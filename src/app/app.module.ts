@@ -6,11 +6,13 @@ import {AccordionModule} from 'primeng/accordion';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
+import { TelaLoginComponent } from './tela-login/tela-login.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TelaLoginComponent
   ],
   imports: [
     BrowserModule,

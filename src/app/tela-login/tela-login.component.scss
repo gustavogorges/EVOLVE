@@ -1,0 +1,28 @@
+.main {
+    @apply h-screen w-screen flex justify-center items-center;
+}
+
+.card-login {
+    @apply h-3/4 w-2/3 flex ;
+}
+
+.left {
+    @apply bg-primary h-full w-1/2 rounded-l-md flex justify-center items-center;
+}
+
+.right {
+    @apply bg-primaryWhite h-full w-1/2 rounded-r-md;
+}
+
+.normal-white-font {
+    @apply text-primaryWhite text-base
+}
+
+.box-text-left {
+    @apply flex justify-center items-center w-4/5
+}
+
+.login-topic-icon {
+    @apply flex
+}
+
