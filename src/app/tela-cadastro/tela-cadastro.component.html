@@ -13,11 +13,15 @@
         <div class="right">
             <div class="box-text-right">
                 <div class="main-title">
-                    <h1>Login</h1>
+                    <h1>Cadastro</h1>
                 </div>
                 <div class="div-inputs">
                     <div class="inputs-login">
                         <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <label for="name" class="form__label">Nome completo</label>
+                          </div>
+                          <div class="form__group field">
                             <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Email</label>
                           </div>
@@ -25,25 +29,31 @@
                             <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Senha</label>
                           </div>
+                          <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <label for="name" class="form__label">Confirmar senha</label>
+                          </div>
                     </div>
-                    <div class="div-link">
-                        <a href="#" class="link-senha">Esqueceu sua senha ?</a>
-                    </div>
+                   
                 </div>
                 <div class="div-buttons">
                     <div class="checkbox">
                         <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Lembre-se de mim</p>
+                        <p class="checkbox-text">Eu li e aceito os Termos</p>
+
+                    </div>
+                    <div class="checkbox">
+                        <p-checkbox name="groupname"></p-checkbox>
+                        <p class="checkbox-text">Receber notificações por e-mail</p>
+                        
                     </div>
                     <div class="div-login">
-                        <button pButton pRipple type="button" label="Login" routerLink="/tela-inicial" class="p-button-rounded button-login"></button>
+                        <button pButton pRipple type="button" label="Cadastrar" class="p-button-rounded button-login"></button>
                     </div>
                     <div class="div-google">
                         <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>
                     </div>
-                    <div class="div-cadastro">
-                        <p class="text-cadastro">Não tem nenhuma conta ? <a href="#" class="link-cadastro" routerLink="/tela-cadastro">Cadastre-se</a></p>
-                    </div>
+                
                 </div>
             </div>
         </div>

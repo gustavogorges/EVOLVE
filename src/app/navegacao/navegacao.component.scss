@@ -1,0 +1,36 @@
+.main {
+    @apply bg-primaryNav h-20 w-screen;
+}
+
+.main-grid {
+    @apply grid grid-cols-3 h-full 
+}
+
+.column1 {
+    @apply flex justify-center items-center 
+}
+
+.column2 {
+    @apply flex justify-center items-center
+}
+
+
+.column3 {
+    @apply flex justify-center items-center gap-8
+}
+
+.search-input {
+    @apply w-2/3 h-full outline-none ml-2
+}
+
+.icon {
+    @apply text-2xl text-primary
+}
+
+.pi-spin {
+   @apply text-[1rem]
+}
+
+.span-input {
+    @apply w-2/3 h-1/2 bg-white rounded-md border-2 border-primary rounded-md 
+}
