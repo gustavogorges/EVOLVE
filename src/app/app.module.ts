@@ -11,6 +11,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './navegacao/navegacao.component';
+import { EntregaProxComponent } from './entrega-prox/entrega-prox.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NavegacaoComponent } from './navegacao/navegacao.component';
     TelaLoginComponent,
     TelaCadastroComponent,
     TelaInicialComponent,
-    NavegacaoComponent
+    NavegacaoComponent,
+    EntregaProxComponent
   ],
   imports: [
     BrowserModule,

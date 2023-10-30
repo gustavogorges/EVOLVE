@@ -6,3 +6,8 @@
 // PRIMENG IMPORTANTIONS
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+* {
+    @apply m-0 p-0 max-w-full;
+    
+}

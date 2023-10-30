@@ -1,0 +1,31 @@
+.main {
+    @apply grid grid-cols-2 h-full w-full
+}
+
+.left-side {
+    @apply h-full w-full flex justify-center items-center
+}
+
+.card-deliveries {
+    @apply w-3/5 h-4/5 bg-primaryGray rounded-xl flex flex-col items-center
+}
+
+.right-side {
+    @apply h-full w-full
+}
+
+.title-deliveries {
+    @apply w-full h-20 flex justify-center items-center bg-secondary rounded-t-xl
+}
+
+.title {
+    @apply text-primaryWhite text-2xl font-bold
+}
+
+.deliveries {
+    @apply w-full h-full flex flex-col items-center mt-5
+}
+
+.delivery {
+    @apply w-full justify-center h-24 flex justify-center mb-8
+}
