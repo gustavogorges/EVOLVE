@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TelaLoginComponent } from './tela-login/tela-login.component';
 import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
+import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path : "tela-inicial",
     component : TelaInicialComponent
+  },
+  {
+    path:"tela-projeto",
+    component: TelaProjetoComponent
   }
 ];
 
