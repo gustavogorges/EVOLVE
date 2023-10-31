@@ -10,9 +10,10 @@ import { TelaLoginComponent } from './tela-login/tela-login.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
-import { NavegacaoComponent } from './navegacao/navegacao.component';
-import { EntregaProxComponent } from './entrega-prox/entrega-prox.component';
+import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
+import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+import { ProjetoComponentComponent } from './componentes/projeto-component/projeto-component.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
     TelaInicialComponent,
     NavegacaoComponent,
     EntregaProxComponent,
-    TelaProjetoComponent
+    TelaProjetoComponent,
+    ProjetoComponentComponent
   ],
   imports: [
     BrowserModule,
