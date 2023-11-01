@@ -14,6 +14,7 @@ import { NavegacaoComponent } from './componentes/navegacao/navegacao.component'
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { ProjetoComponentComponent } from './componentes/projeto-component/projeto-component.component';
+import { ProjetoComponent } from './componentes/projeto/projeto.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ProjetoComponentComponent } from './componentes/projeto-component/proje
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
-    ProjetoComponentComponent
+    ProjetoComponentComponent,
+    ProjetoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+.div-pai-projeto{
+    @apply w-[28%] h-[60vh] shadow-2xl rounded-lg grid grid-cols-3 mt-5;
+    grid-template-rows: 25% 8% 30% 25% 10%;
+}
+
+.imagem-capa{
+    @apply col-start-2 flex;
+
+    .div-foto-centraliza{
+        
+        @apply w-full h-full flex justify-center items-center;
+
+        .foto{
+            @apply h-[90%] w-[70%] rounded-full bg-yellow-500
+        }
+    }
+
+    .lapis-edit{
+        @apply h-[4%] w-[2%] absolute rounded-full 
+    }
+}
+
+.nome-projeto{
+    @apply col-start-2 flex items-center justify-center row-start-2 text-2xl border-2 rounded-lg text-center
+}
+
+.descricao{
+    @apply col-span-3 row-start-3 flex items-center justify-center;
+
+    .desc{
+        @apply p-3 border-2 rounded-lg h-[90%] w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify
+    }
+}
+
+
+.responsaveis{
+    @apply row-start-4 col-span-3
+}
+
+.data-final{
+    @apply row-start-5 col-span-2
+}
