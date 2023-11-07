@@ -1,10 +1,18 @@
 .main {
-    @apply grid grid-cols-2 h-full w-full ;
+    @apply grid grid-cols-2 h-5/6 w-full;
     grid-template-columns: 40% 60%;
 }
 
+.main-box {
+    @apply w-full h-full flex justify-center items-center
+}
+
 .left-side {
-    @apply h-full w-full flex justify-center items-center
+    @apply h-full w-full flex justify-center
+}
+
+.close-deliveries {
+    @apply w-3/4 h-full bg-primary 
 }
 
 .card-deliveries {
@@ -16,42 +24,19 @@
     grid-template-rows: 45% 55%;
 }
 
-.title-deliveries {
-    @apply w-full h-20 flex justify-center items-center bg-secondary rounded-t-xl
+.recent-teams-box {
+    @apply h-full w-full flex justify-center
 }
 
-.title {
-    @apply text-primaryWhite text-2xl font-bold
-}
-
-.deliveries {
-    @apply w-full h-full flex flex-col items-center mt-5
-}
-
-.delivery {
-    @apply w-full h-24 flex justify-center mb-8
-}
-
-.recently-teams {
-    @apply w-full h-full flex justify-center items-center rounded-t-xl 
-}
-
-.teams-box {
-    @apply w-4/6 h-3/4 bg-primaryWhite rounded-xl
-}
-
-.calendar {
-    @apply w-full h-full flex justify-center items-center
+.recent-teams {
+    @apply w-4/5 h-3/4 bg-primary
 }
 
 .calendar-box {
-    @apply w-4/6 h-3/4 bg-primaryWhite  rounded-xl
+    @apply h-full w-full flex justify-center
 }
 
-.title-teams {
-    @apply w-full h-12 flex justify-center items-center bg-secondary rounded-t-xl
+.calendar {
+    @apply w-4/5 h-full bg-primary
 }
 
-.title-calendar {
-    @apply w-full h-12 flex justify-center items-center bg-secondary rounded-t-xl
-}
