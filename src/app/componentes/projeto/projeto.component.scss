@@ -1,42 +1,130 @@
-.div-pai-projeto{
-    @apply w-[28%] h-[60vh] shadow-2xl rounded-lg grid grid-cols-3 mt-5;
-    grid-template-rows: 25% 8% 30% 25% 10%;
+.projeto{
+    @apply w-[100%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[33%] 2xl:w-[28%] h-[60vh] shadow-2xl rounded-s-xl grid grid-cols-3 gap-[1%];
+    grid-template-rows: 24% 7% 29% 24% 1.5% 10%;
+
+    .imagem-capa{
+        @apply col-start-2 flex pt-5;
+    
+        .div-foto-centraliza{
+            
+            @apply w-full h-full flex justify-center items-center;
+    
+            .foto{
+                @apply h-[7rem] w-[7rem] rounded-full bg-yellow-500
+            }
+        }
+    
+        .lapis-edit{
+            @apply h-[4%] w-[2%] absolute rounded-full 
+        }
+    }
+    
+    .nome-projeto{
+        @apply col-span-full w-full flex items-center justify-center row-start-2 text-2xl text-center;
+    
+        h1{
+            @apply border-2 px-2 rounded-lg
+        }
+    }
+    
+    .descricao{
+        @apply col-span-3 row-start-3 flex items-center justify-center overflow-auto;
+    
+        .desc{
+            @apply p-[2%] border-2 rounded-lg w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify
+        }
+    }
+    
+    .responsaveis{
+        @apply row-start-4 col-span-3 grid grid-cols-3 items-end;
+    
+        .responsaveis-escrita{
+            @apply text-gray-500 flex justify-end;
+        }
+    
+        .bolas{
+            @apply col-start-3 flex
+        }
+    
+        .bola{
+            @apply w-[3rem] h-[3rem] rounded-full bg-green-600 ;
+        }
+    }
+    
+    .linha{
+        @apply row-start-5 col-span-full grid grid-cols-3 bg-gray-200;
+    
+        .linha-verde{
+            @apply w-[30%] duration-700 col-span-full bg-green-600 rounded-lg;
+        }
+    }
+    
+    .data-final{
+        @apply row-start-6 col-span-full flex px-2 text-xl items-center
+    }
 }
 
-.imagem-capa{
-    @apply col-start-2 flex;
 
-    .div-foto-centraliza{
-        
-        @apply w-full h-full flex justify-center items-center;
+.infos{
+    @apply w-[100%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[33%] 2xl:w-[28%] h-[60vh] bg-gray-200 overflow-hidden grid gap-6 px-10 rounded-r-xl;
+    grid-template-rows: 5% 40% 30% 5%;
 
-        .foto{
-            @apply h-[90%] w-[70%] rounded-full bg-yellow-500
+    .infos-projeto{
+        @apply row-start-2 bg-secondaryWhite rounded-xl w-full overflow-auto;
+
+        .cabecalho{
+            @apply grid grid-cols-4 rounded-xl text-xl text-gray-500 bg-secondaryWhite;
+
+            .Nome{
+                @apply col-start-1 flex justify-center
+            }
+
+            .Progresso{
+                @apply col-start-2 flex justify-center
+            }
+
+            .Status{
+                @apply col-start-3 flex justify-center
+            }
+
+            .Prazo{
+                @apply col-start-4 flex justify-center
+            }
+        }
+
+
+        .valores{
+            @apply grid grid-cols-4 items-center text-xl text-primary font-semibold pt-3 overflow-auto;
+
+            .Nome{
+                @apply col-start-1 flex justify-center
+            }
+
+            .Progresso{
+                @apply col-start-2 w-full grid items-center h-[1rem] rounded-xl bg-gray-200 overflow-hidden;
+
+                .valor-progresso{
+                    @apply bg-primary w-[90%] duration-700 h-full
+                }
+            }
+
+            .Status{
+                @apply col-start-3 flex justify-center h-full rounded-2xl mx-3 bg-yellow-400
+            }
+
+            .Prazo{
+                @apply col-start-4 flex justify-center
+            }
         }
     }
 
-    .lapis-edit{
-        @apply h-[4%] w-[2%] absolute rounded-full 
+    .integrantes{
+        @apply row-start-3 bg-secondaryWhite  rounded-xl;
     }
-}
 
-.nome-projeto{
-    @apply col-start-2 flex items-center justify-center row-start-2 text-2xl border-2 rounded-lg text-center
-}
-
-.descricao{
-    @apply col-span-3 row-start-3 flex items-center justify-center;
-
-    .desc{
-        @apply p-3 border-2 rounded-lg h-[90%] w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify
+    p-button{
+        @apply row-start-4 flex justify-end p-2 h-[3.5rem];
     }
-}
 
-
-.responsaveis{
-    @apply row-start-4 col-span-3
-}
-
-.data-final{
-    @apply row-start-5 col-span-2
+    
 }
