@@ -12,7 +12,7 @@
 }
 
 .close-deliveries {
-    @apply w-2/3 h-full bg-primaryGray rounded-lg flex-col items-center justify-center
+    @apply w-2/3 h-full bg-primaryGray rounded-lg flex-col items-center justify-center shadow-xl
 }
 
 .title-box {
@@ -33,11 +33,11 @@
 }
 
 .recent-teams-box {
-    @apply h-full w-full flex justify-center
+    @apply h-full w-full flex justify-center 
 }
 
 .recent-teams {
-    @apply w-3/4 h-5/6 bg-primaryGray rounded-lg flex-col flex
+    @apply w-3/4 h-5/6 bg-primaryGray rounded-lg flex-col flex shadow-xl
 }
 
 .content-box {
@@ -49,7 +49,7 @@
 }
 
 .card-team {
-    @apply h-[87%] w-[30%] ;
+    @apply h-[87%] w-[25%] shadow-lg;
 }
 
 .calendar-box {
@@ -57,11 +57,11 @@
 }
 
 .calendar {
-    @apply w-3/4 h-full bg-primaryGray rounded-lg
+    @apply w-3/4 h-full bg-primaryGray rounded-lg shadow-xl
 }
 
 .card-deliveries {
-    @apply w-4/5
+    @apply w-4/5 shadow-lg;
 }
 
 .set-left {
@@ -74,4 +74,8 @@
 
 .icon {
     @apply text-xl
+}
+
+.calendar-content {
+    @apply w-full h-[87%] grid grid-cols-4
 }

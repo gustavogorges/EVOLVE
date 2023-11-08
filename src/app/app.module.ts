@@ -14,6 +14,8 @@ import { NavegacaoComponent } from './componentes/navegacao/navegacao.component'
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
+import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
+import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-rece
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
-    EquipeRecenteComponent
+    EquipeRecenteComponent,
+    DiaCalendarioComponent,
+    TarefaDiaComponent
   ],
   imports: [
     BrowserModule,
