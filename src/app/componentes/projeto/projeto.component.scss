@@ -1,5 +1,5 @@
 .projeto{
-    @apply w-[100%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[33%] 2xl:w-[28%] h-[60vh] shadow-2xl rounded-s-xl grid grid-cols-3 gap-[1%];
+    @apply w-[100%] md:w-[30rem] h-[60vh] grid grid-cols-3 duration-500 gap-[1%] bg-secondaryWhite;
     grid-template-rows: 24% 7% 29% 24% 1.5% 10%;
 
     .imagem-capa{
@@ -20,10 +20,10 @@
     }
     
     .nome-projeto{
-        @apply col-span-full w-full flex items-center justify-center row-start-2 text-2xl text-center;
+        @apply col-span-full w-full flex items-center justify-center row-start-2 text-lg text-center;
     
-        h1{
-            @apply border-2 px-2 rounded-lg
+        p{
+            @apply border-2 px-2 rounded-lg text-lg
         }
     }
     
@@ -66,7 +66,7 @@
 
 
 .infos{
-    @apply w-[100%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[33%] 2xl:w-[28%] h-[60vh] bg-gray-200 overflow-hidden grid gap-6 px-10 rounded-r-xl;
+    @apply duration-200 h-[60vh] bg-gray-200 overflow-hidden grid justify-center gap-6  rounded-r-xl;
     grid-template-rows: 5% 40% 30% 5%;
 
     .infos-projeto{
@@ -94,14 +94,14 @@
 
 
         .valores{
-            @apply grid grid-cols-4 items-center text-xl text-primary font-semibold pt-3 overflow-auto;
+            @apply grid grid-cols-4 items-center text-sm text-primary font-semibold pt-[2%] overflow-auto;
 
             .Nome{
-                @apply col-start-1 flex justify-center
+                @apply col-start-1 flex justify-center text-center px-[1%]
             }
 
             .Progresso{
-                @apply col-start-2 w-full grid items-center h-[1rem] rounded-xl bg-gray-200 overflow-hidden;
+                @apply col-start-2 w-full grid items-center h-4 rounded-xl bg-gray-200 overflow-hidden;
 
                 .valor-progresso{
                     @apply bg-primary w-[90%] duration-700 h-full
@@ -109,7 +109,7 @@
             }
 
             .Status{
-                @apply col-start-3 flex justify-center h-full rounded-2xl mx-3 bg-yellow-400
+                @apply col-start-3 flex max-h-10 justify-center items-center h-full rounded-2xl mx-3 bg-yellow-400
             }
 
             .Prazo{

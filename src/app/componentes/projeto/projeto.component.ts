@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjetoComponent implements OnInit {
 
-  constructor() { }
+  revela:boolean = false
 
+  constructor() { }
+  width = "30rem"
   ngOnInit(): void {
   }
 
+  revelaInfos(){
+    this.revela = !this.revela
+  }
 }
