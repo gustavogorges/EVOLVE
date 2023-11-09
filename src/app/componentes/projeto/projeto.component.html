@@ -21,7 +21,7 @@
         </div>
     
         <div [ngClass]="revela ? 'w-[100%] md:w-[30rem]' : 'w-0'" class="infos">
-            <div class="infos-projeto">
+            <div [ngClass]="revela ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
                 <div class="cabecalho">
                     <h1 class="Nome">Nome</h1>
                     <h1 class="Progresso">Progresso</h1>
@@ -29,7 +29,7 @@
                     <h1 class="Prazo">Prazo</h1>
                 </div>
     
-                <div class="valores">
+                <div [ngClass]="revela ? 'opacity-100' : 'opacity-0'" class="valores">
                     <p class="Nome">Nome tarefa</p>
                     <h1 class="Progresso"><div class="valor-progresso"></div></h1>
                     <h1 class="Status">Doing</h1>

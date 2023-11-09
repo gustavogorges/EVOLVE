@@ -66,14 +66,15 @@
 
 
 .infos{
-    @apply duration-200 h-[60vh] bg-gray-200 overflow-hidden grid justify-center gap-6  rounded-r-xl;
+    @apply duration-200 h-[60vh] bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
     grid-template-rows: 5% 40% 30% 5%;
+    grid-template-columns: 5% 90% 5%;
 
     .infos-projeto{
-        @apply row-start-2 bg-secondaryWhite rounded-xl w-full overflow-auto;
+        @apply  row-start-2 col-start-2 col-end-2 bg-secondaryWhite rounded-xl w-[90%] overflow-auto;
 
         .cabecalho{
-            @apply grid grid-cols-4 rounded-xl text-xl text-gray-500 bg-secondaryWhite;
+            @apply duration-700 grid grid-cols-4 rounded-xl text-xl text-gray-500 bg-secondaryWhite;
 
             .Nome{
                 @apply col-start-1 flex justify-center
@@ -94,7 +95,7 @@
 
 
         .valores{
-            @apply grid grid-cols-4 items-center text-sm text-primary font-semibold pt-[2%] overflow-auto;
+            @apply duration-700  grid grid-cols-4 items-center text-sm text-primary font-semibold pt-[2%] overflow-auto;
 
             .Nome{
                 @apply col-start-1 flex justify-center text-center px-[1%]
@@ -119,11 +120,11 @@
     }
 
     .integrantes{
-        @apply row-start-3 bg-secondaryWhite  rounded-xl;
+        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite  rounded-xl;
     }
 
     p-button{
-        @apply row-start-4 flex justify-end p-2 h-[3.5rem];
+        @apply col-start-2 col-end-2 row-start-4 flex justify-end p-2 h-[3.5rem];
     }
 
     
