@@ -1,0 +1,112 @@
+.barra-cinza{
+    @apply relative w-full h-2 rounded-md bg-[#d9d9d9];
+    width:valorBarra
+}
+.barra-azul{
+   @apply absolute top-0 left-0 h-full text-center text-xs text-white bg-primary rounded-md
+}
+.card{
+    @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md
+}
+.status{
+    @apply rounded-lg  px-4 w-max text-base;
+    font-family: 'Hind Madurai', sans-serif
+
+} .texto{
+    font-family: 'Hind Madurai', sans-serif;
+
+}
+.nomeTarefa{
+    @apply  text-primary text-2xl font-extrabold ;
+    font-family: 'Hind Madurai', sans-serif;
+
+} 
+
+body {
+    padding: 10px;  
+  }
+  
+  /**
+   * Aligning label + input inside a field div
+   */
+  
+  fieldset {
+    margin-bottom: 14px;
+  }
+  
+  .field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  
+  .field:last-child {
+    margin: 0;
+  }
+  
+  /**
+   * Removing the checkbox and radio appearance
+   */
+  
+  [type=radio],
+  [type=checkbox] {
+     -webkit-appearance: none;
+     -moz-appearance:    none;
+     appearance:         none;
+  }
+  
+  /**
+   * Giving Checkbox & Radio not checked a new appearance
+   */
+  
+  [type=radio],
+  [type=checkbox] {
+    width: 20px;
+    height: 20px;
+    border: solid 1px #cccccc;
+    margin-right: 8px;
+    position: relative;
+  }
+  
+  /**
+   * Giving Checkbox & Radio checked state a new appearance
+   */
+  
+  [type=radio]:checked::before,
+  [type=checkbox]:checked::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color:#4C956C;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  }
+  
+  /**
+   * Rounding Radio inputs new appearance
+   */
+  
+  [type=radio],
+  [type=radio]:checked::before{
+    border-radius: 100%;
+  }
+.boboca:checked .babaca{
+    color: aqua;
+    visibility: visible
+}
+.inputSubTarefa{
+    @apply  h-4 w-4;
+
+border: solid 1px blue;
+
+}
+.spanInputSubTarefa{
+    @apply  text-gray-950; 
+    font-family: 'Hind Madurai', sans-serif;
+
+
+}
+.inputSubTarefa:checked {
+    @apply border-secondary
+  }

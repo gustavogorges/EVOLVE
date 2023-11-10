@@ -13,6 +13,8 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
+import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
     TelaInicialComponent,
     NavegacaoComponent,
     EntregaProxComponent,
-    TelaProjetoComponent
+    TelaProjetoComponent,
+    TelaTarefaComponent,
+    TarefaCardPadraoComponent
   ],
   imports: [
     BrowserModule,
