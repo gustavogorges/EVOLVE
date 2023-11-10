@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaTarefaComponent implements OnInit {
 
+
+  lista = [
+    "a",
+    "b",
+    "C",
+    "D"
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

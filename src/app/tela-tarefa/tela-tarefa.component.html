@@ -14,16 +14,12 @@
        </div>
       
     </div>
-    <div class="flex flex-wrap gap-6 w-full  justify-center">
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
-        <app-tarefa-card-padrao class="min-w-[23.82%]"></app-tarefa-card-padrao>
+    <div class="flex flex-wrap gap-6 w-full  justify-center" >
+        <div *ngFor="let blablabla of lista; index as indice;"class="card">
+            <app-tarefa-card-padrao  [id]="(blablabla+indice)" ></app-tarefa-card-padrao>
+        </div>
 
-
-
+ 
     </div>
   
 </div>
