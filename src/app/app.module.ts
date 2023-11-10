@@ -34,7 +34,7 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
     TelaProjetoComponent,
 
     TelaTarefaComponent,
-    TarefaCardPadraoComponent
+    TarefaCardPadraoComponent,
 
     EquipeRecenteComponent,
     DiaCalendarioComponent,
