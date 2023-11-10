@@ -7,7 +7,7 @@
 }
 
 .column1 {
-    @apply flex justify-center items-center 
+    @apply flex justify-start items-center ml-24
 }
 
 .column2 {
@@ -16,7 +16,7 @@
 
 
 .column3 {
-    @apply flex justify-center items-center gap-8
+    @apply flex justify-end items-center gap-8 mr-24
 }
 
 .search-input {

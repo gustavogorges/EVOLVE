@@ -1,31 +1,87 @@
 .main {
-    @apply grid grid-cols-2 h-full w-full
+    @apply grid grid-cols-2 h-[88%] w-full;
+    grid-template-columns: 40% 60%;
+}
+
+.main-box {
+    @apply w-full h-full flex justify-center items-center
 }
 
 .left-side {
-    @apply h-full w-full flex justify-center items-center
+    @apply h-full w-full flex justify-center
 }
 
-.card-deliveries {
-    @apply w-3/5 h-4/5 bg-primaryGray rounded-xl flex flex-col items-center
+.close-deliveries {
+    @apply w-2/3 h-full bg-primaryGray rounded-lg flex-col items-center justify-center shadow-xl
+}
+
+.title-box {
+    @apply w-full h-14 bg-secondary flex justify-center items-center rounded-t-md
+}
+
+.title-text {
+    @apply font-semibold text-2xl text-primaryWhite
+}
+
+.card-deliveries-box {
+    @apply w-full h-5/6 bg-primaryWhite rounded-xl flex flex-col items-center gap-6 mt-5 mb-5
 }
 
 .right-side {
-    @apply h-full w-full
+    @apply h-full w-full grid grid-rows-2;
+    grid-template-rows: 45% 55%;
 }
 
-.title-deliveries {
-    @apply w-full h-20 flex justify-center items-center bg-secondary rounded-t-xl
+.recent-teams-box {
+    @apply h-full w-full flex justify-center 
 }
 
-.title {
-    @apply text-primaryWhite text-2xl font-bold
+.recent-teams {
+    @apply w-3/4 h-5/6 bg-primaryGray rounded-lg flex-col flex shadow-xl
 }
 
-.deliveries {
-    @apply w-full h-full flex flex-col items-center mt-5
+.content-box {
+    @apply w-full h-full flex justify-center items-center
 }
+
+.card-team-box {
+    @apply w-full flex h-full items-center gap-5 justify-center
+}
+
+.card-team {
+    @apply h-[87%] w-[25%] shadow-lg;
+}
+
+.calendar-box {
+    @apply h-full w-full flex justify-center
+}
+
+.calendar {
+    @apply w-3/4 h-full bg-primaryGray rounded-lg shadow-xl
+}
+
+.card-deliveries {
+    @apply w-4/5 shadow-lg;
+}
+
+.set-left {
+    @apply w-5 h-full flex justify-center items-center ml-4 
+}
+
+.set-right {
+    @apply w-5 h-full flex justify-center items-center mr-4 
+}
+
+.icon {
+    @apply text-xl
+}
+
 
 .delivery {
     @apply w-full justify-center h-24 flex justify-center mb-8
 } 
+
+.calendar-content {
+    @apply w-full h-[87%] grid grid-cols-4
+}
+

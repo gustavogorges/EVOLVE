@@ -1,0 +1,40 @@
+.main {
+    @apply w-full h-full
+}
+
+.final-date {
+    @apply w-full h-[30%] flex items-center border-b-2 border-primary
+}
+
+.final-date-text {
+    @apply text-primary ml-3 font-semibold;
+    font-size: 0.8em;
+}
+
+.name {
+    @apply w-full h-[35%] flex items-center justify-center
+}
+
+.name-text {
+    @apply text-primary font-bold text-base
+}
+
+.attribuition {
+    @apply w-full h-[35%] grid grid-cols-2
+}
+
+.class-attribuition {
+    @apply flex items-center justify-start
+}
+
+.class-attribuition-text {
+    @apply py-1 px-2 text-xs bg-blue-300 rounded-lg ml-2
+}
+
+.star {
+    @apply flex justify-end items-center text-xs mr-2
+}
+
+.icon {
+    @apply text-yellow-300
+}
