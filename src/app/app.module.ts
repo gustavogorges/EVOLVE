@@ -17,6 +17,7 @@ import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-rece
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.co
     AppRoutingModule,
     AccordionModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    InputTextareaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

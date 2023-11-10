@@ -4,7 +4,7 @@
 }
 
 .main-box {
-    @apply w-full h-full flex justify-center items-center
+    @apply w-full h-full flex justify-end items-center
 }
 
 .left-side {
@@ -78,4 +78,8 @@
 
 .calendar-content {
     @apply w-full h-[87%] grid grid-cols-4
+}
+
+.tarefa {
+    @apply absolute w-[40%] h-[92vh] ;
 }

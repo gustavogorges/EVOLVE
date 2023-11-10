@@ -1,3 +1,87 @@
 .main {
-    @apply w-[50vw] h-screen absolute bg-red-300
+    @apply w-[50vw] h-full absolute bg-white rounded-tl-xl rounded-bl-xl shadow-2xl
+}
+
+.name-progress {
+    @apply w-full h-[15%] flex items-center;
+}
+
+.name-box {
+    @apply w-[30%] h-full flex justify-center items-center
+}
+
+.name {
+    @apply text-4xl text-primary font-bold 
+}
+
+.progress-bar-box {
+    @apply w-[70%] h-full flex justify-center items-center
+}
+
+.progress-bar {
+    @apply w-5/6 h-[10%] bg-primaryGray rounded-md;
+}
+
+.date-propertie {
+    @apply flex justify-between w-2/3
+}
+
+.task-properties {
+    @apply w-1/2 h-[30%] ml-12
+}
+
+.date-end {
+    @apply flex justify-center
+}
+
+.name-icon {
+    @apply flex items-center w-2/3
+}
+
+.name-propertie {
+    @apply pl-3 text-xl text-fontGray
+}
+
+.icon-propertie {
+    @apply text-lg text-secondary
+}
+
+.date-end-text {
+    @apply text-xl 
+}
+
+.responsible-propertie {
+    @apply flex justify-between w-2/3 mt-3
+} 
+
+.responsible-icon {
+    @apply h-8 w-8 bg-purple-400 rounded-full
+}
+
+.responsible-icon-box {
+    @apply flex items-center
+}
+
+.status-propertie {
+    @apply flex justify-between w-2/3 mt-3
+} 
+
+.status-icon {
+    @apply h-8 w-20 bg-yellow-200 rounded-xl flex justify-center items-center
+}
+
+.status-icon-box {
+    @apply flex items-center justify-center
+}
+
+.description-propertie {
+    @apply w-2/3 mt-3
+} 
+
+.description-icon {
+    @apply h-8 w-20 bg-yellow-200 rounded-xl flex justify-center items-center
+}
+
+.description-icon-box {
+    @apply flex items-center justify-center
 }

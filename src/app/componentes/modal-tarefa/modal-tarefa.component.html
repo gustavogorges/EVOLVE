@@ -1,3 +1,48 @@
 <div class="main">
-    
+    <div class="name-progress">
+        <div class="name-box">
+            <p class="name">Tarefa 1</p>
+        </div>
+        <div class="progress-bar-box">
+            <div class="progress-bar">
+                <div class="w-2/3 h-full bg-secondary rounded-md"></div>
+            </div>
+        </div>
+    </div>
+    <div class="task-properties">
+        <div class="date-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-calendar"></i>
+                <p class="name-propertie">data final:</p>
+            </div>
+            <div class="date-end">
+                <p class="date-end-text">20/10</p>
+            </div>
+        </div>
+        <div class="responsible-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-users"></i>
+                <p class="name-propertie">responsáveis:</p>
+            </div>
+            <div class="responsible-icon-box">
+                <div class="responsible-icon"></div>
+            </div>
+        </div>
+        <div class="status-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-spinner"></i>
+                <p class="name-propertie">status:</p>
+            </div>
+            <div class="status-icon-box">
+                <div class="status-icon">doing</div>
+            </div>
+        </div>
+        <div class="description-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-angle-up"></i>
+                <p class="name-propertie">descrição:</p>
+            </div>
+            <textarea rows="5" cols="50" pInputTextarea [autoResize]="true"></textarea>
+        </div>
+    </div>
 </div>
