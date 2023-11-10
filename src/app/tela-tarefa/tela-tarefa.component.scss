@@ -1,0 +1,17 @@
+.nome-projeto{
+    @apply  text-primary text-[42px] font-bold ;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.botao-adicionaProjeto{
+    @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
+
+}
+.botao-opcoes{
+    font-family: 'Montserrat', sans-serif;
+    @apply text-2xl
+}
+
+.card {
+    @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md max-w-[23.7%] w-full;
+  }
