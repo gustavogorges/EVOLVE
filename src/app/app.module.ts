@@ -16,6 +16,7 @@ import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
     TelaProjetoComponent,
     EquipeRecenteComponent,
     DiaCalendarioComponent,
-    TarefaDiaComponent
+    TarefaDiaComponent,
+    ModalTarefaComponent
   ],
   imports: [
     BrowserModule,
