@@ -39,10 +39,22 @@
         </div>
         <div class="description-propertie">
             <div class="name-icon">
-                <i class="icon-propertie pi pi-angle-up"></i>
-                <p class="name-propertie">descrição:</p>
+                <i *ngIf="!booleanDesc" class="icon-propertie pi pi-angle-down" (click)="openDesc()"></i>
+                <i *ngIf="booleanDesc" class="icon-propertie pi pi-angle-up" (click)="openDesc()"></i>
+                <p class="name-propertie">descrição</p>
             </div>
-            <textarea rows="5" cols="50" pInputTextarea [autoResize]="true"></textarea>
+            <div class="box-description" *ngIf="booleanDesc"></div>
+        </div>
+    </div>
+    
+    <div class="tabs">
+        <div class="pages">
+            <p class="page-name">sub-tarefas</p>
+            <p class="page-name">comentários</p>
+            <p class="page-name">históricos</p>
+            <p class="page-name">anexos</p>
+            <p class="page-name">automoção</p>
+            <p class="page-name">integração</p>
         </div>
     </div>
 </div>

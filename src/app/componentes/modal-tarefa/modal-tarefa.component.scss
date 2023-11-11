@@ -23,7 +23,7 @@
 }
 
 .date-propertie {
-    @apply flex justify-between w-2/3
+    @apply flex  w-full
 }
 
 .task-properties {
@@ -31,7 +31,7 @@
 }
 
 .date-end {
-    @apply flex justify-center
+    @apply flex justify-center ml-2
 }
 
 .name-icon {
@@ -51,7 +51,7 @@
 }
 
 .responsible-propertie {
-    @apply flex justify-between w-2/3 mt-3
+    @apply flex w-full mt-3
 } 
 
 .responsible-icon {
@@ -59,11 +59,11 @@
 }
 
 .responsible-icon-box {
-    @apply flex items-center
+    @apply flex items-center  ml-2
 }
 
 .status-propertie {
-    @apply flex justify-between w-2/3 mt-3
+    @apply flex w-full mt-3
 } 
 
 .status-icon {
@@ -71,7 +71,7 @@
 }
 
 .status-icon-box {
-    @apply flex items-center justify-center
+    @apply flex items-center justify-center  ml-2
 }
 
 .description-propertie {
@@ -84,4 +84,24 @@
 
 .description-icon-box {
     @apply flex items-center justify-center
+}
+
+.tabs {
+    @apply w-full h-[55%] flex
+}
+
+.pages {
+    @apply w-full h-[7%] flex gap-6 justify-center border-b-2 mb-2
+}
+
+.page-name {
+    @apply text-fontGray text-lg 
+}
+
+.page-name:hover {
+    @apply border-b-2 border-primary cursor-pointer
+}
+
+.box-description {
+    @apply w-3/4 h-10 border-2 border-primaryGray rounded-xl ml-12 
 }

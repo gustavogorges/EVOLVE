@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-tarefa.component.scss']
 })
 export class ModalTarefaComponent implements OnInit {
+  booleanDesc:boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  openDesc():void {
+    this.booleanDesc = !this.booleanDesc;
+  }
 }
