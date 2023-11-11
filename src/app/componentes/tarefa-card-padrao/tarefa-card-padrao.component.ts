@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input } from '@angular/core';
-import { BackendEVOLVEService } from 'src/app/service/backend-evolve.service';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tarefa-card-padrao',
