@@ -15,3 +15,6 @@
 .card {
     @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md max-w-[23.7%] w-full;
   }
+  .icon {
+    @apply text-2xl text-secondary cursor-pointer
+  }
