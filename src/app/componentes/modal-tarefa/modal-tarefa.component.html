@@ -43,18 +43,32 @@
                 <i *ngIf="booleanDesc" class="icon-propertie pi pi-angle-up" (click)="openDesc()"></i>
                 <p class="name-propertie">descrição</p>
             </div>
-            <div class="box-description" *ngIf="booleanDesc"></div>
         </div>
+        <div class="w-[400px]">
+            <textarea
+            rows="5" cols="80" pInputTextarea [autoResize]="true"
+            [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
+            ></textarea>
+        </div>
+     
     </div>
     
-    <div class="tabs">
+    <div class="tabs" [ngClass]="booleanDesc ? 'mt-24' : 'w-0 h-0'">
         <div class="pages">
-            <p class="page-name">sub-tarefas</p>
-            <p class="page-name">comentários</p>
-            <p class="page-name">históricos</p>
-            <p class="page-name">anexos</p>
-            <p class="page-name">automoção</p>
-            <p class="page-name">integração</p>
+            <p class="page-name" (click)="changePage('sub-tarefas')">sub-tarefas</p>
+            <p class="page-name" (click)="changePage('comentarios')">comentários</p>
+            <p class="page-name" (click)="changePage('historicos')">históricos</p>
+            <p class="page-name" (click)="changePage('anexos')">anexos</p>
+            <p class="page-name" (click)="changePage('automacao')">automoção</p>
+            <p class="page-name" (click)="changePage('integracao')">integração</p>
+        </div>
+        <div class="components">
+            <app-sub-tarefa class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
+            <app-comentarios class="component" *ngIf="page_task == 'comentarios'"></app-comentarios>
+            <app-historicos  class="component" *ngIf="page_task == 'historicos'"></app-historicos>
+            <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
+            <app-automacao class="component" *ngIf="page_task == 'automacao'"></app-automacao>
+            <app-integracao class="component" *ngIf="page_task == 'integracao'"></app-integracao>
         </div>
     </div>
 </div>

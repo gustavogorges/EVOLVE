@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalTarefaComponent implements OnInit {
   booleanDesc:boolean = false;
+  page_task:string = "sub-tarefas";
 
   constructor() { }
 
@@ -16,4 +17,20 @@ export class ModalTarefaComponent implements OnInit {
   openDesc():void {
     this.booleanDesc = !this.booleanDesc;
   }
+
+  changePage(name_page:string):void {
+    if(name_page == "sub-tarefas") {
+      this.page_task = "sub-tarefas"
+    } else if(name_page == "comentarios") {
+      this.page_task = "comentarios"
+    }  else if(name_page == "historicos") {
+      this.page_task = "historicos"
+    } else if(name_page == "anexos") {
+      this.page_task = "anexos"
+    } else if(name_page == "automacao") {
+      this.page_task = "automacao"
+    } else if(name_page == "integracao") {
+      this.page_task = "integracao"
+    }
+}
 }

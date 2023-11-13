@@ -87,7 +87,7 @@
 }
 
 .tabs {
-    @apply w-full h-[55%] flex
+    @apply w-full h-[55%] flex flex-col
 }
 
 .pages {
@@ -103,5 +103,13 @@
 }
 
 .box-description {
-    @apply w-3/4 h-10 border-2 border-primaryGray rounded-xl ml-12 
+    @apply w-full border-2 border-primaryGray rounded-xl 
+}
+
+.components {
+    @apply w-full h-[90%] flex justify-center mt-5
+}
+
+.component {
+    @apply w-full h-full flex justify-center
 }
