@@ -1,5 +1,5 @@
 .projeto{
-    @apply w-[100%] md:w-[30rem] h-[60vh] grid grid-cols-3 duration-500 gap-[1%] bg-secondaryWhite;
+    @apply w-[100%] md:w-[30rem] h-[55vh] grid grid-cols-3 duration-500 gap-[1%] bg-secondaryWhite;
     grid-template-rows: 24% 7% 29% 24% 1.5% 10%;
 
     .imagem-capa{
@@ -66,7 +66,7 @@
 
 
 .infos{
-    @apply duration-200 h-[60vh] bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
+    @apply duration-200  bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
     grid-template-rows: 5% 40% 30% 5%;
     grid-template-columns: 5% 90% 5%;
 
@@ -120,11 +120,11 @@
     }
 
     .integrantes{
-        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite  rounded-xl;
+        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-[90%]  rounded-xl;
     }
 
     p-button{
-        @apply col-start-2 col-end-2 row-start-4 flex justify-end p-2 h-[3.5rem];
+        @apply col-start-2 col-end-2 row-start-4 flex justify-end p-2 pr-[10%] h-[3.5rem];
     }
 
     
