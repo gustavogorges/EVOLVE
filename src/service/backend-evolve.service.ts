@@ -10,7 +10,7 @@ import { Usuario } from 'src/model/usuario';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://10.4.96.2:8087/"
+  URL : string = "http://10.4.96.29:8087/"
 
   constructor() { }
 
