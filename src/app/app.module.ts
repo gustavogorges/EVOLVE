@@ -18,6 +18,12 @@ import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calenda
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
+import { ComentariosComponent } from './componentes/sub-componentes/comentarios/comentarios.component';
+import { HistoricosComponent } from './componentes/sub-componentes/historicos/historicos.component';
+import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
+import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
+import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 
 @NgModule({
@@ -32,7 +38,13 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     EquipeRecenteComponent,
     DiaCalendarioComponent,
     TarefaDiaComponent,
-    ModalTarefaComponent
+    ModalTarefaComponent,
+    SubTarefaComponent,
+    ComentariosComponent,
+    HistoricosComponent,
+    AnexosComponent,
+    AutomacaoComponent,
+    IntegracaoComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +52,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     AccordionModule,
     ButtonModule,
     CheckboxModule,
-    InputTextareaModule
+    InputTextareaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

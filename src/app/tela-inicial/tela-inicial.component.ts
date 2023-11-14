@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaInicialComponent implements OnInit {
 
+  booleanTask:boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openTask() :void {
+    this.booleanTask = !this.booleanTask;
   }
 
 }
