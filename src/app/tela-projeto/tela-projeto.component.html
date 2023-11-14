@@ -1,10 +1,8 @@
 <div class="flex flex-wrap gap-12 pt-[2%] justify-center">
-    <div class="flex flex-wrap duration-1000 gap-10 justify-center">
-        <app-projeto></app-projeto>
-        <app-projeto></app-projeto>
-        <app-projeto></app-projeto>
-        <app-projeto></app-projeto>
-        <app-projeto></app-projeto>
-        <app-projeto></app-projeto>
+    <div class="flex w-[85%] flex-wrap duration-1000 gap-10 justify-center">
+        <div *ngFor="let p of projects">
+            <app-projeto [isVisible]="p.isVisible" (click)="teste(p)" ></app-projeto>
+        </div>
+
     </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { projetoService } from 'src/service/projetoService';
 
 @Component({
   selector: 'app-projeto',
@@ -8,21 +9,24 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 })
 export class ProjetoComponent implements OnInit {
 
-  revela:boolean = false
+  @Input() isVisible:boolean = true;
+
   tamanhoTela:Number = 0
   md: boolean = false
+  revela: boolean = false
 
   resizeObservable?: Observable<Event>
   resizeSubscription ?: Subscription
 
-  constructor() { }
+  constructor(private revelaService : projetoService) { }
 
   ngOnInit(): void {
+    this.getScreenSize()
     this.resizeObservable = fromEvent(window, 'resize')
     this.resizeSubscription = this.resizeObservable.subscribe( e => {
-      this.getScreenSize()
-      this.revela = false
+      this.revelaService.setRevela(false)
     })
+    this.revela = this.revelaService.getRevela()
   }
 
   ngOnDestroy() {
@@ -30,7 +34,8 @@ export class ProjetoComponent implements OnInit {
   }
 
   revelaInfos(){
-    this.revela = !this.revela
+    this.revelaService.setRevela(!this.revelaService.getRevela())
+    this.revela = this.revelaService.getRevela()
   }
 
   @HostListener('window:resize', ['$event'])
@@ -40,9 +45,5 @@ export class ProjetoComponent implements OnInit {
     }else{
       this.md = false
     }
-  }
-
-  setRevela(param:boolean):void{
-    this.revela = param
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { projetoService } from 'src/service/projetoService';
 import { ProjetoComponent } from '../componentes/projeto/projeto.component';
 @Component({
   selector: 'app-tela-projeto',
@@ -8,20 +9,65 @@ import { ProjetoComponent } from '../componentes/projeto/projeto.component';
 export class TelaProjetoComponent implements OnInit {
 
   projeto = ProjetoComponent
-  constructor() {
+  constructor(private renderer: Renderer2, private el: ElementRef, private revela : projetoService) {
+   }
+
+   projects =[
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+    {
+      isVisible: false
+    },
+   ]
+
+   
+   teste(p:any){
+    let ultimoP
+     for(let pFor of this.projects){
+       pFor.isVisible = false;
+      }
+      if(ultimoP === p){
+        p.isVisible = false;
+      }else{
+        p.isVisible = true;
+      }
+      ultimoP = p
    }
 
   ngOnInit(): void {
-    let projetos = document.querySelectorAll("#projeto")
-    projetos.forEach((e)=>{
-      e.addEventListener('click', () => {
-        projetos.forEach((a) => {
-          if(e != a){
-            a.toggleAttribute('click')
+    
+  }
+
+  lista:[] = []
+
+  ngAfterViewInit(){
+    let divElement = this.el.nativeElement.querySelectorAll('#projeto')
+    this.lista = divElement
+    this.lista.forEach(projeto => {
+      this.renderer.listen(projeto, 'click', ()=> {
+        this.lista.forEach(outroPojeto => {
+          if(projeto != outroPojeto){
+            console.log(outroPojeto)
           }
-        })
+        });
       })
-    })
+    });
   }
 
    

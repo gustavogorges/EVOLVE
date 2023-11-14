@@ -1,7 +1,7 @@
-<div id="projeto">
+<div id="projeto" >
     <div class="drop-shadow-2xl flex  flex-col md:flex-row">
 
-        <div [ngClass]="revela ? 'rounded-s-xl' : 'rounded-xl'" class="projeto" (click)="revelaInfos()">
+        <div [ngClass]="isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto">
             <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"></div> </div> <div class="lapis-edit"></div> </div>
             <div class="nome-projeto"><h1>Projeto WEG</h1></div>
             <div class="descricao">
@@ -20,8 +20,8 @@
             <div class="data-final">Data final: 00/00</div>
         </div>
     
-        <div [ngClass]="revela && md ? 'h-[55vh] w-[100%]' : 'h-0'" [ngClass]="revela && !md ? 'w-[100%] md:w-[29rem] h-[55vh]' : 'w-0'" class="infos">
-            <div [ngClass]="revela ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
+        <div [ngClass]="isVisible && md ? 'h-[55vh] w-[100%]' : 'h-0'" [ngClass]="isVisible && !md ? 'w-[100%] md:w-[29rem] h-[55vh]' : 'w-0'" class="infos">
+            <div [ngClass]="isVisible ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
                 <div class="cabecalho">
                     <h1 class="Nome">Nome</h1>
                     <h1 class="Progresso">Progresso</h1>
@@ -29,7 +29,7 @@
                     <h1 class="Prazo">Prazo</h1>
                 </div>
     
-                <div [ngClass]="revela ? 'opacity-100' : 'opacity-0'" class="valores">
+                <div [ngClass]="isVisible ? 'opacity-100' : 'opacity-0'" class="valores">
                     <p class="Nome">Nome tarefa</p>
                     <h1 class="Progresso"><div class="valor-progresso"></div></h1>
                     <h1 class="Status">Doing</h1>
