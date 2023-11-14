@@ -46,7 +46,7 @@
         </div>
         <div class="w-[400px]">
             <textarea
-            rows="5" cols="80" pInputTextarea [autoResize]="true"
+            rows="4" cols="80" pInputTextarea [autoResize]="true"
             [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
             ></textarea>
         </div>
@@ -55,12 +55,36 @@
     
     <div class="tabs" [ngClass]="booleanDesc ? 'mt-24' : 'w-0 h-0'">
         <div class="pages">
-            <p class="page-name" (click)="changePage('sub-tarefas')">sub-tarefas</p>
-            <p class="page-name" (click)="changePage('comentarios')">comentários</p>
-            <p class="page-name" (click)="changePage('historicos')">históricos</p>
-            <p class="page-name" (click)="changePage('anexos')">anexos</p>
-            <p class="page-name" (click)="changePage('automacao')">automoção</p>
-            <p class="page-name" (click)="changePage('integracao')">integração</p>
+            <p
+             [ngClass]="page_task == 'sub-tarefas' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+              (click)="changePage('sub-tarefas')"
+              >sub-tarefas</p>
+            <p
+             [ngClass]="page_task == 'comentarios' ? 'border-b-2 border-primary' : 'border-none'"
+             class="page-name"
+              (click)="changePage('comentarios')"
+              >comentários</p>
+            <p 
+            [ngClass]="page_task == 'historicos' ? 'border-b-2 border-primary' : 'border-none'"
+             class="page-name"
+              (click)="changePage('historicos')"
+              >históricos</p>
+            <p
+             [ngClass]="page_task == 'anexos' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('anexos')"
+               >anexos</p>
+            <p
+             [ngClass]="page_task == 'automacao' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('automacao')"
+               >automoção</p>
+            <p
+             [ngClass]="page_task == 'integracao' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('integracao')"
+               >integração</p>
         </div>
         <div class="components">
             <app-sub-tarefa class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>

@@ -1,0 +1,80 @@
+.main {
+    @apply w-full h-full flex justify-center
+}
+
+.main-card {
+    @apply  w-[90%] h-2/3 rounded-t-xl
+}
+
+.card {
+    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite
+}
+
+.box-btn-add {
+    @apply w-full h-1/4 border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+}
+
+.s-input input {
+    display: none;
+  }
+  
+  .s-input input + label:before {
+    content: "";
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+    border: solid 2px #6A7181;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-bottom: 3px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .s-input input:checked + label:before{
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9.54961 17.9996L3.84961 12.2996L5.27461 10.8746L9.54961 15.1496L18.7246 5.97461L20.1496 7.39961L9.54961 17.9996Z' fill='%23F8F8F8'/%3E%3C/svg%3E");
+    padding: 1px;
+    background-position: center;
+    background-color: #4C956C;
+    border: solid 2px #4C956C;
+  
+  
+  }
+
+  .btn-add-content {
+    @apply flex justify-center items-center gap-3
+  }
+
+  .btn-add-text {
+    @apply text-primary text-xl font-bold
+  }
+
+  .comment {
+    @apply w-full h-1/2 grid grid-cols-2 border-b-2 ;
+    grid-template-columns : 20% 80%;
+  }
+
+  .profile-picture-box {
+    @apply w-full h-full flex justify-center items-center
+  }
+
+  .profile-picture {
+    @apply w-20 h-20 rounded-full bg-purple-500
+  }
+
+  .comment-content {
+    @apply grid w-full h-full;
+    grid-template-rows: 40% 60%;
+  }
+
+  .commentor-name {
+    @apply text-2xl text-primary font-bold 
+  }
+
+  .commentor-name-box {
+    @apply flex items-end mt-5 p-2
+  }
+
+  .comment-text-box {
+    @apply flex items-start font-semibold p-2
+  }

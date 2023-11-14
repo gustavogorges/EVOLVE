@@ -1,5 +1,5 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-xl rounded-bl-xl shadow-2xl
+    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl
 }
 
 .name-progress {
@@ -27,7 +27,7 @@
 }
 
 .task-properties {
-    @apply w-1/2 h-[30%] ml-12
+    @apply w-1/2 h-[20%] ml-12
 }
 
 .date-end {
@@ -91,7 +91,7 @@
 }
 
 .pages {
-    @apply w-full h-[7%] flex gap-6 justify-center border-b-2 mb-2
+    @apply w-full h-[7%] flex gap-6 justify-center border-b-2 mb-2 mt-7
 }
 
 .page-name {
@@ -103,7 +103,7 @@
 }
 
 .box-description {
-    @apply w-full border-2 border-primaryGray rounded-xl 
+    @apply w-full border-2 border-primaryGray rounded-xl
 }
 
 .components {
