@@ -10,6 +10,7 @@ export class TarefaCardPadraoComponent  {
    valorBarra="0%";
    caminho = "assets/naoVector.svg"
    caminhoEstrela="assets/estrelaNaoMarcada.svg"
+   
 
    
    @Input() id: string = "";

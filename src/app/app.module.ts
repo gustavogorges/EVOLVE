@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +46,8 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
     AppRoutingModule,
     AccordionModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
