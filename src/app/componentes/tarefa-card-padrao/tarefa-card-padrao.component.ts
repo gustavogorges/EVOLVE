@@ -10,6 +10,7 @@ export class TarefaCardPadraoComponent  {
    valorBarra="0%";
    caminho = "assets/naoVector.svg"
    caminhoEstrela="assets/estrelaNaoMarcada.svg"
+   
 
    
    @Input() id: string = "";
@@ -50,7 +51,7 @@ export class TarefaCardPadraoComponent  {
     this.service.getOne("tarefa",1)
     .then(response => {
     
-      console.log(response)
+      console.log(response)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
     })
     .catch(error => {
       console.log(error);
