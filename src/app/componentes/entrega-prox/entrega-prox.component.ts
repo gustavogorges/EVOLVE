@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-entrega-prox',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entrega-prox.component.scss']
 })
 export class EntregaProxComponent implements OnInit {
+
+  @Input() titulo: string = ""
+  @Input() dataFinal: string = ""
+  @Input() favoritado: boolean = false
 
   constructor() { }
 

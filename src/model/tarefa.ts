@@ -8,7 +8,7 @@ export class Tarefa{
     id: number = 0;
     nome : string = "";
     favoritado: boolean = false;
-    datafinal: string = "";
+    dataFinal: string = "";
     dataCriacao: string ="";
     status: Status = new Status;
     statusPossiveis:Array<Status> = new Array;
