@@ -1,0 +1,16 @@
+.main {
+    @apply w-full h-full flex justify-center
+}
+
+.card-box {
+    @apply w-5/6 h-min  border-2 rounded-xl
+}
+
+.card {
+    @apply w-full h-full grid;
+    grid-template-columns: 15% 85%;
+}
+
+.left {
+    @apply w-full border-r-2
+}
