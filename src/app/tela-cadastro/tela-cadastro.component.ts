@@ -12,4 +12,8 @@ export class TelaCadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cadastrarUsuario() : void {
+    console.log("teste")
+  }
+
 }
