@@ -30,8 +30,6 @@
     background-position: center;
     background-color: #4C956C;
     border: solid 2px #4C956C;
-  
-  
   }
 
   .btn-add-content {
@@ -40,4 +38,12 @@
 
   .btn-add-text {
     @apply text-primary text-xl font-bold
+  }
+
+  .content {
+    @apply flex justify-center items-center flex-col gap-4
+  }
+
+  .file-icon {
+    @apply text-8xl text-secondary
   }
