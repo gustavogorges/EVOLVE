@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,10 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+
+import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
+import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
+
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
@@ -26,6 +30,7 @@ import { AutomacaoComponent } from './componentes/sub-componentes/automacao/auto
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,10 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
+
+    TelaTarefaComponent,
+    TarefaCardPadraoComponent,
+
     EquipeRecenteComponent,
     DiaCalendarioComponent,
     TarefaDiaComponent,
@@ -44,7 +53,9 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     HistoricosComponent,
     AnexosComponent,
     AutomacaoComponent,
-    IntegracaoComponent
+    IntegracaoComponent,
+    TarefaDiaComponent
+
   ],
   imports: [
     BrowserModule,
@@ -53,6 +64,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     ButtonModule,
     CheckboxModule,
     InputTextareaModule,
+    FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

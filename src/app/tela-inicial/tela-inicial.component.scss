@@ -76,9 +76,15 @@
     @apply text-xl
 }
 
+
+.delivery {
+    @apply w-full justify-center h-24 flex justify-center mb-8
+} 
+
 .calendar-content {
     @apply w-full h-[87%] grid grid-cols-4
 }
+
 
 .tarefa {
     @apply absolute w-[40%] h-[92vh] ;
