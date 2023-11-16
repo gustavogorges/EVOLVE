@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-entrega-prox',
@@ -7,13 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EntregaProxComponent implements OnInit {
 
-  @Input() titulo: string = ""
-  @Input() dataFinal: string = ""
-  @Input() favoritado: boolean = false
+  @Input() tarefa: Tarefa = new Tarefa
 
-  constructor() { }
+  constructor(private service: BackendEVOLVEService) { }
 
   ngOnInit(): void {
+  }
+
+  alterarTarefaFavoritado(){
+    this.tarefa.favoritado = !this.tarefa.favoritado;
+    this.salvarTarefa()
+  }
+
+  salvarTarefa(){
+    this.service.putTarefa(this.tarefa);
   }
 
 }

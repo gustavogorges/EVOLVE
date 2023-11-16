@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-deliveries-box">
                     <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
-                        <app-entrega-prox class="card-deliveries" titulo={{tarefa.nome}} dataFinal={{tarefa.dataFinal}} 
+                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa"
                         ></app-entrega-prox>
                         <!-- <app-entrega-prox class="card-deliveries"></app-entrega-prox>
                         <app-entrega-prox class="card-deliveries"></app-entrega-prox>

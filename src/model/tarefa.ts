@@ -10,7 +10,7 @@ export class Tarefa{
     favoritado: boolean = false;
     dataFinal: string = "";
     dataCriacao: string ="";
-    status: Status = new Status;
+    statusAtual: Status = new Status;
     statusPossiveis:Array<Status> = new Array;
     criador:Usuario = new Usuario;
     projeto:Projeto = new Projeto;

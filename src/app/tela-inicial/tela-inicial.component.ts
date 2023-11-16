@@ -10,11 +10,9 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class TelaInicialComponent implements OnInit {
 
   listaTarefas: Array<Tarefa> = []
-  service: BackendEVOLVEService
+  
 
-  constructor() { 
-    this.service = new BackendEVOLVEService()
-  }
+  constructor(private service: BackendEVOLVEService) {}
 
     async ngOnInit(): Promise<void> {
     this.listaTarefas = await this.service.getAllSomething("tarefa")
