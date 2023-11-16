@@ -20,6 +20,14 @@ import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tare
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
+import { ComentariosComponent } from './componentes/sub-componentes/comentarios/comentarios.component';
+import { HistoricosComponent } from './componentes/sub-componentes/historicos/historicos.component';
+import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
+import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
+import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 
 
@@ -38,6 +46,14 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
 
     EquipeRecenteComponent,
     DiaCalendarioComponent,
+    TarefaDiaComponent,
+    ModalTarefaComponent,
+    SubTarefaComponent,
+    ComentariosComponent,
+    HistoricosComponent,
+    AnexosComponent,
+    AutomacaoComponent,
+    IntegracaoComponent,
     TarefaDiaComponent
 
   ],
@@ -47,7 +63,9 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
     AccordionModule,
     ButtonModule,
     CheckboxModule,
+    InputTextareaModule,
     FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
