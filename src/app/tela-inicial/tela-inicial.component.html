@@ -8,12 +8,15 @@
                     <p class="title-text">Entregas Próximas</p>
                 </div>
                 <div class="card-deliveries-box">
-                    <app-entrega-prox (click)="openTask()" class="card-deliveries"></app-entrega-prox>
-                    <app-entrega-prox class="card-deliveries"></app-entrega-prox>
-                    <app-entrega-prox class="card-deliveries"></app-entrega-prox>
-                    <app-entrega-prox class="card-deliveries"></app-entrega-prox>
-                    <app-entrega-prox class="card-deliveries"></app-entrega-prox>
-                    <app-entrega-prox class="card-deliveries"></app-entrega-prox>
+
+                    <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
+                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa"
+                        ></app-entrega-prox>
+                       
+                    </div>
+                    <div *ngIf="listaTarefas.length == 0" class="flex flex-col items-center justify-center text-center font-bold text-primary text-xl ">
+                        <h1> Parece que você concluiu todas suas tarefas!</h1>
+                    </div>
                 </div>
            </div>
         </div>
@@ -50,3 +53,4 @@
         </div>
     </div>
 </div>
+<!-- <script src="tela-inicial.component.ts"></script> -->

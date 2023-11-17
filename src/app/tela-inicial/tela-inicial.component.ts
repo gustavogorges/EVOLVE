@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -7,11 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaInicialComponent implements OnInit {
 
+
+  listaTarefas: Array<Tarefa> = []
+
   booleanTask:boolean = false;
 
-  constructor() { }
+  constructor(private service: BackendEVOLVEService) {}
 
-  ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+    this.listaTarefas = await this.service.getAllSomething("tarefa")
+  }
+
+  mostrar(){
+    console.log(this.listaTarefas)
   }
 
   openTask() :void {

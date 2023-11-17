@@ -1,5 +1,5 @@
 .main {
-    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3 border-b-4 border-primary
+    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3 border-b-4 border-primary 
 }
 
 .date {
@@ -7,7 +7,7 @@
 }
 
 .name {
-    @apply col-start-1 col-end-4
+    @apply col-start-1 col-end-4 overflow-clip
 }
 
 .date-text {
@@ -15,17 +15,21 @@
 }
 
 .name-text {
-    @apply text-primary font-bold text-xl
+    @apply text-primary font-bold text-xl ;
+    animation: 5s ease-in 1s slidein;
+
 }
 
 .status-text {
-    @apply pt-1 pr-5 pl-5 pb-1 bg-yellow-200 rounded-xl text-primaryFontBlack text-sm font-semibold
+    @apply pt-1 pr-5 pl-5 pb-1 rounded-xl text-sm font-semibold ;
+    //  bg-yellow-200 text-primaryFontBlack
 }
 
 .star {
     @apply flex col-start-3 col-end-4 justify-end 
 }
 
-.pi-star-fill {
-    @apply text-yellow-300 text-lg
-}
+// .pi-star-fill {
+//     @apply text-white-300 text-lg
+// }
+
