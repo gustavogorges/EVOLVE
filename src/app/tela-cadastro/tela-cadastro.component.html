@@ -18,15 +18,15 @@
                 <div class="div-inputs">
                     <div class="inputs-login">
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <input [(ngModel)]="usuario.nome" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Nome completo</label>
                           </div>
                           <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <input [(ngModel)]="usuario.email" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Email</label>
                           </div>
                           <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <input [(ngModel)]="usuario.senha" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Senha</label>
                           </div>
                           <div class="form__group field">
@@ -48,7 +48,7 @@
                         
                     </div>
                     <div class="div-login">
-                        <button pButton pRipple type="button" label="Cadastrar" class="p-button-rounded button-login"></button>
+                        <button pButton pRipple type="button" label="Cadastrar" class="p-button-rounded button-login" (click)="cadastrarUsuario()"></button>
                     </div>
                     <div class="div-google">
                         <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>

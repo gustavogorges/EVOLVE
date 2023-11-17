@@ -9,8 +9,10 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaInicialComponent implements OnInit {
 
+
   listaTarefas: Array<Tarefa> = []
-  
+
+  booleanTask:boolean = false;
 
   constructor(private service: BackendEVOLVEService) {}
 
@@ -20,6 +22,10 @@ export class TelaInicialComponent implements OnInit {
 
   mostrar(){
     console.log(this.listaTarefas)
+  }
+
+  openTask() :void {
+    this.booleanTask = !this.booleanTask;
   }
 
 }

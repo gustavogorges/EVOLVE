@@ -21,6 +21,9 @@ export class BackendEVOLVEService {
   async getOne(caminho : string, id:number){
     return (await axios.get(this.URL+caminho + "/"+id)).data
   }
+  async getUser( email: string )  {
+    return (await axios.get(this.URL+"usuario/login" + "/"+email)).data
+  }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }

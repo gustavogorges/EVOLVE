@@ -37,10 +37,11 @@
 } 
 
 .status {
-  @apply rounded-lg  px-4 w-max text-base;
-  font-family: "Hind Madurai", sans-serif;
+  @apply rounded-lg  px-4 w-max text-base self-center;
+  font-family: "Montserrat", sans-serif;
 }
 .texto {
+  @apply text-xl text-primary;
   font-family: "Hind Madurai", sans-serif;
 }
 .nomeTarefa {
@@ -55,3 +56,4 @@
 .fotoMembroTarefa{
   @apply w-7 h-7 rounded-full bg-secondary overflow-clip
 }
+

@@ -1,0 +1,98 @@
+<div class="main">
+    <div class="name-progress">
+        <div class="name-box">
+            <p class="name">Tarefa 1</p>
+        </div>
+        <div class="progress-bar-box">
+            <div class="progress-bar">
+                <div class="w-2/3 h-full bg-secondary rounded-md"></div>
+            </div>
+        </div>
+    </div>
+    <div class="task-properties">
+        <div class="date-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-calendar"></i>
+                <p class="name-propertie">data final:</p>
+            </div>
+            <div class="date-end">
+                <p class="date-end-text">20/10</p>
+            </div>
+        </div>
+        <div class="responsible-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-users"></i>
+                <p class="name-propertie">responsáveis:</p>
+            </div>
+            <div class="responsible-icon-box">
+                <div class="responsible-icon"></div>
+            </div>
+        </div>
+        <div class="status-propertie">
+            <div class="name-icon">
+                <i class="icon-propertie pi pi-spinner"></i>
+                <p class="name-propertie">status:</p>
+            </div>
+            <div class="status-icon-box">
+                <div class="status-icon">doing</div>
+            </div>
+        </div>
+        <div class="description-propertie">
+            <div class="name-icon">
+                <i *ngIf="!booleanDesc" class="icon-propertie pi pi-angle-down" (click)="openDesc()"></i>
+                <i *ngIf="booleanDesc" class="icon-propertie pi pi-angle-up" (click)="openDesc()"></i>
+                <p class="name-propertie">descrição</p>
+            </div>
+        </div>
+        <div class="w-[400px]">
+            <textarea
+            rows="4" cols="80" pInputTextarea [autoResize]="true"
+            [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
+            ></textarea>
+        </div>
+     
+    </div>
+    
+    <div class="tabs" [ngClass]="booleanDesc ? 'mt-24' : 'w-0 h-0'">
+        <div class="pages">
+            <p
+             [ngClass]="page_task == 'sub-tarefas' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+              (click)="changePage('sub-tarefas')"
+              >sub-tarefas</p>
+            <p
+             [ngClass]="page_task == 'comentarios' ? 'border-b-2 border-primary' : 'border-none'"
+             class="page-name"
+              (click)="changePage('comentarios')"
+              >comentários</p>
+            <p 
+            [ngClass]="page_task == 'historicos' ? 'border-b-2 border-primary' : 'border-none'"
+             class="page-name"
+              (click)="changePage('historicos')"
+              >históricos</p>
+            <p
+             [ngClass]="page_task == 'anexos' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('anexos')"
+               >anexos</p>
+            <p
+             [ngClass]="page_task == 'automacao' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('automacao')"
+               >automoção</p>
+            <p
+             [ngClass]="page_task == 'integracao' ? 'border-b-2 border-primary' : 'border-none'"
+              class="page-name"
+               (click)="changePage('integracao')"
+               >integração</p>
+        </div>
+        <div class="components">
+            <app-sub-tarefa class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
+            <app-comentarios class="component" *ngIf="page_task == 'comentarios'"></app-comentarios>
+            <app-historicos  class="component" *ngIf="page_task == 'historicos'"></app-historicos>
+            <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
+            <app-automacao class="component" *ngIf="page_task == 'automacao'"></app-automacao>
+            <app-integracao class="component" *ngIf="page_task == 'integracao'"></app-integracao>
+        </div>
+    </div>
+</div>

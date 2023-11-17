@@ -10,7 +10,8 @@ module.exports = {
         'secondaryWhite' : '#F8F8F8',
         'primaryGray' : '#F5F5F5',
         'primaryFontBlack' : '#343434',
-        'primaryNav' : '#E9EDF1'
+        'primaryNav' : '#E9EDF1',
+        'fontGray' : '#6A7181'
       }
     },
   },
