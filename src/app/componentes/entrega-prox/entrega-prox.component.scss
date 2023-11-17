@@ -21,7 +21,8 @@
 }
 
 .status-text {
-    @apply pt-1 pr-5 pl-5 pb-1 bg-yellow-200 rounded-xl text-primaryFontBlack text-sm font-semibold
+    @apply pt-1 pr-5 pl-5 pb-1 rounded-xl text-sm font-semibold ;
+    //  bg-yellow-200 text-primaryFontBlack
 }
 
 .star {
