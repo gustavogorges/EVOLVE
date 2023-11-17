@@ -10,7 +10,7 @@ import { Usuario } from 'src/model/usuario';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://10.4.96.29:8087/"
+  URL : string = "http://10.4.96.2:8087/"
 
   constructor() { }
 
@@ -19,6 +19,9 @@ export class BackendEVOLVEService {
   }
   async getOne(caminho : string, id:number){
     return (await axios.get(this.URL+caminho + "/"+id)).data
+  }
+  async getUser( email: string )  {
+    return (await axios.get(this.URL+"usuario/login" + "/"+email)).data
   }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data

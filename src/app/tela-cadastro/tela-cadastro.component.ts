@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/model/usuario';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tela-cadastro',
@@ -7,13 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaCadastroComponent implements OnInit {
 
-  constructor() { }
+  usuario : Usuario = new Usuario();
+
+  constructor(private service : BackendEVOLVEService) { 
+    
+  }
 
   ngOnInit(): void {
   }
 
-  cadastrarUsuario() : void {
-    console.log("teste")
+  async cadastrarUsuario() : Promise<void> {
+    await this.service.postUsuario("usuario",this.usuario)
   }
 
 }

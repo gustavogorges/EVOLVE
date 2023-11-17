@@ -16,7 +16,7 @@ import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
-
+import { ToastModule } from 'primeng/toast';
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
@@ -64,7 +64,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     ButtonModule,
     CheckboxModule,
     InputTextareaModule,
-    FormsModule
+    FormsModule,
+    ToastModule
 
   ],
   providers: [],
