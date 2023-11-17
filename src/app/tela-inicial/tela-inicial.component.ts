@@ -24,8 +24,9 @@ export class TelaInicialComponent implements OnInit {
     console.log(this.listaTarefas)
   }
 
-  openTask() :void {
+  openTask(tarefa:Tarefa) :void {
     this.booleanTask = !this.booleanTask;
+    console.log(tarefa);
   }
 
 }

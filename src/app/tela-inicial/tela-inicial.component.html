@@ -10,7 +10,7 @@
                 <div class="card-deliveries-box">
 
                     <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
-                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa"
+                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa" (click)="openTask(tarefa)"
                         ></app-entrega-prox>
                        
                     </div>

@@ -19,7 +19,7 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   async cadastrarUsuario() : Promise<void> {
-    await this.service.postUsuario("usuario",this.usuario)
+    await this.service.postUsuario(this.usuario)
   }
 
 }
