@@ -1,11 +1,25 @@
 <div class="main">
     <div class="name-progress">
         <div class="name-box">
-            <p class="name">Tarefa 1</p>
+            <p class="name">{{tarefa.nome}}</p>
         </div>
         <div class="progress-bar-box">
-            <div class="progress-bar">
+            <div  class="progress-bar">
                 <div class="w-2/3 h-full bg-secondary rounded-md"></div>
+            </div>
+            <!-- BOTOES QUE SALVAM E CANCELAM EDIÇÃO DA TAREFA -->
+            <div *ngIf="booleanEdit" class="cancel-button flex justify-center items-center">
+               <p class=" text-primaryWhite" (click)="edit()">cancelar</p>
+            </div>
+            <div *ngIf="booleanEdit" class="save-button flex justify-center items-center">
+                <p class=" text-primaryWhite">salvar</p>
+            </div>
+            <!-- BOTOES QUE ENTRAM NA EDIÇÃO OU DELETEM A TAREFA -->
+            <div *ngIf="!booleanEdit" (click)="edit()" class="edit-button flex justify-center items-center">
+                <i class="text-white pi pi-pencil"></i>
+            </div>
+            <div *ngIf="!booleanEdit" class="remove-button flex justify-center items-center">
+                <i class="text-white pi pi-trash"></i>
             </div>
         </div>
     </div>
@@ -16,7 +30,7 @@
                 <p class="name-propertie">data final:</p>
             </div>
             <div class="date-end">
-                <p class="date-end-text">20/10</p>
+                <p *ngIf="!booleanEdit" class="date-end-text">{{tarefa.dataFinal}}</p>
             </div>
         </div>
         <div class="responsible-propertie">
@@ -34,7 +48,7 @@
                 <p class="name-propertie">status:</p>
             </div>
             <div class="status-icon-box">
-                <div class="status-icon">doing</div>
+                <div class="status-icon bg-[{{tarefa.statusAtual.corFundo}}]">{{tarefa.statusAtual.nome}}</div>
             </div>
         </div>
         <div class="description-propertie">
@@ -47,13 +61,15 @@
         <div class="w-[400px]">
             <textarea
             rows="4" cols="80" pInputTextarea [autoResize]="true"
+            [(ngModel)] = "tarefa.descricao"
+            [disabled]="!editBoolean"
             [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
             ></textarea>
         </div>
      
     </div>
     
-    <div class="tabs" [ngClass]="booleanDesc ? 'mt-24' : 'w-0 h-0'">
+    <div class="tabs" [ngClass]="booleanDesc ? 'mt-24' : 'w-0 h-0'" *ngIf="!booleanEdit">
         <div class="pages">
             <p
              [ngClass]="page_task == 'sub-tarefas' ? 'border-b-2 border-primary' : 'border-none'"

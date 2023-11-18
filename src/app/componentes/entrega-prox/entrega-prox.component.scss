@@ -15,13 +15,13 @@
 }
 
 .name-text {
-    @apply text-primary font-bold text-xl ;
+    @apply text-primary font-bold text-lg ;
     animation: 5s ease-in 1s slidein;
 
 }
 
 .status-text {
-    @apply pt-1 pr-5 pl-5 pb-1 rounded-xl text-sm font-semibold ;
+    @apply py-1 px-3 rounded-xl text-sm  ;
     //  bg-yellow-200 text-primaryFontBlack
 }
 

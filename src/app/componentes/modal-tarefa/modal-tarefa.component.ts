@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
 
 @Component({
   selector: 'app-modal-tarefa',
@@ -8,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ModalTarefaComponent implements OnInit {
   booleanDesc:boolean = false;
   page_task:string = "sub-tarefas";
+  nomeGrande : string = "";
+  editBoolean : boolean = false;
+  booleanEdit:boolean = false;
+  date : Date = new Date;
 
   constructor() { }
-
+@Input() tarefa:Tarefa = new Tarefa
   ngOnInit(): void {
+    // this.verificaTamanhoString();
   }
 
   openDesc():void {
@@ -32,5 +38,18 @@ export class ModalTarefaComponent implements OnInit {
     } else if(name_page == "integracao") {
       this.page_task = "integracao"
     }
+}
+
+verificaTamanhoString(){
+  if(this.tarefa.nome.length>20){
+    this.nomeGrande = this.tarefa.nome
+    let nome = (this.tarefa.nome.split(" ",4)).toString();
+    this.tarefa.nome= nome.replace(/,/g, " ")
+    console.log(this.tarefa.nome)
+  }
+}
+
+edit() {
+  this.booleanEdit = !this.booleanEdit;
 }
 }

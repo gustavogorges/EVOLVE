@@ -28,6 +28,8 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -65,7 +67,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     CheckboxModule,
     InputTextareaModule,
     FormsModule,
-    ToastModule
+    ToastModule,
+    CalendarModule
 
   ],
   providers: [],

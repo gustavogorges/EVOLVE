@@ -10,7 +10,7 @@
     </div>
     <div class="star">
         <!-- <i class="pi pi-star-fill"></i> -->
-        <img *ngIf="!tarefa.favoritado" src="../../../assets/estrelaNaoMarcada.svg" alt="" (click)="alterarTarefaFavoritado()" >
-        <img *ngIf="tarefa.favoritado" src="../../../assets/estrelaMarcada.svg" alt="" (click)="alterarTarefaFavoritado()">
+        <img class="h-5 w-5" *ngIf="!tarefa.favoritado" src="../../../assets/estrelaNaoMarcada.svg" alt="" (click)="alterarTarefaFavoritado()" >
+        <img class="h-5 w-5" *ngIf="tarefa.favoritado" src="../../../assets/estrelaMarcada.svg" alt="" (click)="alterarTarefaFavoritado()">
     </div>
 </div>

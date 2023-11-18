@@ -23,10 +23,10 @@ export class TelaInicialComponent implements OnInit {
   mostrar(){
     console.log(this.listaTarefas)
   }
-
+tarefaSelecionada:Tarefa = new Tarefa
   openTask(tarefa:Tarefa) :void {
     this.booleanTask = !this.booleanTask;
-    console.log(tarefa);
+    this.tarefaSelecionada = tarefa;
   }
 
 }
