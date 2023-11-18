@@ -1,5 +1,5 @@
 .projeto{
-    @apply w-[100%] md:w-[30rem] h-[55vh] grid grid-cols-3 duration-500 gap-[1%] bg-secondaryWhite;
+    @apply w-[100%] xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3 duration-500 gap-2 bg-secondaryWhite;
     grid-template-rows: 24% 7% 29% 24% 1.5% 10%;
 
     .imagem-capa{
@@ -31,7 +31,11 @@
         @apply col-span-3 row-start-3 flex items-center justify-center overflow-auto;
     
         .desc{
-            @apply p-[2%] border-2 rounded-lg w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify
+            @apply p-[2%] border-2 rounded-lg w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify;
+
+            .descricao-valor{
+                @apply h-full w-full bg-transparent border-none resize-none outline-none
+            }
         }
     }
     
@@ -47,7 +51,7 @@
         }
     
         .bola{
-            @apply w-[3rem] h-[3rem] rounded-full bg-green-600 ;
+            @apply w-[2.5rem] h-[2.5rem] rounded-full bg-green-600 ;
         }
     }
     
@@ -60,18 +64,18 @@
     }
     
     .data-final{
-        @apply row-start-6 col-span-full flex px-2 text-xl items-center
+        @apply row-start-6 col-span-full flex px-2 text-lg text-primary items-start
     }
 }
 
 
 .infos{
     @apply duration-200  bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
-    grid-template-rows: 5% 40% 30% 5%;
+    grid-template-rows: 3% 40% 30% 10%;
     grid-template-columns: 5% 90% 5%;
 
     .infos-projeto{
-        @apply  row-start-2 col-start-2 col-end-2 bg-secondaryWhite rounded-xl w-[90%] overflow-auto;
+        @apply  row-start-2 col-start-2 col-end-3 bg-secondaryWhite rounded-xl w-[90%] overflow-auto;
 
         .cabecalho{
             @apply duration-700 grid grid-cols-4 rounded-xl text-xl text-gray-500 bg-secondaryWhite;
@@ -95,7 +99,7 @@
 
 
         .valores{
-            @apply duration-700  grid grid-cols-4 items-center text-sm text-primary font-semibold pt-[2%] overflow-auto;
+            @apply duration-700  grid grid-cols-4 items-center text-sm  font-semibold pt-[2%] overflow-auto;
 
             .Nome{
                 @apply col-start-1 flex justify-center text-center px-[1%]
@@ -105,7 +109,7 @@
                 @apply col-start-2 w-full grid items-center h-4 rounded-xl bg-gray-200 overflow-hidden;
 
                 .valor-progresso{
-                    @apply bg-primary w-[90%] duration-700 h-full
+                    @apply bg-primary duration-700 h-full
                 }
             }
 
@@ -120,11 +124,37 @@
     }
 
     .integrantes{
-        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-[90%]  rounded-xl;
+        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-[90%] flex  rounded-xl;
+
+        .seta{
+            @apply h-full flex items-center justify-center w-[20%]
+        }
+
+        .pessoas{
+            @apply col-start-2 col-end-3 h-full flex gap-2 md:gap-4 overflow-auto;
+
+            
+            .infos-pessoas{
+                @apply flex flex-col justify-center items-center;
+
+                .foto{
+                    @apply h-14 w-14 md:w-20 md:h-20 rounded-full flex justify-center items-center text-4xl font-semibold
+                }
+
+                .nome, .tipo{
+                    @apply  text-gray-700
+                }
+
+                .tipo{
+                    @apply text-sm
+                }
+            }
+        }
+        
     }
 
-    p-button{
-        @apply col-start-2 col-end-2 row-start-4 flex justify-end p-2 pr-[10%] h-[3.5rem];
+    .botoes{
+        @apply flex justify-between px-[10%]  w-full col-span-2  row-start-4;
     }
 
     

@@ -13,8 +13,9 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
-import { ProjetoComponentComponent } from './componentes/projeto-component/projeto-component.component';
 import { ProjetoComponent } from './componentes/projeto/projeto.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +27,6 @@ import { ProjetoComponent } from './componentes/projeto/projeto.component';
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
-    ProjetoComponentComponent,
     ProjetoComponent
   ],
   imports: [
@@ -34,7 +34,9 @@ import { ProjetoComponent } from './componentes/projeto/projeto.component';
     AppRoutingModule,
     AccordionModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    LayoutModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

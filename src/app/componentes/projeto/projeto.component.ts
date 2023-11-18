@@ -1,6 +1,13 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { projetoService } from 'src/service/projetoService';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
+
+interface Tarefa{
+  nome : string,
+  prazo : String,
+  progresso : number,
+  status : string
+}
 
 @Component({
   selector: 'app-projeto',
@@ -8,42 +15,101 @@ import { projetoService } from 'src/service/projetoService';
   styleUrls: ['./projeto.component.scss']
 })
 export class ProjetoComponent implements OnInit {
+  
+  tarefas : Tarefa[] = []
 
-  @Input() isVisible:boolean = true;
+  descricao:string = 'dawdawdada'
+  nome = ''
+  prazo = ''
+  progresso = 0
+  status = ''
+  md: any
+  corAtual: string = ''
+  valorProgresso = 0;
 
-  tamanhoTela:Number = 0
-  md: boolean = false
-  revela: boolean = false
+  @Input() isVisible:boolean = false;
+  
+  setValorProgresso(num:number){
+    this.valorProgresso = num
+  }
 
-  resizeObservable?: Observable<Event>
-  resizeSubscription ?: Subscription
+  integrantes = [
+    {
+      cor: this.randomizeColor(),
+      nome: 'felipe',
+      tipo: 'Administrador'
+    },
+    {
+      cor: this.randomizeColor(),
+      nome: 'julio',
+      tipo: 'convidado'
+    },
+    {
+      cor: this.randomizeColor(),
+      nome: 'felipe',
+      tipo: 'Administrador'
+    },
+    {
+      cor: this.randomizeColor(),
+      nome: 'julio',
+      tipo: 'convidado'
+    },
+    {
+      cor: this.randomizeColor(),
+      nome: 'felipe',
+      tipo: 'Administrador'
+    },
+    {
+      cor: this.randomizeColor(),
+      nome: 'julio',
+      tipo: 'convidado'
+    },
+  ]
+  
+  randomizeColor(){
+    let str = '#';
+    while (str.length < 7) {
+      str += Math.floor(Math.random() * 0x10).toString(16);
+    }
+    return str.toUpperCase()
+  }
 
-  constructor(private revelaService : projetoService) { }
+  criaTarefa(){
+    const task: Tarefa = {
+      nome : 'nome da terefa',
+      prazo : '10/02',
+      progresso : 90,
+      status : 'Doing'
+    }
+    this.tarefas.push(task)
+    this.tarefas.push(task)
+    this.tarefas.push(task)
+    this.tarefas.push(task)
+  }
+
+  visivel(){}
+  
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    this.verificaTamanhoTela()
+  }
 
   ngOnInit(): void {
     this.getScreenSize()
-    this.resizeObservable = fromEvent(window, 'resize')
-    this.resizeSubscription = this.resizeObservable.subscribe( e => {
-      this.revelaService.setRevela(false)
-    })
-    this.revela = this.revelaService.getRevela()
+    this.criaTarefa()
+    this.randomizeColor()
   }
 
-  ngOnDestroy() {
-    this.resizeSubscription?.unsubscribe
-  }
-
-  revelaInfos(){
-    this.revelaService.setRevela(!this.revelaService.getRevela())
-    this.revela = this.revelaService.getRevela()
-  }
-
-  @HostListener('window:resize', ['$event'])
-  getScreenSize() {
-    if(window.innerWidth < 768){
+  verificaTamanhoTela() {
+    if(window.innerWidth < 1024){
       this.md = true
     }else{
       this.md = false
     }
+    this.isVisible = true
+    setTimeout(() => {
+      this.isVisible = false 
+    },0.00001)
   }
 }
+
