@@ -1,15 +1,14 @@
 <div class="main">
     <div class="pic-team">
-        <div class="pic"></div>
+        <img class="pic" src="{{equipe.imagem}}" alt="">
     </div>
     <div class="name-team">
-        <p>Equipe WEG</p>
+        <p>{{equipe.nome}}</p>
     </div>
-    <div class="responsible-team">
-        <p class="responsible-text">responsaveis :</p>
-        <div class="flex">
-            <div class="responsible-circle bg-blue-500"></div>
-            <div class="responsible-circle bg-pink-300"></div>
+    <div class="responsible-team flex gap-4">
+        <p class="responsible-text">administrador :</p>
+        <div class="flex items-center justify-center">
+            <img class="responsible-circle" src="{{equipe.administrador.fotoPerfil}}" alt="">
         </div>
     </div>
 </div>
