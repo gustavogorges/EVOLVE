@@ -52,8 +52,8 @@
     </div>
     <div *ngIf="select == 'Padrao'">
       <div class="flex flex-wrap gap-6 w-full justify-center">
-        <div *ngFor="let blablabla of lista; index as indice" class="card">
-          <app-tarefa-card-padrao [id]="blablabla + indice"></app-tarefa-card-padrao>
+        <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
+          <app-tarefa-card-padrao [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-padrao>
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -6,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tela-inicial.component.scss']
 })
 export class TelaInicialComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+   
   }
 
 }
