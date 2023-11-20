@@ -14,7 +14,6 @@ import { NavegacaoComponent } from './componentes/navegacao/navegacao.component'
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { ProjetoComponent } from './componentes/projeto/projeto.component';
-import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule } from '@angular/forms';
 
 
@@ -35,7 +34,6 @@ import { FormsModule } from '@angular/forms';
     AccordionModule,
     ButtonModule,
     CheckboxModule,
-    LayoutModule,
     FormsModule
   ],
   providers: [],

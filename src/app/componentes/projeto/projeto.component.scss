@@ -51,7 +51,7 @@
         }
     
         .bola{
-            @apply w-[2.5rem] h-[2.5rem] rounded-full bg-green-600 ;
+            @apply w-[2.5rem] h-[2.5rem] rounded-full bg-secondary ;
         }
     }
     
@@ -59,7 +59,7 @@
         @apply row-start-5 col-span-full grid grid-cols-3 bg-gray-200;
     
         .linha-verde{
-            @apply w-[30%] duration-700 col-span-full bg-green-600 rounded-lg;
+            @apply w-[30%] duration-700 col-span-full bg-secondary rounded-lg;
         }
     }
     
@@ -72,13 +72,13 @@
 .infos{
     @apply duration-200  bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
     grid-template-rows: 3% 40% 30% 10%;
-    grid-template-columns: 5% 90% 5%;
+    grid-template-columns: 3% 85% 3%;
 
     .infos-projeto{
-        @apply  row-start-2 col-start-2 col-end-3 bg-secondaryWhite rounded-xl w-[90%] overflow-auto;
+        @apply  row-start-2 col-start-2 col-end-3 bg-secondaryWhite rounded-xl w-full overflow-auto;
 
         .cabecalho{
-            @apply duration-700 grid grid-cols-4 rounded-xl text-xl text-gray-500 bg-secondaryWhite;
+            @apply duration-700 grid grid-cols-4 rounded-xl text-lg md:text-xl text-gray-500 bg-secondaryWhite;
 
             .Nome{
                 @apply col-start-1 flex justify-center
@@ -102,11 +102,11 @@
             @apply duration-700  grid grid-cols-4 items-center text-sm  font-semibold pt-[2%] overflow-auto;
 
             .Nome{
-                @apply col-start-1 flex justify-center text-center px-[1%]
+                @apply col-start-1 flex justify-center text-center px-[1%] text-primary font-bold
             }
 
             .Progresso{
-                @apply col-start-2 w-full grid items-center h-4 rounded-xl bg-gray-200 overflow-hidden;
+                @apply col-start-2 mx-[10%] grid items-center h-4 rounded-xl bg-gray-200 overflow-hidden;
 
                 .valor-progresso{
                     @apply bg-primary duration-700 h-full
@@ -114,24 +114,24 @@
             }
 
             .Status{
-                @apply col-start-3 flex max-h-10 justify-center items-center h-full rounded-2xl mx-3 bg-yellow-400
+                @apply col-start-3 flex max-h-10 justify-center items-center rounded-2xl mx-3 bg-yellow-400
             }
 
             .Prazo{
-                @apply col-start-4 flex justify-center
+                @apply col-start-4 flex justify-center text-lg text-primary font-semibold
             }
         }
     }
 
     .integrantes{
-        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-[90%] flex  rounded-xl;
+        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-full flex  rounded-xl;
 
         .seta{
             @apply h-full flex items-center justify-center w-[20%]
         }
 
         .pessoas{
-            @apply col-start-2 col-end-3 h-full flex gap-2 md:gap-4 overflow-auto;
+            @apply col-start-2 col-end-3 h-full flex gap-2 md:gap-5 overflow-auto;
 
             
             .infos-pessoas{
@@ -154,7 +154,7 @@
     }
 
     .botoes{
-        @apply flex justify-between px-[10%]  w-full col-span-2  row-start-4;
+        @apply flex justify-between  w-full col-start-2 col-end-3  row-start-4;
     }
 
     

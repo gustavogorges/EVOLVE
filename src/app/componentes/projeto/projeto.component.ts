@@ -1,5 +1,4 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
 
 interface Tarefa{
@@ -76,7 +75,7 @@ export class ProjetoComponent implements OnInit {
 
   criaTarefa(){
     const task: Tarefa = {
-      nome : 'nome da terefa',
+      nome : 'Nome tarefa',
       prazo : '10/02',
       progresso : 90,
       status : 'Doing'
