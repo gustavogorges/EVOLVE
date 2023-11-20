@@ -55,14 +55,14 @@ data : Date = new Date
   }
 
   trocaCor(){
-    if(this.tarefaAtual.statusAtual.nome =="to do"){
+    if(this.tarefaAtual.statusAtual.nome =="pendente"){
       this.corStatus="#7CD5F4"
-    }else if(this.tarefaAtual.statusAtual.nome =="doing"){
+    }else if(this.tarefaAtual.statusAtual.nome =="em progresso"){
       this.corStatus="#FCEC62"
-    }else  if(this.tarefaAtual.statusAtual.nome =="done"){
+    }else  if(this.tarefaAtual.statusAtual.nome =="Concluido"){
       this.corStatus="#86C19F"
     }
-    else  if(this.tarefaAtual.statusAtual.nome =="none"){
+    else  if(this.tarefaAtual.statusAtual.nome =="não atribuido"){
       this.corStatus="#9CA3AE"
     }
     
