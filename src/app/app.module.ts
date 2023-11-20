@@ -20,6 +20,8 @@ import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tare
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -47,7 +49,8 @@ import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.componen
     AccordionModule,
     ButtonModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
