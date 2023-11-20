@@ -12,8 +12,8 @@ export class ModalTarefaComponent implements OnInit {
   nomeGrande : string = "";
   editBoolean : boolean = false;
   booleanEdit:boolean = false;
-  date : Date = new Date;
 
+  
   constructor() { }
 @Input() tarefa:Tarefa = new Tarefa
   ngOnInit(): void {

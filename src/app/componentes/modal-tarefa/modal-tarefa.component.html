@@ -31,6 +31,7 @@
             </div>
             <div class="date-end">
                 <p *ngIf="!booleanEdit" class="date-end-text">{{tarefa.dataFinal}}</p>
+                <input *ngIf="booleanEdit" type="date">
             </div>
         </div>
         <div class="responsible-propertie">
