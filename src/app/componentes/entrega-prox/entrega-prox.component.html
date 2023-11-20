@@ -2,7 +2,7 @@
     <div class="date">
         <!-- <p class="date-text">data final : {{dataFinal | date: "dd" + "/" + "MM"}}</p> -->
         <p class="date-text">data final : {{tarefa.dataFinal}}</p>
-        <p class="status-text bg-[{{tarefa.statusAtual.corFundo}}] text-[{{tarefa.statusAtual.corTexto}}]">{{tarefa.statusAtual.nome}}</p>
+        <p class="status-text" [ngStyle]="{'background-color':tarefa.statusAtual.corFundo,'color': tarefa.statusAtual.corTexto}">{{tarefa.statusAtual.nome}}</p>
     </div>
     <div class="name">
         <!-- <p class="name-text">Titulo da tarefa</p> -->

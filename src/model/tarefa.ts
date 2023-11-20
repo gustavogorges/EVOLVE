@@ -11,7 +11,8 @@ export class Tarefa{
     dataFinal: string = "";
     dataCriacao: string ="";
     statusAtual: Status = new Status;
-    statusPossiveis:Array<Status> = new Array;
+    
+    // statusPossiveis:Array<Status> = new Array;
     criador:Usuario = new Usuario;
     projeto:Projeto = new Projeto;
     propriedades:Array<Propriedade> = new Array;

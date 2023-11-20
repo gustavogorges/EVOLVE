@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
   styleUrls: ['./tela-tarefa.component.scss']
+  // 
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
