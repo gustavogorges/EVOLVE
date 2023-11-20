@@ -18,11 +18,11 @@
                 <div class="div-inputs">
                     <div class="inputs-login">
                         <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <input [(ngModel)]="email" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Email</label>
                           </div>
                           <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <input [(ngModel)]="senha" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
                             <label for="name" class="form__label">Senha</label>
                           </div>
                     </div>
@@ -36,7 +36,7 @@
                         <p class="checkbox-text">Lembre-se de mim</p>
                     </div>
                     <div class="div-login">
-                        <button pButton pRipple type="button" label="Login" routerLink="/tela-inicial" class="p-button-rounded button-login"></button>
+                        <button (click)="login()" pButton pRipple type="button" label="Login" class="p-button-rounded button-login"></button>
                     </div>
                     <div class="div-google">
                         <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>

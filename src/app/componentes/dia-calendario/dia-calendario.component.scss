@@ -1,0 +1,19 @@
+.main {
+    @apply h-full w-full border-r-2
+}
+
+.day {
+    @apply w-full h-[12%] bg-primaryNav flex justify-center items-center
+}
+
+.day-text {
+    @apply text-primary font-bold
+}
+
+.tasks {
+    @apply w-full h-[88%] flex-col flex items-center mt-5 gap-5
+}
+
+.task {
+    @apply w-4/5 h-[35%] bg-secondaryWhite rounded-xl shadow-lg
+}
