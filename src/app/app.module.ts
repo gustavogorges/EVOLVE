@@ -14,7 +14,6 @@ import { NavegacaoComponent } from './componentes/navegacao/navegacao.component'
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { ProjetoComponent } from './componentes/projeto/projeto.component';
-import { FormsModule } from '@angular/forms';
 
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
