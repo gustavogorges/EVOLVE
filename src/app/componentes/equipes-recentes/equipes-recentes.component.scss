@@ -15,16 +15,16 @@
 }
 
 .content-box {
-    @apply w-full h-full flex justify-center items-center
+    @apply w-full h-full flex justify-center items-center overflow-hidden 
 }
 
-.card-team-box {
-    @apply w-full flex h-full items-center gap-5 justify-center
-}
+// .card-team-box {
+//     @apply w-full flex h-full items-center gap-5 justify-center max-w-[12rem] min-w-[12rem]  
+// }
 
 .card-team {
     // @apply h-[87%] w-[25%] shadow-lg;
-    @apply h-full w-full;
+    @apply h-52 w-full shadow-lg flex justify-center items-center max-w-[12rem] min-w-[12rem];
 }
 
 .title-box {
