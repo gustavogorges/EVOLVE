@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { ProjetoComponent } from '../componentes/projeto/projeto.component';
 @Component({
   selector: 'app-tela-projeto',
@@ -37,11 +37,15 @@ export class TelaProjetoComponent implements OnInit {
 
    ultimoP = ProjetoComponent
 
-   clicouFora(){
-    for(let pFor of this.projects){
-        pFor.isVisible = false;
-        console.log(event)
-    }
+
+   @HostListener('click', ['$event'])
+   clicouFora(event:any){
+    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c73'));
+      if(!element){
+        for(let pFor of this.projects){
+            pFor.isVisible = false;
+        }
+      }
    }
    
    teste(p:any){
@@ -59,9 +63,6 @@ export class TelaProjetoComponent implements OnInit {
       this.ultimoP = p;
    }
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 
 }
