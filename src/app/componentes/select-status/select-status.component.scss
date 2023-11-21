@@ -1,0 +1,15 @@
+.main {
+    @apply h-60 w-56 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center px-1 py-2 gap-2
+}
+
+.status {
+     @apply w-full h-[18%] rounded-lg flex justify-center items-center 
+}
+
+.status-box {
+    @apply w-full h-[85%] flex items-center gap-2 border-b-2 flex-col
+}
+
+.add-box {
+    @apply w-full h-[15%] flex justify-center items-center gap-x-2
+}

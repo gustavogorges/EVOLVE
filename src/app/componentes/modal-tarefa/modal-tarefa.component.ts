@@ -12,12 +12,14 @@ export class ModalTarefaComponent implements OnInit {
   nomeGrande : string = "";
   editBoolean : boolean = false;
   booleanEdit:boolean = false;
+  booleanStatus:boolean = false;
 
   
   constructor() { }
 @Input() tarefa:Tarefa = new Tarefa
   ngOnInit(): void {
     // this.verificaTamanhoString();
+    console.log(this.tarefa.projeto.listaStatus)
   }
 
   openDesc():void {
@@ -51,5 +53,9 @@ verificaTamanhoString(){
 
 edit() {
   this.booleanEdit = !this.booleanEdit;
+}
+
+clickStatus() {
+  this.booleanStatus = !this.booleanStatus;
 }
 }

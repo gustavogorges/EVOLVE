@@ -48,9 +48,10 @@
                 <i class="icon-propertie pi pi-spinner"></i>
                 <p class="name-propertie">status:</p>
             </div>
-            <div class="status-icon-box">
+            <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer" (click)="clickStatus()">
                 <div class="status-icon bg-[{{tarefa.statusAtual.corFundo}}]">{{tarefa.statusAtual.nome}}</div>
             </div>
+            <app-select-status [statusLista]="tarefa.projeto.listaStatus" *ngIf="booleanStatus"></app-select-status>
         </div>
         <div class="description-propertie">
             <div class="name-icon">

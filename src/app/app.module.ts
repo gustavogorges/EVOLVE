@@ -29,6 +29,7 @@ import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.com
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 import { CalendarModule } from 'primeng/calendar';
+import { SelectStatusComponent } from './componentes/select-status/select-status.component';
 
 
 
@@ -56,7 +57,8 @@ import { CalendarModule } from 'primeng/calendar';
     AnexosComponent,
     AutomacaoComponent,
     IntegracaoComponent,
-    TarefaDiaComponent
+    TarefaDiaComponent,
+    SelectStatusComponent
 
   ],
   imports: [
