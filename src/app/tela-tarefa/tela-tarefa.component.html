@@ -5,7 +5,7 @@
         <h1 class="nome-projeto">Projeto Padrão</h1>
         <button class="botao-adicionaProjeto">
           <i class="pi pi-plus" style="font-size: 1rem"></i>
-          Adicionar Projeto
+          Adicionar Tarefa
         </button>
       </div>
       <div class="flex flex-row gap-4 self-center">
@@ -51,13 +51,16 @@
       </div>
     </div>
     <div *ngIf="select == 'Padrao'">
-      <div class="flex flex-wrap gap-6 w-full justify-center">
-        <div *ngFor="let blablabla of lista; index as indice" class="card">
-          <app-tarefa-card-padrao [id]="blablabla + indice"></app-tarefa-card-padrao>
+      <div class="grid grid-cols-4 gap-6 w-full justify-center">
+        <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
+          <app-tarefa-card-padrao [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-padrao>
         </div>
       </div>
     </div>
     <div *ngIf="select == 'Kanban'">kanban</div>
      <div *ngIf="select == 'Lista'">Lista</div>
+
+
+
   </div>
 </div>

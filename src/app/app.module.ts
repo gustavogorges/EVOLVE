@@ -21,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
@@ -29,6 +30,7 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+
 
 
 
@@ -71,7 +73,6 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     InputTextareaModule,
     FormsModule,
     ToastModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
