@@ -37,14 +37,22 @@ export class TelaProjetoComponent implements OnInit {
 
    ultimoP = ProjetoComponent
 
+   clicouFora(){
+    for(let pFor of this.projects){
+        pFor.isVisible = false;
+        console.log(event)
+    }
+   }
    
    teste(p:any){
     
      for(let pFor of this.projects){
-       pFor.isVisible = false;
+       if(pFor != p){
+         pFor.isVisible = false;
+       }
       }
       if(this.ultimoP === p){
-        p = !p
+        p.isVisible = true
       }else{
         p.isVisible = true;
       }

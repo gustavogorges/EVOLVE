@@ -16,8 +16,8 @@ interface Tarefa{
 export class ProjetoComponent implements OnInit {
   
   tarefas : Tarefa[] = []
-
-  descricao:string = 'dawdawdada'
+  nomeProjeto = 'Projeto Weg'
+  descricao:string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore. Lrem Ipsum is simply dummy text of the printing and typesetting industry. Lore'
   nome = ''
   prazo = ''
   progresso = 0

@@ -12,6 +12,9 @@ module.exports = {
         'primaryFontBlack' : '#343434',
         'primaryNav' : '#E9EDF1',
         'fontGray' : '#6A7181'
+      },
+      fontFamily: {
+          'titulo': ['Montserrat', 'sans-serif']
       }
     },
   },
