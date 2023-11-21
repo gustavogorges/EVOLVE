@@ -13,14 +13,23 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+import { ProjetoComponent } from './componentes/projeto/projeto.component';
 
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
-
+import { ToastModule } from 'primeng/toast';
 import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
-import { CalendarModule } from 'primeng/calendar';
+
+import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
+import { ComentariosComponent } from './componentes/sub-componentes/comentarios/comentarios.component';
+import { HistoricosComponent } from './componentes/sub-componentes/historicos/historicos.component';
+import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
+import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
+import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 
 
@@ -34,13 +43,24 @@ import { CalendarModule } from 'primeng/calendar';
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
+    ProjetoComponent,
+
 
     TelaTarefaComponent,
     TarefaCardPadraoComponent,
 
     EquipeRecenteComponent,
     DiaCalendarioComponent,
+    TarefaDiaComponent,
+    ModalTarefaComponent,
+    SubTarefaComponent,
+    ComentariosComponent,
+    HistoricosComponent,
+    AnexosComponent,
+    AutomacaoComponent,
+    IntegracaoComponent,
     TarefaDiaComponent
+
 
   ],
   imports: [
@@ -50,7 +70,9 @@ import { CalendarModule } from 'primeng/calendar';
     ButtonModule,
     CheckboxModule,
     FormsModule,
-    CalendarModule
+    InputTextareaModule,
+    FormsModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,45 +15,49 @@ export class BackendEVOLVEService {
   constructor() { }
 
   async getAllSomething(caminho : string){
+    console.log((await axios.get(this.URL+caminho)).data);
     return (await axios.get(this.URL+caminho)).data
   }
   async getOne(caminho : string, id:number){
     return (await axios.get(this.URL+caminho + "/"+id)).data
   }
+  async getUser( email: string )  {
+    return (await axios.get(this.URL+"usuario/login" + "/"+email)).data
+  }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
-  async postTarefa (caminho : string, tarefa:Tarefa){
-    (await axios.post(this.URL+caminho, tarefa)).data 
+  async postTarefa (tarefa:Tarefa){
+    (await axios.post(this.URL+"tarefa", tarefa)).data 
   }
 
-  async putTarefa (caminho : string, tarefa:Tarefa){
-    return (await axios.put(this.URL+caminho, tarefa)).data
+  async putTarefa (tarefa:Tarefa){
+    return (await axios.put(this.URL+"tarefa", tarefa)).data
   }
 
-  async postProjeto (caminho : string, projeto:Projeto){
-    return (await axios.post(this.URL+caminho, projeto)).data
+  async postProjeto (projeto:Projeto){
+    return (await axios.post(this.URL+"projeto", projeto)).data
   }
 
-  async putProjeto (caminho : string, projeto:Projeto){
-    return (await axios.put(this.URL+caminho, projeto)).data
+  async putProjeto (projeto:Projeto){
+    return (await axios.put(this.URL+"projeto", projeto)).data
   }
 
-  async postUsuario (caminho : string, usuario:Usuario){
-    return (await axios.post(this.URL+caminho, usuario)).data
+  async postUsuario (usuario:Usuario){
+    return (await axios.post(this.URL+"usuario", usuario)).data
   }
 
-  async putUsuario (caminho : string, usuario:Usuario){
-    return (await axios.put(this.URL+caminho, usuario)).data
+  async putUsuario (usuario:Usuario){
+    return (await axios.put(this.URL+"usuario", usuario)).data
   }
 
-  async postEquipe (caminho : string, equipe:Equipe){
-    return (await axios.post(this.URL+caminho, equipe)).data
+  async postEquipe (equipe:Equipe){
+    return (await axios.post(this.URL+"equipe", equipe)).data
   }
 
-  async putEquipe (caminho : string, equipe:Equipe){
-    return (await axios.put(this.URL+caminho, equipe)).data
+  async putEquipe (equipe:Equipe){
+    return (await axios.put(this.URL+"equipe", equipe)).data
   }
 
 }
