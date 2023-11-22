@@ -1,23 +1,19 @@
 <div class="recent-teams-box">
-<div class="recent-teams">
-    <div class="title-box">
+    <div class="recent-teams">
+      <div class="title-box">
         <p class="title-text">Equipes Recentes</p>
-    </div>
-    <div class="content-box">
-        <div class="set-left" *ngIf="listaEquipes.length > 3"><i class="pi icon pi-angle-left" (click)="regredirVisualizacaoCarrosel()"></i></div>
-
-            <div class=" w-full h-full flex px-16 gap-4 justify-center items-center">
-                <div *ngFor="let equipe of listaEquipesVisualizacao; index as indice">
-                <!-- <div *ngFor="let equipe of listaEquipes; index as indice"> -->
-                    <app-equipe-recente-card class="card-team" [equipe]="equipe"></app-equipe-recente-card>
-                </div>
-            </div>
-
-            <!-- <div class="card-team-box" >
-                <app-equipe-recente-card class="card-team"></app-equipe-recente-card>
-                <app-equipe-recente-card class="card-team"></app-equipe-recente-card>
-                <app-equipe-recente-card class="card-team"></app-equipe-recente-card> -->
-        <div class="set-right" *ngIf="listaEquipes.length > 3" (click)="avancarVisualizacaoCarrosel()"><i class="pi icon pi-angle-right"></i></div>
+      </div>
+      <div class="content-box">
+        <div class="set-left" *ngIf="mostrarSetas"><i class="pi icon pi-angle-left" (click)="regredirVisualizacaoCarrosel()"></i></div>
+  
+        <div class="w-full h-full flex px-16 gap-4 justify-center items-center">
+          <div *ngFor="let equipe of listaEquipesVisualizacao">
+            <app-equipe-recente-card class="card-team " [equipe]="equipe"></app-equipe-recente-card>
+          </div>
+        </div>
+  
+        <div class="set-right" *ngIf="mostrarSetas" (click)="avancarVisualizacaoCarrosel()"><i class="pi icon pi-angle-right"></i></div>
+      </div>
     </div>
 </div>
-</div>
+ 

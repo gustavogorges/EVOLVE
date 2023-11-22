@@ -14,7 +14,6 @@ export class EntregaProxComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) { }
 
   ngOnInit(): void {
-    console.log(this.tarefa.statusAtual.corFundo)
   }
 
   alterarTarefaFavoritado(){

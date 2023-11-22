@@ -11,55 +11,48 @@ export class EquipesRecentesComponent implements OnInit {
 
   listaEquipes: Array<Equipe> = new Array
 
-  indiceVisualizacao: number = 0
-  listaEquipesVisualizacao: Array<Equipe> = new Array
+  indiceVisualizacao: number = 0;
+  mostrarSetas: boolean = false; // Variável para controlar a exibição das setas
 
   constructor(private service: BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-
-    this.listaEquipes = await this.service.getAllSomething("equipe")
-    this.montarListaVisualizacao()
-
+    this.listaEquipes = await this.service.getAllSomething("equipe");
+    this.atualizarMostrarSetas();
   }
 
   avancarVisualizacaoCarrosel() {
-    this.indiceVisualizacao++;
-    if (this.indiceVisualizacao >= this.listaEquipes.length) {
-      this.indiceVisualizacao = 0;
-    }
-    this.montarListaVisualizacao()
+    this.indiceVisualizacao = (this.indiceVisualizacao + 1) % this.listaEquipes.length;
+    this.atualizarMostrarSetas();
   }
 
   regredirVisualizacaoCarrosel() {
-    this.indiceVisualizacao--;
-    if (this.indiceVisualizacao < 0) {
-      this.indiceVisualizacao = this.listaEquipes.length - 1;
-    }
-    this.montarListaVisualizacao()
+    this.indiceVisualizacao = (this.indiceVisualizacao - 1 + this.listaEquipes.length) % this.listaEquipes.length;
+    this.atualizarMostrarSetas();
   }
 
-  montarListaVisualizacao() {
-
-    this.listaEquipesVisualizacao[0] = this.listaEquipes[this.indiceVisualizacao]
-    this.listaEquipesVisualizacao[1] = this.listaEquipes[this.indiceVisualizacao + 1]
-    this.listaEquipesVisualizacao[2] = this.listaEquipes[this.indiceVisualizacao + 2]
-
-    if (this.indiceVisualizacao == this.listaEquipes.length - 2) {
-      this.listaEquipesVisualizacao[2] = this.listaEquipes[0]
-    }
-    if (this.indiceVisualizacao == this.listaEquipes.length - 1) {
-      this.listaEquipesVisualizacao[1] = this.listaEquipes[0]
-      this.listaEquipesVisualizacao[2] = this.listaEquipes[1]
-    }
-
-    if (this.listaEquipes.length == 2) {
-      this.listaEquipesVisualizacao.splice(0, 1)
-    }
-    if (this.listaEquipes.length == 1) {
-      this.listaEquipesVisualizacao.splice(1, 2)
-    }
-
+  atualizarMostrarSetas() {
+    // Mostrar setas apenas se houver mais de três equipes
+    this.mostrarSetas = this.listaEquipes.length > 3; 
   }
+
+  get listaEquipesVisualizacao(): Equipe[] {
+    if (this.listaEquipes.length <= 3) {
+      // Se houver 3 ou menos equipes, exibe todas opa amigos
+      return this.listaEquipes;
+    } else {
+      // Retorna um array "[]" com as equipes a serem exibidas com base no índice atual
+      return [
+        this.listaEquipes[this.indiceVisualizacao],
+        this.listaEquipes[(this.indiceVisualizacao + 1) % this.listaEquipes.length],
+        this.listaEquipes[(this.indiceVisualizacao + 2) % this.listaEquipes.length]
+      ];
+    }
+  }
+
+  //OBS: o uso da lógica de "% this.listaequipes" faz com que o indice não ultrapasse 
+  //a quantidade de elementos da lista e caso ultrapasse volte ao começo (0)
+  //EX1: indice 1 % lista.lenght(7) = 1;
+  //EX2: indice 
 
 }
