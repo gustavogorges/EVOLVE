@@ -1,6 +1,11 @@
 <div class="main">
     <div class="status-box">
-        <div class="status " [ngStyle]="{'background-color': status.corFundo}" *ngFor="let status of statusLista">
+        <div
+         class="status "
+         [ngStyle]="{'background-color': status.corFundo}"
+         *ngFor="let status of statusLista"
+         (click)="salvarStatus(status)"
+         >
             <p>{{status.nome}}</p>
         </div>
     </div>

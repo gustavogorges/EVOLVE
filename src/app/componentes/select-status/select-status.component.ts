@@ -13,12 +13,19 @@ export class SelectStatusComponent implements OnInit {
   @Input()
   statusLista : Array<Status> = new Array
 
+  @Input()
+  tarefa : Tarefa = new Tarefa;
+
   constructor(
     private service : BackendEVOLVEService
   ) { }
 
   ngOnInit(): void {
     console.log(this.statusLista)
+  }
+
+  salvarStatus(status:Status) {
+    this.tarefa.statusAtual = status;
   }
 
 }

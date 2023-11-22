@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Status } from 'src/model/status';
 import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-modal-tarefa',
@@ -13,13 +15,19 @@ export class ModalTarefaComponent implements OnInit {
   editBoolean : boolean = false;
   booleanEdit:boolean = false;
   booleanStatus:boolean = false;
+  booleanCalendario:boolean = false;
+  statusAntigo:Status = new Status;
 
   
-  constructor() { }
+  constructor(
+    private service : BackendEVOLVEService
+  ) { }
 @Input() tarefa:Tarefa = new Tarefa
   ngOnInit(): void {
     // this.verificaTamanhoString();
     console.log(this.tarefa.projeto.listaStatus)
+    this.statusAntigo = this.tarefa.statusAtual;
+    console.log(this.statusAntigo)
   }
 
   openDesc():void {
@@ -53,9 +61,35 @@ verificaTamanhoString(){
 
 edit() {
   this.booleanEdit = !this.booleanEdit;
+  this.booleanCalendario = !this.booleanCalendario;
+  this.booleanStatus = !this.booleanStatus
 }
 
-clickStatus() {
-  this.booleanStatus = !this.booleanStatus;
+editStatus() {
+  if(this.booleanEdit) {
+    this.booleanEdit = true;
+    this.booleanStatus = !this.booleanStatus;
+  }
+  else {
+    this.booleanStatus = !this.booleanStatus;
+    this.booleanEdit = !this.booleanEdit;
+  }
+}
+
+editData() {
+  this.booleanCalendario = !this.booleanCalendario
+  this.booleanEdit = !this.booleanEdit
+}
+
+booleanEditFalse() {
+  this.booleanEdit = false;
+  this.booleanCalendario = false;
+  this.booleanStatus = false;
+  this.tarefa.statusAtual = this.statusAntigo;
+}
+
+salvarTarefa() {
+  this.service.putTarefa(this.tarefa);
+  this.booleanEdit = !this.booleanEdit
 }
 }
