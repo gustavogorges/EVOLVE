@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
@@ -29,7 +29,7 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
-
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -62,6 +62,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
 
   ],
   imports: [
+    BrowserAnimationsModule,
+    CalendarModule,
     BrowserModule,
     AppRoutingModule,
     AccordionModule,

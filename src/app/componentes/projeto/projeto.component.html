@@ -2,10 +2,11 @@
     <div class="projeto-visualizacao">
 
         <div [ngClass]="isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto">
-            <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary" [ngClass]="isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
-            <div class="nome-projeto"><input  maxlength="19" [disabled]="isVisible ? 'false':'true'"  [ngClass]="isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="nomeProjeto"></div>
+            <div class="x" [ngClass]="isVisible ? 'visible':'invisible'" (click)="fechaProjeto()">X</div>
+            <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
+            <div class="nome-projeto"><input  maxlength="19" [disabled]="!isVisible"  [ngClass]="isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="nomeProjeto"></div>
             <div class="descricao">
-                <div class="desc" ><textarea [disabled]="isVisible ? 'false':'true'" class="descricao-valor" [(ngModel)]="descricao" maxlength="200" cols="10" rows="5"></textarea></div>
+                <div class="desc" ><textarea [disabled]="!isVisible" class="descricao-valor" [(ngModel)]="descricao" maxlength="200" cols="10" rows="5"></textarea></div>
             </div>
             <div class="responsaveis">
                 <div class="responsaveis-escrita">Responsaveis: </div>
@@ -17,7 +18,10 @@
             <div class="linha">
                 <div class="linha-verde"></div>
             </div>
-            <div class="data-final">Data final: 00/00</div>
+            <div class="data-final">
+                <p>Data final: </p>
+                <input [disabled]="!isVisible" type="date">
+            </div>
         </div>
     
         <div   [ngClass]="isVisible && md ? 'h-[55vh] w-[100%]' : 'h-0'" [ngClass]="isVisible && !md ? 'w-[29rem] h-[55vh]' : 'w-0'" class="infos">

@@ -35,9 +35,6 @@ export class TelaProjetoComponent implements OnInit {
     },
    ]
 
-   ultimoP = ProjetoComponent
-
-
    @HostListener('click', ['$event'])
    clicouFora(event:any){
     const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c73'));
@@ -47,22 +44,16 @@ export class TelaProjetoComponent implements OnInit {
         }
       }
    }
-   
+
    teste(p:any){
-    
      for(let pFor of this.projects){
        if(pFor != p){
          pFor.isVisible = false;
        }
+       p.isVisible = true;
       }
-      if(this.ultimoP === p){
-        p.isVisible = true
-      }else{
-        p.isVisible = true;
-      }
-      this.ultimoP = p;
-   }
-
+    }
+    
   ngOnInit(): void {}
 
 }

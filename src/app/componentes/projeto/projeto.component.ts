@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
 
 interface Tarefa{
@@ -14,7 +13,7 @@ interface Tarefa{
   styleUrls: ['./projeto.component.scss']
 })
 export class ProjetoComponent implements OnInit {
-  
+  date: string = ''
   tarefas : Tarefa[] = []
   nomeProjeto = 'Projeto Weg'
   descricao:string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore. Lrem Ipsum is simply dummy text of the printing and typesetting industry. Lore'
@@ -30,6 +29,9 @@ export class ProjetoComponent implements OnInit {
   
   setValorProgresso(num:number){
     this.valorProgresso = num
+  }
+
+  fechaProjeto(){
   }
 
   integrantes = [
@@ -97,6 +99,7 @@ export class ProjetoComponent implements OnInit {
     this.getScreenSize()
     this.criaTarefa()
     this.randomizeColor()
+    
   }
 
   verificaTamanhoTela() {
