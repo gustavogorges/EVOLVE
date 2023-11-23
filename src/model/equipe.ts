@@ -7,5 +7,5 @@ export class Equipe{
     imagem:string = "";
     administrador : Usuario = new Usuario;
     projetos: Array<Projeto> = new Array;
-    // participantes:Array<Usuario> = new Array;
+    participantes: Array<Usuario> = new Array;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -7,13 +8,15 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tarefa-card-padrao.component.scss']
 })
 export class TarefaCardPadraoComponent  {
+ @Input() tarefaAtual!:Tarefa
    valorBarra="0%";
    caminho = "assets/naoVector.svg"
    caminhoEstrela="assets/estrelaNaoMarcada.svg"
-   
-
-   
+   nomeGrande ="";
+   corStatus=""; 
    @Input() id: string = "";
+
+data : Date = new Date
 
    listaSub = [
     "subtarefa",
@@ -26,39 +29,45 @@ export class TarefaCardPadraoComponent  {
  
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.trocaCor()
+    if(this.tarefaAtual.favoritado){
+      this.caminhoEstrela = "assets/estrelaMarcada.svg"
+    }else{
+      this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
+    }
     this.valorBarra = 60 +"%"; 
-
+    console.log(this.tarefaAtual.id + " "+this.tarefaAtual.statusAtual)
   
   }
 
   favoritar(){
-    let tarefas;
     if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
       this.caminhoEstrela = "assets/estrelaMarcada.svg"
+      this.tarefaAtual.favoritado=true;
     } else {
       this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
+      this.tarefaAtual.favoritado=false;
+
     }
-    this.service.getAllSomething("tarefa")
-    .then(response => {
-    
-      console.log(response)
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    console.log(this.tarefaAtual)
 
-    this.service.getOne("tarefa",1)
-    .then(response => {
-    
-      console.log(response)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-  
   }
+
+  trocaCor(){
+    if(this.tarefaAtual.statusAtual.nome =="pendente"){
+      this.corStatus="#7CD5F4"
+    }else if(this.tarefaAtual.statusAtual.nome =="em progresso"){
+      this.corStatus="#FCEC62"
+    }else  if(this.tarefaAtual.statusAtual.nome =="Concluido"){
+      this.corStatus="#86C19F"
+    }
+    else  if(this.tarefaAtual.statusAtual.nome =="não atribuido"){
+      this.corStatus="#9CA3AE"
+    }
+    
+  }
+
 
 
 }

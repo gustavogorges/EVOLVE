@@ -8,6 +8,7 @@
 }
 
 .name {
+
     @apply col-start-1 col-end-4 overflow-clip
 }
 
@@ -16,14 +17,14 @@
 }
 
 .name-text {
-    @apply text-primary font-bold text-xl ;
-    animation: 5s ease-in 1s slidein;
 
+    @apply text-primary font-bold text-xl
 }
 
 .status-text {
-    @apply py-1 px-4 rounded-xl text-sm font-semibold ;
-    //  bg-yellow-200 text-primaryFontBlack
+    @apply pt-1 pr-5 pl-5 pb-1 bg-yellow-200 rounded-xl text-primaryFontBlack text-sm font-semibold;
+    @apply text-primary font-bold text-xl ;
+    animation: 5s ease-in 1s slidein;
 }
 
 .star {
@@ -38,7 +39,9 @@
     @apply absolute bottom-0 bg-primary h-1;
 }
 
+
 // .pi-star-fill {
 //     @apply text-white-300 text-lg
 // }
+
 

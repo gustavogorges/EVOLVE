@@ -1,5 +1,6 @@
+import { Prioridade } from "./prioridade";
 import { Projeto } from "./projeto";
-import { Propriedade } from "./propriedade";
+import { Propriedade } from "./propriedade/propriedade";
 import { Status } from "./status";
 import { Subtarefa } from "./subtarefa";
 import { Usuario } from "./usuario";
@@ -10,13 +11,15 @@ export class Tarefa{
     favoritado: boolean = false;
     dataFinal: string = "";
     dataCriacao: string ="";
+    descricao:string = "";
     statusAtual: Status = new Status;
+  
     porcentagemConclusao:number=0;
-    
-    // statusPossiveis:Array<Status> = new Array;
+    prioridade:Prioridade = 0;
+
     criador:Usuario = new Usuario;
     projeto:Projeto = new Projeto;
     propriedades:Array<Propriedade> = new Array;
     subtarefas: Array<Subtarefa> = new Array;
-
+    associados:Array<Usuario> = new Array;
 }

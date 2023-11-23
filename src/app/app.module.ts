@@ -13,6 +13,7 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+import { ProjetoComponent } from './componentes/projeto/projeto.component';
 
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
@@ -20,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
 import { EquipeRecenteComponent } from './componentes/equipe-recente-card/equipe-recente-card.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
@@ -34,6 +36,7 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,8 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
+    ProjetoComponent,
+
 
     TelaTarefaComponent,
     TarefaCardPadraoComponent,
@@ -61,6 +66,7 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     // RecentTeamsComponent,
     EquipesRecentesComponent
 
+
   ],
   imports: [
     BrowserModule,
@@ -68,10 +74,10 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     AccordionModule,
     ButtonModule,
     CheckboxModule,
+    FormsModule,
     InputTextareaModule,
     FormsModule,
     ToastModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
