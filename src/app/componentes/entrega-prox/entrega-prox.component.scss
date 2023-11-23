@@ -1,5 +1,6 @@
 .main {
-    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3 border-b-4 border-primary 
+    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
+    //  border-b-4 border-primary 
 }
 
 .date {
@@ -21,12 +22,20 @@
 }
 
 .status-text {
-    @apply pt-1 pr-5 pl-5 pb-1 rounded-xl text-sm font-semibold ;
+    @apply py-1 px-4 rounded-xl text-sm font-semibold ;
     //  bg-yellow-200 text-primaryFontBlack
 }
 
 .star {
     @apply flex col-start-3 col-end-4 justify-end h-6
+}
+
+.progress-bar-container{
+    @apply w-full absolute bottom-0 bg-gray-200 h-1;
+}
+
+.progress-bar{
+    @apply absolute bottom-0 bg-primary h-1;
 }
 
 // .pi-star-fill {

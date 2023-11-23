@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Equipe } from 'src/model/equipe';
+import { Projeto } from 'src/model/projeto';
 
 @Component({
   selector: 'app-equipe-recente-card',
@@ -8,7 +8,7 @@ import { Equipe } from 'src/model/equipe';
 })
 export class EquipeRecenteComponent implements OnInit {
 
-  @Input() equipe: Equipe = new Equipe
+  @Input() projeto: Projeto = new Projeto
 
   constructor() { }
 

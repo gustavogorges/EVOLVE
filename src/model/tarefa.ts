@@ -11,6 +11,7 @@ export class Tarefa{
     dataFinal: string = "";
     dataCriacao: string ="";
     statusAtual: Status = new Status;
+    porcentagemConclusao:number=0;
     
     // statusPossiveis:Array<Status> = new Array;
     criador:Usuario = new Usuario;

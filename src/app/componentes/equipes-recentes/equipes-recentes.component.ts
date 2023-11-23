@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Equipe } from 'src/model/equipe';
+import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -8,8 +8,8 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./equipes-recentes.component.scss']
 })
 export class EquipesRecentesComponent implements OnInit {
-  
-  listaEquipes: Array<Equipe> = new Array
+
+  listaProjetos: Array<Projeto> = new Array
   // Indice do elemento a ser mostrado 
   indiceVisualizacao: number = 0;
   // Variável para controlar a exibição das setas
@@ -18,35 +18,35 @@ export class EquipesRecentesComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-    this.listaEquipes = await this.service.getAllSomething("equipe");
+    this.listaProjetos = await this.service.getAllSomething("projeto");
     this.atualizarMostrarSetas();
   }
 
   avancarVisualizacaoCarrosel() {
-    this.indiceVisualizacao = (this.indiceVisualizacao + 1) % this.listaEquipes.length;
+    this.indiceVisualizacao = (this.indiceVisualizacao + 1) % this.listaProjetos.length;
     this.atualizarMostrarSetas();
   }
 
   regredirVisualizacaoCarrosel() {
-    this.indiceVisualizacao = (this.indiceVisualizacao - 1 + this.listaEquipes.length) % this.listaEquipes.length;
+    this.indiceVisualizacao = (this.indiceVisualizacao - 1 + this.listaProjetos.length) % this.listaProjetos.length;
     this.atualizarMostrarSetas();
   }
 
   atualizarMostrarSetas() {
-    // Mostrar setas apenas se houver mais de três equipes
-    this.mostrarSetas = this.listaEquipes.length > 3; 
+    // Mostrar setas apenas se houver mais de três projetos
+    this.mostrarSetas = this.listaProjetos.length > 3; 
   }
 
-  get listaEquipesVisualizacao(): Equipe[] {
-    if (this.listaEquipes.length <= 3) {
-      // Se houver 3 ou menos equipes, exibe todas opa amigos
-      return this.listaEquipes;
+  get listaProjetosVisualizacao(): Projeto[] {
+    if (this.listaProjetos.length <= 3) {
+      // Se houver 3 ou menos projetos, exibe todas
+      return this.listaProjetos;
     } else {
-      // Retorna um array "[]" com as equipes a serem exibidas com base no índice atual
+      // Retorna um array "[]" com os projetos a serem exibidos com base no índice atual
       return [
-        this.listaEquipes[this.indiceVisualizacao],
-        this.listaEquipes[(this.indiceVisualizacao + 1) % this.listaEquipes.length],
-        this.listaEquipes[(this.indiceVisualizacao + 2) % this.listaEquipes.length]
+        this.listaProjetos[this.indiceVisualizacao],
+        this.listaProjetos[(this.indiceVisualizacao + 1) % this.listaProjetos.length],
+        this.listaProjetos[(this.indiceVisualizacao + 2) % this.listaProjetos.length]
       ];
     }
   }

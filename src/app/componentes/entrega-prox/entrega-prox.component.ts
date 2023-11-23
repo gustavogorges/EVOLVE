@@ -14,6 +14,8 @@ export class EntregaProxComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) { }
 
   ngOnInit(): void {
+    //retirar quando fizer o calculo automatico
+    this.tarefa.porcentagemConclusao = 75
   }
 
   alterarTarefaFavoritado(){
