@@ -4,6 +4,7 @@ import { Tarefa } from "./tarefa";
 export class Projeto{
     id: number = 0;
     nome: string = "";
+    dataFinal: string = "";
     descricao: string ="";
     tarefas: Array<Tarefa> = new Array;
     propriedades:Array<Propriedade> = new Array;

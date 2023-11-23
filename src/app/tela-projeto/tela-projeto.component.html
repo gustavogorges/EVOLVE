@@ -6,7 +6,7 @@
     </div>
     <div class="flex flex-wrap gap-12 pt-[2%] justify-center">
         <div class="flex w-[95%] xl:w-[85%] 2xl:w-[78%] lg:w-[60%] md:w-full flex-wrap gap-10 justify-center" >
-            <div *ngFor="let p of projects">
+            <div *ngFor="let p of projects" #testeee>
                 <app-projeto [isVisible]="p.isVisible" (click)="teste(p)"></app-projeto>
             </div>
         </div>

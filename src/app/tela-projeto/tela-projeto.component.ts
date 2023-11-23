@@ -1,4 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Projeto } from 'src/model/projeto';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ProjetoComponent } from '../componentes/projeto/projeto.component';
 @Component({
   selector: 'app-tela-projeto',
@@ -8,7 +10,7 @@ import { ProjetoComponent } from '../componentes/projeto/projeto.component';
 export class TelaProjetoComponent implements OnInit {
 
   projeto = ProjetoComponent
-  constructor() {
+  constructor(private service : BackendEVOLVEService) {
    }
 
    projects =[
@@ -53,7 +55,12 @@ export class TelaProjetoComponent implements OnInit {
        p.isVisible = true;
       }
     }
+
+  projetos !: Projeto
     
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let projeto = this.service.getAllSomething('projeto')
+    console.log(projeto)
+  }
 
 }

@@ -1,6 +1,5 @@
 .projeto-visualizacao{
-    @apply drop-shadow-xl flex flex-col lg:flex-row;
-    z-index: -1;
+    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row;
 
     .projeto{
         @apply w-[100%] xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative;
@@ -24,16 +23,14 @@
                         @apply absolute bg-primaryGray flex justify-center items-center rounded-full bottom-2 right-1 duration-200 animate-bounce dark:bg-dark-secundary-gray
                     }
                 }
-            }
-        
-            
+            } 
         }
         
         .nome-projeto{
-            @apply col-span-full flex items-center justify-center row-start-2 text-center text-3xl dark:text-white ;
+            @apply col-span-3 flex items-center justify-center row-start-2 text-center text-3xl dark:text-white ;
         
             input{
-                @apply p-2 w-auto rounded-lg font-titulo text-center items-center bg-transparent outline-none resize-none text-clip dark:border-dark-secundary-gray
+                @apply p-2 rounded-lg w-1/2  font-titulo text-center items-center bg-transparent outline-none text-clip dark:border-dark-secundary-gray
             }
         }
         
@@ -74,7 +71,7 @@
         }
         
         .data-final{
-            @apply row-start-6 col-span-2 gap-2 px-3 text-primary dark:text-dark-primary text-lg font-hind-madurai flex items-center;
+            @apply row-start-6 col-span-3 gap-2 px-3 text-primary dark:text-dark-primary text-lg font-hind-madurai flex items-center;
             input{
                 @apply bg-transparent outline-none
             }

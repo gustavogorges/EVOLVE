@@ -1,0 +1,15 @@
+<div class="div-membros">
+    <div class="foto">
+        <div class="foto2" #bg></div>
+    </div>
+    <div class="infos">
+        <div class="nome"><p>Nome do usuario</p></div>
+        <div class="email"><p>emailusuario@gmail.com</p></div>
+    </div>
+    <div class="tipo"><p>Administrador</p></div>
+    <button class="adicionar" (click)="adicionar()">
+        <div class="fundo-icon">
+            <i class="pi" [ngClass]="adicionado ? 'pi-check-circle':'pi-plus'"></i>
+        </div>
+    </button>
+</div>

@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 interface Tarefa{
   nome : string,
@@ -13,6 +14,9 @@ interface Tarefa{
   styleUrls: ['./projeto.component.scss']
 })
 export class ProjetoComponent implements OnInit {
+
+  constructor(private service : BackendEVOLVEService){}
+
   date: string = ''
   tarefas : Tarefa[] = []
   nomeProjeto = 'Projeto Weg'

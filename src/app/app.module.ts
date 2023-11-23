@@ -30,6 +30,8 @@ import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.com
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 import { CalendarModule } from 'primeng/calendar';
+import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
+import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
 
 
 @NgModule({
@@ -57,9 +59,9 @@ import { CalendarModule } from 'primeng/calendar';
     AnexosComponent,
     AutomacaoComponent,
     IntegracaoComponent,
-    TarefaDiaComponent
-
-
+    TarefaDiaComponent,
+    TelaCriarProjetoComponent,
+    MembrosEquipeComponent
   ],
   imports: [
     BrowserAnimationsModule,

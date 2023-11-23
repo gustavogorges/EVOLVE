@@ -1,0 +1,107 @@
+.titulo{
+    @apply w-full px-[14%] h-[13%] flex items-center;
+
+    p{
+        @apply text-4xl text-primary dark:text-dark-primary font-titulo font-semibold
+    }
+}
+
+.separa-component{
+    @apply grid grid-cols-2 grid-rows-2 gap-4 w-[90%] xl:w-[50%] pt-3;
+    grid-template-columns: 15% 80%;
+    grid-template-rows: 5vh 15vh 11vh 23vh 15vh;
+
+    .imagem-projeto{
+        @apply col-start-1 col-end-2 row-start-1 row-end-2;
+    
+        .div-foto-centraliza{
+            
+            @apply w-full h-full;
+    
+            .foto{
+                @apply h-[7rem] w-[7rem] rounded-full relative bg-yellow-400;
+
+                .lapis-edit{
+                    @apply absolute bg-primaryGray h-7 w-7 flex justify-center items-center rounded-full bottom-2 right-1 duration-200 dark:bg-dark-secundary-gray;
+                }
+            }
+        } }
+
+    .inputs{
+        @apply col-start-2;
+
+        div{
+            div{
+                @apply flex flex-col;
+            }
+
+            .nome-projeto{
+                @apply w-[70%] ;
+                
+                .nome-input{
+                    @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-10 dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
+                }
+            }
+
+            .data-projeto{
+                @apply w-[22%];
+                
+                .data-input{
+                    @apply w-full rounded-lg shadow-md outline-none p-2 text-center dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
+                }
+            }
+        }
+    }
+
+    .descricao{
+        @apply col-start-2 row-start-2 pt-4;
+
+        textarea{
+            @apply w-full p-3 resize-none h-full outline-none rounded-lg shadow-md dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
+        }
+    }
+
+    .membro-components{
+        @apply col-span-full row-start-3 flex justify-between items-end;
+
+        .membro-equipe{
+            @apply  w-[77%];
+    
+            .membro-input{
+                @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-8 dark:bg-dark-primary-gray dark:text-white dark:shadow-gray-700
+            }
+        }
+
+        .botao-pesquisar{
+            @apply w-[20%] h-10 bg-secondary dark:bg-dark-secundary-green text-white rounded-lg flex justify-center gap-3 items-center;
+
+            p{
+                @apply text-lg dark:text-gray-900 font-semibold
+            }
+        }
+    }
+
+    .membros{
+        @apply col-span-full row-start-4 overflow-auto
+    }
+
+    .botoes{
+        @apply col-span-full row-start-5 flex justify-between items-center;
+
+        button{
+            @apply h-[5vh] w-[17%] rounded-lg text-white dark:text-gray-900 text-xl font-semibold
+        }
+
+        .cancelar{
+            @apply bg-primary dark:bg-dark-primary
+        }
+
+        .salvar{
+            @apply bg-secondary dark:bg-dark-secundary-green
+        }
+    }
+}
+
+.label{
+    @apply px-2 text-lg font-titulo font-semibold text-primary dark:text-dark-primary
+}
