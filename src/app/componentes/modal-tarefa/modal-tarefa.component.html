@@ -15,7 +15,7 @@
                 <p class=" text-primaryWhite">salvar</p>
             </div>
             <!-- BOTOES QUE ENTRAM NA EDIÇÃO OU DELETEM A TAREFA -->
-            <div *ngIf="!booleanEdit" (click)="edit()" class="edit-button flex justify-center items-center">
+            <div *ngIf="!booleanEdit" (click)="editDescription()" (click)="edit()" class="edit-button flex justify-center items-center">
                 <i class="text-white pi pi-pencil"></i>
             </div>
             <div *ngIf="!booleanEdit" class="remove-button flex justify-center items-center">
@@ -30,8 +30,8 @@
                 <p class="name-propertie">data final:</p>
             </div>
             <div class="date-end">
-                <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text">{{tarefa.dataFinal}}</p>
-                <input *ngIf="booleanCalendario" type="date">
+                <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.dataFinal}}</p>
+                <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
             </div>
         </div>
         <div class="responsible-propertie">
@@ -49,9 +49,15 @@
                 <p class="name-propertie">status:</p>
             </div>
             <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-                <div (click)="editStatus()" class="status-icon bg-[{{tarefa.statusAtual.corFundo}}]">{{tarefa.statusAtual.nome}}</div>
+                <div (click)="editStatus()" class="status-icon " [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}">{{tarefa.statusAtual.nome}}</div>
             </div>
-            <app-select-status [tarefa]="tarefa" [statusLista]="tarefa.projeto.listaStatus" *ngIf="booleanStatus" (click)="booleanStatus = false"></app-select-status>
+            <app-select-status 
+            (newItem)="editStatus()" 
+            [projeto]="tarefa.projeto" 
+            [tarefa]="tarefa" 
+            [statusLista]="tarefa.projeto.listaStatus" 
+            *ngIf="booleanStatus"
+            ></app-select-status>
         </div>
         <div class="description-propertie">
             <div class="name-icon">
@@ -62,10 +68,9 @@
         </div>
         <div class="w-[400px]">
             <textarea
-            (click)="edit()"
             rows="4" cols="80" pInputTextarea [autoResize]="true"
             [(ngModel)] = "tarefa.descricao"
-            [disabled]="!editBoolean"
+            [disabled]="!booleanEdit"
             [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
             ></textarea>
         </div>

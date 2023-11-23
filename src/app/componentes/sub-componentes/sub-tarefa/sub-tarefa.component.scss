@@ -7,7 +7,7 @@
 }
 
 .card {
-    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite
+    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2
 }
 
 .tasks {
@@ -23,7 +23,7 @@
 }
 
 .box-btn-add {
-    @apply w-full h-1/4 border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+    @apply w-full h-min border-x-2 border-b-2 py-2 px-3 border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
 
 .s-input input {

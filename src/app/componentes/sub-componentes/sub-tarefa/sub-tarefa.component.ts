@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubTarefaComponent implements OnInit {
 
+  booleanAddSubtarefa : boolean = false;
+
   checked:boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  adicionarSubtarefa() {
+    this.booleanAddSubtarefa = !this.booleanAddSubtarefa;
   }
 
 }

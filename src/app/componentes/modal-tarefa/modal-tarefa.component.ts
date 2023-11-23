@@ -16,7 +16,9 @@ export class ModalTarefaComponent implements OnInit {
   booleanEdit:boolean = false;
   booleanStatus:boolean = false;
   booleanCalendario:boolean = false;
+  booleanDescription:boolean = false;
   statusAntigo:Status = new Status;
+  descricaoAntiga:string = "";
 
   
   constructor(
@@ -25,8 +27,8 @@ export class ModalTarefaComponent implements OnInit {
 @Input() tarefa:Tarefa = new Tarefa
   ngOnInit(): void {
     // this.verificaTamanhoString();
-    console.log(this.tarefa.projeto.listaStatus)
     this.statusAntigo = this.tarefa.statusAtual;
+    this.descricaoAntiga = this.tarefa.descricao;
     console.log(this.statusAntigo)
   }
 
@@ -62,7 +64,6 @@ verificaTamanhoString(){
 edit() {
   this.booleanEdit = !this.booleanEdit;
   this.booleanCalendario = !this.booleanCalendario;
-  this.booleanStatus = !this.booleanStatus
 }
 
 editStatus() {
@@ -81,15 +82,26 @@ editData() {
   this.booleanEdit = !this.booleanEdit
 }
 
+editDescription() {
+  console.log(this.editBoolean)
+}
+
 booleanEditFalse() {
   this.booleanEdit = false;
   this.booleanCalendario = false;
   this.booleanStatus = false;
   this.tarefa.statusAtual = this.statusAntigo;
+  this.tarefa.descricao = this.descricaoAntiga;
 }
 
 salvarTarefa() {
   this.service.putTarefa(this.tarefa);
+  if(this.booleanCalendario == true) {
+    this.booleanCalendario = false;
+  }
+  if(this.booleanStatus == true) {
+    this.booleanStatus = false;
+  }
   this.booleanEdit = !this.booleanEdit
 }
 }

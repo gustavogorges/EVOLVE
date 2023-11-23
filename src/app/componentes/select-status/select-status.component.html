@@ -1,5 +1,5 @@
 <div class="main">
-    <div class="status-box">
+    <div class="status-box" >
         <div
          class="status "
          [ngStyle]="{'background-color': status.corFundo}"
@@ -9,8 +9,29 @@
             <p>{{status.nome}}</p>
         </div>
     </div>
-    <div class="add-box">
+    <div *ngIf="!booleanAddStatus" (click)="addStatus()" class="add-box">
         <i class="pi pi-plus text-primary font-bold"></i>
         <p class=" text-fontGray">adicionar status</p>
+    </div>
+    <div *ngIf="booleanAddStatus" class="new-status">
+        <div class="nome-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.nome">
+                <div class="w-full flex justify-center items-center">
+                    <i class="pi pi-pencil text-primary font-bold" ></i>
+                </div>
+            </div>
+        </div>
+        <div class="cor-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input class="input-add-status" type="text" value="{{status.corFundo}}"  placeholder="selecione uma cor">
+                <div class="w-full flex justify-center items-center">
+                    <input type="color" class="w-7" [(ngModel)]="status.corFundo">
+                </div>
+            </div>
+        </div>
+        <div class="confirmar-status-box">
+            <p class=" text-primaryWhite font-semibold" (click)="novoStatus()">confirmar</p>
+        </div>
     </div>
 </div>
