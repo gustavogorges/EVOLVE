@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EquipeRecenteComponent } from './equipe-recente.component';
+import { EquipeRecenteComponent } from './equipe-recente-card.component';
 
-describe('EquipeRecenteComponent', () => {
+describe('EquipeRecenteCardComponent', () => {
   let component: EquipeRecenteComponent;
   let fixture: ComponentFixture<EquipeRecenteComponent>;
 

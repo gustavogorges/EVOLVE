@@ -18,7 +18,7 @@ import { ProjetoComponent } from './componentes/projeto/projeto.component';
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
 import { ToastModule } from 'primeng/toast';
-import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
+import { EquipeRecenteComponent } from './componentes/equipe-recente-card/equipe-recente-card.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
 
@@ -30,6 +30,9 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+// import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
+import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+
 
 
 
@@ -59,7 +62,9 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
     AnexosComponent,
     AutomacaoComponent,
     IntegracaoComponent,
-    TarefaDiaComponent
+    TarefaDiaComponent,
+    // RecentTeamsComponent,
+    EquipesRecentesComponent
 
 
   ],

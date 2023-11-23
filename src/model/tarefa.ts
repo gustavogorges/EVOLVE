@@ -13,7 +13,10 @@ export class Tarefa{
     dataCriacao: string ="";
     descricao:string = "";
     statusAtual: Status = new Status;
+  
+    porcentagemConclusao:number=0;
     prioridade:Prioridade = 0;
+
     criador:Usuario = new Usuario;
     projeto:Projeto = new Projeto;
     propriedades:Array<Propriedade> = new Array;

@@ -1,4 +1,3 @@
-
 <div class="main-box">
     <app-modal-tarefa class="tarefa" *ngIf="booleanTask"></app-modal-tarefa>
     <div class="main">
@@ -21,22 +20,7 @@
            </div>
         </div>
         <div class="right-side">
-          <div class="recent-teams-box">
-            <div class="recent-teams">
-                <div class="title-box">
-                    <p class="title-text">Equipes Recentes</p>
-                </div>
-                <div class="content-box">
-                    <div class="set-left"><i class="pi icon pi-angle-left"></i></div>
-                    <div class="card-team-box">
-                        <app-equipe-recente class="card-team"></app-equipe-recente>
-                        <app-equipe-recente class="card-team"></app-equipe-recente>
-                        <app-equipe-recente class="card-team"></app-equipe-recente>
-                    </div>
-                    <div class="set-right"><i class="pi icon pi-angle-right"></i></div>
-                </div>
-            </div>
-          </div>
+        <app-equipes-recentes></app-equipes-recentes>
           <div class="calendar-box">
             <div class="calendar">
                 <div class="title-box">

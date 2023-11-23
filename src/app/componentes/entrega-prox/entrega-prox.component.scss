@@ -1,7 +1,6 @@
 .main {
-
-    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3 border-b-4 border-primary 
-
+    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
+    //  border-b-4 border-primary 
 }
 
 .date {
@@ -29,7 +28,15 @@
 }
 
 .star {
-    @apply flex col-start-3 col-end-4 justify-end 
+    @apply flex col-start-3 col-end-4 justify-end h-6
+}
+
+.progress-bar-container{
+    @apply w-full absolute bottom-0 bg-gray-200 h-1;
+}
+
+.progress-bar{
+    @apply absolute bottom-0 bg-primary h-1;
 }
 
 
