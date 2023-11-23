@@ -8,11 +8,12 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./equipes-recentes.component.scss']
 })
 export class EquipesRecentesComponent implements OnInit {
-
+  
   listaEquipes: Array<Equipe> = new Array
-
+  // Indice do elemento a ser mostrado 
   indiceVisualizacao: number = 0;
-  mostrarSetas: boolean = false; // Variável para controlar a exibição das setas
+  // Variável para controlar a exibição das setas
+  mostrarSetas: boolean = false; 
 
   constructor(private service: BackendEVOLVEService) { }
 
@@ -52,7 +53,9 @@ export class EquipesRecentesComponent implements OnInit {
 
   //OBS: o uso da lógica de "% this.listaequipes" faz com que o indice não ultrapasse 
   //a quantidade de elementos da lista e caso ultrapasse volte ao começo (0)
-  //EX1: indice 1 % lista.lenght(7) = 1;
-  //EX2: indice 
+  //EX1: indice (1) % lista.length(7) = 1;
+  //EX2: indice (8) % lista.length(7) = 1;
+  //OBS: 1 nesse caso representa o segundo elemento da lista, pois ela começa em 0, então 
+  //quando indice = 8 ele teria dado uma volta inteira na lista e voltado ao segundo elemento 
 
 }
