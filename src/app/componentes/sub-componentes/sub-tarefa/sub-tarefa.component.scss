@@ -7,7 +7,7 @@
 }
 
 .card {
-    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2
+    @apply w-full min-h-full bg-white rounded-t-xl border-t-2 border-x-2
 }
 
 .tasks {

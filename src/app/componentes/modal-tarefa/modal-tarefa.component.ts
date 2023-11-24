@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Projeto } from 'src/model/projeto';
 import { Status } from 'src/model/status';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -25,12 +26,21 @@ export class ModalTarefaComponent implements OnInit {
     private service : BackendEVOLVEService
   ) { }
 @Input() tarefa:Tarefa = new Tarefa
-  ngOnInit(): void {
+projeto:Projeto = new Projeto
+
+  async ngOnInit (): Promise<void> {
     // this.verificaTamanhoString();
     this.statusAntigo = this.tarefa.statusAtual;
     this.descricaoAntiga = this.tarefa.descricao;
     console.log(this.statusAntigo)
+    let projetos = await this.service.getAllSomething("projeto")
+    for(let projeto of projetos){
+      if(projeto.id == this.tarefa.projeto.id){
+        this.projeto = projeto
+      }
+    }
   }
+
 
   openDesc():void {
     this.booleanDesc = !this.booleanDesc;

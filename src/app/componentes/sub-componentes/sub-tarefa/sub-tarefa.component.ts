@@ -40,6 +40,7 @@ export class SubTarefaComponent implements OnInit {
     this.service.putTarefa(this.tarefa)
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
+    console.log(this.tarefa)
   }
 
   booleanSubtarefa() {

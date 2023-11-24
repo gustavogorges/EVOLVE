@@ -25,7 +25,8 @@ export class SelectStatusComponent implements OnInit {
   @Input()
   tarefa : Tarefa = new Tarefa;
 
-  @Output() newItem = new EventEmitter<boolean>(); 
+  @Output() newItem = new EventEmitter<boolean>();
+
 
   constructor(
     private service : BackendEVOLVEService

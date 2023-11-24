@@ -3,7 +3,7 @@
         <div
          class="status "
          [ngStyle]="{'background-color': status.corFundo}"
-         *ngFor="let status of statusLista"
+         *ngFor="let status of projeto.listaStatus"
          (click)="salvarStatus(status)"
          >
             <p>{{status.nome}}</p>

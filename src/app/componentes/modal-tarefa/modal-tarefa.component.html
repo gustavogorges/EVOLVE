@@ -51,8 +51,10 @@
             <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
                 <div (click)="editStatus()" class="status-icon " [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}">{{tarefa.statusAtual.nome}}</div>
             </div>
+            <!--[projeto]="tarefa.projeto"-->
             <app-select-status 
             (newItem)="editStatus()" 
+            
             [projeto]="tarefa.projeto" 
             [tarefa]="tarefa" 
             [statusLista]="tarefa.projeto.listaStatus" 
@@ -111,7 +113,7 @@
                >integração</p>
         </div>
         <div class="components">
-            <app-sub-tarefa [listaSubtarefas]="tarefa.subtarefas" class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
+            <app-sub-tarefa [tarefa]="tarefa" [listaSubtarefas]="tarefa.subtarefas" class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
             <app-comentarios class="component" *ngIf="page_task == 'comentarios'"></app-comentarios>
             <app-historicos  class="component" *ngIf="page_task == 'historicos'"></app-historicos>
             <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
