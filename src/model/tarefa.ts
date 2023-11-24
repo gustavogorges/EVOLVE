@@ -21,5 +21,9 @@ export class Tarefa{
     projeto:Projeto = new Projeto;
     propriedades:Array<Propriedade> = new Array;
     subtarefas: Array<Subtarefa> = new Array;
+
+    descricao: string = "";
+
     associados:Array<Usuario> = new Array;
+
 }

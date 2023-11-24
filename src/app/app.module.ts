@@ -30,8 +30,15 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+
+import { CalendarModule } from 'primeng/calendar';
+import { SelectStatusComponent } from './componentes/select-status/select-status.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+
 
 
 
@@ -63,6 +70,9 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
+
+    SelectStatusComponent
+
     // RecentTeamsComponent,
     EquipesRecentesComponent
 
@@ -77,7 +87,13 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     FormsModule,
     InputTextareaModule,
     FormsModule,
-    ToastModule
+
+    ToastModule,
+    CalendarModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    BrowserModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

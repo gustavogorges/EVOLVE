@@ -19,9 +19,12 @@ export class TelaInicialComponent implements OnInit {
     async ngOnInit(): Promise<void> {
       this.listaTarefas = await this.service.getAllSomething("tarefa")
   }
-
+tarefaSelecionada:Tarefa = new Tarefa
   openTask(tarefa:Tarefa) :void {
     this.booleanTask = !this.booleanTask;
+
+    this.tarefaSelecionada = tarefa;
+
   }
 
 }

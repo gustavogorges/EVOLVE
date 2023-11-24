@@ -1,5 +1,5 @@
 <div class="main-box">
-    <app-modal-tarefa class="tarefa" *ngIf="booleanTask"></app-modal-tarefa>
+    <app-modal-tarefa class="tarefa" *ngIf="booleanTask" [tarefa]="tarefaSelecionada"></app-modal-tarefa>
     <div class="main">
         <div class="left-side">
            <div class="close-deliveries">
@@ -9,7 +9,10 @@
                 <div class="card-deliveries-box">
 
                     <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
-                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa" (click)="openTask(tarefa)"
+                        <app-entrega-prox 
+                        class="card-deliveries"
+                         [tarefa]="tarefa" 
+                         (click)="openTask(tarefa)"
                         ></app-entrega-prox>
                        
                     </div>
@@ -20,7 +23,9 @@
            </div>
         </div>
         <div class="right-side">
+
         <app-equipes-recentes></app-equipes-recentes>
+
           <div class="calendar-box">
             <div class="calendar">
                 <div class="title-box">

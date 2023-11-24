@@ -18,13 +18,17 @@
 
 .name-text {
 
-    @apply text-primary font-bold text-xl
+    @apply text-primary font-bold text-lg ;
+    animation: 5s ease-in 1s slidein;
+
 }
 
 .status-text {
-    @apply pt-1 pr-5 pl-5 pb-1 bg-yellow-200 rounded-xl text-primaryFontBlack text-sm font-semibold;
-    @apply text-primary font-bold text-xl ;
+
+    @apply py-1 px-3 rounded-xl text-sm  ;
+
     animation: 5s ease-in 1s slidein;
+
 }
 
 .star {
@@ -40,8 +44,5 @@
 }
 
 
-// .pi-star-fill {
-//     @apply text-white-300 text-lg
-// }
 
 
