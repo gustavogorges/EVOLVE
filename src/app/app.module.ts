@@ -71,7 +71,7 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     IntegracaoComponent,
     TarefaDiaComponent,
 
-    SelectStatusComponent
+    SelectStatusComponent,
 
     // RecentTeamsComponent,
     EquipesRecentesComponent

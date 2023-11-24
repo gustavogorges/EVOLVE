@@ -1,6 +1,4 @@
-
-import { Propriedade } from "./propriedade";
-
+import { Propriedade } from "./propriedade/propriedade";
 import { TarefaProjetoPropriedade } from "./propriedade/TarefaProjetoPropriedade";
 
 import { Status } from "./status";
@@ -19,8 +17,5 @@ export class Projeto{
     propriedades:Array<TarefaProjetoPropriedade> = new Array;
     listaStatus : Array<Status> = new Array;
     tarefas: Array<Tarefa> = new Array;
-
-    propriedades:Array<Propriedade> = new Array;
-    listaStatus:Array<Status> = new Array;
 
 }
