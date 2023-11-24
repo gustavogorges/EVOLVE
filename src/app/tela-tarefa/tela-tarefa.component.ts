@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
   styleUrls: ['./tela-tarefa.component.scss']
+  // 
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
   select : string = "Padrao";
+  listaTarefas: Array<Tarefa> =[]
 
-  lista = [
-    "a",
-    "b",
-    "C",
-    "D"
-  ]
 
-  constructor() { }
+  constructor(private service : BackendEVOLVEService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.listaTarefas =await this.service.getAllSomething("tarefa")
+    console.log(this.listaTarefas)
     
   }
   mudarSelect(e:any){

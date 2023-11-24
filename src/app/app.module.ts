@@ -13,13 +13,15 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { NavegacaoComponent } from './componentes/navegacao/navegacao.component';
 import { EntregaProxComponent } from './componentes/entrega-prox/entrega-prox.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
+import { ProjetoComponent } from './componentes/projeto/projeto.component';
 
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
 import { ToastModule } from 'primeng/toast';
-import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
+import { EquipeRecenteComponent } from './componentes/equipe-recente-card/equipe-recente-card.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
@@ -28,10 +30,16 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+
 import { CalendarModule } from 'primeng/calendar';
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
+import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+
+
 
 
 
@@ -45,6 +53,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavegacaoComponent,
     EntregaProxComponent,
     TelaProjetoComponent,
+    ProjetoComponent,
+
 
     TelaTarefaComponent,
     TarefaCardPadraoComponent,
@@ -60,7 +70,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
+
     SelectStatusComponent
+
+    // RecentTeamsComponent,
+    EquipesRecentesComponent
+
 
   ],
   imports: [
@@ -69,8 +84,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AccordionModule,
     ButtonModule,
     CheckboxModule,
+    FormsModule,
     InputTextareaModule,
     FormsModule,
+
     ToastModule,
     CalendarModule,
     ColorPickerModule,

@@ -1,5 +1,6 @@
 .main {
-    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3 border-b-4 border-primary 
+    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
+    //  border-b-4 border-primary 
 }
 
 .date {
@@ -7,6 +8,7 @@
 }
 
 .name {
+
     @apply col-start-1 col-end-4 overflow-clip
 }
 
@@ -15,21 +17,32 @@
 }
 
 .name-text {
+
     @apply text-primary font-bold text-lg ;
     animation: 5s ease-in 1s slidein;
 
 }
 
 .status-text {
+
     @apply py-1 px-3 rounded-xl text-sm  ;
-    //  bg-yellow-200 text-primaryFontBlack
+
+    animation: 5s ease-in 1s slidein;
+
 }
 
 .star {
-    @apply flex col-start-3 col-end-4 justify-end 
+    @apply flex col-start-3 col-end-4 justify-end h-6
 }
 
-// .pi-star-fill {
-//     @apply text-white-300 text-lg
-// }
+.progress-bar-container{
+    @apply w-full absolute bottom-0 bg-gray-200 h-1;
+}
+
+.progress-bar{
+    @apply absolute bottom-0 bg-primary h-1;
+}
+
+
+
 
