@@ -13,6 +13,7 @@ module.exports = {
         'primaryFontBlack' : '#343434',
         'primaryNav' : '#E9EDF1',
         'fontGray' : '#6A7181',
+        
         'dark-primary':'#67BFE0',
         'dark-secundary-gray' : '#414651',
         'dark-primary-black' : '#171717',

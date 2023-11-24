@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 interface Tarefa{
@@ -29,13 +30,15 @@ export class ProjetoComponent implements OnInit {
   corAtual: string = ''
   valorProgresso = 0;
 
-  @Input() isVisible:boolean = false;
+
+  @Output()
+  deletar:EventEmitter<number> = new EventEmitter<number>()
+
+
+  @Input() projeto!:Projeto;
   
   setValorProgresso(num:number){
     this.valorProgresso = num
-  }
-
-  fechaProjeto(){
   }
 
   integrantes = [
@@ -112,10 +115,18 @@ export class ProjetoComponent implements OnInit {
     }else{
       this.md = false
     }
-    this.isVisible = true
+    this.projeto.isVisible = true
     setTimeout(() => {
-      this.isVisible = false 
+      this.projeto.isVisible = false 
     },0.00001)
+  }
+
+  deletarProjeto(id:number){
+    this.deletar.emit(id)
+  }
+
+  fechaProjeto(){
+    this.projeto.isVisible = false
   }
 }
 

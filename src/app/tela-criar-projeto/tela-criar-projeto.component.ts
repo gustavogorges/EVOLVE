@@ -33,7 +33,9 @@ export class TelaCriarProjetoComponent implements OnInit {
         dataFinal: this.data.nativeElement.value,
         descricao: this.descricao.nativeElement.value,
         tarefas: [],
-        propriedades: []
+        propriedades: [],
+        membros: [],
+        isVisible: false
       }
       this.service.postProjeto(projeto)
     }else{

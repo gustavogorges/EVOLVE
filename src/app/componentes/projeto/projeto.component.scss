@@ -1,8 +1,8 @@
 .projeto-visualizacao{
-    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row;
+    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row w-full;
 
     .projeto{
-        @apply w-[100%] xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative;
+        @apply xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative;
         grid-template-rows: 24% 15% 30% 10% 1.5% 8%;
     
         .x{

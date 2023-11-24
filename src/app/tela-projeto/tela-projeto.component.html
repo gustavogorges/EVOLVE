@@ -1,14 +1,12 @@
 
-<div>
+<div class="w-full">
     <div class="h-[15vh] mt-[5%] md:mt-0 flex flex-col justify-center px-[10%] items-center xl:items-start gap-5">
             <p class="text-4xl font-semibold text-primary dark:text-dark-primary">Equipe Padrão</p>
-            <button class="h-12 w-[100%] md:w-[70%] xl:w-[20%] bg-secondary dark:bg-dark-secundary-green dark:text-gray-900 rounded-lg flex items-center justify-center gap-1 font-semibold text-lg duration-300 text-white hover:scale-105"> <i class="pi pi-plus"></i> Adicionar Projeto</button>
+            <button [routerLink]="'/criar-projeto'" class="h-12 w-[100%] md:w-[70%] xl:w-[20%] bg-secondary dark:bg-dark-secundary-green dark:text-gray-900 rounded-lg flex items-center justify-center gap-1 font-semibold text-lg duration-300 text-white hover:scale-105"> <i class="pi pi-plus"></i> Adicionar Projeto</button>
     </div>
-    <div class="flex flex-wrap gap-12 pt-[2%] justify-center">
-        <div class="flex w-[95%] xl:w-[85%] 2xl:w-[78%] lg:w-[60%] md:w-full flex-wrap gap-10 justify-center" >
-            <div *ngFor="let p of projects" #testeee>
-                <app-projeto [isVisible]="p.isVisible" (click)="teste(p)"></app-projeto>
-            </div>
+    <div class="flex flex-wrap gap-10 justify-center px-[11%]" >
+        <div *ngFor="let p of projetos" >
+            <app-projeto (deletar)="deletarPai($event)" [projeto]="p" (click)="openProjeto(p)"></app-projeto>
         </div>
     </div>
 </div>

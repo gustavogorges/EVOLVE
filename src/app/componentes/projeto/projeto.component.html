@@ -1,12 +1,12 @@
-<div id="projeto" >
+<div id="projeto">
     <div class="projeto-visualizacao">
 
-        <div [ngClass]="isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto">
-            <div class="x" [ngClass]="isVisible ? 'visible':'invisible'" (click)="fechaProjeto()">X</div>
-            <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
-            <div class="nome-projeto"><input  maxlength="19" [disabled]="!isVisible"  [ngClass]="isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="nomeProjeto"></div>
+        <div [ngClass]="projeto.isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto">
+            <div class="x" [ngClass]="projeto.isVisible ? 'visible':'invisible'" (click)="fechaProjeto()">X</div>
+            <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="projeto.isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="projeto.isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
+            <div class="nome-projeto"><input  maxlength="19" [disabled]="!projeto.isVisible"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.nome"></div>
             <div class="descricao">
-                <div class="desc" ><textarea [disabled]="!isVisible" class="descricao-valor" [(ngModel)]="descricao" maxlength="200" cols="10" rows="5"></textarea></div>
+                <div class="desc" ><textarea [disabled]="!projeto.isVisible" class="descricao-valor" [(ngModel)]="projeto.descricao" maxlength="200" cols="10" rows="5"></textarea></div>
             </div>
             <div class="responsaveis">
                 <div class="responsaveis-escrita">Responsaveis: </div>
@@ -20,12 +20,12 @@
             </div>
             <div class="data-final">
                 <p>Data final: </p>
-                <input [disabled]="!isVisible" type="date">
+                <input [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.dataFinal">
             </div>
         </div>
     
-        <div   [ngClass]="isVisible && md ? 'h-[55vh]' : 'h-0'" [ngClass]="isVisible && !md ? 'h-[55vh] w-[29rem]' : 'w-0'" class="infos">
-            <div [ngClass]="isVisible ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
+        <div   [ngClass]="projeto.isVisible && md ? 'h-[55vh]' : 'h-0'" [ngClass]="projeto.isVisible && !md ? 'h-[55vh] w-[29rem]' : 'w-0'" class="infos">
+            <div [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
                 <div class="cabecalho">
                     <h1 class="Nome">Nome</h1>
                     <h1 class="Progresso">Progresso</h1>
@@ -33,14 +33,14 @@
                     <h1 class="Prazo">Prazo</h1>
                 </div>
     
-                <div *ngFor="let t of tarefas" [ngClass]="isVisible ? 'opacity-100' : 'opacity-0'" class="valores">
+                <div *ngFor="let t of tarefas" [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'" class="valores">
                     <p class="Nome">{{t.nome}}</p>
                     <h1 class="Progresso"><div class="valor-progresso"  [style.width.%]="t.progresso" ></div></h1>
                     <h1 class="Status">{{t.status}}</h1>
                     <h1 class="Prazo">{{t.prazo}}</h1>
                 </div>
             </div>
-            <div *ngIf="isVisible" class="integrantes">
+            <div *ngIf="projeto.isVisible" class="integrantes">
                 <div class="seta"><</div>
                 <div  class="pessoas">
                     <div *ngFor="let p of integrantes;"  class="infos-pessoas">
@@ -51,8 +51,8 @@
                 </div>
                 <div class="seta">></div>
             </div>
-            <div *ngIf="isVisible" class="botoes">
-                <button class="botao-cancelar"><i class="pi pi-trash"></i> Deletar</button>
+            <div *ngIf="projeto.isVisible" class="botoes">
+                <button class="botao-cancelar" (click)="deletarProjeto(projeto.id)" ><i class="pi pi-trash"></i> Deletar</button>
                 <button class="botao-ir-para-projeto">Ir para projeto <i class="pi pi-angle-double-right"></i> </button>
             </div>
         </div>
