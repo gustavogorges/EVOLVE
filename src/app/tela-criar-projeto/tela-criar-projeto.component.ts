@@ -37,6 +37,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         membros: [],
         isVisible: false
       }
+      console.log(projeto)
       this.service.postProjeto(projeto)
     }else{
       alert('campo vazio')

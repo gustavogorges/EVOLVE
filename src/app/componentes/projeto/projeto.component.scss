@@ -1,8 +1,8 @@
 .projeto-visualizacao{
-    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row w-full;
+    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row w-full  ;
 
     .projeto{
-        @apply xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative;
+        @apply xl:w-[30rem] h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative;
         grid-template-rows: 24% 15% 30% 10% 1.5% 8%;
     
         .x{
@@ -80,7 +80,7 @@
     
     
     .infos{
-        @apply duration-200  bg-gray-200 dark:bg-dark-primary-gray overflow-hidden grid gap-6  rounded-r-xl;
+        @apply duration-200 bg-gray-200 dark:bg-dark-primary-gray overflow-hidden grid gap-6  rounded-r-xl;
         grid-template-rows: 3% 40% 30% 10%;
         grid-template-columns: 0% 90% 0%;
     
@@ -171,10 +171,10 @@
     }
 
     .botao-cancelar{
-        @apply w-auto px-4 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-white dark:text-gray-900
+        @apply w-auto px-4 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-white dark:text-gray-900 duration-150 hover:scale-105
     }
 
     .botao-ir-para-projeto{
-        @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center text-white dark:text-gray-900
+        @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-150 hover:scale-105 text-white dark:text-gray-900
     }
 }

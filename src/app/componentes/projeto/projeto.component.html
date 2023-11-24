@@ -1,8 +1,7 @@
 <div id="projeto">
     <div class="projeto-visualizacao">
 
-        <div [ngClass]="projeto.isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto">
-            <div class="x" [ngClass]="projeto.isVisible ? 'visible':'invisible'" (click)="fechaProjeto()">X</div>
+        <div [ngClass]="projeto.isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto" (click)="openEfechaProjeto()">
             <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="projeto.isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="projeto.isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
             <div class="nome-projeto"><input  maxlength="19" [disabled]="!projeto.isVisible"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.nome"></div>
             <div class="descricao">
@@ -18,14 +17,14 @@
             <div class="linha">
                 <div class="linha-verde"></div>
             </div>
-            <div class="data-final">
-                <p>Data final: </p>
+            <div class="data-final" (click)="openEfechaProjeto()">
+                <p>Data final: {{projeto.dataFinal}} </p>
                 <input [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.dataFinal">
             </div>
         </div>
     
-        <div   [ngClass]="projeto.isVisible && md ? 'h-[55vh]' : 'h-0'" [ngClass]="projeto.isVisible && !md ? 'h-[55vh] w-[29rem]' : 'w-0'" class="infos">
-            <div [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
+        <div  [ngClass]="projeto.isVisible && md ? 'h-[55vh] ' : 'h-0'" [ngClass]="projeto.isVisible && !md ? 'h-[55vh] w-[29rem]' : 'w-0'" class="infos">
+            <div *ngIf="projeto.isVisible" [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'" class="infos-projeto">
                 <div class="cabecalho">
                     <h1 class="Nome">Nome</h1>
                     <h1 class="Progresso">Progresso</h1>
@@ -33,7 +32,7 @@
                     <h1 class="Prazo">Prazo</h1>
                 </div>
     
-                <div *ngFor="let t of tarefas" [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'" class="valores">
+                <div  *ngFor="let t of tarefas" [ngClass]="projeto.isVisible ? 'opacity-100' : 'opacity-0'"  class="valores">
                     <p class="Nome">{{t.nome}}</p>
                     <h1 class="Progresso"><div class="valor-progresso"  [style.width.%]="t.progresso" ></div></h1>
                     <h1 class="Status">{{t.status}}</h1>

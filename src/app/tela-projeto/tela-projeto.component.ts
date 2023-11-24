@@ -10,9 +10,6 @@ import { TelaCriarProjetoComponent } from '../tela-criar-projeto/tela-criar-proj
 })
 export class TelaProjetoComponent implements OnInit {
 
-  
-
-  projeto = ProjetoComponent
   constructor(private service : BackendEVOLVEService) {
    }
 
@@ -26,17 +23,8 @@ export class TelaProjetoComponent implements OnInit {
       }
    }
 
-   openProjeto(p:Projeto){
-     for(let pFor of this.projetos){
-       if(pFor != p){
-         pFor.isVisible = false;
-       }
-       p.isVisible = true;
-      }
-    }
-
   projetos !: Projeto[]
-    
+
   ngOnInit(): void {
     this.funcao()
   }
@@ -49,7 +37,6 @@ export class TelaProjetoComponent implements OnInit {
     this.projetos = await this.service.getAllSomething('projeto')
   }
 
-
   deletarPai(id:number){
     this.projetos.forEach((e) =>{
       if(e.id == id){
@@ -57,14 +44,15 @@ export class TelaProjetoComponent implements OnInit {
       }
     })
     this.service.deleteById("projeto",id);
-
-    console.log(this.service.deleteById("projeto",id));
-    
   }
-  
-  
 
-  
-
+  abrirProjetoPai(p:Projeto){
+    this.projetos.forEach(element => {
+      if(p != element){
+        element.isVisible = false
+      }
+   });
+    p.isVisible = !p.isVisible
+  }
 
 }

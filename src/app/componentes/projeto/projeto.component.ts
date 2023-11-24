@@ -34,6 +34,7 @@ export class ProjetoComponent implements OnInit {
   @Output()
   deletar:EventEmitter<number> = new EventEmitter<number>()
 
+  @Output() openProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
 
   @Input() projeto!:Projeto;
   
@@ -125,8 +126,8 @@ export class ProjetoComponent implements OnInit {
     this.deletar.emit(id)
   }
 
-  fechaProjeto(){
-    this.projeto.isVisible = false
+  openEfechaProjeto(){
+    this.openProjeto.emit(this.projeto)
   }
 }
 
