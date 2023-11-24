@@ -32,6 +32,7 @@ import { AutomacaoComponent } from './componentes/sub-componentes/automacao/auto
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+import { TelaChatComponent } from './tela-chat/tela-chat.component';
 
 
 
@@ -64,7 +65,8 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     IntegracaoComponent,
     TarefaDiaComponent,
     // RecentTeamsComponent,
-    EquipesRecentesComponent
+    EquipesRecentesComponent,
+    TelaChatComponent
 
 
   ],
