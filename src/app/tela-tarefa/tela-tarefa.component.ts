@@ -9,7 +9,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
-  select : string = "Padrao";
+  select : string = "Lista";
   listaTarefas: Array<Tarefa> =[]
 
 

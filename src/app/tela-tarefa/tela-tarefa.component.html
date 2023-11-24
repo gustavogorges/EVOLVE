@@ -3,7 +3,7 @@
     <div class="w-full flex flex-row justify-between py-10">
       <div class="flex flex-col gap-4 max-w-fit">
         <h1 class="nome-projeto">Projeto Padrão</h1>
-        <button class="botao-adicionaProjeto">
+        <button class="botao-adicionaProjeto" routerLink="/modal-tarefa">
           <i class="pi pi-plus" style="font-size: 1rem"></i>
           Adicionar Tarefa
         </button>
@@ -57,8 +57,15 @@
         </div>
       </div>
     </div>
-    <div *ngIf="select == 'Kanban'">kanban</div>
-     <div *ngIf="select == 'Lista'">Lista</div>
+    <div *ngIf="select == 'Lista'">
+      <div class="flex flex-col h-full w-full gap-6  items-center justify-center">
+        <div *ngFor="let tarefa of listaTarefas; index as indice" class="cardLista">
+          <app-tarefa-card-lista class="h-full w-full" [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-lista>
+        </div>
+      </div>
+      
+    </div>
+     <div *ngIf="select == 'Kanban'">Lista</div>
 
 
 

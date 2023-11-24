@@ -1,0 +1,24 @@
+<div class="w-full flex h-[60px] items-center p-4 gap-12 justify-center">
+  <p class="nomeTarefa">{{tarefaAtual.nome}}</p>
+
+    <div class="barra-cinza">
+        <div class="barra-azul" [ngStyle]="{ width: valorBarra }"></div>
+      </div>
+      <p class="dataFinal">{{tarefaAtual.dataFinal}}</p>
+      <div class="status" [ngStyle]="{'background-color': tarefaAtual.statusAtual.corFundo}">{{tarefaAtual.statusAtual.nome}}</div>
+      <div class="flex gap-2">
+        <div class="fotoMembroTarefa bg-secondary"></div>
+        <div class="fotoMembroTarefa ">
+          <img src="assets/pessoaTeste.svg" /> 
+        </div>
+          <div class="fotoMembroTarefa bg-fuchsia-400">
+            </div>
+            
+            
+        </div>
+        <div class="flex items-center">
+            <img [src]="caminhoEstrela" (click)="favoritar()" alt="" class="cursor-pointer"/>
+          </div>
+    
+       
+</div>

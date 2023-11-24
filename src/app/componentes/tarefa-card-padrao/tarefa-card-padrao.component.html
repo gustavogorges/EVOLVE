@@ -1,7 +1,7 @@
 
   <div class="p-3 flex flex-row justify-between">
     <p class="texto">data final: {{tarefaAtual.dataFinal}} </p>
-    <div class="status" [ngStyle]="{'background-color': corStatus}">{{tarefaAtual.statusAtual.nome}}</div>
+    <div class="status" [ngStyle]="{'background-color': tarefaAtual.statusAtual.corFundo}">{{tarefaAtual.statusAtual.nome}}</div>
   </div>
   <div class="barra-cinza">
     <div class="barra-azul" [ngStyle]="{ width: valorBarra }"></div>

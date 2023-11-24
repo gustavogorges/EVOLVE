@@ -1,13 +1,11 @@
 .barra-cinza {
-  @apply relative w-full h-2 rounded-md bg-[#d9d9d9];
+  @apply relative w-full h-4 rounded-md bg-[#d9d9d9];
   width: valorBarra;
 }
 .barra-azul {
   @apply absolute top-0 left-0 h-full text-center text-xs text-white bg-primary rounded-md;
 }
-.card {
-  @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md;
-}
+
 
 .s-input input {
   display: none;
