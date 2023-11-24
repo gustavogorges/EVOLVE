@@ -111,7 +111,7 @@
                >integração</p>
         </div>
         <div class="components">
-            <app-sub-tarefa class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
+            <app-sub-tarefa [listaSubtarefas]="tarefa.subtarefas" class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
             <app-comentarios class="component" *ngIf="page_task == 'comentarios'"></app-comentarios>
             <app-historicos  class="component" *ngIf="page_task == 'historicos'"></app-historicos>
             <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
