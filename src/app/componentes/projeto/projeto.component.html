@@ -2,10 +2,10 @@
     <div class="projeto-visualizacao">
 
         <div [ngClass]="projeto.isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto" (click)="openEfechaProjeto()">
-            <div class="imagem-capa"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" [ngClass]="projeto.isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="projeto.isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
-            <div class="nome-projeto"><input  maxlength="19" [disabled]="!projeto.isVisible"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.nome"></div>
-            <div class="descricao">
-                <div class="desc" ><textarea [disabled]="!projeto.isVisible" class="descricao-valor" [(ngModel)]="projeto.descricao" maxlength="200" cols="10" rows="5"></textarea></div>
+            <div class="imagem-capa" > <div class="div-foto-centraliza"><div class="foto" (click)="openEfechaProjeto()"><div class="lapis-edit" [ngClass]="projeto.isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="projeto.isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
+            <div class="nome-projeto"><input #nome  maxlength="19" (click)="openEfechaProjeto()"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.nome"></div>
+            <div class="descricao" (click)="openEfechaProjeto()">
+                <div class="desc" ><textarea class="descricao-valor" #descricao [(ngModel)]="projeto.descricao" maxlength="200" cols="10" rows="5"></textarea></div>
             </div>
             <div class="responsaveis">
                 <div class="responsaveis-escrita">Responsaveis: </div>
@@ -18,8 +18,8 @@
                 <div class="linha-verde"></div>
             </div>
             <div class="data-final" (click)="openEfechaProjeto()">
-                <p>Data final: {{projeto.dataFinal}} </p>
-                <input [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.dataFinal">
+                <p>Data final: </p>
+                <input #data [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.dataFinal">
             </div>
         </div>
     
@@ -51,7 +51,8 @@
                 <div class="seta">></div>
             </div>
             <div *ngIf="projeto.isVisible" class="botoes">
-                <button class="botao-cancelar" (click)="deletarProjeto(projeto.id)" ><i class="pi pi-trash"></i> Deletar</button>
+                <button class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar <i class="pi pi-trash"></i></button>
+                <button class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar projeto<i class="pi pi-save"></i> </button>
                 <button class="botao-ir-para-projeto">Ir para projeto <i class="pi pi-angle-double-right"></i> </button>
             </div>
         </div>

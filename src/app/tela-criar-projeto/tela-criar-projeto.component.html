@@ -34,11 +34,9 @@
                 <button class="botao-pesquisar"><p>Pesquisar</p> <i class="pi pi-search dark:text-gray-900"></i></button>
             </div>
             <div class="membros">
-                <app-membros-equipe></app-membros-equipe>
-                <app-membros-equipe></app-membros-equipe>
-                <app-membros-equipe></app-membros-equipe>
-                <app-membros-equipe></app-membros-equipe>
-                <app-membros-equipe></app-membros-equipe>
+                <div *ngFor="let p of usuarios">
+                    <app-membros-equipe [user]="p" (adiconarUser)="addUser(p)" ></app-membros-equipe>
+                </div>
             </div>
             <div class="botoes">
                 <button class="cancelar">Cancelar</button>

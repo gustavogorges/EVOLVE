@@ -80,7 +80,7 @@
     
     
     .infos{
-        @apply duration-200 bg-gray-200 dark:bg-dark-primary-gray overflow-hidden grid gap-6  rounded-r-xl;
+        @apply duration-150 bg-gray-200 dark:bg-dark-primary-gray overflow-hidden grid gap-6  rounded-r-xl;
         grid-template-rows: 3% 40% 30% 10%;
         grid-template-columns: 0% 90% 0%;
     
@@ -172,6 +172,14 @@
 
     .botao-cancelar{
         @apply w-auto px-4 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-white dark:text-gray-900 duration-150 hover:scale-105
+    }
+
+    .botao-salvar-projeto{
+        @apply w-auto px-4 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-white dark:text-gray-900 duration-150 hover:scale-105;
+
+        i{
+            @apply px-1
+        }
     }
 
     .botao-ir-para-projeto{

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ProjetoComponent } from '../componentes/projeto/projeto.component';
@@ -46,6 +46,10 @@ export class TelaProjetoComponent implements OnInit {
     this.service.deleteById("projeto",id);
   }
 
+  salvarPai(p:Projeto){
+    this.service.putProjeto(p)
+  }
+
   abrirProjetoPai(p:Projeto){
     this.projetos.forEach(element => {
       if(p != element){
@@ -53,6 +57,7 @@ export class TelaProjetoComponent implements OnInit {
       }
    });
     p.isVisible = !p.isVisible
+
   }
 
 }

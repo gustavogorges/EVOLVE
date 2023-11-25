@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -20,12 +20,7 @@ export class ProjetoComponent implements OnInit {
 
   date: string = ''
   tarefas : Tarefa[] = []
-  nomeProjeto = 'Projeto Weg'
-  descricao:string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore. Lrem Ipsum is simply dummy text of the printing and typesetting industry. Lore'
-  nome = ''
-  prazo = ''
   progresso = 0
-  status = ''
   md: any
   corAtual: string = ''
   valorProgresso = 0;
@@ -35,6 +30,8 @@ export class ProjetoComponent implements OnInit {
   deletar:EventEmitter<number> = new EventEmitter<number>()
 
   @Output() openProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
+
+  @Output() salvarProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
 
   @Input() projeto!:Projeto;
   
@@ -126,8 +123,13 @@ export class ProjetoComponent implements OnInit {
     this.deletar.emit(id)
   }
 
+  salvaProjeto(){
+    this.salvarProjeto.emit(this.projeto)
+  }
+
   openEfechaProjeto(){
     this.openProjeto.emit(this.projeto)
   }
+
 }
 
