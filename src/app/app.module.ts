@@ -33,6 +33,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
 import { TelaChatComponent } from './tela-chat/tela-chat.component';
+// import { ContactsComponent } from './contacts/contacts.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -66,7 +68,9 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
     TarefaDiaComponent,
     // RecentTeamsComponent,
     EquipesRecentesComponent,
-    TelaChatComponent
+    TelaChatComponent,
+    // ContactsComponent,
+    ContactComponent
 
 
   ],
