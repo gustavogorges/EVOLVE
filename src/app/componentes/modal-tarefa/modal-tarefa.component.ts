@@ -20,6 +20,7 @@ export class ModalTarefaComponent implements OnInit {
   booleanDescription:boolean = false;
   statusAntigo:Status = new Status;
   descricaoAntiga:string = "";
+  nomeAntigo:string = "";
 
   
   constructor(
@@ -32,12 +33,17 @@ projeto:Projeto = new Projeto
     // this.verificaTamanhoString();
     this.statusAntigo = this.tarefa.statusAtual;
     this.descricaoAntiga = this.tarefa.descricao;
-    console.log(this.statusAntigo)
+    this.nomeAntigo = this.tarefa.nome;
+    console.log(this.tarefa)
     let projetos = await this.service.getAllSomething("projeto")
     for(let projeto of projetos){
       if(projeto.id == this.tarefa.projeto.id){
         this.projeto = projeto
       }
+    }
+    if(this.tarefa.id == 0) {
+      this.booleanEdit = true;
+      this.booleanCalendario = true;
     }
   }
 
@@ -102,10 +108,19 @@ booleanEditFalse() {
   this.booleanStatus = false;
   this.tarefa.statusAtual = this.statusAntigo;
   this.tarefa.descricao = this.descricaoAntiga;
+  this.tarefa.nome = this.nomeAntigo;
 }
 
 salvarTarefa() {
-  this.service.putTarefa(this.tarefa);
+  if(this.tarefa.id != 0) {
+    this.service.putTarefa(this.tarefa);
+  } else if(this.tarefa.id == 0) {
+    console.log("entrou")
+    this.tarefa.criador.id = 303;
+    this.tarefa.projeto.id = 1;
+    this.service.postTarefa(this.tarefa);
+  }
+
   if(this.booleanCalendario == true) {
     this.booleanCalendario = false;
   }

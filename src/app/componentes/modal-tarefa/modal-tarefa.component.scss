@@ -7,7 +7,11 @@
 }
 
 .name-box {
-    @apply w-[80%] h-[70%] flex items-center min-w-min mb-5
+    @apply w-[80%] h-[100%] flex items-center min-w-min mb-5
+}
+
+.input-box {
+    @apply w-[80%] h-[100%] outline-none pb-2
 }
 
 .name {

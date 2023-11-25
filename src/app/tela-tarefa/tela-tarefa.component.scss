@@ -38,3 +38,7 @@
 .select:focus{
     outline: 0;
 }
+
+.tarefa {
+  @apply absolute w-[40%] h-[92vh] z-50;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -12,6 +12,7 @@ export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
   select : string = "Padrao";
   listaTarefas: Array<Tarefa> =[]
+  booleanTask : boolean = false;
 
 
   constructor(private service : BackendEVOLVEService) { }
@@ -32,6 +33,10 @@ export class TelaTarefaComponent implements OnInit {
     //     this.select = this.selectedVisualizacao
     // }
 
+  }
+
+  adicionarTarefa() {
+    this.booleanTask = !this.booleanTask;
   }
 
 }

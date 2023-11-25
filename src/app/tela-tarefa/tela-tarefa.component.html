@@ -1,9 +1,10 @@
-<div class="w-screen">
+<div class="w-screen h-full flex justify-end items-center">
+  <app-modal-tarefa class="tarefa" *ngIf="booleanTask"></app-modal-tarefa>
   <div class="w-full px-48">
     <div class="w-full flex flex-row justify-between py-10">
       <div class="flex flex-col gap-4 max-w-fit">
         <h1 class="nome-projeto">Projeto Padrão</h1>
-        <button class="botao-adicionaProjeto">
+        <button class="botao-adicionaProjeto" (click)="adicionarTarefa()">
           <i class="pi pi-plus" style="font-size: 1rem"></i>
           Adicionar Tarefa
         </button>

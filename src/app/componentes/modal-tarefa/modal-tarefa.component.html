@@ -1,7 +1,11 @@
 <div class="main">
     <div class="name-progress">
         <div class="name-box">
-            <p class="name">{{tarefa.nome}}</p>
+            <p class="name" *ngIf="!booleanEdit">{{tarefa.nome}}</p>
+            <span class="p-input-icon-right w-[70%] h-full flex items-center" *ngIf="booleanEdit">
+                <i class="pi pi-pencil " style="font-size: 1.3rem;"></i>
+                <input class="input-box" style="font-size:30px; color: #185E77; font-weight: bold;" type="text" pInputText [(ngModel)]="tarefa.nome" />
+            </span>
         </div>
         <div class="progress-bar-box">
             <div  class="progress-bar">
