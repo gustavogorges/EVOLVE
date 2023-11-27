@@ -12,24 +12,28 @@
 }
 
 .close-deliveries {
-    @apply w-2/3 h-full bg-primaryGray rounded-lg flex-col items-center justify-center shadow-xl
+    @apply w-[70%] h-full bg-primaryGray rounded-lg flex-col items-center justify-center shadow-xl
 }
 
 .card-deliveries-box {
-    @apply w-full h-5/6 bg-primaryWhite rounded-xl flex flex-col items-center gap-6 mt-5 mb-5
+    @apply w-full h-5/6 bg-primaryWhite rounded-xl flex flex-col items-center gap-6 mt-5 mb-5 max-h-[72vh] overflow-y-scroll
 }
 
 .right-side {
+    @apply w-full h-full flex flex-col
+}
+
+.right-side-box {
     @apply h-full w-full grid grid-rows-2;
     grid-template-rows: 45% 55%;
 }
 
 .calendar-box {
-    @apply h-full w-full flex justify-center
+    @apply h-full w-full flex justify-start
 }
 
 .calendar {
-    @apply w-3/4 h-full bg-primaryGray rounded-lg shadow-xl
+    @apply w-[90%] h-full bg-primaryGray rounded-lg shadow-xl
 }
 
 .card-deliveries {
