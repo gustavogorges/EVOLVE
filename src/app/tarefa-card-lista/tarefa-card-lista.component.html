@@ -1,5 +1,17 @@
 <div class="w-full flex h-[60px] items-center p-4 gap-12 justify-center">
-  <p class="nomeTarefa">{{tarefaAtual.nome}}</p>
+  <div class="flex gap-1 flex-row container">
+    <div *ngIf="tarefaAtual.nome.length>20">
+      <p class="nomeTarefa">{{tarefaAtual.nome}}</p>
+    </div>
+    <div *ngIf="tarefaAtual.nome.length<=20">
+    <p class="nome">{{tarefaAtual.nome}}</p>
+    </div>  
+
+  </div>
+ 
+
+
+
 
     <div class="barra-cinza">
         <div class="barra-azul" [ngStyle]="{ width: valorBarra }"></div>

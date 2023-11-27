@@ -1,9 +1,16 @@
 .nomeTarefa {
-    @apply text-primary text-2xl font-extrabold  ;
-    font-family: "Hind Madurai", sans-serif;
-    white-space: nowrap;
-    
-  }
+  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  font-family: "Hind Madurai", sans-serif;
+  white-space: nowrap;
+  position: absolute;
+  transform: translateX(0);
+  transition: transform 5s linear; 
+}
+.nome {
+  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  font-family: "Hind Madurai", sans-serif;
+
+}
   .barra-cinza {
     @apply  w-80 h-6 rounded-md bg-[#d9d9d9];
     width: valorBarra;
@@ -23,3 +30,20 @@
   .fotoMembroTarefa{
     @apply w-11 h-11 rounded-full  overflow-clip
   }
+  .container {
+    @apply h-6 w-48   ;
+      overflow: hidden; 
+      position: relative;
+    }
+    
+    
+    
+    .container:hover .nomeTarefa {
+      transform: translateX(-100%);
+      overflow:visible; 
+    }
+    
+    .container:not(:hover) .nomeTarefa {
+      transition: none; 
+    }
+    
