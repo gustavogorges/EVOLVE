@@ -24,5 +24,6 @@ export class Tarefa{
 
 
     associados:Array<Usuario> = new Array;
+    isVisible: boolean = false;
 
 }

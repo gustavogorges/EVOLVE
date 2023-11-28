@@ -28,22 +28,26 @@ export class ModalTarefaComponent implements OnInit {
   ) { }
 @Input() tarefa:Tarefa = new Tarefa
 projeto:Projeto = new Projeto
+tarefaNova : Tarefa = new Tarefa;
 
   async ngOnInit (): Promise<void> {
-    // this.verificaTamanhoString();
-    this.statusAntigo = this.tarefa.statusAtual;
-    this.descricaoAntiga = this.tarefa.descricao;
-    this.nomeAntigo = this.tarefa.nome;
     console.log(this.tarefa)
+    // this.verificaTamanhoString();
+    if(this.tarefa.id == 0) {
+      this.booleanEdit = true;
+      this.booleanCalendario = true;
+      this.tarefa = this.tarefaNova;
+      this.tarefaNova.statusAtual.nome = "sem status"
+    } else if(this.tarefa.id != 0) {
+      this.statusAntigo = this.tarefa.statusAtual;
+      this.descricaoAntiga = this.tarefa.descricao;
+      this.nomeAntigo = this.tarefa.nome;
+    }
     let projetos = await this.service.getAllSomething("projeto")
     for(let projeto of projetos){
       if(projeto.id == this.tarefa.projeto.id){
         this.projeto = projeto
       }
-    }
-    if(this.tarefa.id == 0) {
-      this.booleanEdit = true;
-      this.booleanCalendario = true;
     }
   }
 
@@ -119,6 +123,7 @@ salvarTarefa() {
     this.tarefa.criador.id = 303;
     this.tarefa.projeto.id = 1;
     this.service.postTarefa(this.tarefa);
+    this.tarefa.id = 0;
   }
 
   if(this.booleanCalendario == true) {

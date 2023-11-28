@@ -1,10 +1,10 @@
 .main {
-    @apply grid grid-cols-2 h-[88%] w-full;
+    @apply grid grid-cols-2 h-[85%] w-full;
     grid-template-columns: 40% 60%;
 }
 
 .main-box {
-    @apply w-full h-full flex justify-end items-center
+    @apply w-full h-[92%] flex justify-end items-center
 }
 
 .left-side {
@@ -46,7 +46,7 @@
 
 
 .delivery {
-    @apply w-full justify-center h-24 flex justify-center mb-8
+    @apply w-full justify-center h-24 flex mb-8
 } 
 
 .calendar-content {
@@ -55,7 +55,7 @@
 
 
 .tarefa {
-    @apply absolute w-[40%] h-[92vh] ;
+    @apply w-[45%] h-[92vh] fixed z-50;
 }
 
 .title-box {

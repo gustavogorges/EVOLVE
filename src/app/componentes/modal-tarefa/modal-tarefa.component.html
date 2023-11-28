@@ -53,12 +53,15 @@
                 <p class="name-propertie">status:</p>
             </div>
             <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-                <div (click)="editStatus()" class="status-icon " [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}">{{tarefa.statusAtual.nome}}</div>
+                <div 
+                (click)="editStatus()" 
+                class="status-icon " 
+                [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
+                >{{tarefa.statusAtual.nome}}</div>
             </div>
             <!--[projeto]="tarefa.projeto"-->
             <app-select-status 
             (newItem)="editStatus()" 
-            
             [projeto]="tarefa.projeto" 
             [tarefa]="tarefa" 
             [statusLista]="tarefa.projeto.listaStatus" 

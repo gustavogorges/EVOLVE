@@ -3,10 +3,7 @@
     font-family: 'Montserrat', sans-serif;
 
 }
-.botao-adicionaProjeto{
-    @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
 
-}
 .botao-opcoes{
     font-family: 'Montserrat', sans-serif;
     @apply text-2xl
@@ -40,5 +37,5 @@
 }
 
 .tarefa {
-  @apply absolute w-[40%] h-[92vh] z-50;
+  @apply  w-[45%] h-[92vh] z-50 fixed;
 }
