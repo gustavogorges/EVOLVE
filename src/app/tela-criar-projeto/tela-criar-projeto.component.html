@@ -35,7 +35,7 @@
             </div>
             <div class="membros">
                 <div *ngFor="let p of usuarios">
-                    <app-membros-equipe [user]="p" (adiconarUser)="addUser(p)" ></app-membros-equipe>
+                    <app-membros-equipe [user]="p" [membros]="membros" (adicionaUser)="addUser([])" ></app-membros-equipe>
                 </div>
             </div>
             <div class="botoes">

@@ -13,13 +13,13 @@ export class MembrosEquipeComponent implements OnInit {
   adicionado = false
 
   @Input() user!:Usuario
-  @Output() adiconarUser:EventEmitter<Usuario> = new EventEmitter<Usuario>()
+  @Input() membros!:Usuario[]
+  @Output() adiconarUser:EventEmitter<Usuario[]> = new EventEmitter<Usuario[]>()
 
   ngOnInit(){
     this.getAllUsers()
   }
 
-  membros:Usuario[] = []
   usuarios!:Usuario[]
   
   async getAllUsers(){
@@ -28,27 +28,34 @@ export class MembrosEquipeComponent implements OnInit {
 
   adicionar(){
     this.adicionado = !this.adicionado
-    this.adiconarUser.emit(this.user)
+    if(this.adicionado){
+      this.addUser()
+    }else{
+      this.removeUser()
+    }
   }
 
-  // @ViewChild('adicionado') addUser!:HTMLElement
+  addUser(){
+    this.membros.push(this.user)
+    this.arrayAlterada()
+  }
+
+  arrayAlterada(){
+    this.adiconarUser.emit(this.membros)
+    console.log(this.membros)
+  }
+
+  removeUser(){
+    this.membros.splice(this.membros.indexOf(this.user), 1)
+    this.arrayAlterada()
+
+  }
+
   @ViewChild('bg') fundo !: ElementRef;
   ngAfterViewInit(){
     this.fundo.nativeElement.style.backgroundColor = this.randomizeColor()
-    // let membros = localStorage.getItem('membros') || ''
-    // this.membros.push(JSON.parse(membros))
-
-    // this.usuarios.forEach(user => {
-    //   this.membros.forEach(add => {
-    //     if(user.id === add.id){
-    //       this.adicionado = true
-    //       this.addUser.classList.re()
-    //     }
-    //   });
-    // });
   }
 
-  
   randomizeColor(){
     let str = '#';
     while (str.length < 7) {

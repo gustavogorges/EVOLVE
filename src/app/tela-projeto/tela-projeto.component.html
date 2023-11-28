@@ -6,7 +6,7 @@
     </div>
     <div class="flex flex-wrap gap-10 justify-center px-[11%]" >
         <div *ngFor="let p of projetos" >
-            <app-projeto (deletar)="deletarPai($event)" (salvarProjeto)="salvarPai(p)" (openProjeto)="abrirProjetoPai(p)" [projeto]="p"></app-projeto>
+            <app-projeto #prj (deletar)="deletarPai($event)" (salvarProjeto)="salvarPai(p)" (openProjeto)="abrirProjetoPai(p)" [projeto]="p"></app-projeto>
         </div>
     </div>
 </div>

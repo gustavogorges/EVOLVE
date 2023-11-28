@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
+import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 interface Tarefa{
@@ -39,47 +40,6 @@ export class ProjetoComponent implements OnInit {
     this.valorProgresso = num
   }
 
-  integrantes = [
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-  ]
-  
-  randomizeColor(){
-    let str = '#';
-    while (str.length < 7) {
-      str += Math.floor(Math.random() * 0x10).toString(16);
-    }
-    return str.toUpperCase()
-  }
-
   criaTarefa(){
     const task: Tarefa = {
       nome : 'Nome tarefa',
@@ -103,8 +63,14 @@ export class ProjetoComponent implements OnInit {
   ngOnInit(): void {
     this.getScreenSize()
     this.criaTarefa()
-    this.randomizeColor()
-    
+  }
+
+  randomizeColor(){
+    let str = '#';
+    while (str.length < 7) {
+      str += Math.floor(Math.random() * 0x10).toString(16);
+    }
+    return str.toUpperCase()
   }
 
   verificaTamanhoTela() {

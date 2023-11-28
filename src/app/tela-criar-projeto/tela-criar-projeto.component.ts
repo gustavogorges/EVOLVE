@@ -40,12 +40,14 @@ export class TelaCriarProjetoComponent implements OnInit {
     descricao != null && descricao != ''){
       const projeto: Projeto = {
         id: 0, //auto generate
+        // criador: null,
         nome: this.nome.nativeElement.value,
         dataFinal: this.data.nativeElement.value,
         descricao: this.descricao.nativeElement.value,
         tarefas: [],
         propriedades: [],
         membros: this.membros,
+        Administrador: this.membros,
         isVisible: false
       }
       console.log(projeto)
@@ -59,10 +61,10 @@ export class TelaCriarProjetoComponent implements OnInit {
     // localStorage.removeItem('membros')
   }
 
-  addUser(p:Usuario){
+  addUser(p:Usuario[]){
     // console.log(p.email)
-    this.membros.push(p)
-    // console.log(this.membros)
+    this.membros = p
+    console.log(this.membros)
     // localStorage.setItem('membros',JSON.stringify(this.membros))
   }
 

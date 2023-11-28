@@ -10,5 +10,6 @@ export class Projeto{
     tarefas: Array<Tarefa> = new Array;
     propriedades:Array<Propriedade> = new Array;
     membros: Array<Usuario> = new Array;
+    Administrador: Array<Usuario> = new Array;
     isVisible: boolean = false 
 }

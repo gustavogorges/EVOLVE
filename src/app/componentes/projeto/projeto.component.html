@@ -41,11 +41,11 @@
             </div>
             <div *ngIf="projeto.isVisible" class="integrantes">
                 <div class="seta"><</div>
-                <div  class="pessoas">
-                    <div *ngFor="let p of integrantes;"  class="infos-pessoas">
-                        <div class="foto" [style.backgroundColor]="p.cor">{{p.nome.charAt(0).toUpperCase()}}</div>
+                <div #bg class="pessoas">
+                    <div  *ngFor="let p of projeto.membros;"  class="infos-pessoas">
+                        <div class="foto" >{{p.nome.charAt(0).toUpperCase()}}</div>
                         <p class="nome">{{p.nome}}</p>
-                        <p class="tipo">{{p.tipo}}</p>
+                        <p class="tipo">Administrador</p>
                     </div>
                 </div>
                 <div class="seta">></div>

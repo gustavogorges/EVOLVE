@@ -10,8 +10,7 @@ import { TelaCriarProjetoComponent } from '../tela-criar-projeto/tela-criar-proj
 })
 export class TelaProjetoComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) {
-   }
+  constructor(private service : BackendEVOLVEService) {}
 
    @HostListener('click', ['$event'])
    clicouFora(event:any){
@@ -58,6 +57,11 @@ export class TelaProjetoComponent implements OnInit {
    });
     p.isVisible = !p.isVisible
 
+  }
+
+  @ViewChild('prj') prj!:HTMLElement
+  ngAfterViewInit(){
+    console.log(this.prj);
   }
 
 }
