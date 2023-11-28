@@ -5,15 +5,29 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.contact-list::-webkit-scrollbar {
+.contact-list::-webkit-scrollbar, .messages::-webkit-scrollbar {
     display: none;
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-  .contact-list {
+  .contact-list::-webkit-scrollbar , .messages::-webkit-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+  
+
+  .triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 20.5px 35.5px 20.5px;
+    border-color: transparent transparent #f5f5f5 transparent;
+ }
+
+
+
+
 
   .triangulo {
     width: 0;
@@ -39,13 +53,8 @@
       background: linear-gradient(to bottom right, white 0%, black 50%);
       
     }
-
-    .triangle {
-      width: 0px;
-      height: 0px;
-      border-style: solid;
-      border-width: 0 20.5px 35.5px 20.5px;
-      border-color: transparent transparent #f5f5f5 transparent;
-      transform: rotate(46deg);
-   }
     
+   .teste{
+     -webkit-clip-path: polygon(46% 40%, 83% 40%, 100% 35%, 95% 50%, 95% 59%, 46% 59%);
+     clip-path: polygon(46% 40%, 83% 40%, 100% 35%, 95% 50%, 95% 59%, 46% 59%);
+   }
