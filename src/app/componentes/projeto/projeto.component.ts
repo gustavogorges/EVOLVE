@@ -85,6 +85,14 @@ export class ProjetoComponent implements OnInit {
     },0.00001)
   }
 
+  verifyImage(user:Usuario){
+    if(user.fotoPerfil.length>10){
+      return false
+    }else{
+      return true
+    }
+  }
+
   deletarProjeto(id:number){
     this.deletar.emit(id)
   }

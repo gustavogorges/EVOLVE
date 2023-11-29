@@ -52,9 +52,11 @@ export class TelaCriarProjetoComponent implements OnInit {
       }
       console.log(projeto)
       this.service.postProjeto(projeto)
+      alert('criado')
     }else{
       alert('campo vazio')
     }
+
     this.nome.nativeElement.value = ''
     this.data.nativeElement.value = ''
     this.descricao.nativeElement.value = ''

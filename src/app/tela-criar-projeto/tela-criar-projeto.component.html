@@ -38,6 +38,15 @@
                     <app-membros-equipe [user]="p" [membros]="membros" (adicionaUser)="addUser([])" ></app-membros-equipe>
                 </div>
             </div>
+            <div class="status-priority">
+                <button class="add-status">Adicionar status</button>
+                <app-status-component-criar-tarefa></app-status-component-criar-tarefa>
+                
+                <button class="add-priority">Adicionar prioridade</button>
+            </div>
+            <div class="lembrete">
+                <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>
+            </div>
             <div class="botoes">
                 <button class="cancelar">Cancelar</button>
                 <button class="salvar" (click)="salvarProjeto()">Salvar</button>

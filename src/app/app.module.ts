@@ -32,6 +32,7 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
 import { CalendarModule } from 'primeng/calendar';
 import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
 import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
+import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equ
     IntegracaoComponent,
     TarefaDiaComponent,
     TelaCriarProjetoComponent,
-    MembrosEquipeComponent
+    MembrosEquipeComponent,
+    StatusComponentCriarTarefaComponent
   ],
   imports: [
     BrowserAnimationsModule,

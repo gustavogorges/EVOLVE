@@ -20,6 +20,14 @@ export class MembrosEquipeComponent implements OnInit {
     this.getAllUsers()
   }
 
+  verifyImage(){
+    if(this.user.fotoPerfil.length>10){
+      return false
+    }else{
+      return true
+    }
+  }
+
   usuarios!:Usuario[]
   
   async getAllUsers(){
@@ -42,26 +50,12 @@ export class MembrosEquipeComponent implements OnInit {
 
   arrayAlterada(){
     this.adiconarUser.emit(this.membros)
-    console.log(this.membros)
   }
 
   removeUser(){
     this.membros.splice(this.membros.indexOf(this.user), 1)
     this.arrayAlterada()
 
-  }
-
-  @ViewChild('bg') fundo !: ElementRef;
-  ngAfterViewInit(){
-    this.fundo.nativeElement.style.backgroundColor = this.randomizeColor()
-  }
-
-  randomizeColor(){
-    let str = '#';
-    while (str.length < 7) {
-      str += Math.floor(Math.random() * 0x10).toString(16);
-    }
-    return str.toUpperCase()
   }
 
 }

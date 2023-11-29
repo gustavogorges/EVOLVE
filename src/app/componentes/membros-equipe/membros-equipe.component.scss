@@ -6,7 +6,11 @@
         @apply col-start-1 col-end-2 flex items-center justify-center;
 
         .foto2{
-            @apply h-[5rem] w-[5rem] object-cover overflow-hidden rounded-full
+            @apply h-[5rem] w-[5rem] overflow-hidden rounded-full text-4xl flex justify-center items-center font-semibold
+        }
+
+        .fotoImagem{
+            @apply h-[5rem] w-[5rem] rounded-full object-cover
         }
     }
 

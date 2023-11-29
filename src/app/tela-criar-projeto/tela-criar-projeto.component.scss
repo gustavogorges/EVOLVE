@@ -7,12 +7,12 @@
 }
 
 .separa-component{
-    @apply grid grid-cols-2 grid-rows-2 gap-4 w-[90%] xl:w-[50%] pt-3;
-    grid-template-columns: 15% 80%;
-    grid-template-rows: 5vh 15vh 11vh 23vh 15vh;
+    @apply grid grid-cols-4 justify-center grid-rows-[7] gap-4;
+    grid-template-columns: 5% 15% 90% 5%;
+    grid-template-rows: 5vh 15vh 12vh 23vh 7vh 3vh 3vh;
 
     .imagem-projeto{
-        @apply col-start-1 col-end-2 row-start-1 row-end-2;
+        @apply col-start-2 col-end-3 row-start-1 row-end-2;
     
         .div-foto-centraliza{
             
@@ -28,7 +28,7 @@
         } }
 
     .inputs{
-        @apply col-start-2;
+        @apply col-start-3 col-end-4;
 
         div{
             div{
@@ -54,7 +54,7 @@
     }
 
     .descricao{
-        @apply col-start-2 row-start-2 pt-4;
+        @apply col-start-3 col-end-4 row-start-2 pt-4;
 
         textarea{
             @apply w-full p-3 resize-none h-full outline-none rounded-lg shadow-md dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
@@ -62,7 +62,7 @@
     }
 
     .membro-components{
-        @apply col-span-full row-start-3 flex justify-between items-end;
+        @apply col-start-2 col-end-4 row-start-3 flex justify-between items-end;
 
         .membro-equipe{
             @apply  w-[77%];
@@ -82,14 +82,34 @@
     }
 
     .membros{
-        @apply col-span-full row-start-4 overflow-auto
+        @apply col-start-2 col-end-4 row-start-4 overflow-auto
+    }
+
+    .status-priority{
+        @apply col-start-2 col-end-4 row-start-5 flex justify-between items-center;
+
+        button{
+            @apply h-[4vh] p-2 rounded-lg text-white dark:text-gray-900 text-lg font-semibold flex items-center
+        }
+
+        .add-status{
+            @apply bg-primary dark:bg-dark-primary
+        }
+
+        .add-priority{
+            @apply bg-secondary dark:bg-dark-secundary-green
+        }
+    }
+
+    .lembrete{
+        @apply row-start-6 flex justify-center w-full col-span-full items-start text-gray-500 dark:text-gray-400
     }
 
     .botoes{
-        @apply col-span-full row-start-5 flex justify-between items-center;
+        @apply col-span-full row-start-7 flex justify-between items-center;
 
         button{
-            @apply h-[5vh] w-[17%] rounded-lg text-white dark:text-gray-900 text-xl font-semibold
+            @apply h-[5vh] w-[17%] rounded-lg text-white dark:text-gray-900 text-xl font-semibold 
         }
 
         .cancelar{
