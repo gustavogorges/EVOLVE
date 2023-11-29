@@ -18,6 +18,7 @@ export class ModalTarefaComponent implements OnInit {
   booleanStatus:boolean = false;
   booleanCalendario:boolean = false;
   booleanDescription:boolean = false;
+  booleanFoco:boolean = false;
   statusAntigo:Status = new Status;
   descricaoAntiga:string = "";
   nomeAntigo:string = "";
@@ -133,5 +134,15 @@ salvarTarefa() {
     this.booleanStatus = false;
   }
   this.booleanEdit = !this.booleanEdit
+}
+
+startFocus(){
+  console.log("entrou no teste")
+  this.booleanFoco = true;
+  console.log(this.booleanFoco)
+}
+
+finishFocus() {
+  this.booleanFoco = false;
 }
 }

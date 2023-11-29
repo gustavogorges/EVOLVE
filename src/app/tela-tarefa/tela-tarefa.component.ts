@@ -29,7 +29,11 @@ export class TelaTarefaComponent implements OnInit {
   @HostListener('click', ['$event'])
   clicouFora(event:any){
    console.log("TESTE 2")
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') || name.includes('c78'));
+   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
+    name.includes('c71') ||
+    name.includes('c64') ||
+    name.includes('c70') || 
+    name.includes('c78'));
      if(!element){
        for(let pFor of this.listaTarefas){
            this.closeTask();

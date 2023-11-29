@@ -1,56 +1,31 @@
-<div class="w-full h-[100%] flex justify-end">
+<div class="w-full h-[100%] flex ">
   <app-modal-tarefa class="tarefa" *ngIf="booleanTask" [tarefa]="tarefaSelecionada"></app-modal-tarefa>
   <div class="w-full px-48 h-full">
-    <div class="w-full flex flex-row justify-between py-10">
-      <div class="flex flex-col gap-4 max-w-fit">
-        <h1 class="nome-projeto">Projeto Padrão</h1>
-        <app-botao-add-tarefa 
-        class=" w-[100%]"
-        (click)="openTaskEdit(tarefaNova)"
-        ></app-botao-add-tarefa>
+    <div class="w-full flex flex-col justify-between py-10">
+      <div class=" w-full flex items-end h-[20%]">
+        <div class="flex flex-col gap-4 max-w-fit">
+          <h1 class="nome-projeto">Projeto Padrão</h1>
+          <app-botao-add-tarefa 
+          class=" w-[100%]"
+          (click)="openTaskEdit(tarefaNova)"
+          ></app-botao-add-tarefa>
+        </div>
+        <div class="flex h-full flex-row gap-4 items-center self-center">
+          <button class="botao-opcoes flex gap-2">
+            <p>Visualização</p>
+            <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+          </button> 
+          <button class="botao-opcoes flex gap-2">
+            <p>Visualização</p>
+            <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+          </button> 
+          <button class="botao-opcoes flex gap-2">
+            <p>Visualização</p>
+            <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+          </button> 
+        </div>
       </div>
-      <div class="flex h-full flex-row gap-4 self-center">
-        <button class="botao-opcoes">
-          <select
-            name="visualizacoes"
-            id="1"
-            class="select"
-            [(ngModel)]="selectedVisualizacao"
-            (change)="mudarSelect($event)"
-          >
-            <option value="Visualização" selected class="text-base">
-                Visualização
-            </option>
-            <option value="Padrao" class="text-base">Padrão</option>
-            <option value="Kanban" class="text-base">Kanban</option>
-            <option value="Lista" class="text-base">Lista</option>
-            <option value="Calendário" class="text-base">Calendário</option>
-
-          </select>
-          <i class="pi pi-eye icon" style="font-size: 1rem"></i>
-        </button>
-
-        <button class="botao-opcoes">
-            <select
-            name="Ordenação"
-            id="2"
-            class="select"
-          >
-            <option value="Ordenação" selected class="text-base">
-                Ordenação
-            </option>
-            <option value="Padrao" class="text-base">Data</option>
-            <option value="Kanban" class="text-base">Status</option>
-            <option value="Lista" class="text-base">Favoritos</option>
-          </select>
-          <i class="pi pi-sort-alt icon" style="font-size: 1rem"></i>
-        </button>
-        <button class="botao-opcoes">
-          Filtros
-          <i class="pi pi-filter icon" style="font-size: 1rem"></i>
-        </button>
-      </div>
-    </div>
+      
     <div *ngIf="select == 'Padrao'">
       <div class="grid grid-cols-4 gap-6 w-full justify-center pb-10">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
@@ -68,4 +43,5 @@
 
 
   </div>
+</div>
 </div>
