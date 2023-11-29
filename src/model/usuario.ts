@@ -6,6 +6,7 @@ export class Usuario {
     email: string = "";
     senha: string = "";
     nome : string = "";
+    testeImagem: string = ""
 
     fotoPerfil:string = "";
     tarefasCriadas: Array<Tarefa> = new Array;
