@@ -1,0 +1,53 @@
+<div class="main">
+    <div class="propriedades-box">
+
+        <div 
+        class="date propertie" 
+        (click)="clickDate()"
+        [ngClass]="booleanClickDate ? 'bg-[#e5e7eb] rounded-t-md text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-calendar text-primary icon"></i>
+            <p>data</p>
+        </div>
+        <div 
+        class="unique-selection propertie"
+        (click)="clickUniqueSelection()"
+        [ngClass]="booleanClickUniqueSelection ? 'bg-[#e5e7eb] text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-tag text-primary icon"></i>
+            <p>seleção única</p>
+        </div>
+        <div 
+        class="double propertie" 
+        (click)="clickDouble()"
+        [ngClass]="booleanClickDouble ? 'bg-[#e5e7eb] text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-dollar text-primary icon"></i>
+            <p>número double</p>
+        </div>
+        <div 
+        class="integer propertie" 
+        (click)="clickInteger()"
+        [ngClass]="booleanClickInteger ? 'bg-[#e5e7eb] text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-hashtag text-primary icon"></i>
+            <p>número inteiro</p>
+        </div>
+        <div 
+        class="multiple-selection propertie" 
+        (click)="clickMultiSelection()"
+        [ngClass]="booleanClickMultiSelection ? 'bg-[#e5e7eb] text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-tags text-primary icon"></i>
+            <p>seleção múltipla</p>
+        </div>
+        <div 
+        class="text propertie" 
+        (click)="clickText()"
+        [ngClass]="booleanClickText ? 'bg-[#e5e7eb] text-primaryFontBlack' : 'bg-primaryWhite'"
+        >
+            <i class="pi pi-book text-primary icon"></i>
+            <p>texto</p>
+        </div>
+    </div>
+</div>

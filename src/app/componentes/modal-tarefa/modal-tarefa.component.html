@@ -1,197 +1,297 @@
 <div class="main">
-    <div class="name-progress">
-        <div class="foco-name-box">
-            <div class="name-box">
-                <p class="name" *ngIf="!booleanEdit">{{tarefa.nome}}</p>
-                <span class="p-input-icon-right w-[70%] h-full flex items-center" *ngIf="booleanEdit">
-                    <i class="pi pi-pencil " style="font-size: 1.3rem;"></i>
-                    <input class="input-box" style="font-size:30px; color: #185E77; font-weight: bold;" type="text" pInputText [(ngModel)]="tarefa.nome" />
-                </span>
-            </div>
-            <div *ngIf="!booleanEdit" class="foco-box">
-                <div class="foco" (click)="startFocus()" *ngIf=" !booleanFoco">
-                    <i class="pi pi-clock" style="font-size: 1.3rem;"></i>
-                    <p class="font-bold">iniciar foco</p>
-                </div>
-            </div>
+  <div class="name-progress">
+    <div class="foco-name-box">
+      <div class="name-box">
+        <p class="name" *ngIf="!booleanEdit">{{ tarefa.nome }}</p>
+        <span
+          class="p-input-icon-right w-[70%] h-full flex items-center"
+          *ngIf="booleanEdit"
+        >
+          <i class="pi pi-pencil" style="font-size: 1.3rem"></i>
+          <input
+            class="input-box"
+            style="font-size: 30px; color: #185e77; font-weight: bold"
+            type="text"
+            pInputText
+            [(ngModel)]="tarefa.nome"
+          />
+        </span>
+      </div>
+      <div *ngIf="!booleanEdit" class="foco-box">
+        <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
+          <i class="pi pi-clock" style="font-size: 1.3rem"></i>
+          <p class="font-bold">iniciar foco</p>
         </div>
-        <div class="foco-on" *ngIf="booleanFoco">
-            <div class="foco-timer">
-                <p>0:00</p>
-            </div>
-            <div class="actions-timer">
-                <div class="cancel action" (click)="finishFocus()"><i class="pi pi-times" style="font-size: 1rem;"></i>cancelar</div>
-                <div class="pause action"><i class="pi pi-pause" style="font-size: 1rem;"></i>pausar</div>
-                <div class="stop action" (click)="finishFocus()"><i class="pi pi-stop-circle" style="font-size: 1rem;"></i>parar</div>
-            </div>
-        </div>
-        
-        <div class="progress-bar-box">
-            <div  class="progress-bar">
-                <div class="w-2/3 h-full bg-secondary rounded-md"></div>
-            </div>
-            <!-- BOTOES QUE SALVAM E CANCELAM EDIÇÃO DA TAREFA -->
-            <div *ngIf="booleanEdit" class="cancel-button flex justify-center items-center">
-               <p class=" text-primaryWhite" (click)="booleanEditFalse()">cancelar</p>
-            </div>
-            <div *ngIf="booleanEdit" (click)="salvarTarefa()" class="save-button flex justify-center items-center">
-                <p class=" text-primaryWhite">salvar</p>
-            </div>
-            <!-- BOTOES QUE ENTRAM NA EDIÇÃO OU DELETEM A TAREFA -->
-            <div *ngIf="!booleanEdit" (click)="editDescription()" (click)="edit()" class="edit-button flex justify-center items-center">
-                <i class="text-white pi pi-pencil"></i>
-            </div>
-            <div *ngIf="!booleanEdit" class="remove-button flex justify-center items-center">
-                <i class="text-white pi pi-trash"></i>
-            </div>
-        </div>
+      </div>
     </div>
-    <div class="task-properties-box">
-     <div class="task-properties">
-        <div class="date-propertie">
-            <div class="name-icon">
-                <i class="icon-propertie pi pi-calendar"></i>
-                <p class="name-propertie">data final:</p>
-            </div>
-            <div class="date-end">
-                <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.dataFinal}}</p>
-                <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
-            </div>
+    <div class="foco-on" *ngIf="booleanFoco">
+      <div class="foco-timer">
+        <p>0:00</p>
+      </div>
+      <div class="actions-timer">
+        <div class="cancel action" (click)="finishFocus()">
+          <i class="pi pi-times" style="font-size: 1rem"></i>cancelar
         </div>
-        <div class="responsible-propertie">
-            <div class="name-icon">
-                <i class="icon-propertie pi pi-users"></i>
-                <p class="name-propertie">responsáveis:</p>
-            </div>
-            <div class="responsible-icon-box">
-                <div class="responsible-icon"></div>
-            </div>
+        <div class="pause action">
+          <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
         </div>
-        <div class="status-propertie">
-            <div class="name-icon">
-                <i class="icon-propertie pi pi-spinner"></i>
-                <p class="name-propertie">status:</p>
-            </div>
-            <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-                <div 
-                (click)="editStatus()" 
-                class="status-icon " 
-                [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
-                >{{tarefa.statusAtual.nome}}</div>
-            </div>
-            <!--[projeto]="tarefa.projeto"-->
-            <app-select-status 
-            (newItem)="editStatus()" 
-            [projeto]="tarefa.projeto" 
-            [tarefa]="tarefa" 
-            [statusLista]="tarefa.projeto.listaStatus" 
-            *ngIf="booleanStatus"
-            ></app-select-status>
+        <div class="stop action" (click)="finishFocus()">
+          <i class="pi pi-stop-circle" style="font-size: 1rem"></i>parar
         </div>
-        <div class="description-propertie">
-            <div class="name-icon">
-                <i *ngIf="!booleanDesc" class="icon-propertie pi pi-angle-down" (click)="openDesc()"></i>
-                <i *ngIf="booleanDesc" class="icon-propertie pi pi-angle-up" (click)="openDesc()"></i>
-                <p class="name-propertie">descrição</p>
-            </div>
+      </div>
+    </div>
+
+    <div class="progress-bar-box">
+      <div class="progress-bar">
+        <div class="w-2/3 h-full bg-secondary rounded-md"></div>
+      </div>
+      <!-- BOTOES QUE SALVAM E CANCELAM EDIÇÃO DA TAREFA -->
+      <div
+        *ngIf="booleanEdit"
+        class="cancel-button flex justify-center items-center"
+      >
+        <p class="text-primaryWhite" (click)="booleanEditFalse()">cancelar</p>
+      </div>
+      <div
+        *ngIf="booleanEdit"
+        (click)="salvarTarefa()"
+        class="save-button flex justify-center items-center"
+      >
+        <p class="text-primaryWhite">salvar</p>
+      </div>
+      <!-- BOTOES QUE ENTRAM NA EDIÇÃO OU DELETEM A TAREFA -->
+      <div
+        *ngIf="!booleanEdit"
+        (click)="editDescription()"
+        (click)="edit()"
+        class="edit-button flex justify-center items-center"
+      >
+        <i class="text-white pi pi-pencil"></i>
+      </div>
+      <div
+        *ngIf="!booleanEdit"
+        class="remove-button flex justify-center items-center"
+      >
+        <i class="text-white pi pi-trash"></i>
+      </div>
+    </div>
+  </div>
+  <div class="task-properties-box">
+    <div class="task-properties">
+      <div class="date-propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-calendar"></i>
+          <p class="name-propertie">data final:</p>
         </div>
-        <div class="w-[100%]">
-            <textarea
-            rows="4" cols="80" pInputTextarea [autoResize]="true"
-            [(ngModel)] = "tarefa.descricao"
-            [disabled]="!booleanEdit"
-            [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'" class="box-description" *ngIf="booleanDesc"
-            ></textarea>
+        <div class="date-end">
+          <p
+            *ngIf="!booleanCalendario"
+            (click)="editData()"
+            class="date-end-text cursor-pointer"
+          >
+            {{ tarefa.dataFinal }}
+          </p>
+          <input
+            *ngIf="booleanCalendario"
+            type="date"
+            [(ngModel)]="tarefa.dataFinal"
+          />
         </div>
-     
+      </div>
+      <div class="responsible-propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-users"></i>
+          <p class="name-propertie">responsáveis:</p>
+        </div>
+        <div class="responsible-icon-box">
+          <div class="responsible-icon"></div>
+        </div>
+      </div>
+      <div class="status-propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-spinner"></i>
+          <p class="name-propertie">status:</p>
+        </div>
+        <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
+          <div
+            (click)="editStatus()"
+            class="status-icon"
+            [ngStyle]="{ 'background-color': tarefa.statusAtual.corFundo }"
+          >
+            {{ tarefa.statusAtual.nome }}
+          </div>
+        </div>
+        <!--[projeto]="tarefa.projeto"-->
+        <app-select-status
+          (newItem)="editStatus()"
+          [projeto]="tarefa.projeto"
+          [tarefa]="tarefa"
+          [statusLista]="tarefa.projeto.listaStatus"
+          *ngIf="booleanStatus"
+        ></app-select-status>
+      </div>
+      <div class="description-propertie">
+        <div class="name-icon">
+          <i
+            *ngIf="!booleanDesc"
+            class="icon-propertie pi pi-angle-down"
+            (click)="openDesc()"
+          ></i>
+          <i
+            *ngIf="booleanDesc"
+            class="icon-propertie pi pi-angle-up"
+            (click)="openDesc()"
+          ></i>
+          <p class="name-propertie">descrição</p>
+        </div>
+      </div>
+      <div class="w-[100%]">
+        <textarea
+          rows="4"
+          cols="80"
+          pInputTextarea
+          [autoResize]="true"
+          [(ngModel)]="tarefa.descricao"
+          [disabled]="!booleanEdit"
+          [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'"
+          class="box-description"
+          *ngIf="booleanDesc"
+        ></textarea>
+      </div>
     </div>
     <div class="task-properties">
-        <div class="date-propertie">
-            <div class="name-icon">
-                <i class="icon-propertie pi pi-calendar"></i>
-                <p class="name-propertie">agendamento:</p>
-            </div>
-            <!-- ADICIONAR AGENDAMENTO DIV FUTURA
+      <div class="date-propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-calendar"></i>
+          <p class="name-propertie">agendamento:</p>
+        </div>
+        <!-- ADICIONAR AGENDAMENTO DIV FUTURA
                 <div class="date-end">
                 <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.dataFinal}}</p>
                 <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
             </div>-->
+      </div>
+      <div class="responsible-propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-exclamation-circle"></i>
+          <p class="name-propertie">prioridade:</p>
         </div>
-        <div class="responsible-propertie">
-            <div class="name-icon">
-                <i class="icon-propertie pi pi-exclamation-circle"></i>
-                <p class="name-propertie">prioridade:</p>
-            </div>
-            <!-- ADICIONAR PRIORIDADE DIV FUTURA 
+        <!-- ADICIONAR PRIORIDADE DIV FUTURA 
                 <div class="responsible-icon-box">
                 <div class="responsible-icon"></div>
             </div>-->
+      </div>
+      <div class="status-propertie">
+        <div class="add-icon hover" *ngIf="!booleanAddPropriedade">
+          <i class="icon-propertie pi pi-plus"></i>
+          <p class="name-propertie" (click)="addPropertie()">adicionar propriedade</p>
         </div>
-        <div class="status-propertie">
-            <div class="add-icon hover">
-                <i class="icon-propertie pi pi-plus"></i>
-                <p class="name-propertie">adicionar propriedade</p>
-            </div>
-            <!-- ADICIONAR PROPRIEDADE DIV FUTURA
+        <!-- ADICIONAR PROPRIEDADE DIV FUTURA
                 <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
                 <div 
                 (click)="editStatus()" 
                 class="status-icon " 
                 [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
                 >{{tarefa.statusAtual.nome}}</div>
-            </div>
-            <app-select-status 
-            (newItem)="editStatus()" 
-            [projeto]="tarefa.projeto" 
-            [tarefa]="tarefa" 
-            [statusLista]="tarefa.projeto.listaStatus" 
-            *ngIf="booleanStatus"
-            ></app-select-status>-->
-        </div>
-     
-     </div>
+            </div> -->
+        <app-select-propriedade *ngIf="booleanAddPropriedade"></app-select-propriedade>
+      </div>
     </div>
-    
-    <div class="tabs" [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'" *ngIf="!booleanEdit">
-        <div class="pages">
-            <p
-             [ngClass]="page_task == 'sub-tarefas' ? 'border-b-2 border-primary' : 'border-none'"
-              class="page-name"
-              (click)="changePage('sub-tarefas')"
-              >sub-tarefas</p>
-            <p
-             [ngClass]="page_task == 'comentarios' ? 'border-b-2 border-primary' : 'border-none'"
-             class="page-name"
-              (click)="changePage('comentarios')"
-              >comentários</p>
-            <p 
-            [ngClass]="page_task == 'historicos' ? 'border-b-2 border-primary' : 'border-none'"
-             class="page-name"
-              (click)="changePage('historicos')"
-              >históricos</p>
-            <p
-             [ngClass]="page_task == 'anexos' ? 'border-b-2 border-primary' : 'border-none'"
-              class="page-name"
-               (click)="changePage('anexos')"
-               >anexos</p>
-            <p
-             [ngClass]="page_task == 'automacao' ? 'border-b-2 border-primary' : 'border-none'"
-              class="page-name"
-               (click)="changePage('automacao')"
-               >automoção</p>
-            <p
-             [ngClass]="page_task == 'integracao' ? 'border-b-2 border-primary' : 'border-none'"
-              class="page-name"
-               (click)="changePage('integracao')"
-               >integração</p>
-        </div>
-        <div class="components">
-            <app-sub-tarefa [tarefa]="tarefa" [listaSubtarefas]="tarefa.subtarefas" class="component" *ngIf="page_task == 'sub-tarefas'"></app-sub-tarefa>
-            <app-comentarios class="component" *ngIf="page_task == 'comentarios'"></app-comentarios>
-            <app-historicos  class="component" *ngIf="page_task == 'historicos'"></app-historicos>
-            <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
-            <app-automacao class="component" *ngIf="page_task == 'automacao'"></app-automacao>
-            <app-integracao class="component" *ngIf="page_task == 'integracao'"></app-integracao>
-        </div>
+  </div>
+
+  <div
+    class="tabs"
+    [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'"
+    *ngIf="!booleanEdit"
+  >
+    <div class="pages">
+      <p
+        [ngClass]="
+          page_task == 'sub-tarefas'
+            ? 'border-b-2 border-primary'
+            : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('sub-tarefas')"
+      >
+        sub-tarefas
+      </p>
+      <p
+        [ngClass]="
+          page_task == 'comentarios'
+            ? 'border-b-2 border-primary'
+            : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('comentarios')"
+      >
+        comentários
+      </p>
+      <p
+        [ngClass]="
+          page_task == 'historicos'
+            ? 'border-b-2 border-primary'
+            : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('historicos')"
+      >
+        históricos
+      </p>
+      <p
+        [ngClass]="
+          page_task == 'anexos' ? 'border-b-2 border-primary' : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('anexos')"
+      >
+        anexos
+      </p>
+      <p
+        [ngClass]="
+          page_task == 'automacao' ? 'border-b-2 border-primary' : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('automacao')"
+      >
+        automoção
+      </p>
+      <p
+        [ngClass]="
+          page_task == 'integracao'
+            ? 'border-b-2 border-primary'
+            : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('integracao')"
+      >
+        integração
+      </p>
     </div>
+    <div class="components">
+      <app-sub-tarefa
+        [tarefa]="tarefa"
+        [listaSubtarefas]="tarefa.subtarefas"
+        class="component"
+        *ngIf="page_task == 'sub-tarefas'"
+      ></app-sub-tarefa>
+      <app-comentarios
+        class="component"
+        *ngIf="page_task == 'comentarios'"
+      ></app-comentarios>
+      <app-historicos
+        class="component"
+        *ngIf="page_task == 'historicos'"
+      ></app-historicos>
+      <app-anexos class="component" *ngIf="page_task == 'anexos'"></app-anexos>
+      <app-automacao
+        class="component"
+        *ngIf="page_task == 'automacao'"
+      ></app-automacao>
+      <app-integracao
+        class="component"
+        *ngIf="page_task == 'integracao'"
+      ></app-integracao>
+    </div>
+  </div>
 </div>

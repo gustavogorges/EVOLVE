@@ -1,0 +1,19 @@
+.main {
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2
+}
+
+.propriedades-box {
+    @apply w-full flex items-center border-b-2 flex-col
+}
+
+.propertie {
+    @apply flex w-full h-12 items-center justify-start pl-2 gap-3 border-b-2 cursor-pointer py-2
+}
+
+.icon {
+    font-size: 1.1rem;
+}
+
+.date {
+    @apply rounded-t-md
+}
