@@ -1,0 +1,12 @@
+main {
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2
+}
+
+.option {
+     @apply w-full h-[18%] rounded-lg flex justify-center items-center  cursor-pointer
+}
+
+.select-box {
+    @apply w-full flex items-center gap-2 border-b-2 flex-col px-1 py-2
+}
+

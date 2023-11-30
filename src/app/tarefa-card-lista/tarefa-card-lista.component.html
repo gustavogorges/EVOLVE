@@ -1,4 +1,4 @@
-<div class="w-full flex h-[60px] items-center p-4 gap-12 justify-center">
+<div class="w-full flex h-[60px] items-center px-12 py-2 gap-16 justify-center">
   <div class="flex gap-1 flex-row container">
     <div *ngIf="tarefaAtual.nome.length>20">
       <p class="nomeTarefa">{{tarefaAtual.nome}}</p>
@@ -29,7 +29,7 @@
             
         </div>
         <div class="flex items-center">
-            <img [src]="caminhoEstrela" (click)="favoritar()" alt="" class="cursor-pointer"/>
+            <img [src]="caminhoEstrela" (click)="favoritar()" alt="" class="cursor-pointer" style="width: 2rem " />
           </div>
     
        

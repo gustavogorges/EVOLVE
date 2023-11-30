@@ -1,15 +1,33 @@
-.nome-projeto{
+.main-box{
+  @apply w-full flex justify-center
+}
+.main{
+  @apply w-3/4
+}
+.header{
+  @apply w-full flex flex-row justify-between py-10
+}
+.button-name-box{
+  @apply flex flex-col gap-4 max-w-fit
+}
+.project-name{
     @apply  text-primary text-[42px] font-bold ;
     font-family: 'Montserrat', sans-serif;
 
 }
-.botao-adicionaProjeto{
+.button-AddProject{
     @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
 
 }
 .botao-opcoes{
     font-family: 'Montserrat', sans-serif;
     @apply text-2xl
+}
+.tasks-grid-padrao{
+  @apply grid grid-cols-4 gap-6 w-full justify-center
+}
+.box-list{
+  @apply flex flex-col h-full w-full gap-6  items-center justify-center
 }
 
 .card {
@@ -44,4 +62,5 @@
 .select:focus{
     outline: 0;
 }
+
  

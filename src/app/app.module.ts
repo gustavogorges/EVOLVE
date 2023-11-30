@@ -31,6 +31,7 @@ import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.com
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
+import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
 
 
 
@@ -61,7 +62,8 @@ import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
-    TarefaCardListaComponent
+    TarefaCardListaComponent,
+    SelectCustomComponent
 
 
   ],

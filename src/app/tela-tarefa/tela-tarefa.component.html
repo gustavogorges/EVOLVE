@@ -1,14 +1,18 @@
-<div class="w-screen">
-  <div class="w-full px-48">
-    <div class="w-full flex flex-row justify-between py-10">
-      <div class="flex flex-col gap-4 max-w-fit">
-        <h1 class="nome-projeto">Projeto Padrão</h1>
-        <button class="botao-adicionaProjeto" routerLink="/modal-tarefa">
+<div class="main-box">
+  <div class="main">
+    <div class="header">
+      <div class="button-name-box">
+        <h1 class="project-name">Projeto Padrão</h1>
+        <button class="button-AddProject" routerLink="/modal-tarefa">
           <i class="pi pi-plus" style="font-size: 1rem"></i>
           Adicionar Tarefa
         </button>
       </div>
-      <div class="flex flex-row gap-4 self-center">
+      <button (click)="changeVisualizacao($event)">Visualização</button>
+      <div *ngIf="visualizacaoVIsivel">
+        <app-select-custom [listOptions]="listOptions "(newItem)="option"></app-select-custom>
+      </div>
+      <!-- <div class="flex flex-row gap-4 self-center">
         <button class="botao-opcoes">
           <select
             name="visualizacoes"
@@ -35,10 +39,10 @@
             id="2"
             class="select"
           >
-            <option value="Ordenação" selected class="text-base">
+            <option value="Ordenação" selected class="text-sm">
                 Ordenação
             </option>
-            <option value="Padrao" class="text-base">Data</option>
+            <option value="Padrao" class="text-sm">Data</option>
             <option value="Kanban" class="text-base">Status</option>
             <option value="Lista" class="text-base">Favoritos</option>
           </select>
@@ -48,17 +52,18 @@
           Filtros
           <i class="pi pi-filter icon" style="font-size: 1rem"></i>
         </button>
-      </div>
+      </div> -->
     </div>
+<!-- 
     <div *ngIf="select == 'Padrao'">
-      <div class="grid grid-cols-4 gap-6 w-full justify-center">
+      <div class="tasks-grid-padrao">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
           <app-tarefa-card-padrao [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-padrao>
         </div>
       </div>
     </div>
     <div *ngIf="select == 'Lista'">
-      <div class="flex flex-col h-full w-full gap-6  items-center justify-center">
+      <div class="box-list">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="cardLista">
           <app-tarefa-card-lista class="h-full w-full" [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-lista>
         </div>
@@ -66,7 +71,7 @@
       
     </div>
      <div *ngIf="select == 'Kanban'">Lista</div>
-
+ -->
 
 
   </div>

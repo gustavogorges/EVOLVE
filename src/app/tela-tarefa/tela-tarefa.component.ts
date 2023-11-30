@@ -9,28 +9,40 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
-  select : string = "Lista";
+  select : string = "Padrao";
   listaTarefas: Array<Tarefa> =[]
+  listOptions :Array<string>=[]
+  visualizacaoVIsivel:boolean = false
 
+  option :string=""
 
   constructor(private service : BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
     this.listaTarefas =await this.service.getAllSomething("tarefa")
     console.log(this.listaTarefas)
-    
   }
-  mudarSelect(e:any){
+
+  changeVisualizacao(e:any){
     e.target.value = "Visualização"
-    // console.log(e.target.name)
-    console.log(this.select);
-    console.log(this.selectedVisualizacao)
+  
     this.select = this.selectedVisualizacao
     this.selectedVisualizacao = "Visualização"
-    // if(!(this.select == this.selectedVisualizacao)){
-    //     this.select = this.selectedVisualizacao
-    // }
+    this.select = this.selectedVisualizacao
+    this.selectedVisualizacao = "Visualização"
+    this.listOptions = [
+      "Visulaização","Padrão","Kanban","Lista","Calendario"
+    ]
+    this.visualizacaoVIsivel=true;
+    console.log(this.option)
+
+    
+  }
+  editOption(){
+
 
   }
+  
+
 
 }
