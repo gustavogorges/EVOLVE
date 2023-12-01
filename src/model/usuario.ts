@@ -1,3 +1,4 @@
+import { UserChat } from "./userChat";
 import { Equipe } from "./equipe";
 import { Tarefa } from "./tarefa";
 
@@ -6,6 +7,8 @@ export class Usuario {
     email: string = "";
     senha: string = "";
     nome : string = "";
+
+    chats:Array<UserChat> = new Array
 
     fotoPerfil:string = "";
     tarefasCriadas: Array<Tarefa> = new Array;

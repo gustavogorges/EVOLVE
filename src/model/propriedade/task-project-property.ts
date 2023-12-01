@@ -1,7 +1,8 @@
 import { Projeto } from "../projeto";
-import { Propriedade } from "./propriedade";
+import { Propriedade } from "./property";
 import { Tarefa } from "../tarefa";
-import { TipoPropriedade } from "./tipoPropriedade";
+import { TipoPropriedade } from "./propertyType";
+import { Usuario } from "../usuario";
 
 
 export class TarefaProjetoPropriedade {
@@ -10,4 +11,5 @@ export class TarefaProjetoPropriedade {
     tarefa: Tarefa = new Tarefa;
     projeto: Projeto = new Projeto;
     tipo: TipoPropriedade = 0
+    value: number | string | Date | Array<Usuario> | Array<string> = ""
 }

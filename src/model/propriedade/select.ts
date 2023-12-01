@@ -1,7 +1,7 @@
-import { Opcao } from "./opcao";
+import { Opcao } from "./text";
 
 export class Select{
     id:number =0
-    opcoesPOssiveis:Array<Opcao> = new Array;
-    valorUnico: boolean = false
+    possibleOptions:Array<Opcao> = new Array;
+    uniqueValue: boolean = false
 }
