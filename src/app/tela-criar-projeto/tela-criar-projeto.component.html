@@ -40,10 +40,9 @@
             </div>
             <div class="status-priority">
                 <button class="add-status">Adicionar status</button>
-                <app-status-component-criar-tarefa></app-status-component-criar-tarefa>
-                
                 <button class="add-priority">Adicionar prioridade</button>
             </div>
+            <app-status-component-criar-tarefa [projeto]="projetoStatus" ></app-status-component-criar-tarefa>
             <div class="lembrete">
                 <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>
             </div>

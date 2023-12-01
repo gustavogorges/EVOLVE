@@ -32,8 +32,13 @@ export class TelaProjetoComponent implements OnInit {
     this.funcao()
   }
 
+  async criaProjeto(){
+   return await this.service.postProjeto(new Projeto)
+  }
+
   async funcao(){
     this.projetos = await this.service.getAllSomething('projeto')
+    this.limpa()
   }
 
   deletarPai(id:number){
@@ -59,9 +64,15 @@ export class TelaProjetoComponent implements OnInit {
 
   }
 
-  @ViewChild('prj') prj!:HTMLElement
-  ngAfterViewInit(){
-    console.log(this.prj);
+
+  limpa(){
+    this.projetos.forEach(element => {
+      if(element.nome === null || element.nome === ''){
+        setTimeout(() => {
+          this.deletarPai(element.id)
+        }, 300);
+      }
+    });
   }
 
 }

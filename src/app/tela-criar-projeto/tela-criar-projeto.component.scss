@@ -96,9 +96,15 @@
             @apply bg-primary dark:bg-dark-primary
         }
 
+        
+
         .add-priority{
             @apply bg-secondary dark:bg-dark-secundary-green
         }
+    }
+
+    app-status-component-criar-tarefa{
+        @apply col-start-3 col-end-4 z-10 row-start-3 ml-[2%] mt-[5%]
     }
 
     .lembrete{

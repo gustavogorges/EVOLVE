@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
+import { Status } from 'src/model/status';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -12,13 +13,23 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaCriarProjetoComponent implements OnInit {
 
+  projetoCriado:Projeto = new Projeto;
+
   constructor(private service : BackendEVOLVEService){}
 
   ngOnInit(): void {
+    this.criaProjeto()
     this.getMembros()
     // let membros = localStorage.getItem('membros') || ''
     // this.membros.push(JSON.parse(membros))
   }
+
+  async criaProjeto(){
+    this.projetoStatus = await this.service.postProjeto(this.projeto)
+  }
+
+  @Input() projeto!:Projeto
+  projetoStatus !: Projeto
 
   usuarios!: Usuario[]
 
@@ -26,50 +37,19 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.usuarios = await this.service.getAllSomething('usuario')
   }
 
-
-  @ViewChild('nome') nome !:ElementRef
-  @ViewChild('data') data !:ElementRef
-  @ViewChild('descricao') descricao !:ElementRef
   salvarProjeto(){
-    let nome = this.nome.nativeElement.value
-    let data = this.data.nativeElement.value
-    let descricao = this.descricao.nativeElement.value
-
-    if(nome!=null && nome!='' &&
-    data != null && data!='' &&
-    descricao != null && descricao != ''){
-      const projeto: Projeto = {
-        id: 0, //auto generate
-        // criador: null,
-        nome: this.nome.nativeElement.value,
-        dataFinal: this.data.nativeElement.value,
-        descricao: this.descricao.nativeElement.value,
-        tarefas: [],
-        propriedades: [],
-        membros: this.membros,
-        Administrador: this.membros,
-        isVisible: false
-      }
-      console.log(projeto)
-      this.service.postProjeto(projeto)
-      alert('criado')
-    }else{
-      alert('campo vazio')
-    }
-
-    this.nome.nativeElement.value = ''
-    this.data.nativeElement.value = ''
-    this.descricao.nativeElement.value = ''
-    // localStorage.removeItem('membros')
+    this.projeto.membros = this.membros
+    this.service.putProjeto(this.projeto)
   }
 
   addUser(p:Usuario[]){
     // console.log(p.email)
     this.membros = p
-    console.log(this.membros)
     // localStorage.setItem('membros',JSON.stringify(this.membros))
   }
 
   membros: Usuario[] = []
+
+  
 
 }

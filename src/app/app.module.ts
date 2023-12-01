@@ -33,7 +33,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
 import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
 import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
-
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { StatusComponentCriarTarefaComponent } from './componentes/sub-component
     StatusComponentCriarTarefaComponent
   ],
   imports: [
+    ColorPickerModule,
     BrowserAnimationsModule,
     CalendarModule,
     BrowserModule,

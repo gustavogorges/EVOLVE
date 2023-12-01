@@ -15,7 +15,6 @@ export class BackendEVOLVEService {
   constructor() { }
 
   async getAllSomething(caminho : string){
-    console.log((await axios.get(this.URL+caminho)).data);
     return (await axios.get(this.URL+caminho)).data
   }
   async getOne(caminho : string, id:number){
