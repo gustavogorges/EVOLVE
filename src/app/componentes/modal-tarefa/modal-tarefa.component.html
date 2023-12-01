@@ -130,34 +130,6 @@
           *ngIf="booleanStatus"
         ></app-select-status>
       </div>
-      <div class="description-propertie">
-        <div class="name-icon">
-          <i
-            *ngIf="!booleanDesc"
-            class="icon-propertie pi pi-angle-down"
-            (click)="openDesc()"
-          ></i>
-          <i
-            *ngIf="booleanDesc"
-            class="icon-propertie pi pi-angle-up"
-            (click)="openDesc()"
-          ></i>
-          <p class="name-propertie">descrição</p>
-        </div>
-      </div>
-      <div class="w-[100%]">
-        <textarea
-          rows="4"
-          cols="80"
-          pInputTextarea
-          [autoResize]="true"
-          [(ngModel)]="tarefa.descricao"
-          [disabled]="!booleanEdit"
-          [ngClass]="booleanDesc ? 'min-w-[180%] h-48' : 'w-0 h-0'"
-          class="box-description"
-          *ngIf="booleanDesc"
-        ></textarea>
-      </div>
     </div>
     <div class="task-properties">
       <div class="date-propertie">
@@ -184,7 +156,9 @@
       <div class="status-propertie">
         <div class="add-icon hover" *ngIf="!booleanAddPropriedade">
           <i class="icon-propertie pi pi-plus"></i>
-          <p class="name-propertie" (click)="addPropertie()">adicionar propriedade</p>
+          <p class="name-propertie" (click)="addPropertie()">
+            adicionar propriedade
+          </p>
         </div>
         <!-- ADICIONAR PROPRIEDADE DIV FUTURA
                 <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
@@ -194,11 +168,45 @@
                 [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
                 >{{tarefa.statusAtual.nome}}</div>
             </div> -->
-        <app-select-propriedade *ngIf="booleanAddPropriedade"></app-select-propriedade>
+        <app-select-propriedade
+          *ngIf="booleanAddPropriedade"
+        ></app-select-propriedade>
       </div>
     </div>
   </div>
-
+  <div class="created-properties">
+    
+  </div>
+  <div class="description-box">
+    <div class="description-propertie">
+      <div class="name-icon">
+        <i
+          *ngIf="!booleanDesc"
+          class="icon-propertie pi pi-angle-down"
+          (click)="openDesc()"
+        ></i>
+        <i
+          *ngIf="booleanDesc"
+          class="icon-propertie pi pi-angle-up"
+          (click)="openDesc()"
+        ></i>
+        <p class="name-propertie">descrição</p>
+      </div>
+    </div>
+    <div class="w-[80%]">
+      <textarea
+        rows="4"
+        cols="80"
+        pInputTextarea
+        [autoResize]="true"
+        [(ngModel)]="tarefa.descricao"
+        [disabled]="!booleanEdit"
+        [ngClass]="booleanDesc ? 'min-w-[80%] h-48' : 'w-0 h-0'"
+        class="box-description"
+        *ngIf="booleanDesc"
+      ></textarea>
+    </div>
+  </div>
   <div
     class="tabs"
     [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'"
