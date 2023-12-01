@@ -1,5 +1,5 @@
 <div class="main-box">
-    <app-modal-tarefa class="tarefa" *ngIf="booleanTask"></app-modal-tarefa>
+    <app-modal-tarefa class="tarefa" *ngIf="booleanTask" [tarefa]="tarefaSelecionada"></app-modal-tarefa>
     <div class="main">
         <div class="left-side">
            <div class="close-deliveries">
@@ -9,7 +9,10 @@
                 <div class="card-deliveries-box">
 
                     <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
-                        <app-entrega-prox class="card-deliveries" [tarefa]="tarefa" (click)="openTask(tarefa)"
+                        <app-entrega-prox 
+                        class="card-deliveries"
+                         [tarefa]="tarefa" 
+                         (click)="openTask(tarefa)"
                         ></app-entrega-prox>
                        
                     </div>
@@ -20,20 +23,23 @@
            </div>
         </div>
         <div class="right-side">
-        <app-equipes-recentes></app-equipes-recentes>
-          <div class="calendar-box">
-            <div class="calendar">
-                <div class="title-box">
-                    <p class="title-text">Calendário</p>
-                </div>
-                <div class="calendar-content">
-                    <app-dia-calendario></app-dia-calendario>
-                    <app-dia-calendario></app-dia-calendario>
-                    <app-dia-calendario></app-dia-calendario>
-                    <app-dia-calendario></app-dia-calendario>
-                </div>
+        <div class="right-side-box">
+            <app-equipes-recentes class="w-full"></app-equipes-recentes>
+
+            <div class="calendar-box">
+              <div class="calendar">
+                  <div class="title-box">
+                      <p class="title-text">Calendário</p>
+                  </div>
+                  <div class="calendar-content">
+                      <app-dia-calendario></app-dia-calendario>
+                      <app-dia-calendario></app-dia-calendario>
+                      <app-dia-calendario></app-dia-calendario>
+                      <app-dia-calendario></app-dia-calendario>
+                  </div>
+              </div>
             </div>
-          </div>
+        </div>
         </div>
     </div>
 </div>

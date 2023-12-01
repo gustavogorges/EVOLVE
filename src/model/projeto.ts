@@ -1,4 +1,5 @@
 import { TarefaProjetoPropriedade } from "./propriedade/task-project-property";
+
 import { Status } from "./status";
 import { Tarefa } from "./tarefa";
 import { Usuario } from "./usuario";

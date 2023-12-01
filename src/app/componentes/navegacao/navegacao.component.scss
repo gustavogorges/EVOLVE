@@ -1,5 +1,6 @@
 .main {
-    @apply bg-primaryNav h-20 w-screen;
+    @apply bg-primaryNav h-20 w-screen fixed;
+    z-index: 9999;
 }
 
 .main-grid {

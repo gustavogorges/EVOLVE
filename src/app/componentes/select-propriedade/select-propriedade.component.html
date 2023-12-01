@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="propriedades-box">
+    <ng-container *ngFor="let option of options">
+        <div
+        class="propertie"
+        (click)="clickDate(option)"
+        [ngClass]="
+          option.hover
+            ? 'bg-[#e5e7eb] rounded-t-md text-primaryFontBlack'
+            : 'bg-primaryWhite'
+        "
+      >
+        <i class="{{option.icon}} text-primary icon"></i>
+        <p>{{option.text}}</p>
+      </div>
+    </ng-container>
+    <div *ngIf="propertieSelected" class="propertie input">
+        <input type="text" pInputText class="inputNamePropertie" placeholder="escreva o nome"/>
+    </div>
+    <div *ngIf="propertieSelected"  class=" button-confirm">
+        <p class="font-bold text-white">confirmar</p>
+    </div>
+  </div>
+</div>

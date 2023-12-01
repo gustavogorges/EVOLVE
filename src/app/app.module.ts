@@ -30,11 +30,22 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+
+import { CalendarModule } from 'primeng/calendar';
+import { SelectStatusComponent } from './componentes/select-status/select-status.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+
 import { TelaChatComponent } from './tela-chat/tela-chat.component';
 // import { ContactsComponent } from './contacts/contacts.component';
 import { ContactComponent } from './contact/contact.component';
+
+import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
+import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+
 
 
 
@@ -66,11 +77,19 @@ import { ContactComponent } from './contact/contact.component';
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
+
+    SelectStatusComponent,
+
     // RecentTeamsComponent,
     EquipesRecentesComponent,
+
     TelaChatComponent,
     // ContactsComponent,
     ContactComponent
+
+    BotaoAddTarefaComponent,
+    SelectPropriedadeComponent
+
 
 
   ],
@@ -83,7 +102,13 @@ import { ContactComponent } from './contact/contact.component';
     FormsModule,
     InputTextareaModule,
     FormsModule,
-    ToastModule
+
+    ToastModule,
+    CalendarModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    BrowserModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
