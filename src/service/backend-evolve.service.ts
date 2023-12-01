@@ -14,6 +14,7 @@ export class BackendEVOLVEService {
 
   constructor() { }
 
+
   async getAllSomething(caminho : string){
     // console.log((await axios.get(this.URL+caminho)).data);
     return (await axios.get(this.URL+caminho)).data
@@ -58,6 +59,12 @@ export class BackendEVOLVEService {
 
   async putEquipe (equipe:Equipe){
     return (await axios.put(this.URL+"equipe", equipe)).data
+  }
+
+  //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
+  async getChatsByUserId(id:number) {
+    let path:string = "userChat/user/" 
+    return (await axios.get(this.URL+path+id)).data
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Chat } from 'src/model/chat';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-import { FileService } from 'src/service/file.service';
+// import { FileService } from 'src/service/file.service';
 
 @Component({
   selector: 'app-tela-chat',
@@ -10,22 +11,23 @@ import { FileService } from 'src/service/file.service';
 })
 export class TelaChatComponent implements OnInit {
 
-  usuario:Usuario = new Usuario
+  user:Usuario = new Usuario
   fotoPerfilUrl:string = ""
+
 
   constructor(
     private service:BackendEVOLVEService,
-    private fileService:FileService
+    // private fileService:FileService
     ) { }
 
   async ngOnInit(): Promise<void> {
-    this.usuario = await this.service.getOne("usuario",1202 )
-    console.log(this.usuario)
+    this.user = await this.service.getOne("usuario",1202 )
+    this.user.chats = await this.service.getChatsByUserId(this.user.id)
+    console.log(this.user.chats)
+    console.log(this.user)
+  
+    this.fotoPerfilUrl = this.user.testeImagem
 
-    this.fotoPerfilUrl = this.usuario.testeImagem
-
-    // this.fotoPerfilUrl = "data:image/jpeg;base64," + this.usuario.testeImagem
-    // this.fileService.convertByteStringToBase64(this.usuario.testeImagem)
     console.log(this.fotoPerfilUrl)
    
   }

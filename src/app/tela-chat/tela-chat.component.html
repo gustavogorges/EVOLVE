@@ -33,14 +33,18 @@
                 </div>
 
 
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
-                <app-contact></app-contact>
+                <div class="w-full h-full" *ngFor="let chat of user.chats">
+
+                    <app-contact [contact]="chat.getContactFromUser(user)" [chat]="chat"></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+                    <app-contact></app-contact>
+
+                </div>
 
             </div>
 
@@ -52,7 +56,7 @@
                 <!-- <img src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT"
                     alt="" class="rounded-full h-[80%]"> -->
                     <div class="h-[3.25rem] min-w-[3.25rem] max-w-min ">
-                        <img src="{{usuario.testeImagem}}"
+                        <img src="{{user.testeImagem}}"
                             alt="" class="rounded-full h-full w-full">
                     </div>
                 <p class="font-bold text-primaryWhite  flex w-full truncate">
