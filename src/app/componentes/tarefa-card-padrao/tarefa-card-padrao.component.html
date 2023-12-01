@@ -1,7 +1,10 @@
 
   <div class="p-3 flex flex-row justify-between">
     <p class="texto">data final: {{tarefaAtual.dataFinal}} </p>
-    <div class="status" [ngStyle]="{'background-color': corStatus}">{{tarefaAtual.statusAtual.nome}}</div>
+    <div 
+    class="status" 
+    [ngStyle]="{'background-color':tarefaAtual.statusAtual.corFundo,'color': tarefaAtual.statusAtual.corTexto}"
+    >{{tarefaAtual.statusAtual.nome}}</div>
   </div>
   <div class="barra-cinza">
     <div class="barra-azul" [ngStyle]="{ width: valorBarra }"></div>
@@ -21,10 +24,10 @@
 
 
     <div class="flex flex-col gap-2">
-      <div *ngFor="let sub of listaSub; index as indice;">
-        <div class="s-input flex gap-1">
+      <div *ngFor="let sub of tarefaAtual.subtarefas; index as indice;">
+        <div class="s-input flex gap-1" *ngIf="indice < 3">
           <input type="checkbox" id="({{id}}+{{sub}}+{{indice}})">
-         <label for="({{id}}+{{sub}}+{{indice}})">{{sub}}</label> 
+         <label for="({{id}}+{{sub}}+{{indice}})">{{sub.nome}}</label> 
          </div>
       </div>
       <!-- <div class="flex gap-1">

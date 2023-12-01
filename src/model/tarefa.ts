@@ -22,6 +22,8 @@ export class Tarefa{
     propriedades:Array<Propriedade> = new Array;
     subtarefas: Array<Subtarefa> = new Array;
 
+
     associados:Array<Usuario> = new Array;
+    isVisible: boolean = false;
 
 }

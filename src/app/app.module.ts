@@ -38,6 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
+import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
 
 
 
@@ -74,7 +76,9 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
     SelectStatusComponent,
 
     // RecentTeamsComponent,
-    EquipesRecentesComponent
+    EquipesRecentesComponent,
+    BotaoAddTarefaComponent,
+    SelectPropriedadeComponent
 
 
   ],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -12,6 +12,10 @@ export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = "Visualização";
   select : string = "Padrao";
   listaTarefas: Array<Tarefa> =[]
+  booleanTask : boolean = false;
+
+  tarefaSelecionada:Tarefa = new Tarefa
+  tarefaNova : Tarefa = new Tarefa;
 
 
   constructor(private service : BackendEVOLVEService) { }
@@ -21,6 +25,28 @@ export class TelaTarefaComponent implements OnInit {
     console.log(this.listaTarefas)
     
   }
+
+  @HostListener('click', ['$event'])
+  clicouFora(event:any){
+   console.log("TESTE 2")
+   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
+    name.includes('c72') ||
+    name.includes('c64') ||
+    name.includes('c70') || 
+    name.includes('c78') ||
+    name.includes('c71'));
+     if(!element){
+       for(let pFor of this.listaTarefas){
+           this.closeTask();
+       }
+     }
+  }
+
+  closeTask() {
+    this.tarefaNova = new Tarefa;
+    this.booleanTask = false;
+  }
+
   mudarSelect(e:any){
     e.target.value = "Visualização"
     // console.log(e.target.name)
@@ -32,6 +58,23 @@ export class TelaTarefaComponent implements OnInit {
     //     this.select = this.selectedVisualizacao
     // }
 
+  }
+
+  openTask(tarefa:Tarefa) :void {
+    this.booleanTask = !this.booleanTask;
+
+    this.tarefaSelecionada = tarefa;
+
+  }
+
+  openTaskEdit(tarefa:Tarefa) {
+    this.tarefaSelecionada = this.tarefaNova;
+    this.booleanTask = true;
+  }
+
+  adicionarTarefa() {
+    this.tarefaSelecionada.id = 0;
+    this.booleanTask = !this.booleanTask;
   }
 
 }
