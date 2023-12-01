@@ -1,6 +1,6 @@
 import { Prioridade } from "./prioridade";
 import { Projeto } from "./projeto";
-import { Propriedade } from "./propriedade/propriedade";
+import { Propriedade } from "./propriedade/property";
 import { Status } from "./status";
 import { Subtarefa } from "./subtarefa";
 import { Usuario } from "./usuario";

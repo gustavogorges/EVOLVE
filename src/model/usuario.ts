@@ -7,7 +7,6 @@ export class Usuario {
     email: string = "";
     senha: string = "";
     nome : string = "";
-    testeImagem: string = ""
 
     chats:Array<UserChat> = new Array
 
