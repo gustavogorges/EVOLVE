@@ -85,7 +85,7 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
 
     TelaChatComponent,
     // ContactsComponent,
-    ContactComponent
+    ContactComponent,
 
     BotaoAddTarefaComponent,
     SelectPropriedadeComponent
