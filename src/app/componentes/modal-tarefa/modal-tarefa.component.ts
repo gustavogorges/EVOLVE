@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
 import { Status } from 'src/model/status';
 import { Tarefa } from 'src/model/tarefa';
@@ -48,6 +48,17 @@ export class ModalTarefaComponent implements OnInit {
         this.projeto = projeto;
       }
     }
+  }
+
+
+  @HostListener('click', ['$event'])
+  clicouFora(event:any){
+   console.log("TESTE 2")
+   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c71') || name.includes('c72'))
+     if(!element){
+       
+      this.closeAddPropertie();
+     }
   }
 
   openDesc(): void {
@@ -144,5 +155,9 @@ export class ModalTarefaComponent implements OnInit {
 
   addPropertie() {
     this.booleanAddPropriedade = true;
+  }
+
+  closeAddPropertie() {
+    this.booleanAddPropriedade = false;
   }
 }

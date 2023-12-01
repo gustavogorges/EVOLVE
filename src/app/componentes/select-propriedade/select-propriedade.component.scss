@@ -17,3 +17,11 @@
 .date {
     @apply rounded-t-md
 }
+
+.inputNamePropertie {
+    @apply outline-none bg-primaryWhite
+}
+
+.button-confirm {
+    @apply h-10 w-full bg-secondary rounded-b-md flex justify-center items-center cursor-pointer
+}

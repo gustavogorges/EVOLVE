@@ -7,35 +7,76 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectPropriedadeComponent implements OnInit {
 
-  booleanClickDate : boolean = false;
-  booleanClickUniqueSelection : boolean = false;
-  booleanClickDouble : boolean = false;
-  booleanClickInteger : boolean = false;
-  booleanClickMultiSelection : boolean = false;
-  booleanClickText : boolean = false;
+  propertieSelected : boolean = false;
+
+  propertieSelectedName : string = "";
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.options)
   }
 
-  clickDate() {
-    this.booleanClickDate = !this.booleanClickDate;
+  options: any[] = [
+    { 
+    text: "data", 
+    icon: "pi pi-calendar", 
+    hover:false,
+    selected:false
+    },
+    { 
+    text: "seleção única", 
+    icon: "pi pi-tag", 
+    hover:false,
+    selected:false
+    },
+    { 
+    text: "número double", 
+    icon: "pi pi-dollar", 
+    hover:false,
+    selected:false
+    },
+    { 
+    text: "numero inteiro",
+    icon: "pi pi-hashtag", 
+    hover:false,
+    selected:false
+    },
+    { 
+    text: "seleção múltipla", 
+    icon: "pi pi-tags", 
+    hover:false,
+    selected:false
+    },
+    { 
+    text: "text", 
+    icon: "pi pi-book", 
+    hover:false,
+    selected:false 
+    }
+  ]
+
+  clickDate(option:any) {
+    this.options.forEach(option => {
+      if(option.selected == true) {
+        option.selected = false;
+        option.hover = false;
+      }
+    });
+    option.hover = true;
+    option.selected = true;
+    this.anySelected();
+    console.log(this.propertieSelected)
   }
-  clickUniqueSelection() {
-    this.booleanClickUniqueSelection = !this.booleanClickUniqueSelection;
-  }
-  clickDouble() {
-    this.booleanClickDouble = !this.booleanClickDouble;
-  }
-  clickInteger() {
-    this.booleanClickInteger = !this.booleanClickInteger;
-  }
-  clickMultiSelection() {
-    this.booleanClickMultiSelection = !this.booleanClickMultiSelection;
-  }
-  clickText() {
-    this.booleanClickText = !this.booleanClickText;
+
+  anySelected() : void{
+
+    this.options.forEach(option => {
+      if(option.selected == true) {
+        this.propertieSelected = true;
+      }
+    });
+    
   }
 
 }
