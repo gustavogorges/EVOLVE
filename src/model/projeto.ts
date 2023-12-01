@@ -1,5 +1,5 @@
 
-
+import { Propriedade } from "./propriedade/propriedade";
 
 import { TarefaProjetoPropriedade } from "./propriedade/TarefaProjetoPropriedade";
 
