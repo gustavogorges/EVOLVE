@@ -1,0 +1,16 @@
+<div class="main ">
+    <div class="select-box" >
+        <div
+         class="select"
+         (click)="saveOption(option)"
+         *ngFor="let option of listOptions index as indice"
+         >
+         <div class="flex flex-row gap-2 items-center   ">
+            <i class="{{listIcons[indice]}}" style="color: #185E77; font-size: 1rem;"></i>
+            <p> {{option}}</p>
+         </div>
+         
+        </div>
+    </div>
+    
+</div> 

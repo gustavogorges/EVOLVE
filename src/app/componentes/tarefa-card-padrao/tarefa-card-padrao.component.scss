@@ -1,13 +1,17 @@
+.container-data-nome{
+  @apply p-3 flex flex-row justify-between; 
+}
+.container-nome{
+  @apply px-5 py-2 flex flex-col gap-2
+}
 .barra-cinza {
-  @apply relative w-full h-2 rounded-md bg-[#d9d9d9];
+  @apply relative w-full h-2 bg-[#d9d9d9];
   width: valorBarra;
 }
 .barra-azul {
-  @apply absolute top-0 left-0 h-full text-center text-xs text-white bg-primary rounded-md;
+  @apply absolute top-0 left-0 h-full text-center text-xs text-white bg-primary rounded-e-md;
 }
-.card {
-  @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md;
-}
+
 
 .s-input input {
   display: none;
@@ -65,7 +69,7 @@
   @apply w-7 h-7 rounded-full bg-secondary overflow-clip
 }
 .container {
-@apply min-w-min h-7   ;
+@apply min-w-min h-7  flex gap-1 flex-row ;
   overflow: hidden; 
   position: relative;
 }
@@ -80,4 +84,12 @@
 .container:not(:hover) .nomeTarefa {
   transition: none; 
 }
-
+.container-subtarefas{
+  @apply flex flex-col gap-2 
+}
+.subtarefa{
+  @apply s-input flex gap-1
+}
+.container-estrela-membros{
+  @apply flex flex-row justify-between
+}

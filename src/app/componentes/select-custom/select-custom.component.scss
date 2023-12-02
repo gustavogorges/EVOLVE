@@ -1,0 +1,16 @@
+.main {
+    @apply w-36 h-min  rounded-md shadow-lg flex flex-col  gap-2 bg-primaryWhite
+}
+
+.option {
+     @apply w-full h-[18%] rounded-lg flex  justify-start cursor-pointer 
+}
+
+.select-box {
+    @apply w-full flex   flex-col  text-base cursor-pointer ;
+    font-family: 'Hind Madurai', sans-serif;
+}
+.select{
+    @apply border-b-2 px-2 py-2
+}
+

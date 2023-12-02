@@ -30,6 +30,8 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
+import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
 
 import { CalendarModule } from 'primeng/calendar';
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
@@ -77,7 +79,8 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
-
+    TarefaCardListaComponent,
+    SelectCustomComponent,
     SelectStatusComponent,
 
     // RecentTeamsComponent,
@@ -89,6 +92,7 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
 
     BotaoAddTarefaComponent,
     SelectPropriedadeComponent
+
 
 
 

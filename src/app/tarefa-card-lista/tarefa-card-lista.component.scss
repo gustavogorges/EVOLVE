@@ -1,0 +1,49 @@
+.nomeTarefa {
+  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  font-family: "Hind Madurai", sans-serif;
+  white-space: nowrap;
+  position: absolute;
+  transform: translateX(0);
+  transition: transform 5s linear; 
+}
+.nome {
+  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  font-family: "Hind Madurai", sans-serif;
+
+}
+  .barra-cinza {
+    @apply  w-80 h-6 rounded-md bg-[#d9d9d9];
+    width: valorBarra;
+  }
+  .barra-azul {
+    @apply  h-full text-center text-xs text-white bg-primary rounded-md;
+  }
+  .dataFinal {
+    @apply text-lg text-primary;
+    font-family: "Hind Madurai", sans-serif;
+  }
+  .status {
+    @apply rounded-lg h-6 px-6 max-w-xl text-sm self-center items-center;
+    font-family: "Montserrat", sans-serif;
+  }
+ 
+  .fotoMembroTarefa{
+    @apply w-11 h-11 rounded-full  overflow-clip
+  }
+  .container {
+    @apply h-6 w-48   ;
+      overflow: hidden; 
+      position: relative;
+    }
+    
+    
+    
+    .container:hover .nomeTarefa {
+      transform: translateX(-100%);
+      overflow:visible; 
+    }
+    
+    .container:not(:hover) .nomeTarefa {
+      transition: none; 
+    }
+    
