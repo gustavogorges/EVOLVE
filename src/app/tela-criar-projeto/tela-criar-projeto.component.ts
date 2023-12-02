@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { Status } from 'src/model/status';
 import { Usuario } from 'src/model/usuario';
@@ -13,23 +14,16 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaCriarProjetoComponent implements OnInit {
 
-  projetoCriado:Projeto = new Projeto;
+  constructor(private service : BackendEVOLVEService, private route: ActivatedRoute){}
 
-  constructor(private service : BackendEVOLVEService){}
-
-  ngOnInit(): void {
-    this.criaProjeto()
+  async ngOnInit(){
+    this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
+    console.log(this.projeto);
+    
     this.getMembros()
-    // let membros = localStorage.getItem('membros') || ''
-    // this.membros.push(JSON.parse(membros))
   }
 
-  async criaProjeto(){
-    this.projetoStatus = await this.service.postProjeto(this.projeto)
-  }
-
-  @Input() projeto!:Projeto
-  projetoStatus !: Projeto
+  projeto!:Projeto
 
   usuarios!: Usuario[]
 
@@ -37,9 +31,24 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.usuarios = await this.service.getAllSomething('usuario')
   }
 
-  salvarProjeto(){
+  statusEnabled(){
+    this.statusVisible = !this.statusVisible
+  }
+
+  updateProject(p:Projeto){
+    this.projeto.listaStatus = p.listaStatus
+    this.service.putProjeto(p)
+  }
+
+  @ViewChild('nome') nome!:ElementRef
+  @ViewChild('data') data!:ElementRef
+  @ViewChild('descricao') descricao!:ElementRef
+  async salvarProjeto(){
+    this.projeto.nome = this.nome.nativeElement.value
+    this.projeto.dataFinal = this.data.nativeElement.value
+    this.projeto.descricao = this.descricao.nativeElement.value
     this.projeto.membros = this.membros
-    this.service.putProjeto(this.projeto)
+    console.log(await this.service.putProjeto(this.projeto));
   }
 
   addUser(p:Usuario[]){
@@ -50,6 +59,16 @@ export class TelaCriarProjetoComponent implements OnInit {
 
   membros: Usuario[] = []
 
-  
+  @HostListener('click', ['$event'])
+   clicouFora(event:any){
+    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c79'))
+    || event.target.classList.value === 'add-status'
+    || event.target.getAttributeNames().find((name: string | string[]) => name.includes('style'))
+      if(!element){
+        this.statusVisible = false;
+      }
+   }
+
+   statusVisible = false
 
 }

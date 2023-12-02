@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ProjetoComponent } from '../componentes/projeto/projeto.component';
@@ -10,7 +11,7 @@ import { TelaCriarProjetoComponent } from '../tela-criar-projeto/tela-criar-proj
 })
 export class TelaProjetoComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) {}
+  constructor(private service : BackendEVOLVEService, private route:Router) {}
 
    @HostListener('click', ['$event'])
    clicouFora(event:any){
@@ -30,10 +31,6 @@ export class TelaProjetoComponent implements OnInit {
 
   ngOnChange(): void {
     this.funcao()
-  }
-
-  async criaProjeto(){
-   return await this.service.postProjeto(new Projeto)
   }
 
   async funcao(){
@@ -64,7 +61,6 @@ export class TelaProjetoComponent implements OnInit {
 
   }
 
-
   limpa(){
     this.projetos.forEach(element => {
       if(element.nome === null || element.nome === ''){
@@ -73,6 +69,12 @@ export class TelaProjetoComponent implements OnInit {
         }, 300);
       }
     });
+  }
+
+  async router(){
+    let projeto:Projeto = await this.service.postProjeto(new Projeto)
+    localStorage.setItem('projeto', JSON.stringify(projeto))
+    this.route.navigate(['/criar-projeto'])
   }
 
 }

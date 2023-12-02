@@ -39,16 +39,16 @@
                 </div>
             </div>
             <div class="status-priority">
-                <button class="add-status">Adicionar status</button>
+                <button class="add-status" (click)="statusEnabled()">Adicionar status</button>
                 <button class="add-priority">Adicionar prioridade</button>
-            </div>
-            <app-status-component-criar-tarefa [projeto]="projetoStatus" ></app-status-component-criar-tarefa>
+            </div>[
+            <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [ngClass]="statusVisible ? 'opacity-100':'opacity-0'" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa>
             <div class="lembrete">
                 <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>
             </div>
             <div class="botoes">
                 <button class="cancelar">Cancelar</button>
-                <button class="salvar" (click)="salvarProjeto()">Salvar</button>
+                <button class="salvar" (click)="salvarProjeto()" [routerLink]="['/tela-projeto']">Salvar</button>
             </div>
         </div>
     </div>

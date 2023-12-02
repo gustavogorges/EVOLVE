@@ -3,4 +3,5 @@ export class Status {
     nome : string = "";
     corFundo: string = "";
     corTexto: string = "";
+    enabled: boolean = true
 }
