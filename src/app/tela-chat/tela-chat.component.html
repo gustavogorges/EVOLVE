@@ -33,9 +33,9 @@
                 </div>
 
 
-                <div class="w-full h-full" *ngFor="let chat of user.chats">
+                <div class="w-full h-full" *ngFor="let chat of loggedUser.chats">
 
-                    <app-contact [contact]="getContactFromUser(chat,user)" [chat]="chat"></app-contact>
+                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat"></app-contact>
                     <!-- <app-contact></app-contact>
                     <app-contact></app-contact>
                     <app-contact></app-contact>
@@ -56,11 +56,11 @@
                 <!-- <img src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT"
                     alt="" class="rounded-full h-[80%]"> -->
                     <div class="h-[3.25rem] min-w-[3.25rem] max-w-min ">
-                        <img src="{{user.fotoPerfil}}"
+                        <img src="{{loggedUser.fotoPerfil}}"
                             alt="" class="rounded-full h-full w-full">
                     </div>
                 <p class="font-bold text-primaryWhite  flex w-full truncate">
-                    {{user.nome}}
+                    {{loggedUser.nome}}
                 </p>
                 <div class="bg-primaryWhite w-16 h-[80%]">
 
@@ -76,23 +76,28 @@
 
 
 
-                
-                <div class="first-message-right flex flex-col w-full ">
 
-                    <div class="first-message-right-image-container w-full flex justify-end items-center pb-2">
-                        <img class="first-message-right-image w-16 rounded-full"  src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT" alt="" >
-                    </div>
+                <div class="w-full h-full " *ngFor="let message of loggedUser.chats[0].messages">
 
-                    <div class="right-message-container w-full px-16  flex justify-end">
-                        <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                            <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
-                            <p class="break-words w-max">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptatibus? Eveniet quis odio recusandae cumque labore libero placeat doloremque facilis ab dicta reiciendis dignissimos adipisci nostrum magni, eius earum voluptates.
-                            </p>
+                    <div class="first-message-right flex flex-col w-full ">
+    
+                        <div class="first-message-right-image-container w-full flex justify-end items-center pb-2">
+                            <img class="first-message-right-image w-16 rounded-full"  src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT" alt="" >
                         </div>
+    
+                        <div class="right-message-container w-full px-16  flex justify-end">
+                            <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
+                                <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
+                                <p class="break-words w-max">
+                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptatibus? Eveniet quis odio recusandae cumque labore libero placeat doloremque facilis ab dicta reiciendis dignissimos adipisci nostrum magni, eius earum voluptates.
+                                </p>
+                            </div>
+                        </div>
+    
                     </div>
 
                 </div>
+                
 
 
                 <div class="right-message-container w-full px-16  flex justify-end">
@@ -184,15 +189,15 @@
 
             <div class="w-full h-[10%] flex items-center justify-center gap-8">
 
-                <div class="flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4 ">
-                    <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text">
+                <div class="message-input flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4 ">
+                    <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
                 </div>
 
-                <div class="flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]">
+                <div class="send-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]" (click)="sendMessage()">
                     <img src="../../assets/sendButton.svg" alt="" class="">
                 </div>
 
-                <div class="flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]  ">
+                <div class="annex-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]  ">
                     <img src="../../assets/clip.svg" alt="">
                 </div>
 

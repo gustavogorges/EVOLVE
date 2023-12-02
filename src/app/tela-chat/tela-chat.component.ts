@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Chat } from 'src/model/chat';
+import { Message } from 'src/model/message';
 import { UserChat } from 'src/model/userChat';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -12,34 +14,71 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaChatComponent implements OnInit {
 
-  user:Usuario = new Usuario
-  fotoPerfilUrl:string = ""
 
+
+  loggedUser: Usuario = new Usuario
+  fotoPerfilUrl: string = ""
+
+  newMessage: Message = new Message
 
   constructor(
-    private service:BackendEVOLVEService,
+    private service: BackendEVOLVEService,
     // private fileService:FileService
-    ) { }
+  ) { }
 
-contact:Usuario = new Usuario
+  contact: Usuario = new Usuario
 
   async ngOnInit(): Promise<void> {
-    this.user = await this.service.getOne("usuario",1202 )
-    this.user.chats = await this.service.getChatsByUserId(this.user.id)
-    console.log(this.user.chats)
-    console.log(this.user)
-  
-    this.fotoPerfilUrl = this.user.fotoPerfil
+    this.loggedUser = await this.service.getOne("usuario", 1202)
+    this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
+
+    console.log(this.loggedUser)
+
+    this.fotoPerfilUrl = this.loggedUser.fotoPerfil
 
     // this.contact = chat.getContactFromUser(user)
-    console.log( this.getContactFromUser(this.user.chats[0],this.user))
+    console.log(this.getContactFromUser(this.loggedUser.chats[0], this.loggedUser))
 
-    console.log(this.fotoPerfilUrl)
-   
+    this.newMessage
+
   }
 
-  getContactFromUser(chat:UserChat, user:Usuario){
-    if(chat.users[0]!=user){
+  // Omit<UserChat, "message">
+  async sendMessage(): Promise<void> {
+
+    let messageDate: Date = new Date()
+
+    let sender = new Usuario()
+    sender.id = this.loggedUser.id
+    this.newMessage.sender = sender
+    //rever o status da mensagem
+    this.newMessage.date = messageDate.toISOString()
+
+    // type messageDTO = Omit<Message, "id">
+
+
+    // let sendingMessage: messageDTO = {
+    //   content: this.newMessage.content,
+    //   date: this.newMessage.date,
+    //   messageStatus: this.newMessage.messageStatus,
+    //   sender: sender
+    // }
+
+    // console.log("é qui msm n tem jeito")
+    // console.log(sendingMessage)
+
+    this.loggedUser.chats[0].messages.push(this.newMessage)
+
+    console.log(this.loggedUser.chats[0].messages)
+
+    console.log(await this.service.putUserChat(this.loggedUser.chats[0]))
+
+    this.newMessage = new Message
+
+  }
+
+  getContactFromUser(chat: UserChat, user: Usuario) {
+    if (chat.users[0] != user) {
       return chat.users[0]
     }
     return chat.users[1]

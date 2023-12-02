@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Equipe } from 'src/model/equipe';
+import { Message } from 'src/model/message';
 import { Projeto } from 'src/model/projeto';
 import { Tarefa } from 'src/model/tarefa';
+import { UserChat } from 'src/model/userChat';
 import { Usuario } from 'src/model/usuario';
 
 
@@ -60,6 +62,21 @@ export class BackendEVOLVEService {
   async putEquipe (equipe:Equipe){
     return (await axios.put(this.URL+"equipe", equipe)).data
   }
+
+
+
+  async postUserChat (chat:UserChat){
+    (await axios.post(this.URL+"userChat", chat)).data 
+  }
+
+  async putUserChat (chat:UserChat){
+    console.log("Eu cheguei aqui")
+    return (await axios.put(this.URL+"userChat", chat)).data
+  }
+
+
+
+
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getChatsByUserId(id:number) {
