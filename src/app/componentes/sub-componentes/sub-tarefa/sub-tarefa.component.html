@@ -2,31 +2,27 @@
     <div class="main-card">
         <div class="card">
             <div class="tasks">
-                <div class="task">
+                <div class="task" *ngFor="let sub of listaSubtarefas; index as i">
                     <div class="s-input flex gap-1">
-                        <input type="checkbox" id="1">
-                       <label class="task-label" for="1">se eu quiser adicionar muito texto cabe coisa aqui, a escolha do usuario</label> 
-                       </div>
+                       <input type="checkbox" id="{{i}}">
+                       <label class="task-label" for="{{i}}">{{sub.nome}}</label> 
+                    </div>
                 </div>
-                <div class="task">
-                    <div class="s-input flex gap-1">
-                        <input type="checkbox" id="2">
-                       <label class="task-label" for="2">se eu quiser adicionar muito texto cabe coisa aqui, a escolha do usuario</label> 
-                       </div>
-                </div>
-                <div class="task">
-                    <div class="s-input flex gap-1">
-                        <input type="checkbox" id="3">
-                       <label class="task-label" for="3">se eu quiser adicionar muito texto cabe coisa </label> 
-                       </div>
-                </div>
-
             </div>
         </div>
-        <div class="box-btn-add">
-            <div class="btn-add-content">
+        <div *ngIf="!booleanAddSubtarefa" class="box-btn-add">
+            <div *ngIf="!booleanAddSubtarefa" (click)="booleanSubtarefa()" class="btn-add-content">
                 <i class="pi pi-plus btn-add-text"></i>
                 <p class="btn-add-text">adicionar sub-tarefa </p>
+            </div>
+        </div>
+        <div *ngIf="booleanAddSubtarefa" class=" h-min w-full flex py-3 px-2 border-x-2 border-b-2 items-center">
+            <div class=" w-[80%] h-full">
+                <input type="text" class=" w-full h-[80%] input-new-sub border-b-2 pb-2 " [(ngModel)]="subtarefa.nome" placeholder="Digite a sub-tarefa aqui ...">
+            </div>
+            <div class=" w-[20%] h-full flex justify-center items-center gap-3">
+                <i (click)="adicionarSubtarefa()" class="pi pi-check p-2 bg-secondary text-primaryWhite rounded-lg"></i>
+                <i class="pi pi-trash p-2 bg-red-500 text-primaryWhite rounded-lg"></i>
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+
 import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
 import { Projeto } from 'src/model/projeto';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -15,8 +17,18 @@ interface Bah {
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
   styleUrls: ['./tela-tarefa.component.scss']
+  // 
 })
 export class TelaTarefaComponent implements OnInit {
+
+  selectedVisualizacao = "Visualização";
+  select : string = "Padrao";
+  listaTarefas: Array<Tarefa> =[]
+  booleanTask : boolean = false;
+
+  tarefaSelecionada:Tarefa = new Tarefa
+  tarefaNova : Tarefa = new Tarefa;
+
 
 
 
@@ -71,11 +83,36 @@ if( this.visualizacaoVisible==true){
     console.log(option)
   }
 
+
   changeOrdenacao(e:any){
     this.visualizacaoVisible=false
     this.filtroVisible=false
 
     console.log(this.ordenacaoVisible)
+
+  @HostListener('click', ['$event'])
+  clicouFora(event:any){
+   console.log("TESTE 2")
+   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
+    name.includes('c72') ||
+    name.includes('c64') ||
+    name.includes('c70') || 
+    name.includes('c78') ||
+    name.includes('c71'));
+     if(!element){
+       for(let pFor of this.listaTarefas){
+           this.closeTask();
+       }
+     }
+  }
+
+  closeTask() {
+    this.tarefaNova = new Tarefa;
+    this.booleanTask = false;
+  }
+
+  mudarSelect(e:any){
+
     e.target.value = "Visualização"
 
     this.listOptions = [
@@ -143,5 +180,22 @@ if( this.filtroVisible==true){
 
   
 
+
+  openTask(tarefa:Tarefa) :void {
+    this.booleanTask = !this.booleanTask;
+
+    this.tarefaSelecionada = tarefa;
+
+  }
+
+  openTaskEdit(tarefa:Tarefa) {
+    this.tarefaSelecionada = this.tarefaNova;
+    this.booleanTask = true;
+  }
+
+  adicionarTarefa() {
+    this.tarefaSelecionada.id = 0;
+    this.booleanTask = !this.booleanTask;
+  }
 
 }

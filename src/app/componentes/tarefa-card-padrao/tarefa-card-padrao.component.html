@@ -1,7 +1,12 @@
 
   <div class="container-data-nome">
     <p class="texto">data final: {{tarefaAtual.dataFinal}} </p>
-    <div class="status" [ngStyle]="{'background-color': tarefaAtual.statusAtual.corFundo}">{{tarefaAtual.statusAtual.nome}}</div>
+
+    <div 
+    class="status" 
+    [ngStyle]="{'background-color':tarefaAtual.statusAtual.corFundo,'color': tarefaAtual.statusAtual.corTexto}"
+    >{{tarefaAtual.statusAtual.nome}}</div>
+
   </div>
   <div class="barra-cinza">
     <div class="barra-azul" [ngStyle]="{ width: valorBarra }"></div>
@@ -16,9 +21,11 @@
       </div>
 
     </div>
+
     <div class="container-subtarefas">
       <div *ngFor="let sub of tarefaAtual.subtarefas; index as indice;">
         <div class="subtarefa">
+
           <input type="checkbox" id="({{id}}+{{sub}}+{{indice}})">
          <label for="({{id}}+{{sub}}+{{indice}})">{{sub.nome}}</label> 
          </div>

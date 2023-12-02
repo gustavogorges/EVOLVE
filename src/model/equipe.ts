@@ -4,6 +4,8 @@ import { Usuario } from "./usuario";
 export class Equipe{
     id:number = 0;
     nome : string = "";
-    lider : Usuario = new Usuario;
+    imagem:string = "";
+    administrador : Usuario = new Usuario;
     projetos: Array<Projeto> = new Array;
+    participantes: Array<Usuario> = new Array;
 }
