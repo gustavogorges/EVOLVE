@@ -5,7 +5,7 @@
   @apply w-3/4
 }
 .header{
-  @apply w-full flex flex-row justify-between py-10
+  @apply w-full flex flex-row justify-between py-10 items-center 
 }
 .button-name-box{
   @apply flex flex-col gap-4 max-w-fit
@@ -62,5 +62,11 @@
 .select:focus{
     outline: 0;
 }
-
+.select-button{
+  @apply text-xl;
+  font-family: 'Montserrat', sans-serif;
+}
+.box-selections{
+  @apply flex flex-row gap-3
+}
  

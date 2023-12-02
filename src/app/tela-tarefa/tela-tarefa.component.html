@@ -8,10 +8,43 @@
           Adicionar Tarefa
         </button>
       </div>
-      <button (click)="changeVisualizacao($event)">Visualização</button>
-      <div *ngIf="visualizacaoVIsivel">
-        <app-select-custom [listOptions]="listOptions "(newItem)="option"></app-select-custom>
+      <div class="box-selections">
+        <div >
+          <button (click)="changeVisualizacao($event)" 
+          class="select-button">
+          <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+            Visualização
+          </button>
+          <div *ngIf="visualizacaoVisible" class="absolute z-50">
+            <app-select-custom [listOptions]="listOptions " [listIcons]="listIcons"(newItem)="optionA($event)" ></app-select-custom>
+          </div>
+        </div>
+  
+        <div >
+          <button (click)="changeOrdenacao($event)" 
+          class="select-button">
+          <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+            Ordenação
+          </button>
+          <div *ngIf="ordenacaoVisible" class="absolute">
+            <app-select-custom [listOptions]="listOptions " [listIcons]="listIcons"(newItem)="optionB($event)" ></app-select-custom>
+          </div>
+        </div>
+        <div >
+          <button (click)="changeFiltro($event)" 
+          class="select-button">
+          <i class="pi pi-eye icon" style="font-size: 1rem"></i>
+           Filtros
+          </button>
+          <div *ngIf="filtroVisible" class="absolute">
+            <app-select-custom [listOptions]="listOptions " [listIcons]="listIcons"(newItem)="optionC($event)"></app-select-custom>
+          </div>
+        </div>
       </div>
+     
+       
+     
+     
       <!-- <div class="flex flex-row gap-4 self-center">
         <button class="botao-opcoes">
           <select
@@ -54,15 +87,15 @@
         </button>
       </div> -->
     </div>
-<!-- 
-    <div *ngIf="select == 'Padrao'">
+
+    <div *ngIf="option == 'Padrão'">
       <div class="tasks-grid-padrao">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
           <app-tarefa-card-padrao [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-padrao>
         </div>
       </div>
     </div>
-    <div *ngIf="select == 'Lista'">
+    <div *ngIf="option == 'Lista'">
       <div class="box-list">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="cardLista">
           <app-tarefa-card-lista class="h-full w-full" [id]="tarefa.nome + indice" [tarefaAtual]="tarefa"></app-tarefa-card-lista>
@@ -70,8 +103,8 @@
       </div>
       
     </div>
-     <div *ngIf="select == 'Kanban'">Lista</div>
- -->
+     <div *ngIf="option == 'Kanban'">Lista</div>
+
 
 
   </div>

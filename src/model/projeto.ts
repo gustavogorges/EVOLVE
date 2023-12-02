@@ -7,4 +7,6 @@ export class Projeto{
     descricao: string ="";
     tarefas: Array<Tarefa> = new Array;
     propriedades:Array<Propriedade> = new Array;
+  
+
 }
