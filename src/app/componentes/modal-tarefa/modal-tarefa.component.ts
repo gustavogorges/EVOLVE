@@ -26,6 +26,7 @@ export class ModalTarefaComponent implements OnInit {
 
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Tarefa = new Tarefa();
+  tarefaTeste : Tarefa = this.tarefa;
   projeto: Projeto = new Projeto();
   tarefaNova: Tarefa = new Tarefa();
 

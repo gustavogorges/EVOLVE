@@ -1,24 +1,32 @@
 <div class="main">
   <div class="propriedades-box">
     <ng-container *ngFor="let option of options">
-        <div
-        class="propertie"
-        (click)="clickDate(option)"
-        [ngClass]="
-          option.hover
-            ? 'bg-[#e5e7eb] rounded-t-md text-primaryFontBlack'
-            : 'bg-primaryWhite'
-        "
-      >
-        <i class="{{option.icon}} text-primary icon"></i>
-        <p>{{option.text}}</p>
+      <div class="propertie" (click)="clickDate(option)" *ngIf="option.showing">
+
+        <div class="flex gap-2 items-center">
+          <i class="{{ option.icon }} text-primary icon"></i>
+          <p>{{ option.text }}</p>
+        </div>
       </div>
     </ng-container>
     <div *ngIf="propertieSelected" class="propertie input">
-        <input type="text" pInputText class="inputNamePropertie" placeholder="escreva o nome"/>
+      <input
+        type="text"
+        pInputText
+        class="inputNamePropertie"
+        placeholder="escreva o nome"
+      />
     </div>
-    <div *ngIf="propertieSelected"  class=" button-confirm">
-        <p class="font-bold text-white">confirmar</p>
+    <div *ngIf="booleanPropertieSelect" class="propertie-add add-options">
+      <i class="pi pi-plus text-secondary icon"></i>
+      <p class="text-primaryFontBlack">adicionar opcões</p>
+    </div>
+    <div *ngIf="propertieSelected" class="propertie-add propertie-global">
+      <input type="checkbox" class="check" />
+      <p class="text-primaryFontBlack">tornar propriedade global</p>
+    </div>
+    <div *ngIf="propertieSelected" class="button-confirm">
+      <p class="font-bold text-white">confirmar</p>
     </div>
   </div>
 </div>
