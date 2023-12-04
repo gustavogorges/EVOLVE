@@ -18,9 +18,10 @@ import { ProjetoComponent } from './componentes/projeto/projeto.component';
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TarefaCardPadraoComponent } from './componentes/tarefa-card-padrao/tarefa-card-padrao.component';
 import { ToastModule } from 'primeng/toast';
-import { EquipeRecenteComponent } from './componentes/equipe-recente/equipe-recente.component';
+import { EquipeRecenteComponent } from './componentes/equipe-recente-card/equipe-recente-card.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
+
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
@@ -29,11 +30,31 @@ import { HistoricosComponent } from './componentes/sub-componentes/historicos/hi
 import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.component';
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
+
 import { CalendarModule } from 'primeng/calendar';
 import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
 import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
 import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
 import { ColorPickerModule } from 'primeng/colorpicker';
+
+import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
+import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
+
+import { CalendarModule } from 'primeng/calendar';
+import { SelectStatusComponent } from './componentes/select-status/select-status.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
+import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
+
+import { TelaChatComponent } from './tela-chat/tela-chat.component';
+// import { ContactsComponent } from './contacts/contacts.component';
+import { ContactComponent } from './contact/contact.component';
+
+import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
+import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+
 
 @NgModule({
   declarations: [
@@ -61,10 +82,25 @@ import { ColorPickerModule } from 'primeng/colorpicker';
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
+
     TelaCriarProjetoComponent,
     MembrosEquipeComponent,
     StatusComponentCriarTarefaComponent
+    TarefaCardListaComponent,
+    SelectCustomComponent,
+    SelectStatusComponent,
+
+    // RecentTeamsComponent,
+    EquipesRecentesComponent,
+
+    TelaChatComponent,
+    // ContactsComponent,
+    ContactComponent,
+
+    BotaoAddTarefaComponent,
+    SelectPropriedadeComponent
   ],
+  
   imports: [
     ColorPickerModule,
     BrowserAnimationsModule,
@@ -77,9 +113,13 @@ import { ColorPickerModule } from 'primeng/colorpicker';
     FormsModule,
     InputTextareaModule,
     FormsModule,
-    ToastModule
-
+    ToastModule,
+    CalendarModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

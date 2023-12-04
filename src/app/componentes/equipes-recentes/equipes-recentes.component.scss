@@ -1,0 +1,36 @@
+.set-left {
+    @apply w-5 h-full flex justify-center items-center ml-4 
+}
+
+.set-right {
+    @apply w-5 h-full flex justify-center items-center mr-4 
+}
+
+.recent-projects-box {
+    @apply h-full w-full flex justify-start 
+}
+
+.recent-projects {
+    @apply w-[90%] h-5/6 bg-primaryGray rounded-lg flex-col flex shadow-xl
+}
+
+.content-box {
+    @apply w-full h-full flex justify-center items-center overflow-hidden 
+}
+
+// .card-team-box {
+//     @apply w-full flex h-full items-center gap-5 justify-center max-w-[12rem] min-w-[12rem]  
+// }
+
+.card-project {
+    // @apply h-[87%] w-[25%] shadow-lg;
+    @apply h-52 w-full shadow-lg flex justify-center items-center max-w-[12rem] min-w-[12rem];
+}
+
+.title-box {
+    @apply w-full h-14 bg-secondary flex justify-center items-center rounded-t-md
+}
+
+.title-text {
+    @apply font-semibold text-2xl text-primaryWhite
+}

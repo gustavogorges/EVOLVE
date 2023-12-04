@@ -1,5 +1,6 @@
 .main {
     @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-screen;
+    z-index: 9999;
 }
 
 .main-grid {

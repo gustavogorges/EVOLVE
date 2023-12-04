@@ -1,25 +1,81 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl
+    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll
 }
 
 .name-progress {
-    @apply w-full h-[15%] flex items-center;
+    @apply w-full min-h-[15%] flex flex-col justify-center pl-10 mt-10;
 }
 
 .name-box {
-    @apply w-[30%] h-full flex justify-center items-center
+    @apply w-[65%] h-[100%] flex items-center min-w-min mb-5
+}
+
+.foco-box {
+    @apply w-[35%] h-full flex justify-start
+}
+
+.foco {
+    @apply w-[60%] h-[60%] bg-primary rounded-lg flex justify-center items-center gap-3 text-primaryWhite cursor-pointer py-1
+}
+
+.foco-name-box {
+    @apply flex w-full h-full items-center
+}
+
+.foco-on {
+    @apply w-[85%] h-16 mb-5 flex items-center pl-2 justify-between
+}
+
+.foco-timer {
+    @apply text-4xl text-black font-bold w-[20%] h-full flex items-center
+}
+
+.actions-timer {
+    @apply flex w-[50%] h-full items-center gap-4
+}
+
+.action {
+    @apply w-[30%] h-[50%] px-2 flex justify-center items-center rounded-lg text-primaryWhite font-bold gap-2 cursor-pointer
+}
+
+.cancel {
+    @apply bg-red-500
+}
+
+.pause {
+    @apply bg-primary
+}
+
+.stop {
+    @apply bg-secondary
+}
+
+.input-box {
+    @apply w-[80%] h-[100%] outline-none pb-2
 }
 
 .name {
-    @apply text-4xl text-primary font-bold 
+    @apply text-4xl text-primary font-bold ;
+    white-space: nowrap; /* Evita a quebra de linha */
+  position: absolute;
+  transform: translateX(0); /* Inicia na posição original */
+  transition: transform 5s linear;
 }
 
 .progress-bar-box {
-    @apply w-[70%] h-full flex justify-center items-center
+    @apply w-full h-[30%] flex items-center gap-3 justify-start mb-5
+}
+
+.edit-button {
+    @apply w-12 h-7 bg-secondary rounded-md
+}
+
+.remove-button {
+    @apply w-12 h-7 bg-red-500 rounded-md
 }
 
 .progress-bar {
-    @apply w-5/6 h-[10%] bg-primaryGray rounded-md;
+    @apply w-[70%] h-3 bg-primaryGray rounded-md;
 }
 
 .date-propertie {
@@ -27,7 +83,11 @@
 }
 
 .task-properties {
-    @apply w-1/2 h-[20%] ml-12
+    @apply w-[35%] min-h-[20%] ml-12
+}
+
+.task-properties-box {
+    @apply flex
 }
 
 .date-end {
@@ -35,7 +95,15 @@
 }
 
 .name-icon {
-    @apply flex items-center w-2/3
+    @apply flex items-center
+}
+
+.add-icon {
+    @apply flex items-center justify-center w-[77%] 
+}
+
+.add-icon:hover {
+    @apply w-full cursor-pointer py-2 bg-gray-100 rounded-xl flex justify-center items-center;
 }
 
 .name-propertie {
@@ -63,15 +131,15 @@
 }
 
 .status-propertie {
-    @apply flex w-full mt-3
+    @apply flex w-full mt-3 gap-5
 } 
 
 .status-icon {
-    @apply h-8 w-20 bg-yellow-200 rounded-xl flex justify-center items-center
+    @apply h-8 w-24 rounded-xl flex justify-center items-center text-sm
 }
 
 .status-icon-box {
-    @apply flex items-center justify-center  ml-2
+    @apply flex items-center justify-center 
 }
 
 .description-propertie {
@@ -112,4 +180,39 @@
 
 .component {
     @apply w-full h-full flex justify-center
+}
+
+
+.name-box {
+    @apply min-w-min h-10 ;
+      overflow: hidden; 
+      position: relative;
+    }
+    
+    
+    
+    .name-box:hover .name {
+      transform: translateX(-100%);
+      overflow:visible; 
+    }
+    
+    .name-box:not(:hover) .name {
+      transition: none; 
+    }
+
+
+.cancel-button {
+    @apply bg-primary px-5 py-1 rounded-lg
+}
+
+.save-button {
+    @apply bg-secondary px-5 py-1 rounded-lg
+}
+
+.description-box {
+    @apply ml-12
+}
+
+.created-properties {
+    @apply w-[80%] ml-12
 }

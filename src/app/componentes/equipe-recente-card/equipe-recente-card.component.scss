@@ -1,21 +1,22 @@
 .main {
-    @apply bg-white h-full w-full rounded-md;
+    @apply bg-white h-full w-full rounded-md ; //botar shadow
 }
 
-.pic-team {
+.pic-project {
     @apply h-[45%] w-full flex justify-center items-center
 }
 
 .pic {
-    @apply h-20 w-20 rounded-full bg-orange-600
+    @apply h-20 w-20 rounded-full;
+    //  bg-orange-600
 }
 
-.name-team {
+.name-project {
     @apply h-[20%] w-full flex justify-center items-center
 }
 
-.responsible-team {
-    @apply h-[35%] w-full flex justify-between items-center pl-4 pr-4
+.responsible-project {
+    @apply h-[35%] w-full flex justify-center items-center 
 }
 
 .responsible-text {
