@@ -1,11 +1,8 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
-import { Status } from 'src/model/status';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-
-
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -14,7 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaCriarProjetoComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService, private route: ActivatedRoute){}
+  constructor(private service : BackendEVOLVEService, private route: Router){}
 
   async ngOnInit(){
     this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
@@ -48,7 +45,8 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.projeto.dataFinal = this.data.nativeElement.value
     this.projeto.descricao = this.descricao.nativeElement.value
     this.projeto.membros = this.membros
-    console.log(await this.service.putProjeto(this.projeto));
+    await this.service.putProjeto(this.projeto);
+    this.route.navigate(['tela-projeto'])
   }
 
   addUser(p:Usuario[]){
@@ -59,14 +57,22 @@ export class TelaCriarProjetoComponent implements OnInit {
 
   membros: Usuario[] = []
 
-  @HostListener('click', ['$event'])
-   clicouFora(event:any){
-    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c79'))
-    || event.target.classList.value === 'add-status'
-    || event.target.getAttributeNames().find((name: string | string[]) => name.includes('style'))
-      if(!element){
-        this.statusVisible = false;
-      }
+  // @HostListener('click', ['$event'])
+  //  clicouFora(event:any){
+  //   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c79'))
+  //   || event.target.classList.value === 'add-status'
+  //   || event.target.getAttributeNames().find((name: string | string[]) => name.includes('style') ? true : false) ? true : false
+  //   || event.target.getAttributeNames().find((name: string | string[]) => name.includes('c78-0') ? true : false) ? true : false
+  //   console.log(element, event.target);
+    
+  //     if(!element){
+  //       // this.statusVisible = false;
+  //     }
+  //  }
+
+   async cancelar(){
+      this.service.deleteById('projeto', this.projeto.id)
+      this.route.navigate(['/tela-projeto'])
    }
 
    statusVisible = false

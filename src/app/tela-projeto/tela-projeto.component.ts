@@ -1,9 +1,8 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-import { ProjetoComponent } from '../componentes/projeto/projeto.component';
-import { TelaCriarProjetoComponent } from '../tela-criar-projeto/tela-criar-projeto.component';
+
 @Component({
   selector: 'app-tela-projeto',
   templateUrl: './tela-projeto.component.html',
@@ -35,7 +34,7 @@ export class TelaProjetoComponent implements OnInit {
 
   async funcao(){
     this.projetos = await this.service.getAllSomething('projeto')
-    this.limpa()
+    console.log(await this.service.getAllSomething('projeto'));
   }
 
   deletarPai(id:number){
@@ -59,16 +58,6 @@ export class TelaProjetoComponent implements OnInit {
    });
     p.isVisible = !p.isVisible
 
-  }
-
-  limpa(){
-    this.projetos.forEach(element => {
-      if(element.nome === null || element.nome === ''){
-        setTimeout(() => {
-          this.deletarPai(element.id)
-        }, 300);
-      }
-    });
   }
 
   async router(){
