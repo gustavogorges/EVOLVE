@@ -32,7 +32,7 @@ export class TelaTarefaComponent implements OnInit {
 
 
 
-  listaTarefas: Array<Tarefa> =[]
+ 
   listOptions :Array<string>=[]
   listIcons : Array<string>=[]
   visualizacaoVisible:boolean = false
@@ -89,6 +89,7 @@ if( this.visualizacaoVisible==true){
     this.filtroVisible=false
 
     console.log(this.ordenacaoVisible)
+  }
 
   @HostListener('click', ['$event'])
   clicouFora(event:any){
