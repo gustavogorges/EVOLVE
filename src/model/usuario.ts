@@ -10,7 +10,6 @@ export class Usuario {
     nome : string = "";
     fotoPerfil: string = '';
     chats:Array<UserChat> = new Array
-    fotoPerfil:string = "";
     tarefasCriadas: Array<Tarefa> = new Array;
     equipesAdministradas: Array<Equipe> = new Array;
     equipes: Array<Equipe> = new Array;

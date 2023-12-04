@@ -5,6 +5,8 @@ import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
+import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
+import { TelaChatComponent } from './tela-chat/tela-chat.component';
 
 
 const routes: Routes = [

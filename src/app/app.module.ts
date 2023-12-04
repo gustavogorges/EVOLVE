@@ -40,10 +40,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
 import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
 
-import { CalendarModule } from 'primeng/calendar';
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
-import { ColorPickerModule } from 'primeng/colorpicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
@@ -85,7 +82,7 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
 
     TelaCriarProjetoComponent,
     MembrosEquipeComponent,
-    StatusComponentCriarTarefaComponent
+    StatusComponentCriarTarefaComponent,
     TarefaCardListaComponent,
     SelectCustomComponent,
     SelectStatusComponent,
