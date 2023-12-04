@@ -5,8 +5,6 @@ import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
-import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
-import { TelaChatComponent } from './tela-chat/tela-chat.component';
 
 
 const routes: Routes = [
@@ -31,10 +29,13 @@ const routes: Routes = [
     component: TelaTarefaComponent
   },
   {
+    path:"criar-projeto",
+    component: TelaCriarProjetoComponent
+  },
+  {
     path:"tela-chat",
     component: TelaChatComponent
-  }
- 
+   }
 ];
 
 @NgModule({

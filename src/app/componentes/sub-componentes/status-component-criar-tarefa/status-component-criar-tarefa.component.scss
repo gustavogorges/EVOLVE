@@ -1,0 +1,22 @@
+.status-grid{
+    @apply duration-300;
+    .create-status{
+        @apply flex flex-col gap-2 overflow-auto;
+        .status{
+            @apply row-start-1 grid grid-cols-3 justify-center items-center grid-rows-1 gap-1 w-full h-full;
+            grid-template-columns: 75% 10% 10%;
+        
+            p, i{
+                @apply flex justify-center h-full items-center
+            }
+        
+            p{
+                @apply dark:text-gray-800
+            }
+        
+            i{
+                @apply text-primary dark:text-dark-primary text-lg cursor-pointer
+            }
+        }
+    }
+}
