@@ -15,8 +15,6 @@ export class TelaCriarProjetoComponent implements OnInit {
 
   async ngOnInit(){
     this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
-    console.log(this.projeto);
-    
     this.getMembros()
   }
 

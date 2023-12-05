@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -17,7 +18,7 @@ interface Tarefa{
 })
 export class ProjetoComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService){}
+  constructor(private service : BackendEVOLVEService, private route:Router){}
 
   date: string = ''
   tarefas : Tarefa[] = []
@@ -105,5 +106,8 @@ export class ProjetoComponent implements OnInit {
     this.openProjeto.emit(this.projeto)
   }
 
+  async irParaProjeto(){
+    this.route.navigate(['view-project'], {state : {id:''}})
+  }
 }
 

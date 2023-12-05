@@ -51,6 +51,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+import { ProjetoFullScreenComponent } from './projeto-full-screen/projeto-full-screen.component';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     ContactComponent,
 
     BotaoAddTarefaComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    ProjetoFullScreenComponent
   ],
   
   imports: [

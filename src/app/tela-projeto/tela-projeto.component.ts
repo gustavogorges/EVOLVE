@@ -14,7 +14,7 @@ export class TelaProjetoComponent implements OnInit {
 
    @HostListener('click', ['$event'])
    clicouFora(event:any){
-    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c73'));
+    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c76'));
       if(!element){
         for(let pFor of this.projetos){
             pFor.isVisible = false;
@@ -57,7 +57,6 @@ export class TelaProjetoComponent implements OnInit {
       }
    });
     p.isVisible = !p.isVisible
-
   }
 
   async router(){
