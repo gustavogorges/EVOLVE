@@ -44,14 +44,22 @@ export class TelaChatComponent implements OnInit {
   }
 
   // Omit<UserChat, "message">
-  async sendMessage(): Promise<void> {
+  // async sendMessage(chat:UserChat): Promise<void> {
+    async sendMessage(): Promise<void> {
 
     let messageDate: Date = new Date()
 
     let sender = new Usuario()
     sender.id = this.loggedUser.id
     this.newMessage.sender = sender
+
+    type chatId =Pick<UserChat, "id"> 
+
+    let chatId :chatId = {"id": this.loggedUser.chats[0].id}
+    this.newMessage.chat = chatId
+
     //rever o status da mensagem
+
     this.newMessage.date = messageDate.toISOString()
 
     // type messageDTO = Omit<Message, "id">

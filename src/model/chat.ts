@@ -6,4 +6,5 @@ export abstract class Chat {
     messages:Array<Message> = new Array
 
 
+
 }
