@@ -54,7 +54,6 @@ export class ModalTarefaComponent implements OnInit {
 
   @HostListener('click', ['$event'])
   clicouFora(event:any){
-   console.log("TESTE 2")
    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c71') || name.includes('c72'))
      if(!element){
        
@@ -130,7 +129,7 @@ export class ModalTarefaComponent implements OnInit {
     } else if (this.tarefa.id == 0) {
       console.log('entrou');
       this.tarefa.criador.id = 303;
-      this.tarefa.projeto.id = 1;
+      this.tarefa.projeto.id = 2652;
       this.service.postTarefa(this.tarefa);
       this.tarefa.id = 0;
     }

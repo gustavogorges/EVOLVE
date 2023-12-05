@@ -28,13 +28,13 @@ export class TelaTarefaComponent implements OnInit {
 
   @HostListener('click', ['$event'])
   clicouFora(event:any){
-   console.log("TESTE 2")
    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
     name.includes('c72') ||
     name.includes('c64') ||
     name.includes('c70') || 
     name.includes('c78') ||
-    name.includes('c71'));
+    name.includes('c71') ||
+    name.includes('c79'));
      if(!element){
        for(let pFor of this.listaTarefas){
            this.closeTask();
@@ -50,8 +50,6 @@ export class TelaTarefaComponent implements OnInit {
   mudarSelect(e:any){
     e.target.value = "Visualização"
     // console.log(e.target.name)
-    console.log(this.select);
-    console.log(this.selectedVisualizacao)
     this.select = this.selectedVisualizacao
     this.selectedVisualizacao = "Visualização"
     // if(!(this.select == this.selectedVisualizacao)){
@@ -67,7 +65,7 @@ export class TelaTarefaComponent implements OnInit {
 
   }
 
-  openTaskEdit(tarefa:Tarefa) {
+  openTaskEdit() {
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }

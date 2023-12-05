@@ -17,6 +17,8 @@ export class SelectPropriedadeComponent implements OnInit {
 
   checked: boolean = false;
 
+  creatingOptionBoolean : boolean = false;
+
   @Input()
   tarefa: Tarefa = new Tarefa();
 
@@ -83,5 +85,10 @@ export class SelectPropriedadeComponent implements OnInit {
         this.propertieSelected = true;
       }
     });
+  }
+
+  addOptions() {
+    this.booleanPropertieSelect = false;
+    this.creatingOptionBoolean = true;
   }
 }

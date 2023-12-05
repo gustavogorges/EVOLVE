@@ -2,7 +2,6 @@
   <div class="propriedades-box">
     <ng-container *ngFor="let option of options">
       <div class="propertie" (click)="clickDate(option)" *ngIf="option.showing">
-
         <div class="flex gap-2 items-center">
           <i class="{{ option.icon }} text-primary icon"></i>
           <p>{{ option.text }}</p>
@@ -13,14 +12,47 @@
       <input
         type="text"
         pInputText
-        class="inputNamePropertie"
+        class="inputNamePropertie text-primary font-semibold"
         placeholder="escreva o nome"
       />
     </div>
-    <div *ngIf="booleanPropertieSelect" class="propertie-add add-options">
+    <div
+      *ngIf="booleanPropertieSelect"
+      (click)="(addOptions)"
+      class="propertie-add add-options"
+    >
       <i class="pi pi-plus text-secondary icon"></i>
-      <p class="text-primaryFontBlack">adicionar opcões</p>
+      <p class="text-primaryFontBlack" (click)="addOptions()">
+        adicionar opcões
+      </p>
     </div>
+
+    <div
+      *ngIf="creatingOptionBoolean"
+      class="grid grid-cols-2 w-full propertie"
+      style="grid-template-columns: 80% 20%"
+    >
+      <input
+        class="input-add-status"
+        type="text"
+        placeholder="escreva o nome"
+      />
+      <div class="w-full flex justify-center items-center">
+        <i class="pi pi-pencil text-primary font-bold"></i>
+      </div>
+    </div>
+
+    <div *ngIf="creatingOptionBoolean" class="grid grid-cols-2 w-full propertie" style="grid-template-columns: 80% 20%">
+      <input
+        class="input-add-status"
+        type="text"
+        placeholder="selecione uma cor"
+      />
+      <div class="w-full flex justify-center items-center">
+        <input type="color" class="w-7" />
+      </div>
+    </div>
+
     <div *ngIf="propertieSelected" class="propertie-add propertie-global">
       <input type="checkbox" class="check" />
       <p class="text-primaryFontBlack">tornar propriedade global</p>
