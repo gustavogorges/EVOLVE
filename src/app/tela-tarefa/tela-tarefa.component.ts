@@ -6,6 +6,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { Status } from 'src/model/status';
 
 interface Bah {
   name:string,
@@ -28,32 +29,29 @@ export class TelaTarefaComponent implements OnInit {
 
   tarefaSelecionada:Tarefa = new Tarefa
   tarefaNova : Tarefa = new Tarefa;
+  listaNova :Array<Tarefa>=[];
 
 
-
-
- 
   listOptions :Array<string>=[]
   listIcons : Array<string>=[]
   visualizacaoVisible:boolean = false
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
-  projetos !: Array<Projeto> 
+  projeto !:Projeto
   option  : string ="Padrão"
+  optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-    
+    this.listaNova = await this.service.getAllSomething("tarefa")
     this.listaTarefas =await this.service.getAllSomething("tarefa")
-    console.log(this.listaTarefas)
   }
 
   changeVisualizacao(e:any){
     this.ordenacaoVisible=false
     this.filtroVisible=false
 
-    console.log(this.visualizacaoVisible)
     e.target.value = "Visualização"
 
     this.listOptions = [
@@ -69,7 +67,6 @@ if( this.visualizacaoVisible==true){
     this.visualizacaoVisible=true;
 
   }
-  console.log(this.visualizacaoVisible)
 
 
     
@@ -89,31 +86,6 @@ if( this.visualizacaoVisible==true){
     this.filtroVisible=false
 
     console.log(this.ordenacaoVisible)
-  }
-
-  @HostListener('click', ['$event'])
-  clicouFora(event:any){
-   console.log("TESTE 2")
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
-    name.includes('c72') ||
-    name.includes('c64') ||
-    name.includes('c70') || 
-    name.includes('c78') ||
-    name.includes('c71'));
-     if(!element){
-       for(let pFor of this.listaTarefas){
-           this.closeTask();
-       }
-     }
-  }
-
-  closeTask() {
-    this.tarefaNova = new Tarefa;
-    this.booleanTask = false;
-  }
-
-  mudarSelect(e:any){
-
     e.target.value = "Visualização"
 
     this.listOptions = [
@@ -130,9 +102,26 @@ if( this.ordenacaoVisible==true){
 
   }
   console.log(this.ordenacaoVisible)
+  }
 
+  @HostListener('click', ['$event'])
+  clicouFora(event:any){
+   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
+    name.includes('c72') ||
+    name.includes('c64') ||
+    name.includes('c70') || 
+    name.includes('c78') ||
+    name.includes('c71'));
+     if(!element){
+       for(let pFor of this.listaTarefas){
+           this.closeTask();
+       }
+     }
+  }
 
-    
+  closeTask() {
+    this.tarefaNova = new Tarefa;
+    this.booleanTask = false;
   }
   
   optionB(option : any){
@@ -166,16 +155,55 @@ if( this.filtroVisible==true){
     
   }
   
-  optionC(option : any){
-  
-    this.filtroVisible=false;
-    console.log(option)
-    if(option=="status"){
-     async () => {
-      this.projetos = await axios.get("projeto")
+   async optionC(option : any){
+    if(option=="Status"){
+      this.optionFilter="";
+  }else{
+    this.optionFilter=option
+    this.optionFilter=this.optionFilter.toLowerCase()
+
+
+  }
+    this.ordenacaoVisible=false;
+    this.visualizacaoVisible=false;
+    this.projeto = await this.service.getOne("projeto",2652)
+   
+      this.projeto.listaStatus.map((status : Status)=>{
       
-     }
-    }
+        if(status.nome==option){
+          this.listaTarefas =[]
+          console.log("foi puta merdaaa")
+          this.listaNova.map((tarefa : Tarefa)=>{
+            console.log(tarefa.statusAtual.nome)
+
+            if(tarefa.statusAtual.nome==option){
+              this.listaTarefas.push(tarefa)
+              console.log("eueuue")
+              this.filtroVisible=false      
+
+            }
+          })
+
+        } 
+
+      }
+    
+      )
+    
+      if(option=="Favorito"){
+        this.listaTarefas =[]
+        console.log("de novvooo")
+        this.listaNova.map((tarefa : Tarefa)=>{
+          if(tarefa.favoritado==true){
+            this.listaTarefas.push(tarefa)
+          }
+        }
+        )
+        this.filtroVisible=false      
+
+      }
+    
+  
   }
 
 
@@ -198,5 +226,9 @@ if( this.filtroVisible==true){
     this.tarefaSelecionada.id = 0;
     this.booleanTask = !this.booleanTask;
   }
-
+  async removeFilter(){
+    this.listaTarefas =await this.service.getAllSomething("tarefa")
+    this.optionFilter=""
+  }
 }
+

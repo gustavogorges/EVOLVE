@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input, Output, EventEmitter } from '@angular/core';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -15,6 +15,7 @@ export class TarefaCardPadraoComponent  {
    nomeGrande ="";
    corStatus=""; 
    @Input() id: string = "";
+   @Output() newItem = new EventEmitter<boolean>();
 
 data : Date = new Date
 
@@ -51,6 +52,10 @@ data : Date = new Date
 
     }
     console.log(this.tarefaAtual)
+    this.service.putTarefa(this.tarefaAtual)
+    this.newItem.emit(true);
+
+    this.service.getOne("tarefa",this.tarefaAtual.id)
 
   }
 

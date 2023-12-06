@@ -1,11 +1,15 @@
 .main-box{
   @apply w-full flex justify-center
 }
+
+.gorgees{
+  @apply flex justify-end w-screen
+}
 .main{
-  @apply w-3/4
+  @apply w-3/4 flex flex-col gap-3
 }
 .header{
-  @apply w-full flex flex-row justify-between py-10 items-center 
+  @apply w-full flex flex-row justify-between py-6 items-center 
 }
 .button-name-box{
   @apply flex flex-col gap-4 max-w-fit
@@ -31,9 +35,8 @@
   @apply flex flex-col h-full w-full gap-6  items-center justify-center
 }
 
-.card {
-    @apply bg-[#F8F8F8] rounded-xl  drop-shadow-md w-full;
-  }
+
+
   .cardLista {
     @apply bg-[#FFFFFF] rounded-lg drop-shadow-md  w-[78%];
   }
@@ -75,5 +78,17 @@
 
 .tarefa {
   @apply  w-[45%] h-[92vh] z-50 fixed;
+}
+.box-filterBy{
+  @apply flex flex-row gap-1 items-center
+}
+.option-filterBy{
+  @apply bg-primaryNav  px-2 rounded-md text-[#6A7181] text-base flex items-center flex gap-2;
+  font-family: 'Hind Madurai', sans-serif;
+
+}
+.text-filterBy{
+  font-family: 'Hind Madurai', sans-serif;
+  @apply text-lg text-[#6A7181] 
 }
 
