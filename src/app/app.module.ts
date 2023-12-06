@@ -45,6 +45,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
 
 
@@ -88,7 +89,8 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     ContactComponent,
 
     BotaoAddTarefaComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    TeamCreationScreenComponent
 
 
 

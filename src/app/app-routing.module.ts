@@ -6,6 +6,7 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { TelaProjetoComponent } from './tela-projeto/tela-projeto.component';
 import { TelaTarefaComponent } from './tela-tarefa/tela-tarefa.component';
 import { TelaChatComponent } from './tela-chat/tela-chat.component';
+import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:"tela-chat",
     component: TelaChatComponent
+  },
+  {
+    path:"equipe/criar",
+    component: TeamCreationScreenComponent
   }
 ];
 
