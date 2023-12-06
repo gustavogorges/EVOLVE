@@ -109,6 +109,5 @@ export class ProjetoComponent implements OnInit {
   async irParaProjeto(){
     this.route.navigate(['view-project'], {state : {id:''}})
   }
-
 }
 

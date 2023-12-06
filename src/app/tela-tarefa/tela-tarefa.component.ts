@@ -6,6 +6,8 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 interface Bah {
   name:string,
@@ -41,9 +43,10 @@ export class TelaTarefaComponent implements OnInit {
   projetos !: Array<Projeto> 
   option  : string ="Padrão"
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService, private sla2: Location) {}
 
   async ngOnInit(): Promise<void> {
+    console.log(this.sla2.getState())
     
     this.listaTarefas =await this.service.getAllSomething("tarefa")
     console.log(this.listaTarefas)

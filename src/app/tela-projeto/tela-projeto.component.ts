@@ -57,7 +57,6 @@ export class TelaProjetoComponent implements OnInit {
       }
    });
     p.isVisible = !p.isVisible
-
   }
 
   async router(){

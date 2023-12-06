@@ -55,7 +55,6 @@ export class MembrosEquipeComponent implements OnInit {
   removeUser(){
     this.membros.splice(this.membros.indexOf(this.user), 1)
     this.arrayAlterada()
-
   }
 
 }

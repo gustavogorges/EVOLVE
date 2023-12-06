@@ -54,6 +54,7 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
 import { ChartModule } from 'primeng/chart';
 
+
 @NgModule({
   declarations: [
     AppComponent,
