@@ -8,7 +8,7 @@
         </div>
       </div>
     </ng-container>
-    <div *ngIf="propertieSelected" class="propertie input">
+    <div *ngIf="propertieSelected"  [ngClass]="creatingOptionBoolean ? ' border-none ' : 'border-b-2'" class="propertie py-1 pl-2">
       <input
         type="text"
         pInputText
@@ -19,7 +19,7 @@
     <div
       *ngIf="booleanPropertieSelect"
       (click)="(addOptions)"
-      class="propertie-add add-options"
+      class="propertie-add add-options border-none"
     >
       <i class="pi pi-plus text-secondary icon"></i>
       <p class="text-primaryFontBlack" (click)="addOptions()">
@@ -29,31 +29,36 @@
 
     <div
       *ngIf="creatingOptionBoolean"
-      class="grid grid-cols-2 w-full propertie"
+      class="propertie-add-input"
       style="grid-template-columns: 80% 20%"
     >
       <input
         class="input-add-status"
         type="text"
         placeholder="escreva o nome"
+        [(ngModel)]="selectOption.name"
       />
-      <div class="w-full flex justify-center items-center">
-        <i class="pi pi-pencil text-primary font-bold"></i>
+      <div class="w-full flex justify-center items-center" (click)="addOneOption()">
+        <i class="pi pi-check text-secondary font-bold"></i>
+      </div>
+      
+    </div>
+    <div class="listOptions" *ngIf="creatingOptionBoolean">
+      <div class="option"  *ngFor="let option of listOptions">
+        <div
+        [ngStyle]="{'background-color': option.backgroundColor}" 
+        class="w-[80%] h-full p-2 flex justify-center items-center rounded-md">
+          <p>{{option.name}}</p>
+        </div>
+        <i class="pi pi-times text-primary font-bold"></i>
       </div>
     </div>
 
-    <div *ngIf="creatingOptionBoolean" class="grid grid-cols-2 w-full propertie" style="grid-template-columns: 80% 20%">
-      <input
-        class="input-add-status"
-        type="text"
-        placeholder="selecione uma cor"
-      />
-      <div class="w-full flex justify-center items-center">
-        <input type="color" class="w-7" />
-      </div>
-    </div>
-
-    <div *ngIf="propertieSelected" class="propertie-add propertie-global">
+    <div 
+    *ngIf="propertieSelected" 
+    class="propertie-add propertie-global border-t-2"
+    [ngClass]="creatingOptionBoolean ? 'mt-2' : ''"
+    >
       <input type="checkbox" class="check" />
       <p class="text-primaryFontBlack">tornar propriedade global</p>
     </div>

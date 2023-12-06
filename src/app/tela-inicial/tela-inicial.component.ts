@@ -4,7 +4,7 @@ import { Equipe } from 'src/model/equipe';
 import { Tarefa } from 'src/model/tarefa';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-import { CookieService } from 'ngx-cookie-service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -29,27 +29,30 @@ export class TelaInicialComponent implements OnInit {
 
   data: any;
 
-  loggedUser: Usuario = new Usuario();
+  loggedUser: Usuario = new Usuario;
 
   booleanTask: boolean = false;
 
   constructor(
     private service: BackendEVOLVEService,
     private location: Location,
-    private cookieService: CookieService
+    private cookieService: CookiesService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.data = this.location.getState();
+    let userData: Usuario = await this.data.user
+    if(userData){
+      this.cookieService.setOne( userData)
+    }
+     
+    //this.loggedUser = await this.data.user;
 
-    this.loggedUser = this.data.user;
-
-    this.cookieService.set('loggedUser', JSON.stringify(this.loggedUser))
+    //this.cookieService.setOne(this.loggedUser)
 
     this.listaTarefas = await this.service.getAllSomething('tarefa');
-
-    //NAO FUNCIONA POR CAUSA DO BLOB CONVERTER BLOB PRA ALGUMA COISA
-    console.log(JSON.parse(this.cookieService.get('loggedUser')))
+    
+    this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
   }
   tarefaSelecionada: Tarefa = new Tarefa();
   openTask(tarefa: Tarefa): void {

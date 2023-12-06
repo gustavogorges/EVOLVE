@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Propriedade } from 'src/model/propriedade/property';
+import { SelectOption } from 'src/model/propriedade/selectOption';
 import { TarefaProjetoPropriedade } from 'src/model/propriedade/task-project-property';
 import { Tarefa } from 'src/model/tarefa';
 
@@ -18,6 +19,14 @@ export class SelectPropriedadeComponent implements OnInit {
   checked: boolean = false;
 
   creatingOptionBoolean : boolean = false;
+
+  creatingOptionTest : boolean = false;
+
+  optionName:string = '';
+
+  selectOption : SelectOption = new SelectOption;
+
+  listOptions : Array<SelectOption> = new Array;
 
   @Input()
   tarefa: Tarefa = new Tarefa();
@@ -90,5 +99,15 @@ export class SelectPropriedadeComponent implements OnInit {
   addOptions() {
     this.booleanPropertieSelect = false;
     this.creatingOptionBoolean = true;
+  }
+
+  addOneOption() {
+    const newOption: SelectOption = {
+      name: this.selectOption.name,
+      backgroundColor: this.selectOption.backgroundColor,
+      id: 0
+    }
+    this.listOptions.push(newOption);
+    this.selectOption.name = '';
   }
 }

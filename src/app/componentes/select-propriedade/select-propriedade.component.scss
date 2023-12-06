@@ -15,6 +15,10 @@
     @apply flex w-full h-12 items-center justify-start gap-2 border-b-2 cursor-pointer py-2
 }
 
+.propertie-add-input {
+    @apply flex w-full h-10 items-center justify-start gap-2 cursor-pointer pl-2
+}
+
 .icon {
     font-size: 1.1rem;
 }
@@ -63,5 +67,13 @@
 }
 
 .input-add-status {
-    @apply bg-primaryWhite outline-none 
+    @apply bg-white outline-none py-1 px-2 rounded-lg
+}
+
+.listOptions {
+    @apply w-full flex-col items-start pl-2 mt-2
+}
+
+.option {
+    @apply w-[60%] h-7 text-primaryFontBlack rounded-md flex justify-between items-center mb-1
 }
