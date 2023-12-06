@@ -51,7 +51,8 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
-
+import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -95,10 +96,12 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     ContactComponent,
 
     BotaoAddTarefaComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    TelaFullViewComponent
   ],
   
   imports: [
+    ChartModule,
     ColorPickerModule,
     BrowserAnimationsModule,
     CalendarModule,

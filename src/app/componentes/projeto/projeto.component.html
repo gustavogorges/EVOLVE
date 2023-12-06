@@ -54,7 +54,7 @@
             <div *ngIf="projeto.isVisible" class="botoes">
                 <button class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar <i class="pi pi-trash"></i></button>
                 <button class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar projeto<i class="pi pi-save"></i> </button>
-                <button class="botao-ir-para-projeto">Ir para projeto <i class="pi pi-angle-double-right"></i> </button>
+                <button class="botao-ir-para-projeto" (click)="irParaProjeto()">Ir para projeto <i class="pi pi-angle-double-right"></i> </button>
             </div>
         </div>
     
