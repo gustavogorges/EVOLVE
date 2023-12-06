@@ -37,6 +37,7 @@ export class SelectPropriedadeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.tarefa);
+    console.log(this.selectOption.backgroundColor)
   }
 
   options: any[] = [

@@ -33,7 +33,8 @@ import { IntegracaoComponent } from './componentes/sub-componentes/integracao/in
 
 import { CalendarModule } from 'primeng/calendar';
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
-import { ColorPickerModule } from 'primeng/colorpicker';
+
+import {ColorPickerModule} from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';

@@ -44,13 +44,19 @@
       
     </div>
     <div class="listOptions" *ngIf="creatingOptionBoolean">
-      <div class="option"  *ngFor="let option of listOptions">
+      <div 
+      class="option"  
+      *ngFor="let option of listOptions"
+      [ngStyle]="{'background-color': option.backgroundColor}" 
+      >
         <div
-        [ngStyle]="{'background-color': option.backgroundColor}" 
-        class="w-[80%] h-full p-2 flex justify-center items-center rounded-md">
+        class="w-[75%] h-full p-2 flex justify-center items-center rounded-md bg-white">
           <p>{{option.name}}</p>
         </div>
-        <i class="pi pi-times text-primary font-bold"></i>
+        <div class="w-[25%] h-full flex items-center justify-center gap-1">
+          <input type="color" class="w-6 h-full " default-value="#ffffff">
+          <i class="pi pi-times text-primary font-bold cursor-pointer"></i>
+        </div>
       </div>
     </div>
 

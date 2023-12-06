@@ -14,6 +14,7 @@ export class SelectStatusComponent implements OnInit {
   booleanAddStatus : boolean = false;
   booleanTeste : boolean = false;
   color : string = "";
+
   status : Status = new Status();
 
   @Input()
@@ -35,6 +36,7 @@ export class SelectStatusComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.statusLista)
     console.log(this.projeto)
+    console.log(this.status.corFundo)
   }
 
   salvarStatus(status:Status) {
