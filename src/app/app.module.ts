@@ -53,7 +53,10 @@ import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.com
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
 import { ChartModule } from 'primeng/chart';
-
+import { ChartModalComponent } from './componentes/chart-modal/chart-modal.component';
+import { DragDropModule } from 'primeng/dragdrop';
+import { MessagesModule } from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -98,10 +101,14 @@ import { ChartModule } from 'primeng/chart';
 
     BotaoAddTarefaComponent,
     SelectPropriedadeComponent,
-    TelaFullViewComponent
+    TelaFullViewComponent,
+    ChartModalComponent
   ],
   
   imports: [
+    MessageModule,
+    MessagesModule,
+    DragDropModule,
     ChartModule,
     ColorPickerModule,
     BrowserAnimationsModule,

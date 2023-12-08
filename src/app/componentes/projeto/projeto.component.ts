@@ -1,8 +1,7 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { Usuario } from 'src/model/usuario';
-import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 interface Tarefa{
   nome : string,
@@ -18,7 +17,7 @@ interface Tarefa{
 })
 export class ProjetoComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService, private route:Router){}
+  constructor(private route:Router){}
 
   date: string = ''
   tarefas : Tarefa[] = []

@@ -60,8 +60,8 @@ export class TelaProjetoComponent implements OnInit {
   }
 
   async router(){
-    let projeto:Projeto = await this.service.postProjeto(new Projeto)
-    localStorage.setItem('projeto', JSON.stringify(projeto))
+    console.log(new Projeto)
+    localStorage.setItem('projeto', JSON.stringify(await this.service.postProjeto(new Projeto)))
     this.route.navigate(['/criar-projeto'])
   }
 

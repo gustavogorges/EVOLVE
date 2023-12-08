@@ -29,29 +29,37 @@
         .dashboard-pai{
             @apply pt-20;
 
-            .titulo-dashboard{
-                @apply flex justify-between w-full pl-4 pb-3;
+            .container{
+                @apply py-10;
 
-                p{
-                    @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
-                }
-
-                button{
-                    @apply text-lg text-gray-800 dark:text-gray-300;
-
-                    i{
-                        @apply text-primary dark:text-dark-primary
+                .titulo-dashboard{
+                    @apply flex justify-between w-full pl-4 pb-3;
+    
+                    p{
+                        @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
+                    }
+    
+                    button{
+                        @apply text-lg text-gray-800 dark:text-gray-300;
+    
+                        i{
+                            @apply text-primary dark:text-dark-primary
+                        }
                     }
                 }
-            }
-
-            .dashboard{
-                @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
-
-                .chart{
-                    @apply  rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full;
+    
+                .dashboard{
+                    @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
+    
+                    .chart{
+                        @apply  rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full;
+                    }
                 }
             }
         }
     }
+}
+
+app-chart-modal{
+    @apply h-[20rem] z-10
 }

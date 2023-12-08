@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Projeto } from 'src/model/projeto';
-
 @Component({
   selector: 'app-tela-full-view',
   templateUrl: './tela-full-view.component.html',
@@ -8,13 +7,11 @@ import { Projeto } from 'src/model/projeto';
 })
 export class TelaFullViewComponent implements OnInit {
 
-  basicData : any
+    basicData : any
     basicOptions !: any
     options : any
     data : any
-
-    constructor() { }
-
+    
     ngOnInit() {
         this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
         this.graficoBasico()
@@ -44,6 +41,13 @@ export class TelaFullViewComponent implements OnInit {
                 },
                 {
                     label: 'Second Dataset',
+                    data: [28, 48, 40, 19, 86, 27, 90],
+                    fill: false,
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
+                    tension: 0.4
+                },
+                {
+                    label: 'Tree Dataset',
                     data: [28, 48, 40, 19, 86, 27, 90],
                     fill: false,
                     borderColor: documentStyle.getPropertyValue('--pink-500'),
