@@ -3,6 +3,7 @@ import { Propriedade } from 'src/model/propriedade/property';
 import { SelectOption } from 'src/model/propriedade/selectOption';
 import { TarefaProjetoPropriedade } from 'src/model/propriedade/task-project-property';
 import { Tarefa } from 'src/model/tarefa';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-select-propriedade',
@@ -31,9 +32,13 @@ export class SelectPropriedadeComponent implements OnInit {
   @Input()
   tarefa: Tarefa = new Tarefa();
 
+  newPropertie:TarefaProjetoPropriedade = new TarefaProjetoPropriedade();
+
   elemento: TarefaProjetoPropriedade = new TarefaProjetoPropriedade();
 
-  constructor() {}
+  constructor(
+    private service : BackendEVOLVEService
+  ) {}
 
   ngOnInit(): void {
     console.log(this.tarefa);
@@ -110,5 +115,13 @@ export class SelectPropriedadeComponent implements OnInit {
     }
     this.listOptions.push(newOption);
     this.selectOption.name = '';
+  }
+
+  savePropertie() {
+    console.log(this.tarefa)
+    this.tarefa.propriedades.push(this.newPropertie);
+    this.service.putTarefa(this.tarefa);
+    console.log(this.service.getAllSomething("tarefa"))
+    console.log(this.tarefa.propriedades);
   }
 }

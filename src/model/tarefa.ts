@@ -1,6 +1,7 @@
 import { Prioridade } from "./prioridade";
 import { Projeto } from "./projeto";
 import { Propriedade } from "./propriedade/property";
+import { TarefaProjetoPropriedade } from "./propriedade/task-project-property";
 import { Status } from "./status";
 import { Subtarefa } from "./subtarefa";
 import { Usuario } from "./usuario";
@@ -19,7 +20,7 @@ export class Tarefa{
 
     criador:Usuario = new Usuario;
     projeto:Projeto = new Projeto;
-    propriedades:Array<Propriedade> = new Array;
+    propriedades:Array<TarefaProjetoPropriedade> = new Array;
     subtarefas: Array<Subtarefa> = new Array;
 
 

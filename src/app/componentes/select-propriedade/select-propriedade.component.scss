@@ -28,11 +28,15 @@
 }
 
 .inputNamePropertie {
-    @apply outline-none bg-primaryWhite
+    @apply outline-none bg-primaryWhite text-lg
 }
 
 .button-confirm {
-    @apply h-10 w-full bg-secondary rounded-b-md flex justify-center items-center cursor-pointer
+    @apply h-10 w-full bg-secondary flex justify-center items-center cursor-pointer
+}
+
+.button-cancel {
+    @apply h-10 w-full bg-primary rounded-bl-md flex justify-center items-center cursor-pointer
 }
 
 .add-options  {
