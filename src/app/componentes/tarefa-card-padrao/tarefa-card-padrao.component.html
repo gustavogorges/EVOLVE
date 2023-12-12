@@ -1,6 +1,6 @@
 <div class="main">
-  <div class="flex gap-2 flex-col h-max">
-    <div class="top-box p-4 pb-0">
+  <div class="flex gap-1 flex-col h-max">
+    <div class="top-box p-3 pb-0">
       <p class="endDate">data final:{{ tarefaAtual.dataFinal }}</p>
       <div
         class="status"
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="center-box px-4 pt-2">
+  <div class="center-box ">
     <div class="nameTask-box">
       <div *ngIf="tarefaAtual.nome.length > 20">
         <p class="nameTask">{{ tarefaAtual.nome }}</p>
@@ -42,11 +42,12 @@
   <div class="usersStar-box pt-0 p-4">
     <div class="star">
       <img
-        [src]="caminhoEstrela"
-        (click)="favoritar()"
-        alt=""
-        class="cursor-pointer"
-      />
+      [src]="caminhoEstrela"
+      (click)="favoritar()"
+      alt=""
+      class="cursor-pointer"
+      style="width: 21px"
+    />
     </div>
     <div class="members">
       <div class="photoMember"></div>

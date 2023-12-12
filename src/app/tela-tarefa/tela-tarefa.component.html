@@ -16,6 +16,7 @@
         <app-botao-add-tarefa
           class="w-[100%]"
           (click)="openTaskEdit(tarefaNova)"
+          *ngIf="!(option == 'Kanban')"
         ></app-botao-add-tarefa>
       </div>
       <div class="box-selections">
@@ -102,6 +103,13 @@
         </div>
       </div>
     </div>
-    <div *ngIf="option == 'Kanban'">Lista</div>
+    
+      
+      </div>
+      <div *ngIf="option == 'Kanban'" >
+        <div class="flex flex-row gap-10 h-max" cdkDropListGroup >
+            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.listaStatus"
+            ></app-tarefa-kanban>
+        </div>
   </div>
 </div>

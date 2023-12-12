@@ -3,7 +3,7 @@ import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
 import { Projeto } from 'src/model/projeto';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
@@ -30,7 +30,7 @@ export class TelaTarefaComponent implements OnInit {
   tarefaSelecionada:Tarefa = new Tarefa
   tarefaNova : Tarefa = new Tarefa;
   listaNova :Array<Tarefa>=[];
-
+  tarefaMovida !:any
 
   listOptions :Array<string>=[]
   listIcons : Array<string>=[]
@@ -38,7 +38,7 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
   projeto !:Projeto
-  option  : string ="Padrão"
+  option  : string ="Kanban"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
@@ -46,6 +46,8 @@ export class TelaTarefaComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.listaNova = await this.service.getAllSomething("tarefa")
     this.listaTarefas =await this.service.getAllSomething("tarefa")
+    this.projeto = await this.service.getOne("projeto",2652)
+    console.log(this.projeto.listaStatus)
   }
 
   changeVisualizacao(e:any){
@@ -166,7 +168,7 @@ if( this.filtroVisible==true){
   }
     this.ordenacaoVisible=false;
     this.visualizacaoVisible=false;
-    this.projeto = await this.service.getOne("projeto",2652)
+    
    
       this.projeto.listaStatus.map((status : Status)=>{
       
@@ -230,5 +232,42 @@ if( this.filtroVisible==true){
     this.listaTarefas =await this.service.getAllSomething("tarefa")
     this.optionFilter=""
   }
-}
+  onDropSuccess(event: any, novoIndice: number): void {
+    const tarefa: Tarefa = event.dragData;
+    // Aqui você pode realizar a lógica de atualização do estado da tarefa no seu modelo de dados
+    // por exemplo, mover a tarefa para o novo índice na lista de tarefas
+  }
 
+  filtrarLista(status:Status): Array<Tarefa> {
+    let listaFiltrada = this.listaTarefas.filter(
+      (tarefa: Tarefa) => tarefa.statusAtual.nome === status.nome
+    );
+    return listaFiltrada 
+  }
+
+  onDrop(event: CdkDragDrop<Tarefa[]>, status:Status): void {
+    console.log("sto aq")
+    console.log(event.item)
+    console.log(event.container)
+    console.log(event.previousIndex)
+
+    if (event.previousContainer === event.container) {
+        // Reorder within the same list
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      // Move item to a different list
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      // Update the status of the task in your data model
+      const movedTask: Tarefa = event.container.data[event.currentIndex];
+      movedTask.statusAtual = status;
+    }
+  }
+  
+
+}

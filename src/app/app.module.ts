@@ -47,6 +47,9 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -91,8 +94,8 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     ContactComponent,
 
     BotaoAddTarefaComponent,
-    SelectPropriedadeComponent
-
+    SelectPropriedadeComponent,
+    TarefaKanbanComponent,
 
 
 
@@ -111,7 +114,10 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     CalendarModule,
     ColorPickerModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    DragDropModule
+    
+
 
   ],
   providers: [],
