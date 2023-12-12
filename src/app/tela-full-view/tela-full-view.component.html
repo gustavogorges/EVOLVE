@@ -8,58 +8,328 @@
             </div>
         </div>
         <div class="dashboard-pai">
-            <div class="container">
-                <div class="titulo-dashboard">
-                    <p>Dashboard 1</p>
-                    <button type="button"><i class="pi pi-plus"></i> Adicionar novo gráfico</button>
+            <div  class="container">
+                <div>
+                    <div class="titulo-dashboard">
+                        <p>Dashboard 1</p>
+                        <button type="button"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
+                    </div>
+                    <div class="dashboard flex" >
+                        <div  class="chart col-span-2 row-span-2 "  >
+                            <p-chart type="bar"  [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart" >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="dashboard flex" >
-                    <div  class="chart col-span-2 row-span-2 " >
-                        <p-chart type="line"  [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart" >
-                        <p-chart type="pie" [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="doughnut" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions" text-color="white" theme="dark" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="line" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+
+                <div class="comentario-pai">
+                    <div class="fundo-comentario">
+                        <div class="comentarios">
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
 
             <div  class="container">
-                <div class="titulo-dashboard">
-                    <p>Dashboard 1</p>
-                    <button type="button"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
+                <div>
+                    <div class="titulo-dashboard">
+                        <p>Dashboard 2</p>
+                        <button type="button"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
+                    </div>
+                    <div class="dashboard flex" >
+                        <div  class="chart col-span-2 row-span-2 "  >
+                            <p-chart type="line"  [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart" >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                        <div  class="chart " >
+                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        </div>
+                    </div>
                 </div>
-                <div class="dashboard flex" >
-                    <div  class="chart col-span-2 row-span-2 "  >
-                        <p-chart type="bar"  [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart" >
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                    </div>
-                    <div  class="chart " >
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+
+                <div class="comentario-pai">
+                    <div class="fundo-comentario">
+                        <div class="comentarios">
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+
+                            <div class="comentario">
+                                <div class="foto-user">
+                                    <div class="foto"></div>
+                                </div>
+                                <div class="nome">
+                                    <p>Felipe</p>
+                                </div>
+                                <div class="comentario-text">
+                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
+                                </div>
+                                <div class="date">
+                                    <p>29/10</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-    <div class="w-full h-full col-start-2">
-        <div class="bg-red-500 h-[80%] w-[20%] fixed"></div>
+    <div class="div-menor">
+        <div class="square">
+            <div class="name">
+                <p class="name-text">Membros</p>
+            </div>
+            <div class="membros">
+                <div class="membro">
+                    <i class="pi pi-ellipsis-v ponto"></i>
+                    <p class="name-user">José Almeida</p>
+                </div>
+                <div class="membro">
+                    <i class="pi pi-ellipsis-v ponto"></i>
+                    <p class="name-user">Clarice Lispector</p>
+                </div>
+                <div class="membro">
+                    <i class="pi pi-ellipsis-v ponto"></i>
+                    <p class="name-user">Jorge Amado</p>
+                </div>
+                <div class="membro">
+                    <i class="pi pi-ellipsis-v ponto"></i>
+                    <p class="name-user">Fernando Pessoa</p>
+                </div>
+            </div>
+            <div class="name">
+                <p class="name-text">Status das Tarefas</p>
+            </div>
+            <app-status-component-criar-tarefa [isVisible]="true"></app-status-component-criar-tarefa>
+            <div class="name">
+                <p class="name-text pt-[8%]">Propriedades</p>
+            </div>
+            <div class="propriedades">
+                <div class="propriedade">
+                    <i class="pi pi-calendar"></i>
+                    <p class="prop-name">revisão</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

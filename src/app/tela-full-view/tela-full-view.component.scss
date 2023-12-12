@@ -30,10 +30,10 @@
             @apply pt-20;
 
             .container{
-                @apply py-10;
+                @apply py-[3%] flex flex-col gap-3;
 
                 .titulo-dashboard{
-                    @apply flex justify-between w-full pl-4 pb-3;
+                    @apply flex justify-between w-full px-4 pb-3;
     
                     p{
                         @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
@@ -52,14 +52,105 @@
                     @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
     
                     .chart{
-                        @apply  rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full;
+                        @apply  rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
+                    }
+                }
+
+                .comentario-pai{
+                    @apply w-full h-[50vh] bg-primaryGray p-[3%] dark:bg-gray-700 rounded-xl;
+                    .fundo-comentario{
+                        @apply bg-secondaryWhite h-full dark:bg-gray-600 rounded-xl overflow-auto;
+                    
+                        .comentarios{
+                            @apply w-full;
+        
+                            .comentario{
+                                @apply grid grid-cols-2 grid-rows-2 items-center h-[9vh] border-b-2
+                                border-gray-200
+                                dark:border-gray-500;
+                                grid-template-columns: 12% 80% 8%;
+        
+                                .foto-user{
+                                    @apply col-start-1 col-end-2 row-span-full flex justify-center;
+        
+                                    .foto{
+                                        @apply w-[4rem] h-[4rem] bg-yellow-500 rounded-full
+                                    }
+                                }
+        
+                                .nome{
+                                    @apply row-start-1 row-end-2 col-start-2 col-end-3 text-xl font-semibold
+                                    text-primary
+                                    dark:text-dark-primary;
+                                }
+        
+                                .comentario-text{
+                                    @apply overflow-auto row-start-2 col-start-2 col-end-3 text-lg dark:text-primaryGray;
+    
+                                    p{
+                                        @apply text-justify
+                                    }
+                                }
+
+                                .date{
+                                    @apply text-gray-500
+                                            dark:text-gray-300;
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
-}
+    .div-menor{
+        @apply w-full h-full col-start-2;
 
-app-chart-modal{
-    @apply h-[20rem] z-10
+        .square{
+            @apply p-[1.5%] overflow-hidden bg-primaryGray dark:bg-gray-700 h-[80%] w-[20%] fixed shadow-md rounded-lg;
+
+            .name{
+                @apply px-2;
+
+                .name-text{
+                    @apply text-xl text-primary dark:text-dark-primary font-semibold
+                }
+            }
+
+            .membros{
+                @apply py-[7%];
+
+                .membro{
+                    @apply grid grid-cols-2 items-center grid-rows-1;
+                    grid-template-columns: 10% 80%;
+                    grid-template-rows: 2.5rem;
+    
+                    .ponto{
+                        @apply col-start-1 col-end-2 dark:text-dark-secundary-green text-secondary
+                    }
+    
+                    .name-user{
+                        @apply col-start-2 dark:text-gray-100
+                    }
+                }
+            }
+            .propriedades{
+                @apply py-[7%] overflow-scroll;
+
+                .propriedade{
+                    @apply grid grid-cols-4 items-center grid-rows-1;
+                    grid-template-columns: 10% 70% 10% 10%;
+                    grid-template-rows: 2.5rem;
+
+                    .prop-name{
+                        @apply dark:text-gray-200
+                    }
+
+                    i{
+                        @apply text-primary dark:text-dark-primary
+                    }
+                }
+            }
+        }
+    }
 }
