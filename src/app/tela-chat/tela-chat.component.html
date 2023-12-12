@@ -77,19 +77,27 @@
 
 
 
-                <div class="w-full h-full " *ngFor="let message of loggedUser.chats[0].messages">
+                <div class="w-full h-full " *ngFor="let message of loggedUser.chats[0].messages; index as index ">
 
                     <div class="first-message-right flex flex-col w-full ">
     
-                        <div class="first-message-right-image-container w-full flex justify-end items-center pb-2">
-                            <img class="first-message-right-image w-16 rounded-full"  src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT" alt="" >
+                        <div class="first-message-right-image-container w-full flex justify-end items-center pb-2" *ngIf="index == 0 || !previousMessageIsFromLoggedUser(message) && message.sender == loggedUser">
+                            <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
                         </div>
+
+                            <div class="first-message-left-image-container w-full flex justify-start items-center pb-2" *ngIf=" previousMessageIsFromLoggedUser(message) && message.sender != loggedUser">
+                                <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
+                            </div>
+
+                        <!-- <div class="first-message-left-image-container w-full flex justify-{{estilo}} items-center pb-2" >
+                            <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
+                        </div> -->
     
                         <div class="right-message-container w-full px-16  flex justify-end">
                             <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
                                 <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
-                                <p class="break-words w-max">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptatibus? Eveniet quis odio recusandae cumque labore libero placeat doloremque facilis ab dicta reiciendis dignissimos adipisci nostrum magni, eius earum voluptates.
+                                <p class="break-words w-max h-max">
+                                    {{message.content}}
                                 </p>
                             </div>
                         </div>

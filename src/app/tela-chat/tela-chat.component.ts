@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { Chat } from 'src/model/chat';
 import { Message } from 'src/model/message';
 import { UserChat } from 'src/model/userChat';
@@ -19,7 +20,7 @@ export class TelaChatComponent implements OnInit {
   loggedUser: Usuario = new Usuario
   fotoPerfilUrl: string = ""
 
-  newMessage: Message = new Message
+  newMessage: MessageDTO = new MessageDTO
 
   constructor(
     private service: BackendEVOLVEService,
@@ -27,9 +28,9 @@ export class TelaChatComponent implements OnInit {
   ) { }
 
   contact: Usuario = new Usuario
-
+estilo:string = ""
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.service.getOne("usuario", 1202)
+    this.loggedUser = await this.service.getOne("usuario", 303)
     this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
 
     console.log(this.loggedUser)
@@ -40,6 +41,7 @@ export class TelaChatComponent implements OnInit {
     console.log(this.getContactFromUser(this.loggedUser.chats[0], this.loggedUser))
 
     this.newMessage
+    this.estilo = "end"
 
   }
 
@@ -51,37 +53,31 @@ export class TelaChatComponent implements OnInit {
 
     let sender = new Usuario()
     sender.id = this.loggedUser.id
+
     this.newMessage.sender = sender
 
-    type chatId =Pick<UserChat, "id"> 
+    this.newMessage.chatId = this.loggedUser.chats[0].id
 
-    let chatId :chatId = {"id": this.loggedUser.chats[0].id}
-    this.newMessage.chat = chatId
-
-    //rever o status da mensagem
+    //mudar status ao receber mensagem (backend?)
+    this.newMessage.messageStatus = 0
 
     this.newMessage.date = messageDate.toISOString()
 
-    // type messageDTO = Omit<Message, "id">
+    console.log(await this.service.postMessage(this.newMessage))
 
+    this.newMessage = new MessageDTO
 
-    // let sendingMessage: messageDTO = {
-    //   content: this.newMessage.content,
-    //   date: this.newMessage.date,
-    //   messageStatus: this.newMessage.messageStatus,
-    //   sender: sender
-    // }
+  }
 
-    // console.log("é qui msm n tem jeito")
-    // console.log(sendingMessage)
-
-    this.loggedUser.chats[0].messages.push(this.newMessage)
-
-    console.log(this.loggedUser.chats[0].messages)
-
-    console.log(await this.service.putUserChat(this.loggedUser.chats[0]))
-
-    this.newMessage = new Message
+  previousMessageIsFromLoggedUser(message:Message):Boolean{
+    let messages:Array<Message> =  this.loggedUser.chats[0].messages
+    let previousMessageIndex:number = messages.indexOf(message) - 1 
+    if(previousMessageIndex >= 0){
+      // console.log(messages[previousMessageIndex].sender)
+      // console.log(this.loggedUser)
+      return messages[previousMessageIndex].sender.id == this.loggedUser.id
+    }
+    return false
 
   }
 
@@ -91,5 +87,14 @@ export class TelaChatComponent implements OnInit {
     }
     return chat.users[1]
   }
+
+// a(index:number, message:Message):Boolean{
+//   console.log(index == 0 || !this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser)
+//   console.log(!this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser)
+//   console.log(message.sender == this.loggedUser)
+//   console.log(!this.previousMessageIsFromLoggedUser(message))
+//   console.log(message.sender)
+//   return index == 0 || !this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser
+// }
 
 }

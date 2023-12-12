@@ -8,7 +8,6 @@ export class Message {
     sender:Usuario = new Usuario;
     date:string = "";
     messageStatus:MessageStatus = 0;
-    chat:Pick<Chat, "id"> = {"id":0}
-
+    chat:Array<Chat> = new Array
 
 }
