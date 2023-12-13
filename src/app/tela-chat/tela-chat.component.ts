@@ -6,7 +6,6 @@ import { Message } from 'src/model/message';
 import { UserChat } from 'src/model/userChat';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-// import { FileService } from 'src/service/file.service';
 
 @Component({
   selector: 'app-tela-chat',
@@ -15,34 +14,51 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaChatComponent implements OnInit {
 
-
+  messageAlignment:String = "end"
+  senderImagePointerAlignment:String = "right"
+  senderImagePointerDirection:Number = 46
+  showSenderImagePointer:Boolean = false
 
   loggedUser: Usuario = new Usuario
-  fotoPerfilUrl: string = ""
 
   newMessage: MessageDTO = new MessageDTO
 
+  selectedChat:Chat = new UserChat
+
   constructor(
     private service: BackendEVOLVEService,
-    // private fileService:FileService
   ) { }
 
   contact: Usuario = new Usuario
-estilo:string = ""
+
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.service.getOne("usuario", 303)
+    this.loggedUser = await this.service.getOne("usuario", 1202)
     this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
 
     console.log(this.loggedUser)
 
-    this.fotoPerfilUrl = this.loggedUser.fotoPerfil
-
     // this.contact = chat.getContactFromUser(user)
-    console.log(this.getContactFromUser(this.loggedUser.chats[0], this.loggedUser))
+    // console.log(this.getContactFromUser(this.loggedUser.chats[1], this.loggedUser))
 
-    this.newMessage
-    this.estilo = "end"
+    this.selectedChat = await this.getLastChat()
+  }
 
+  async getLastChat():Promise<Chat>{
+    return await this.service.getChatsByUserId(this.loggedUser.id).then( (chats:Array<Chat>) => {
+
+      for(let chat of chats){
+        if(chat.id == JSON.parse(localStorage.getItem("lastChatId") ?? "")){
+          return chat
+        }
+      }
+      return new UserChat
+    })
+  }
+
+  selectChat(chat:Chat):void{
+    console.log(chat)
+    this.selectedChat = chat
+    localStorage.setItem("lastChatId",JSON.stringify(this.selectedChat.id))
   }
 
   // Omit<UserChat, "message">
@@ -56,7 +72,7 @@ estilo:string = ""
 
     this.newMessage.sender = sender
 
-    this.newMessage.chatId = this.loggedUser.chats[0].id
+    this.newMessage.chatId = this.selectedChat.id
 
     //mudar status ao receber mensagem (backend?)
     this.newMessage.messageStatus = 0
@@ -69,32 +85,58 @@ estilo:string = ""
 
   }
 
-  previousMessageIsFromLoggedUser(message:Message):Boolean{
-    let messages:Array<Message> =  this.loggedUser.chats[0].messages
-    let previousMessageIndex:number = messages.indexOf(message) - 1 
+
+
+  getContactFromUser(chat: UserChat, user: Usuario) {
+    let users:Array<Usuario> = chat.users
+    if (users[0].id != user.id) {
+      return users[0]
+    }
+    return users[1]
+  }
+
+
+
+
+
+  previousMessageIsFromLoggedUser(currentMessageIndex:Number):Boolean{
+    let messages:Array<Message> =  this.selectedChat.messages
+    let previousMessageIndex:number = currentMessageIndex.valueOf() - 1 
     if(previousMessageIndex >= 0){
-      // console.log(messages[previousMessageIndex].sender)
-      // console.log(this.loggedUser)
       return messages[previousMessageIndex].sender.id == this.loggedUser.id
     }
     return false
 
   }
 
-  getContactFromUser(chat: UserChat, user: Usuario) {
-    if (chat.users[0] != user) {
-      return chat.users[0]
+  showImage(messageIndex:Number,message:Message):Boolean{
+
+    this.setMessageAlignment(message)
+
+    if(!this.previousMessageIsFromLoggedUser(messageIndex) && message.sender.id == this.loggedUser.id){
+      this.showSenderImagePointer = true
+      return true
+    } else if( this.previousMessageIsFromLoggedUser(messageIndex) && message.sender.id != this.loggedUser.id){
+      this.showSenderImagePointer = true
+      return true
     }
-    return chat.users[1]
+
+    this.showSenderImagePointer = messageIndex == 0
+    return messageIndex == 0
   }
 
-// a(index:number, message:Message):Boolean{
-//   console.log(index == 0 || !this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser)
-//   console.log(!this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser)
-//   console.log(message.sender == this.loggedUser)
-//   console.log(!this.previousMessageIsFromLoggedUser(message))
-//   console.log(message.sender)
-//   return index == 0 || !this.previousMessageIsFromLoggedUser(message) && message.sender == this.loggedUser
-// }
+  setMessageAlignment(message:Message):void{
+
+    if(message.sender.id == this.loggedUser.id){
+      this.messageAlignment = "end"
+      this.senderImagePointerAlignment = "right"
+      this.senderImagePointerDirection = 46
+    } else {
+      this.messageAlignment = "start"
+      this.senderImagePointerAlignment = "left"
+      this.senderImagePointerDirection = -46
+    }
+
+  }
 
 }

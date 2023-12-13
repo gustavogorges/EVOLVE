@@ -32,20 +32,10 @@
                     </div>
                 </div>
 
-
-                <div class="w-full h-full" *ngFor="let chat of loggedUser.chats">
-
-                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat"></app-contact>
-                    <!-- <app-contact></app-contact>
-                    <app-contact></app-contact>
-                    <app-contact></app-contact>
-                    <app-contact></app-contact>
-                    <app-contact></app-contact>
-                    <app-contact></app-contact>
-                    <app-contact></app-contact> -->
-
+                <div class="w-full h-max"  *ngFor="let chat of loggedUser.chats">
+                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)"></app-contact>
                 </div>
-
+                
             </div>
 
         </div>
@@ -53,8 +43,7 @@
         <div class="conversa justify-between flex-col flex bg-white w-[70%] relative h-full">
 
             <div class="w-full min-h-[4rem] h-16 bg-primary flex items-center gap-4 px-8 ">
-                <!-- <img src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT"
-                    alt="" class="rounded-full h-[80%]"> -->
+
                     <div class="h-[3.25rem] min-w-[3.25rem] max-w-min ">
                         <img src="{{loggedUser.fotoPerfil}}"
                             alt="" class="rounded-full h-full w-full">
@@ -72,31 +61,18 @@
             <div class="messages w-full h-full pt-4 overflow-scroll px-16 flex flex-col gap-4 ">
 
 
+                <div class="w-full h-max " *ngFor="let message of selectedChat.messages; index as index ">
 
-
-
-
-
-                <div class="w-full h-full " *ngFor="let message of loggedUser.chats[0].messages; index as index ">
-
-                    <div class="first-message-right flex flex-col w-full ">
+                    <div class="message-container flex flex-col w-full ">
     
-                        <div class="first-message-right-image-container w-full flex justify-end items-center pb-2" *ngIf="index == 0 || !previousMessageIsFromLoggedUser(message) && message.sender == loggedUser">
-                            <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
+                        <div class="sender-image-container w-full flex justify-{{messageAlignment}} items-center pb-2" *ngIf="showImage(index, message) ">
+                            <img class="sender-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
                         </div>
-
-                            <div class="first-message-left-image-container w-full flex justify-start items-center pb-2" *ngIf=" previousMessageIsFromLoggedUser(message) && message.sender != loggedUser">
-                                <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
-                            </div>
-
-                        <!-- <div class="first-message-left-image-container w-full flex justify-{{estilo}} items-center pb-2" >
-                            <img class="first-message-right-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
-                        </div> -->
     
-                        <div class="right-message-container w-full px-16  flex justify-end">
+                        <div class="message w-full px-16  flex justify-{{messageAlignment}}">
                             <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                                <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
-                                <p class="break-words w-max h-max">
+                                <div class="sender-image-pointer z-[1] top-[-15px] {{senderImagePointerAlignment}}-[-15px] absolute rotate-[{{senderImagePointerDirection}}deg]" *ngIf="showSenderImagePointer"></div>
+                                <p class="message-content break-words w-max h-max">
                                     {{message.content}}
                                 </p>
                             </div>
@@ -105,12 +81,15 @@
                     </div>
 
                 </div>
+
+
+            </div>
                 
 
-
+<!-- 
                 <div class="right-message-container w-full px-16  flex justify-end">
                     <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                        <!-- <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div> -->
+                        <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
                         <p class="break-words w-max">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                         </p>
@@ -119,7 +98,7 @@
 
                 <div class="right-message-container w-full px-16  flex justify-end">
                     <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                        <!-- <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div> -->
+                        <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
                         <p class="break-words w-max">
                             Lorem
                         </p>
@@ -157,7 +136,7 @@
                 
                 <div class="w-full pl-16">
                     <div class="message-with-pointer bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] ">
-                        <!-- <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div> -->
+                        <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div>
                         <p class="break-words w-max">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         </p>
@@ -166,14 +145,14 @@
 
                 <div class="w-full  pl-16">
                     <div class="message-with-pointer bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] ">
-                        <!-- <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div> -->
+                        <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div>
                         <p class="break-words w-max">
                             Lorem
                         </p>
                     </div>
                 </div>
 
-
+ -->
 
 
 
@@ -185,7 +164,7 @@
                 </div> -->
 
 
-            </div>
+
 
 
 
