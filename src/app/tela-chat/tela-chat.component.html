@@ -62,132 +62,30 @@
 
 
                 <div class="w-full h-max " *ngFor="let message of selectedChat.messages; index as index ">
-
-                    <div class="message-container flex flex-col w-full ">
-    
-                        <div class="sender-image-container w-full flex justify-{{messageAlignment}} items-center pb-2" *ngIf="showImage(index, message) ">
-                            <img class="sender-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
-                        </div>
-    
-                        <div class="message w-full px-16  flex justify-{{messageAlignment}}">
-                            <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                                <div class="sender-image-pointer z-[1] top-[-15px] {{senderImagePointerAlignment}}-[-15px] absolute rotate-[{{senderImagePointerDirection}}deg]" *ngIf="showSenderImagePointer"></div>
-                                <p class="message-content break-words w-max h-max">
-                                    {{message.content}}
-                                </p>
-                            </div>
-                        </div>
-    
-                    </div>
-
+                    <app-message [loggedUser]="loggedUser" [chat]="selectedChat" [message]="message"></app-message>
                 </div>
 
 
             </div>
+
+
+            <div class="message-bar w-full h-[10%]">
+                <!-- <div class="w-full h-full flex items-center justify-center gap-8">
+
+                    <div class="message-input flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4 ">
+                        <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
+                    </div>
                 
-
-<!-- 
-                <div class="right-message-container w-full px-16  flex justify-end">
-                    <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                        <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
-                        <p class="break-words w-max">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
+                    <div class="send-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]" (click)="sendMessage()">
+                        <img src="../../assets/sendButton.svg" alt="" class="">
                     </div>
-                </div>
-
-                <div class="right-message-container w-full px-16  flex justify-end">
-                    <div class="bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end">
-                        <div class="triangle z-[1] top-[-15px] right-[-15px] absolute rotate-[46deg]"></div>
-                        <p class="break-words w-max">
-                            Lorem
-                        </p>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-                <div class="first-message-left flex flex-col w-full ">
-
-                    <div class="first-message-left-image-container w-full flex justify-start items-center pb-2">
-                        <img class="first-message-left-image w-16 rounded-full"  src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcT9kry1myZTi2dMJ7OtgJjmdT__lImpI-pJ9mdq42Cz8HhIet_ro_Obp6q4xbksBbpT" alt="" >
-                    </div>
-
-                    <div class="left-message-container w-full pl-16">
-                        <div class="left-message-with-pointer bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] ">
-                            <div class="left-message-pointer triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div>
-                            <p class="message-text break-words w-max">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi mollitia atque fugit adipisci fugiat temporibus, veritatis ea pariatur! Nam inventore cumque tenetur placeat nostrum id eaque alias animi reiciendis repellat.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-
                 
-                <div class="w-full pl-16">
-                    <div class="message-with-pointer bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] ">
-                        <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div>
-                        <p class="break-words w-max">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </p>
+                    <div class="annex-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]  ">
+                        <img src="../../assets/clip.svg" alt="">
                     </div>
-                </div>
-
-                <div class="w-full  pl-16">
-                    <div class="message-with-pointer bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] ">
-                        <div class="triangle z-[1] top-[-15px] left-[-15px] rotate-[-46deg] absolute"></div>
-                        <p class="break-words w-max">
-                            Lorem
-                        </p>
-                    </div>
-                </div>
-
- -->
-
-
-
-
-
-
-                <!-- <div class="teste bg-primaryWhite" >
-                    
+                
                 </div> -->
-
-
-
-
-
-
-
-
-            <!-- <div class="triangulo absolute rotate-[-45deg] z-10 top-[-34px] left-[-35px]  "></div>
-            <div class="triangle  top-[-15px] right-[-15px] absolute" ></div>    -->
-
-
-            <div class="w-full h-[10%] flex items-center justify-center gap-8">
-
-                <div class="message-input flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4 ">
-                    <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
-                </div>
-
-                <div class="send-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]" (click)="sendMessage()">
-                    <img src="../../assets/sendButton.svg" alt="" class="">
-                </div>
-
-                <div class="annex-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]  ">
-                    <img src="../../assets/clip.svg" alt="">
-                </div>
-
+               <app-message-bar [loggedUser]="loggedUser" [chat]="selectedChat"></app-message-bar>
             </div>
 
         </div>

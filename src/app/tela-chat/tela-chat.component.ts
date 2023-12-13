@@ -14,10 +14,10 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaChatComponent implements OnInit {
 
-  messageAlignment:String = "end"
-  senderImagePointerAlignment:String = "right"
-  senderImagePointerDirection:Number = 46
-  showSenderImagePointer:Boolean = false
+  // messageAlignment:String = "end"
+  // senderImagePointerAlignment:String = "right"
+  // senderImagePointerDirection:Number = 46
+  // showSenderImagePointer:Boolean = false
 
   loggedUser: Usuario = new Usuario
 
@@ -93,50 +93,6 @@ export class TelaChatComponent implements OnInit {
       return users[0]
     }
     return users[1]
-  }
-
-
-
-
-
-  previousMessageIsFromLoggedUser(currentMessageIndex:Number):Boolean{
-    let messages:Array<Message> =  this.selectedChat.messages
-    let previousMessageIndex:number = currentMessageIndex.valueOf() - 1 
-    if(previousMessageIndex >= 0){
-      return messages[previousMessageIndex].sender.id == this.loggedUser.id
-    }
-    return false
-
-  }
-
-  showImage(messageIndex:Number,message:Message):Boolean{
-
-    this.setMessageAlignment(message)
-
-    if(!this.previousMessageIsFromLoggedUser(messageIndex) && message.sender.id == this.loggedUser.id){
-      this.showSenderImagePointer = true
-      return true
-    } else if( this.previousMessageIsFromLoggedUser(messageIndex) && message.sender.id != this.loggedUser.id){
-      this.showSenderImagePointer = true
-      return true
-    }
-
-    this.showSenderImagePointer = messageIndex == 0
-    return messageIndex == 0
-  }
-
-  setMessageAlignment(message:Message):void{
-
-    if(message.sender.id == this.loggedUser.id){
-      this.messageAlignment = "end"
-      this.senderImagePointerAlignment = "right"
-      this.senderImagePointerDirection = 46
-    } else {
-      this.messageAlignment = "start"
-      this.senderImagePointerAlignment = "left"
-      this.senderImagePointerDirection = -46
-    }
-
   }
 
 }
