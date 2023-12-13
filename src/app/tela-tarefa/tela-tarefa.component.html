@@ -107,7 +107,7 @@
       
       </div>
       <div *ngIf="option == 'Kanban'" >
-        <div class="flex flex-row gap-10 h-max" cdkDropListGroup >
+        <div class="w-full" cdkDropListGroup >
             <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.listaStatus"
             ></app-tarefa-kanban>
         </div>

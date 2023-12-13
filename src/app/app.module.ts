@@ -115,7 +115,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ColorPickerModule,
     BrowserAnimationsModule,
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    
     
 
 
