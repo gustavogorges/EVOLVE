@@ -46,6 +46,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+import { CdTimerModule } from 'angular-cd-timer';
 
 
 
@@ -108,7 +109,9 @@ import { SelectPropriedadeComponent } from './componentes/select-propriedade/sel
     CalendarModule,
     ColorPickerModule,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    CdTimerModule
+
 
   ],
   providers: [],

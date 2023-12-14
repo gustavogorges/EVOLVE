@@ -23,7 +23,13 @@ export class ModalTarefaComponent implements OnInit {
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
   nomeAntigo: string = '';
+  booleanPlayPause : boolean = false; 
 
+  stopTimer() {
+    
+  }
+
+  
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Tarefa = new Tarefa();
   tarefaTeste : Tarefa = this.tarefa;

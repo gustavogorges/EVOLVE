@@ -26,7 +26,7 @@
     </div>
     <div class="foco-on" *ngIf="booleanFoco">
       <div class="foco-timer">
-        <p>0:00</p>
+        <cd-timer></cd-timer>
       </div>
       <div class="actions-timer">
         <div class="cancel action" (click)="finishFocus()">
@@ -35,7 +35,14 @@
         <div class="pause action">
           <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
         </div>
-        <div class="stop action" (click)="finishFocus()">
+        <div  *ngIf="booleanPlayPause"  class="stop action">
+          <i class="pi pi-play" style="font-size: 1rem"></i>começar
+        </div>
+        <div  
+        *ngIf="!booleanPlayPause" 
+        class="stop action"
+        (click)="stopTimer()"
+        >
           <i class="pi pi-stop-circle" style="font-size: 1rem"></i>parar
         </div>
       </div>

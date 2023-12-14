@@ -32,6 +32,7 @@ export class TelaTarefaComponent implements OnInit {
     name.includes('c72') ||
     name.includes('c64') ||
     name.includes('c70') || 
+    name.includes('c73') || 
     name.includes('c78') ||
     name.includes('c71') ||
     name.includes('c79'));
