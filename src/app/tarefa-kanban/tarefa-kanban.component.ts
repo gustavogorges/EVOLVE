@@ -8,57 +8,69 @@ import {
 } from '@angular/cdk/drag-drop';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
-
 @Component({
   selector: 'app-tarefa-kanban',
   templateUrl: './tarefa-kanban.component.html',
   styleUrls: ['./tarefa-kanban.component.scss'],
 })
 export class TarefaKanbanComponent implements OnInit {
-  // @Input() status!: Status;
   @Input() listaTarefas!: Array<Tarefa>;
   @Input() listaStatus!: Array<Status>;
 
-  // listaFiltrada: Array<Tarefa> = [];
-  constructor(private service: BackendEVOLVEService) {}
-  ngOnInit(): void {}
+  constructor(private service: BackendEVOLVEService) { }
+  ngOnInit(): void { }
 
   filtrarLista(status: Status): Array<Tarefa> {
-    let listaFiltrada = this.listaTarefas.filter(
-      (tarefa: Tarefa) => tarefa.statusAtual.nome === status.nome
-    );
+    let listaFiltrada = this.listaTarefas
+      .filter((tarefa: Tarefa) => tarefa.statusAtual.nome === status.nome)
+      .sort((a, b) => a.statusListIndex - b.statusListIndex);
+
     return listaFiltrada;
   }
 
-
-  drop(event: CdkDragDrop<Tarefa[]>, status: Status, list:Array<Tarefa>) {
-
-
-    
+  async drop(
+    event: CdkDragDrop<Tarefa[]>,
+    status: Status,
+    list: Array<Tarefa>
+  ) {
     if (event.previousContainer === event.container) {
-      const prevIndex = event.previousIndex;
-    const currentIndex = event.currentIndex;
-
-    // Remove o item da posição anterior
-    const removedItem = this.listaTarefas.splice(prevIndex, 1)[0];
-
-    // Adiciona o item na nova posição
-    this.listaTarefas.splice(currentIndex, 0, removedItem);
-
-    console.log(this.listaTarefas);
-    
-      
-
-      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       (event.item.data as Tarefa).statusAtual = status;
-      console.log(event.item.data);
-     
+      this.service.putTarefa(event.item.data);
+    }
+
+    if (event.container.data.length == 0) {
+      (event.item.data as Tarefa).statusAtual = status;
+
+      (event.item.data as Tarefa).statusListIndex = event.currentIndex;
+
+      this.service.putTarefa(event.item.data);
+      await console.log(this.service.getOne('tarefa', event.item.data.id));
+    } else {
+      for (let i of event.container.data) {
+        let novoIndex = event.container.data.indexOf(i);
+        i.statusListIndex = novoIndex;
+        this.service.putTarefa(i);
+      }
     }
   }
+  // dropTudo(event: CdkDragDrop<any[]>){    
+  //   console.log(event.container)
+  //   console.log(event.previousContainer)
+  //   console.log(this.listaStatus)
 
-  a(a: any, b: any): void {
-    console.log(a);
-    console.log(b);
-  }
+
+  //     moveItemInArray(
+  //       this.listaStatus,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //     console.log(this.listaStatus)
+    
+  // }
 }

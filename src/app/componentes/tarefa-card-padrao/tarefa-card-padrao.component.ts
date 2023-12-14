@@ -35,7 +35,7 @@
         this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
       }
       this.valorBarra = 60 +"%"; 
-      console.log(this.tarefaAtual.id + " "+this.tarefaAtual.statusAtual)
+  
     
     }
 

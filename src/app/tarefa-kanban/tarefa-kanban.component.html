@@ -1,12 +1,13 @@
-  <div class=" flex justify-between  w-full gap-7 overflow-auto " cdkDropListGroup>
+  <div class=" flex justify-between  w-[1712px] gap-7 overflow-auto " cdkDropListGroup>
     <div
       *ngFor="let status of listaStatus"
       cdkDropList
       [cdkDropListData]="filtrarLista(status)"
       (cdkDropListDropped)="drop($event, status, filtrarLista(status))"
       class="min-w-[400px] bg-primaryGray flex flex-col items-center"
+      cdkDrag 
     >
-      <div class=" w-full flex justify-end bg-[#F8F8F8]">
+      <div class=" w-full flex justify-end bg-[#F8F8F8]"  >
        <p class="status w-min "  [ngStyle]="{
         'background-color': status.corFundo,
         color: status.corTexto
