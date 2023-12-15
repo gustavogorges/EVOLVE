@@ -12,8 +12,8 @@
             </p>
         </div>
         <div class="">
-            <p class="w-full truncate text-[80%]">
-                Ultima mensagem de Roberto Carlos Foi essa daqui
+            <p class="w-full truncate text-[95%]">
+                {{lastMessage.content}}
             </p>
         </div>
     </div>
@@ -22,7 +22,7 @@
 
         <div class="flex items-center  w-full h-1/2">
             <p>
-                24/11
+                {{lastMessage.date | date : "dd"+"/"+"MM"}} 
             </p>
         </div>
         <div class="">

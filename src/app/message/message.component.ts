@@ -16,14 +16,18 @@ export class MessageComponent implements OnInit {
   @Input() loggedUser:Usuario = new Usuario
   @Input() message:Message = new Message
 
-  messageAlignment:String = "end"
+  messageAlignment:string = "end"
   senderImagePointerAlignment:String = "right"
-  senderImagePointerDirection:Number = 46
-  showSenderImagePointer:Boolean = false
+  senderImagePointerDirection:number = 46
+  showSenderImagePointer:boolean = false
 
   constructor() { }
 
   ngOnInit(): void {
+    this.messageAlignment = "end"
+    this.senderImagePointerAlignment = "right"
+    this.senderImagePointerDirection = 46
+    this.showSenderImagePointer = false
   }
 
   previousMessageIsFromLoggedUser(currentMessageIndex:Number):Boolean{
@@ -40,7 +44,7 @@ export class MessageComponent implements OnInit {
 
     let messageIndex:Number = this.chat.messages.indexOf(message)
 
-    console.log(message)
+    // console.log(message)
     this.setMessageAlignment(message)
 
     if(!this.previousMessageIsFromLoggedUser(messageIndex) && message.sender.id == this.loggedUser.id){
