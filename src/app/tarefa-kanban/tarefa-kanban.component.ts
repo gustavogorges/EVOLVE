@@ -3,6 +3,7 @@ import { Status } from 'src/model/status';
 import { Tarefa } from 'src/model/tarefa';
 import {
   CdkDragDrop,
+  CdkDragMove,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
@@ -59,18 +60,31 @@ export class TarefaKanbanComponent implements OnInit {
       }
     }
   }
-  // dropTudo(event: CdkDragDrop<any[]>){    
-  //   console.log(event.container)
-  //   console.log(event.previousContainer)
-  //   console.log(this.listaStatus)
+  dropTudo(event: CdkDragDrop<any[]>){    
+    console.log(event.container)
+    console.log(event.previousContainer)
+    console.log(this.listaStatus)
 
 
-  //     moveItemInArray(
-  //       this.listaStatus,
-  //       event.previousIndex,
-  //       event.currentIndex
-  //     );
-  //     console.log(this.listaStatus)
+      moveItemInArray(
+        this.listaStatus,
+        event.previousIndex,
+        event.currentIndex
+      );
+      console.log(this.listaStatus)
     
-  // }
+  }
+  updateListOrder(event: CdkDragMove<any>) {
+    console.log(event.delta)
+    console.log(event.event)
+    console.log(event.pointerPosition);
+    console.log(event.source)
+    
+   
+    // if (previousIndex !== undefined) {
+    //   // Atualiza a ordem da listaStatus
+    //   const status = this.listaStatus.splice(currentIndex, 1)[0];
+    //   this.listaStatus.splice(previousIndex, 0, status);
+    // }
+  }
 }
