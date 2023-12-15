@@ -25,8 +25,56 @@ export class ModalTarefaComponent implements OnInit {
   nomeAntigo: string = '';
   booleanPlayPause : boolean = false; 
 
+  interval : any;
+
+  timerString : string = '00:00';
+  seconds : number = 0;
+  secondsString : string = '';
+  minutes : number = 0;
+  minutesString : string = '00';
+  hours : number = 0
+  hoursString : string = ' ';
+
+
+  startTimer() {
+    this.booleanPlayPause = false;
+    this.interval = setInterval(() => {
+      if(this.seconds <= 59) {
+        if(this.seconds < 9) {
+          this.seconds++;
+          this.secondsString = '0' + this.seconds.toString();
+        } else {
+          this.seconds++;
+          this.secondsString = this.seconds.toString();
+        }
+      } 
+      if(this.seconds > 59) {
+        this.seconds = 0;
+        this.secondsString = '0' + this.seconds.toString();
+        if(this.minutes < 59) {
+          if(this.minutes < 10) {
+            this.minutes++;
+            this.minutesString = '0' + this.minutes.toString();
+          } else {
+            this.minutes++;
+            this.minutesString = this.minutes.toString();
+            this.seconds = 0;
+            this.secondsString = this.seconds.toString();
+          }
+        } else {
+          this.minutes=0;
+          this.hours++;
+          this.hoursString = this.hours.toString() + ' : '
+        }
+      }
+
+      this.timerString = this.hoursString + this.minutesString + ':' + this.secondsString
+    },1000)
+  }
+
   stopTimer() {
-    
+    this.booleanPlayPause = true;
+    clearInterval(this.interval);
   }
 
   
@@ -153,6 +201,7 @@ export class ModalTarefaComponent implements OnInit {
     console.log('entrou no teste');
     this.booleanFoco = true;
     console.log(this.booleanFoco);
+    this.startTimer();
   }
 
   finishFocus() {
