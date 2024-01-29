@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
@@ -32,9 +32,22 @@ import { AutomacaoComponent } from './componentes/sub-componentes/automacao/auto
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 import { CalendarModule } from 'primeng/calendar';
+
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
-import { ColorPickerModule } from 'primeng/colorpicker';
+
+import {ColorPickerModule} from 'primeng/colorpicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
+import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
+import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
+import { ColorPickerModule } from 'primeng/colorpicker';
+
+import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
+import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
+
+
+
 
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
@@ -47,7 +60,17 @@ import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.com
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
+import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { ChartModule } from 'primeng/chart';
+import { ChartModalComponent } from './componentes/chart-modal/chart-modal.component';
+import { DragDropModule } from 'primeng/dragdrop';
+import { MessagesModule } from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
+
+import { CdTimerModule } from 'angular-cd-timer';
+
+import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 
 
 
@@ -79,6 +102,11 @@ import { TeamCreationScreenComponent } from './team-creation-screen/team-creatio
     IntegracaoComponent,
     TarefaDiaComponent,
 
+    TelaCriarProjetoComponent,
+    MembrosEquipeComponent,
+    StatusComponentCriarTarefaComponent,
+    TarefaCardListaComponent,
+    SelectCustomComponent,
     SelectStatusComponent,
 
     // RecentTeamsComponent,
@@ -89,13 +117,25 @@ import { TeamCreationScreenComponent } from './team-creation-screen/team-creatio
     ContactComponent,
 
     BotaoAddTarefaComponent,
-    SelectPropriedadeComponent,
-    TeamCreationScreenComponent
 
+    TeamCreationScreenComponent,
 
+    TelaFullViewComponent,
+    ChartModalComponent,
+
+    TarefaKanbanComponent,
+    SelectPropriedadeComponent
 
   ],
+  
   imports: [
+    MessageModule,
+    MessagesModule,
+    DragDropModule,
+    ChartModule,
+    ColorPickerModule,
+    BrowserAnimationsModule,
+    CalendarModule,
     BrowserModule,
     AppRoutingModule,
     AccordionModule,
@@ -104,14 +144,17 @@ import { TeamCreationScreenComponent } from './team-creation-screen/team-creatio
     FormsModule,
     InputTextareaModule,
     FormsModule,
-
     ToastModule,
     CalendarModule,
     ColorPickerModule,
     BrowserAnimationsModule,
+    CdTimerModule,
+    DragDropModule,
     BrowserModule
 
+
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

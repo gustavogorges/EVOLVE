@@ -1,0 +1,38 @@
+<div class="main">
+  <div class=" name-box">
+    <div *ngIf="tarefaAtual.nome.length > 10">
+      <p class="taskName">{{ tarefaAtual.nome }}</p>
+    </div>
+    <div *ngIf="tarefaAtual.nome.length <= 10">
+      <p class="name">{{ tarefaAtual.nome }}</p>
+    </div>
+  </div>
+  <div class="grey-progress">
+    <div class="blue-progress" [ngStyle]="{ width: valorBarra }"></div>
+  </div>
+  <div class="finalDate-box">
+    <p class="finalDate">{{ tarefaAtual.dataFinal }}</p>
+  </div>
+  <div
+    class="status"
+    [ngStyle]="{ 'background-color': tarefaAtual.statusAtual.corFundo }"
+  >
+    {{ tarefaAtual.statusAtual.nome }}
+  </div>
+  <div class="flex gap-2">
+    <div class="taskMemberPhoto bg-secondary"></div>
+    <div class="taskMemberPhoto">
+      <img src="assets/pessoaTeste.svg" />
+    </div>
+    <div class="taskMemberPhoto bg-fuchsia-400"></div>
+  </div>
+  <div class="star-box">
+    <img
+      [src]="caminhoEstrela"
+      (click)="favoritar()"
+      alt=""
+      class="cursor-pointer"
+      style="width: 1.5rem"
+    />
+  </div>
+</div>

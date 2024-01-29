@@ -3,9 +3,50 @@
         <div class="card">
             <div class="tasks">
                 <div class="task" *ngFor="let sub of listaSubtarefas; index as i">
-                    <div class="s-input flex gap-1">
-                       <input type="checkbox" id="{{i}}">
-                       <label class="task-label" for="{{i}}">{{sub.nome}}</label> 
+                    <div class="main-task">
+                        <div *ngIf="!sub.editable" class="s-input flex gap-1 w-[80%]">
+                            <input type="checkbox" id="{{i}}">
+                            <label class="task-label" for="{{i}}">{{sub.nome}}</label> 
+                         </div>
+                         <div *ngIf="sub.editable" class=" flex justify-between gap-1 w-full">
+                            <div class="divInputEdit">
+                                <input 
+                                type="text" 
+                                class="inputEditNameSubtarefa" 
+                                placeholder="Digite o novo nome..."
+                                [(ngModel)]="newNameEdit"
+                                >
+                            </div>
+                            <div class="btn-confirm cursor-pointer" (click)="confirmEdit(sub)">
+                                <i class="pi pi-check text-primaryWhite text-xl"></i>
+                            </div>
+                         </div>
+                         <div class="w-[20%] gap-2" *ngIf="!sub.editable">
+                            <div class=" w-full">
+                                <div class="flex justify-end cursor-pointer">
+                                    <i class="pi pi-ellipsis-v" (click)="openModalSubtarefa(sub)"></i>
+                                </div>
+                            </div>
+                            <div class="w-[20%] pr-7 pt-1 absolute flex flex-col items-end">
+                                <div *ngIf="sub.modalEdit" class="modal-subtarefa">
+                                    <div class="main-modal-subtarefa">
+                                        <div class="w-full flex justify-center items-center gap-1 border-b  px-2">
+                                            <i class="pi pi-pencil icon "></i>
+                                            <div class="w-full cursor-pointer" (click)="editSubtarefa(sub)">
+                                                <p class=" text-primaryFontBlack">editar</p>
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex justify-center items-center gap-1 px-2">
+                                            <i class="pi pi-trash icon"></i>
+                                            <div class="w-full cursor-pointer" (click)="removeSubtarefa(sub, i)">
+                                                <p class=" text-primaryFontBlack">remover</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                         </div>
                     </div>
                 </div>
             </div>

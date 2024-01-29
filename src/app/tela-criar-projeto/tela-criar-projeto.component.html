@@ -1,0 +1,57 @@
+<div class="h-full">
+    <p-messages [(value)]="msgs"></p-messages>
+    <div class="titulo">
+        
+        <p>Equipe Padrão</p>
+    </div>
+    <div class="flex justify-center">
+        <div class="separa-component">
+            <div class="imagem-projeto"> <div class="div-foto-centraliza"><div class="foto"><div class="lapis-edit" ><i class="pi pi-pencil text-primary dark:text-dark-primary"></i></div></div> </div></div>
+            <div class="inputs">
+                <div class="flex justify-between">
+                    <div class="nome-projeto">
+                        <label class="label" for="Nome do Projeto">Nome do Projeto:</label>
+                        <label class="p-input-icon-right">
+                            <i class="pi pi-pencil px-2 dark:text-dark-primary"></i>
+                            <input class="nome-input" type="text" pInputText #nome />
+                        </label>
+                    </div>
+                    <div class="data-projeto">
+                        <label class="label" for="Nome do Projeto">data final:</label>
+                        <input class="data-input" placeholder="Digite aqui" #data type="date">
+                    </div>
+                </div>
+            </div>
+            <div class="descricao">
+                <label class="label" for="Descricao">Descrição</label>
+                <textarea maxlength="200" placeholder="Digite aqui" #descricao ></textarea>
+            </div>
+
+
+            <div class="membro-components">
+                <div class="membro-equipe">
+                    <label class="label" for="Membro equipe">Pesquise um membro da sua equipe:</label>
+                    <input class="membro-input" placeholder="email do usuário" type="text" pInputText />
+                </div>
+                <button class="botao-pesquisar"><p>Pesquisar</p> <i class="pi pi-search dark:text-gray-900"></i></button>
+            </div>
+            <div class="membros">
+                <div *ngFor="let p of usuarios">
+                    <app-membros-equipe [user]="p" [projeto]="projeto" ></app-membros-equipe>
+                </div>
+            </div>
+            <div class="status-priority">
+                <button class="add-status" (click)="statusEnabled()">Adicionar status</button>
+                <button class="add-priority">Adicionar prioridade</button>
+            </div>[
+            <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [ngClass]="statusVisible ? 'opacity-100':'opacity-0'" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa>
+            <div class="lembrete">
+                <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>
+            </div>
+            <div class="botoes">
+                <button class="cancelar" (click)="cancelar()">Cancelar</button>
+                <button class="salvar" (click)="salvarProjeto()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

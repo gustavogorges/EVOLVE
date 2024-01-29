@@ -1,14 +1,12 @@
 
-<div>
+<div class="w-full h-screen">
     <div class="h-[15vh] mt-[5%] md:mt-0 flex flex-col justify-center px-[10%] items-center xl:items-start gap-5">
-            <p class="text-4xl font-semibold text-primary">Equipe Padrão</p>
-            <button class="h-12 w-[100%] md:w-[70%] xl:w-[20%] bg-secondary rounded-lg flex items-center justify-center gap-1 font-semibold text-lg duration-300 text-white hover:scale-105"> <i class="pi pi-plus" style="color: white"></i> Adicionar Projeto</button>
+            <p class="text-4xl font-semibold text-primary dark:text-dark-primary">Equipe Padrão</p>
+            <button (click)="router()" class="h-12 w-[100%] md:w-[70%] xl:w-[20%] bg-secondary dark:bg-dark-secundary-green dark:text-gray-900 rounded-lg flex items-center justify-center gap-1 font-semibold text-lg duration-300 text-white hover:scale-105"> <i class="pi pi-plus"></i> Adicionar Projeto</button>
     </div>
-    <div class="flex flex-wrap gap-12 pt-[2%] justify-center">
-        <div class="flex w-[95%] xl:w-[85%] 2xl:w-[78%] lg:w-[60%] md:w-full flex-wrap gap-10 justify-center">
-            <div *ngFor="let p of projects">
-                <app-projeto [isVisible]="p.isVisible" (click)="teste(p)"></app-projeto>
-            </div>
+    <div class="flex flex-wrap gap-10 justify-center px-[11%]" >
+        <div *ngFor="let p of projetos" >
+            <app-projeto #prj (deletar)="deletarPai($event)" (salvarProjeto)="salvarPai(p)" (openProjeto)="abrirProjetoPai(p)" [projeto]="p"></app-projeto>
         </div>
     </div>
 </div>

@@ -10,6 +10,6 @@ export class TarefaProjetoPropriedade {
     propriedade: Propriedade = new Propriedade;
     tarefa: Tarefa = new Tarefa;
     projeto: Projeto = new Projeto;
-    tipo: TipoPropriedade = 0
+
     value: number | string | Date | Array<Usuario> | Array<string> = ""
 }

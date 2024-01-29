@@ -1,16 +1,47 @@
-.nome-projeto{
+.main-box{
+  @apply w-full flex  flex-col items-center
+}
+
+.gorgees{
+  @apply flex justify-end w-screen
+}
+.main{
+  @apply w-3/4 flex flex-col gap-3
+}
+.header{
+  @apply w-full flex flex-row justify-between py-6 items-center 
+}
+.button-name-box{
+  @apply flex flex-col gap-4 max-w-fit
+}
+.project-name{
     @apply  text-primary text-[42px] font-bold ;
     font-family: 'Montserrat', sans-serif;
 
 }
 
+.button-AddProject{
+    @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
+      }
+
 .botao-opcoes{
     font-family: 'Montserrat', sans-serif;
     @apply text-2xl
 }
+.tasks-grid-padrao{
+  @apply grid grid-cols-4 gap-6 w-full justify-center
+}
+.box-list{
+  @apply flex flex-col h-full w-full gap-6  items-center justify-center
+}
 
-.card {
-    @apply bg-[#F8F8F8] rounded-xl  drop-shadow-md w-full;
+
+
+  .cardLista {
+    @apply bg-[#FFFFFF] rounded-lg drop-shadow-md  w-[78%];
+  }
+  .card-box {
+    @apply w-full h-full
   }
   .icon {
     @apply text-2xl text-secondary cursor-pointer
@@ -36,6 +67,28 @@
     outline: 0;
 }
 
+.select-button{
+  @apply text-xl;
+  font-family: 'Montserrat', sans-serif;
+}
+.box-selections{
+  @apply flex flex-row gap-3
+}
+ 
+
 .tarefa {
   @apply  w-[45%] h-[92vh] z-50 fixed;
 }
+.box-filterBy{
+  @apply flex flex-row gap-1 items-center
+}
+.option-filterBy{
+  @apply bg-primaryNav  px-2 rounded-md text-[#6A7181] text-base flex items-center flex gap-2;
+  font-family: 'Hind Madurai', sans-serif;
+
+}
+.text-filterBy{
+  font-family: 'Hind Madurai', sans-serif;
+  @apply text-lg text-[#6A7181] 
+}
+

@@ -19,7 +19,16 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   async cadastrarUsuario() : Promise<void> {
+    this.usuario.fotoPerfil = this.randomizeColor()
     await this.service.postUsuario(this.usuario)
+  }
+
+  randomizeColor(){
+    let str = '#';
+    while (str.length < 7) {
+      str += Math.floor(Math.random() * 0x10).toString(16);
+    }
+    return str.toUpperCase()
   }
 
 }
