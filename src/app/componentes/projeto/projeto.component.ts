@@ -1,5 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Projeto } from 'src/model/projeto';
+import { Usuario } from 'src/model/usuario';
 
 interface Tarefa{
   nome : string,
@@ -14,63 +16,28 @@ interface Tarefa{
   styleUrls: ['./projeto.component.scss']
 })
 export class ProjetoComponent implements OnInit {
-  
-  tarefas : Tarefa[] = []
 
-  descricao:string = 'dawdawdada'
-  nome = ''
-  prazo = ''
+  constructor(private route:Router){}
+
+  date: string = ''
+  tarefas : Tarefa[] = []
   progresso = 0
-  status = ''
   md: any
   corAtual: string = ''
   valorProgresso = 0;
 
-  @Input() isVisible:boolean = false;
+
+  @Output()
+  deletar:EventEmitter<number> = new EventEmitter<number>()
+
+  @Output() openProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
+
+  @Output() salvarProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
+
+  @Input() projeto!:Projeto;
   
   setValorProgresso(num:number){
     this.valorProgresso = num
-  }
-
-  integrantes = [
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'felipe',
-      tipo: 'Administrador'
-    },
-    {
-      cor: this.randomizeColor(),
-      nome: 'julio',
-      tipo: 'convidado'
-    },
-  ]
-  
-  randomizeColor(){
-    let str = '#';
-    while (str.length < 7) {
-      str += Math.floor(Math.random() * 0x10).toString(16);
-    }
-    return str.toUpperCase()
   }
 
   criaTarefa(){
@@ -96,7 +63,14 @@ export class ProjetoComponent implements OnInit {
   ngOnInit(): void {
     this.getScreenSize()
     this.criaTarefa()
-    this.randomizeColor()
+  }
+
+  randomizeColor(){
+    let str = '#';
+    while (str.length < 7) {
+      str += Math.floor(Math.random() * 0x10).toString(16);
+    }
+    return str.toUpperCase()
   }
 
   verificaTamanhoTela() {
@@ -105,10 +79,34 @@ export class ProjetoComponent implements OnInit {
     }else{
       this.md = false
     }
-    this.isVisible = true
+    this.projeto.isVisible = true
     setTimeout(() => {
-      this.isVisible = false 
+      this.projeto.isVisible = false 
     },0.00001)
+  }
+
+  verifyImage(user:Usuario){
+    if(user.fotoPerfil.length>10){
+      return false
+    }else{
+      return true
+    }
+  }
+
+  deletarProjeto(id:number){
+    this.deletar.emit(id)
+  }
+
+  salvaProjeto(){
+    this.salvarProjeto.emit(this.projeto)
+  }
+
+  openEfechaProjeto(){
+    this.openProjeto.emit(this.projeto)
+  }
+
+  async irParaProjeto(){
+    this.route.navigate(['view-project'], {state : {id:''}})
   }
 }
 

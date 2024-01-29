@@ -1,51 +1,107 @@
 <div class="main">
-    <div class="card-login">
-        <div class="left">
-            <div class="box-text-left">
-                <div class="welcome">
-                    <p class="main-text">Bem-vindo ao Evolve. Aqui a organização e eficiência se encontram para transformar sua forma de gerenciar tarefas e projetos. Abra as portas para uma nova era de produtividade.</p>
-                    <div class="login-topic-icon"><i class="pi pi-sitemap normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-calendar normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-history normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                </div>
-            </div>
-        </div>  
-        <div class="right">
-            <div class="box-text-right">
-                <div class="main-title">
-                    <h1>Login</h1>
-                </div>
-                <div class="div-inputs">
-                    <div class="inputs-login">
-                        <div class="form__group field">
-                            <input [(ngModel)]="email" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Email</label>
-                          </div>
-                          <div class="form__group field">
-                            <input [(ngModel)]="senha" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Senha</label>
-                          </div>
-                    </div>
-                    <div class="div-link">
-                        <a href="#" class="link-senha">Esqueceu sua senha ?</a>
-                    </div>
-                </div>
-                <div class="div-buttons">
-                    <div class="checkbox">
-                        <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Lembre-se de mim</p>
-                    </div>
-                    <div class="div-login">
-                        <button (click)="login()" pButton pRipple type="button" label="Login" class="p-button-rounded button-login"></button>
-                    </div>
-                    <div class="div-google">
-                        <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>
-                    </div>
-                    <div class="div-cadastro">
-                        <p class="text-cadastro">Não tem nenhuma conta ? <a href="#" class="link-cadastro" routerLink="/tela-cadastro">Cadastre-se</a></p>
-                    </div>
-                </div>
-            </div>
+  <div class="card-login">
+    <div class="left">
+      <div class="box-text-left">
+        <div class="welcome">
+          <p class="main-text">
+            Bem-vindo ao Evolve. Aqui a organização e eficiência se encontram
+            para transformar sua forma de gerenciar tarefas e projetos. Abra as
+            portas para uma nova era de produtividade.
+          </p>
+          <div class="login-topic-icon">
+            <i class="pi pi-sitemap normal-white-font"></i>
+            <p class="normal-white-font">
+              Personalize fluxos de trabalho para se adequar à maneira como sua
+              equipe trabalha.
+            </p>
+          </div>
+          <div class="login-topic-icon">
+            <i class="pi pi-calendar normal-white-font"></i>
+            <p class="normal-white-font">
+              Personalize fluxos de trabalho para se adequar à maneira como sua
+              equipe trabalha.
+            </p>
+          </div>
+          <div class="login-topic-icon">
+            <i class="pi pi-history normal-white-font"></i>
+            <p class="normal-white-font">
+              Personalize fluxos de trabalho para se adequar à maneira como sua
+              equipe trabalha.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="right">
+      <div class="box-text-right">
+        <div class="main-title">
+          <h1>Login</h1>
+        </div>
+        <div class="div-inputs">
+          <div class="inputs-login">
+            <div class="form__group field">
+              <input
+                [(ngModel)]="email"
+                type="input"
+                class="form__field"
+                placeholder="Name"
+                name="name"
+                id="name"
+                required
+              />
+              <label for="name" class="form__label">Email</label>
+            </div>
+            <div class="form__group field">
+              <input
+                [(ngModel)]="senha"
+                type="input"
+                class="form__field"
+                placeholder="Name"
+                name="name"
+                id="name"
+                required
+              />
+              <label for="name" class="form__label">Senha</label>
+            </div>
+          </div>
+          <div class="div-link">
+            <a href="#" class="link-senha">Esqueceu sua senha ?</a>
+          </div>
+        </div>
+        <div class="div-buttons">
+          <div class="checkbox">
+            <p-checkbox name="groupname"></p-checkbox>
+            <p class="checkbox-text">Lembre-se de mim</p>
+          </div>
+          <div class="div-login">
+            <button
+              (click)="login()"
+              pButton
+              pRipple
+              type="button"
+              label="Login"
+              class="p-button-rounded button-login"
+            ></button>
+          </div>
+          <div class="div-google">
+            <button
+              pButton
+              pRipple
+              type="button"
+              label="Google"
+              class="p-button-rounded button-google"
+            ></button>
+          </div>
+          <div class="div-cadastro">
+            <p class="text-cadastro">
+              Não tem nenhuma conta ?
+              <a href="#" class="link-cadastro" routerLink="/tela-cadastro"
+                >Cadastre-se</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

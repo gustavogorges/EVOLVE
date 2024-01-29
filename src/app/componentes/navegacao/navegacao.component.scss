@@ -1,5 +1,5 @@
 .main {
-    @apply bg-primaryNav h-20 w-screen fixed;
+    @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-full fixed;
     z-index: 9999;
 }
 
@@ -12,7 +12,15 @@
 }
 
 .column2 {
-    @apply flex justify-center items-center
+    @apply flex justify-center items-center;
+    
+    label, input{
+        @apply dark:bg-dark-primary-black dark:border-dark-primary dark:text-white
+    }
+
+    i{
+        @apply dark:text-dark-primary
+    }
 }
 
 
@@ -25,7 +33,7 @@
 }
 
 .icon {
-    @apply text-2xl text-primary cursor-pointer
+    @apply text-2xl text-primary dark:text-dark-primary cursor-pointer
 }
 
 .pi-spin {

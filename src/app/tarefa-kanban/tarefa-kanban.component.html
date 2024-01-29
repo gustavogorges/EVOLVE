@@ -1,0 +1,28 @@
+  <div class=" flex justify-between  w-[1712px] gap-7 overflow-auto " cdkDropListGroup>
+    
+    <div
+      *ngFor="let status of listaStatus; let i = index"
+      cdkDropList
+      [cdkDropListData]="filtrarLista(status)"
+      (cdkDropListDropped)="drop($event, status, filtrarLista(status))"
+      class="min-w-[400px] bg-primaryGray flex flex-col items-center"
+      cdkDrag [cdkDragData]="{status: status, index: i}" 
+      (cdkDragMoved)="updateListOrder($event)"
+    >
+      <div class=" w-full flex justify-end bg-[#F8F8F8]"  >
+       <p class="status w-min "  [ngStyle]="{
+        'background-color': status.corFundo,
+        color: status.corTexto
+      }"> {{ status.nome }}</p>
+      </div>
+      <div>ADICIONAR TAREFA</div>
+      <div
+        *ngFor="let item of filtrarLista(status)"
+        cdkDrag
+        [cdkDragData]="item"
+        class="p-8"
+      >
+        <app-tarefa-card-padrao [tarefaAtual]="item"></app-tarefa-card-padrao>
+      </div>
+    </div>
+  </div>

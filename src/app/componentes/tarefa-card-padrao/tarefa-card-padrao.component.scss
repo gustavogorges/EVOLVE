@@ -1,12 +1,57 @@
-.barra-cinza {
-  @apply relative w-full h-2 rounded-md bg-[#d9d9d9];
-  width: valorBarra;
+.main {
+  @apply bg-[#F8F8F8] rounded-xl  drop-shadow-md w-[360px]   h-[211px]  flex flex-col justify-between;
 }
-.barra-azul {
-  @apply absolute top-0 left-0 h-full text-center text-xs text-white bg-primary rounded-md;
+.top-box {
+  @apply flex  justify-between;
 }
-.card {
-  @apply bg-[#F8F8F8] rounded-xl  min-w-[20%]  drop-shadow-md;
+.endDate {
+  @apply text-lg text-primary;
+  font-family: "Hind Madurai", sans-serif;
+}
+
+.status {
+  @apply rounded-lg  px-4 w-max text-sm self-center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.progress-bar {
+  @apply w-full h-2 bg-[#d9d9d9];
+}
+.progress-blue {
+  @apply  h-full text-center text-xs text-white bg-primary rounded-e-md;
+}
+.center-box {
+  @apply flex flex-col h-full gap-1 px-3 pt-1;
+}
+.taskName {
+  @apply text-primary text-xl font-extrabold overflow-hidden absolute;
+  font-family: "Hind Madurai", sans-serif;
+  white-space: nowrap;
+  position: absolute;
+  transform: translateX(0);
+  transition: transform 5s linear;
+}
+.name {
+  @apply text-primary text-[22px] leading-7 font-extrabold;
+  font-family: "Hind Madurai", sans-serif;
+}
+.taskName-box {
+  @apply min-w-min h-7  flex gap-1 flex-row;
+  overflow: hidden;
+  position: relative;
+}
+.taskName-box:hover .taskName {
+  transform: translateX(-100%);
+  overflow: visible;
+}
+.taskName:not(:hover) .taskName {
+  transition: none;
+}
+.subTasks {
+  @apply flex flex-col gap-2;
+}
+.subTask {
+  @apply s-input flex gap-1;
 }
 
 .s-input input {
@@ -26,58 +71,19 @@
   cursor: pointer;
 }
 
-.s-input input:checked + label:before{
+.s-input input:checked + label:before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9.54961 17.9996L3.84961 12.2996L5.27461 10.8746L9.54961 15.1496L18.7246 5.97461L20.1496 7.39961L9.54961 17.9996Z' fill='%23F8F8F8'/%3E%3C/svg%3E");
   padding: 1px;
   background-position: center;
-  background-color: #4C956C;
-  border: solid 2px #4C956C;
-
-
-} 
-
-.status {
-  @apply rounded-lg  px-4 w-max text-sm self-center;
-  font-family: "Montserrat", sans-serif;
+  background-color: #4c956c;
+  border: solid 2px #4c956c;
 }
-.texto {
-  @apply text-lg text-primary;
-  font-family: "Hind Madurai", sans-serif;
+.usersStar-box {
+  @apply flex  justify-between items-center h-max;
 }
-.nomeTarefa {
-  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
-  font-family: "Hind Madurai", sans-serif;
-  white-space: nowrap;
-  position: absolute;
-  transform: translateX(0);
-  transition: transform 5s linear; 
+.members {
+  @apply flex flex-row;
 }
-.nome {
-  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
-  font-family: "Hind Madurai", sans-serif;
-
+.photoMember {
+  @apply w-7 h-7 rounded-full bg-secondary overflow-clip;
 }
-.spanInputSubTarefa {
-  @apply text-gray-950;
-  font-family: "Hind Madurai", sans-serif;
-}
-.fotoMembroTarefa{
-  @apply w-7 h-7 rounded-full bg-secondary overflow-clip
-}
-.container {
-@apply min-w-min h-7   ;
-  overflow: hidden; 
-  position: relative;
-}
-
-
-
-.container:hover .nomeTarefa {
-  transform: translateX(-100%);
-  overflow:visible; 
-}
-
-.container:not(:hover) .nomeTarefa {
-  transition: none; 
-}
-

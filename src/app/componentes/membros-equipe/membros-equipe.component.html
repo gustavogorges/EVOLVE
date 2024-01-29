@@ -1,0 +1,16 @@
+<div class="div-membros">
+    <div class="foto">
+        <div *ngIf="verifyImage()" class="foto2" [ngStyle]="{'background': user.fotoPerfil }" >{{user.nome.charAt(0).toUpperCase()}}</div>
+        <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.fotoPerfil}}" alt="">
+    </div>
+    <div class="infos">
+        <div class="nome"><p>{{user.nome}}</p></div>
+        <div class="email"><p>{{user.email}}</p></div>
+    </div>
+    <div class="tipo"><p>Administrador</p></div>
+    <button class="adicionar" (click)="adicionar()">
+        <div class="fundo-icon">
+            <i class="pi" [ngClass]="adicionado ? 'pi-check-circle':'pi-plus'"></i>
+        </div>
+    </button>
+</div>
