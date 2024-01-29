@@ -112,8 +112,10 @@ if( this.ordenacaoVisible==true){
     name.includes('c72') ||
     name.includes('c64') ||
     name.includes('c70') || 
+    name.includes('c73') || 
     name.includes('c78') ||
-    name.includes('c71'));
+    name.includes('c71') ||
+    name.includes('c79'));
      if(!element){
        for(let pFor of this.listaTarefas){
            this.closeTask();
@@ -130,6 +132,7 @@ if( this.ordenacaoVisible==true){
   
     this.ordenacaoVisible=false;
     this.visualizacaoVisible=false;
+
 
     console.log(option)
   }
@@ -149,6 +152,7 @@ if( this.filtroVisible==true){
 
   }else {
     this.filtroVisible=true;
+
 
   }
   console.log(this.filtroVisible)
@@ -219,7 +223,7 @@ if( this.filtroVisible==true){
 
   }
 
-  openTaskEdit(tarefa:Tarefa) {
+  openTaskEdit() {
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }

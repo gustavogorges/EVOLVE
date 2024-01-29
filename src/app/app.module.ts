@@ -32,6 +32,12 @@ import { AutomacaoComponent } from './componentes/sub-componentes/automacao/auto
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
 import { CalendarModule } from 'primeng/calendar';
+
+import { SelectStatusComponent } from './componentes/select-status/select-status.component';
+
+import {ColorPickerModule} from 'primeng/colorpicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
 import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
 import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
@@ -40,7 +46,8 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
 import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
 
-import { SelectStatusComponent } from './componentes/select-status/select-status.component';
+
+
 
 // import { RecentTeamsComponent } from './componentes/recent-teams/recent-teams.component';
 import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes-recentes.component';
@@ -51,7 +58,11 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+
+import { CdTimerModule } from 'angular-cd-timer';
+
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -124,8 +135,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CalendarModule,
     ColorPickerModule,
     BrowserAnimationsModule,
+    CdTimerModule,
     DragDropModule,
     BrowserModule
+
 
   ],
   

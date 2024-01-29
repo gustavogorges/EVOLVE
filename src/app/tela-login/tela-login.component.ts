@@ -6,32 +6,27 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-tela-login',
   templateUrl: './tela-login.component.html',
-  styleUrls: ['./tela-login.component.scss']
+  styleUrls: ['./tela-login.component.scss'],
 })
 export class TelaLoginComponent implements OnInit {
-  usuario : Usuario = new Usuario();
+  usuario: Usuario = new Usuario();
 
-  email : string = "";
-  senha : string = "";
+  email: string = '';
+  senha: string = '';
 
-  constructor(
-    private router : Router,
-    private service : BackendEVOLVEService
-  ) { }
+  constructor(private router: Router, private service: BackendEVOLVEService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  async login() : Promise<void> {
-    this.usuario = await this.service.getUser(this.email)
-    if(this.usuario.senha == this.senha) {
-      this.router.navigate(['/tela-inicial'])
+  async login(): Promise<void> {
+    this.usuario = await this.service.getUser(this.email);
+    if (this.usuario.senha == this.senha) {
+      this.router.navigate(['/tela-inicial'], { state: { user: this.usuario } });
     }
   }
 
-  cadastro() : void {
-    console.log("foi")
-    this.router.navigate(['/tela-cadastro'])
+  cadastro(): void {
+    console.log('foi');
+    this.router.navigate(['/tela-cadastro']);
   }
-
 }

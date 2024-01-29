@@ -19,8 +19,13 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "angular-cd-timer": "^3.0.0",
     "axios": "^1.6.2",
+
+    "ngx-cookie-service": "^14.0.1",
+
     "ng-drag-drop": "^5.0.0",
+
     "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

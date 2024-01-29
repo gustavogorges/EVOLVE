@@ -18,6 +18,10 @@
     @apply mt-4 w-full
 }
 
+.main-task {
+  @apply w-full flex justify-between
+}
+
 .task-label {
     @apply text-lg font-semibold
 }
@@ -63,4 +67,32 @@
 
   .input-new-sub {
     @apply outline-none ml-3
+  }
+
+  .modal-subtarefa {
+     @apply w-24 h-16  shadow-md 
+  }
+
+  .main-modal-subtarefa {
+    @apply w-24 h-16 absolute bg-primaryWhite shadow-md flex flex-col justify-center items-end
+ }
+
+  .icon {
+    font-size: small;
+  }
+
+  .divInputEdit {
+    @apply w-[40%]
+  }
+
+  .inputEditNameSubtarefa{
+    @apply outline-none border-b-2 border-primary w-full
+  }
+
+  .btn-confirm {
+    @apply py-2 px-2 bg-secondary flex items-center justify-center rounded-lg font-bold;
+  }
+
+  .pi {
+    font-size: small;
   }
