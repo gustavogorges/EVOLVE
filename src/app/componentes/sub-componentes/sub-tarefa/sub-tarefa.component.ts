@@ -16,6 +16,10 @@ export class SubTarefaComponent implements OnInit {
   };
   checked:boolean = false;
 
+  modalSubtarefa:boolean = false;
+
+  newNameEdit : string = '';
+
   @Input()
   tarefa : Tarefa = new Tarefa;
   
@@ -34,7 +38,9 @@ export class SubTarefaComponent implements OnInit {
     const subtarefaNova: Subtarefa = {
       nome: this.subtarefa.nome,
       concluido: false,
-      id: 0
+      id: 0,
+      modalEdit : false,
+      editable: false
     }
     this.listaSubtarefas.push(subtarefaNova);
     this.service.putTarefa(this.tarefa)
@@ -45,6 +51,30 @@ export class SubTarefaComponent implements OnInit {
 
   booleanSubtarefa() {
     this.booleanAddSubtarefa = !this.booleanAddSubtarefa;
+  }
+
+  openModalSubtarefa(subtarefa : Subtarefa) {
+    subtarefa.modalEdit = !subtarefa.modalEdit;
+  }
+
+  editSubtarefa(subtarefa : Subtarefa) {
+    subtarefa.modalEdit = false;
+    subtarefa.editable = true;
+  }
+
+  removeSubtarefa(subtarefa : Subtarefa, i : number) {
+    this.listaSubtarefas.splice(i,1)
+    console.log(this.listaSubtarefas)
+    this.service.putTarefa(this.tarefa);
+  }
+
+  confirmEdit(subtarefa : Subtarefa) {
+    console.log(this.listaSubtarefas)
+    subtarefa.nome = this.newNameEdit;
+    subtarefa.editable = false;
+    console.log(this.listaSubtarefas)
+    console.log(this.tarefa.subtarefas)
+    this.service.putTarefa(this.tarefa);
   }
 
 }

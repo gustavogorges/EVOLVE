@@ -26,24 +26,30 @@ export class SelectCustomComponent implements OnInit {
   constructor(private service : BackendEVOLVEService 
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log(this.listOptions)
     console.log(this.listIcons)
+    this.projeto = await this.service.getOne("projeto",2652)
+
     
   }
 
   saveOption(option:string) {
+    this.listOptions=[]
+    this.listIcons=[]
+
     this.newItem.emit(option);
     console.log(option)
     if(option=="Status"){
-      async () => {
-       this.projeto = await this.service.getOne("projeto",2153)
-       
-      }
-      console.log(this.projeto)
+      this.projeto.listaStatus.map((status :Status)=>{
+        console.log(status.nome)
+        this.listOptions.push(status.nome)
+       })
+  
+      
 
      }
-
+    
   }
 
 

@@ -23,9 +23,64 @@ export class ModalTarefaComponent implements OnInit {
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
   nomeAntigo: string = '';
+  booleanPlayPause : boolean = false; 
 
+  interval : any;
+
+  timerString : string = '00:00';
+  seconds : number = 0;
+  secondsString : string = '';
+  minutes : number = 0;
+  minutesString : string = '00';
+  hours : number = 0
+  hoursString : string = ' ';
+
+
+  startTimer() {
+    this.booleanPlayPause = false;
+    this.interval = setInterval(() => {
+      if(this.seconds <= 59) {
+        if(this.seconds < 9) {
+          this.seconds++;
+          this.secondsString = '0' + this.seconds.toString();
+        } else {
+          this.seconds++;
+          this.secondsString = this.seconds.toString();
+        }
+      } 
+      if(this.seconds > 59) {
+        this.seconds = 0;
+        this.secondsString = '0' + this.seconds.toString();
+        if(this.minutes < 59) {
+          if(this.minutes < 10) {
+            this.minutes++;
+            this.minutesString = '0' + this.minutes.toString();
+          } else {
+            this.minutes++;
+            this.minutesString = this.minutes.toString();
+            this.seconds = 0;
+            this.secondsString = this.seconds.toString();
+          }
+        } else {
+          this.minutes=0;
+          this.hours++;
+          this.hoursString = this.hours.toString() + ' : '
+        }
+      }
+
+      this.timerString = this.hoursString + this.minutesString + ':' + this.secondsString
+    },1000)
+  }
+
+  stopTimer() {
+    this.booleanPlayPause = true;
+    clearInterval(this.interval);
+  }
+
+  
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Tarefa = new Tarefa();
+  tarefaTeste : Tarefa = this.tarefa;
   projeto: Projeto = new Projeto();
   tarefaNova: Tarefa = new Tarefa();
 
@@ -53,7 +108,6 @@ export class ModalTarefaComponent implements OnInit {
 
   @HostListener('click', ['$event'])
   clicouFora(event:any){
-   console.log("TESTE 2")
    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c71') || name.includes('c72'))
      if(!element){
        
@@ -129,7 +183,7 @@ export class ModalTarefaComponent implements OnInit {
     } else if (this.tarefa.id == 0) {
       console.log('entrou');
       this.tarefa.criador.id = 303;
-      this.tarefa.projeto.id = 1;
+      this.tarefa.projeto.id = 2652;
       this.service.postTarefa(this.tarefa);
       this.tarefa.id = 0;
     }
@@ -147,6 +201,7 @@ export class ModalTarefaComponent implements OnInit {
     console.log('entrou no teste');
     this.booleanFoco = true;
     console.log(this.booleanFoco);
+    this.startTimer();
   }
 
   finishFocus() {

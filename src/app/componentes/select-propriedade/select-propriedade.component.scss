@@ -1,5 +1,6 @@
 .main {
-    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2;
+    z-index: 999;
 }
 
 .propriedades-box {
@@ -7,7 +8,15 @@
 }
 
 .propertie {
-    @apply flex w-full h-12 items-center justify-start pl-2 gap-3 border-b-2 cursor-pointer py-2
+    @apply flex w-full h-12 items-center justify-start gap-3 pl-2 border-b-2 cursor-pointer py-2
+}
+
+.propertie-add {
+    @apply flex w-full h-12 items-center justify-start gap-2 border-b-2 cursor-pointer py-2
+}
+
+.propertie-add-input {
+    @apply flex w-full h-10 items-center justify-start gap-2 cursor-pointer pl-2
 }
 
 .icon {
@@ -19,9 +28,56 @@
 }
 
 .inputNamePropertie {
-    @apply outline-none bg-primaryWhite
+    @apply outline-none bg-primaryWhite text-lg
 }
 
 .button-confirm {
-    @apply h-10 w-full bg-secondary rounded-b-md flex justify-center items-center cursor-pointer
+    @apply h-10 w-full bg-secondary flex justify-center items-center cursor-pointer
+}
+
+.button-cancel {
+    @apply h-10 w-full bg-primary rounded-bl-md flex justify-center items-center cursor-pointer
+}
+
+.add-options  {
+    @apply flex justify-center items-center
+}
+
+.propertie-global {
+ @apply flex justify-center items-center
+}
+
+.check {
+    @apply outline-none bg-primaryGray;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 7px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+
+.check:active, .regular-checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.check:checked {
+	background-color: #729682;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #4C956C;
+}
+
+.input-add-status {
+    @apply bg-white outline-none py-1 px-2 rounded-lg
+}
+
+.listOptions {
+    @apply w-full flex-col items-start pl-2 mt-2
+}
+
+.option {
+    @apply w-full h-7 text-primaryFontBlack rounded-md flex justify-between items-center mb-1
 }

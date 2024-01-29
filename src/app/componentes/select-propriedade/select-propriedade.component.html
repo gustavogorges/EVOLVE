@@ -1,24 +1,97 @@
 <div class="main">
   <div class="propriedades-box">
     <ng-container *ngFor="let option of options">
-        <div
-        class="propertie"
-        (click)="clickDate(option)"
-        [ngClass]="
-          option.hover
-            ? 'bg-[#e5e7eb] rounded-t-md text-primaryFontBlack'
-            : 'bg-primaryWhite'
-        "
-      >
-        <i class="{{option.icon}} text-primary icon"></i>
-        <p>{{option.text}}</p>
+      <div class="propertie" (click)="clickDate(option)" *ngIf="option.showing">
+        <div class="flex gap-2 items-center">
+          <i class="{{ option.icon }} text-primary icon"></i>
+          <p>{{ option.text }}</p>
+        </div>
       </div>
     </ng-container>
-    <div *ngIf="propertieSelected" class="propertie input">
-        <input type="text" pInputText class="inputNamePropertie" placeholder="escreva o nome"/>
+    <div
+      *ngIf="propertieSelected"
+      [ngClass]="creatingOptionBoolean ? ' border-none ' : 'border-b-2'"
+      class="propertie py-1 pl-2"
+    >
+      <input
+        type="text"
+        pInputText
+        class="inputNamePropertie text-primary font-semibold"
+        placeholder="escreva o nome"
+        [(ngModel)]="newPropertie.propriedade.name"
+      />
     </div>
-    <div *ngIf="propertieSelected"  class=" button-confirm">
+    <div
+      *ngIf="booleanPropertieSelect"
+      (click)="(addOptions)"
+      class="propertie-add add-options border-none"
+    >
+      <i class="pi pi-plus text-secondary icon"></i>
+      <p class="text-primaryFontBlack" (click)="addOptions()">
+        adicionar opcões
+      </p>
+    </div>
+
+    <div
+      *ngIf="creatingOptionBoolean"
+      class="propertie-add-input"
+      style="grid-template-columns: 80% 20%"
+    >
+      <input
+        class="input-add-status"
+        type="text"
+        placeholder="escreva o nome"
+        [(ngModel)]="selectOption.name"
+      />
+      <div
+        class="w-full flex justify-center items-center"
+        (click)="addOneOption()"
+      >
+        <i class="pi pi-check text-secondary font-bold"></i>
+      </div>
+    </div>
+    <div class="listOptions" *ngIf="creatingOptionBoolean">
+      <div class="option" *ngFor="let option of listOptions">
+        <div
+          class="w-[75%] h-full p-2 flex justify-center items-center rounded-md"
+          [ngStyle]="{ 'background-color': option.backgroundColor }"
+        >
+          <p>{{ option.name }}</p>
+        </div>
+        <div class="w-[25%] h-full flex items-center justify-center gap-1">
+          <input
+            type="color"
+            class="w-6 h-full"
+            default-value="#FFFFFF"
+            [(ngModel)]="option.backgroundColor"
+          />
+          <i class="pi pi-times text-primary font-bold cursor-pointer"></i>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="propertieSelected"
+      class="propertie-add propertie-global border-t-2"
+      [ngClass]="creatingOptionBoolean ? 'mt-2' : ''"
+    >
+      <input type="checkbox" class="check" />
+      <p class="text-primaryFontBlack">tornar propriedade global</p>
+    </div>
+    <div
+      [ngClass]="creatingOptionBoolean ? 'w-full grid grid-cols-2' : 'w-full'"
+    >
+      <div *ngIf="creatingOptionBoolean" class="button-cancel">
+        <p class="font-bold text-white">cancel</p>
+      </div>
+      <div 
+      *ngIf="propertieSelected" 
+      class="button-confirm"
+      (click)="savePropertie()"
+      [ngClass]="creatingOptionBoolean ? 'rounded-br-md rounded-bl-none' : 'rounded-b-md'"
+      >
         <p class="font-bold text-white">confirmar</p>
+      </div>
     </div>
   </div>
 </div>
