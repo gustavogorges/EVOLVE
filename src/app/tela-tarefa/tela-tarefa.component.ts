@@ -6,7 +6,12 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Status } from 'src/model/status';
+
 
 interface Bah {
   name:string,
@@ -41,10 +46,12 @@ export class TelaTarefaComponent implements OnInit {
   option  : string ="Kanban"
   optionFilter : string = ""
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService, private sla2: Location) {}
 
   async ngOnInit(): Promise<void> {
+
     this.listaNova = await this.service.getAllSomething("tarefa")
+
     this.listaTarefas =await this.service.getAllSomething("tarefa")
     this.projeto = await this.service.getOne("projeto",2652)
     console.log(this.projeto.listaStatus)

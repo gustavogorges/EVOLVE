@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Query, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Projeto } from 'src/model/projeto';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
@@ -8,16 +9,19 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class MembrosEquipeComponent implements OnInit {
 
-  constructor(private renderer : Renderer2, private service: BackendEVOLVEService) { }
+  constructor(private service: BackendEVOLVEService) { }
 
   adicionado = false
 
   @Input() user!:Usuario
-  @Input() membros!:Usuario[]
-  @Output() adiconarUser:EventEmitter<Usuario[]> = new EventEmitter<Usuario[]>()
+  @Input() projeto!:Projeto
 
   ngOnInit(){
-    this.getAllUsers()
+    this.projeto.membros.forEach(element => {
+      if(element.id === this.user.id){
+        this.adicionado = true
+      }
+    });
   }
 
   verifyImage(){
@@ -26,12 +30,6 @@ export class MembrosEquipeComponent implements OnInit {
     }else{
       return true
     }
-  }
-
-  usuarios!:Usuario[]
-  
-  async getAllUsers(){
-    this.usuarios = await this.service.getAllSomething('usuario')
   }
 
   adicionar(){
@@ -44,18 +42,21 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   addUser(){
-    this.membros.push(this.user)
+    this.projeto.membros.push(this.user)
     this.arrayAlterada()
   }
 
-  arrayAlterada(){
-    this.adiconarUser.emit(this.membros)
+  async arrayAlterada(){
+    await this.service.putProjeto(this.projeto)
   }
 
   removeUser(){
-    this.membros.splice(this.membros.indexOf(this.user), 1)
+    this.projeto.membros.forEach(element => {
+      if(element.id === this.user.id){
+        this.projeto.membros.splice(this.projeto.membros.indexOf(element), 1)
+      }
+    });
     this.arrayAlterada()
-
   }
 
 }

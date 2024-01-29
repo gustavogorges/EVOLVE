@@ -25,6 +25,8 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
   
   adicionarStatus(){
+    this.status.nome = ''
+    this.status.corFundo = ''
     this.adicionar = !this.adicionar
   }
 
@@ -62,6 +64,7 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
         this.statusNovo.push(e)
       }
     })
+    this.statusNovo.reverse()
   }
 
   EventEmitter(){
@@ -89,6 +92,7 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
 
   editar(status:Status){
+    this.adicionar = true
     this.editando = true
     this.statusEditando = JSON.stringify(status)
     setTimeout(() => {

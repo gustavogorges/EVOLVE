@@ -1,7 +1,7 @@
 .status-grid{
     @apply duration-300;
     .create-status{
-        @apply flex flex-col gap-2 overflow-auto;
+        @apply flex h-[14rem] flex-col gap-2 overflow-auto;
         .status{
             @apply row-start-1 grid grid-cols-3 justify-center items-center grid-rows-1 gap-1 w-full h-full;
             grid-template-columns: 75% 10% 10%;

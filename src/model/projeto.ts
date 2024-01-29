@@ -10,7 +10,7 @@ export class Projeto{
     dataFinal: string = "";
     descricao: string ="";
     imagem:string=""
-    criador:Usuario = new Usuario
+    criador!:Usuario
     administradores:Array<Usuario>=new Array
     membros:Array<Usuario> = new Array;
     propriedades:Array<TarefaProjetoPropriedade> = new Array;

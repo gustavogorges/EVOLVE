@@ -59,12 +59,19 @@ import { ContactComponent } from './contact/contact.component';
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
 
+import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { ChartModule } from 'primeng/chart';
+import { ChartModalComponent } from './componentes/chart-modal/chart-modal.component';
+import { DragDropModule } from 'primeng/dragdrop';
+import { MessagesModule } from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -109,17 +116,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ContactComponent,
 
     BotaoAddTarefaComponent,
+    TelaFullViewComponent,
+    ChartModalComponent
+
 
     TarefaKanbanComponent,
-
-
-
-
     SelectPropriedadeComponent
 
   ],
   
   imports: [
+    MessageModule,
+    MessagesModule,
+    DragDropModule,
+    ChartModule,
     ColorPickerModule,
     BrowserAnimationsModule,
     CalendarModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Projeto } from 'src/model/projeto';
 import { Usuario } from 'src/model/usuario';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -12,21 +13,17 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class TelaCriarProjetoComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService, private route: Router){}
-
+  msgs!:Message[]
+  
   async ngOnInit(){
-    this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
-    console.log(this.projeto);
-    
-    this.getMembros()
-  }
-
-  projeto!:Projeto
-
-  usuarios!: Usuario[]
-
-  async getMembros(){
+    let projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
+    this.projeto = await this.service.getOne("projeto", projeto.id)
     this.usuarios = await this.service.getAllSomething('usuario')
   }
+  
+  messages: Message[] | undefined;
+  projeto!:Projeto
+  usuarios!: Usuario[]
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
@@ -44,18 +41,9 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.projeto.nome = this.nome.nativeElement.value
     this.projeto.dataFinal = this.data.nativeElement.value
     this.projeto.descricao = this.descricao.nativeElement.value
-    this.projeto.membros = this.membros
     await this.service.putProjeto(this.projeto);
     this.route.navigate(['tela-projeto'])
   }
-
-  addUser(p:Usuario[]){
-    // console.log(p.email)
-    this.membros = p
-    // localStorage.setItem('membros',JSON.stringify(this.membros))
-  }
-
-  membros: Usuario[] = []
 
   // @HostListener('click', ['$event'])
   //  clicouFora(event:any){
@@ -76,5 +64,9 @@ export class TelaCriarProjetoComponent implements OnInit {
    }
 
    statusVisible = false
+
+   ngAfterViewInit(){
+    this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+   }
 
 }
