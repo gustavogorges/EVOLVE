@@ -3,7 +3,7 @@ import { Usuario } from "./usuario";
 
 export class UserChat extends Chat {
 
-    users:Array<Usuario> = new Array
+    // users:Array<Usuario> = new Array
 
     // public  getContactFromUser(user:Usuario):Usuario{
         

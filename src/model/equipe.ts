@@ -1,4 +1,5 @@
 import { Projeto } from "./projeto";
+import { TeamChat } from "./team-chat";
 import { Usuario } from "./usuario";
 
 export class Equipe{
@@ -8,4 +9,5 @@ export class Equipe{
     administrador : Usuario = new Usuario;
     projetos: Array<Projeto> = new Array;
     participantes: Array<Usuario> = new Array;
+    chat: TeamChat = new TeamChat
 }

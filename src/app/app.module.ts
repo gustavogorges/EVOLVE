@@ -58,6 +58,10 @@ import { ContactComponent } from './contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
+
+import { MessageComponent } from './message/message.component';
+import { MessageBarComponent } from './message-bar/message-bar.component';
+
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
@@ -117,6 +121,10 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
     ContactComponent,
 
     BotaoAddTarefaComponent,
+
+    MessageComponent,
+    MessageBarComponent,
+
 
     TeamCreationScreenComponent,
 

@@ -1,0 +1,15 @@
+<div class="w-full h-full flex items-center justify-center gap-8">
+
+    <div class="message-input flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4 ">
+        <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
+    </div>
+
+    <div class="send-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]" (click)="sendMessage()">
+        <img src="../../assets/sendButton.svg" alt="" class="">
+    </div>
+
+    <div class="annex-icon flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem]  ">
+        <img src="../../assets/clip.svg" alt="">
+    </div>
+
+</div>

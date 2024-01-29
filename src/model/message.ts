@@ -1,3 +1,4 @@
+import { Chat } from "./chat";
 import { MessageStatus } from "./messageStatus";
 import { Usuario } from "./usuario";
 
@@ -6,6 +7,7 @@ export class Message {
     content:string = "";
     sender:Usuario = new Usuario;
     date:string = "";
-    messageStatus:MessageStatus = 0
+    messageStatus:MessageStatus = 0;
+    chat:Array<Chat> = new Array
 
 }
