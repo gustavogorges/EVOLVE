@@ -1,161 +1,192 @@
-.projeto{
-    @apply w-[100%] xl:w-[30rem] h-[55vh] xl:h-[55vh] grid grid-cols-3 duration-500 gap-2 bg-secondaryWhite;
-    grid-template-rows: 24% 7% 29% 24% 1.5% 10%;
+.projeto-visualizacao{
+    @apply drop-shadow-xl dark:shadow-white flex flex-col lg:flex-row w-full  ;
 
-    .imagem-capa{
-        @apply col-start-2 flex pt-5;
+    .projeto{
+        @apply xl:w-[30rem] h-[55vh] grid grid-cols-3  gap-3 bg-secondaryWhite dark:bg-dark-theme-back relative cursor-pointer;
+        grid-template-rows: 24% 15% 30% 10% 1.5% 8%;
     
-        .div-foto-centraliza{
-            
-            @apply w-full h-full flex justify-center items-center;
-    
-            .foto{
-                @apply h-[7rem] w-[7rem] rounded-full bg-yellow-500
-            }
+        .x{
+            @apply col-start-1 col-end-2 flex p-5 items-start cursor-pointer dark:text-white
         }
     
-        .lapis-edit{
-            @apply h-[4%] w-[2%] absolute rounded-full 
-        }
-    }
-    
-    .nome-projeto{
-        @apply col-span-full w-full flex items-center justify-center row-start-2 text-lg text-center;
-    
-        p{
-            @apply border-2 px-2 rounded-lg text-lg
-        }
-    }
-    
-    .descricao{
-        @apply col-span-3 row-start-3 flex items-center justify-center overflow-auto;
-    
-        .desc{
-            @apply p-[2%] border-2 rounded-lg w-[70%] bg-[#D6DCE2] text-primaryFontBlack text-justify;
-
-            .descricao-valor{
-                @apply h-full w-full bg-transparent border-none resize-none outline-none
-            }
-        }
-    }
-    
-    .responsaveis{
-        @apply row-start-4 col-span-3 grid grid-cols-3 items-end;
-    
-        .responsaveis-escrita{
-            @apply text-gray-500 flex justify-end;
-        }
-    
-        .bolas{
-            @apply col-start-3 flex
-        }
-    
-        .bola{
-            @apply w-[2.5rem] h-[2.5rem] rounded-full bg-secondary ;
-        }
-    }
-    
-    .linha{
-        @apply row-start-5 col-span-full grid grid-cols-3 bg-gray-200;
-    
-        .linha-verde{
-            @apply w-[30%] duration-700 col-span-full bg-secondary rounded-lg;
-        }
-    }
-    
-    .data-final{
-        @apply row-start-6 col-span-full flex px-2 text-lg text-primary items-start
-    }
-}
-
-
-.infos{
-    @apply duration-200  bg-gray-200 overflow-hidden grid gap-6  rounded-r-xl;
-    grid-template-rows: 3% 40% 30% 10%;
-    grid-template-columns: 3% 85% 3%;
-
-    .infos-projeto{
-        @apply  row-start-2 col-start-2 col-end-3 bg-secondaryWhite rounded-xl w-full overflow-auto;
-
-        .cabecalho{
-            @apply duration-700 grid grid-cols-4 rounded-xl text-lg md:text-xl text-gray-500 bg-secondaryWhite;
-
-            .Nome{
-                @apply col-start-1 flex justify-center
-            }
-
-            .Progresso{
-                @apply col-start-2 flex justify-center
-            }
-
-            .Status{
-                @apply col-start-3 flex justify-center
-            }
-
-            .Prazo{
-                @apply col-start-4 flex justify-center
-            }
-        }
-
-
-        .valores{
-            @apply duration-700  grid grid-cols-4 items-center text-sm  font-semibold pt-[2%] overflow-auto;
-
-            .Nome{
-                @apply col-start-1 flex justify-center text-center px-[1%] text-primary font-bold
-            }
-
-            .Progresso{
-                @apply col-start-2 mx-[10%] grid items-center h-4 rounded-xl bg-gray-200 overflow-hidden;
-
-                .valor-progresso{
-                    @apply bg-primary duration-700 h-full
-                }
-            }
-
-            .Status{
-                @apply col-start-3 flex max-h-10 justify-center items-center rounded-2xl mx-3 bg-yellow-400
-            }
-
-            .Prazo{
-                @apply col-start-4 flex justify-center text-lg text-primary font-semibold
-            }
-        }
-    }
-
-    .integrantes{
-        @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite w-full flex  rounded-xl;
-
-        .seta{
-            @apply h-full flex items-center justify-center w-[20%]
-        }
-
-        .pessoas{
-            @apply col-start-2 col-end-3 h-full flex gap-2 md:gap-5 overflow-auto;
-
-            
-            .infos-pessoas{
-                @apply flex flex-col justify-center items-center;
-
+        .imagem-capa{
+            @apply col-start-2 col-end-3 row-start-1 row-end-2 flex pt-5;
+        
+            .div-foto-centraliza{
+                
+                @apply w-full h-full flex justify-center items-center;
+        
                 .foto{
-                    @apply h-14 w-14 md:w-20 md:h-20 rounded-full flex justify-center items-center text-4xl font-semibold
+                    @apply h-[7rem] w-[7rem] rounded-full relative bg-yellow-500;
+    
+                    .lapis-edit{
+                        @apply absolute bg-primaryGray flex justify-center items-center rounded-full bottom-2 right-1 duration-200 animate-bounce dark:bg-dark-secundary-gray
+                    }
                 }
-
-                .nome, .tipo{
-                    @apply  text-gray-700
-                }
-
-                .tipo{
-                    @apply text-sm
+            } 
+        }
+        
+        .nome-projeto{
+            @apply col-span-3 flex items-center justify-center row-start-2 text-center text-3xl dark:text-white ;
+        
+            input{
+                @apply p-2 rounded-lg w-1/2  font-titulo text-center items-center bg-transparent outline-none text-clip dark:border-dark-secundary-gray
+            }
+        }
+        
+        .descricao{
+            @apply col-span-3 row-start-3 flex items-center justify-center overflow-auto;
+        
+            .desc{
+                @apply p-[2%] border-2 rounded-lg w-[70%] bg-primaryGray dark:bg-dark-primary-black text-primaryFontBlack text-justify dark:border-dark-secundary-gray;
+    
+                .descricao-valor{
+                    @apply h-full w-full bg-transparent border-none resize-none outline-none dark:text-white
                 }
             }
         }
         
+        .responsaveis{
+            @apply row-start-4 col-span-3 grid grid-cols-3 items-end;
+        
+            .responsaveis-escrita{
+                @apply text-gray-500 dark:text-gray-300 flex justify-end;
+            }
+        
+            .bolas{
+                @apply col-start-3 flex
+            }
+        
+            .bola{
+                @apply w-[2.5rem] h-[2.5rem] rounded-full bg-secondary dark:bg-dark-secundary-green ;
+            }
+        }
+        
+        .linha{
+            @apply row-start-5 col-span-full grid grid-cols-3 bg-gray-200 dark:bg-dark-secundary-gray;
+        
+            .linha-verde{
+                @apply w-[30%] duration-700 col-span-full bg-secondary dark:bg-dark-secundary-green rounded-lg;
+            }
+        }
+        
+        .data-final{
+            @apply row-start-6 col-span-3 gap-2 px-3 text-primary dark:text-dark-primary text-lg font-hind-madurai flex items-center;
+            input{
+                @apply bg-transparent outline-none
+            }
+        }
     }
-
-    .botoes{
-        @apply flex justify-between  w-full col-start-2 col-end-3  row-start-4;
-    }
-
     
+    
+    .infos{
+        @apply duration-200 bg-gray-200 dark:bg-dark-primary-gray overflow-hidden grid gap-6  rounded-r-xl;
+        grid-template-rows: 3% 40% 30% 10%;
+        grid-template-columns: 0% 90% 0%;
+    
+        .infos-projeto{
+            @apply  row-start-2 col-start-2 col-end-3 bg-secondaryWhite dark:bg-dark-primary-black rounded-xl w-full overflow-auto;
+    
+            .cabecalho{
+                @apply  grid grid-cols-4 rounded-xl text-lg md:text-xl text-gray-500 dark:text-gray-300 bg-secondaryWhite dark:bg-dark-primary-black;
+    
+                .Nome{
+                    @apply col-start-1 flex justify-center
+                }
+    
+                .Progresso{
+                    @apply col-start-2 flex justify-center
+                }
+    
+                .Status{
+                    @apply col-start-3 flex justify-center
+                }
+    
+                .Prazo{
+                    @apply col-start-4 flex justify-center
+                }
+            }
+    
+    
+            .valores{
+                @apply duration-700  grid grid-cols-4 items-center text-sm  font-semibold pt-[2%] overflow-auto;
+    
+                .Nome{
+                    @apply col-start-1 flex justify-center text-center px-[1%] text-primary dark:text-dark-primary font-bold
+                }
+    
+                .Progresso{
+                    @apply col-start-2 mx-[10%] grid items-center h-4 rounded-xl bg-gray-200 dark:bg-dark-primary-gray overflow-hidden;
+    
+                    .valor-progresso{
+                        @apply bg-primary dark:bg-dark-primary duration-700 h-full
+                    }
+                }
+    
+                .Status{
+                    @apply col-start-3 flex max-h-10 justify-center items-center rounded-2xl mx-3 bg-yellow-400
+                }
+    
+                .Prazo{
+                    @apply col-start-4 flex justify-center text-sm text-primary dark:text-dark-primary font-semibold
+                }
+            }
+        }
+    
+        .integrantes{
+            @apply row-start-3 col-start-2 col-end-2 bg-secondaryWhite dark:bg-dark-primary-black w-full flex rounded-xl;
+    
+            .seta{
+                @apply h-full flex items-center justify-center w-[20%] text-2xl font-bold dark:text-gray-300
+            }
+    
+            .pessoas{
+                @apply col-start-2 col-end-3 h-full w-full flex gap-2 md:gap-4 overflow-auto;
+    
+                
+                .infos-pessoas{
+                    @apply flex flex-col justify-center items-center;
+    
+                    .foto{
+                        @apply h-14 w-14 md:w-20 md:h-20 rounded-full flex justify-center items-center text-4xl font-semibold
+                    }
+
+                    .fotoImagem{
+                        @apply h-[5rem] w-[5rem] rounded-full object-cover
+                    }
+    
+                    .nome, .tipo{
+                        @apply  text-gray-700 dark:text-gray-300
+                    }
+    
+                    .tipo{
+                        @apply text-sm dark:text-gray-400
+                    }
+                }
+            }
+            
+        }
+    
+        .botoes{
+            @apply flex justify-between  w-full col-start-2 col-end-3  row-start-4;
+        }
+    
+        
+    }
+
+    .botao-cancelar{
+        @apply w-auto px-4 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-150 hover:scale-105
+    }
+
+    .botao-salvar-projeto{
+        @apply w-auto px-4 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-150 hover:scale-105;
+
+        i{
+            @apply px-1
+        }
+    }
+
+    .botao-ir-para-projeto{
+        @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-150 hover:scale-105 text-primaryWhite dark:text-dark-primary-black
+    }
 }

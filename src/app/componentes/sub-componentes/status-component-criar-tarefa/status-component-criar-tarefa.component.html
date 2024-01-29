@@ -1,0 +1,33 @@
+<div class="bg-white shadow-lg dark:shadow-gray-900 rounded-lg pt-2 dark:bg-dark-secundary-gray">
+    <div *ngIf="isVisible" class="status-grid">
+        <div class="create-status pb-[15%] p-2 cursor-pointer" (click)="desabilitaAdicionar()">
+            <div *ngFor="let s of statusNovo" class="w-full">
+                <div class="status">
+                    <p class="rounded-md w-full dark:text-white" [style.background]="s.corFundo">{{s.nome}}</p>
+                    <i (click)="editar(s)"  class="pi pi-pencil"></i>
+                    <i (click)="removeStatusNovo(s)" class="pi pi-trash"></i>
+                </div>
+            </div>
+            <div *ngFor="let s of statusPadrao" class="w-full">
+                <div class="status">
+                    <p class=" rounded-md w-full dark:text-white" [style.background]="s.corFundo" >{{s.nome}}</p>
+                    <i class="pi" (click)="removeStatusPadrao(s)" [ngClass]="s.enabled ? 'pi-minus-circle':'pi-plus-circle'"></i>
+                </div>
+            </div>
+        </div>
+        <div >
+            <div *ngIf="adicionar" (click)="adicionarStatus()" class="flex border-t-2 dark:border-gray-400 justify-center gap-3 items-center h-[3rem] text-gray-500 dark:text-primaryGray cursor-pointer">
+                <i class="pi pi-plus"></i>
+                <P>Adicionar Status</P>
+            </div>
+            <div *ngIf="!adicionar" class="flex flex-col border-t-2 dark:border-gray-400 justify-center gap-1 items-center h-[9rem] text-gray-500 dark:text-primaryGray cursor-pointer">
+                <input type="text" [(ngModel)]="status.nome" class="bg-transparent h-full w-full p-2 outline-none" placeholder="escreva o nome">
+                <div class="flex justify-between w-full border-t-2 dark:border-gray-400 p-2">
+                    <input class="bg-transparent" disabled="true" placeholder="selecione a cor" [ngModel]="status.corFundo.toUpperCase()" type="text"><p-colorPicker class="color" [(ngModel)]="status.corFundo"></p-colorPicker>
+                </div>
+                <button *ngIf="!editando" (click)="criarStatus()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-secondary rounded-b-lg dark:bg-dark-secundary-green">Confirmar</button>
+                <button *ngIf="editando" (click)="salvar()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-primary rounded-b-lg dark:bg-dark-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
