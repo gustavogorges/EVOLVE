@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tarefa } from 'src/model/tarefa';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -15,6 +15,8 @@ export class TarefaCardListaComponent implements OnInit {
   nomeGrande ="";
   corStatus=""; 
   @Input() id: string = "";
+  @Output() newItem = new EventEmitter<boolean>();
+
 
 data : Date = new Date
 
@@ -50,7 +52,10 @@ data : Date = new Date
      this.tarefaAtual.favoritado=false;
 
    }
-   console.log(this.tarefaAtual)
+  
+   this.service.putTarefa(this.tarefaAtual)
+   this.newItem.emit(true);
+
 
  }
 

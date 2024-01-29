@@ -1,4 +1,7 @@
-.nomeTarefa {
+.main{
+  @apply w-full flex h-[60px] items-center  py-2 gap-12 justify-center
+}
+.taskName {
   @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
   font-family: "Hind Madurai", sans-serif;
   white-space: nowrap;
@@ -6,44 +9,49 @@
   transform: translateX(0);
   transition: transform 5s linear; 
 }
-.nome {
+.name {
   @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
   font-family: "Hind Madurai", sans-serif;
 
 }
-  .barra-cinza {
-    @apply  w-80 h-6 rounded-md bg-[#d9d9d9];
-    width: valorBarra;
+  .grey-progress {
+    @apply  w-[23%] h-5 rounded-md bg-[#d9d9d9];
   }
-  .barra-azul {
+  .blue-progress {
     @apply  h-full text-center text-xs text-white bg-primary rounded-md;
+    width: valorBarra;
+
   }
-  .dataFinal {
+  .finalDate-box{
+    @apply w-[5%]
+  }
+  .finalDate {
     @apply text-lg text-primary;
     font-family: "Hind Madurai", sans-serif;
   }
   .status {
-    @apply rounded-lg h-6 px-6 max-w-xl text-sm self-center items-center;
+    @apply rounded-lg h-6 px-6 w-[15%] flex text-sm justify-center items-center;
     font-family: "Montserrat", sans-serif;
   }
  
-  .fotoMembroTarefa{
+  .taskMemberPhoto{
     @apply w-11 h-11 rounded-full  overflow-clip
   }
-  .container {
-    @apply h-6 w-48   ;
+  .name-box {
+    @apply h-6 w-[10%] ;
       overflow: hidden; 
       position: relative;
     }
-    
-    
-    
-    .container:hover .nomeTarefa {
+    .name-box:hover .taskName {
       transform: translateX(-100%);
       overflow:visible; 
     }
     
-    .container:not(:hover) .nomeTarefa {
+    .name-box:not(:hover) .taskName {
       transition: none; 
+    }
+    
+    .star-box{
+      @apply flex items-center
     }
     
