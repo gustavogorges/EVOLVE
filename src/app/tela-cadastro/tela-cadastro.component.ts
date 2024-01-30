@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaCadastroComponent implements OnInit {
 
-  usuario : Usuario = new Usuario();
+  usuario : User = new User();
 
   constructor(private service : BackendEVOLVEService) { 
     
@@ -19,7 +19,7 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   async cadastrarUsuario() : Promise<void> {
-    this.usuario.fotoPerfil = this.randomizeColor()
+    this.usuario.profilePicture = this.randomizeColor()
     await this.service.postUsuario(this.usuario)
   }
 

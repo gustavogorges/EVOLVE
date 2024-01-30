@@ -1,6 +1,6 @@
 import { Chat } from "./chat";
-import { Equipe } from "./equipe";
+import { Team } from "./team";
 
 export class TeamChat extends Chat {
-    team: Equipe = new Equipe
+    team: Team = new Team
 }

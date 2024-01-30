@@ -1,15 +1,15 @@
 <div class="main">
   <div class="flex gap-1 flex-col h-max">
     <div class="top-box p-3 pb-0">
-      <p class="endDate">data final:{{ tarefaAtual.dataFinal }}</p>
+      <p class="endDate">data final:{{ tarefaAtual.finalDate }}</p>
       <div
         class="status"
         [ngStyle]="{
-          'background-color': tarefaAtual.statusAtual.corFundo,
-          color: tarefaAtual.statusAtual.corTexto
+          'background-color': tarefaAtual.currentStatus.backgroundColor,
+          color: tarefaAtual.currentStatus.textColor
         }"
       >
-        {{ tarefaAtual.statusAtual.nome }}
+        {{ tarefaAtual.currentStatus.name }}
       </div>
     </div>
     <div class="progress-bar">
@@ -19,21 +19,21 @@
 
   <div class="center-box ">
     <div class="nameTask-box">
-      <div *ngIf="tarefaAtual.nome.length > 20">
-        <p class="nameTask">{{ tarefaAtual.nome }}</p>
+      <div *ngIf="tarefaAtual.name.length > 20">
+        <p class="nameTask">{{ tarefaAtual.name }}</p>
       </div>
-      <div *ngIf="tarefaAtual.nome.length <= 20">
-        <p class="name">{{ tarefaAtual.nome }}</p>
+      <div *ngIf="tarefaAtual.name.length <= 20">
+        <p class="name">{{ tarefaAtual.name }}</p>
       </div>
     </div>
     <div class="subTasks">
-      <div *ngFor="let sub of tarefaAtual.subtarefas; index as indice">
+      <div *ngFor="let sub of tarefaAtual.subtasks; index as indice">
         <div class="subTask">
           <input type="checkbox" id="({{ id }}+{{ sub }}+{{ indice }})" />
           <label
             class="leading-[18px]"
             for="({{ id }}+{{ sub }}+{{ indice }})"
-            >{{ sub.nome }}</label
+            >{{ sub.name }}</label
           >
         </div>
       </div>

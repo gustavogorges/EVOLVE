@@ -2,7 +2,7 @@
   <div class="name-progress">
     <div class="foco-name-box">
       <div class="name-box">
-        <p class="name" *ngIf="!booleanEdit">{{ tarefa.nome }}</p>
+        <p class="name" *ngIf="!booleanEdit">{{ tarefa.name }}</p>
         <span
           class="p-input-icon-right w-[70%] h-full flex items-center"
           *ngIf="booleanEdit"
@@ -13,7 +13,7 @@
             style="font-size: 30px; color: #185e77; font-weight: bold"
             type="text"
             pInputText
-            [(ngModel)]="tarefa.nome"
+            [(ngModel)]="tarefa.name"
           />
         </span>
       </div>
@@ -103,12 +103,12 @@
             (click)="editData()"
             class="date-end-text cursor-pointer"
           >
-            {{ tarefa.dataFinal }}
+            {{ tarefa.finalDate }}
           </p>
           <input
             *ngIf="booleanCalendario"
             type="date"
-            [(ngModel)]="tarefa.dataFinal"
+            [(ngModel)]="tarefa.finalDate"
           />
         </div>
       </div>
@@ -130,17 +130,17 @@
           <div
             (click)="editStatus()"
             class="status-icon"
-            [ngStyle]="{ 'background-color': tarefa.statusAtual.corFundo }"
+            [ngStyle]="{ 'background-color': tarefa.currentStatus.backgroundColor }"
           >
-            {{ tarefa.statusAtual.nome }}
+            {{ tarefa.currentStatus.name }}
           </div>
         </div>
         <!--[projeto]="tarefa.projeto"-->
         <app-select-status
           (newItem)="editStatus()"
-          [projeto]="tarefa.projeto"
+          [projeto]="tarefa.project"
           [tarefa]="tarefa"
-          [statusLista]="tarefa.projeto.listaStatus"
+          [statusLista]="tarefa.project.statusList"
           *ngIf="booleanStatus"
         ></app-select-status>
       </div>
@@ -214,7 +214,7 @@
         cols="80"
         pInputTextarea
         [autoResize]="true"
-        [(ngModel)]="tarefa.descricao"
+        [(ngModel)]="tarefa.description"
         [disabled]="!booleanEdit"
         [ngClass]="booleanDesc ? 'min-w-[80%] h-48' : 'w-0 h-0'"
         class="box-description"
@@ -294,9 +294,9 @@
     <div class="components">
       <app-sub-tarefa
         [tarefa]="tarefa"
-        [listaSubtarefas]="tarefa.subtarefas"
+        [listaSubtarefas]="tarefa.subtasks"
         class="component"
-        *ngIf="page_task == 'sub-tarefas'"
+        *ngIf="page_task == 'sub-subtasks'"
       ></app-sub-tarefa>
       <app-comentarios
         class="component"

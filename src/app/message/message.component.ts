@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Chat } from 'src/model/chat';
 import { Message } from 'src/model/message';
 import { UserChat } from 'src/model/userChat';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 
 @Component({
   selector: 'app-message',
@@ -13,7 +13,7 @@ export class MessageComponent implements OnInit {
 
   @Input() chat:Chat = new UserChat
 
-  @Input() loggedUser:Usuario = new Usuario
+  @Input() loggedUser:User = new User
   @Input() message:Message = new Message
 
   messageAlignment:string = "end"

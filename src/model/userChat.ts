@@ -1,5 +1,5 @@
 import { Chat } from "./chat";
-import { Usuario } from "./usuario";
+import { User } from "./user";
 
 export class UserChat extends Chat {
 

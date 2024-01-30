@@ -1,5 +1,5 @@
   import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input, Output, EventEmitter } from '@angular/core';
-  import { Tarefa } from 'src/model/tarefa';
+  import { Task } from 'src/model/task';
   import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
   @Component({
@@ -8,7 +8,7 @@
     styleUrls: ['./tarefa-card-padrao.component.scss']
   })
   export class TarefaCardPadraoComponent  {
-  @Input() tarefaAtual!:Tarefa
+  @Input() tarefaAtual!:Task
 
   valorBarra="0%";
     caminho = "assets/naoVector.svg"
@@ -29,7 +29,7 @@
     ngOnInit(): void {
   
       this.trocaCor()
-      if(this.tarefaAtual.favoritado){
+      if(this.tarefaAtual.favorited){
         this.caminhoEstrela = "assets/estrelaMarcada.svg"
       }else{
         this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
@@ -42,10 +42,10 @@
     favoritar(){
       if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
         this.caminhoEstrela = "assets/estrelaMarcada.svg"
-        this.tarefaAtual.favoritado=true;
+        this.tarefaAtual.favorited=true;
       } else {
         this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
-        this.tarefaAtual.favoritado=false;
+        this.tarefaAtual.favorited=false;
 
       }
       console.log(this.tarefaAtual)
@@ -57,14 +57,14 @@
     }
 
     trocaCor(){
-      if(this.tarefaAtual.statusAtual.nome =="pendente"){
+      if(this.tarefaAtual.currentStatus.name =="pendente"){
         this.corStatus="#7CD5F4"
-      }else if(this.tarefaAtual.statusAtual.nome =="em progresso"){
+      }else if(this.tarefaAtual.currentStatus.name =="em progresso"){
         this.corStatus="#FCEC62"
-      }else  if(this.tarefaAtual.statusAtual.nome =="Concluido"){
+      }else  if(this.tarefaAtual.currentStatus.name =="Concluido"){
         this.corStatus="#86C19F"
       }
-      else  if(this.tarefaAtual.statusAtual.nome =="não atribuido"){
+      else  if(this.tarefaAtual.currentStatus.name =="não atribuido"){
         this.corStatus="#9CA3AE"
       }
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'src/model/message';
 import { UserChat } from 'src/model/userChat';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +11,7 @@ import { Usuario } from 'src/model/usuario';
 export class ContactComponent implements OnInit {
 
 @Input() chat:UserChat = new UserChat
-@Input() contact:Usuario = new Usuario
+@Input() contact:User = new User
 
 lastMessage:Message = new Message
 

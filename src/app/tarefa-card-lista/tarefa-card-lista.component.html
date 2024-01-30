@@ -1,23 +1,23 @@
 <div class="main">
   <div class=" name-box">
-    <div *ngIf="tarefaAtual.nome.length > 10">
-      <p class="taskName">{{ tarefaAtual.nome }}</p>
+    <div *ngIf="tarefaAtual.name.length > 10">
+      <p class="taskName">{{ tarefaAtual.name }}</p>
     </div>
-    <div *ngIf="tarefaAtual.nome.length <= 10">
-      <p class="name">{{ tarefaAtual.nome }}</p>
+    <div *ngIf="tarefaAtual.name.length <= 10">
+      <p class="name">{{ tarefaAtual.name }}</p>
     </div>
   </div>
   <div class="grey-progress">
     <div class="blue-progress" [ngStyle]="{ width: valorBarra }"></div>
   </div>
   <div class="finalDate-box">
-    <p class="finalDate">{{ tarefaAtual.dataFinal }}</p>
+    <p class="finalDate">{{ tarefaAtual.finalDate }}</p>
   </div>
   <div
     class="status"
-    [ngStyle]="{ 'background-color': tarefaAtual.statusAtual.corFundo }"
+    [ngStyle]="{ 'background-color': tarefaAtual.currentStatus.backgroundColor }"
   >
-    {{ tarefaAtual.statusAtual.nome }}
+    {{ tarefaAtual.currentStatus.name }}
   </div>
   <div class="flex gap-2">
     <div class="taskMemberPhoto bg-secondary"></div>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { UserChat } from 'src/model/userChat';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class MessageBarComponent implements OnInit {
 
-  @Input() loggedUser = new Usuario
+  @Input() loggedUser = new User
   @Input() chat = new UserChat
   newMessage: MessageDTO = new MessageDTO
 
@@ -24,7 +24,7 @@ export class MessageBarComponent implements OnInit {
 
     let messageDate: Date = new Date()
 
-    let sender = new Usuario()
+    let sender = new User()
     sender.id = this.loggedUser.id
 
     this.newMessage.sender = sender

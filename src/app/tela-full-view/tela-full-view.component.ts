@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 @Component({
   selector: 'app-tela-full-view',
   templateUrl: './tela-full-view.component.html',

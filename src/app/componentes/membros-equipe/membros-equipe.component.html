@@ -1,10 +1,10 @@
 <div class="div-membros">
     <div class="foto">
-        <div *ngIf="verifyImage()" class="foto2" [ngStyle]="{'background': user.fotoPerfil }" >{{user.nome.charAt(0).toUpperCase()}}</div>
-        <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.fotoPerfil}}" alt="">
+        <div *ngIf="verifyImage()" class="foto2" [ngStyle]="{'background': user.profilePicture }" >{{user.name.charAt(0).toUpperCase()}}</div>
+        <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.profilePicture}}" alt="">
     </div>
     <div class="infos">
-        <div class="nome"><p>{{user.nome}}</p></div>
+        <div class="nome"><p>{{user.name}}</p></div>
         <div class="email"><p>{{user.email}}</p></div>
     </div>
     <div class="tipo"><p>Administrador</p></div>

@@ -1,7 +1,7 @@
-export class Subtarefa{
+export class Subtask{
     id: number = 0;
-    nome : string = "";
-    concluido : boolean = false;
+    name : string = "";
+    concluded : boolean = false;
     modalEdit : boolean = false;
     editable : boolean = false;
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
-import { Usuario } from 'src/model/usuario';
+import { Projeto } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-membros-equipe',
@@ -13,11 +13,11 @@ export class MembrosEquipeComponent implements OnInit {
 
   adicionado = false
 
-  @Input() user!:Usuario
+  @Input() user!:User
   @Input() projeto!:Projeto
 
   ngOnInit(){
-    this.projeto.membros.forEach(element => {
+    this.projeto.members.forEach(element => {
       if(element.id === this.user.id){
         this.adicionado = true
       }
@@ -25,7 +25,7 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   verifyImage(){
-    if(this.user.fotoPerfil.length>10){
+    if(this.user.profilePicture.length>10){
       return false
     }else{
       return true
@@ -42,7 +42,7 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   addUser(){
-    this.projeto.membros.push(this.user)
+    this.projeto.members.push(this.user)
     this.arrayAlterada()
   }
 
@@ -51,9 +51,9 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   removeUser(){
-    this.projeto.membros.forEach(element => {
+    this.projeto.members.forEach(element => {
       if(element.id === this.user.id){
-        this.projeto.membros.splice(this.projeto.membros.indexOf(element), 1)
+        this.projeto.members.splice(this.projeto.members.indexOf(element), 1)
       }
     });
     this.arrayAlterada()

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 
 @Component({
   selector: 'app-equipe-recente-card',

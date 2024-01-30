@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -25,25 +25,25 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
   
   adicionarStatus(){
-    this.status.nome = ''
-    this.status.corFundo = ''
+    this.status.name = ''
+    this.status.backgroundColor = ''
     this.adicionar = !this.adicionar
   }
 
   async criarStatus(){
-    if(this.status.nome != ''){
-      if(this.status.corFundo === ''){
-        this.status.corFundo = '#FF0000'
+    if(this.status.name != ''){
+      if(this.status.backgroundColor === ''){
+        this.status.backgroundColor = '#FF0000'
       }
-      this.projeto.listaStatus.push(this.status as Status)
+      this.projeto.statusList.push(this.status as Status)
       await this.service.putProjeto(this.projeto)
       this.EventEmitter()
       this.atualizaStatus()
       this.adicionar = true
       this.editando = false
     }
-    this.status.nome = ''
-    this.status.corFundo = ''
+    this.status.name = ''
+    this.status.backgroundColor = ''
   }
 
   async atualizaStatus(){
@@ -54,11 +54,11 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
       this.statusPadrao.splice(this.statusPadrao.indexOf(this.statusPadrao[i]), 1)
     }
     this.projeto = await this.service.getOne('projeto',this.projeto.id)
-    this.projeto.listaStatus.forEach(e => {
-      if((e.nome === 'não atribuido' ||
-      e.nome === 'concluido' ||
-      e.nome === 'pendente' ||
-      e.nome === 'em progresso') && !this.statusPadrao.includes(e)){
+    this.projeto.statusList.forEach(e => {
+      if((e.name === 'não atribuido' ||
+      e.name === 'concluido' ||
+      e.name === 'pendente' ||
+      e.name === 'em progresso') && !this.statusPadrao.includes(e)){
         this.statusPadrao.push(e)
       }else{
         this.statusNovo.push(e)
@@ -73,7 +73,7 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
 
   removeStatusNovo(status:Status){
-    this.projeto.listaStatus.splice(this.projeto.listaStatus.indexOf(status), 1)
+    this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
     this.statusNovo.splice(this.statusNovo.indexOf(status), 1)
     this.EventEmitter()
   }
@@ -99,14 +99,14 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
       this.adicionar = false
       this.status = status
     }, 1);
-    this.status.nome = ''
-    this.status.corFundo = ''
+    this.status.name = ''
+    this.status.backgroundColor = ''
   }
 
   statusEditando:any
 
   async salvar(){
-    this.projeto.listaStatus[this.projeto.listaStatus.indexOf(JSON.parse(this.statusEditando))] = this.status
+    this.projeto.statusList[this.projeto.statusList.indexOf(JSON.parse(this.statusEditando))] = this.status
     await this.service.putProjeto(this.projeto)
     this.EventEmitter()
     this.atualizaStatus()

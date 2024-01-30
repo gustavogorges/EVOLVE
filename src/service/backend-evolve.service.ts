@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { MessageDTO } from 'src/model/DTO/messageDTO';
-import { Equipe } from 'src/model/equipe';
-import { Projeto } from 'src/model/projeto';
-import { Tarefa } from 'src/model/tarefa';
+import { Team } from 'src/model/team';
+import { Projeto } from 'src/model/project';
+import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 
 
 @Injectable({
@@ -30,11 +30,11 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
-  async postTarefa (tarefa:Tarefa){
+  async postTarefa (tarefa:Task){
     (await axios.post(this.URL+"tarefa", tarefa)).data 
   }
 
-  async putTarefa (tarefa:Tarefa){
+  async putTarefa (tarefa:Task){
     return (await axios.put(this.URL+"tarefa", tarefa)).data
   }
 
@@ -46,19 +46,19 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"projeto", projeto)).data
   }
 
-  async postUsuario (usuario:Usuario){
+  async postUsuario (usuario:User){
     return (await axios.post(this.URL+"usuario", usuario)).data
   }
 
-  async putUsuario (usuario:Usuario){
+  async putUsuario (usuario:User){
     return (await axios.put(this.URL+"usuario", usuario)).data
   }
 
-  async postEquipe (equipe:Equipe){
+  async postEquipe (equipe:Team){
     return (await axios.post(this.URL+"equipe", equipe)).data
   }
 
-  async putEquipe (equipe:Equipe){
+  async putEquipe (equipe:Team){
     return (await axios.put(this.URL+"equipe", equipe)).data
   }
 

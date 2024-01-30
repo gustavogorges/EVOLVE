@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Projeto } from 'src/model/projeto';
-import { Usuario } from 'src/model/usuario';
+import { Projeto } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
 
@@ -23,14 +23,14 @@ export class TelaCriarProjetoComponent implements OnInit {
   
   messages: Message[] | undefined;
   projeto!:Projeto
-  usuarios!: Usuario[]
+  usuarios!: User[]
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
   }
 
   updateProject(p:Projeto){
-    this.projeto.listaStatus = p.listaStatus
+    this.projeto.statusList = p.statusList
     this.service.putProjeto(p)
   }
 
@@ -38,9 +38,9 @@ export class TelaCriarProjetoComponent implements OnInit {
   @ViewChild('data') data!:ElementRef
   @ViewChild('descricao') descricao!:ElementRef
   async salvarProjeto(){
-    this.projeto.nome = this.nome.nativeElement.value
-    this.projeto.dataFinal = this.data.nativeElement.value
-    this.projeto.descricao = this.descricao.nativeElement.value
+    this.projeto.name = this.nome.nativeElement.value
+    this.projeto.finalDate = this.data.nativeElement.value
+    this.projeto.description = this.descricao.nativeElement.value
     await this.service.putProjeto(this.projeto);
     this.route.navigate(['tela-projeto'])
   }

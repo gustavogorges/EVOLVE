@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Status } from 'src/model/status';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import {
   CdkDragDrop,
   CdkDragMove,
@@ -15,24 +15,24 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tarefa-kanban.component.scss'],
 })
 export class TarefaKanbanComponent implements OnInit {
-  @Input() listaTarefas!: Array<Tarefa>;
+  @Input() listaTarefas!: Array<Task>;
   @Input() listaStatus!: Array<Status>;
 
   constructor(private service: BackendEVOLVEService) { }
   ngOnInit(): void { }
 
-  filtrarLista(status: Status): Array<Tarefa> {
+  filtrarLista(status: Status): Array<Task> {
     let listaFiltrada = this.listaTarefas
-      .filter((tarefa: Tarefa) => tarefa.statusAtual.nome === status.nome)
+      .filter((task: Task) => task.currentStatus.name === status.name)
       .sort((a, b) => a.statusListIndex - b.statusListIndex);
 
     return listaFiltrada;
   }
 
   async drop(
-    event: CdkDragDrop<Tarefa[]>,
+    event: CdkDragDrop<Task[]>,
     status: Status,
-    list: Array<Tarefa>
+    list: Array<Task>
   ) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -41,14 +41,14 @@ export class TarefaKanbanComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      (event.item.data as Tarefa).statusAtual = status;
+      (event.item.data as Task).currentStatus = status;
       this.service.putTarefa(event.item.data);
     }
 
     if (event.container.data.length == 0) {
-      (event.item.data as Tarefa).statusAtual = status;
+      (event.item.data as Task).currentStatus = status;
 
-      (event.item.data as Tarefa).statusListIndex = event.currentIndex;
+      (event.item.data as Task).statusListIndex = event.currentIndex;
 
       this.service.putTarefa(event.item.data);
       await console.log(this.service.getOne('tarefa', event.item.data.id));

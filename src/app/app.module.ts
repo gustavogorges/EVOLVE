@@ -36,12 +36,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
 
 import {ColorPickerModule} from 'primeng/colorpicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TelaCriarProjetoComponent } from './tela-criar-projeto/tela-criar-projeto.component';
 import { MembrosEquipeComponent } from './componentes/membros-equipe/membros-equipe.component';
 import { StatusComponentCriarTarefaComponent } from './componentes/sub-componentes/status-component-criar-tarefa/status-component-criar-tarefa.component';
-import { ColorPickerModule } from 'primeng/colorpicker';
 
 import { TarefaCardListaComponent } from './tarefa-card-lista/tarefa-card-lista.component';
 import { SelectCustomComponent } from './componentes/select-custom/select-custom.component';
@@ -67,7 +65,9 @@ import { TeamCreationScreenComponent } from './team-creation-screen/team-creatio
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
 import { ChartModule } from 'primeng/chart';
 import { ChartModalComponent } from './componentes/chart-modal/chart-modal.component';
-import { DragDropModule } from 'primeng/dragdrop';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { MessagesModule } from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
@@ -139,12 +139,9 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
   imports: [
     MessageModule,
     MessagesModule,
-    DragDropModule,
     ChartModule,
-    ColorPickerModule,
     BrowserAnimationsModule,
     CalendarModule,
-    BrowserModule,
     AppRoutingModule,
     AccordionModule,
     ButtonModule,
@@ -157,10 +154,8 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
     ColorPickerModule,
     BrowserAnimationsModule,
     CdTimerModule,
-    DragDropModule,
-    BrowserModule
-
-
+    BrowserModule,
+    DragDropModule
   ],
   
   providers: [],

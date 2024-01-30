@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import axios from 'axios';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 import { Status } from 'src/model/status';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -41,9 +41,9 @@ export class SelectCustomComponent implements OnInit {
     this.newItem.emit(option);
     console.log(option)
     if(option=="Status"){
-      this.projeto.listaStatus.map((status :Status)=>{
-        console.log(status.nome)
-        this.listOptions.push(status.nome)
+      this.projeto.statusList.map((status :Status)=>{
+        console.log(status.name)
+        this.listOptions.push(status.name)
        })
   
       

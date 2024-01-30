@@ -5,7 +5,7 @@ import { Chat } from 'src/model/chat';
 import { Message } from 'src/model/message';
 import { TeamChat } from 'src/model/team-chat';
 import { UserChat } from 'src/model/userChat';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class TelaChatComponent implements OnInit {
   // senderImagePointerDirection:Number = 46
   // showSenderImagePointer:Boolean = false
 
-  loggedUser: Usuario = new Usuario
+  loggedUser: User = new User
   search:string = ""
   // newMessage: MessageDTO = new MessageDTO
 
@@ -37,7 +37,7 @@ export class TelaChatComponent implements OnInit {
     private service: BackendEVOLVEService,
   ) { }
 
-  contact: Usuario = new Usuario
+  contact: User = new User
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.service.getOne("usuario", 1202)
@@ -77,16 +77,16 @@ export class TelaChatComponent implements OnInit {
     }
   }
 
-  filterTeamChats(loggedUser:Usuario):Array<Chat>{
+  filterTeamChats(loggedUser:User):Array<Chat>{
     let teamChats = new Array<TeamChat>
-    for(let team of loggedUser.equipes){
+    for(let team of loggedUser.teams){
       teamChats.push(team.chat)
     }
     return teamChats
   }
 
   checkSearch(chat:Chat):Boolean{
-    let contactName = this.getContactFromUser(chat, this.loggedUser).nome.toLowerCase()
+    let contactName = this.getContactFromUser(chat, this.loggedUser).name.toLowerCase()
     return contactName.includes(this.search.toLowerCase())
   }
 
@@ -98,8 +98,8 @@ export class TelaChatComponent implements OnInit {
     localStorage.setItem("lastChatId",JSON.stringify(this.selectedChat.id))
   }
 
-  getContactFromUser(chat: UserChat, user: Usuario) {
-    let users:Array<Usuario> = chat.users
+  getContactFromUser(chat: UserChat, user: User) {
+    let users:Array<User> = chat.users
     if (users[0].id != user.id) {
       return users[0]
     }

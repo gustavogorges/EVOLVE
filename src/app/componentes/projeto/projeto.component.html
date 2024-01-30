@@ -3,9 +3,9 @@
 
         <div [ngClass]="projeto.isVisible ? 'rounded-s-xl' : 'rounded-xl'" class="projeto" (click)="openEfechaProjeto()">
             <div class="imagem-capa" > <div class="div-foto-centraliza"><div class="foto" (click)="openEfechaProjeto()"><div class="lapis-edit" [ngClass]="projeto.isVisible ? 'w-[25%] h-[25%]':'w-0'" ><i class="pi pi-pencil text-primary dark:text-dark-primary" [ngClass]="projeto.isVisible ? 'visible':'invisible'"></i></div></div> </div></div>
-            <div class="nome-projeto"><input #nome  maxlength="19" (click)="openEfechaProjeto()"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.nome"></div>
+            <div class="nome-projeto"><input #nome  maxlength="19" (click)="openEfechaProjeto()"  [ngClass]="projeto.isVisible ? 'border-2':'border-none'" type="text" [(ngModel)]="projeto.name"></div>
             <div class="descricao" (click)="openEfechaProjeto()">
-                <div class="desc" ><textarea class="descricao-valor" #descricao [(ngModel)]="projeto.descricao" maxlength="200" cols="10" rows="5"></textarea></div>
+                <div class="desc" ><textarea class="descricao-valor" #descricao [(ngModel)]="projeto.description" maxlength="200" cols="10" rows="5"></textarea></div>
             </div>
             <div class="responsaveis">
                 <div class="responsaveis-escrita">Responsaveis: </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="data-final" (click)="openEfechaProjeto()">
                 <p>Data final: </p>
-                <input #data [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.dataFinal">
+                <input #data [disabled]="!projeto.isVisible" type="date" [(ngModel)]="projeto.finalDate">
             </div>
         </div>
     
@@ -42,10 +42,10 @@
             <div *ngIf="projeto.isVisible" class="integrantes">
                 <div class="seta"><</div>
                 <div #bg class="pessoas">
-                    <div  *ngFor="let p of projeto.membros;"  class="infos-pessoas">
-                        <div *ngIf="verifyImage(p)" class="foto" [ngStyle]="{'background': p.fotoPerfil}" >{{p.nome.charAt(0).toUpperCase()}}</div>
-                        <img class="fotoImagem" *ngIf="!verifyImage(p)" src="{{p.fotoPerfil}}" alt="">
-                        <p class="nome">{{p.nome}}</p>
+                    <div  *ngFor="let p of projeto.members;"  class="infos-pessoas">
+                        <div *ngIf="verifyImage(p)" class="foto" [ngStyle]="{'background': p.profilePicture}" >{{p.name.charAt(0).toUpperCase()}}</div>
+                        <img class="fotoImagem" *ngIf="!verifyImage(p)" src="{{p.profilePicture}}" alt="">
+                        <p class="nome">{{p.name}}</p>
                         <p class="tipo">Administrador</p>
                     </div>
                 </div>

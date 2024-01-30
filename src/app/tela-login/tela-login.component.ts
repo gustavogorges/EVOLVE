@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/model/usuario';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tela-login.component.scss'],
 })
 export class TelaLoginComponent implements OnInit {
-  usuario: Usuario = new Usuario();
+  usuario: User = new User();
 
   email: string = '';
   senha: string = '';
@@ -20,7 +20,7 @@ export class TelaLoginComponent implements OnInit {
 
   async login(): Promise<void> {
     this.usuario = await this.service.getUser(this.email);
-    if (this.usuario.senha == this.senha) {
+    if (this.usuario.password == this.senha) {
       this.router.navigate(['/tela-inicial'], { state: { user: this.usuario } });
     }
   }

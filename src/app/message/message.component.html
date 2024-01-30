@@ -1,7 +1,7 @@
 <div class="message-container flex flex-col w-full ">
     
     <div class="sender-image-container w-full flex justify-{{messageAlignment}} items-center pb-2" *ngIf="showImage(message) ">
-        <img class="sender-image w-16 h-16 rounded-full"  src="{{message.sender.fotoPerfil}}" alt="" >
+        <img class="sender-image w-16 h-16 rounded-full"  src="{{message.sender.profilePicture}}" alt="" >
     </div>
 
     <div class="message w-full px-16  flex justify-{{messageAlignment}}">

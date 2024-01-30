@@ -2,11 +2,11 @@
     <div class="status-box" >
         <div
          class="status "
-         [ngStyle]="{'background-color': status.corFundo}"
-         *ngFor="let status of projeto.listaStatus"
+         [ngStyle]="{'background-color': status.backgroundColor}"
+         *ngFor="let status of projeto.statusList"
          (click)="salvarStatus(status)"
          >
-            <p>{{status.nome}}</p>
+            <p>{{status.name}}</p>
         </div>
     </div>
     <div *ngIf="!booleanAddStatus" (click)="addStatus()" class="add-box">
@@ -16,7 +16,7 @@
     <div *ngIf="booleanAddStatus" class="new-status">
         <div class="nome-status-box">
             <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
-                <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.nome">
+                <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.name">
                 <div class="w-full flex justify-center items-center">
                     <i class="pi pi-pencil text-primary font-bold" ></i>
                 </div>
@@ -24,9 +24,9 @@
         </div>
         <div class="cor-status-box">
             <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
-                <input class="input-add-status" type="text" value="{{status.corFundo}}"  placeholder="selecione uma cor">
+                <input class="input-add-status" type="text" value="{{status.backgroundColor}}"  placeholder="selecione uma cor">
                 <div class="w-full flex justify-center items-center">
-                    <input type="color" class="w-7" [(ngModel)]="status.corFundo">
+                    <input type="color" class="w-7" [(ngModel)]="status.backgroundColor">
                 </div>
             </div>
         </div>

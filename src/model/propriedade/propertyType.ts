@@ -1,4 +1,4 @@
-export enum TipoPropriedade{
+export enum PropertyType{
     TEXT,
     DOUBLE,
     INTEGER,

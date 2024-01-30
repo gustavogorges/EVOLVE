@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Equipe } from 'src/model/equipe';
-import { Tarefa } from 'src/model/tarefa';
-import { Usuario } from 'src/model/usuario';
+import { Team } from 'src/model/team';
+import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 
@@ -25,11 +25,11 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  listaTarefas: Array<Tarefa> = [];
+  listaTarefas: Array<Task> = [];
 
   data: any;
 
-  loggedUser: Usuario = new Usuario;
+  loggedUser: User = new User;
 
   booleanTask: boolean = false;
 
@@ -41,7 +41,7 @@ export class TelaInicialComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.data = this.location.getState();
-    let userData: Usuario = await this.data.user
+    let userData: User = await this.data.user
     if(userData){
       this.cookieService.setOne( userData)
     }
@@ -54,16 +54,16 @@ export class TelaInicialComponent implements OnInit {
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
   }
-  tarefaSelecionada: Tarefa = new Tarefa();
-  openTask(tarefa: Tarefa): void {
+  tarefaSelecionada: Task = new Task();
+  openTask(tarefa: Task): void {
     console.log('teste 1');
     this.booleanTask = true;
 
     this.tarefaSelecionada = tarefa;
   }
 
-  closeTask(tarefa: Tarefa) {
+  closeTask(tarefa: Task) {
     this.booleanTask = false;
-    this.tarefaSelecionada = new Tarefa();
+    this.tarefaSelecionada = new Task();
   }
 }

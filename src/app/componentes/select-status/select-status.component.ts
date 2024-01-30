@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 import { Status } from 'src/model/status';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class SelectStatusComponent implements OnInit {
   statusLista : Array<Status> = new Array
 
   @Input()
-  tarefa : Tarefa = new Tarefa;
+  tarefa : Task = new Task;
 
   @Output() newItem = new EventEmitter<boolean>();
 
@@ -36,11 +36,11 @@ export class SelectStatusComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.statusLista)
     console.log(this.projeto)
-    console.log(this.status.corFundo)
+    console.log(this.status.backgroundColor)
   }
 
   salvarStatus(status:Status) {
-    this.tarefa.statusAtual = status;
+    this.tarefa.currentStatus = status;
     this.newItem.emit(false);
   }
 
@@ -49,8 +49,8 @@ export class SelectStatusComponent implements OnInit {
   }
 
   novoStatus() {
-    this.status.corTexto = "#000000";
-    this.projeto.listaStatus.push(this.status)
+    this.status.textColor = "#000000";
+    this.projeto.statusList.push(this.status)
     this.service.putProjeto(this.projeto)
     console.log(this.projeto)
     this.addStatus();

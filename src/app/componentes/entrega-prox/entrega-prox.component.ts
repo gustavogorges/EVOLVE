@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 
@@ -12,17 +12,17 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class EntregaProxComponent implements OnInit {
 
 
-  @Input() tarefa: Tarefa = new Tarefa
+  @Input() tarefa: Task = new Task
 
   constructor(private service: BackendEVOLVEService) { }
 
   ngOnInit(): void {
     //retirar quando fizer o calculo automatico
-    this.tarefa.porcentagemConclusao = 75
+    this.tarefa.conclusionPercentage = 75
   }
 
   alterarTarefaFavoritado(){
-    this.tarefa.favoritado = !this.tarefa.favoritado;
+    this.tarefa.favorited = !this.tarefa.favorited;
     this.salvarTarefa()
   }
 

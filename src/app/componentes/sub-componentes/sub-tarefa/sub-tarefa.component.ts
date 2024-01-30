@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Tarefa } from 'src/model/tarefa';
-import { Subtarefa } from 'src/model/subtarefa';
+import { Task } from 'src/model/task';
+import { Subtask } from 'src/model/subtask';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -21,10 +21,10 @@ export class SubTarefaComponent implements OnInit {
   newNameEdit : string = '';
 
   @Input()
-  tarefa : Tarefa = new Tarefa;
+  tarefa : Task = new Task;
   
   @Input()
-  listaSubtarefas : Array<Subtarefa> = new Array;
+  listaSubtarefas : Array<Subtask> = new Array;
 
   constructor(
     private service : BackendEVOLVEService
@@ -35,9 +35,9 @@ export class SubTarefaComponent implements OnInit {
   }
 
   adicionarSubtarefa() {
-    const subtarefaNova: Subtarefa = {
-      nome: this.subtarefa.nome,
-      concluido: false,
+    const subtarefaNova: Subtask = {
+      name: this.subtarefa.nome,
+      concluded: false,
       id: 0,
       modalEdit : false,
       editable: false
@@ -53,27 +53,27 @@ export class SubTarefaComponent implements OnInit {
     this.booleanAddSubtarefa = !this.booleanAddSubtarefa;
   }
 
-  openModalSubtarefa(subtarefa : Subtarefa) {
+  openModalSubtarefa(subtarefa : Subtask) {
     subtarefa.modalEdit = !subtarefa.modalEdit;
   }
 
-  editSubtarefa(subtarefa : Subtarefa) {
+  editSubtarefa(subtarefa : Subtask) {
     subtarefa.modalEdit = false;
     subtarefa.editable = true;
   }
 
-  removeSubtarefa(subtarefa : Subtarefa, i : number) {
+  removeSubtarefa(subtarefa : Subtask, i : number) {
     this.listaSubtarefas.splice(i,1)
     console.log(this.listaSubtarefas)
     this.service.putTarefa(this.tarefa);
   }
 
-  confirmEdit(subtarefa : Subtarefa) {
+  confirmEdit(subtarefa : Subtask) {
     console.log(this.listaSubtarefas)
-    subtarefa.nome = this.newNameEdit;
+    subtarefa.name = this.newNameEdit;
     subtarefa.editable = false;
     console.log(this.listaSubtarefas)
-    console.log(this.tarefa.subtarefas)
+    console.log(this.tarefa.subtasks)
     this.service.putTarefa(this.tarefa);
   }
 

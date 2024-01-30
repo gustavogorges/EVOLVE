@@ -1,15 +1,15 @@
-import { Projeto } from "../projeto";
-import { Propriedade } from "./property";
-import { Tarefa } from "../tarefa";
-import { TipoPropriedade } from "./propertyType";
-import { Usuario } from "../usuario";
+import { Projeto } from "../project";
+import { Property } from "./property";
+import { Task } from "../task";
+import { PropertyType } from "./propertyType";
+import { User } from "../user";
 
 
-export class TarefaProjetoPropriedade {
+export class TaskProjectProperty {
     id: number = 0;
-    propriedade: Propriedade = new Propriedade;
-    tarefa: Tarefa = new Tarefa;
-    projeto: Projeto = new Projeto;
+    property: Property = new Property;
+    task: Task = new Task;
+    project: Projeto = new Projeto;
 
-    value: number | string | Date | Array<Usuario> | Array<string> = ""
+    value: number | string | Date | Array<User> | Array<string> = ""
 }

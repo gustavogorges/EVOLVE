@@ -46,7 +46,8 @@ const routes: Routes = [
 
     path:"equipe/criar",
     component: TeamCreationScreenComponent
-  }
+  },
+  {
     path:'view-project',
     component: TelaFullViewComponent
 

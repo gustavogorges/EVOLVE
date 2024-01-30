@@ -16,7 +16,7 @@
         <h1 class="project-name">Projeto Padrão</h1>
         <app-botao-add-tarefa
           class="w-[100%]"
-          (click)="openTaskEdit(tarefaNova)"
+          (click)="openTaskEdit()"
           *ngIf="!(option == 'Kanban')"
         ></app-botao-add-tarefa>
 
@@ -82,7 +82,7 @@
       <div class="tasks-grid-padrao">
         <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
           <app-tarefa-card-padrao
-            [id]="tarefa.nome + indice"
+            [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (click)="openTask(tarefa)"
             (newItem)="ngOnInit()"
@@ -98,7 +98,7 @@
         >
           <app-tarefa-card-lista
             class="h-full w-full"
-            [id]="tarefa.nome + indice"
+            [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (newItem)="ngOnInit()"
           ></app-tarefa-card-lista>
@@ -110,7 +110,7 @@
       </div>
       <div *ngIf="option == 'Kanban'" >
         <div class="w-full" cdkDropListGroup >
-            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.listaStatus"
+            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.statusList"
             ></app-tarefa-kanban>
         </div>
   </div>

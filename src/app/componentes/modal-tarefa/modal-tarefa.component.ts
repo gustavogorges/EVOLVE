@@ -1,7 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/projeto';
+import { Projeto } from 'src/model/project';
 import { Status } from 'src/model/status';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -79,10 +79,10 @@ export class ModalTarefaComponent implements OnInit {
 
   
   constructor(private service: BackendEVOLVEService) {}
-  @Input() tarefa: Tarefa = new Tarefa();
-  tarefaTeste : Tarefa = this.tarefa;
+  @Input() tarefa: Task = new Task();
+  tarefaTeste : Task = this.tarefa;
   projeto: Projeto = new Projeto();
-  tarefaNova: Tarefa = new Tarefa();
+  tarefaNova: Task = new Task();
 
   async ngOnInit(): Promise<void> {
     console.log(this.tarefa);
@@ -91,15 +91,15 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanEdit = true;
       this.booleanCalendario = true;
       this.tarefa = this.tarefaNova;
-      this.tarefaNova.statusAtual.nome = 'sem status';
+      this.tarefaNova.currentStatus.name = 'sem status';
     } else if (this.tarefa.id != 0) {
-      this.statusAntigo = this.tarefa.statusAtual;
-      this.descricaoAntiga = this.tarefa.descricao;
-      this.nomeAntigo = this.tarefa.nome;
+      this.statusAntigo = this.tarefa.currentStatus;
+      this.descricaoAntiga = this.tarefa.description;
+      this.nomeAntigo = this.tarefa.name;
     }
     let projetos = await this.service.getAllSomething('projeto');
     for (let projeto of projetos) {
-      if (projeto.id == this.tarefa.projeto.id) {
+      if (projeto.id == this.tarefa.project.id) {
         this.projeto = projeto;
       }
     }
@@ -136,11 +136,11 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   verificaTamanhoString() {
-    if (this.tarefa.nome.length > 20) {
-      this.nomeGrande = this.tarefa.nome;
-      let nome = this.tarefa.nome.split(' ', 4).toString();
-      this.tarefa.nome = nome.replace(/,/g, ' ');
-      console.log(this.tarefa.nome);
+    if (this.tarefa.name.length > 20) {
+      this.nomeGrande = this.tarefa.name;
+      let nome = this.tarefa.name.split(' ', 4).toString();
+      this.tarefa.name = nome.replace(/,/g, ' ');
+      console.log(this.tarefa.name);
     }
   }
 
@@ -172,9 +172,9 @@ export class ModalTarefaComponent implements OnInit {
     this.booleanEdit = false;
     this.booleanCalendario = false;
     this.booleanStatus = false;
-    this.tarefa.statusAtual = this.statusAntigo;
-    this.tarefa.descricao = this.descricaoAntiga;
-    this.tarefa.nome = this.nomeAntigo;
+    this.tarefa.currentStatus = this.statusAntigo;
+    this.tarefa.description = this.descricaoAntiga;
+    this.tarefa.name = this.nomeAntigo;
   }
 
   salvarTarefa() {
@@ -182,8 +182,8 @@ export class ModalTarefaComponent implements OnInit {
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
       console.log('entrou');
-      this.tarefa.criador.id = 303;
-      this.tarefa.projeto.id = 2652;
+      this.tarefa.creator.id = 303;
+      this.tarefa.project.id = 2652;
       this.service.postTarefa(this.tarefa);
       this.tarefa.id = 0;
     }

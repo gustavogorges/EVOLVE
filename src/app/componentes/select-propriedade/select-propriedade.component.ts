@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Propriedade } from 'src/model/propriedade/property';
+import { Property } from 'src/model/propriedade/property';
 import { SelectOption } from 'src/model/propriedade/selectOption';
-import { TarefaProjetoPropriedade } from 'src/model/propriedade/task-project-property';
-import { Tarefa } from 'src/model/tarefa';
+import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -30,11 +30,11 @@ export class SelectPropriedadeComponent implements OnInit {
   listOptions : Array<SelectOption> = new Array;
 
   @Input()
-  tarefa: Tarefa = new Tarefa();
+  tarefa: Task = new Task();
 
-  newPropertie:TarefaProjetoPropriedade = new TarefaProjetoPropriedade();
-
-  elemento: TarefaProjetoPropriedade = new TarefaProjetoPropriedade();
+  newPropertie:TaskProjectProperty = new TaskProjectProperty();
+  
+  elemento: TaskProjectProperty = new TaskProjectProperty();
 
   constructor(
     private service : BackendEVOLVEService
@@ -119,9 +119,9 @@ export class SelectPropriedadeComponent implements OnInit {
 
   savePropertie() {
     console.log(this.tarefa)
-    this.tarefa.propriedades.push(this.newPropertie);
+    this.tarefa.properties.push(this.newPropertie);
     this.service.putTarefa(this.tarefa);
     console.log(this.service.getAllSomething("tarefa"))
-    console.log(this.tarefa.propriedades);
+    console.log(this.tarefa.properties);
   }
 }

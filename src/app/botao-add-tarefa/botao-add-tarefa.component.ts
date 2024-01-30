@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 
 @Component({
   selector: 'app-botao-add-tarefa',

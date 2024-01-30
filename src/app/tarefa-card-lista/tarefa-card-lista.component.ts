@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tarefa } from 'src/model/tarefa';
+import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tarefa-card-lista.component.scss']
 })
 export class TarefaCardListaComponent implements OnInit {
-  @Input() tarefaAtual!:Tarefa
+  @Input() tarefaAtual!:Task
   valorBarra="0%";
   caminho = "assets/naoVector.svg"
   caminhoEstrela="assets/estrelaNaoMarcada.svg"
@@ -33,23 +33,23 @@ data : Date = new Date
 
   ngOnInit(): void {
    this.trocaCor()
-   if(this.tarefaAtual.favoritado){
+   if(this.tarefaAtual.favorited){
      this.caminhoEstrela = "assets/estrelaMarcada.svg"
    }else{
      this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
    }
    this.valorBarra = 60 +"%"; 
-   console.log(this.tarefaAtual.id + " "+this.tarefaAtual.statusAtual)
+   console.log(this.tarefaAtual.id + " "+this.tarefaAtual.currentStatus)
  
  }
 
  favoritar(){
    if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
      this.caminhoEstrela = "assets/estrelaMarcada.svg"
-     this.tarefaAtual.favoritado=true;
+     this.tarefaAtual.favorited=true;
    } else {
      this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
-     this.tarefaAtual.favoritado=false;
+     this.tarefaAtual.favorited=false;
 
    }
   
@@ -60,14 +60,14 @@ data : Date = new Date
  }
 
  trocaCor(){
-   if(this.tarefaAtual.statusAtual.nome =="pendente"){
+   if(this.tarefaAtual.currentStatus.name =="pendente"){
      this.corStatus="#7CD5F4"
-   }else if(this.tarefaAtual.statusAtual.nome =="em progresso"){
+   }else if(this.tarefaAtual.currentStatus.name =="em progresso"){
      this.corStatus="#FCEC62"
-   }else  if(this.tarefaAtual.statusAtual.nome =="Concluido"){
+   }else  if(this.tarefaAtual.currentStatus.name =="Concluido"){
      this.corStatus="#86C19F"
    }
-   else  if(this.tarefaAtual.statusAtual.nome =="não atribuido"){
+   else  if(this.tarefaAtual.currentStatus.name =="não atribuido"){
      this.corStatus="#9CA3AE"
    }
    

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Projeto } from 'src/model/projeto';
-import { Usuario } from 'src/model/usuario';
+import { Projeto } from 'src/model/project';
+import { User } from 'src/model/user';
 
 interface Tarefa{
   nome : string,
@@ -85,8 +85,8 @@ export class ProjetoComponent implements OnInit {
     },0.00001)
   }
 
-  verifyImage(user:Usuario){
-    if(user.fotoPerfil.length>10){
+  verifyImage(user:User){
+    if(user.profilePicture.length>10){
       return false
     }else{
       return true
