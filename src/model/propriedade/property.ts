@@ -1,4 +1,4 @@
-import { Projeto } from "../project";
+import { Project } from "../project";
 import { PropertyType } from "./propertyType";
 import { Select } from "./select";
 

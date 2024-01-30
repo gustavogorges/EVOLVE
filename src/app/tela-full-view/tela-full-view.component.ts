@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 @Component({
   selector: 'app-tela-full-view',
   templateUrl: './tela-full-view.component.html',
@@ -13,7 +13,7 @@ export class TelaFullViewComponent implements OnInit {
     data : any
     
     ngOnInit() {
-        this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
+        this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
         this.graficoBasico()
         this.verticalBar()
         this.doughnut()
@@ -386,6 +386,6 @@ export class TelaFullViewComponent implements OnInit {
         };
     }
 
-    projeto !: Projeto
+    projeto !: Project
 
 }

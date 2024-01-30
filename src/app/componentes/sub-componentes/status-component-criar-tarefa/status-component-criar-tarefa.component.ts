@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -14,9 +14,9 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
 
   status = new Status()
 
-  @Input() projeto!:Projeto
+  @Input() projeto!:Project
   @Input() isVisible:Boolean = false
-  @Output() projetoNew:EventEmitter<Projeto> = new EventEmitter<Projeto>()
+  @Output() projetoNew:EventEmitter<Project> = new EventEmitter<Project>()
 
   ngOnChanges(): void {
     if(this.projeto){
@@ -53,7 +53,7 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
     for (let i = this.statusPadrao.length -1 ; i >= 0; i-- ){
       this.statusPadrao.splice(this.statusPadrao.indexOf(this.statusPadrao[i]), 1)
     }
-    this.projeto = await this.service.getOne('projeto',this.projeto.id)
+    this.projeto = await this.service.getOne('project',this.projeto.id)
     this.projeto.statusList.forEach(e => {
       if((e.name === 'não atribuido' ||
       e.name === 'concluido' ||

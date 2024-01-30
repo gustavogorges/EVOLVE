@@ -4,7 +4,7 @@ import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
 
-export class Projeto{
+export class Project{
     id: number = 0;
     name: string = "";
     finalDate: string = "";

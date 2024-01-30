@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 
 interface Tarefa{
@@ -30,11 +30,11 @@ export class ProjetoComponent implements OnInit {
   @Output()
   deletar:EventEmitter<number> = new EventEmitter<number>()
 
-  @Output() openProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
+  @Output() openProjeto: EventEmitter<Project> = new EventEmitter<Project>()
 
-  @Output() salvarProjeto: EventEmitter<Projeto> = new EventEmitter<Projeto>()
+  @Output() salvarProjeto: EventEmitter<Project> = new EventEmitter<Project>()
 
-  @Input() projeto!:Projeto;
+  @Input() projeto!:Project;
   
   setValorProgresso(num:number){
     this.valorProgresso = num

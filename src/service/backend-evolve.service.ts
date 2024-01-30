@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { Team } from 'src/model/team';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
@@ -24,42 +24,42 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+caminho + "/"+id)).data
   }
   async getUser( email: string )  {
-    return (await axios.get(this.URL+"usuario/login" + "/"+email)).data
+    return (await axios.get(this.URL+"user/login" + "/"+email)).data
   }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
   async postTarefa (tarefa:Task){
-    (await axios.post(this.URL+"tarefa", tarefa)).data 
+    (await axios.post(this.URL+"task", tarefa)).data 
   }
 
   async putTarefa (tarefa:Task){
-    return (await axios.put(this.URL+"tarefa", tarefa)).data
+    return (await axios.put(this.URL+"task", tarefa)).data
   }
 
-  async postProjeto (projeto:Projeto){
-    return (await axios.post(this.URL+"projeto", projeto)).data
+  async postProjeto (projeto:Project){
+    return (await axios.post(this.URL+"project", projeto)).data
   }
 
-  async putProjeto (projeto:Projeto){
-    return (await axios.put(this.URL+"projeto", projeto)).data
+  async putProjeto (projeto:Project){
+    return (await axios.put(this.URL+"project", projeto)).data
   }
 
   async postUsuario (usuario:User){
-    return (await axios.post(this.URL+"usuario", usuario)).data
+    return (await axios.post(this.URL+"user", usuario)).data
   }
 
   async putUsuario (usuario:User){
-    return (await axios.put(this.URL+"usuario", usuario)).data
+    return (await axios.put(this.URL+"user", usuario)).data
   }
 
   async postEquipe (equipe:Team){
-    return (await axios.post(this.URL+"equipe", equipe)).data
+    return (await axios.post(this.URL+"team", equipe)).data
   }
 
   async putEquipe (equipe:Team){
-    return (await axios.put(this.URL+"equipe", equipe)).data
+    return (await axios.put(this.URL+"team", equipe)).data
   }
 
 

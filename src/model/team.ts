@@ -1,4 +1,4 @@
-import { Projeto } from "./project";
+import { Project } from "./project";
 import { TeamChat } from "./team-chat";
 import { User } from "./user";
 
@@ -7,7 +7,7 @@ export class Team{
     name : string = "";
     image:string = "";
     adimnistrator : User = new User;
-    projects: Array<Projeto> = new Array;
+    projects: Array<Project> = new Array;
     participants: Array<User> = new Array;
     chat: TeamChat = new TeamChat
 }

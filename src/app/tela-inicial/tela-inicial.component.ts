@@ -50,7 +50,7 @@ export class TelaInicialComponent implements OnInit {
 
     //this.cookieService.setOne(this.loggedUser)
 
-    this.listaTarefas = await this.service.getAllSomething('tarefa');
+    this.listaTarefas = await this.service.getAllSomething('task');
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
   }

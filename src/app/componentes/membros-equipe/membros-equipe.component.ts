@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
@@ -14,7 +14,7 @@ export class MembrosEquipeComponent implements OnInit {
   adicionado = false
 
   @Input() user!:User
-  @Input() projeto!:Projeto
+  @Input() projeto!:Project
 
   ngOnInit(){
     this.projeto.members.forEach(element => {

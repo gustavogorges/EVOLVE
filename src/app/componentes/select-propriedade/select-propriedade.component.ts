@@ -121,7 +121,7 @@ export class SelectPropriedadeComponent implements OnInit {
     console.log(this.tarefa)
     this.tarefa.properties.push(this.newPropertie);
     this.service.putTarefa(this.tarefa);
-    console.log(this.service.getAllSomething("tarefa"))
+    console.log(this.service.getAllSomething("task"))
     console.log(this.tarefa.properties);
   }
 }

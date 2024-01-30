@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -81,7 +81,7 @@ export class ModalTarefaComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
   tarefaTeste : Task = this.tarefa;
-  projeto: Projeto = new Projeto();
+  projeto: Project = new Project();
   tarefaNova: Task = new Task();
 
   async ngOnInit(): Promise<void> {
@@ -97,7 +97,7 @@ export class ModalTarefaComponent implements OnInit {
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
     }
-    let projetos = await this.service.getAllSomething('projeto');
+    let projetos = await this.service.getAllSomething('project');
     for (let projeto of projetos) {
       if (projeto.id == this.tarefa.project.id) {
         this.projeto = projeto;

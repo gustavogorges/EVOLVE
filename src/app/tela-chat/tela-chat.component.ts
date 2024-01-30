@@ -40,7 +40,7 @@ export class TelaChatComponent implements OnInit {
   contact: User = new User
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.service.getOne("usuario", 1202)
+    this.loggedUser = await this.service.getOne("user", 1202)
     this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
     console.log(this.loggedUser)
 

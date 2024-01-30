@@ -52,7 +52,7 @@
       this.service.putTarefa(this.tarefaAtual)
       this.newItem.emit(true);
 
-      this.service.getOne("tarefa",this.tarefaAtual.id)
+      this.service.getOne("task",this.tarefaAtual.id)
 
     }
 

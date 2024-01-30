@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class EquipesRecentesComponent implements OnInit {
 
-  listaProjetos: Array<Projeto> = new Array
+  listaProjetos: Array<Project> = new Array
   // Indice do elemento a ser mostrado 
   indiceVisualizacao: number = 0;
   // Variável para controlar a exibição das setas
@@ -18,7 +18,7 @@ export class EquipesRecentesComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-    this.listaProjetos = await this.service.getAllSomething("projeto");
+    this.listaProjetos = await this.service.getAllSomething("project");
     this.atualizarMostrarSetas();
   }
 
@@ -37,7 +37,7 @@ export class EquipesRecentesComponent implements OnInit {
     this.mostrarSetas = this.listaProjetos.length > 3; 
   }
 
-  get listaProjetosVisualizacao(): Projeto[] {
+  get listaProjetosVisualizacao(): Project[] {
     if (this.listaProjetos.length <= 3) {
       // Se houver 3 ou menos projetos, exibe todas
       return this.listaProjetos;

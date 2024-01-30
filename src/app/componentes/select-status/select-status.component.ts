@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -18,7 +18,7 @@ export class SelectStatusComponent implements OnInit {
   status : Status = new Status();
 
   @Input()
-  projeto : Projeto = new Projeto;
+  projeto : Project = new Project;
 
   @Input()
   statusLista : Array<Status> = new Array

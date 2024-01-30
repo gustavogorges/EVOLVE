@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import axios from 'axios';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -16,7 +16,7 @@ export class SelectCustomComponent implements OnInit {
   listOptions : Array<string> = new Array
   @Input()
   listIcons : Array<string>=new Array
-  projeto !: Projeto 
+  projeto !: Project 
 
   
 
@@ -29,7 +29,7 @@ export class SelectCustomComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log(this.listOptions)
     console.log(this.listIcons)
-    this.projeto = await this.service.getOne("projeto",2652)
+    this.projeto = await this.service.getOne("project",2652)
 
     
   }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
@@ -16,20 +16,20 @@ export class TelaCriarProjetoComponent implements OnInit {
   msgs!:Message[]
   
   async ngOnInit(){
-    let projeto = JSON.parse(localStorage.getItem('projeto') || '') as Projeto
-    this.projeto = await this.service.getOne("projeto", projeto.id)
-    this.usuarios = await this.service.getAllSomething('usuario')
+    let projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
+    this.projeto = await this.service.getOne("project", projeto.id)
+    this.usuarios = await this.service.getAllSomething('user')
   }
   
   messages: Message[] | undefined;
-  projeto!:Projeto
+  projeto!:Project
   usuarios!: User[]
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
   }
 
-  updateProject(p:Projeto){
+  updateProject(p:Project){
     this.projeto.statusList = p.statusList
     this.service.putProjeto(p)
   }
@@ -59,7 +59,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   //  }
 
    async cancelar(){
-      this.service.deleteById('projeto', this.projeto.id)
+      this.service.deleteById('project', this.projeto.id)
       this.route.navigate(['/tela-projeto'])
    }
 

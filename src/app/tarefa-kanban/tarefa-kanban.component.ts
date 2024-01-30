@@ -51,7 +51,7 @@ export class TarefaKanbanComponent implements OnInit {
       (event.item.data as Task).statusListIndex = event.currentIndex;
 
       this.service.putTarefa(event.item.data);
-      await console.log(this.service.getOne('tarefa', event.item.data.id));
+      await console.log(this.service.getOne('task', event.item.data.id));
     } else {
       for (let i of event.container.data) {
         let novoIndex = event.container.data.indexOf(i);

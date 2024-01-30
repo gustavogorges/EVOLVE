@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class TelaProjetoComponent implements OnInit {
       }
    }
 
-  projetos !: Projeto[]
+  projetos !: Project[]
 
   ngOnInit(): void {
     this.funcao()
@@ -33,8 +33,8 @@ export class TelaProjetoComponent implements OnInit {
   }
 
   async funcao(){
-    this.projetos = await this.service.getAllSomething('projeto')
-    console.log(await this.service.getAllSomething('projeto'));
+    this.projetos = await this.service.getAllSomething('project')
+    console.log(await this.service.getAllSomething('project'));
   }
 
   deletarPai(id:number){
@@ -43,14 +43,14 @@ export class TelaProjetoComponent implements OnInit {
         this.projetos.splice(this.projetos.indexOf(e),1)
       }
     })
-    this.service.deleteById("projeto",id);
+    this.service.deleteById("project",id);
   }
 
-  salvarPai(p:Projeto){
+  salvarPai(p:Project){
     this.service.putProjeto(p)
   }
 
-  abrirProjetoPai(p:Projeto){
+  abrirProjetoPai(p:Project){
     this.projetos.forEach(element => {
       if(p != element){
         element.isVisible = false
@@ -60,8 +60,8 @@ export class TelaProjetoComponent implements OnInit {
   }
 
   async router(){
-    console.log(new Projeto)
-    localStorage.setItem('projeto', JSON.stringify(await this.service.postProjeto(new Projeto)))
+    console.log(new Project)
+    localStorage.setItem('projeto', JSON.stringify(await this.service.postProjeto(new Project)))
     this.route.navigate(['/criar-projeto'])
   }
 

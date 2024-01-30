@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
-import { Projeto } from 'src/model/project';
+import { Project } from 'src/model/project';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from 'src/model/task';
@@ -42,16 +42,16 @@ export class TelaTarefaComponent implements OnInit {
   visualizacaoVisible:boolean = false
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
-  projeto !:Projeto
+  projeto !:Project
   option  : string ="Kanban"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService, private sla2: Location) {}
 
   async ngOnInit(): Promise<void> {
-    this.listaNova = await this.service.getAllSomething("tarefa")
-    this.listaTarefas =await this.service.getAllSomething("tarefa")
-    this.projeto = await this.service.getOne("projeto",2652)
+    this.listaNova = await this.service.getAllSomething("task")
+    this.listaTarefas =await this.service.getAllSomething("task")
+    this.projeto = await this.service.getOne("project",2652)
     console.log(this.projeto.statusList)
   }
 
