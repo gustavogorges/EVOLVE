@@ -75,9 +75,8 @@
   @apply flex flex-row gap-3
 }
  
-
 .tarefa {
-  @apply  w-[45%] h-[92vh] z-50 fixed;
+  @apply w-[50%] h-[92vh] z-50 fixed;
 }
 .box-filterBy{
   @apply flex flex-row gap-1 items-center
