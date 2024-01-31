@@ -15,7 +15,9 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tarefa-kanban.component.scss'],
 })
 export class TarefaKanbanComponent implements OnInit {
+  
   @Input() listaTarefas!: Array<Task>;
+
   @Input() listaStatus!: Array<Status>;
 
   constructor(private service: BackendEVOLVEService) { }

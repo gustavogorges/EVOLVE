@@ -43,7 +43,8 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
   projeto !:Project
-  option  : string ="Kanban"
+  statusList : Array<Status> =[];
+  option  : string ="Padrão"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService, private sla2: Location) {}
@@ -52,6 +53,7 @@ export class TelaTarefaComponent implements OnInit {
     this.listaNova = await this.service.getAllSomething("task")
     this.listaTarefas =await this.service.getAllSomething("task")
     this.projeto = await this.service.getOne("project",2652)
+    this.statusList = this.projeto.statusList;
     console.log(this.projeto.statusList)
   }
 
