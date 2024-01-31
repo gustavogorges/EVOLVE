@@ -7,6 +7,7 @@ import { TeamChat } from 'src/model/team-chat';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tela-chat',
@@ -35,12 +36,14 @@ export class TelaChatComponent implements OnInit {
 
   constructor(
     private service: BackendEVOLVEService,
+    private cookiesService: CookiesService
   ) { }
 
   contact: User = new User
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.service.getOne("user", 1202)
+    this.loggedUser = await this.cookiesService.getLoggedUser()
+    // this.loggedUser = await this.service.getOne("user", 1202)
     this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
     console.log(this.loggedUser)
 
