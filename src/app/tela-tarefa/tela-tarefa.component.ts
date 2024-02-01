@@ -174,7 +174,6 @@ if( this.filtroVisible==true){
       
         if(status.name==option){
           this.listaTarefas =[]
-          console.log("foi puta merdaaa")
           this.listaNova.map((tarefa : Task)=>{
             console.log(tarefa.currentStatus.name)
 
@@ -214,7 +213,8 @@ if( this.filtroVisible==true){
 
   openTask(tarefa:Task) :void {
     this.booleanTask = !this.booleanTask;
-
+    console.log(this.booleanTask)
+    console.log("ta vindo")
     this.tarefaSelecionada = tarefa;
 
   }

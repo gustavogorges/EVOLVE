@@ -6,6 +6,7 @@ import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
+import { Status } from 'src/model/status';
 
 
 @Injectable({
@@ -28,6 +29,10 @@ export class BackendEVOLVEService {
   }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
+  }
+
+  async updateStatusList(projetoId:number,novoStatus:Status) {
+    return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
 
   async postTarefa (tarefa:Task){
