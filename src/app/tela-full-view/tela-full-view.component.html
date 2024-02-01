@@ -8,27 +8,31 @@
             </div>
         </div>
         <div class="dashboard-pai">
+            <div class="newDashBoard">
+                <button #buttonNewDash type="button" (click)="newDashVisible()" class="flex gap-2 items-center h-full"><i class="pi pi-plus" options="delay"></i>New Dashboard</button>
+            </div>
+            <app-new-dashboard-modal [newDashBool]="newDashVisibleBol" ></app-new-dashboard-modal>
             <div  class="container">
                 <div>
                     <div class="titulo-dashboard">
                         <p>Dashboard 1</p>
                         <button type="button"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
                     </div>
-                    <div class="dashboard flex" >
-                        <div  class="chart col-span-2 row-span-2 "  >
-                            <p-chart type="bar"  [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
+                    <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+                        <div class="chart col-span-2 row-span-2" cdkDrag>
+                            <p-chart [type]="charts[0].type" [data]="charts[0].data" [options]="charts[0].options" width="100%" height="100%"></p-chart>
                         </div>
-                        <div  class="chart" >
-                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        <div class="chart" cdkDrag>
+                            <p-chart [type]="charts[1].type" [data]="charts[1].data" [options]="charts[1].options" width="100%" height="100%"></p-chart>
                         </div>
-                        <div  class="chart " >
-                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        <div class="chart" cdkDrag>
+                            <p-chart [type]="charts[2].type" [data]="charts[2].data" [options]="charts[2].options" width="100%" height="100%"></p-chart>
                         </div>
-                        <div  class="chart " >
-                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        <div class="chart" cdkDrag>
+                            <p-chart [type]="charts[3].type" [data]="charts[3].data" [options]="charts[3].options" width="100%" height="100%"></p-chart>
                         </div>
-                        <div  class="chart " >
-                            <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
+                        <div class="chart" cdkDrag>
+                            <p-chart [type]="charts[4].type" [data]="charts[4].data" [options]="charts[4].options" width="100%" height="100%"></p-chart>
                         </div>
                     </div>
                 </div>
@@ -36,157 +40,7 @@
                 <div class="comentario-pai">
                     <div class="fundo-comentario">
                         <div class="comentarios">
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
-                                <div class="foto-user">
-                                    <div class="foto"></div>
-                                </div>
-                                <div class="nome">
-                                    <p>Felipe</p>
-                                </div>
-                                <div class="comentario-text">
-                                    <p>gostei do seu  comentário, irei adicionar um também, é uma ótima ideia.</p>
-                                </div>
-                                <div class="date">
-                                    <p>29/10</p>
-                                </div>
-                            </div>
-
-                            <div class="comentario">
+                            <div class="comentario" ngFor="100">
                                 <div class="foto-user">
                                     <div class="foto"></div>
                                 </div>
@@ -217,7 +71,7 @@
                         <div  class="chart col-span-2 row-span-2 "  >
                             <p-chart type="line"  [data]="basicData" [options]="options" width="100%" height="100%"></p-chart>
                         </div>
-                        <div  class="chart" >
+                        <div  class="chart col-start-3 col-end-5" >
                             <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
                         </div>
                         <div  class="chart " >
@@ -225,10 +79,10 @@
                         </div>
                         <div  class="chart " >
                             <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                        </div>
+                        <!-- </div>
                         <div  class="chart " >
                             <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="100%" height="100%"></p-chart>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -285,50 +139,53 @@
 
             </div>
         </div>
+        <div class="top">
+            <button class="top-b">Voltar para o topo</button>
+        </div>
     </div>
-    <div class="div-menor">
-        <div class="square">
-            <div class="name">
-                <p class="name-text">Membros</p>
+</div>
+<div class="div-menor">
+    <div class="square">
+        <div class="name">
+            <p class="name-text">Membros</p>
+        </div>
+        <div class="membros">
+            <div class="membro">
+                <i class="pi pi-ellipsis-v ponto"></i>
+                <p class="name-user">José Almeida</p>
             </div>
-            <div class="membros">
-                <div class="membro">
-                    <i class="pi pi-ellipsis-v ponto"></i>
-                    <p class="name-user">José Almeida</p>
-                </div>
-                <div class="membro">
-                    <i class="pi pi-ellipsis-v ponto"></i>
-                    <p class="name-user">Clarice Lispector</p>
-                </div>
-                <div class="membro">
-                    <i class="pi pi-ellipsis-v ponto"></i>
-                    <p class="name-user">Jorge Amado</p>
-                </div>
-                <div class="membro">
-                    <i class="pi pi-ellipsis-v ponto"></i>
-                    <p class="name-user">Fernando Pessoa</p>
-                </div>
+            <div class="membro">
+                <i class="pi pi-ellipsis-v ponto"></i>
+                <p class="name-user">Clarice Lispector</p>
             </div>
-            <div class="name">
-                <p class="name-text">Status das Tarefas</p>
+            <div class="membro">
+                <i class="pi pi-ellipsis-v ponto"></i>
+                <p class="name-user">Jorge Amado</p>
             </div>
-            <app-status-component-criar-tarefa [isVisible]="true"></app-status-component-criar-tarefa>
-            <div class="name">
-                <p class="name-text pt-[8%]">Propriedades</p>
+            <div class="membro">
+                <i class="pi pi-ellipsis-v ponto"></i>
+                <p class="name-user">Fernando Pessoa</p>
             </div>
-            <div class="propriedades">
-                <div class="propriedade">
-                    <i class="pi pi-calendar"></i>
-                    <p class="prop-name">revisão</p>
-                    <i class="pi pi-pencil"></i>
-                    <i class="pi pi-trash"></i>
-                </div>
-                <div class="propriedade">
-                    <i class="pi pi-dollar"></i>
-                    <p class="prop-name">orçamento</p>
-                    <i class="pi pi-pencil"></i>
-                    <i class="pi pi-trash"></i>
-                </div>
+        </div>
+        <div class="name">
+            <p class="name-text">Status das Tarefas</p>
+        </div>
+        <app-status-component-criar-tarefa [isVisible]="true"></app-status-component-criar-tarefa>
+        <div class="name">
+            <p class="name-text pt-[8%]">Propriedades</p>
+        </div>
+        <div class="propriedades">
+            <div class="propriedade">
+                <i class="pi pi-calendar"></i>
+                <p class="prop-name">revisão</p>
+                <i class="pi pi-pencil"></i>
+                <i class="pi pi-trash"></i>
+            </div>
+            <div class="propriedade">
+                <i class="pi pi-dollar"></i>
+                <p class="prop-name">orçamento</p>
+                <i class="pi pi-pencil"></i>
+                <i class="pi pi-trash"></i>
             </div>
         </div>
     </div>

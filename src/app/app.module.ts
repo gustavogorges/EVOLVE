@@ -75,6 +75,7 @@ import {MessageModule} from 'primeng/message';
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/new-dashboard-modal.component';
 
 
 
@@ -132,7 +133,8 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
     ChartModalComponent,
 
     TarefaKanbanComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    NewDashboardModalComponent
 
   ],
   

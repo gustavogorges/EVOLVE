@@ -1,6 +1,10 @@
 .div-pai{
-    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-20;
+    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300;
     grid-template-columns: 60% 20%;
+
+    i{
+        @apply text-primary dark:text-dark-primary
+    }
     
     .div-maior{
         @apply w-full h-full col-start-1;
@@ -21,43 +25,44 @@
                 }
 
                 .descricao{
-                    @apply pt-5 font-titulo break-words text-gray-800 dark:text-gray-300
+                    @apply pt-5 font-titulo break-words
                 }
             }
         }
 
         .dashboard-pai{
+
+            .newDashBoard{
+                @apply bg-primaryGray w-[9.4vw] h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150
+            }
+
             @apply pt-20;
 
             .container{
-                @apply py-[3%] flex flex-col gap-3;
+                @apply py-[3%] flex flex-col;
 
                 .titulo-dashboard{
-                    @apply flex justify-between w-full px-4 pb-3;
+                    @apply flex justify-between w-full items-center pl-1 mb-3;
     
                     p{
                         @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
                     }
     
                     button{
-                        @apply text-lg text-gray-800 dark:text-gray-300;
-    
-                        i{
-                            @apply text-primary dark:text-dark-primary
-                        }
+                        @apply w-[13vw] rounded-lg gap-2 h-[5vh] text-gray-800 dark:text-gray-300 bg-primaryGray justify-center flex items-center hover:scale-105 duration-150;
                     }
                 }
     
                 .dashboard{
-                    @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
+                    @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
     
                     .chart{
-                        @apply  rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
+                        @apply duration-300 rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
                     }
                 }
 
                 .comentario-pai{
-                    @apply w-full h-[50vh] bg-primaryGray p-[3%] dark:bg-gray-700 rounded-xl;
+                    @apply w-full h-[50vh] bg-primaryGray p-[3%] dark:bg-gray-700 rounded-b-xl shadow-lg;
                     .fundo-comentario{
                         @apply bg-secondaryWhite h-full dark:bg-gray-600 rounded-xl overflow-auto;
                     
@@ -100,6 +105,13 @@
                         }
                     }
                 }
+            }
+        }
+        .top{
+            @apply flex w-full justify-center h-[8vh];
+
+            .top-b{
+                @apply w-[50%] bg-primaryGray rounded-xl text-xl text-primaryFontBlack
             }
         }
     }
