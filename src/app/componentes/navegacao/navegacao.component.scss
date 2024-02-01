@@ -1,5 +1,5 @@
 .main {
-    @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-full fixed;
+    @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-full fixed border-b-2;
     z-index: 9999;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .column2 {
-    @apply flex justify-center items-center;
+    @apply flex justify-between items-center;
     
     label, input{
         @apply dark:bg-dark-primary-black dark:border-dark-primary dark:text-white
@@ -41,5 +41,5 @@
 }
 
 .span-input {
-    @apply w-2/3 h-1/2 bg-white rounded-md border-2 border-primary rounded-md 
+    @apply w-2/3 h-1/2 bg-white rounded-xl border-2 rounded-md 
 }
