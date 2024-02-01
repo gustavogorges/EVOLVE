@@ -57,7 +57,7 @@
                     @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
     
                     .chart{
-                        @apply duration-300 rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
+                        @apply cursor-pointer duration-300 rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
                     }
                 }
 

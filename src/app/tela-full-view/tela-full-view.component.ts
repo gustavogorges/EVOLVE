@@ -18,7 +18,6 @@ export class TelaFullViewComponent implements OnInit {
     ngOnInit() {
         this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
         this.chartsInitialize()
-        console.log(this.charts[0].type)
     }
     
     newDashVisible(){

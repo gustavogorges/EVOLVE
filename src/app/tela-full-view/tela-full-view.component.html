@@ -11,7 +11,7 @@
             <div class="newDashBoard">
                 <button #buttonNewDash type="button" (click)="newDashVisible()" class="flex gap-2 items-center h-full"><i class="pi pi-plus" options="delay"></i>New Dashboard</button>
             </div>
-            <app-new-dashboard-modal [newDashBool]="newDashVisibleBol" ></app-new-dashboard-modal>
+            <app-new-dashboard-modal [newDashBool]="newDashVisibleBol" [ngClass]="!newDashVisibleBol?'invisible':'visible'" ></app-new-dashboard-modal>
             <div  class="container">
                 <div>
                     <div class="titulo-dashboard">

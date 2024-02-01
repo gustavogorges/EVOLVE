@@ -1,3 +1,18 @@
-<ul class="modal " [ngClass]="!newDashBool ? 'h-0 w-0':'h-[40vh] w-[30vw]'">
-    
+<ul class="modal rotate-180" [ngClass]="!newDashBool ? 'h-0 w-0':'h-[40vh] w-[30vw]'">
+
+    <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="dashChoosed === 0 ? 'h-0':'h-[20%]'">
+        <button class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Criar</button>
+        <input class=" h-[50%] rotate-180 w-full px-2" type="text" placeholder="gay">
+    </div>
+
+    <div class="div-modal rotate-180" [ngClass]="!newDashBool ? 'invisible ':'visible'">
+        <p class="title" [ngClass]="!newDashBool ? 'invisible ':'visible'">Escolha o estilo da nova DashBoard</p>
+
+        <div class="box duration-100 " [ngClass]="!newDashBool ? 'invisible ':'visible'">
+            <div class="squads" *ngFor="let squad of squads, index as i" (click)="chooseDash(squad.id)" [ngClass]="squad.style">
+                <div class="squad" *ngFor="let div of squad.squad" [ngClass]="div"></div>
+            </div>
+        </div>
+
+    </div>
 </ul>
