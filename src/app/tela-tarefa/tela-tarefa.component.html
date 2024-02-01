@@ -1,9 +1,9 @@
-
-<div class="gorgees">
+<div class="gorgees" >
   <app-modal-tarefa
   class="tarefa"
   *ngIf="booleanTask"
   [tarefa]="tarefaSelecionada"
+  [projeto]="projeto"
   ></app-modal-tarefa>
 </div>
 
@@ -16,10 +16,9 @@
         <h1 class="project-name">Projeto Padrão</h1>
         <app-botao-add-tarefa
           class="w-[100%]"
-          (click)="openTaskEdit()"
+          (click)="openTaskEdit(tarefaNova)"
           *ngIf="!(option == 'Kanban')"
         ></app-botao-add-tarefa>
-
       </div>
       <div class="box-selections">
         <div class="relative">
