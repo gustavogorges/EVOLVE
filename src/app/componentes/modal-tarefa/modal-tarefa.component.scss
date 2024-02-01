@@ -1,9 +1,9 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll
+    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex justify-center
 }
 
 .name-progress {
-    @apply w-full min-h-[15%] flex flex-col justify-center pl-10 mt-10;
+    @apply w-full min-h-[15%] flex flex-col justify-center mt-10;
 }
 
 .name-box {
@@ -11,7 +11,7 @@
 }
 
 .foco-box {
-    @apply w-[35%] h-full flex justify-start
+    @apply w-[35%] h-full flex justify-end
 }
 
 .foco {
@@ -63,7 +63,7 @@
 }
 
 .progress-bar-box {
-    @apply w-full h-[30%] flex items-center gap-3 justify-start mb-5
+    @apply w-full h-[30%] flex items-center gap-3 justify-between mb-5
 }
 
 .edit-button {
@@ -83,11 +83,11 @@
 }
 
 .task-properties {
-    @apply w-[35%] min-h-[20%] ml-12
+    @apply w-[35%] min-h-[20%] 
 }
 
 .task-properties-box {
-    @apply flex
+    @apply flex gap-20
 }
 
 .date-end {
@@ -99,15 +99,19 @@
 }
 
 .add-icon {
-    @apply flex items-center justify-center w-[77%] 
+    @apply flex items-center mb-10 px-1 py-1 bg-secondary rounded-md w-[30%] justify-center
 }
 
 .add-icon:hover {
-    @apply w-full cursor-pointer py-2 bg-gray-100 rounded-xl flex justify-center items-center;
+    @apply cursor-pointer  bg-green-900 rounded-md flex justify-center items-center;
 }
 
 .name-propertie {
-    @apply pl-3 text-xl text-fontGray
+    @apply pl-3 text-lg text-primaryFontBlack
+}
+
+.add-propertie-text  {
+    @apply text-base pl-3
 }
 
 .icon-propertie {
@@ -135,7 +139,7 @@
 } 
 
 .status-icon {
-    @apply h-8 w-24 rounded-xl flex justify-center items-center text-sm
+    @apply h-8 w-24 rounded-xl flex justify-center items-center text-sm text-primaryFontBlack
 }
 
 .status-icon-box {
@@ -143,7 +147,7 @@
 }
 
 .description-propertie {
-    @apply w-2/3 mt-3
+    @apply w-full mt-3
 } 
 
 .description-icon {
@@ -159,7 +163,7 @@
 }
 
 .pages {
-    @apply w-full h-[7%] flex gap-6 justify-center border-b-2 mb-2 mt-7
+    @apply w-full h-[7%] flex gap-6 justify-between border-b-2 mb-2 mt-7
 }
 
 .page-name {
@@ -209,10 +213,12 @@
     @apply bg-secondary px-5 py-1 rounded-lg
 }
 
-.description-box {
-    @apply ml-12
-}
+
 
 .created-properties {
     @apply w-[80%] ml-12
+}
+
+.the-box {
+    @apply w-[80%] h-full
 }

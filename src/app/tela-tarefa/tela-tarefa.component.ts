@@ -6,12 +6,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-
 import { Status } from 'src/model/status';
-
 
 interface Bah {
   name:string,
@@ -46,12 +41,12 @@ export class TelaTarefaComponent implements OnInit {
   option  : string ="Kanban"
   optionFilter : string = ""
 
-  constructor(private service : BackendEVOLVEService, private sla2: Location) {}
+  constructor(private service : BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
     this.listaNova = await this.service.getAllSomething("task")
     this.listaTarefas =await this.service.getAllSomething("task")
-    this.projeto = await this.service.getOne("project",2652)
+    this.projeto = await this.service.getOne("project",252)
     console.log(this.projeto.statusList)
   }
 
@@ -117,10 +112,8 @@ if( this.ordenacaoVisible==true){
     name.includes('c72') ||
     name.includes('c64') ||
     name.includes('c70') || 
-    name.includes('c73') || 
     name.includes('c78') ||
-    name.includes('c71') ||
-    name.includes('c79'));
+    name.includes('c71'));
      if(!element){
        for(let pFor of this.listaTarefas){
            this.closeTask();
@@ -137,7 +130,6 @@ if( this.ordenacaoVisible==true){
   
     this.ordenacaoVisible=false;
     this.visualizacaoVisible=false;
-
 
     console.log(option)
   }
@@ -157,7 +149,6 @@ if( this.filtroVisible==true){
 
   }else {
     this.filtroVisible=true;
-
 
   }
   console.log(this.filtroVisible)
@@ -183,12 +174,11 @@ if( this.filtroVisible==true){
       
         if(status.name==option){
           this.listaTarefas =[]
-          console.log("foi puta merdaaa")
-          this.listaNova.map((task : Task)=>{
-            console.log(task.currentStatus.name)
+          this.listaNova.map((tarefa : Task)=>{
+            console.log(tarefa.currentStatus.name)
 
-            if(task.currentStatus.name==option){
-              this.listaTarefas.push(task)
+            if(tarefa.currentStatus.name==option){
+              this.listaTarefas.push(tarefa)
               console.log("eueuue")
               this.filtroVisible=false      
 
@@ -204,9 +194,9 @@ if( this.filtroVisible==true){
       if(option=="Favorito"){
         this.listaTarefas =[]
         console.log("de novvooo")
-        this.listaNova.map((task : Task)=>{
-          if(task.favorited==true){
-            this.listaTarefas.push(task)
+        this.listaNova.map((tarefa : Task)=>{
+          if(tarefa.favorited==true){
+            this.listaTarefas.push(tarefa)
           }
         }
         )
@@ -221,14 +211,15 @@ if( this.filtroVisible==true){
   
 
 
-  openTask(task:Task) :void {
+  openTask(tarefa:Task) :void {
     this.booleanTask = !this.booleanTask;
-
-    this.tarefaSelecionada = task;
+    console.log(this.booleanTask)
+    console.log("ta vindo")
+    this.tarefaSelecionada = tarefa;
 
   }
 
-  openTaskEdit() {
+  openTaskEdit(tarefa:Task) {
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }
@@ -242,14 +233,14 @@ if( this.filtroVisible==true){
     this.optionFilter=""
   }
   onDropSuccess(event: any, novoIndice: number): void {
-    const task: Task = event.dragData;
+    const tarefa: Task = event.dragData;
     // Aqui você pode realizar a lógica de atualização do estado da tarefa no seu modelo de dados
     // por exemplo, mover a tarefa para o novo índice na lista de tarefas
   }
 
   filtrarLista(status:Status): Array<Task> {
     let listaFiltrada = this.listaTarefas.filter(
-      (task: Task) => task.currentStatus.name === status.name
+      (tarefa: Task) => tarefa.currentStatus.name === status.name
     );
     return listaFiltrada 
   }

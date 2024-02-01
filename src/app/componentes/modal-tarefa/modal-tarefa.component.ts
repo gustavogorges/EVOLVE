@@ -80,12 +80,13 @@ export class ModalTarefaComponent implements OnInit {
   
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
+  @Input() projeto: Project = new Project();
   tarefaTeste : Task = this.tarefa;
-  projeto: Project = new Project();
   tarefaNova: Task = new Task();
 
   async ngOnInit(): Promise<void> {
     console.log(this.tarefa);
+    console.log(this.projeto)
     // this.verificaTamanhoString();
     if (this.tarefa.id == 0) {
       this.booleanEdit = true;
@@ -96,12 +97,6 @@ export class ModalTarefaComponent implements OnInit {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
-    }
-    let projetos = await this.service.getAllSomething('project');
-    for (let projeto of projetos) {
-      if (projeto.id == this.tarefa.project.id) {
-        this.projeto = projeto;
-      }
     }
   }
 
@@ -177,15 +172,16 @@ export class ModalTarefaComponent implements OnInit {
     this.tarefa.name = this.nomeAntigo;
   }
 
-  salvarTarefa() {
+  async salvarTarefa() {
     if (this.tarefa.id != 0) {
+      console.log("TA ENTRANDO ERRADO")
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
-      console.log('entrou');
-      this.tarefa.creator.id = 303;
-      this.tarefa.project.id = 2652;
+      console.log("TA ENTRANDO CERTO")
+      this.tarefa.project.id = 252;
+      this.tarefa.creator.id = 1;
+      console.log(this.tarefa);
       this.service.postTarefa(this.tarefa);
-      this.tarefa.id = 0;
     }
 
     if (this.booleanCalendario == true) {

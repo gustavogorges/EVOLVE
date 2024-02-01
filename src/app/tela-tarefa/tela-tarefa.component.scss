@@ -5,6 +5,11 @@
 .gorgees{
   @apply flex justify-end w-screen
 }
+
+.tarefa {
+  @apply  w-[50%] h-[92vh] z-50 fixed;
+}
+
 .main{
   @apply w-3/4 flex flex-col gap-3
 }
@@ -76,9 +81,7 @@
 }
  
 
-.tarefa {
-  @apply  w-[45%] h-[92vh] z-50 fixed;
-}
+
 .box-filterBy{
   @apply flex flex-row gap-1 items-center
 }
@@ -91,4 +94,3 @@
   font-family: 'Hind Madurai', sans-serif;
   @apply text-lg text-[#6A7181] 
 }
-
