@@ -44,9 +44,9 @@ export class TelaTarefaComponent implements OnInit {
   constructor(private service : BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-    this.listaNova = await this.service.getAllSomething("tarefa")
-    this.listaTarefas =await this.service.getAllSomething("tarefa")
-    this.projeto = await this.service.getOne("projeto",2652)
+    this.listaNova = await this.service.getAllSomething("task")
+    this.listaTarefas =await this.service.getAllSomething("task")
+    this.projeto = await this.service.getOne("project",252)
     console.log(this.projeto.statusList)
   }
 
@@ -112,10 +112,8 @@ if( this.ordenacaoVisible==true){
     name.includes('c72') ||
     name.includes('c64') ||
     name.includes('c70') || 
-    name.includes('c73') || 
     name.includes('c78') ||
-    name.includes('c71') ||
-    name.includes('c79'));
+    name.includes('c71'));
      if(!element){
        for(let pFor of this.listaTarefas){
            this.closeTask();
@@ -132,7 +130,6 @@ if( this.ordenacaoVisible==true){
   
     this.ordenacaoVisible=false;
     this.visualizacaoVisible=false;
-
 
     console.log(option)
   }
@@ -152,7 +149,6 @@ if( this.filtroVisible==true){
 
   }else {
     this.filtroVisible=true;
-
 
   }
   console.log(this.filtroVisible)
@@ -223,7 +219,7 @@ if( this.filtroVisible==true){
 
   }
 
-  openTaskEdit() {
+  openTaskEdit(tarefa:Task) {
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }

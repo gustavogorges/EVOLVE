@@ -1,4 +1,3 @@
-
 <div class="gorgees">
   <app-modal-tarefa
   class="tarefa"
@@ -16,10 +15,9 @@
         <h1 class="project-name">Projeto Padrão</h1>
         <app-botao-add-tarefa
           class="w-[100%]"
-          (click)="openTaskEdit()"
+          (click)="openTaskEdit(tarefaNova)"
           *ngIf="!(option == 'Kanban')"
         ></app-botao-add-tarefa>
-
       </div>
       <div class="box-selections">
         <div class="relative">
@@ -110,7 +108,7 @@
       </div>
       <div *ngIf="option == 'Kanban'" >
         <div class="w-full" cdkDropListGroup >
-            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus]="projeto.statusList"
+            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.statusList"
             ></app-tarefa-kanban>
         </div>
   </div>

@@ -50,6 +50,7 @@ export class SelectStatusComponent implements OnInit {
 
   novoStatus() {
     this.status.textColor = "#000000";
+    this.projeto.id=252;
     this.projeto.statusList.push(this.status)
     this.service.putProjeto(this.projeto)
     console.log(this.projeto)
