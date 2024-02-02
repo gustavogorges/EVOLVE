@@ -10,7 +10,7 @@ export const theme = {
       'secondaryWhite': '#F8F8F8',
       'primaryGray': '#F5F5F5',
       'primaryFontBlack': '#343434',
-      'primaryNav': '#E9EDF1',
+      'primaryNav': '#F8F8F8',
       'fontGray': '#6A7181',
 
       'dark-primary': '#67BFE0',
