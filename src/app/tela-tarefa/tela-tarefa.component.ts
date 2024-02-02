@@ -116,7 +116,7 @@ if( this.ordenacaoVisible==true){
     name.includes('c71'));
      if(!element){
        for(let pFor of this.listaTarefas){
-           this.closeTask();
+          // this.closeTask();
        }
      }
   }
@@ -208,10 +208,8 @@ if( this.filtroVisible==true){
   }
 
 
-  
-
-
   openTask(tarefa:Task) :void {
+    this.tarefaSelecionada = tarefa;
     this.booleanTask = !this.booleanTask;
     console.log(this.booleanTask)
     console.log("ta vindo")
