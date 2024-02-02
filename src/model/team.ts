@@ -1,5 +1,5 @@
 import { Project } from "./project";
-import { TeamChat } from "./team-chat";
+import { TeamChat } from "./teamChat";
 import { User } from "./user";
 
 export class Team{

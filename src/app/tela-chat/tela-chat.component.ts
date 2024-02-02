@@ -1,19 +1,22 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { Chat } from 'src/model/chat';
-import { Message } from 'src/model/message';
-import { TeamChat } from 'src/model/team-chat';
+import { TeamChat } from 'src/model/teamChat';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+
+interface ChatHeaderInfo{
+  name:String,
+  image:string
+}
 
 @Component({
   selector: 'app-tela-chat',
   templateUrl: './tela-chat.component.html',
   styleUrls: ['./tela-chat.component.scss']
 })
+
 export class TelaChatComponent implements OnInit {
 
   // messageAlignment:String = "end"
@@ -27,9 +30,9 @@ export class TelaChatComponent implements OnInit {
 
   chatList:Array<Chat> = new Array
 
-  chatTypeUsers:string = "pessoas"
-  chatTypeTeams:string = "equipes"
-  chatTypeProjects:string = "projetos"
+  chatTypeUsers:string = "users"
+  chatTypeTeams:string = "teams"
+  chatTypeProjects:string = "projects"
   chatType:string = ""
 
   selectedChat:Chat = new UserChat

@@ -1,0 +1,18 @@
+<div class="message-container ">
+    
+    <div class="sender-img-box" [ngStyle]="{ 'justify-content': messageAlignment}" *ngIf="showImage(message) ">
+        <div class="sender-img-container" [ngStyle]="{'background-color': message.sender.profilePicture}">
+            <img class="sender-img"  *ngIf="message.sender.profilePicture.slice()[0]!='#'" src="{{message.sender.profilePicture}}" alt="" >
+        </div>
+    </div>
+
+    <div class="message" [ngStyle]="{ 'justify-content': messageAlignment }">
+        <div class="message-body">
+            <div class="sender-image-pointer {{messagePointerLoggedUser ? 'rotate-[46deg]' : 'rotate-[-46deg]'}} {{messageAlignment=='start' ? 'start-[-15px]' : 'end-[-15px]'}}"  *ngIf="showSenderImagePointer"></div>
+            <p class="message-content">
+                {{message.content}}
+            </p>
+        </div>
+    </div>
+
+</div>

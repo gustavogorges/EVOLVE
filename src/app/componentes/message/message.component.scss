@@ -1,0 +1,39 @@
+.message-container{
+    @apply flex flex-col w-full ;
+}
+
+.sender-img-box{
+    @apply  flex items-center pb-2 w-full ;
+}
+
+.sender-img-container{
+    @apply w-16 h-16 rounded-full ;
+}
+
+.sender-img{
+    @apply w-full h-full rounded-full ;
+}
+
+.message{
+    @apply w-full px-16 flex ;
+}
+
+.message-body{
+    @apply bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end ;
+}
+
+.sender-image-pointer{
+    @apply z-[1] top-[-15px] absolute;
+}
+
+.sender-image-pointer {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 20.5px 35.5px 20.5px;
+    border-color: transparent transparent #f5f5f5 transparent;
+ }
+
+ .message-content{
+    @apply break-words max-w-full w-max h-max ;
+ }

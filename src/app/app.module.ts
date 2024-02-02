@@ -52,13 +52,13 @@ import { EquipesRecentesComponent } from './componentes/equipes-recentes/equipes
 
 import { TelaChatComponent } from './tela-chat/tela-chat.component';
 // import { ContactsComponent } from './contacts/contacts.component';
-import { ContactComponent } from './contact/contact.component';
+import { ContactComponent } from './componentes/contact/contact.component';
 
 import { BotaoAddTarefaComponent } from './botao-add-tarefa/botao-add-tarefa.component';
 import { SelectPropriedadeComponent } from './componentes/select-propriedade/select-propriedade.component';
 
-import { MessageComponent } from './message/message.component';
-import { MessageBarComponent } from './message-bar/message-bar.component';
+import { MessageComponent } from './componentes/message/message.component';
+import { MessageBarComponent } from './componentes/message-bar/message-bar.component';
 
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
