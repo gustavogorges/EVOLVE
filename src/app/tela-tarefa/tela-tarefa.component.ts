@@ -116,7 +116,9 @@ if( this.ordenacaoVisible==true){
     name.includes('c71'));
      if(!element){
        for(let pFor of this.listaTarefas){
+
           // this.closeTask();
+
        }
      }
   }
