@@ -1,4 +1,7 @@
 <div class="main">
+  <div class="close-btn" (click)="sendEventEmitter()">
+    <i class="pi pi-angle-double-right icon-close"></i>
+  </div>
   <div class="the-box">
     <div class="name-progress">
       <div class="foco-name-box">
@@ -91,7 +94,7 @@
         
       </div>
     </div>
-    <div class="add-icon hover" *ngIf="!booleanAddPropriedade">
+    <div class="add-icon hover" >
       <i class="icon-propertie pi pi-plus " style="color: white;"></i>
       <p class="add-propertie-text " style="color: white;" (click)="addPropertie()">
         adicionar propriedade

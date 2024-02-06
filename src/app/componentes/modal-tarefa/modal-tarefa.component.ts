@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
@@ -81,6 +81,12 @@ export class ModalTarefaComponent implements OnInit {
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
+  @Output() closeModalTask = new EventEmitter<boolean>();
+
+  sendEventEmitter():void {
+    this.closeModalTask.emit(true);
+  }
+
   tarefaTeste : Task = this.tarefa;
   tarefaNova: Task = new Task();
 

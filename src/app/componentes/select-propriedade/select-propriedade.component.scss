@@ -1,6 +1,9 @@
 .main {
-    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2;
+    @apply w-64 bg-white absolute rounded-md  flex flex-col items-center gap-2;
     z-index: 999;
+    -webkit-box-shadow: 4px 6px 29px -6px rgba(0,0,0,0.43);
+-moz-box-shadow: 4px 6px 29px -6px rgba(0,0,0,0.43);
+box-shadow: 4px 6px 29px -6px rgba(0,0,0,0.43);
 }
 
 .propriedades-box {
@@ -28,7 +31,7 @@
 }
 
 .inputNamePropertie {
-    @apply outline-none bg-primaryWhite text-lg
+    @apply outline-none bg-white text-lg
 }
 
 .button-confirm {

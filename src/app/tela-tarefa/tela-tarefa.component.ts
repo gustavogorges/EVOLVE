@@ -38,7 +38,7 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
   projeto !:Project
-  option  : string ="Kanban"
+  option  : string ="Padrão"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
@@ -46,7 +46,7 @@ export class TelaTarefaComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.listaNova = await this.service.getAllSomething("task")
     this.listaTarefas =await this.service.getAllSomething("task")
-    this.projeto = await this.service.getOne("project",252)
+    this.projeto = await this.service.getOne("project",2)
     console.log(this.projeto.statusList)
   }
 
@@ -106,26 +106,13 @@ if( this.ordenacaoVisible==true){
   console.log(this.ordenacaoVisible)
   }
 
-  @HostListener('click', ['$event'])
-  clicouFora(event:any){
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
-    name.includes('c72') ||
-    name.includes('c64') ||
-    name.includes('c70') || 
-    name.includes('c78') ||
-    name.includes('c71'));
-     if(!element){
-       for(let pFor of this.listaTarefas){
 
-          // this.closeTask();
-
-       }
-     }
-  }
-
-  closeTask() {
-    this.tarefaNova = new Task;
-    this.booleanTask = false;
+  closeTask(event:boolean) {
+    console.log("ta entrando no close task")
+    if(event) {
+      this.tarefaNova = new Task;
+      this.booleanTask = false;
+    }
   }
   
   optionB(option : any){

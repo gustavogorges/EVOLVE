@@ -29,7 +29,7 @@ export class SelectCustomComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log(this.listOptions)
     console.log(this.listIcons)
-    this.projeto = await this.service.getOne("project",2652)
+    this.projeto = await this.service.getOne("project",2)
 
     
   }

@@ -1,9 +1,17 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex justify-center
+    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex flex-col items-center
 }
 
 .name-progress {
-    @apply w-full min-h-[15%] flex flex-col justify-center mt-10;
+    @apply w-full min-h-[15%] flex flex-col justify-center ;
+}
+
+.close-btn {
+    @apply h-12 w-[95%] flex items-end cursor-pointer
+}
+
+.icon-close {
+    @apply text-xl text-gray-400
 }
 
 .name-box {

@@ -49,7 +49,9 @@ export class SelectStatusComponent implements OnInit {
 
   async novoStatus(): Promise<void> {
     this.status.textColor = "#000000";
-    this.projeto.id=252;
+    this.projeto.id=2;
+
+    console.log(this.status);
 
 
     this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);

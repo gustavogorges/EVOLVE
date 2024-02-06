@@ -13,12 +13,11 @@ import { Status } from 'src/model/status';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://10.4.96.2:8087/"
+  URL : string = "http://localhost:8087/"
 
   constructor() { }
 
   async getAllSomething(caminho : string){
-    console.log((await axios.get(this.URL+caminho)).data);
     return (await axios.get(this.URL+caminho)).data
   }
   async getOne(caminho : string, id:number){
