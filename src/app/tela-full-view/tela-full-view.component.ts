@@ -14,6 +14,13 @@ export class TelaFullViewComponent implements OnInit {
     data : any
     charts: any[] = []
     newDashVisibleBol: Boolean = false
+    dashboards: any[] = []
+
+    dashBoard = {
+        id:0,
+        style:0,
+        charts:this.charts
+    }
 
     ngOnInit() {
         this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
@@ -25,12 +32,19 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     @HostListener('click', ['$event'])
-   clicouFora(event:any){
+    outsideClick(event:any){
     const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105')) || event.target.tagName === "BUTTON";
       if(!element){
         this.newDashVisibleBol = false
       }
-   }
+    }
+
+    createNewDashBoard(dash:any){
+        dash.charts = this.charts
+        this.dashboards.push(dash)
+        this.newDashVisibleBol = false
+        this.dashboards = this.dashboards.reverse()
+    }
 
     chartsInitialize(){
         const documentStyle = getComputedStyle(document.documentElement);

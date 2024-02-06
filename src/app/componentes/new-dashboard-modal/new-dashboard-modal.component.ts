@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-new-dashboard-modal',
@@ -9,20 +9,35 @@ export class NewDashboardModalComponent implements OnInit {
 
   constructor() { }
 
-  dashChoosed:number = 0
+  dashChoosed:number = -1
   squads: any[] = []
+
+  @Input() newDashBool!:Boolean
+  @Output() newDash : EventEmitter<any> = new EventEmitter<any>()
+  @Input() newDashId !: number
+  nome = ""
 
   ngOnInit(): void {
     this.squads.push(
       {
-        id:1,
+        id:0,
         style:"",
         squad: [
           "col-span-2 row-span-2",
-          "",
-          "",
-          "",
-          ""
+          "auto-cols-auto",
+          "auto-cols-auto",
+          "auto-cols-auto",
+          "auto-cols-auto"
+        ]
+      },
+      {
+        id:1,
+        style:"",
+        squad:[
+          "col-span-2 row-span-2",
+          "auto-cols-auto",
+          "auto-cols-auto",
+          "col-start-3 col-end-5"
         ]
       },
       {
@@ -30,9 +45,7 @@ export class NewDashboardModalComponent implements OnInit {
         style:"",
         squad:[
           "col-span-2 row-span-2",
-          "",
-          "",
-          "col-start-3 col-end-5"
+          "col-start-3 row-span-2 col-end-5"
         ]
       },
       {
@@ -40,7 +53,9 @@ export class NewDashboardModalComponent implements OnInit {
         style:"",
         squad:[
           "col-span-2 row-span-2",
-          "col-start-3 row-span-2 col-end-5"
+          "col-start-3 col-end-5",
+          "",
+          ""
         ]
       },
       {
@@ -49,31 +64,40 @@ export class NewDashboardModalComponent implements OnInit {
         squad:[
           "col-span-2 row-span-2",
           "col-start-3 col-end-5",
-          "",
-          ""
+          "col-start-3 col-end-5"
         ]
       },
       {
         id:5,
         style:"",
         squad:[
-          "col-span-2 row-span-2",
-          "col-start-3 col-end-5",
-          "col-start-3 col-end-5"
+          " col-span-full row-span-full"
         ]
       },
-      {
-        id:6,
-        style:"",
-        squad:[
-          "col-span-full row-span-full",
-        ]
-      }
-  )
-    
+      
+    )
   }
 
-  @Input() newDashBool!:Boolean
+  createNewDash(){
+    const dashBoard = {
+      id:this.newDashId,
+      nome:this.nome,
+      style:this.squads,
+      charts:[]
+    }
+    dashBoard.id = this.newDashId;
+    this.squads.forEach(element => {
+      if(element.id === this.dashChoosed){
+        dashBoard.style = element.squad
+      }
+    });
+
+    this.newDash.emit(dashBoard)
+    this.nome = ""
+    this.dashChoosed = -1
+    this.chooseDash(-1)
+  }
+
 
   chooseDash(index:number){
       this.squads.forEach(element => {
@@ -96,8 +120,9 @@ export class NewDashboardModalComponent implements OnInit {
   clickOutside(event:any){
     const element = event.target.classList.value.includes(('squad')) || event.target.tagName === "BUTTON" || event.target.tagName === "INPUT";
       if(!element){
-        this.dashChoosed = 0
-        this.chooseDash(0)
+        this.dashChoosed = -1
+        this.chooseDash(-1)
       }
    }
 }
+
