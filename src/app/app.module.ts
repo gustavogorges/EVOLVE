@@ -76,6 +76,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/new-dashboard-modal.component';
+import { NewChartModalComponent } from './componentes/new-chart-modal/new-chart-modal.component';
 
 
 
@@ -134,7 +135,8 @@ import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/ne
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
-    NewDashboardModalComponent
+    NewDashboardModalComponent,
+    NewChartModalComponent
 
   ],
   

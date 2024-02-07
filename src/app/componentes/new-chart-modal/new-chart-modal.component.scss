@@ -1,0 +1,25 @@
+.modal{
+    @apply bg-primaryWhite shadow-lg absolute right-[40%] mt-6 z-50 rounded-lg duration-150;
+
+    .div-modal{
+        @apply w-full h-[100%] overflow-auto pt-4;
+
+        .title{
+            @apply text-xl text-primary font-semibold flex justify-center
+        }
+
+        .box{
+            @apply p-8 flex flex-wrap justify-around gap-3;
+
+            .squads{
+                @apply rounded-lg w-[17vw] h-[17vh] border-2 gap-1 cursor-pointer duration-100
+                hover:scale-105;
+                
+                .squad{
+                    @apply bg-gray-300 rounded-lg;
+                }
+            }
+        }
+
+    }
+}

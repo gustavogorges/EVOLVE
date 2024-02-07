@@ -11,12 +11,14 @@
             <div class="newDashBoard">
                 <button #buttonNewDash type="button"  (click)="newDashVisible()" class="flex gap-2 items-center h-full"><i class="pi pi-plus" options="delay"></i>New Dashboard</button>
             </div>
-            <app-new-dashboard-modal [newDashId]="dashboards.length" (newDash)="createNewDashBoard($event)" [newDashBool]="newDashVisibleBol" [ngClass]="!newDashVisibleBol?'invisible':'visible'" ></app-new-dashboard-modal>
+            <app-new-dashboard-modal  [newDashId]="dashboards.length" (newDash)="createNewDashBoard($event)" [newDashBool]="newDashVisibleBol" [ngClass]="!newDashVisibleBol?'invisible':'visible'" ></app-new-dashboard-modal>
             <div  class="container" *ngFor="let dashboard of dashboards">
                 <div>
                     <div class="titulo-dashboard">
                         <p>{{dashboard.nome}}</p>
-                        <button type="button"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
+                        <app-new-chart-modal [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
+                        <button type="button" (click)="newChartVisible()"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico
+                        </button>
                     </div>
                     <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
                         <div class="chart " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
@@ -47,7 +49,7 @@
                 </div>
             </div>
         <div class="top">
-            <button class="top-b">Voltar para o topo</button>
+            <button class="top-b" (click)="gotoTop()" >Voltar para o topo</button>
         </div>
     </div>
 </div>

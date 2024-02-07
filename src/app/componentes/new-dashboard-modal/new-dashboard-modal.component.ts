@@ -1,21 +1,20 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-new-dashboard-modal',
   templateUrl: './new-dashboard-modal.component.html',
   styleUrls: ['./new-dashboard-modal.component.scss']
 })
-export class NewDashboardModalComponent implements OnInit {
+export class NewDashboardModalComponent implements OnInit, OnChanges {
 
   constructor() { }
 
   dashChoosed:number = -1
   squads: any[] = []
-
   @Input() newDashBool!:Boolean
   @Output() newDash : EventEmitter<any> = new EventEmitter<any>()
   @Input() newDashId !: number
-  nome = ""
+  nome = "Felipe"
 
   ngOnInit(): void {
     this.squads.push(
@@ -76,6 +75,14 @@ export class NewDashboardModalComponent implements OnInit {
       },
       
     )
+    this.dashChoosed = 1
+    this.createNewDash()
+  }
+
+  ngOnChanges(): void {
+    if(!this.newDashBool){
+      this.chooseDash(-1)
+    }
   }
 
   createNewDash(){

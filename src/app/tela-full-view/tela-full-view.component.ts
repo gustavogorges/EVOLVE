@@ -15,6 +15,7 @@ export class TelaFullViewComponent implements OnInit {
     charts: any[] = []
     newDashVisibleBol: Boolean = false
     dashboards: any[] = []
+    newChartBool: Boolean = false
 
     dashBoard = {
         id:0,
@@ -29,13 +30,24 @@ export class TelaFullViewComponent implements OnInit {
     
     newDashVisible(){
         this.newDashVisibleBol = !this.newDashVisibleBol
+        this.newChartBool = false
+
+    }
+
+    newChartVisible(){
+        this.newChartBool = !this.newChartBool
+        this.newDashVisibleBol = false
     }
 
     @HostListener('click', ['$event'])
     outsideClick(event:any){
-    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105')) || event.target.tagName === "BUTTON";
+    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105') || name.includes('c106')) 
+    || event.target.tagName === "BUTTON"
+    || event.target.tagName === "BUTTON" || event.target.tagName === "P" 
+    || event.target.tagName === "CANVAS";
       if(!element){
         this.newDashVisibleBol = false
+        this.newChartBool = false
       }
     }
 
@@ -53,6 +65,7 @@ export class TelaFullViewComponent implements OnInit {
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
         this.charts.push({
+            id: 0,
             type: 'bar',
             data : {
                 labels: ['Q1', 'Q2', 'Q3', 'Q4'],
@@ -100,6 +113,7 @@ export class TelaFullViewComponent implements OnInit {
         },
         
         {
+            id: 1,
             type: 'pie',
             data : {
                 labels: ['A', 'B', 'C'],
@@ -124,6 +138,7 @@ export class TelaFullViewComponent implements OnInit {
             }
         },
         {
+            id: 2,
             type: 'doughnut',
             data : {
                 labels: ['A', 'B', 'C'],
@@ -149,6 +164,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 3,
             type: 'bar',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -206,6 +222,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 4,
             type: 'bar',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -263,6 +280,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 5,
             type: 'bar',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -329,6 +347,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 6,
             type: 'line',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -384,6 +403,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 7,
             type: 'line',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -455,6 +475,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 8,
             type: 'line',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -517,6 +538,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 9,
             type: 'polarArea',
             data : {
                 datasets: [
@@ -555,6 +577,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 10,
             type: 'radar',
             data : {
                 labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
@@ -602,6 +625,7 @@ export class TelaFullViewComponent implements OnInit {
         },
 
         {
+            id: 11,
             type: 'line',
             data : {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -664,6 +688,18 @@ export class TelaFullViewComponent implements OnInit {
         }
         )
     }
+
+    gotoTop() {
+        (function smoothscroll() {
+            var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothscroll);
+                window.scrollTo(0, currentScroll - (currentScroll / 8));
+            }
+        })();
+    }
+
+
 
     drop(event: CdkDragDrop<string[]>) {
         this.newDashVisibleBol = false
