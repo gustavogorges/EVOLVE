@@ -109,7 +109,7 @@
       </div>
       <div *ngIf="option == 'Kanban'" >
         <div class="w-full" cdkDropListGroup >
-            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.statusList"
+            <app-tarefa-kanban [taskList]="listaTarefas"  [project]="projeto"
             ></app-tarefa-kanban>
         </div>
   </div>

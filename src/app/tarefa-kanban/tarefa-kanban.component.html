@@ -1,28 +1,56 @@
-  <div class=" flex justify-between  w-[1712px] gap-7 overflow-auto " cdkDropListGroup>
-    
+<div class="container-fluid">
+  <ng-template #recursiveList statusList>
+    <div appearance="raised" class="dndPlaceholder" dndPlaceholderRef></div>
+
     <div
-      *ngFor="let status of listaStatus; let i = index"
-      cdkDropList
-      [cdkDropListData]="filtrarLista(status)"
-      (cdkDropListDropped)="drop($event, status, filtrarLista(status))"
-      class="min-w-[400px] bg-primaryGray flex flex-col items-center"
-      cdkDrag [cdkDragData]="{status: status, index: i}" 
-      (cdkDragMoved)="updateListOrder($event)"
+      appearance="raised"
+      *ngFor="let item of statusList"
+      [dndDraggable]="item"
+     
+      (dndEnd)="onDragEnd($event)"
+      (dndStart)="onDragStart($event)"
+      dndEffectAllowed="move"
+      
     >
-      <div class=" w-full flex justify-end bg-[#F8F8F8]"  >
-       <p class="status w-min "  [ngStyle]="{
-        'background-color': status.backgroundColor,
-        color: status.textColor
-      }"> {{ status.name }}</p>
+      <div class="p-2 border" dndHandle id="{{item.columnIndex}}">
+        {{ item.name }}
       </div>
-      <div>ADICIONAR TAREFA</div>
+
       <div
-        *ngFor="let item of filtrarLista(status)"
-        cdkDrag
-        [cdkDragData]="item"
-        class="p-8"
+        class="flex flex-col"
+        (dndDrop)="onDropTask($event, taskList, item)"
+        dndDropzone
+        id="1"
       >
-        <app-tarefa-card-padrao [tarefaAtual]="item"></app-tarefa-card-padrao>
+        <div appearance="raised" class="dndPlaceholder" dndPlaceholderRef></div>
+
+        <div
+          appearance="raised"
+          *ngFor="let task of taskList; let i = index"
+          [dndDraggable]="task"
+          (dndEnd)="onDragEnd($event)"
+          (dndMoved)="onDragged(task, taskList, 'move')"
+          class="flex flex-col"
+          dndEffectAllowed="move"
+          
+        >
+          <div *ngIf="task.currentStatus?.id == item.id">
+            <app-tarefa-card-padrao
+              [tarefaAtual]="task"
+              dndHandle
+              id="2"
+            ></app-tarefa-card-padrao>
+          </div>
+        </div>
       </div>
     </div>
+  </ng-template>
+
+  <div
+    (dndDrop)="onDrop($event, statusList)"
+    class="d-flex gap-3 p-3 rounded-2"
+    dndDropzone
+  >
+    <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
   </div>
+</div>
