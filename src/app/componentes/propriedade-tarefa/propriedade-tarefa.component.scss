@@ -1,0 +1,24 @@
+.propertie {
+    @apply flex w-full min-h-[100%] gap-2
+}
+
+.propertie-value {
+    @apply h-full flex items-center
+}
+
+.name-icon {
+    @apply flex items-center
+}
+
+.icon-propertie {
+    @apply text-lg text-secondary
+}
+
+.name-propertie {
+    @apply pl-3 text-lg text-primaryFontBlack
+}
+
+.propertie-value {
+    @apply h-full flex items-center
+}
+

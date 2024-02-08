@@ -11,5 +11,5 @@ export class TaskProjectProperty {
     task: Task = new Task;
     project: Project = new Project;
 
-    value: number | string | Date | Array<User> | Array<string> = ""
+    value: number | string | Date | Array<User> | Array<string> = []
 }

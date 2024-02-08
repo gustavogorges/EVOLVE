@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Property } from 'src/model/propriedade/property';
+import { PropertyType } from 'src/model/propriedade/propertyType';
 import { SelectOption } from 'src/model/propriedade/selectOption';
 import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 import { Task } from 'src/model/task';
@@ -24,6 +25,8 @@ export class SelectPropriedadeComponent implements OnInit {
   creatingOptionTest : boolean = false;
 
   optionName:string = '';
+
+  optionType : string = '';
 
   selectOption : SelectOption = new SelectOption;
 
@@ -84,6 +87,7 @@ export class SelectPropriedadeComponent implements OnInit {
     });
     option.showing = true;
     this.anySelected();
+    this.optionType = option.text;
   }
 
   anySelected(): void {
@@ -118,10 +122,19 @@ export class SelectPropriedadeComponent implements OnInit {
   }
 
   savePropertie() {
-    console.log(this.tarefa)
+    console.log(this.optionType)
+    if(this.optionType == 'numero inteiro') {
+      this.newPropertie.property.type = PropertyType.INTEGER;
+      console.log(this.newPropertie.property.type)
+    }
+    console.log(this.tarefa.properties)
+    console.log(this.newPropertie)
     this.tarefa.properties.push(this.newPropertie);
-    this.service.putTarefa(this.tarefa);
-    console.log(this.service.getAllSomething("task"))
+    //console.log(this.tarefa.properties)
+    console.log(JSON.stringify(this.tarefa.properties))
+    console.log(this.service.patchProperty(this.newPropertie,this.tarefa.id));
+     
+    console.log(this.service.getOne("task",this.tarefa.id))
     console.log(this.tarefa.properties);
   }
 }

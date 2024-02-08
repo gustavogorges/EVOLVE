@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
@@ -107,14 +107,14 @@ export class ModalTarefaComponent implements OnInit {
   }
 
 
-  @HostListener('click', ['$event'])
-  clicouFora(event:any){
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c71') || name.includes('c72'))
-     if(!element){
+  //@HostListener('click', ['$event'])
+  //clicouFora(event:any){
+  // const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c73'))
+  //   if(!element){
        
-      this.closeAddPropertie();
-     }
-  }
+  //    this.closeAddPropertie();
+  //   }
+  //}
 
   openDesc(): void {
     this.booleanDesc = !this.booleanDesc;
@@ -211,7 +211,9 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   addPropertie() {
+    console.log("entrou no addPropertie")
     this.booleanAddPropriedade = true;
+    console.log(this.booleanAddPropriedade)
   }
 
   closeAddPropertie() {

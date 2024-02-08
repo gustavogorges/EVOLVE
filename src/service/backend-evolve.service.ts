@@ -7,6 +7,7 @@ import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { Status } from 'src/model/status';
+import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 
 
 @Injectable({
@@ -32,6 +33,13 @@ export class BackendEVOLVEService {
 
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
+  }
+
+  async patchProperty(taskProjectProperty:TaskProjectProperty, taskId:number) {
+    console.log(taskProjectProperty)
+    console.log((await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data);
+    
+    return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
   }
 
   async postTarefa (tarefa:Task){

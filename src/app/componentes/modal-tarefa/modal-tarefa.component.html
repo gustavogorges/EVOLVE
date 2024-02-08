@@ -91,12 +91,11 @@
           <i class="text-white pi pi-trash"></i>
         </div>
         </div>
-        
       </div>
     </div>
-    <div class="add-icon hover" >
+    <div class="add-icon hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus " style="color: white;"></i>
-      <p class="add-propertie-text " style="color: white;" (click)="addPropertie()">
+      <p class="add-propertie-text " style="color: white;">
         adicionar propriedade
       </p>
     </div>
@@ -180,18 +179,8 @@
               <div class="responsible-icon"></div>
           </div>-->
       </div>
-      <div class="status-propertie">
-        <!-- ADICIONAR PROPRIEDADE DIV FUTURA
-              <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-              <div 
-              (click)="editStatus()" 
-              class="status-icon " 
-              [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
-              >{{tarefa.statusAtual.nome}}</div>
-          </div> -->
-        
-      </div>
-      
+      <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
+      <app-propriedade-tarefa></app-propriedade-tarefa>
     </div>
     <div class="description-box">
       <div class="description-propertie">

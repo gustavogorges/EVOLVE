@@ -87,7 +87,11 @@
 }
 
 .propertie {
-    @apply flex w-full
+    @apply flex w-full min-h-[100%] gap-2
+}
+
+.propertie-value {
+    @apply h-full flex items-center
 }
 
 .date-propertie {
@@ -95,7 +99,7 @@
 }
 
 .task-properties-box {
-    @apply grid grid-cols-2 min-h-[15%]
+    @apply grid grid-cols-2 min-h-[15%] gap-2
 }
 
 .date-end {
