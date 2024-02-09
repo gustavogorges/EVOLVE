@@ -127,14 +127,8 @@ export class SelectPropriedadeComponent implements OnInit {
       this.newPropertie.property.type = PropertyType.INTEGER;
       console.log(this.newPropertie.property.type)
     }
-    console.log(this.tarefa.properties)
+      
     console.log(this.newPropertie)
-    this.tarefa.properties.push(this.newPropertie);
-    //console.log(this.tarefa.properties)
-    console.log(JSON.stringify(this.tarefa.properties))
     console.log(this.service.patchProperty(this.newPropertie,this.tarefa.id));
-     
-    console.log(this.service.getOne("task",this.tarefa.id))
-    console.log(this.tarefa.properties);
   }
 }

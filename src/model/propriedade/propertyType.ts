@@ -1,9 +1,9 @@
 export enum PropertyType{
-    TEXT,
-    DOUBLE,
-    INTEGER,
-    DATE,
-    MULTISELECT,
-    UNISELECT,
-    ASSOCIATES
+    TEXT = "TEXT",
+    DOUBLE = "DOUBLE",
+    INTEGER = "INTEGER",
+    DATE = "DATE",
+    MULTISELECT = "MULTISELECT",
+    UNISELECT = "UNISELECT",
+    ASSOCIATES= "ASSOCIATES"
 }

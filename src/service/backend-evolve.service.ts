@@ -37,8 +37,7 @@ export class BackendEVOLVEService {
 
   async patchProperty(taskProjectProperty:TaskProjectProperty, taskId:number) {
     console.log(taskProjectProperty)
-    console.log((await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data);
-    
+  
     return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
   }
 
