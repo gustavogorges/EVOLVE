@@ -7,7 +7,7 @@
                 <p class="descricao">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore. Lrem Ipsum is simply dummy text of the printing and typesetting industry. Lore</p>
             </div>
         </div>
-        <div class="dashboard-pai">
+        <div class="dashboard-pai overflow-hidden">
             <div class="newDashBoard">
                 <button #buttonNewDash type="button"  (click)="newDashVisible()" class="flex gap-2 items-center h-full"><i class="pi pi-plus" options="delay"></i>New Dashboard</button>
             </div>
@@ -16,13 +16,26 @@
                 <div>
                     <div class="titulo-dashboard">
                         <p>{{dashboard.nome}}</p>
-                        <app-new-chart-modal [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
-                        <button type="button" (click)="newChartVisible()"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico
-                        </button>
+                        <div class="flex gap-3">
+                            <div class="flex gap-3">
+                                <button type="button" (click)="newChartVisible()"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
+                                <app-new-chart-modal (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
+                                <button type="button" (click)="newChartVisible()"><i class="pi pi-pencil" options="delay"></i> Editar Dashboard</button>
+                                <button type="button" (click)="newChartVisible()"><i class="pi pi-trash text-red-700" options="delay"></i> Deletar Dashboard</button>
+                            </div>
+                            <button (click)="newChartVisible()"><i class="pi pi-ellipsis-v "></i></button>
+                        </div>
                     </div>
-                    <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+                    <div class="invisible">
+                        <div class="grid">
+                            <div class="col-start-2 col-end-5 row-start-2"></div>
+                            <div class="col-start-2 col-end-5"></div>
+                            <div class="col-span-full row-span-full"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, dashboard)">
                         <div class="chart " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
-                            <p-chart [type]="charts[i].type" [data]="charts[i].data" [options]="charts[i].options" width="100%" height="100%" ></p-chart>
+                            <p-chart *ngIf="dashboard.charts[i]" [type]="dashboard.charts[i].type" [data]="dashboard.charts[i].data" [options]="dashboard.charts[i].options" width="100%" height="100%" ></p-chart>
                         </div>
                     </div>
                 </div>

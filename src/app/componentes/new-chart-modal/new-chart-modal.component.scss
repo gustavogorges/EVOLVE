@@ -1,5 +1,5 @@
 .modal{
-    @apply bg-primaryWhite shadow-lg absolute right-[40%] mt-6 z-50 rounded-lg duration-150;
+    @apply bg-primaryWhite shadow-lg absolute mt-8 z-50 rounded-lg duration-150;
 
     .div-modal{
         @apply w-full h-[100%] overflow-auto pt-4;

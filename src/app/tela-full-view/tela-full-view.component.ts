@@ -17,21 +17,21 @@ export class TelaFullViewComponent implements OnInit {
     dashboards: any[] = []
     newChartBool: Boolean = false
 
-    dashBoard = {
+    dashboard = {
         id:0,
         style:0,
-        charts:this.charts
+        charts:[]
     }
 
     ngOnInit() {
         this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
         this.chartsInitialize()
+        console.log(this.dashboard.charts);
     }
     
     newDashVisible(){
         this.newDashVisibleBol = !this.newDashVisibleBol
         this.newChartBool = false
-
     }
 
     newChartVisible(){
@@ -52,7 +52,6 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     createNewDashBoard(dash:any){
-        dash.charts = this.charts
         this.dashboards.push(dash)
         this.newDashVisibleBol = false
         this.dashboards = this.dashboards.reverse()
@@ -699,14 +698,13 @@ export class TelaFullViewComponent implements OnInit {
         })();
     }
 
-
-
-    drop(event: CdkDragDrop<string[]>) {
-        this.newDashVisibleBol = false
-        moveItemInArray(this.charts, event.previousIndex, event.currentIndex);
+    drop(event: CdkDragDrop<string[]>, dashboard:any) {
+        if(dashboard.charts.length >= 2){
+            this.newDashVisibleBol = false
+            moveItemInArray(dashboard.charts, event.previousIndex, event.currentIndex);
+        }
     }
     
 
     projeto !: Project
-
 }

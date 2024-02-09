@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-new-chart-modal',
@@ -12,6 +12,8 @@ export class NewChartModalComponent implements OnChanges {
   @Input() newChartBool !: Boolean
   chartChoosed:number = -1
   @Input() charts: any[] = []
+  @Input() dashboard: any
+  @Output() closeNewChart : EventEmitter<any> = new EventEmitter<any>()
 
   ngOnChanges(): void {
     if(!this.newChartBool){
@@ -20,7 +22,17 @@ export class NewChartModalComponent implements OnChanges {
     }
   }
 
-  createNewChart(){}
+  createNewChart(){
+    console.log(this.dashboard);
+    this.charts.forEach(element => {
+      if(element.id === this.chartChoosed){
+        this.dashboard.charts.push(element)
+      }
+    });
+    if(this.dashboard.charts.length === this.dashboard.style.length){
+      this.closeNewChart.emit()
+    }
+  }
 
   chooseChart(index:number){
     this.charts.forEach(element => {
