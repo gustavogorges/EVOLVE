@@ -32,6 +32,9 @@ export class TarefaKanbanComponent  implements OnChanges{
   start: number =0;
   statusList: Array<Status> = new Array<Status>;
   @Input() project: Project = new Project;
+  taskMoved : Task = new Task;
+  dropTarefa : boolean = true
+  dropStatus: boolean = true
 
   
   ;
@@ -59,23 +62,40 @@ export class TarefaKanbanComponent  implements OnChanges{
   onDragStart(event: any) {
     this.currentDragEffectMsg = '';
     this.currentDraggableEvent = event;
-    console.log(event)
+    console.log(event.toElement.id)
     this.start = event.toElement.id
 
   }
+  onDragStartTask(event: any) {
+    this.dropTarefa = true; 
+    this.dropStatus = false 
+    console.log(this.dropTarefa)
+    this.start = event.toElement.id
 
-  onDragged(item: any, list: any[], effect: DropEffect) {
-   
-    this.currentDragEffectMsg = `Drag ended with effect "${effect}"!`;
-    
-    
 
+  }
+  onDragStartStatus(event: any) {
+    this.dropTarefa = false; 
+    this.dropStatus = true 
+    console.log(event.toElement.id)
+    this.start = event.toElement.id
+
+
+  }
+
+  onDraggedTask(item: Task, list: any[], effect: DropEffect) {
+    this.dropTarefa = true; 
+    this.dropStatus = false 
+    this.taskMoved = item
+    console.log(this.dropTarefa)
+  
   //   if (effect === 'move') {
   //     const index = list.indexOf(item);
   //     list.splice(index, 1);
     
   // }
 }
+
 
   onDragEnd(event: DragEvent) {
     this.currentDraggableEvent = event;
@@ -84,8 +104,13 @@ export class TarefaKanbanComponent  implements OnChanges{
      
   }
 
-  async onDrop(event: DndDropEvent, list?: Status[]) {
+   onDrop(event: DndDropEvent, list?: Status[]) {
+    console.log(event.index)
 
+    if(event.data == this.taskMoved ){
+      console.log("sou pika");
+      
+    }
     if (list && (event.dropEffect === 'copy' || event.dropEffect === 'move')) {
 
       let index = event.index!;
@@ -110,8 +135,12 @@ export class TarefaKanbanComponent  implements OnChanges{
     }
     
   }
-   async onDropTask(event: DndDropEvent, list?: Task[], item?:any) {
+   async onDropTask(event: DndDropEvent, list: Task[], item?:any) {
 
+    if((event.data as Task).currentStatus){
+      console.log("sou pika");
+      
+    
    
     if (list && (event.dropEffect === 'copy' || event.dropEffect === 'move')) {
       let index = event.index!;
@@ -134,9 +163,17 @@ export class TarefaKanbanComponent  implements OnChanges{
         this.service.putTarefa(task)
       })
       this.taskList == list;
+    }else{
+      console.log("status ");
+      
+    }
  
      
     }
+  }
+  teste(item : Status){
+    console.log(item)
+    console.log(this.statusList)
   }
  
 //   ngOnInit(): void { }
