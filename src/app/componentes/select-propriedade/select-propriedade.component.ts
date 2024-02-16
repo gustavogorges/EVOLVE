@@ -122,14 +122,13 @@ export class SelectPropriedadeComponent implements OnInit {
     this.selectOption.name = '';
   }
 
-  async savePropertie() {
+   savePropertie() {
     console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
       this.newPropertie.type = PropertyType.INTEGER;
-      await this.service.patchProperty(this.newPropertie,this.tarefa.id);
+       this.service.patchProperty(this.newPropertie,this.tarefa.id);
 
     }
-    
     console.log(this.tarefa)  
   }
 }
