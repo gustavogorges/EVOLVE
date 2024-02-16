@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { isNullOrUndef } from 'chart.js/dist/helpers/helpers.core';
 import { Property } from 'src/model/propriedade/property';
 import { PropertyType } from 'src/model/propriedade/propertyType';
 import { SelectOption } from 'src/model/propriedade/selectOption';
@@ -121,14 +122,14 @@ export class SelectPropriedadeComponent implements OnInit {
     this.selectOption.name = '';
   }
 
-  savePropertie() {
-    console.log(this.optionType)
+  async savePropertie() {
+    console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
-      this.newPropertie.property.type = PropertyType.INTEGER;
-      console.log(this.newPropertie.property.type)
+      this.newPropertie.type = PropertyType.INTEGER;
+      await this.service.patchProperty(this.newPropertie,this.tarefa.id);
+
     }
-      
-    console.log(this.newPropertie)
-    console.log(this.service.patchProperty(this.newPropertie,this.tarefa.id));
+    
+    console.log(this.tarefa)  
   }
 }

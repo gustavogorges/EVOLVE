@@ -184,7 +184,7 @@ export class ModalTarefaComponent implements OnInit {
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
       console.log("TA ENTRANDO CERTO")
-      this.tarefa.project.id = 2;
+      this.tarefa.project.id = 102;
       this.tarefa.creator.id = 1;
       console.log(this.tarefa);
       this.service.postTarefa(this.tarefa);

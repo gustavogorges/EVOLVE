@@ -12,4 +12,6 @@ export class TaskProjectProperty {
     project: Project = new Project;
 
     value: number | string | Date | Array<User> | Array<string> = []
+
+    type: PropertyType = PropertyType.TEXT;
 }
