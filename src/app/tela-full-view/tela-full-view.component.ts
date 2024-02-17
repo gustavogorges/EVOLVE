@@ -1,5 +1,6 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { map } from 'rxjs';
 import { Project } from 'src/model/project';
 @Component({
   selector: 'app-tela-full-view',
@@ -16,38 +17,62 @@ export class TelaFullViewComponent implements OnInit {
     newDashVisibleBol: Boolean = false
     dashboards: any[] = []
     newChartBool: Boolean = false
+    viewOptionsBol: Boolean = true
+    viewEditBol: Boolean = false
 
-    dashboard = {
-        id:0,
-        style:0,
-        charts:[]
+    deleteDashboard(dashboard:any){
+        this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
+    }
+
+    viewOptions(){
+        this.viewOptionsBol = !this.viewOptionsBol
+        this.viewEditBol = false
+
+    }
+
+    viewEdit(){
+        this.viewEditBol = !this.viewEditBol
+        this.newChartBool = false
+        this.newDashVisibleBol = false
+    }
+
+    chartToTrash(dashboard:any,i:number){
+        dashboard.charts.splice(i, 1)
     }
 
     ngOnInit() {
         this.projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
         this.chartsInitialize()
-        console.log(this.dashboard.charts);
     }
     
     newDashVisible(){
         this.newDashVisibleBol = !this.newDashVisibleBol
         this.newChartBool = false
+        this.viewEditBol = false
     }
 
     newChartVisible(){
         this.newChartBool = !this.newChartBool
         this.newDashVisibleBol = false
+        this.viewEditBol = false
     }
 
+    @ViewChild ('Options') optionsMenu !: ElementRef
     @HostListener('click', ['$event'])
     outsideClick(event:any){
-    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105') || name.includes('c106')) 
+        
+    if(!this.optionsMenu.nativeElement.contains(event.target) && !(event.target.tagName === "I")){
+        this.viewOptionsBol = true
+    }
+        
+    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105') || name.includes('c106')) || event.target.tagName === "I"
     || event.target.tagName === "BUTTON"
     || event.target.tagName === "BUTTON" || event.target.tagName === "P" 
     || event.target.tagName === "CANVAS";
       if(!element){
         this.newDashVisibleBol = false
         this.newChartBool = false
+        this.viewEditBol = false
       }
     }
 

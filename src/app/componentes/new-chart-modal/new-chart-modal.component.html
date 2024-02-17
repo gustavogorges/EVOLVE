@@ -3,8 +3,8 @@
         <button (click)="createNewChart()" class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
     </div>
 
-    <div class="div-modal rotate-180" [ngClass]="!newChartBool ? 'invisible ':'visible'">
-        <p class="title" [ngClass]="!newChartBool ? 'invisible ':'visible'">Escolha o novo gráfico</p>
+    <div class="div-modal rotate-180" >
+        <p class="title" >Escolha o novo gráfico</p>
 
         <div class="invisible">
             <div class="grid">
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="box duration-100 " [ngClass]="!newChartBool ? 'invisible ':'visible'">
+        <div class="box" [ngClass]="!newChartBool ? 'invisible ':'visible'">
             <div class="squads " *ngFor="let squad of charts, index as i" (click)="chooseChart(squad.id)" [ngClass]="squad.style">
                 <p-chart [type]="charts[i].type" [data]="charts[i].data" [options]="charts[i].options" width="100%" height="100%" ></p-chart>
             </div>

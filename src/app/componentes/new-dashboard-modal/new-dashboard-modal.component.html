@@ -5,20 +5,21 @@
         <input [(ngModel)]="nome" class=" h-[50%] rotate-180 w-full px-2 outline-none" type="text" placeholder="Nome da dashboard">
     </div>
 
-    <div class="div-modal rotate-180" [ngClass]="!newDashBool ? 'invisible ':'visible'">
-        <p class="title" [ngClass]="!newDashBool ? 'invisible ':'visible'">Escolha o estilo da nova DashBoard</p>
+    <div class="div-modal rotate-180" >
+        <p class="title min-w-max" >Escolha o estilo da nova DashBoard</p>
 
         <div class="invisible">
             <div class="grid">
                 <div class="col-start-2 col-end-5 row-start-2"></div>
-                <div class="col-start-2 col-end-5"></div>
+                <div class="col-span-2 row-span-2"></div>
+                <div class="col-start-3 col-end-5"></div>
                 <div class="col-span-full row-span-full"></div>
             </div>
         </div>
         
-        <div class="box duration-100 " [ngClass]="!newDashBool ? 'invisible ':'visible'">
+        <div class="box duration-100">
             <div class="squads" *ngFor="let squad of squads" (click)="chooseDash(squad.id)" [ngClass]="squad.style">
-                <div class="squad " *ngFor="let div of squad.squad" [ngClass]="div"></div>
+                <div class="squad min-w-max" *ngFor="let div of squad.squad" [ngClass]="div"></div>
             </div>
         </div>
 

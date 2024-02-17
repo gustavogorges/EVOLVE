@@ -16,25 +16,19 @@
                 <div>
                     <div class="titulo-dashboard">
                         <p>{{dashboard.nome}}</p>
-                        <div class="flex gap-3">
-                            <div class="flex gap-3">
-                                <button type="button" (click)="newChartVisible()"><i class="pi pi-plus" options="delay"></i> Adicionar novo gráfico</button>
-                                <app-new-chart-modal (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
-                                <button type="button" (click)="newChartVisible()"><i class="pi pi-pencil" options="delay"></i> Editar Dashboard</button>
-                                <button type="button" (click)="newChartVisible()"><i class="pi pi-trash text-red-700" options="delay"></i> Deletar Dashboard</button>
+                        <div class="flex gap-3 flex-row-reverse" #Options >
+                            <button (click)="viewOptions()" class="dark:text-gray-300 bg-primaryGray"><i class="pi pi-ellipsis-v duration-500 text-primary dark:text-dark-primary" [ngClass]="!viewOptionsBol ? 'rotate-90':'rotate-0'"></i></button>
+                            <div class="flex gap-2 overflow-hidden duration-500 " [ngClass]="viewOptionsBol ? 'w-0':'w-full pr-2'">
+                                <button type="button" (click)="newChartVisible()" class="text-gray-800 dark:text-gray-300 bg-primaryGray"><i class="pi pi-plus text-primary dark:text-dark-primary" options="delay"></i> Adicionar novo gráfico</button>
+                                <app-new-chart-modal style="z-index: 99999;" (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
+                                <button type="button" (click)="viewEdit()" class="text-gray-800 dark:text-gray-300 bg-primaryGray mr-[0.5rem]"><i class="pi pi-pencil text-primary dark:text-dark-primary" options="delay"></i> Editar Dashboard</button>
+                                <button type="button" (click)="deleteDashboard(dashboard)" class="bg-red-600 text-secondaryWhite"><i class="pi pi-trash text-secondaryWhite" options="delay"></i> Deletar Dashboard</button>
                             </div>
-                            <button (click)="newChartVisible()"><i class="pi pi-ellipsis-v "></i></button>
                         </div>
                     </div>
-                    <div class="invisible">
-                        <div class="grid">
-                            <div class="col-start-2 col-end-5 row-start-2"></div>
-                            <div class="col-start-2 col-end-5"></div>
-                            <div class="col-span-full row-span-full"></div>
-                        </div>
-                    </div>
-                    <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, dashboard)">
-                        <div class="chart " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
+                    <div class="dashboard  flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, dashboard)">
+                        <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
+                            <button (click)="chartToTrash(dashboard,i)" [ngClass]="!viewEditBol ? 'w-0 h-0':'w-[3rem] h-[3rem]'" *ngIf="dashboard.charts[i]" class="trash"><i class="pi pi-trash trachPi"></i></button>
                             <p-chart *ngIf="dashboard.charts[i]" [type]="dashboard.charts[i].type" [data]="dashboard.charts[i].data" [options]="dashboard.charts[i].options" width="100%" height="100%" ></p-chart>
                         </div>
                     </div>
@@ -62,7 +56,7 @@
                 </div>
             </div>
         <div class="top">
-            <button class="top-b" (click)="gotoTop()" >Voltar para o topo</button>
+            <button class="top-b" (click)="gotoTop()" > <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> Voltar para o topo</button>
         </div>
     </div>
 </div>
