@@ -102,9 +102,13 @@
     <app-select-propriedade
             *ngIf="booleanAddPropriedade"
             [tarefa]="tarefa"
+            (newItemEvent)="updatePropertiesList()"
           ></app-select-propriedade>
-    <div class="task-properties-box">
-      <div class="date-propertie">
+    <div 
+    class="task-properties-box"
+    [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
+    >
+      <div class="propertie">
         <div class="name-icon">
           <i class="icon-propertie pi pi-calendar"></i>
           <p class="name-propertie">data final:</p>
@@ -124,7 +128,7 @@
           />
         </div>
       </div>
-      <div class="responsible-propertie">
+      <div class="propertie">
         <div class="name-icon">
           <i class="icon-propertie pi pi-users"></i>
           <p class="name-propertie">associados:</p>
@@ -133,7 +137,7 @@
           <div class="responsible-icon"></div>
         </div>
       </div>
-      <div class="status-propertie">
+      <div class="propertie">
         <div class="name-icon">
           <i class="icon-propertie pi pi-spinner"></i>
           <p class="name-propertie">status:</p>
@@ -158,7 +162,7 @@
           *ngIf="booleanStatus"
         ></app-select-status>
       </div>
-      <div class="date-propertie">
+      <div class="propertie">
         <div class="name-icon">
           <i class="icon-propertie pi pi-calendar"></i>
           <p class="name-propertie">agendamento:</p>
@@ -169,7 +173,7 @@
               <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
           </div>-->
       </div>
-      <div class="responsible-propertie">
+      <div class="propertie">
         <div class="name-icon">
           <i class="icon-propertie pi pi-exclamation-circle"></i>
           <p class="name-propertie">prioridade:</p>
@@ -180,7 +184,15 @@
           </div>-->
       </div>
       <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
-      <app-propriedade-tarefa></app-propriedade-tarefa>
+      <div 
+      *ngFor="let property of propertiesList"
+      class=" h-full w-full gap-4"
+      >
+        <app-propriedade-tarefa 
+        class="propertie"
+        [property]="property"
+        ></app-propriedade-tarefa>
+      </div>
     </div>
     <div class="description-box">
       <div class="description-propertie">

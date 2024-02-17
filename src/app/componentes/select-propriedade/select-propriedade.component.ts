@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isNullOrUndef } from 'chart.js/dist/helpers/helpers.core';
 import { Property } from 'src/model/propriedade/property';
 import { PropertyType } from 'src/model/propriedade/propertyType';
@@ -35,6 +35,9 @@ export class SelectPropriedadeComponent implements OnInit {
 
   @Input()
   tarefa: Task = new Task();
+
+  @Output() 
+  newItemEvent = new EventEmitter<Array<TaskProjectProperty>>();
 
   newPropertie:TaskProjectProperty = new TaskProjectProperty();
   
@@ -122,13 +125,13 @@ export class SelectPropriedadeComponent implements OnInit {
     this.selectOption.name = '';
   }
 
-   savePropertie() {
+  savePropertie() {
     console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
       this.newPropertie.type = PropertyType.INTEGER;
-       this.service.patchProperty(this.newPropertie,this.tarefa.id);
-
-    }
-    console.log(this.tarefa)  
+      this.tarefa.properties.push(this.newPropertie);
+      this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }
+    this.newItemEvent.emit()  
   }
 }

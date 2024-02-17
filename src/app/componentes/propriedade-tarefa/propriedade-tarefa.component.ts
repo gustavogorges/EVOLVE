@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -10,6 +11,10 @@ export class PropriedadeTarefaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
+
+  @Input()
+  property : TaskProjectProperty = new TaskProjectProperty();
 
 }

@@ -1,5 +1,6 @@
-import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { Project } from 'src/model/project';
+import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -24,6 +25,8 @@ export class ModalTarefaComponent implements OnInit {
   descricaoAntiga: string = '';
   nomeAntigo: string = '';
   booleanPlayPause : boolean = false; 
+
+  propertiesList : Array<TaskProjectProperty> = new Array();
 
   interval : any;
 
@@ -77,6 +80,12 @@ export class ModalTarefaComponent implements OnInit {
     clearInterval(this.interval);
   }
 
+  updatePropertiesList() : void {
+      this.propertiesList = this.tarefa.properties;
+      console.log(this.propertiesList)
+  }
+
+
   
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
@@ -91,8 +100,8 @@ export class ModalTarefaComponent implements OnInit {
   tarefaNova: Task = new Task();
 
   async ngOnInit(): Promise<void> {
-    console.log(this.tarefa);
-    console.log(this.projeto)
+    this.propertiesList = this.tarefa.properties;
+    
     // this.verificaTamanhoString();
     if (this.tarefa.id == 0) {
       this.booleanEdit = true;
