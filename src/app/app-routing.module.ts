@@ -16,7 +16,7 @@ import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component
 const routes: Routes = [
   {
     path : "",
-    component : TelaFullViewComponent
+    component : TelaLoginComponent
   },
   {
     path : "tela-cadastro",
