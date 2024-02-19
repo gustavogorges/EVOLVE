@@ -28,7 +28,7 @@
                     </div>
                     <div class="dashboard  flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, dashboard)">
                         <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
-                            <button (click)="chartToTrash(dashboard,i)" [ngClass]="!viewEditBol ? 'w-0 h-0':'w-[3rem] h-[3rem]'" *ngIf="dashboard.charts[i]" class="trash"><i class="pi pi-trash trachPi"></i></button>
+                            <button (click)="chartToTrash(dashboard,i)" [ngClass]="!viewEditBol ? 'w-0 h-0':'w-[3rem] h-[3rem]'" *ngIf="dashboard.charts[i]" class="trash"><i [ngClass]="!viewEditBol ? 'invisible':'visible'" class="pi pi-trash trachPi"></i></button>
                             <p-chart *ngIf="dashboard.charts[i]" [type]="dashboard.charts[i].type" [data]="dashboard.charts[i].data" [options]="dashboard.charts[i].options" width="100%" height="100%" ></p-chart>
                         </div>
                     </div>

@@ -63,6 +63,7 @@ export class TelaFullViewComponent implements OnInit {
         
     if(!this.optionsMenu.nativeElement.contains(event.target) && !(event.target.tagName === "I")){
         this.viewOptionsBol = true
+        this.viewEditBol = false
     }
         
     const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105') || name.includes('c106')) || event.target.tagName === "I"

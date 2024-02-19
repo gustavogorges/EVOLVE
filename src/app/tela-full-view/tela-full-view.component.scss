@@ -61,10 +61,10 @@
                     @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
 
                     .trash{
-                        @apply rounded-lg right-0 bg-red-600 absolute z-50 scale-125 duration-200;
+                        @apply rounded-lg right-0 bg-red-600 absolute z-50 scale-105 duration-200 overflow-hidden;
 
                         .trachPi{
-                            @apply text-secondaryWhite w-full h-full flex items-center justify-center animate-pulse hover:animate-none;
+                            @apply text-secondaryWhite w-full h-full flex items-center justify-center duration-200 hover:scale-125;
                         }
                     }
     
