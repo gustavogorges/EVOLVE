@@ -75,6 +75,8 @@ import {MessageModule} from 'primeng/message';
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
+import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/projeto-remastered.component';
 
 
 
@@ -132,7 +134,9 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
     ChartModalComponent,
 
     TarefaKanbanComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    TelaProjetoRemasteredComponent,
+    ProjetoRemasteredComponent
 
   ],
   

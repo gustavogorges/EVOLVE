@@ -1,0 +1,10 @@
+<div class="screen">
+    <div class="tittle">
+        <h1>Equipe Padrão</h1>
+        <button><i class="pi pi-plus"></i> Adicionar Projeto</button>
+    </div>
+
+    <div class="projects">
+        <div *ngFor="let p of projetos" #projectElement><app-projeto-remastered [projectOpen]="p.isVisible" (click)="openProject(p)" (noCloseProject)="openProject(p)"></app-projeto-remastered></div>
+    </div>
+</div>

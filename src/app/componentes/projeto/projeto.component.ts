@@ -27,8 +27,7 @@ export class ProjetoComponent implements OnInit {
   valorProgresso = 0;
 
 
-  @Output()
-  deletar:EventEmitter<number> = new EventEmitter<number>()
+  @Output() deletar:EventEmitter<number> = new EventEmitter<number>()
 
   @Output() openProjeto: EventEmitter<Project> = new EventEmitter<Project>()
 
@@ -53,15 +52,8 @@ export class ProjetoComponent implements OnInit {
     this.tarefas.push(task)
   }
 
-  visivel(){}
-  
-  @HostListener('window:resize', ['$event'])
-  getScreenSize() {
-    this.verificaTamanhoTela()
-  }
 
   ngOnInit(): void {
-    this.getScreenSize()
     this.criaTarefa()
   }
 

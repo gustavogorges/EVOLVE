@@ -1,0 +1,16 @@
+<div class="component" #project>
+
+    <div class="project" [ngClass]="projectOpen ? 'rounded-s-xl' : 'rounded-xl'" >
+        <div class="project-image"><div></div><span><i class="pi pi-pencil"></i></span></div>
+        <div class="project-name"><input type="text" value="Nome Projeto"></div>
+        <div class="project-desc"><textarea name="" id="" cols="30" rows="10"></textarea></div>
+        <div class="project-response"><p>Responsaveis:</p></div>
+        <div class="project-users-response"><div></div><div></div></div>
+        <div class="project-progress"><div></div></div>
+        <div class="project-final-date"><p>data final: 00/00</p></div>
+    </div>
+    <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[25vw] rounded-r-xl'" (click)="openAgain()">
+    
+    </div>
+</div>
+

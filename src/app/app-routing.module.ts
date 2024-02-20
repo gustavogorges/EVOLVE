@@ -11,12 +11,13 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 
 
 const routes: Routes = [
   {
     path : "",
-    component : TelaLoginComponent
+    component : TelaProjetoRemasteredComponent
   },
   {
     path : "tela-cadastro",

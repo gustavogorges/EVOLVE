@@ -1,0 +1,78 @@
+.component{
+    @apply flex mb-14 drop-shadow-2xl dark:shadow-white;
+
+    .project{
+        @apply grid grid-rows-6 grid-cols-3 w-[26vw] h-[56vh] bg-secondaryWhite dark:bg-dark-theme-back duration-200;
+        grid-template-rows: 30% 15% 25% 10% 9% 1% 10%;
+        grid-template-columns: 28% 44% 28%;
+
+        .project-image{
+            @apply col-start-2 p-2 w-full h-full justify-center items-center relative grid grid-cols-3 grid-rows-2 justify-items-center;
+            grid-template-columns: 40% 40% 20%;
+            grid-template-rows: 50% 50%;
+
+            div{
+                @apply w-[7vw] h-[7vw] rounded-full bg-yellow-400 col-span-full row-span-full;
+            }
+
+            span{
+                @apply w-[2vw] h-[2vw] col-start-2 row-start-2 rounded-full bg-[#E9EDF1] flex justify-center items-center absolute animate-bounce;
+
+                i{
+                    @apply text-xl text-primary dark:text-dark-primary animate-bounce
+                }
+            }
+        }
+
+        .project-name{
+            @apply row-start-2 col-start-2 col-end-3 flex items-center;
+
+            input{
+                @apply w-full px-2 h-[6vh] rounded-lg truncate text-2xl bg-transparent text-center outline-gray-300; 
+            }
+        }
+
+        .project-desc{
+            @apply col-span-full px-[10%] row-start-3 row-end-4 flex justify-center items-center;
+
+            textarea{
+                @apply h-full resize-none w-full bg-gray-100 rounded-lg outline-none shadow-inner p-4 px-5 truncate;
+            }
+        }
+
+        .project-response{
+            @apply row-start-5 px-[10%] col-span-full row-end-6 w-full h-full flex items-center;
+            p{
+                @apply text-fontGray
+            }
+        }
+
+        .project-users-response{
+            @apply row-start-5 row-end-6 col-start-3 w-full h-full flex items-center;
+
+            div{
+                @apply w-[2vw] h-[2vw] bg-green-500 rounded-full
+            }
+        }
+
+        .project-progress{
+            @apply row-start-6 row-end-7 col-span-full w-full h-full bg-gray-200;
+
+            div{
+                @apply w-[40%] bg-secondary h-full rounded-r-lg
+            }
+        }
+
+        .project-final-date{
+            @apply row-start-7 h-full w-full flex items-center px-[10%] col-span-full;
+
+            p{
+                @apply text-primary text-xl;
+            }
+        }
+    }
+    
+    .project-open{
+        @apply grid grid-rows-6 grid-cols-3 h-[56vh] bg-red-600 duration-200
+    }
+}
