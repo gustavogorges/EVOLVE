@@ -8,6 +8,7 @@ import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { Status } from 'src/model/status';
 import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
+import { Priority } from 'src/model/priority';
 
 
 @Injectable({
@@ -39,6 +40,12 @@ export class BackendEVOLVEService {
     console.log(taskProjectProperty)
   
     return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
+  }
+
+  async patchPriority(priority:number,taskId:number) {
+    console.log(priority);
+    
+    return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
   async postTarefa (tarefa:Task){

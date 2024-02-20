@@ -79,10 +79,15 @@ export class SelectPropriedadeComponent implements OnInit {
       showing: true
     },
     {
-      text: 'text',
+      text: 'texto',
       icon: 'pi pi-book',
       showing: true
     },
+    {
+      text: 'associados',
+      icon: 'pi pi-users',
+      showing: true
+    }
   ];
 
   clickDate(option: any) {
@@ -131,6 +136,30 @@ export class SelectPropriedadeComponent implements OnInit {
       this.newPropertie.type = PropertyType.INTEGER;
       this.tarefa.properties.push(this.newPropertie);
       this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      } else if(this.optionType == 'data') {
+        this.newPropertie.type = PropertyType.DATE;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'seleção única') {
+        this.newPropertie.type = PropertyType.UNISELECT;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'seleção múltipla') {
+        this.newPropertie.type = PropertyType.MULTISELECT;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'número double') {
+        this.newPropertie.type = PropertyType.DOUBLE;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'text') {
+        this.newPropertie.type = PropertyType.TEXT;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'associados') {
+        this.newPropertie.type = PropertyType.ASSOCIATES;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }
     this.newItemEvent.emit()  
   }

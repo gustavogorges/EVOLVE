@@ -76,6 +76,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
+import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
 
 
 
@@ -90,11 +91,8 @@ import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/pro
     EntregaProxComponent,
     TelaProjetoComponent,
     ProjetoComponent,
-
-
     TelaTarefaComponent,
     TarefaCardPadraoComponent,
-
     EquipeRecenteComponent,
     DiaCalendarioComponent,
     TarefaDiaComponent,
@@ -106,7 +104,6 @@ import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/pro
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
-
     TelaCriarProjetoComponent,
     MembrosEquipeComponent,
     StatusComponentCriarTarefaComponent,
@@ -134,7 +131,8 @@ import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/pro
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
-    PropriedadeTarefaComponent
+    PropriedadeTarefaComponent,
+    SelectPrioridadeComponent
 
   ],
   

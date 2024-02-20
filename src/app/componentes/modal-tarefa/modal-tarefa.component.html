@@ -178,10 +178,21 @@
           <i class="icon-propertie pi pi-exclamation-circle"></i>
           <p class="name-propertie">prioridade:</p>
         </div>
-        <!-- ADICIONAR PRIORIDADE DIV FUTURA 
-              <div class="responsible-icon-box">
-              <div class="responsible-icon"></div>
-          </div>-->
+        <div *ngIf="!booleanSelectPrioridade" class="status-icon-box cursor-pointer">
+          <div
+            (click)="editPriority()"
+            class="status-icon"
+          >
+            {{tarefa.currentPriority}}
+          </div>
+        </div>
+        <div>
+          <app-select-prioridade
+          [task]="tarefa"
+          *ngIf="booleanSelectPrioridade"
+          >
+          </app-select-prioridade>
+        </div>
       </div>
       <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
       <div 

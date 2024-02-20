@@ -14,4 +14,6 @@ export class TaskProjectProperty {
     value: number | string | Date | Array<User> | Array<string> = []
 
     type: PropertyType = PropertyType.TEXT;
+
+    icon:string = '';
 }

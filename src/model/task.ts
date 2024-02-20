@@ -14,6 +14,7 @@ export class Task{
     creationDate: string ="";
     description:string = "";
     currentStatus: Status = new Status;
+    currentPriority !: any;
   
     conclusionPercentage:number=0;
     priority:Priority = 0;

@@ -2,7 +2,7 @@ export enum Priority{
     NONE,
     VERY_LOW,
     LOW,
-    MEDIUM,
+    AVERAGE,
     HIGH,
     URGENT
 }
