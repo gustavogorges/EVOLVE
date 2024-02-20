@@ -1,7 +1,7 @@
 
 
 .status {
-    @apply rounded-lg  px-4 w-max text-sm ;
+    @apply rounded-lg  px-7 text-sm text-end w-max  ;
     font-family: "Montserrat", sans-serif;
   }
   .dndDraggingSource {
@@ -10,14 +10,13 @@
   }
   
   .dndPlaceholder {
-    background: #fff;
+    background: #fdfdfd;
     min-height: 46px;
     min-width: 46px;
   }
   
   [dnddropzone] {
-    background: #fafafa;
+    background: #f8f8f8;
     min-height: 60px;
     display: flex;
-    outline: 2px solid rgba(0, 0, 0, 0.04);
   }

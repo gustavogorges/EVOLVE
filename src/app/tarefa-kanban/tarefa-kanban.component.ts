@@ -33,7 +33,7 @@ export class TarefaKanbanComponent  implements OnChanges{
   statusList: Array<Status> = new Array<Status>;
   @Input() project: Project = new Project;
   taskMoved : Task = new Task;
-  dropTarefa : boolean = true
+  dropTarefa : boolean = false
   dropStatus: boolean = true
 
   

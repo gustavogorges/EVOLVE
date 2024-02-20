@@ -1,25 +1,30 @@
-<div class="container-fluid">
-  <ng-template #recursiveList statusList  >
+<div class="container-fluid flex ">
+  <ng-template #recursiveList statusList>
+    <!-- sou a porra toda -->
 
 
-<!-- sou a porra toda -->
-
-    
- <!-- sou a coluna -->
+    <!-- sou a coluna -->
     <div
       *ngFor="let item of statusList"
       [dndDraggable]="item"
       (dndEnd)="onDragEnd($event)"
       (dndStart)="onDragStartStatus($event)"
       dndEffectAllowed="move"
+      class="w-[400px] flex flex-col mx-4 items-end "
     >
+<div class="flex justify-between w-full">
+  <i  class="pi pi-arrows-h text-secondary" dndHandle id="{{ item.columnIndex }}"></i>
+      <p class=" status "  [ngStyle]="{
+        'background-color': item.backgroundColor,
+        color: item.textColor
+      }">
+    
+        {{ item.name }}
+      </p>
+</div>
 
-    <!-- to na coluna -->
-      <div class="p-2 border" dndHandle id="{{ item.columnIndex }}" >
-        {{item.name}}
-      </div>
-      
-
+    <button class="bg-primaryWhite w-full text-lg  text-fontGray border-b p-1"> <i class="pi pi-plus text-secondary p-1" style="font-size: 1rem"></i> adicionar tarefa </button>
+    
 
       <!-- to na coluna que tem as tasks -->
       <div
@@ -27,22 +32,22 @@
         (dndDrop)="onDropTask($event, taskList, item)"
         dndDropzone
       >
-      
-<!-- sou algo, não sei o que e nem praque -->
-<div appearance="raised" class="dndPlaceholder" dndPlaceholderRef></div>
+        <!-- sou algo, não sei o que e nem praque -->
 
-<!-- Renderizamo as parceira -->
+        <div *ngIf="!dropStatus" class="dndPlaceholder" dndPlaceholderRef></div>
+
+        <!-- Renderizamo as parceira -->
         <div
-          appearance="raised"
           *ngFor="let task of taskList; let i = index"
           [dndDraggable]="task"
           (dndEnd)="onDragEnd($event)"
           (dndMoved)="onDraggedTask(task, taskList, 'move')"
           (dndStart)="onDragStartTask($event)"
-          class="flex flex-col"
+          class="flex flex-col "
           dndEffectAllowed="move"
+          
         >
-          <div *ngIf="task.currentStatus?.id == item.id">
+          <div *ngIf="task.currentStatus?.id == item.id" class=" bg-primaryWhite  rounded-md p-5">
             <app-tarefa-card-padrao
               [tarefaAtual]="task"
               dndHandle
@@ -50,35 +55,22 @@
             ></app-tarefa-card-padrao>
           </div>
         </div>
-
-
       </div>
-    </div>
 
+  </div>
 
-    <div appearance="raised" class="dndPlaceholder" dndPlaceholderRef></div>
-
-
-
-
+    <div *ngIf="!dropTarefa" class="dndPlaceholder" dndPlaceholderRef></div>
   </ng-template>
-<div class=" flex flex-row">
-  <ng-container *ngIf="dropStatus;  else pwp">
-    <div
-    class="p-12 "
-    (dndDrop)="onDrop($event, statusList)"
-    dndDropzone
-    >
-      <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
-    </div>
-  </ng-container>
-  <ng-template #pwp class=" ">
-    <div class="flex "
-    >
-      
-      <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
-    </div>
-  </ng-template>
-</div>
-  
+  <div class="flex flex-row">
+    <ng-container *ngIf="dropStatus; else pwp">
+      <div class="p-5" (dndDrop)="onDrop($event, statusList)" dndDropzone>
+        <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
+      </div>
+    </ng-container>
+    <ng-template #pwp class=" ">
+      <div class="flex p-5">
+        <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
+      </div>
+    </ng-template>
+  </div>
 </div>
