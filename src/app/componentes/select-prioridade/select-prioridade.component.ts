@@ -13,7 +13,7 @@ export class SelectPrioridadeComponent implements OnInit {
   constructor(private service:BackendEVOLVEService) { }
 
   ngOnInit(): void {
-    
+    console.log(this.task)
   }
 
   priorities : any[] = [

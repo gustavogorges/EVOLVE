@@ -49,7 +49,7 @@ export class BackendEVOLVEService {
   }
 
   async postTarefa (tarefa:Task){
-    (await axios.post(this.URL+"task", tarefa)).data 
+    return (await axios.post(this.URL+"task", tarefa)).data 
   }
 
   async putTarefa (tarefa:Task){

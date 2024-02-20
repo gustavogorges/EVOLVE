@@ -1,8 +1,5 @@
-export enum Priority{
-    NONE,
-    VERY_LOW,
-    LOW,
-    AVERAGE,
-    HIGH,
-    URGENT
+export class Priority{
+   id : number = 0;
+   name : string = '';
+   backgroundColor = '';
 }

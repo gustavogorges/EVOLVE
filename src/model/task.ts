@@ -17,7 +17,7 @@ export class Task{
     currentPriority !: any;
   
     conclusionPercentage:number=0;
-    priority:Priority = 0;
+    priorities:Array<Priority> = new Array;
 
     creator:User = new User;
     project:Project = new Project;
