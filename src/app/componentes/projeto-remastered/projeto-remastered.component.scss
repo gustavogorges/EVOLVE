@@ -19,7 +19,7 @@
                 @apply w-[2vw] h-[2vw] col-start-2 row-start-2 rounded-full bg-[#E9EDF1] flex justify-center items-center absolute animate-bounce;
 
                 i{
-                    @apply text-xl text-primary dark:text-dark-primary animate-bounce
+                    @apply text-xl text-primary dark:text-dark-primary animate-bounce shadow-sm
                 }
             }
         }
@@ -73,6 +73,55 @@
     }
     
     .project-open{
-        @apply grid grid-rows-6 grid-cols-3 h-[56vh] bg-red-600 duration-200
+        @apply flex flex-col gap-[10%] py-[6%] h-[56vh] bg-gray-200 duration-200 overflow-hidden;
+
+        .project-open-infos{
+            @apply h-[60%] w-full bg-secondaryWhite rounded-lg relative;
+
+            .tittle-infos{
+                @apply grid grid-cols-4 grid-rows-1 justify-items-center mb-2 px-2 z-50 bg-secondaryWhite rounded-lg;
+
+                p{
+                    @apply text-fontGray text-lg font-medium
+                }
+            }
+
+            .value-infos{
+                @apply grid grid-cols-4 grid-rows-1 px-2 justify-items-center items-center mb-2;
+
+                .Nome{
+                    @apply truncate w-full text-sm text-primary
+                }
+
+                .Progresso{
+                    @apply w-[90%] h-[50%] bg-gray-200 rounded-full mx-4 overflow-hidden;
+    
+                    .valor-progresso{
+                        @apply bg-primary dark:bg-dark-primary duration-700 h-full
+                    }
+                }
+
+                .Status{
+                    @apply bg-yellow-400 p-1 rounded-2xl px-2 text-sm
+                }
+
+                .Prazo{
+                    @apply text-primary
+                }
+
+                p{
+                    @apply font-semibold
+                }
+            }
+        }
+
+        .project-open-users{
+            @apply h-[40%] w-full bg-secondaryWhite rounded-lg grid grid-cols-3 justify-items-center items-center;
+            grid-template-columns: 10% 80% 10%;
+
+            span{
+                @apply text-2xl font-semibold cursor-pointer hover:scale-110 duration-100
+            }
+        }
     }
 }

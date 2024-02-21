@@ -18,7 +18,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   projetos:any[] = [
     {
       id : 0,
-      isVisible : false
+      isVisible : true
     },
     {
       id : 1,

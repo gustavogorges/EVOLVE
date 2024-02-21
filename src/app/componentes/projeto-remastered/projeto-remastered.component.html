@@ -9,8 +9,31 @@
         <div class="project-progress"><div></div></div>
         <div class="project-final-date"><p>data final: 00/00</p></div>
     </div>
-    <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[25vw] rounded-r-xl'" (click)="openAgain()">
-    
+    <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
+        <div class="project-open-infos">
+            <div class="tittle-infos">
+                <p>Nome</p>
+                <p>Progresso</p>
+                <p>Status</p>
+                <p>Prazo</p>
+            </div>
+            
+            <div class="value-infos" *ngFor="let t of tarefas">
+                <p class="Nome">{{t.nome}}dawdawd</p>
+                <div class="Progresso">
+                    <div class="valor-progresso"  [style.width.%]="t.progresso" ></div>
+                </div>
+                <p class="Status">{{t.status}}</p>
+                <p class="Prazo">{{t.prazo}}</p>
+            </div>
+        </div>
+        <div class="project-open-users">
+            <span><</span>
+            <div class="users">
+                
+            </div>
+            <span>></span>
+        </div>
     </div>
 </div>
 
