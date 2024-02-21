@@ -14,10 +14,10 @@ export class Task{
     creationDate: string ="";
     description:string = "";
     currentStatus: Status = new Status;
-    currentPriority !: any;
   
     conclusionPercentage:number=0;
     priorities:Array<Priority> = new Array;
+    currentPriority:Priority = new Priority;
 
     creator:User = new User;
     project:Project = new Project;
