@@ -34,7 +34,7 @@
     @apply text-2xl
 }
 .tasks-grid-padrao{
-  @apply grid grid-cols-4 gap-6 w-full justify-center
+  @apply grid grid-cols-4 gap-8 w-full justify-center
 }
 .box-list{
   @apply flex flex-col h-full w-full gap-6  items-center justify-center
