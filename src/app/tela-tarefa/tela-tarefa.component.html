@@ -4,6 +4,7 @@
   *ngIf="booleanTask"
   [tarefa]="tarefaSelecionada"
   [projeto]="projeto"
+  (closeModalTask)="closeTask($event)"
   ></app-modal-tarefa>
 </div>
 
