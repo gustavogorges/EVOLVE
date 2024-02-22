@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
+import { PriorityRecord } from 'src/model/priorityRecord';
 
 interface Bah {
   name:string,
@@ -207,6 +208,10 @@ if( this.filtroVisible==true){
   }
 
   openTaskEdit(tarefa:Task) {
+    let priorityTeste : PriorityRecord = new PriorityRecord();
+    priorityTeste.name = "nenhuma";
+    priorityTeste.backgroundColor = "#cccccc" 
+    this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }

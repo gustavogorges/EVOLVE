@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { Priority } from 'src/model/priority';
+import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
 import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
@@ -87,6 +88,10 @@ export class ModalTarefaComponent implements OnInit {
     this.booleanSelectPrioridade = true;
   }
 
+  finishEditPriority() {
+    this.booleanSelectPrioridade = false;
+  }
+
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
@@ -107,16 +112,20 @@ export class ModalTarefaComponent implements OnInit {
   tarefaTeste : Task = this.tarefa;
   tarefaNova: Task = new Task();
 
+  listPriorities !: PriorityRecord[];
+
   async ngOnInit(): Promise<void> {
-    console.log(this.tarefa.currentPriority);
+    this.listPriorities = await this.service.getAllPriorities()
+    console.log(this.listPriorities)
+    console.log(this.tarefa);
     
     this.propertiesList = this.tarefa.properties;
     // this.verificaTamanhoString();
-    if (this.tarefa.id == 0) {
+    if (this.tarefa.id == 0) {      
       this.booleanEdit = true;
       this.booleanCalendario = true;
+      this.tarefa.currentStatus.name = "sem status";
       this.tarefa = this.tarefaNova;
-      this.tarefaNova.currentStatus.name = 'sem status';
     } else if (this.tarefa.id != 0) {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
@@ -204,7 +213,6 @@ export class ModalTarefaComponent implements OnInit {
       console.log("TA ENTRANDO CERTO")
       this.tarefa.project.id = 102;
       this.tarefa.creator.id = 1;
-      console.log(this.tarefa);
       this.service.postTarefa(this.tarefa);
     }
 

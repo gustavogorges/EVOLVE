@@ -1,4 +1,5 @@
 import { Priority } from "./priority";
+import { PriorityRecord } from "./priorityRecord";
 import { Project } from "./project";
 import { Property } from "./propriedade/property";
 import { TaskProjectProperty } from "./propriedade/task-project-property";
@@ -16,8 +17,7 @@ export class Task{
     currentStatus: Status = new Status;
   
     conclusionPercentage:number=0;
-    priorities:Array<Priority> = new Array;
-    currentPriority:Priority = new Priority;
+    priority:PriorityRecord = new PriorityRecord();
 
     creator:User = new User;
     project:Project = new Project;

@@ -182,14 +182,19 @@
           <div
             (click)="editPriority()"
             class="status-icon"
+            [ngStyle]="{
+              'background-color': tarefa.priority.backgroundColor
+            }"
           >
-            {{tarefa.currentPriority}}
+            {{tarefa.priority.name}}
           </div>
         </div>
         <div>
           <app-select-prioridade
           [task]="tarefa"
+          [listPriorities]="listPriorities"
           *ngIf="booleanSelectPrioridade"
+          (eventEmitter)="finishEditPriority()"
           >
           </app-select-prioridade>
         </div>

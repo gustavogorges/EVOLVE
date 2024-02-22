@@ -48,6 +48,10 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
+  async getAllPriorities() {
+    return (await axios.get(this.URL+"task/priorities")).data
+  }
+
   async postTarefa (tarefa:Task){
     return (await axios.post(this.URL+"task", tarefa)).data 
   }
