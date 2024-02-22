@@ -1,4 +1,5 @@
 import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { LogarithmicScale } from 'chart.js';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
@@ -108,30 +109,31 @@ export class ModalTarefaComponent implements OnInit {
   sendEventEmitter():void {
     this.closeModalTask.emit(true);
   }
-
-  tarefaTeste : Task = this.tarefa;
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
 
   async ngOnInit(): Promise<void> {
-    this.listPriorities = await this.service.getAllPriorities()
-    console.log(this.listPriorities)
     console.log(this.tarefa);
     
+    this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
+
     // this.verificaTamanhoString();
     if (this.tarefa.id == 0) {      
       this.booleanEdit = true;
       this.booleanCalendario = true;
-      this.tarefa.currentStatus.name = "sem status";
       this.tarefa = this.tarefaNova;
+      this.tarefa.currentStatus.name = "sem status";
+      this.tarefa.priority.name = "NENHUMA"
+      this.tarefa.priority.backgroundColor = "#cccccc"
     } else if (this.tarefa.id != 0) {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
     }
   }
+
 
 
   //@HostListener('click', ['$event'])
@@ -211,7 +213,9 @@ export class ModalTarefaComponent implements OnInit {
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
       console.log("TA ENTRANDO CERTO")
-      this.tarefa.project.id = 102;
+      console.log(this.tarefa);
+      
+      this.tarefa.project.id = 2;
       this.tarefa.creator.id = 1;
       this.service.postTarefa(this.tarefa);
     }

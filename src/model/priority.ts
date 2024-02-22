@@ -4,5 +4,5 @@ export enum Priority{
    BAIXA,
    MEDIA,
    ALTA,
-   URGENTE
+   URGENTE,
 }

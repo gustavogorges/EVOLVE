@@ -47,8 +47,10 @@ export class TelaTarefaComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.listaNova = await this.service.getAllSomething("task")
     this.listaTarefas =await this.service.getAllSomething("task")
+    console.log(this.listaTarefas);
+    
     this.projeto = await this.service.getOne("project",2)
-    console.log(this.projeto.statusList)
+    console.log(this.projeto.tasks)
   }
 
   changeVisualizacao(e:any){

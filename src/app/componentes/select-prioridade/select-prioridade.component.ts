@@ -32,7 +32,6 @@ export class SelectPrioridadeComponent implements OnInit {
 
   savePriority(priority : PriorityRecord) {
     this.task.priority = priority;
-    console.log()
     this.eventEmitter.emit(false);
   }
 
