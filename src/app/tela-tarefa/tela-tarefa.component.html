@@ -79,12 +79,13 @@
 
     <div *ngIf="option == 'Padrão'">
       <div class="tasks-grid-padrao">
-        <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
+        <div *ngFor="let tarefa of listaTarefas; index as indice; trackBy: trackById" class="card">
           <app-tarefa-card-padrao
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (click)="openTask(tarefa)"
             (newItem)="ngOnInit()"
+            [project]="projeto"
           ></app-tarefa-card-padrao>
         </div>
       </div>
@@ -92,14 +93,15 @@
     <div *ngIf="option == 'Lista'">
       <div class="box-list">
         <div
-          *ngFor="let tarefa of listaTarefas; index as indice"
+          *ngFor="let tarefa of listaTarefas; index as indice; trackBy: trackById"
           class="cardLista"
         >
           <app-tarefa-card-lista
             class="h-full w-full"
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
-            (newItem)="ngOnInit()"
+            (newItem)="atualizar($event)"
+            [project]="projeto"
           ></app-tarefa-card-lista>
         </div>
       </div>

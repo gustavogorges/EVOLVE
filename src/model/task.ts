@@ -19,7 +19,7 @@ export class Task{
     priority:Priority = 0;
 
     creator:User = new User;
-    project:Project = new Project;
+    project:Project | Partial<Project> = new Project;
     properties:Array<TaskProjectProperty> = new Array;
     subtasks: Array<Subtask> = new Array;
     statusListIndex :number = -1;

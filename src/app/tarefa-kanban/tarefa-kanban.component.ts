@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, AfterContentInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, AfterContentInit, AfterViewInit, OnChanges, HostListener } from '@angular/core';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 
@@ -35,6 +35,10 @@ export class TarefaKanbanComponent  implements OnChanges{
   taskMoved : Task = new Task;
   dropTarefa : boolean = false
   dropStatus: boolean = true
+  selectOpen: boolean = false
+  optionsSelect: Array<string>=[];
+  IconsOptionsSelect: Array<string> =[];
+  statusId : number = 0
 
   
   ;
@@ -42,7 +46,12 @@ export class TarefaKanbanComponent  implements OnChanges{
   private currentDraggableEvent?: DragEvent;
   private currentDragEffectMsg?: string;
 
-  constructor(private service: BackendEVOLVEService) { }
+  constructor(private service: BackendEVOLVEService) {
+
+    this.optionsSelect =[
+      "deletar", "renomear", "alterar cor"
+    ]
+   }
   ngOnChanges(): void {
 
     this.statusListOrdenation();
@@ -160,6 +169,9 @@ export class TarefaKanbanComponent  implements OnChanges{
 
       list.map((task : Task)=>{
         task.statusListIndex=list.indexOf(task)
+        task.project = {
+          id: this.project.id
+        }
         this.service.putTarefa(task)
       })
       this.taskList == list;
@@ -170,11 +182,25 @@ export class TarefaKanbanComponent  implements OnChanges{
  
      
     }
+   
   }
-  teste(item : Status){
-    console.log(item)
-    console.log(this.statusList)
+  @HostListener('document:click', ['$event'])
+  closeSelect(event: MouseEvent){
+    const targetElement = event.target as HTMLElement;
+    if (!targetElement.closest('.select-container')) {
+      this.selectOpen = false;
+    }
   }
+  openSelect(id : number, event: MouseEvent){
+    event.stopPropagation();
+      this.statusId= id;
+      this.selectOpen=!this.selectOpen
+      this.optionsSelect=[
+        "deletar", "renomear", "alterar cor"
+      ]
+
+  }
+
  
 //   ngOnInit(): void { }
 

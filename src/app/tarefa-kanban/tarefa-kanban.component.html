@@ -10,14 +10,15 @@
       (dndEnd)="onDragEnd($event)"
       (dndStart)="onDragStartStatus($event)"
       dndEffectAllowed="move"
-      class="w-[400px] flex flex-col mx-4 items-end"
+      class="w-[400px] relative flex flex-col mx-4 items-end"
     >
-      <div class="flex justify-between w-full">
+      <div class="flex justify-between w-full py-2">
         <i
           class="pi pi-arrows-h text-secondary"
           dndHandle
           id="{{ item.columnIndex }}"
         ></i>
+        <div class="flex gap-2">
         <p
           class="status"
           [ngStyle]="{
@@ -27,10 +28,21 @@
         >
           {{ item.name }}
         </p>
+        <i
+          class="pi pi-ellipsis-v text-secondary"
+          (click)="openSelect(item.id, $event)"
+        ></i>
+        <div *ngIf="selectOpen && statusId==item.id" class="absolute z-10 top-8 ">
+          <app-select-custom [listOptions]="optionsSelect" [listIcons]="IconsOptionsSelect" ></app-select-custom>
+        </div>
+       
       </div>
+     
+      </div>
+   
 
       <button class="bg-primaryWhite w-full text-lg text-fontGray border-b p-1">
-        <i class="pi pi-plus text-secondary p-1" style="font-size: 1rem"></i>
+        <i class="pi pi-plus text-secondary p-1" style="font-size: 1rem" ></i>
         adicionar tarefa
       </button>
 

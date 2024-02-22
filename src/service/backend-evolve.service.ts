@@ -13,7 +13,7 @@ import { Status } from 'src/model/status';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://10.4.96.2:8087/"
+  URL : string = "http://localhost:8087/"
 
   constructor() { }
 

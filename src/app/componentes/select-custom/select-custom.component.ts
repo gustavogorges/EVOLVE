@@ -13,9 +13,9 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class SelectCustomComponent implements OnInit {
   
   @Input()
-  listOptions : Array<string> = new Array
+  listOptions !: Array<string> 
   @Input()
-  listIcons : Array<string>=new Array
+  listIcons !: Array<string>
   projeto !: Project 
 
   
@@ -29,7 +29,7 @@ export class SelectCustomComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log(this.listOptions)
     console.log(this.listIcons)
-    this.projeto = await this.service.getOne("project",252)
+    this.projeto = await this.service.getOne("project",102)
 
     
   }
