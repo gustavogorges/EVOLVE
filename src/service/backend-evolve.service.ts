@@ -33,6 +33,7 @@ export class BackendEVOLVEService {
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
+ 
 
   async postTarefa (tarefa:Task){
     (await axios.post(this.URL+"task", tarefa)).data 

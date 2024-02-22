@@ -1,28 +1,99 @@
-  <div class=" flex justify-between  w-[1712px] gap-7 overflow-auto " cdkDropListGroup>
-    
+<div class="container-fluid flex   w-full">
+  <ng-template #recursiveList statusList>
+    <!-- sou a porra toda -->
+
+    <div *ngIf="!dropTarefa" class="dndPlaceholder" dndPlaceholderRef></div>
+    <!-- sou a coluna -->
     <div
-      *ngFor="let status of listaStatus; let i = index"
-      cdkDropList
-      [cdkDropListData]="filtrarLista(status)"
-      (cdkDropListDropped)="drop($event, status, filtrarLista(status))"
-      class="min-w-[400px] bg-primaryGray flex flex-col items-center"
-      cdkDrag [cdkDragData]="{status: status, index: i}" 
-      (cdkDragMoved)="updateListOrder($event)"
+      *ngFor="let item of statusList"
+      [dndDraggable]="item"
+      (dndEnd)="onDragEnd($event)"
+      (dndStart)="onDragStartStatus($event)"
+      dndEffectAllowed="move"
+      class="w-[400px] relative flex flex-col mx-4 items-end"
     >
-      <div class=" w-full flex justify-end bg-[#F8F8F8]"  >
-       <p class="status w-min "  [ngStyle]="{
-        'background-color': status.backgroundColor,
-        color: status.textColor
-      }"> {{ status.name }}</p>
+      <div class="flex justify-between w-full py-2">
+        <i
+          class="pi pi-arrows-h text-secondary"
+          dndHandle
+          id="{{ item.columnIndex }}"
+        ></i>
+        <div class="flex gap-2">
+        <p
+          class="status"
+          [ngStyle]="{
+            'background-color': item.backgroundColor,
+            color: item.textColor
+          }"
+        >
+          {{ item.name }}
+        </p>
+        <i
+          class="pi pi-ellipsis-v text-secondary"
+          (click)="openSelect(item.id, $event)"
+        ></i>
+        <div *ngIf="selectOpen && statusId==item.id" class="absolute z-10 top-8 ">
+          <app-select-custom [listOptions]="optionsSelect" [listIcons]="IconsOptionsSelect" [projeto]="project" ></app-select-custom>
+        </div>
+       
       </div>
-      <div>ADICIONAR TAREFA</div>
+     
+      </div>
+   
+
+      <button class="bg-primaryWhite w-full text-lg text-fontGray border-b p-1">
+        <i class="pi pi-plus text-secondary p-1" style="font-size: 1rem" ></i>
+        adicionar tarefa
+      </button>
+
+      <!-- to na coluna que tem as tasks -->
       <div
-        *ngFor="let item of filtrarLista(status)"
-        cdkDrag
-        [cdkDragData]="item"
-        class="p-8"
+        class="flex flex-col w-full h-6"
+        (dndDrop)="onDropTask($event, taskList, item)"
+        dndDropzone
       >
-        <app-tarefa-card-padrao [tarefaAtual]="item"></app-tarefa-card-padrao>
+        <!-- sou algo, não sei o que e nem praque -->
+
+        <div
+          *ngIf="!dropStatus"
+          class="dndPlaceholder w-full h-6"
+          dndPlaceholderRef
+        ></div>
+
+        <!-- Renderizamo as parceira -->
+        <div
+          *ngFor="let task of taskList; let i = index"
+          [dndDraggable]="task"
+          (dndEnd)="onDragEnd($event)"
+          (dndMoved)="onDraggedTask(task, taskList, 'move')"
+          (dndStart)="onDragStartTask($event)"
+          class="flex flex-col"
+          dndEffectAllowed="move"
+        >
+          <div
+            *ngIf="task.currentStatus?.id == item.id"
+            class="bg-primaryWhite rounded-md p-5"
+          >
+            <app-tarefa-card-padrao
+              [tarefaAtual]="task"
+              dndHandle
+              id="2"
+            ></app-tarefa-card-padrao>
+          </div>
+        </div>
       </div>
     </div>
+  </ng-template>
+  <div class="flex flex-row w-[1600px] h-[720px]  oba">
+    <ng-container *ngIf="dropStatus; else pwp">
+      <div class="p-5" (dndDrop)="onDrop($event, statusList)" dndDropzone>
+        <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
+      </div>
+    </ng-container>
+    <ng-template #pwp class="  ">
+      <div class="flex p-5">
+        <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
+      </div>
+    </ng-template>
   </div>
+</div>

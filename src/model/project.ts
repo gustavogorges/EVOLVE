@@ -5,7 +5,7 @@ import { Task } from "./task";
 import { User } from "./user";
 
 export class Project{
-    id: number = 0;
+    id!: number;
     name: string = "";
     finalDate: string = "";
     description: string ="";

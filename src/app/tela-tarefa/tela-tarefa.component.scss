@@ -11,7 +11,7 @@
 }
 
 .main{
-  @apply w-3/4 flex flex-col gap-3
+  @apply w-4/5 flex flex-col gap-3
 }
 .header{
   @apply w-full flex flex-row justify-between py-6 items-center 
@@ -34,7 +34,12 @@
     @apply text-2xl
 }
 .tasks-grid-padrao{
-  @apply grid grid-cols-4 gap-6 w-full justify-center
+  width: 100%;
+  display: grid;
+  justify-self: center;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
+  grid-gap: 20px; 
+
 }
 .box-list{
   @apply flex flex-col h-full w-full gap-6  items-center justify-center

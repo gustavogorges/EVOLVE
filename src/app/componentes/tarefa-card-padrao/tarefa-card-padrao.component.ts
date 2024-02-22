@@ -1,4 +1,5 @@
   import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input, Output, EventEmitter } from '@angular/core';
+import { Project } from 'src/model/project';
   import { Task } from 'src/model/task';
   import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -16,6 +17,7 @@
     nomeGrande ="";
     corStatus=""; 
     @Input() id: string = "";
+    @Input() project !: Project
     @Output() newItem = new EventEmitter<boolean>();
 
   data : Date = new Date
@@ -39,7 +41,9 @@
     
     }
 
-    favoritar(){
+    favoritar(event: MouseEvent){
+      event.stopPropagation();
+
       if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
         this.caminhoEstrela = "assets/estrelaMarcada.svg"
         this.tarefaAtual.favorited=true;
@@ -48,11 +52,12 @@
         this.tarefaAtual.favorited=false;
 
       }
-      console.log(this.tarefaAtual)
-      this.service.putTarefa(this.tarefaAtual)
+      this.tarefaAtual.project = {
+        id : this.project.id
+      }
+       this.service.putTarefa(this.tarefaAtual)
       this.newItem.emit(true);
 
-      this.service.getOne("task",this.tarefaAtual.id)
 
     }
 

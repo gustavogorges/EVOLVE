@@ -75,6 +75,7 @@ import {MessageModule} from 'primeng/message';
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+import { DndModule } from 'ngx-drag-drop';
 
 
 
@@ -155,7 +156,9 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
     BrowserAnimationsModule,
     CdTimerModule,
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    DndModule
+
   ],
   
   providers: [],

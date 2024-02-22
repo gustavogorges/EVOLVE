@@ -1,5 +1,5 @@
 export class Subtask{
-    id: number = 0;
+    id!: number ;
     name : string = "";
     concluded : boolean = false;
     modalEdit : boolean = false;

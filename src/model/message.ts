@@ -3,7 +3,7 @@ import { MessageStatus } from "./messageStatus";
 import { User } from "./user";
 
 export class Message {
-    id:number = 0;
+    id!:number;
     content:string = "";
     sender:User = new User;
     date:string = "";

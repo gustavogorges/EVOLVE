@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
 import { Project } from 'src/model/project';
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -38,18 +38,38 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
   projeto !:Project
+
   option  : string ="Padrão"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
 
+
+
+
+  async atualizar(favoritado : boolean): Promise<void> {
+    if(favoritado){
+      console.log(this.listaTarefas)
+      this.projeto=await this.service.getOne("project",102)
+      this.listaTarefas=this.projeto.tasks
+    }
+    }
+
+
+
+  
   async ngOnInit(): Promise<void> {
-    this.listaNova = await this.service.getAllSomething("task")
-    this.listaTarefas =await this.service.getAllSomething("task")
-    this.projeto = await this.service.getOne("project",2)
-    console.log(this.projeto.statusList)
+
+    this.projeto = await this.service.getOne("project",102)
+    this.listaTarefas = this.projeto.tasks
+    this.listaNova=this.projeto.tasks
+    console.log(this.listaTarefas)
+    console.log(this.projeto)
   }
 
+  trackById(index: number, item: any): any {
+  return item.id;
+}
   changeVisualizacao(e:any){
     this.ordenacaoVisible=false
     this.filtroVisible=false
@@ -74,12 +94,16 @@ if( this.visualizacaoVisible==true){
     
   }
   
-  optionA(option : any){
+  async optionA(option : any){
   
     this.visualizacaoVisible=false;
     
     this.option=option
     console.log(option)
+   
+      this.projeto = await this.service.getOne("project",this.projeto.id)
+      this.listaTarefas=this.projeto.tasks
+  
   }
 
 

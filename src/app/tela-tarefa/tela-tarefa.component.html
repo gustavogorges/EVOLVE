@@ -29,8 +29,10 @@
           </button>
           <div *ngIf="visualizacaoVisible" class="selections absolute z-10">
             <app-select-custom
+              [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
+              
               (newItem)="optionA($event)"
             ></app-select-custom>
           </div>
@@ -43,6 +45,7 @@
           </button>
           <div *ngIf="ordenacaoVisible" class="selections absolute z-10">
             <app-select-custom
+            [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionB($event)"
@@ -56,6 +59,8 @@
           </button>
           <div *ngIf="filtroVisible" class="selections absolute z-10">
             <app-select-custom
+            [projeto]="projeto"
+
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionC($event)"
@@ -80,12 +85,13 @@
 
     <div *ngIf="option == 'Padrão'">
       <div class="tasks-grid-padrao">
-        <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
+        <div *ngFor="let tarefa of listaTarefas; index as indice; trackBy: trackById" class="card">
           <app-tarefa-card-padrao
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (click)="openTask(tarefa)"
             (newItem)="ngOnInit()"
+            [project]="projeto"
           ></app-tarefa-card-padrao>
         </div>
       </div>
@@ -93,14 +99,15 @@
     <div *ngIf="option == 'Lista'">
       <div class="box-list">
         <div
-          *ngFor="let tarefa of listaTarefas; index as indice"
+          *ngFor="let tarefa of listaTarefas; index as indice; trackBy: trackById"
           class="cardLista"
         >
           <app-tarefa-card-lista
             class="h-full w-full"
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
-            (newItem)="ngOnInit()"
+            (newItem)="atualizar($event)"
+            [project]="projeto"
           ></app-tarefa-card-lista>
         </div>
       </div>
@@ -109,8 +116,8 @@
       
       </div>
       <div *ngIf="option == 'Kanban'" >
-        <div class="w-full" cdkDropListGroup >
-            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.statusList"
+        <div class="w-full"  >
+            <app-tarefa-kanban [taskList]="listaTarefas"  [project]="projeto"
             ></app-tarefa-kanban>
         </div>
   </div>
