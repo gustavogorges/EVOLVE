@@ -28,8 +28,10 @@
           </button>
           <div *ngIf="visualizacaoVisible" class="selections absolute z-10">
             <app-select-custom
+              [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
+              
               (newItem)="optionA($event)"
             ></app-select-custom>
           </div>
@@ -42,6 +44,7 @@
           </button>
           <div *ngIf="ordenacaoVisible" class="selections absolute z-10">
             <app-select-custom
+            [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionB($event)"
@@ -55,6 +58,8 @@
           </button>
           <div *ngIf="filtroVisible" class="selections absolute z-10">
             <app-select-custom
+            [projeto]="projeto"
+
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionC($event)"

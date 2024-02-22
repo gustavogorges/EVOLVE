@@ -33,7 +33,7 @@
           (click)="openSelect(item.id, $event)"
         ></i>
         <div *ngIf="selectOpen && statusId==item.id" class="absolute z-10 top-8 ">
-          <app-select-custom [listOptions]="optionsSelect" [listIcons]="IconsOptionsSelect" ></app-select-custom>
+          <app-select-custom [listOptions]="optionsSelect" [listIcons]="IconsOptionsSelect" [projeto]="project" ></app-select-custom>
         </div>
        
       </div>
