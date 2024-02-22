@@ -152,7 +152,7 @@ export class SelectPropriedadeComponent implements OnInit {
         this.newPropertie.type = PropertyType.DOUBLE;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
-      }  else if(this.optionType == 'text') {
+      }  else if(this.optionType == 'texto') {
         this.newPropertie.type = PropertyType.TEXT;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);

@@ -85,10 +85,6 @@ export class ModalTarefaComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  editPriority() {
-    this.booleanSelectPrioridade = true;
-  }
-
   finishEditPriority() {
     this.booleanSelectPrioridade = false;
   }
@@ -185,6 +181,16 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanStatus = !this.booleanStatus;
     } else {
       this.booleanStatus = !this.booleanStatus;
+      this.booleanEdit = !this.booleanEdit;
+    }
+  }
+
+  editPriority() {
+    if (this.booleanEdit) {
+      this.booleanEdit = true;
+      this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
+    } else {
+      this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
       this.booleanEdit = !this.booleanEdit;
     }
   }

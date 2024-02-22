@@ -150,7 +150,7 @@
               'background-color': tarefa.currentStatus.backgroundColor
             }"
           >
-            {{ tarefa.currentStatus.name }}
+            {{ tarefa.currentStatus.name.toLowerCase() }}
           </div>
         </div>
         <!--[projeto]="tarefa.projeto"-->
@@ -167,11 +167,10 @@
           <i class="icon-propertie pi pi-calendar"></i>
           <p class="name-propertie">agendamento:</p>
         </div>
-        <!-- ADICIONAR AGENDAMENTO DIV FUTURA
               <div class="date-end">
-              <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.dataFinal}}</p>
-              <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
-          </div>-->
+              <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.finalDate}}</p>
+              <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.finalDate">
+          </div>
       </div>
       <div class="propertie">
         <div class="name-icon">
@@ -186,7 +185,7 @@
               'background-color': tarefa.priority.backgroundColor
             }"
           >
-            {{tarefa.priority.name}}
+            {{tarefa.priority.name.toLowerCase()}}
           </div>
         </div>
         <div>
