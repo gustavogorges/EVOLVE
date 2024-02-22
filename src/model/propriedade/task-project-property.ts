@@ -6,7 +6,7 @@ import { User } from "../user";
 
 
 export class TaskProjectProperty {
-    id: number = 0;
+    id!: number ;
     property: Property = new Property;
     task: Task = new Task;
     project: Project = new Project;

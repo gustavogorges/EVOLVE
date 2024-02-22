@@ -1,3 +1,3 @@
 export class PropertiePermissions{
-    id: number = 0;
+    id!: number ;
 }

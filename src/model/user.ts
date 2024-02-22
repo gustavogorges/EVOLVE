@@ -4,7 +4,7 @@ import { Task } from "./task";
 
 export class User {
     [x: string]: any;
-    id: number = 0;
+    id!: number;
     email: string = "";
     password: string = "";
     name : string = "";

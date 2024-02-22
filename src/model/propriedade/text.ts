@@ -1,5 +1,5 @@
 export class Opcao {
-  id: number = 0;
+  id!: number;
   value: string = '';
   backgroundColor: string = '';
 }

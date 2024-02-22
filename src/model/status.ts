@@ -1,5 +1,5 @@
 export class Status {
-    id: number = 0;
+    id!: number;
     name : string = "";
     backgroundColor: string = "";
     textColor: string = "";

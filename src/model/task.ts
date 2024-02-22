@@ -7,7 +7,7 @@ import { Subtask } from "./subtask";
 import { User } from "./user";
 
 export class Task{
-    id: number = 0;
+    id!: number ;
     name : string = "";
     favorited: boolean = false;
     finalDate: string = "";
