@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Priority } from 'src/model/priority';
+import { PropertyType } from 'src/model/propriedade/propertyType';
 import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 
 @Component({
@@ -27,9 +28,38 @@ export class PropriedadeTarefaComponent implements OnInit {
     }  else if(this.property.type == 'ASSOCIATES') {
       this.property.icon = 'pi pi-users'
     }
+
+    console.log(this.property.value);
+    
   }
+
+  booleanEditProperty : boolean = false;
 
   @Input()
   property : TaskProjectProperty = new TaskProjectProperty();
+
+  @Output()
+  eventEmitter = new EventEmitter();
+
+  propertyValue(property : TaskProjectProperty) {
+    if (property.type != PropertyType.ASSOCIATES) {
+      if(this.property.value.length == 0 ) {
+        this.booleanEditProperty = false;
+      }
+      if(property.editable == false) {
+        this.booleanEditProperty = false;
+      }
+      else {
+        this.booleanEditProperty = true;
+      }
+    }
+    this.booleanEditProperty = true;
+  }
+
+  addPropertyValue(property : TaskProjectProperty): void {
+    this.propertyValue(property)
+    property.editable = true;
+    this.eventEmitter.emit();
+  }
 
 }

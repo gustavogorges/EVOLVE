@@ -12,7 +12,8 @@ export class Task{
     name : string = "";
     favorited: boolean = false;
     finalDate: string = "";
-    creationDate: string ="";
+    creationDate: string = "";
+    schedulingData: string = ""; 
     description:string = "";
     currentStatus: Status = new Status;
   

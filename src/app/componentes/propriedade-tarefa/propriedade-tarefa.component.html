@@ -3,7 +3,22 @@
         <i class="icon-propertie {{property.icon}}"></i>
         <p class="name-propertie">{{property.property.name}}:</p>
     </div>
-    <div class="propertie-value">
-        
+    <div *ngIf="booleanEditProperty" class="propertie-value">
+        {{property.value}}
     </div>
+    <div 
+    *ngIf="!booleanEditProperty"
+    class="propertie-value-no"
+    (click)="addPropertyValue(property)"
+    >
+        sem valor
+    </div>
+    <p-inputNumber 
+    *ngIf="property.editable == true"
+    class="inputPropertyValue"
+    [ngStyle]="{'width': '800px'}"
+    mode="currency" 
+    currency="USD" 
+    locale="en-US"> 
+    </p-inputNumber>
 </div>

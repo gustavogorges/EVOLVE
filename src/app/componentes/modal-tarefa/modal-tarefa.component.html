@@ -115,14 +115,14 @@
         </div>
         <div class="date-end">
           <p
-            *ngIf="!booleanCalendario"
-            (click)="editData()"
+            *ngIf="!booleanCalendarioFinalDate"
+            (click)="editDataFinalDate()"
             class="date-end-text cursor-pointer"
           >
             {{ tarefa.finalDate }}
           </p>
           <input
-            *ngIf="booleanCalendario"
+            *ngIf="booleanCalendarioFinalDate"
             type="date"
             [(ngModel)]="tarefa.finalDate"
           />
@@ -168,8 +168,8 @@
           <p class="name-propertie">agendamento:</p>
         </div>
               <div class="date-end">
-              <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.finalDate}}</p>
-              <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.finalDate">
+              <p *ngIf="!booleanCalendariosScheduling" (click)="editDataScheduling()" class="date-end-text cursor-pointer">{{tarefa.schedulingData}}</p>
+              <input *ngIf="booleanCalendariosScheduling" type="date" [(ngModel)]="tarefa.schedulingData">
           </div>
       </div>
       <div class="propertie">
@@ -206,6 +206,7 @@
         <app-propriedade-tarefa 
         class="propertie"
         [property]="property"
+        (eventEmitter)="editNoValue()"
         ></app-propriedade-tarefa>
       </div>
     </div>

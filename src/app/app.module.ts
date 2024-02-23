@@ -31,6 +31,7 @@ import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.com
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
+import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
@@ -155,7 +156,8 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
     BrowserAnimationsModule,
     CdTimerModule,
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    InputNumberModule
   ],
   
   providers: [],

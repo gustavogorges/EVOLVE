@@ -11,9 +11,11 @@ export class TaskProjectProperty {
     task: Task = new Task;
     project: Project = new Project;
 
-    value: number | string | Date | Array<User> | Array<string> = []
+    value : Array<Text> = [];
 
     type: PropertyType = PropertyType.TEXT;
+
+    editable:boolean = false;
 
     icon:string = '';
 }

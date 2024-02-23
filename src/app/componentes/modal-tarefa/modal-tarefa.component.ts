@@ -21,7 +21,8 @@ export class ModalTarefaComponent implements OnInit {
   editBoolean: boolean = false;
   booleanEdit: boolean = false;
   booleanStatus: boolean = false;
-  booleanCalendario: boolean = false;
+  booleanCalendarioFinalDate: boolean = false;
+  booleanCalendariosScheduling : boolean = false;
   booleanDescription: boolean = false;
   booleanFoco: boolean = false;
   booleanSelectPrioridade : boolean = false;
@@ -118,7 +119,7 @@ export class ModalTarefaComponent implements OnInit {
     // this.verificaTamanhoString();
     if (this.tarefa.id == 0) {      
       this.booleanEdit = true;
-      this.booleanCalendario = true;
+      this.booleanCalendarioFinalDate = true;
       this.tarefa = this.tarefaNova;
       this.tarefa.currentStatus.name = "sem status";
       this.tarefa.priority.name = "NENHUMA"
@@ -128,6 +129,10 @@ export class ModalTarefaComponent implements OnInit {
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
     }
+  }
+
+  editNoValue() : void {
+    this.edit();
   }
 
 
@@ -172,7 +177,8 @@ export class ModalTarefaComponent implements OnInit {
 
   edit() {
     this.booleanEdit = !this.booleanEdit;
-    this.booleanCalendario = !this.booleanCalendario;
+    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling
   }
 
   editStatus() {
@@ -195,8 +201,13 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
-  editData() {
-    this.booleanCalendario = !this.booleanCalendario;
+  editDataFinalDate() {
+    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
+    this.booleanEdit = !this.booleanEdit;
+  }
+
+  editDataScheduling() {
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
     this.booleanEdit = !this.booleanEdit;
   }
 
@@ -206,7 +217,7 @@ export class ModalTarefaComponent implements OnInit {
 
   booleanEditFalse() {
     this.booleanEdit = false;
-    this.booleanCalendario = false;
+    this.booleanCalendarioFinalDate = false;
     this.booleanStatus = false;
     this.tarefa.currentStatus = this.statusAntigo;
     this.tarefa.description = this.descricaoAntiga;
@@ -215,19 +226,19 @@ export class ModalTarefaComponent implements OnInit {
 
   async salvarTarefa() {
     if (this.tarefa.id != 0) {
-      console.log("TA ENTRANDO ERRADO")
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
-      console.log("TA ENTRANDO CERTO")
-      console.log(this.tarefa);
       
       this.tarefa.project.id = 2;
       this.tarefa.creator.id = 1;
       this.service.postTarefa(this.tarefa);
     }
 
-    if (this.booleanCalendario == true) {
-      this.booleanCalendario = false;
+    if (this.booleanCalendarioFinalDate == true) {
+      this.booleanCalendarioFinalDate = false;
+    }
+    if(this.booleanCalendariosScheduling == true) {
+      this.booleanCalendariosScheduling = false;
     }
     if (this.booleanStatus == true) {
       this.booleanStatus = false;
@@ -236,9 +247,7 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   startFocus() {
-    console.log('entrou no teste');
     this.booleanFoco = true;
-    console.log(this.booleanFoco);
     this.startTimer();
   }
 
@@ -247,9 +256,7 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   addPropertie() {
-    console.log("entrou no addPropertie")
     this.booleanAddPropriedade = true;
-    console.log(this.booleanAddPropriedade)
   }
 
   closeAddPropertie() {

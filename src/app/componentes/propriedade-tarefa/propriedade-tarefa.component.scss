@@ -6,6 +6,10 @@
     @apply h-full flex items-center
 }
 
+.propertie-value-no {
+    @apply h-full flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
+}
+
 .name-icon {
     @apply flex items-center
 }
@@ -22,3 +26,6 @@
     @apply h-full flex items-center
 }
 
+.inputPropertyValue {
+    @apply w-[30%] h-full outline-none
+}
