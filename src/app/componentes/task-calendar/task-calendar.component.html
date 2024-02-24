@@ -1,0 +1,44 @@
+<div class="full-calendar">
+
+
+<div class="calendar-title">
+    <div>
+        <button (click)="alterarMes(-1)">ant.</button>
+    </div>
+    <div class="calendario-titulo-mes-ano">
+        {{dataAtual | date : 'MMMM yyyy'}}
+    </div>
+    <div>
+        <button (click)="alterarMes(+1)">prox.</button>
+    </div>
+</div>
+<div class="days-row">
+    <ng-container *ngFor="let dia of diasCalendario; let i = index"  >
+        <div *ngIf="i < 7" class="w-[164px] flex justify-center" >
+            <strong>{{ dia | date: 'EEEE' }}</strong>
+        </div>
+    </ng-container>
+</div>
+
+<div class="calendario-dias">
+    <!-- Aqui renderizamos o nome do dia da semana -->
+   
+    
+    <!-- 
+         Dias que aparecem no calendário.
+
+         Aqui vale comentar que podemos adicionar
+         classes CSS de forma condicional da
+         seguinte forma:
+           [class.minhaclasse]="condição"
+    -->
+    <div *ngFor="let dia of diasCalendario; let i = index"
+        class="calendario-dia"
+        [class.calendario-quebrar-linha]="i % 7 === 0"
+        [class.calendario-dia-nao-faz-parte-mes-atual]="dataAtual.getMonth() !== dia.getMonth()">
+        <p class="text-sm">
+            {{dia | date : 'dd'}}
+        </p>
+    </div>
+</div> 
+</div>

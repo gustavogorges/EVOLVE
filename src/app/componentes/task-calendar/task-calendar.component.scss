@@ -1,0 +1,25 @@
+.calendario-dias {
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    @apply w-full h-full gap-4 
+}
+
+.calendario-dias div {
+    @apply w-[164px] h-[140px]  rounded-xl flex justify-end p-4 items-end;
+    border: 1px solid #ccc;
+    font-size: 16px;
+   
+}
+.days-row{
+    @apply flex flex-row w-full justify-between
+}
+.calendar-title{
+    @apply flex 
+
+}
+.full-calendar{
+    @apply w-full h-full
+
+}

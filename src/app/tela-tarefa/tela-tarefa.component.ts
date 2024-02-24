@@ -39,7 +39,7 @@ export class TelaTarefaComponent implements OnInit {
   filtroVisible:boolean = false
   projeto !:Project
 
-  option  : string ="Padrão"
+  option  : string ="Calendario"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
