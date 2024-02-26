@@ -13,12 +13,18 @@
     >
         sem valor
     </div>
-    <p-inputNumber 
+    <input 
     *ngIf="property.editable == true"
     class="inputPropertyValue"
-    [ngStyle]="{'width': '800px'}"
-    mode="currency" 
-    currency="USD" 
-    locale="en-US"> 
-    </p-inputNumber>
+    type="number"
+    >
+    <div class="confirmation-buttons">
+        <div class="cancel-btn btn">
+            <i class="pi pi-times"></i>
+        </div>
+        <div class="confirm-btn btn">
+            <i class="pi pi-check"></i>
+        </div>
+        
+    </div>
 </div>

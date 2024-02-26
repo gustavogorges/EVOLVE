@@ -49,7 +49,7 @@ export class SelectStatusComponent implements OnInit {
 
   async novoStatus(): Promise<void> {
     this.status.textColor = "#000000";
-    this.projeto.id=2;
+    this.projeto.id=2352;
 
     console.log(this.status);
 

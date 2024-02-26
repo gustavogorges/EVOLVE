@@ -29,3 +29,20 @@
 .inputPropertyValue {
     @apply w-[30%] h-full outline-none
 }
+
+.confirmation-buttons {
+    @apply flex items-center h-[80%] w-[20%] gap-2
+}
+
+.btn {
+    @apply h-full w-[60%] rounded text-white flex items-center justify-center cursor-pointer
+}
+
+.confirm-btn {
+    @apply bg-secondary
+}
+
+.cancel-btn {
+    @apply bg-primary
+}
+
