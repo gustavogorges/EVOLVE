@@ -20,6 +20,7 @@
     </ng-container>
 </div>
 
+   
 <div class="calendario-dias">
     <!-- Aqui renderizamos o nome do dia da semana -->
    
@@ -33,12 +34,19 @@
            [class.minhaclasse]="condição"
     -->
     <div *ngFor="let dia of diasCalendario; let i = index"
-        class="calendario-dia"
         [class.calendario-quebrar-linha]="i % 7 === 0"
         [class.calendario-dia-nao-faz-parte-mes-atual]="dataAtual.getMonth() !== dia.getMonth()">
+        <div *ngFor="let task of taskList">
+            <div *ngIf="dia.getTime()==task.finalDate.getTime()">{{task.name}}</div>
+
+        </div>      
         <p class="text-sm">
             {{dia | date : 'dd'}}
         </p>
+
+    
+           
     </div>
+ 
 </div> 
 </div>

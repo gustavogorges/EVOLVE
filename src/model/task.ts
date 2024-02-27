@@ -10,7 +10,7 @@ export class Task{
     id!: number ;
     name : string = "";
     favorited: boolean = false;
-    finalDate: string = "";
+    finalDate!: Date ;
     creationDate: string ="";
     description:string = "";
     currentStatus: Status = new Status;
