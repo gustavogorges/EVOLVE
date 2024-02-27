@@ -1,5 +1,4 @@
-export class Opcao {
-  id: number = 0;
-  value: string = '';
-  backgroundColor: string = '';
+export class Text {
+    id !: number;
+    value : string = "";
 }

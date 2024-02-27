@@ -3,7 +3,7 @@
         <i class="icon-propertie {{property.icon}}"></i>
         <p class="name-propertie">{{property.property.name}}:</p>
     </div>
-    <div *ngIf="booleanEditProperty" class="propertie-value">
+    <div *ngIf="checkEditable(property)" class="propertie-value">
         {{property.value}}
     </div>
     <div 
@@ -13,18 +13,32 @@
     >
         sem valor
     </div>
-    <input 
-    *ngIf="property.editable == true"
-    class="inputPropertyValue"
-    type="number"
-    >
-    <div class="confirmation-buttons">
-        <div class="cancel-btn btn">
-            <i class="pi pi-times"></i>
+    <div
+    *ngIf="property.editable == true" 
+    class=" h-full w-full flex items-center justify-start gap-3">
+        <input 
+        *ngIf="property.type == INTEGER"
+        class="inputPropertyValue"
+        type="number"
+        >
+        <input 
+        *ngIf="property.type == DOUBLE"
+        class="inputPropertyValue"
+        type="number"
+        >
+        <input 
+        *ngIf="property.type == TEXT"
+        class="inputPropertyValue"
+        type="text"
+        >
+        <div
+        *ngIf="property.editable"
+        class="confirmation-buttons"
+        (click)="stringfyProperty(property)"
+        >
+            <div class="btn confirm-btn">
+                <i class="pi pi-check"></i>
+            </div>
         </div>
-        <div class="confirm-btn btn">
-            <i class="pi pi-check"></i>
-        </div>
-        
     </div>
 </div>

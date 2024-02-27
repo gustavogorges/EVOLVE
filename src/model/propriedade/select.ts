@@ -1,4 +1,4 @@
-import { Opcao } from "./text";
+import { Opcao } from "./opcao";
 
 export class Select{
     id:number =0

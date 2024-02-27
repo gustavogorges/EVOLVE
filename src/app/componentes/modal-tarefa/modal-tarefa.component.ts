@@ -132,7 +132,9 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   editNoValue() : void {
-    this.edit();
+    if(this.booleanEdit == false) {
+      this.edit();
+    }
   }
 
 
@@ -226,11 +228,15 @@ export class ModalTarefaComponent implements OnInit {
 
   async salvarTarefa() {
     if (this.tarefa.id != 0) {
+      this.tarefa.properties.forEach(element => {
+        console.log(element.value);
+      });
+      
       this.service.putTarefa(this.tarefa);
     } else if (this.tarefa.id == 0) {
       
-      this.tarefa.project.id = 2352;
-      this.tarefa.creator.id = 52;
+      this.tarefa.project.id = 2;
+      this.tarefa.creator.id = 1;
       this.service.postTarefa(this.tarefa);
     }
 

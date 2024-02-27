@@ -30,8 +30,6 @@ export class SelectCustomComponent implements OnInit {
     console.log(this.listOptions)
     console.log(this.listIcons)
     this.projeto = await this.service.getOne("project",2)
-
-    
   }
 
   saveOption(option:string) {

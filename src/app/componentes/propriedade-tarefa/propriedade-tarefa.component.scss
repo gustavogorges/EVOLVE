@@ -27,9 +27,12 @@
 }
 
 .inputPropertyValue {
-    @apply w-[30%] h-full outline-none
+    @apply w-[50%] h-full outline-none
 }
 
+.inputPropertyValueTextArea {
+    @apply w-full p-0
+}
 .confirmation-buttons {
     @apply flex items-center h-[80%] w-[20%] gap-2
 }

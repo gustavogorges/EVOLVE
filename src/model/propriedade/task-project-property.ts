@@ -3,6 +3,7 @@ import { Property } from "./property";
 import { Task } from "../task";
 import { PropertyType } from "./propertyType";
 import { User } from "../user";
+import { Text } from "../propriedade/text";
 
 
 export class TaskProjectProperty {
@@ -11,7 +12,7 @@ export class TaskProjectProperty {
     task: Task = new Task;
     project: Project = new Project;
 
-    value : Array<Text> = [];
+    value : Array<Text> = new Array;
 
     type: PropertyType = PropertyType.TEXT;
 
