@@ -1,30 +1,26 @@
 <div class="full-calendar">
-
-
-<div class="calendar-title">
+  <div class="calendar-title">
     <div>
-        <button (click)="alterarMes(-1)">ant.</button>
+      <button (click)="alterarMes(-1)">ant.</button>
     </div>
     <div class="calendario-titulo-mes-ano">
-        {{dataAtual | date : 'MMMM yyyy'}}
+      {{ dataAtual | date : "MMMM yyyy" }}
     </div>
     <div>
-        <button (click)="alterarMes(+1)">prox.</button>
+      <button (click)="alterarMes(+1)">prox.</button>
     </div>
-</div>
-<div class="days-row">
-    <ng-container *ngFor="let dia of diasCalendario; let i = index"  >
-        <div *ngIf="i < 7" class="w-[164px] flex justify-center" >
-            <strong>{{ dia | date: 'EEEE' }}</strong>
-        </div>
+  </div>
+  <div class="days-row">
+    <ng-container *ngFor="let dia of diasCalendario; let i = index">
+      <div *ngIf="i < 7" class="w-[164px] flex justify-center">
+        <strong>{{ dia | date : "EEEE" }}</strong>
+      </div>
     </ng-container>
-</div>
+  </div>
 
-   
-<div class="calendario-dias">
+  <div class="calendario-dias">
     <!-- Aqui renderizamos o nome do dia da semana -->
-   
-    
+
     <!-- 
          Dias que aparecem no calendário.
 
@@ -33,20 +29,28 @@
          seguinte forma:
            [class.minhaclasse]="condição"
     -->
-    <div *ngFor="let dia of diasCalendario; let i = index"
-        [class.calendario-quebrar-linha]="i % 7 === 0"
-        [class.calendario-dia-nao-faz-parte-mes-atual]="dataAtual.getMonth() !== dia.getMonth()">
-        <div *ngFor="let task of taskList">
-            <div *ngIf="dia.getTime()==task.finalDate.getTime()">{{task.name}}</div>
+    <div
+      *ngFor="let dia of diasCalendario; let i = index"
+      [class.calendario-quebrar-linha]="i % 7 === 0"
+      [class.calendario-dia-nao-faz-parte-mes-atual]="
+        dataAtual.getMonth() !== dia.getMonth()
+      "
+    >
+      <div class="flex flex-col w-full h-full overflow-hidden items-start gap-1">
+        <div *ngFor="let task of taskList" class="w-full">
+          <div *ngIf="dia.getTime() == task.finalDate.getTime()" class="0  rounded-md text-sm w-full" 
+          [ngStyle]="{
+            'background-color': task.currentStatus.backgroundColor,
+            color: task.currentStatus.textColor
+          }">
+            {{ task.name }}
+          </div>
+        </div>
+      </div>
 
-        </div>      
-        <p class="text-sm">
-            {{dia | date : 'dd'}}
-        </p>
-
-    
-           
+      <p class="text-sm">
+        {{ dia | date : "dd" }}
+      </p>
     </div>
- 
-</div> 
+  </div>
 </div>
