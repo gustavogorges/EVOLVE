@@ -205,12 +205,16 @@ export class ModalTarefaComponent implements OnInit {
 
   editDataFinalDate() {
     this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
-    this.booleanEdit = !this.booleanEdit;
+    if(!this.booleanEdit) {
+      this.booleanEdit = !this.booleanEdit;
+    }
   }
 
   editDataScheduling() {
     this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
-    this.booleanEdit = !this.booleanEdit;
+    if(!this.booleanEdit) {
+      this.booleanEdit = !this.booleanEdit;
+    }
   }
 
   editDescription() {
@@ -229,7 +233,7 @@ export class ModalTarefaComponent implements OnInit {
   async salvarTarefa() {
     if (this.tarefa.id != 0) {
       this.tarefa.properties.forEach(element => {
-        console.log(element.value);
+        console.log(element.values);
       });
       
       this.service.putTarefa(this.tarefa);

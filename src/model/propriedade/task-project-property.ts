@@ -12,7 +12,7 @@ export class TaskProjectProperty {
     task: Task = new Task;
     project: Project = new Project;
 
-    value : Array<Text> = new Array;
+    values : Array<Text> =  [];
 
     type: PropertyType = PropertyType.TEXT;
 

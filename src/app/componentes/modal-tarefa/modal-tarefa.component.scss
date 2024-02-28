@@ -103,7 +103,7 @@
 }
 
 .date-end {
-    @apply flex justify-center ml-2
+    @apply flex justify-center ml-2 hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .name-icon {

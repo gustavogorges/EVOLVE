@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { Priority } from 'src/model/priority';
 import { PropertyType } from 'src/model/propriedade/propertyType';
 import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 import { Text } from 'src/model/propriedade/text';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -11,9 +13,14 @@ import { Text } from 'src/model/propriedade/text';
 })
 export class PropriedadeTarefaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : BackendEVOLVEService) { }
 
   ngOnInit(): void {
+    if(this.property.editable == undefined) {
+      this.property.editable = false;
+    }
+    
+
     if(this.property.type == 'INTEGER') {
       this.property.icon = 'pi pi-hashtag'
     } else if(this.property.type == 'TEXT') {
@@ -30,7 +37,10 @@ export class PropriedadeTarefaComponent implements OnInit {
       this.property.icon = 'pi pi-users'
     }
 
-    console.log(this.property.type);
+    if(this.property.values.length != 0) {
+      
+      this.booleanEditProperty = true;
+    }
   }
 
   booleanEditProperty : boolean = false;
@@ -38,34 +48,44 @@ export class PropriedadeTarefaComponent implements OnInit {
   DOUBLE : string = "DOUBLE";
   TEXT : string = "TEXT";
 
+  newPropertyObject:Text = new Text;
+  newPropertyValue:string = '';
+
   @Input()
   property : TaskProjectProperty = new TaskProjectProperty();
 
   @Output()
   eventEmitter = new EventEmitter();
 
-  propertyValue(property : TaskProjectProperty) {
-    if (property.type != PropertyType.ASSOCIATES) {
-      if(this.property.value.length == 0 ) {
-        this.booleanEditProperty = false;
-      }
-      if(property.editable == false) {
-        this.booleanEditProperty = false;
-      }
-    } 
-    this.booleanEditProperty = true;
-  }
+  //propertyValue(property : TaskProjectProperty) {
+  //  console.log(this.property.values.length);
+    
+  //    if(this.property.values.length > 0 ) {
+  //      this.booleanEditProperty = false;
+  //    } else {
+  //      this.booleanEditProperty = true;
+  //    }
+  //    if(property.editable == false) {
+  //      this.booleanEditProperty = false;
+  //    } else {
+  //      this.booleanEditProperty = true;
+  //    }
+    
+  //}
 
   addPropertyValue(property : TaskProjectProperty): void {
-    console.log(property);
-    this.propertyValue(property)
+    //console.log(property);
+    //this.propertyValue(property)
+    this.booleanEditProperty = true;
     property.editable = true;
+    console.log(this.property.type);
+    
     this.eventEmitter.emit();
   }
 
   checkEditable(property:TaskProjectProperty) : boolean {
     if(property.editable == false) {
-      if(this.booleanEditProperty) {
+      if(this.booleanEditProperty == true) {
         return true;
       }
     }
@@ -75,31 +95,23 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   propertyValueTest : Text = new Text;
 
-  stringfyProperty(property:TaskProjectProperty) : void {
-    // Lógica para adicionar um valor a propriedade, lebrando que os valores fazem parte de uma array 
-    //property.value.
-
-    //property.value.push()
-    console.log(typeof(property.value));
-    property.value.values.toString();
-    console.log(typeof(property.value.values));
+  saveProperty(property:TaskProjectProperty) : void {
+    property.values = new Array;
+   
+      this.newPropertyObject.value = this.newPropertyValue;
+      
+      property.values.push(this.newPropertyObject)
+  
+      this.service.putPropertyValue(property.id,property)
+      property.editable = false;
+      this.booleanEditProperty = true;
   }
 
 
-  //checkTypeOfProperty(property:TaskProjectProperty) : boolean {
-  //  if(property.type == PropertyType.INTEGER) {
-  //    console.log("ENTROU NO NUMBER")
-  //    if(property.editable == true) {
-  //      return true;
-  //    }
-  //  }
-  //  if(property.type == PropertyType.TEXT) {
-  //    console.log("ENTROU NO TEXTO")
-  //    if(property.editable == true) {
-  //      return true;
-  //    }
-  //  }
-  //  return false;
-  //}
+  editPropertyValue(property:TaskProjectProperty):void {
+    this.eventEmitter.emit();
+    property.editable = true;
+  }
+
 
 }
