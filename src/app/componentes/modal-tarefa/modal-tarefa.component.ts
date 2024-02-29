@@ -32,6 +32,8 @@ export class ModalTarefaComponent implements OnInit {
   nomeAntigo: string = '';
   booleanPlayPause : boolean = false; 
 
+  propertyStack : TaskProjectProperty = new TaskProjectProperty;
+
   propertiesList : Array<TaskProjectProperty> = new Array();
 
   interval : any;
@@ -138,16 +140,6 @@ export class ModalTarefaComponent implements OnInit {
   }
 
 
-
-  //@HostListener('click', ['$event'])
-  //clicouFora(event:any){
-  // const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c73'))
-  //   if(!element){
-       
-  //    this.closeAddPropertie();
-  //   }
-  //}
-
   openDesc(): void {
     this.booleanDesc = !this.booleanDesc;
   }
@@ -217,9 +209,7 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
-  editDescription() {
-    console.log(this.editBoolean);
-  }
+
 
   booleanEditFalse() {
     this.booleanEdit = false;
@@ -228,20 +218,25 @@ export class ModalTarefaComponent implements OnInit {
     this.tarefa.currentStatus = this.statusAntigo;
     this.tarefa.description = this.descricaoAntiga;
     this.tarefa.name = this.nomeAntigo;
+    
   }
 
   async salvarTarefa() {
     if (this.tarefa.id != 0) {
-      this.tarefa.properties.forEach(element => {
-        console.log(element.values);
-      });
-      
+
       this.service.putTarefa(this.tarefa);
+      if(this.propertyStack != null ) {
+        this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
+      }
+
     } else if (this.tarefa.id == 0) {
       
       this.tarefa.project.id = 2;
       this.tarefa.creator.id = 1;
       this.service.postTarefa(this.tarefa);
+      if(this.propertyStack != null ) {
+        this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
+      }
     }
 
     if (this.booleanCalendarioFinalDate == true) {

@@ -16,6 +16,10 @@ export class PropriedadeTarefaComponent implements OnInit {
   constructor(private service : BackendEVOLVEService) { }
 
   ngOnInit(): void {
+    console.log("TESTANDO");
+    console.log(this.booleanEdit);
+    
+    
     if(this.property.editable == undefined) {
       this.property.editable = false;
     }
@@ -51,27 +55,21 @@ export class PropriedadeTarefaComponent implements OnInit {
   newPropertyObject:Text = new Text;
   newPropertyValue:string = '';
 
+  oldValue : string = '';
+
+  booleanTeste : boolean = false;
+
+  @Input()
+  booleanEdit !: boolean;
+
   @Input()
   property : TaskProjectProperty = new TaskProjectProperty();
 
   @Output()
   eventEmitter = new EventEmitter();
 
-  //propertyValue(property : TaskProjectProperty) {
-  //  console.log(this.property.values.length);
-    
-  //    if(this.property.values.length > 0 ) {
-  //      this.booleanEditProperty = false;
-  //    } else {
-  //      this.booleanEditProperty = true;
-  //    }
-  //    if(property.editable == false) {
-  //      this.booleanEditProperty = false;
-  //    } else {
-  //      this.booleanEditProperty = true;
-  //    }
-    
-  //}
+  @Output()
+  eventEmitterValue = new EventEmitter<TaskProjectProperty>();
 
   addPropertyValue(property : TaskProjectProperty): void {
     //console.log(property);
@@ -98,13 +96,15 @@ export class PropriedadeTarefaComponent implements OnInit {
   saveProperty(property:TaskProjectProperty) : void {
     property.values = new Array;
    
-      this.newPropertyObject.value = this.newPropertyValue;
+    this.oldValue = this.newPropertyObject.value;
+    this.newPropertyObject.value = this.newPropertyValue;
       
-      property.values.push(this.newPropertyObject)
-  
-      this.service.putPropertyValue(property.id,property)
-      property.editable = false;
-      this.booleanEditProperty = true;
+    property.values.push(this.newPropertyObject)
+    
+    property.editable = false;
+    this.booleanEditProperty = true;
+
+    this.eventEmitterValue.emit(property);
   }
 
 
