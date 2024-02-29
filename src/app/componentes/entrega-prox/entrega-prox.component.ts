@@ -13,6 +13,7 @@ export class EntregaProxComponent implements OnInit {
 
 
   @Input() tarefa: Task = new Task
+  @Input() withProgressBar!: boolean 
 
   constructor(private service: BackendEVOLVEService) { }
 

@@ -20,13 +20,16 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
 
   @Input() taskList!: Array<Task>;
   @Input() project!: Project;
-
+  openDaytasks: boolean = false;
 
   dataAtual: Date = new Date();
   diasCalendario: Date[] = [];
+  dayOpen = new Date;
 
   ngOnInit() {
     this.construirCalendario();
+    this.dayOpen.setHours(0, 0, 0, 0)
+
 
     
   }
@@ -35,8 +38,8 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
     const ano = this.dataAtual.getFullYear();
     const mes = this.dataAtual.getMonth();
 
-    const primeiroDiaDaSemana = 0; // domingo
-    const ultimoDiaDaSemana = 6;   // sábado
+    const primeiroDiaDaSemana = 1; // domingo
+    const ultimoDiaDaSemana = 0;   // sábado
 
     // Vai subtraindo -1 até chegarmos no primeiro dia da semana
     const dataInicial = new Date(ano, mes, 1);
@@ -61,7 +64,6 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
   }
 
   alterarMes(offsetMes: number) {
-    this.teste()
       this.dataAtual.setMonth(this.dataAtual.getMonth() + offsetMes);
       this.dataAtual = new Date(this.dataAtual.getTime());
       this.construirCalendario();
@@ -90,4 +92,18 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
       }
     }
   }
+  openSideDayTasks(dia : Date){
+    this.openDaytasks=!this.openDaytasks
+    this.dayOpen=dia;
+  }
+  isToday(dia : Date){
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+   
+   
+   
+    
+    return dia.getTime()==today.getTime()
+  }
+  
 }

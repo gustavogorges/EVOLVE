@@ -1,27 +1,46 @@
-<div class="full-calendar">
-  <div class="calendar-title">
+<div class="flex flex-col items-end w-[1655px] h-full">
+  <div class="calendar-title flex items-end m-3 gap-2">
     <div>
-      <button (click)="alterarMes(-1)">ant.</button>
+      <button (click)="alterarMes(-1)" class="pi pi-chevron-left text-[#aaa]
+      "></button>
     </div>
     <div class="calendario-titulo-mes-ano">
       {{ dataAtual | date : "MMMM yyyy" }}
     </div>
     <div>
-      <button (click)="alterarMes(+1)">prox.</button>
+      <button (click)="alterarMes(+1)" class="pi pi-chevron-right text-[#aaa]"></button>
     </div>
   </div>
-  <div class="days-row">
-    <ng-container *ngFor="let dia of diasCalendario; let i = index">
-      <div *ngIf="i < 7" class="w-[164px] flex justify-center">
-        <strong>{{ dia | date : "EEEE" }}</strong>
+  <div class="flex gap-9 w-[1655px] overflow-x-auto justify-center h-full">
+    <div
+      class="w-[400px] bg-primary rounded-[10px] flex flex-col  p-10"
+      
+    >
+      <p class="textDayOpen">
+        {{ dayOpen | date : "EEEE" |uppercase}} : {{ dayOpen | date : "dd" }}/{{
+          dayOpen | date : "LL"
+        }}
+      </p>
+      <div *ngFor="let task of taskList" class="flex justify-center">
+        <div *ngIf="dayOpen.getTime() == task.finalDate.getTime()" class="w-[300px] m-2">
+          <app-entrega-prox [tarefa]="task" [withProgressBar]="false"></app-entrega-prox>
+        </div>
       </div>
-    </ng-container>
-  </div>
+    </div>
 
-  <div class="calendario-dias">
-    <!-- Aqui renderizamos o nome do dia da semana -->
+    <div class="full-calendar">
+      <div class="days-row">
+        <ng-container *ngFor="let dia of diasCalendario; let i = index">
+          <div *ngIf="i < 7" class="w-[140px]  min-w-[164px] flex justify-center">
+            <p class="daysWeek">{{ dia | date : "EEEE" }}</p>
+          </div>
+        </ng-container>
+      </div>
 
-    <!-- 
+      <div class="calendario-dias">
+        <!-- Aqui renderizamos o nome do dia da semana -->
+
+        <!-- 
          Dias que aparecem no calendário.
 
          Aqui vale comentar que podemos adicionar
@@ -29,28 +48,38 @@
          seguinte forma:
            [class.minhaclasse]="condição"
     -->
-    <div
-      *ngFor="let dia of diasCalendario; let i = index"
-      [class.calendario-quebrar-linha]="i % 7 === 0"
-      [class.calendario-dia-nao-faz-parte-mes-atual]="
-        dataAtual.getMonth() !== dia.getMonth()
-      "
-    >
-      <div class="flex flex-col w-full h-full overflow-hidden items-start gap-1">
-        <div *ngFor="let task of taskList" class="w-full">
-          <div *ngIf="dia.getTime() == task.finalDate.getTime()" class="0  rounded-md text-sm w-full" 
-          [ngStyle]="{
-            'background-color': task.currentStatus.backgroundColor,
-            color: task.currentStatus.textColor
-          }">
-            {{ task.name }}
+        <div
+          *ngFor="let dia of diasCalendario; let i = index"
+          [class.calendario-quebrar-linha]="i % 7 === 0"
+          [class.calendario-dia-nao-faz-parte-mes-atual]="
+            dataAtual.getMonth() !== dia.getMonth()
+          "
+          [ngClass]="{'today': isToday(dia)}"
+        >
+          <div
+            class="flex flex-col w-full h-full overflow-hidden items-start gap-0.5"
+            (click)="openSideDayTasks(dia)"
+           
+          >
+            <div *ngFor="let task of taskList" class="w-full">
+              <div
+                *ngIf="dia.getTime() == task.finalDate.getTime()"
+                class=" rounded-md text-sm w-full"
+                [ngStyle]="{
+                  'background-color': task.currentStatus.backgroundColor,
+                  color: task.currentStatus.textColor
+                }"
+              >
+                {{ task.name }}
+              </div>
+            </div>
           </div>
+
+          <p class="text-sm text-gray-500"  [ngClass]="{'todayText': isToday(dia)}">
+            {{ dia | date : "dd" }}
+          </p>
         </div>
       </div>
-
-      <p class="text-sm">
-        {{ dia | date : "dd" }}
-      </p>
     </div>
   </div>
 </div>

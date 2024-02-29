@@ -2,7 +2,7 @@
     <div class="date">
 
         <!-- <p class="date-text">data final : {{dataFinal | date: "dd" + "/" + "MM"}}</p> -->
-        <p class="date-text">data final : {{tarefa.finalDate}}</p>
+        <p class="date-text">data final : {{tarefa.finalDate | date: "dd" + "/" + "MM"}}</p>
 
         <p class="status-text" [ngStyle]="{'background-color':tarefa.currentStatus.backgroundColor,'color': tarefa.currentStatus.textColor}">{{tarefa.currentStatus.name}}</p>
 
@@ -16,7 +16,7 @@
         <img *ngIf="tarefa.favorited" src="../../../assets/estrelaMarcada.svg" alt="" (click)="alterarTarefaFavoritado()">
 
     </div>
-    <div class="progress-bar-container">
+    <div  *ngIf="withProgressBar" class="progress-bar-container">
         <div class="progress-bar" [ngStyle]="{'width': tarefa.conclusionPercentage+'%'}">
             
         </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
@@ -77,6 +77,10 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { DndModule } from 'ngx-drag-drop';
 import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+registerLocaleData(localePT);
 
 
 
@@ -159,11 +163,12 @@ import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar
     CdTimerModule,
     BrowserModule,
     DragDropModule,
-    DndModule
+    DndModule,
+    CommonModule
 
   ],
   
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

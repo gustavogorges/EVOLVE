@@ -1,5 +1,5 @@
 .main {
-    @apply w-full h-full bg-white rounded-t-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
+    @apply w-full h-full bg-white rounded-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
     //  border-b-4 border-primary 
 }
 
@@ -25,7 +25,7 @@
 
 .status-text {
 
-    @apply py-1 px-3 rounded-xl text-sm  ;
+    @apply  rounded-lg text-sm py-0 px-4 h-5  ;
 
     animation: 5s ease-in 1s slidein;
 
@@ -36,11 +36,11 @@
 }
 
 .progress-bar-container{
-    @apply w-full absolute bottom-0 bg-gray-200 h-1;
+    @apply w-full absolute bottom-0 bg-gray-200 h-1 ;
 }
 
 .progress-bar{
-    @apply absolute bottom-0 bg-primary h-1;
+    @apply absolute bg-primary h-1;
 }
 
 
