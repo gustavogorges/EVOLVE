@@ -1,28 +1,27 @@
-<div class="flex flex-col items-end w-[1655px] h-full">
-  <div class="calendar-title flex items-end m-3 gap-2">
+<div class="main">
+  <div class="calendar-title">
     <div>
       <button (click)="alterarMes(-1)" class="pi pi-chevron-left text-[#aaa]
       "></button>
     </div>
-    <div class="calendario-titulo-mes-ano">
+    <div class="calendario-title-year-month">
       {{ dataAtual | date : "MMMM yyyy" }}
     </div>
     <div>
       <button (click)="alterarMes(+1)" class="pi pi-chevron-right text-[#aaa]"></button>
     </div>
   </div>
-  <div class="flex gap-9 w-[1655px] overflow-x-auto justify-center h-full">
+  <div class="day-and-month-calendar">
     <div
-      class="w-[400px] bg-primary rounded-[10px] flex flex-col  p-10"
-      
+      class="day-open"
     >
-      <p class="textDayOpen">
+      <p class="text-day-open">
         {{ dayOpen | date : "EEEE" |uppercase}} : {{ dayOpen | date : "dd" }}/{{
           dayOpen | date : "LL"
         }}
       </p>
-      <div *ngFor="let task of taskList" class="flex justify-center">
-        <div *ngIf="dayOpen.getTime() == task.finalDate.getTime()" class="w-[300px] m-2">
+      <div *ngFor="let task of taskList" class="tasks.day-open">
+        <div *ngIf="dayOpen.getTime() == task.finalDate.getTime()" class="task-day-open">
           <app-entrega-prox [tarefa]="task" [withProgressBar]="false"></app-entrega-prox>
         </div>
       </div>
@@ -31,13 +30,13 @@
     <div class="full-calendar">
       <div class="days-row">
         <ng-container *ngFor="let dia of diasCalendario; let i = index">
-          <div *ngIf="i < 7" class="w-[140px]  min-w-[164px] flex justify-center">
-            <p class="daysWeek">{{ dia | date : "EEEE" }}</p>
+          <div *ngIf="i < 7" class="each-day">
+            <p class="days-text">{{ dia | date : "EEEE" }}</p>
           </div>
         </ng-container>
       </div>
 
-      <div class="calendario-dias">
+      <div class="grid-calendar">
         <!-- Aqui renderizamos o nome do dia da semana -->
 
         <!-- 
@@ -57,14 +56,14 @@
           [ngClass]="{'today': isToday(dia)}"
         >
           <div
-            class="flex flex-col w-full h-full overflow-hidden items-start gap-0.5"
+            class="day-box"
             (click)="openSideDayTasks(dia)"
            
           >
-            <div *ngFor="let task of taskList" class="w-full">
+            <div *ngFor="let task of taskList" class="tasks-day-box">
               <div
                 *ngIf="dia.getTime() == task.finalDate.getTime()"
-                class=" rounded-md text-sm w-full"
+                class="task-day-box"
                 [ngStyle]="{
                   'background-color': task.currentStatus.backgroundColor,
                   color: task.currentStatus.textColor

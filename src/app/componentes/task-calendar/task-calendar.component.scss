@@ -1,52 +1,71 @@
-.calendario-dias {
-    display: grid;
-    margin-top: 10px;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    @apply w-full h-full gap-2
-}
+.main {
+  @apply flex flex-col items-end w-[1655px] h-full;
 
-
-.calendario-dia-nao-faz-parte-mes-atual {
-    @apply border-none bg-primaryGray
+  .calendar-title {
+    @apply flex items-end m-3 gap-2;
+    .calendario-title-year-month {
+      @apply text-center text-2xl text-secondary font-bold;
+      font-family: "Montserrat", sans-serif;
+    }
   }
-  .calendario-titulo-mes-ano{
-    @apply text-center text-2xl text-secondary font-bold ;
-    font-family: 'Montserrat', sans-serif;
+  .day-and-month-calendar {
+    @apply flex gap-9 w-[1655px] overflow-x-auto justify-center h-full;
+    .day-open {
+      @apply w-[400px] bg-primary rounded-[10px] flex flex-col  p-10;
+    }
+    .text-day-open {
+      @apply text-center text-2xl text-primaryWhite font-bold;
+      font-family: "Montserrat", sans-serif;
+    }
+    .tasks.day-open {
+      @apply flex justify-center ;
+    }
+    .task-day-open {
+        @apply w-[300px] m-2;
+      }
+    .full-calendar {
+      @apply max-w-[1330px] h-full overflow-x-auto flex flex-col justify-center;
 
+      .days-row {
+        @apply flex flex-row w-full justify-between gap-2;
+        .each-day {
+          @apply w-[140px]  min-w-[164px] flex justify-center;
+          .day-text {
+            @apply w-full text-center font-medium;
+            font-family: "Montserrat", sans-serif;
+          }
+        }
+      }
+      .grid-calendar {
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        @apply w-full h-full gap-2  grid mt-2;
+      }
+      .calendario-dia-nao-faz-parte-mes-atual {
+        @apply border-none bg-primaryGray;
+      }
+      .grid-calendar > div {
+        @apply w-[164px] h-[140px] flex-col rounded-xl flex border-[#ddd] border-[1px] justify-end p-3 gap-1 items-end;
+
+        font-size: 16px;
+        .day-box {
+          @apply flex flex-col w-full h-full overflow-hidden items-start gap-0.5;
+
+          .tasks-day-box {
+            @apply w-full;
+
+            .task-day-box {
+              @apply rounded-md text-sm w-full;
+
+              .todayText {
+                @apply bg-primary text-primaryWhite rounded-full px-1.5 py-1;
+              }
+            }
+          }
+        }
+      }
+    }
   }
-
-
-.calendario-dias > div {
-    @apply w-[164px] h-[140px] flex-col rounded-xl flex border-[#ddd] border-[1px] justify-end p-3 gap-1 items-end;
-   
-    font-size: 16px;
-   
-}
-.days-row{
-    @apply flex flex-row w-full justify-between gap-2
-}
-.calendar-title{
-    @apply flex 
-
-}
-.full-calendar{
-    @apply max-w-[1330px] h-full overflow-x-auto flex flex-col justify-center
-
 }
 
-.textDayOpen{
-    @apply text-center text-2xl text-primaryWhite font-bold ;
-    font-family: 'Montserrat', sans-serif;
 
-
-}
-
-.todayText{
-    @apply  bg-primary text-primaryWhite rounded-full px-1.5 py-1
-}
-.daysWeek{
-    @apply w-full text-center font-medium;
-    font-family: 'Montserrat', sans-serif;
-
-}

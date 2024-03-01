@@ -39,7 +39,7 @@ export class TelaTarefaComponent implements OnInit {
   filtroVisible:boolean = false
   projeto !:Project
 
-  option  : string ="Calendario"
+  option  : string | null ="Calendario"
   optionFilter : string = ""
 
   constructor(private service : BackendEVOLVEService) { }
@@ -59,12 +59,16 @@ export class TelaTarefaComponent implements OnInit {
 
   
   async ngOnInit(): Promise<void> {
+    if(localStorage.getItem("taskViewPreference")!=null){
+      this.option = localStorage.getItem("taskViewPreference")
+      }
 
     this.projeto = await this.service.getOne("project",102)
     this.listaTarefas = this.projeto.tasks
     this.listaNova=this.projeto.tasks
     console.log(this.listaTarefas)
     console.log(this.projeto)
+  
   }
 
   trackById(index: number, item: any): any {
@@ -100,6 +104,7 @@ if( this.visualizacaoVisible==true){
     
     this.option=option
     console.log(option)
+    localStorage.setItem('taskViewPreference', option);
    
       this.projeto = await this.service.getOne("project",this.projeto.id)
       this.listaTarefas=this.projeto.tasks
