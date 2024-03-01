@@ -1,5 +1,4 @@
 <div class="h-full">
-    <p-messages [(value)]="msgs"></p-messages>
     <div class="titulo">
         
         <p>Equipe Padrão</p>
@@ -31,20 +30,22 @@
             <div class="membro-components">
                 <div class="membro-equipe">
                     <label class="label" for="Membro equipe">Pesquise um membro da sua equipe:</label>
+                    <div class="absolute w-fit h-fit" #statusClose >
+                        <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa>
+                    </div>                    
                     <input class="membro-input" placeholder="email do usuário" type="text" pInputText />
                 </div>
                 <button class="botao-pesquisar"><p>Pesquisar</p> <i class="pi pi-search dark:text-gray-900"></i></button>
             </div>
             <div class="membros">
                 <div *ngFor="let p of usuarios">
-                    <app-membros-equipe [user]="p" [projeto]="projeto" ></app-membros-equipe>
+                    <!-- <app-membros-equipe [user]="p" [projeto]="projeto" ></app-membros-equipe> -->
                 </div>
             </div>
             <div class="status-priority">
                 <button class="add-status" (click)="statusEnabled()">Adicionar status</button>
                 <button class="add-priority">Adicionar prioridade</button>
-            </div>[
-            <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [ngClass]="statusVisible ? 'opacity-100':'opacity-0'" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa>
+            </div>
             <div class="lembrete">
                 <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>
             </div>

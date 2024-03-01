@@ -1,4 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Project } from 'src/model/project';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tela-projeto-remastered',
@@ -7,45 +10,47 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 })
 export class TelaProjetoRemasteredComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : BackendEVOLVEService, private route:Router) { }
+
+  id!: number
+  projetos !: Project[]
 
   ngOnInit(): void {
+    this.funcao()
   }
 
-  isVisible: boolean = false
-  id!: number
+  ngOnChange(): void {
+    this.funcao()
+  }
 
-  projetos:any[] = [
-    {
-      id : 0,
-      isVisible : true
-    },
-    {
-      id : 1,
-      isVisible : false
-    },
-    {
-      id : 2,
-      isVisible : false
-    },
-    {
-      id : 3,
-      isVisible : false
-    },
-    {
-      id : 4,
-      isVisible : false
-    }
-  ]
+  async funcao(){
+    this.projetos = await this.service.getAllSomething('project')
 
+    this.projetos.forEach(element => {
+      if(element.name === ''){
+        this.deletarPai(element.id)        
+      }
+    });
+
+    this.projetos = this.projetos.reverse()
+
+    this.projetos.forEach(element => {
+      if(element.name === ''){
+        this.deletarPai(element.id)        
+      }
+    });
+  }
 
   openProject(p:any){
-      this.projetos.forEach(element => {
-        if(element.id != p.id){
-          element.isVisible = false
+        this.projetos.forEach(element => {
+          if(element.id != p.id){
+            element.isVisible = false
+            element.editOn = false
+          }
+        });
+        if(!p.editOn){
+          p.isVisible = !p.isVisible
         }
-      });
-      p.isVisible = !p.isVisible
   }
 
   @ViewChild('projectElement') projectElement!:ElementRef
@@ -53,10 +58,45 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   clickOutside(event:any){
     if(event.target.contains(this.projectElement.nativeElement)){
       this.projetos.forEach(element => {
+        element.editOn = false
         element.isVisible = false
       });
     }
   }
+
+  noCloseProject(project:any){
+    this.openProject(project)
+  }
+
+  async deletarPai(id:number){
+    this.projetos.forEach((e) =>{
+      if(e.id == id){
+        this.projetos.splice(this.projetos.indexOf(e),1)
+      }
+    })
+    await this.service.deleteById("project",id);
+  }
+
+  async salvarPai(p:Project){
+   await this.service.putProjeto(p)
+  }
+
+  async goToCreateProject(){
+    this.route.navigate(['/criar-projeto'])
+  }
+
+  async cancelEdit(event:any, project:any){
+    project = await this.service.getOne("project", event.id)
+  }
+
+  editProject(event:any, p:any){
+    this.projetos.forEach(element => {
+      if(element.id === p.id){
+        element.editOn = event
+      }
+    });
+  }
+
 
 }
 

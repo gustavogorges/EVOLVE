@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
@@ -13,12 +13,12 @@ import { Message } from 'primeng/api';
 export class TelaCriarProjetoComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService, private route: Router){}
-  msgs!:Message[]
   
   async ngOnInit(){
-    let projeto = JSON.parse(localStorage.getItem('projeto') || '') as Project
-    this.projeto = await this.service.getOne("project", projeto.id)
+    this.projeto = await this.service.postProjeto(new Project)
     this.usuarios = await this.service.getAllSomething('user')
+    console.log(this.projeto);
+    
   }
   
   messages: Message[] | undefined;
@@ -34,6 +34,16 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.service.putProjeto(p)
   }
 
+  @ViewChild('statusClose') statusClose!:ElementRef
+  @HostListener('click', ['$event'])
+  clickOutside(event:any){
+    console.log(this.statusClose.nativeElement);
+    
+    if(event.target.contains(this.statusClose.nativeElement) || event.target.classList.contains("membros")){
+      this.statusVisible = false
+    }
+  }
+
   @ViewChild('nome') nome!:ElementRef
   @ViewChild('data') data!:ElementRef
   @ViewChild('descricao') descricao!:ElementRef
@@ -42,31 +52,23 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.projeto.finalDate = this.data.nativeElement.value
     this.projeto.description = this.descricao.nativeElement.value
     await this.service.putProjeto(this.projeto);
+    localStorage.removeItem('projeto')
     this.route.navigate(['tela-projeto'])
   }
 
-  // @HostListener('click', ['$event'])
-  //  clicouFora(event:any){
-  //   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c79'))
-  //   || event.target.classList.value === 'add-status'
-  //   || event.target.getAttributeNames().find((name: string | string[]) => name.includes('style') ? true : false) ? true : false
-  //   || event.target.getAttributeNames().find((name: string | string[]) => name.includes('c78-0') ? true : false) ? true : false
-  //   console.log(element, event.target);
-    
-  //     if(!element){
-  //       // this.statusVisible = false;
-  //     }
-  //  }
-
    async cancelar(){
+    localStorage.removeItem('projeto')
       this.service.deleteById('project', this.projeto.id)
       this.route.navigate(['/tela-projeto'])
    }
 
-   statusVisible = false
-
-   ngAfterViewInit(){
-    this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+   async createStatus(event:any){
+    this.projeto.statusList.push(event)
+    this.projeto = await this.service.putProjeto(this.projeto)
+    console.log(this.projeto);
+    
    }
+
+   statusVisible = false
 
 }

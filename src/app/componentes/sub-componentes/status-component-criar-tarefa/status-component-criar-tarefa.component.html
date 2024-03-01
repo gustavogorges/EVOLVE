@@ -1,4 +1,4 @@
-<div class=" bg-primaryGray rounded-lg pt-2 dark:bg-gray-700">
+<div class=" bg-primaryGray rounded-lg pt-2 dark:bg-gray-700 absolute w-[15vw] shadow-xl" [ngClass]="isVisible ? 'opacity-100 duration-200':'opacity-0 invisible'">
     <div *ngIf="isVisible" class="status-grid">
         <div class="create-status pb-[15%] p-2 cursor-pointer" (click)="desabilitaAdicionar()">
             <div *ngFor="let s of statusNovo" class="w-full">
@@ -16,7 +16,9 @@
             </div>
         </div>
         <div >
-            <div *ngIf="adicionar" (click)="adicionarStatus()" class="flex border-t-2 dark:border-gray-400 justify-center gap-3 items-center h-[3rem] text-gray-500 dark:text-primaryGray cursor-pointer">
+            <div *ngIf="adicionar" (click)="adicionarStatus()" class="flex border-t-2 dark:border-gray-400 justify-center gap-3 items-center h-[3rem] text-gray-500 dark:text-primaryGray cursor-pointer
+            duration-200
+            hover:text-lg">
                 <i class="pi pi-plus"></i>
                 <P>Adicionar Status</P>
             </div>
@@ -25,8 +27,8 @@
                 <div class="flex justify-between w-full border-t-2 dark:border-gray-400 p-2">
                     <input class="bg-transparent" disabled="true" placeholder="selecione a cor" [ngModel]="status.backgroundColor.toUpperCase()" type="text"><p-colorPicker class="color" [(ngModel)]="status.backgroundColor"></p-colorPicker>
                 </div>
-                <button *ngIf="!editando" (click)="criarStatus()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-secondary rounded-b-lg dark:bg-dark-secundary-green">Confirmar</button>
-                <button *ngIf="editando" (click)="salvar()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-primary rounded-b-lg dark:bg-dark-primary">Salvar</button>
+                <button *ngIf="!editando" (click)="criarStatus()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-secondary rounded-b-lg dark:bg-dark-secundary-green duration-200 hover:bg-green-500">Confirmar</button>
+                <button *ngIf="editando" (click)="salvar()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-primary rounded-b-lg dark:bg-dark-primary duration-200 hover:bg-blue-500">Salvar</button>
             </div>
         </div>
     </div>

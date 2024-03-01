@@ -22,14 +22,26 @@ export class MembrosEquipeComponent implements OnInit {
         this.adicionado = true
       }
     });
+    console.log(this.user);
+    
   }
 
-  verifyImage(){
-    if(this.user.profilePicture.length>10){
+  async verifyImage(){
+    if(this.user.profilePicture === null){
+      this.user.profilePicture = this.randomizeColor()
+      await this.service.putUsuario(this.user)
       return false
     }else{
       return true
     }
+  }
+
+  randomizeColor(){
+    let str = '#';
+    while (str.length < 7) {
+      str += Math.floor(Math.random() * 0x10).toString(16);
+    }
+    return str.toUpperCase()
   }
 
   adicionar(){
