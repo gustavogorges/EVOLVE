@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { Priority } from 'src/model/priority';
 import { PropertyType } from 'src/model/propriedade/propertyType';
@@ -16,8 +17,10 @@ export class PropriedadeTarefaComponent implements OnInit {
   constructor(private service : BackendEVOLVEService) { }
 
   ngOnInit(): void {
-    console.log("TESTANDO");
-    console.log(this.booleanEdit);
+    this.eventsSubscription = 
+    this.events.subscribe(() => 
+    this.oldValueFunction()
+    );
     
     
     if(this.property.editable == undefined) {
@@ -59,6 +62,13 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   booleanTeste : boolean = false;
 
+  eventsSubscription !: Subscription;
+
+  stackProperty : TaskProjectProperty = new TaskProjectProperty;
+
+  @Input()
+  events!:Observable<TaskProjectProperty>
+
   @Input()
   booleanEdit !: boolean;
 
@@ -72,11 +82,8 @@ export class PropriedadeTarefaComponent implements OnInit {
   eventEmitterValue = new EventEmitter<TaskProjectProperty>();
 
   addPropertyValue(property : TaskProjectProperty): void {
-    //console.log(property);
-    //this.propertyValue(property)
     this.booleanEditProperty = true;
     property.editable = true;
-    console.log(this.property.type);
     
     this.eventEmitter.emit();
   }
@@ -94,17 +101,30 @@ export class PropriedadeTarefaComponent implements OnInit {
   propertyValueTest : Text = new Text;
 
   saveProperty(property:TaskProjectProperty) : void {
+    if(property.values[0] != undefined) {
+      console.log("ta aqui");
+      console.log(property.values);
+      
+      this.oldValue = property.values[0].value;
+    }
     property.values = new Array;
    
-    this.oldValue = this.newPropertyObject.value;
+   
     this.newPropertyObject.value = this.newPropertyValue;
       
     property.values.push(this.newPropertyObject)
+
+    this.stackProperty = property;
     
     property.editable = false;
     this.booleanEditProperty = true;
 
     this.eventEmitterValue.emit(property);
+  }
+
+  oldValueFunction() {
+    this.stackProperty.values[0].value = this.oldValue;
+    this.newPropertyValue = this.oldValue;
   }
 
 

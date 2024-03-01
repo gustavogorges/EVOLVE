@@ -205,7 +205,7 @@
         <app-propriedade-tarefa 
         class="propertie"
         [property]="property"
-        [booleanEdit]="booleanEdit"
+        [events]="eventsSubject.asObservable()"
         (eventEmitter)="editNoValue()"
         (eventEmitterValue)="propertyStack"
         ></app-propriedade-tarefa>

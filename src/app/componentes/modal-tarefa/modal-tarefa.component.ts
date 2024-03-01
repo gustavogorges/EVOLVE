@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
+import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
@@ -95,7 +96,6 @@ export class ModalTarefaComponent implements OnInit {
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
-      console.log(this.propertiesList)
   }
 
 
@@ -113,7 +113,6 @@ export class ModalTarefaComponent implements OnInit {
   listPriorities !: PriorityRecord[];
 
   async ngOnInit(): Promise<void> {
-    console.log(this.tarefa);
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
@@ -165,7 +164,6 @@ export class ModalTarefaComponent implements OnInit {
       this.nomeGrande = this.tarefa.name;
       let nome = this.tarefa.name.split(' ', 4).toString();
       this.tarefa.name = nome.replace(/,/g, ' ');
-      console.log(this.tarefa.name);
     }
   }
 
@@ -210,6 +208,7 @@ export class ModalTarefaComponent implements OnInit {
   }
 
 
+  eventsSubject: Subject<TaskProjectProperty> = new Subject<TaskProjectProperty>();
 
   booleanEditFalse() {
     this.booleanEdit = false;
@@ -218,7 +217,7 @@ export class ModalTarefaComponent implements OnInit {
     this.tarefa.currentStatus = this.statusAntigo;
     this.tarefa.description = this.descricaoAntiga;
     this.tarefa.name = this.nomeAntigo;
-    
+    this.eventsSubject.next(this.propertyStack);
   }
 
   async salvarTarefa() {
