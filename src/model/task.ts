@@ -2,7 +2,6 @@ import { Priority } from "./priority";
 import { PriorityRecord } from "./priorityRecord";
 import { Project } from "./project";
 import { Property } from "./propriedade/property";
-import { TaskProjectProperty } from "./propriedade/task-project-property";
 import { Status } from "./status";
 import { Subtask } from "./subtask";
 import { User } from "./user";
@@ -22,7 +21,7 @@ export class Task{
 
     creator:User = new User;
     project:Project = new Project;
-    properties:Array<TaskProjectProperty> = new Array;
+    properties:Array<Property> = new Array;
     subtasks: Array<Subtask> = new Array;
     statusListIndex :number = -1;
 

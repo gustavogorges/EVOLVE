@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isNullOrUndef } from 'chart.js/dist/helpers/helpers.core';
-import { Property } from 'src/model/propriedade/property';
 import { PropertyType } from 'src/model/propriedade/propertyType';
-import { SelectOption } from 'src/model/propriedade/selectOption';
-import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
+import { Option } from 'src/model/propriedade/option';
+import { Property } from 'src/model/propriedade/property';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -29,19 +28,19 @@ export class SelectPropriedadeComponent implements OnInit {
 
   optionType : string = '';
 
-  selectOption : SelectOption = new SelectOption;
+  selectOption : Option = new Option;
 
-  listOptions : Array<SelectOption> = new Array;
+  listOptions : Array<Option> = new Array;
 
   @Input()
   tarefa: Task = new Task();
 
   @Output() 
-  newItemEvent = new EventEmitter<Array<TaskProjectProperty>>();
+  newItemEvent = new EventEmitter<Array<Property>>();
 
-  newPropertie:TaskProjectProperty = new TaskProjectProperty();
+  newPropertie:Property = new Property();
   
-  elemento: TaskProjectProperty = new TaskProjectProperty();
+  elemento: Property = new Property();
 
   constructor(
     private service : BackendEVOLVEService
@@ -121,43 +120,43 @@ export class SelectPropriedadeComponent implements OnInit {
   }
 
   addOneOption() {
-    const newOption: SelectOption = {
-      name: this.selectOption.name,
+    const newOption: Option = {
+      value: this.selectOption.value,
       backgroundColor: this.selectOption.backgroundColor,
       id: 0
     }
     this.listOptions.push(newOption);
-    this.selectOption.name = '';
+    this.selectOption.value = '';
   }
 
   savePropertie() {
     console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
-      this.newPropertie.type = PropertyType.INTEGER;
+      // this.newPropertie.type = PropertyType.INTEGER;
       this.tarefa.properties.push(this.newPropertie);
       this.service.patchProperty(this.newPropertie,this.tarefa.id);
       } else if(this.optionType == 'data') {
-        this.newPropertie.type = PropertyType.DATE;
+        // this.newPropertie.type = PropertyType.DATE;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção única') {
-        this.newPropertie.type = PropertyType.UNISELECT;
+        // this.newPropertie.type = PropertyType.UNISELECT;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção múltipla') {
-        this.newPropertie.type = PropertyType.MULTISELECT;
+        // this.newPropertie.type = PropertyType.MULTISELECT;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'número double') {
-        this.newPropertie.type = PropertyType.DOUBLE;
+        // this.newPropertie.type = PropertyType.DOUBLE;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'texto') {
-        this.newPropertie.type = PropertyType.TEXT;
+        // this.newPropertie.type = PropertyType.TEXT;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'associados') {
-        this.newPropertie.type = PropertyType.ASSOCIATES;
+        // this.newPropertie.type = PropertyType.ASSOCIATES;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }

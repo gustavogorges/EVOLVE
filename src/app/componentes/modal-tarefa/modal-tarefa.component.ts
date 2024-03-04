@@ -5,7 +5,6 @@ import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
-import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -33,9 +32,9 @@ export class ModalTarefaComponent implements OnInit {
   nomeAntigo: string = '';
   booleanPlayPause : boolean = false; 
 
-  propertyStack : TaskProjectProperty = new TaskProjectProperty;
+  propertyStack : Property = new Property;
 
-  propertiesList : Array<TaskProjectProperty> = new Array();
+  propertiesList : Array<Property> = new Array();
 
   interval : any;
 
@@ -208,7 +207,7 @@ export class ModalTarefaComponent implements OnInit {
   }
 
 
-  eventsSubject: Subject<TaskProjectProperty> = new Subject<TaskProjectProperty>();
+  eventsSubject: Subject<Property> = new Subject<Property>();
 
   booleanEditFalse() {
     this.booleanEdit = false;

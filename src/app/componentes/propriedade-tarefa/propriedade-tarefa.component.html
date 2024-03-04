@@ -1,14 +1,14 @@
 <div class="propertie">
     <div class="name-icon">
         <i class="icon-propertie {{property.icon}}"></i>
-        <p class="name-propertie">{{property.property.name}}:</p>
+        <p class="name-propertie">{{property.name}}:</p>
     </div>
     <div 
     *ngIf="checkEditable(property)" 
     class="propertie-value"
     (click)="editPropertyValue(property)"
     >
-        {{property.values[0].value}}
+        {{property.propertyValues[0].value}}
     </div>
     <div 
     *ngIf="!booleanEditProperty"
@@ -20,24 +20,25 @@
     <div
     *ngIf="property.editable == true" 
     class=" h-full w-full flex items-center justify-start gap-3">
-        <input 
-        *ngIf="property.type == INTEGER"
+    <!-- ARRUMAR OS NGIF DOS INPUT COM NOVA LÓGICA TAMBÉM -->
+        <!-- <input 
+        *ngIf="property.propertyType == IntegerValue"
         class="inputPropertyValue"
         type="number"
         [(ngModel)]="newPropertyValue"
         >
         <input 
-        *ngIf="property.type == DOUBLE"
+        *ngIf="property.propertyType == DoubleValue"
         class="inputPropertyValue"
         type="number"
         [(ngModel)]="newPropertyValue"
         >
         <input 
-        *ngIf="property.type == TEXT"
+        *ngIf="property.propertyType == TextValue"
         class="inputPropertyValue"
         type="text"
         [(ngModel)]="newPropertyValue"
-        >
+        > -->
         <div
         *ngIf="property.editable"
         class="confirmation-buttons"

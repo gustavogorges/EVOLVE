@@ -7,7 +7,7 @@ import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { Status } from 'src/model/status';
-import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
+import { Property } from 'src/model/propriedade/property';
 import { Priority } from 'src/model/priority';
 
 
@@ -36,7 +36,7 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
 
-  async patchProperty(taskProjectProperty:TaskProjectProperty, taskId:number) {
+  async patchProperty(taskProjectProperty:Property, taskId:number) {
     console.log(taskProjectProperty)
   
     return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
@@ -48,7 +48,7 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(propertyId:number,taskProjectPropertyValue:TaskProjectProperty) {
+  async putPropertyValue(propertyId:number,taskProjectPropertyValue:Property) {
     return (await axios.put(this.URL+"task/property/"+propertyId,taskProjectPropertyValue)).data
   }
 

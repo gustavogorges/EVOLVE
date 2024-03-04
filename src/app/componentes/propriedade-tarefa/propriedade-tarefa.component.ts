@@ -3,8 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { Priority } from 'src/model/priority';
 import { PropertyType } from 'src/model/propriedade/propertyType';
-import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
-import { Text } from 'src/model/propriedade/text';
+import { Property } from 'src/model/propriedade/property';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -26,28 +25,28 @@ export class PropriedadeTarefaComponent implements OnInit {
     if(this.property.editable == undefined) {
       this.property.editable = false;
     }
-    
+    // LÓGICA DE ICONES A DE SER MUDADA TAMBÉM DE ACORDO COM AS NOVAS MODELS
 
-    if(this.property.type == 'INTEGER') {
-      this.property.icon = 'pi pi-hashtag'
-    } else if(this.property.type == 'TEXT') {
-      this.property.icon = 'pi pi-book'
-    }  else if(this.property.type == 'DOUBLE') {
-      this.property.icon = 'pi pi-dollar'
-    }  else if(this.property.type == 'DATE') {
-      this.property.icon = 'pi pi-calendar'
-    }  else if(this.property.type == 'MULTISELECT') {
-      this.property.icon = 'pi pi-tags'
-    }  else if(this.property.type == 'UNISELECT') {
-      this.property.icon = 'pi pi-tag'
-    }  else if(this.property.type == 'ASSOCIATES') {
-      this.property.icon = 'pi pi-users'
-    }
+    // if(this.property.type == 'INTEGER') {
+    //   this.property.icon = 'pi pi-hashtag'
+    // } else if(this.property.type == 'TEXT') {
+    //   this.property.icon = 'pi pi-book'
+    // }  else if(this.property.type == 'DOUBLE') {
+    //   this.property.icon = 'pi pi-dollar'
+    // }  else if(this.property.type == 'DATE') {
+    //   this.property.icon = 'pi pi-calendar'
+    // }  else if(this.property.type == 'MULTISELECT') {
+    //   this.property.icon = 'pi pi-tags'
+    // }  else if(this.property.type == 'UNISELECT') {
+    //   this.property.icon = 'pi pi-tag'
+    // }  else if(this.property.type == 'ASSOCIATES') {
+    //   this.property.icon = 'pi pi-users'
+    // }
 
-    if(this.property.values.length != 0) {
+    // if(this.property.values.length != 0) {
       
-      this.booleanEditProperty = true;
-    }
+    //   this.booleanEditProperty = true;
+    // }
   }
 
   booleanEditProperty : boolean = false;
@@ -64,31 +63,31 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   eventsSubscription !: Subscription;
 
-  stackProperty : TaskProjectProperty = new TaskProjectProperty;
+  stackProperty : Property = new Property;
 
   @Input()
-  events!:Observable<TaskProjectProperty>
+  events!:Observable<Property>
 
   @Input()
   booleanEdit !: boolean;
 
   @Input()
-  property : TaskProjectProperty = new TaskProjectProperty();
+  property : Property = new Property();
 
   @Output()
   eventEmitter = new EventEmitter();
 
   @Output()
-  eventEmitterValue = new EventEmitter<TaskProjectProperty>();
+  eventEmitterValue = new EventEmitter<Property>();
 
-  addPropertyValue(property : TaskProjectProperty): void {
+  addPropertyValue(property : Property): void {
     this.booleanEditProperty = true;
     property.editable = true;
     
     this.eventEmitter.emit();
   }
 
-  checkEditable(property:TaskProjectProperty) : boolean {
+  checkEditable(property:Property) : boolean {
     if(property.editable == false) {
       if(this.booleanEditProperty == true) {
         return true;
@@ -100,19 +99,21 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   propertyValueTest : Text = new Text;
 
-  saveProperty(property:TaskProjectProperty) : void {
-    if(property.values[0] != undefined) {
-      console.log("ta aqui");
-      console.log(property.values);
+  saveProperty(property:Property) : void {
+
+    // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
+    // if(property.values[0] != undefined) {
+    //   console.log("ta aqui");
+    //   console.log(property.values);
       
-      this.oldValue = property.values[0].value;
-    }
-    property.values = new Array;
+    //   this.oldValue = property.propertyValues[0].value;
+    // }
+    // property.values = new Array;
    
    
-    this.newPropertyObject.value = this.newPropertyValue;
+    // this.newPropertyObject.value = this.newPropertyValue;
       
-    property.values.push(this.newPropertyObject)
+    // property.values.push(this.newPropertyObject)
 
     this.stackProperty = property;
     
@@ -123,12 +124,13 @@ export class PropriedadeTarefaComponent implements OnInit {
   }
 
   oldValueFunction() {
-    this.stackProperty.values[0].value = this.oldValue;
+    // LÓGICA A SER MUDADA
+    // this.stackProperty.values[0].value = this.oldValue;
     this.newPropertyValue = this.oldValue;
   }
 
 
-  editPropertyValue(property:TaskProjectProperty):void {
+  editPropertyValue(property:Property):void {
     this.eventEmitter.emit();
     property.editable = true;
   }
