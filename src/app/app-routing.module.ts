@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TelaLoginComponent } from './tela-login/tela-login.component';
 import { TelaCadastroComponent } from './tela-cadastro/tela-cadastro.component';
@@ -11,12 +11,13 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 const routes: Routes = [
   {
     path : "",
-    component : TelaLoginComponent
+    component : LandingPageComponent
   },
   {
     path : "tela-cadastro",
@@ -51,6 +52,10 @@ const routes: Routes = [
     path:'view-project',
     component: TelaFullViewComponent
 
+  },
+  {
+    path: 'home',
+    component: LandingPageComponent
   }
 ];
 

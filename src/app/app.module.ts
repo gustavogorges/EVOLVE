@@ -76,6 +76,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { DndModule } from 'ngx-drag-drop';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 
@@ -133,7 +134,8 @@ import { DndModule } from 'ngx-drag-drop';
     ChartModalComponent,
 
     TarefaKanbanComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    LandingPageComponent
 
   ],
   
