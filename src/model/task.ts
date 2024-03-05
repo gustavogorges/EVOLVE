@@ -26,5 +26,5 @@ export class Task{
 
     associates:Array<User> = new Array;
     isVisible: boolean = false;
-
+    scheduledDate: Date = new Date;
 }
