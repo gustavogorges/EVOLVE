@@ -26,11 +26,13 @@
     <p class="finalDate">{{ tarefaAtual.finalDate | date: "dd" }}/{{ tarefaAtual.finalDate | date: "LL" }}/ {{ tarefaAtual.finalDate | date: "yyyy" }}</p>
   </div>
  
-  <div class="flex gap-2">
-    <div class="taskMemberPhoto bg-secondary"></div>
+  <div class="flex gap-2 w-28">
+    <div class="taskMemberPhoto bg-yellow-300"></div>
+    <div class="taskMemberPhoto bg-pink-400"></div>
+    <div class="taskMemberPhoto bg-blue-400"></div>
    
   </div>
-  <div class="status-box">
+  <div class="priority-box">
     <div
     class="priority"
   >
@@ -38,7 +40,7 @@
   </div>
   </div>
   <div class="finalDate-box">
-    <p class="finalDate">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
+    <p class="text-black text-lg font-hind-madurai">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
   </div>
   <div class="star-box">
     <img

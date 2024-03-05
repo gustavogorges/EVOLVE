@@ -52,6 +52,7 @@ export class TelaTarefaComponent implements OnInit {
       console.log(this.listaTarefas)
       this.projeto=await this.service.getOne("project",102)
       this.listaTarefas=this.projeto.tasks
+      this.sortLists()
     }
     }
 
@@ -66,9 +67,20 @@ export class TelaTarefaComponent implements OnInit {
     this.projeto = await this.service.getOne("project",102)
     this.listaTarefas = this.projeto.tasks
     this.listaNova=this.projeto.tasks
+    this.sortLists();
     console.log(this.listaTarefas)
     console.log(this.projeto)
   
+  }
+  sortLists(){
+    this.listaTarefas.sort((a, b) => {
+      
+      return (a.favorited === b.favorited) ? 0 : a.favorited ? -1 : 1;
+    });
+    this.listaNova.sort((a, b) => {
+      
+      return (a.favorited === b.favorited) ? 0 : a.favorited ? -1 : 1;
+    });
   }
 
   trackById(index: number, item: any): any {
@@ -108,6 +120,7 @@ if( this.visualizacaoVisible==true){
    
       this.projeto = await this.service.getOne("project",this.projeto.id)
       this.listaTarefas=this.projeto.tasks
+      this.sortLists()
   
   }
 
@@ -203,7 +216,9 @@ if( this.filtroVisible==true){
             }
           })
 
-        } 
+        }
+        this.sortLists()
+
 
       }
     
@@ -219,7 +234,7 @@ if( this.filtroVisible==true){
         }
         )
         this.filtroVisible=false      
-
+        this.sortLists()
       }
     
   
@@ -245,14 +260,15 @@ if( this.filtroVisible==true){
     this.booleanTask = !this.booleanTask;
   }
   async removeFilter(){
-    this.listaTarefas =await this.service.getAllSomething("tarefa")
+    console.log("pobbbb");
     this.optionFilter=""
+
+    this.projeto = await this.service.getOne("project",this.projeto.id)
+    this.listaTarefas = this.projeto.tasks
+
+    
   }
-  onDropSuccess(event: any, novoIndice: number): void {
-    const tarefa: Task = event.dragData;
-    // Aqui você pode realizar a lógica de atualização do estado da tarefa no seu modelo de dados
-    // por exemplo, mover a tarefa para o novo índice na lista de tarefas
-  }
+
 
   filtrarLista(status:Status): Array<Task> {
     let listaFiltrada = this.listaTarefas.filter(
@@ -261,29 +277,7 @@ if( this.filtroVisible==true){
     return listaFiltrada 
   }
 
-  onDrop(event: CdkDragDrop<Task[]>, status:Status): void {
-    console.log("sto aq")
-    console.log(event.item)
-    console.log(event.container)
-    console.log(event.previousIndex)
-
-    if (event.previousContainer === event.container) {
-        // Reorder within the same list
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      // Move item to a different list
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-
-      // Update the status of the task in your data model
-      const movedTask: Task = event.container.data[event.currentIndex];
-      movedTask.currentStatus = status;
-    }
-  }
+  
   
 
 }
