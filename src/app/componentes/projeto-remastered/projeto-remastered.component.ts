@@ -1,4 +1,5 @@
 import { Component,EventEmitter,Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
@@ -16,15 +17,20 @@ interface Tarefa{
   templateUrl: './projeto-remastered.component.html',
   styleUrls: ['./projeto-remastered.component.scss']
 })
-export class ProjetoRemasteredComponent implements OnInit {
+export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   constructor(private route:Router, private service:BackendEVOLVEService) { }
 
-
+  
   tarefas : Tarefa[] = []
   
   @Input() projeto!:Project;
-
+  
+  ngOnChanges(): void {
+    if(!this.projeto.editOn){
+      this.cancelEdit()
+    }
+  }
   ngOnInit(): void {
     this.criaTarefa()
   }
@@ -34,7 +40,6 @@ export class ProjetoRemasteredComponent implements OnInit {
   md: any
   corAtual: string = ''
   valorProgresso = 0;
-
   
   @Input() projectOpen !: Boolean
 
@@ -104,11 +109,13 @@ export class ProjetoRemasteredComponent implements OnInit {
   }
 
   async cancelEdit(){
-    var projeto = await this.service.getOne("project", this.projeto.id) as Project
-    this.projeto.name = projeto.name
-    this.projeto.description = projeto.description
-    this.projeto.finalDate = projeto.finalDate
-    this.editProjectEmit(false)
+      setTimeout(async()   => {
+      var projeto = await this.service.getOne("project", this.projeto.id) as Project
+      this.projeto.name = projeto.name
+      this.projeto.description = projeto.description
+      this.projeto.finalDate = projeto.finalDate
+      this.editProjectEmit(false)
+    }, 500);
   }
 
 }

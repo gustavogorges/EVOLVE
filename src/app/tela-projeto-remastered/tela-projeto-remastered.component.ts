@@ -85,10 +85,6 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.route.navigate(['/criar-projeto'])
   }
 
-  async cancelEdit(event:any, project:any){
-    project = await this.service.getOne("project", event.id)
-  }
-
   editProject(event:any, p:any){
     this.projetos.forEach(element => {
       if(element.id === p.id){
