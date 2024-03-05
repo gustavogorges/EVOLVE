@@ -16,7 +16,7 @@ import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-p
 const routes: Routes = [
   {
     path : "",
-    component : TelaProjetoRemasteredComponent
+    component : TelaLoginComponent
   },
   {
     path : "tela-cadastro",
