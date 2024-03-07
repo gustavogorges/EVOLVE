@@ -77,6 +77,7 @@ import { CdTimerModule } from 'angular-cd-timer';
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { DndModule } from 'ngx-drag-drop';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { GreenDivLandingpageComponent } from './componentes/sub-componentes/green-div-landingpage/green-div-landingpage.component';
 
 
 
@@ -135,8 +136,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
-    LandingPageComponent
-
+    LandingPageComponent,
+    GreenDivLandingpageComponent
   ],
   
   imports: [
