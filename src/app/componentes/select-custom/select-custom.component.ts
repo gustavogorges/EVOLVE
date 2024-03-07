@@ -13,7 +13,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class SelectCustomComponent implements OnInit {
   
   @Input()
-  listOptions !: Array<string> 
+  listOptions !: Array<any> 
   @Input()
   listIcons !: Array<string>
   @Input()
@@ -37,16 +37,16 @@ export class SelectCustomComponent implements OnInit {
     
   }
 
-  saveOption(option:string) {
+  saveOption(option:any) {
     this.listOptions=[]
     this.listIcons=[]
 
-    this.newItem.emit(option);
+    this.newItem.emit(option.name);
     console.log(option)
-    if(option=="Status"){
+    if(option.name=="Status"){
       this.projeto.statusList.map((status :Status)=>{
         console.log(status.name)
-        this.listOptions.push(status.name)
+        this.listOptions.push(status)
        })
   
       
