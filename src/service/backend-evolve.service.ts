@@ -57,6 +57,8 @@ export class BackendEVOLVEService {
   }
 
   async postTarefa (tarefa:Task){
+    console.log("POST SERVICE");
+    console.log(tarefa);
     return (await axios.post(this.URL+"task", tarefa)).data 
   }
 

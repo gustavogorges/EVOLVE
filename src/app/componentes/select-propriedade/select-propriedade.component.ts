@@ -132,31 +132,32 @@ export class SelectPropriedadeComponent implements OnInit {
   savePropertie() {
     console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
-      // this.newPropertie.type = PropertyType.INTEGER;
-      this.tarefa.properties.push(this.newPropertie);
-      this.service.patchProperty(this.newPropertie,this.tarefa.id);
+       this.newPropertie.propertyType = PropertyType.IntegerValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
       } else if(this.optionType == 'data') {
-        // this.newPropertie.type = PropertyType.DATE;
+        this.newPropertie.propertyType = PropertyType.DataValue;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção única') {
-        // this.newPropertie.type = PropertyType.UNISELECT;
+        this.newPropertie.propertyType = PropertyType.UniSelectValue;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção múltipla') {
-        // this.newPropertie.type = PropertyType.MULTISELECT;
+        this.newPropertie.propertyType = PropertyType.MultiSelectValue;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'número double') {
-        // this.newPropertie.type = PropertyType.DOUBLE;
+        this.newPropertie.propertyType = PropertyType.DoubleValue;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'texto') {
-        // this.newPropertie.type = PropertyType.TEXT;
+        this.newPropertie.propertyType = PropertyType.TextValue;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'associados') {
-        // this.newPropertie.type = PropertyType.ASSOCIATES;
+        //Há de ser implementado ainda no enum, ou de algum outra forma
+        //this.newPropertie.propertyType = PropertyType;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }

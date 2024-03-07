@@ -49,7 +49,7 @@ export class TelaTarefaComponent implements OnInit {
     this.listaTarefas =await this.service.getAllSomething("task")
     console.log(this.listaTarefas);
     
-    this.projeto = await this.service.getOne("project",2)
+    this.projeto = await this.service.getOne("project",1)
     console.log(this.projeto.tasks)
   }
 

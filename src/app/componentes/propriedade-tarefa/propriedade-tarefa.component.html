@@ -21,24 +21,24 @@
     *ngIf="property.editable == true" 
     class=" h-full w-full flex items-center justify-start gap-3">
     <!-- ARRUMAR OS NGIF DOS INPUT COM NOVA LÓGICA TAMBÉM -->
-        <!-- <input 
-        *ngIf="property.propertyType == IntegerValue"
+        <input 
+        *ngIf="property.propertyType.toString() == 'IntegerValue'"
         class="inputPropertyValue"
         type="number"
         [(ngModel)]="newPropertyValue"
         >
         <input 
-        *ngIf="property.propertyType == DoubleValue"
+        *ngIf="property.propertyType.toString() == 'DoubleValue'"
         class="inputPropertyValue"
         type="number"
         [(ngModel)]="newPropertyValue"
         >
         <input 
-        *ngIf="property.propertyType == TextValue"
+        *ngIf="property.propertyType.toString() == 'TextValue'"
         class="inputPropertyValue"
         type="text"
         [(ngModel)]="newPropertyValue"
-        > -->
+        >
         <div
         *ngIf="property.editable"
         class="confirmation-buttons"

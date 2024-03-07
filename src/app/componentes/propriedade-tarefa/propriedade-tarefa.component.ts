@@ -5,6 +5,7 @@ import { Priority } from 'src/model/priority';
 import { PropertyType } from 'src/model/propriedade/propertyType';
 import { Property } from 'src/model/propriedade/property';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { PropertyValue } from 'src/model/propriedade/propertyValue';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -27,26 +28,28 @@ export class PropriedadeTarefaComponent implements OnInit {
     }
     // LÓGICA DE ICONES A DE SER MUDADA TAMBÉM DE ACORDO COM AS NOVAS MODELS
 
-    // if(this.property.type == 'INTEGER') {
-    //   this.property.icon = 'pi pi-hashtag'
-    // } else if(this.property.type == 'TEXT') {
-    //   this.property.icon = 'pi pi-book'
-    // }  else if(this.property.type == 'DOUBLE') {
-    //   this.property.icon = 'pi pi-dollar'
-    // }  else if(this.property.type == 'DATE') {
-    //   this.property.icon = 'pi pi-calendar'
-    // }  else if(this.property.type == 'MULTISELECT') {
-    //   this.property.icon = 'pi pi-tags'
-    // }  else if(this.property.type == 'UNISELECT') {
-    //   this.property.icon = 'pi pi-tag'
-    // }  else if(this.property.type == 'ASSOCIATES') {
-    //   this.property.icon = 'pi pi-users'
-    // }
+     if(this.property.propertyType.toString() == "IntegerValue") {
+      console.log("foi na integer");
+       this.property.icon = 'pi pi-hashtag'
+     } else if(this.property.propertyType.toString() == "TextValue") {
+       this.property.icon = 'pi pi-book'
+     }  else if(this.property.propertyType.toString() == "DoubleValue") {
+       this.property.icon = 'pi pi-dollar'
+     }  else if(this.property.propertyType.toString() == "DataValue") {
+       this.property.icon = 'pi pi-calendar'
+     }  else if(this.property.propertyType.toString() == "MultiSelectValue") {
+       this.property.icon = 'pi pi-tags'
+     }  else if(this.property.propertyType.toString() == "UniSelectValue") {
+       this.property.icon = 'pi pi-tag'
+     }  else if(this.property.propertyType.toString() == "UniSelectValue") {
+       this.property.icon = 'pi pi-users'
+     }
 
-    // if(this.property.values.length != 0) {
+     if(this.property.propertyValues.length != 0) {
       
-    //   this.booleanEditProperty = true;
-    // }
+       this.booleanEditProperty = true;
+     }
+     
   }
 
   booleanEditProperty : boolean = false;
@@ -54,7 +57,8 @@ export class PropriedadeTarefaComponent implements OnInit {
   DOUBLE : string = "DOUBLE";
   TEXT : string = "TEXT";
 
-  newPropertyObject:Text = new Text;
+  newPropertyObject:PropertyValue = new PropertyValue;
+
   newPropertyValue:string = '';
 
   oldValue : string = '';
@@ -102,18 +106,17 @@ export class PropriedadeTarefaComponent implements OnInit {
   saveProperty(property:Property) : void {
 
     // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
-    // if(property.values[0] != undefined) {
-    //   console.log("ta aqui");
-    //   console.log(property.values);
+     if(property.propertyValues[0] != undefined) {
+       console.log(property.propertyValues);
       
-    //   this.oldValue = property.propertyValues[0].value;
-    // }
-    // property.values = new Array;
+       this.oldValue = property.propertyValues[0].value.toString();
+     }
+     property.propertyValues = new Array;
    
    
-    // this.newPropertyObject.value = this.newPropertyValue;
+     this.newPropertyObject.value = this.newPropertyValue;
       
-    // property.values.push(this.newPropertyObject)
+     property.values.push(this.newPropertyObject)
 
     this.stackProperty = property;
     
