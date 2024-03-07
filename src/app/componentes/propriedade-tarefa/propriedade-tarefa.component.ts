@@ -6,6 +6,12 @@ import { PropertyType } from 'src/model/propriedade/propertyType';
 import { Property } from 'src/model/propriedade/property';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
+import { ValueText } from 'src/model/propriedade/property-values/valueText';
+import { ValueInteger } from 'src/model/propriedade/property-values/valueInteger';
+import { ValueDouble } from 'src/model/propriedade/property-values/valueDouble';
+import { ValueData } from 'src/model/propriedade/property-values/valueData';
+import { ValueMultiSelect } from 'src/model/propriedade/property-values/valueMultiSelect';
+import { ValueUniSelect } from 'src/model/propriedade/property-values/valueUniSelect';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -15,6 +21,11 @@ import { PropertyValue } from 'src/model/propriedade/propertyValue';
 export class PropriedadeTarefaComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService) { }
+
+  // instanciando o objeto especifico o método funcionaria de acordo
+  // porém seriam vários if's, tentar achar uma maneira de não usar 
+  // tantos if's
+  newPropertyObject:any;
 
   ngOnInit(): void {
     this.eventsSubscription = 
@@ -29,19 +40,25 @@ export class PropriedadeTarefaComponent implements OnInit {
     // LÓGICA DE ICONES A DE SER MUDADA TAMBÉM DE ACORDO COM AS NOVAS MODELS
 
      if(this.property.propertyType.toString() == "IntegerValue") {
-      console.log("foi na integer");
+       this.newPropertyObject = new ValueInteger();
        this.property.icon = 'pi pi-hashtag'
      } else if(this.property.propertyType.toString() == "TextValue") {
+      this.newPropertyObject = new ValueText();
        this.property.icon = 'pi pi-book'
      }  else if(this.property.propertyType.toString() == "DoubleValue") {
+      this.newPropertyObject = new ValueDouble();
        this.property.icon = 'pi pi-dollar'
      }  else if(this.property.propertyType.toString() == "DataValue") {
+      this.newPropertyObject = new ValueData();
        this.property.icon = 'pi pi-calendar'
      }  else if(this.property.propertyType.toString() == "MultiSelectValue") {
+      this.newPropertyObject = new ValueMultiSelect();
        this.property.icon = 'pi pi-tags'
      }  else if(this.property.propertyType.toString() == "UniSelectValue") {
+      this.newPropertyObject = new ValueUniSelect();
        this.property.icon = 'pi pi-tag'
      }  else if(this.property.propertyType.toString() == "UniSelectValue") {
+      this.newPropertyObject = new ValueUniSelect();
        this.property.icon = 'pi pi-users'
      }
 
@@ -56,8 +73,6 @@ export class PropriedadeTarefaComponent implements OnInit {
   INTEGER : string = "INTEGER";
   DOUBLE : string = "DOUBLE";
   TEXT : string = "TEXT";
-
-  newPropertyObject:PropertyValue = new PropertyValue;
 
   newPropertyValue:string = '';
 
@@ -101,8 +116,6 @@ export class PropriedadeTarefaComponent implements OnInit {
   
   }
 
-  propertyValueTest : Text = new Text;
-
   saveProperty(property:Property) : void {
 
     // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
@@ -113,10 +126,9 @@ export class PropriedadeTarefaComponent implements OnInit {
      }
      property.propertyValues = new Array;
    
-   
      this.newPropertyObject.value = this.newPropertyValue;
-      
-     property.values.push(this.newPropertyObject)
+        
+     property.propertyValues.push(this.newPropertyObject)
 
     this.stackProperty = property;
     
