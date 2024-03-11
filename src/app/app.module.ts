@@ -78,6 +78,7 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { DndModule } from 'ngx-drag-drop';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { GreenDivLandingpageComponent } from './componentes/sub-componentes/green-div-landingpage/green-div-landingpage.component';
+import { ScreenViewInterativeLandingPageComponent } from './componentes/sub-componentes/screen-view-interative-landing-page/screen-view-interative-landing-page.component';
 
 
 
@@ -137,7 +138,8 @@ import { GreenDivLandingpageComponent } from './componentes/sub-componentes/gree
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
     LandingPageComponent,
-    GreenDivLandingpageComponent
+    GreenDivLandingpageComponent,
+    ScreenViewInterativeLandingPageComponent
   ],
   
   imports: [
