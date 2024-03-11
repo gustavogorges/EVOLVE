@@ -135,6 +135,11 @@ export class PropriedadeTarefaComponent implements OnInit {
     property.editable = false;
     this.booleanEditProperty = true;
 
+    console.log("Log property, no property save");
+    
+    console.log(property);
+    
+
     this.eventEmitterValue.emit(property);
   }
 

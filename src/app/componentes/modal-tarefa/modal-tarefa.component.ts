@@ -225,7 +225,10 @@ export class ModalTarefaComponent implements OnInit {
     if (this.tarefa.id != 0) {
       this.service.putTarefa(this.tarefa);
       if(this.propertyStack != null ) {
-        this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
+        console.log("Log property stack");
+        console.log(this.propertyStack);
+        
+        this.service.putPropertyValue(this.propertyStack)
       }
 
     } else if (this.tarefa.id == 0) {
@@ -247,6 +250,15 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanStatus = false;
     }
     this.booleanEdit = !this.booleanEdit;
+  }
+
+  setPropertyValue(property:Property) {
+    console.log("Log property recebida");
+    this.propertyStack = property;
+    console.log("Log property stack atribuida");
+    console.log(this.propertyStack);
+    
+    
   }
 
   startFocus() {

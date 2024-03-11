@@ -207,7 +207,7 @@
         [property]="property"
         [events]="eventsSubject.asObservable()"
         (eventEmitter)="editNoValue()"
-        (eventEmitterValue)="propertyStack"
+        (eventEmitterValue)="setPropertyValue($event)"
         ></app-propriedade-tarefa>
       </div>
     </div>

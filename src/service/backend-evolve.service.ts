@@ -48,8 +48,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(propertyId:number,taskProjectPropertyValue:Property) {
-    return (await axios.put(this.URL+"task/property/"+propertyId,taskProjectPropertyValue)).data
+  async putPropertyValue(taskProjectPropertyValue:Property) {
+    return (await axios.put(this.URL+"task/property/put",taskProjectPropertyValue)).data
   }
 
   async getAllPriorities() {
