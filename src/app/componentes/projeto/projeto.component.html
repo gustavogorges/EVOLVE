@@ -43,8 +43,8 @@
                 <div class="seta"><</div>
                 <div #bg class="pessoas">
                     <div  *ngFor="let p of projeto.members;"  class="infos-pessoas">
-                        <div *ngIf="verifyImage(p)" class="foto" [ngStyle]="{'background': p.profilePicture}" >{{p.name.charAt(0).toUpperCase()}}</div>
-                        <img class="fotoImagem" *ngIf="!verifyImage(p)" src="{{p.profilePicture}}" alt="">
+                        <div *ngIf="verifyImage(p)" class="foto" [ngStyle]="{'background': p.imageColor}" >{{p.name.charAt(0).toUpperCase()}}</div>
+                        <img class="fotoImagem" *ngIf="!verifyImage(p)" src="{{p.image.data}}" alt="">
                         <p class="nome">{{p.name}}</p>
                         <p class="tipo">Administrador</p>
                     </div>

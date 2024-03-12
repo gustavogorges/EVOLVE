@@ -44,8 +44,8 @@
 
             <div class="chat-header " *ngIf="true">
 
-                <div class="chat-header-img-container" [ngStyle]="{'background-color': contact.profilePicture}">
-                    <img *ngIf="contact.profilePicture.slice()[0]!='#'" src="{{contact.profilePicture}}"
+                <div class="chat-header-img-container" [ngStyle]="{'background-color': contact.imageColor}">
+                    <img *ngIf="contact.image?.data" src="{{contact.image.data}}"
                         alt="" class="chat-header-img">
                 </div>
                 <p class="chat-name">
@@ -58,7 +58,7 @@
 
             <div class="messages-container ">
 
-                <div class="message-box" *ngFor="let message of selectedChat.messages; index as index ">
+                <div class="message-box" *ngFor="let message of selectedChat?.messages; index as index ">
                     <app-message [loggedUser]="loggedUser" [chat]="selectedChat" [message]="message"></app-message>
                 </div>
 

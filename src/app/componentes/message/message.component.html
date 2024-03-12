@@ -1,8 +1,8 @@
 <div class="message-container ">
     
     <div class="sender-img-box" [ngStyle]="{ 'justify-content': messageAlignment}" *ngIf="showImage(message) ">
-        <div class="sender-img-container" [ngStyle]="{'background-color': message.sender.profilePicture}">
-            <img class="sender-img"  *ngIf="message.sender.profilePicture.slice()[0]!='#'" src="{{message.sender.profilePicture}}" alt="" >
+        <div class="sender-img-container" [ngStyle]="{'background-color': message.sender.imageColor}">
+            <img class="sender-img"  *ngIf="message.sender.image.data" src="{{message.sender.image.data}}" alt="" >
         </div>
     </div>
 

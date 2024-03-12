@@ -1,7 +1,7 @@
 <div class="div-membros">
     <div class="foto">
-        <div *ngIf="verifyImage()" class="foto2" [ngStyle]="{'background': user.profilePicture }" >{{user.name.charAt(0).toUpperCase()}}</div>
-        <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.profilePicture}}" alt="">
+        <div *ngIf="verifyImage()" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
+        <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.image.data}}" alt="">
     </div>
     <div class="infos">
         <div class="nome"><p>{{user.name}}</p></div>

@@ -1,18 +1,18 @@
 <div class="contact">
 
-    <div class="img-container" [ngStyle]="{ 'background-color': contact.profilePicture }">
-        <img *ngIf="contact.profilePicture.slice()[0]!='#'" src="{{contact.profilePicture}}"
+    <div class="img-container" [ngStyle]="{ 'background-color': image }">
+        <img *ngIf="isImageAHex()" src="{{image}}"
             alt="" class="img">
     </div>
 
     <div class="body">
         <div class="name-container ">
             <p class="name">
-                {{contact.name}}
+                {{name}}
             </p>
         </div>
         <div class="last-message-container">
-            <p class="last-message">
+            <p *ngIf="lastMessage" class="last-message">
                 {{lastMessage.content}}
             </p>
         </div>
@@ -21,7 +21,7 @@
     <div class="side-info">
 
         <div class="last-message-date-container">
-            <p>
+            <p *ngIf="lastMessage">
                 {{lastMessage.date | date : "dd"+"/"+"MM"}} 
             </p>
         </div>

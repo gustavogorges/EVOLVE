@@ -19,7 +19,7 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   async cadastrarUsuario() : Promise<void> {
-    this.usuario.profilePicture = this.randomizeColor()
+    this.usuario.imageColor = this.randomizeColor()
     await this.service.postUsuario(this.usuario)
   }
 

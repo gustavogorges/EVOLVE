@@ -42,7 +42,7 @@ export class TelaTarefaComponent implements OnInit {
   visualizacaoVisible:boolean = false
   ordenacaoVisible:boolean = false
   filtroVisible:boolean = false
-  projeto !:Project
+  projeto :Project = new Project
   option  : string ="Kanban"
   optionFilter : string = ""
 
@@ -51,7 +51,7 @@ export class TelaTarefaComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.listaNova = await this.service.getAllSomething("task")
     this.listaTarefas =await this.service.getAllSomething("task")
-    this.projeto = await this.service.getOne("project",2652)
+    this.projeto = await this.service.getOne("project",252)
     console.log(this.projeto.statusList)
   }
 

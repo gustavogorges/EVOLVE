@@ -86,11 +86,17 @@ export class ProjetoComponent implements OnInit {
   }
 
   verifyImage(user:User){
-    if(user.profilePicture.length>10){
+    if(user.image.data){
       return false
-    }else{
+    } else if(user.imageColor){
       return true
     }
+    return true
+    // if(user.profilePicture.length>10){
+    //   return false
+    // }else{
+    //   return true
+    // }
   }
 
   deletarProjeto(id:number){

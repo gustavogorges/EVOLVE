@@ -25,11 +25,17 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   verifyImage(){
-    if(this.user.profilePicture.length>10){
+    if(this.user.image.data){
       return false
-    }else{
+    } else if(this.user.imageColor){
       return true
     }
+    return true
+    // if(this.user.profilePicture.length>10){
+    //   return false
+    // }else{
+    //   return true
+    // }
   }
 
   adicionar(){
