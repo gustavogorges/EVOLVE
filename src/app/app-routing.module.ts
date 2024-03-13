@@ -16,7 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
   {
-    path : "kaique",
+    path : "",
     component : LandingPageComponent
   },
   {
