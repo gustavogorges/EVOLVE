@@ -40,6 +40,9 @@ export class BackendEVOLVEService {
   }
 
   async putTarefa (tarefa:Task){
+    console.log(tarefa);
+    console.log(JSON.stringify(tarefa));
+    
     return (await axios.put(this.URL+"task", tarefa)).data
   }
 

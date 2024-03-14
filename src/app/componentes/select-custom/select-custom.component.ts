@@ -21,7 +21,7 @@ export class SelectCustomComponent implements OnInit {
 
   
 
-  @Output() newItem = new EventEmitter<string>();
+  @Output() newItem = new EventEmitter<any>();
 
 
   constructor(private service : BackendEVOLVEService 
@@ -41,7 +41,7 @@ export class SelectCustomComponent implements OnInit {
     this.listOptions=[]
     this.listIcons=[]
 
-    this.newItem.emit(option.name);
+    this.newItem.emit(option);
     console.log(option)
     if(option.name=="Status"){
       this.projeto.statusList.map((status :Status)=>{

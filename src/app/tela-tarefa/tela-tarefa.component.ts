@@ -57,7 +57,7 @@ export class TelaTarefaComponent implements OnInit {
   async atualizar(favoritado: boolean): Promise<void> {
     if (favoritado) {
       console.log(this.listaTarefas);
-      this.projeto = await this.service.getOne('project', 102);
+      this.projeto = await this.service.getOne('project', 1);
       this.listaTarefas = this.projeto.tasks;
       this.sortLists();
     }
@@ -68,7 +68,7 @@ export class TelaTarefaComponent implements OnInit {
       this.option = localStorage.getItem('taskViewPreference');
     }
 
-    this.projeto = await this.service.getOne('project', 102);
+    this.projeto = await this.service.getOne('project', 1);
     this.listaTarefas = this.projeto.tasks;
     this.listaNova = this.projeto.tasks;
     this.sortLists();
@@ -127,9 +127,9 @@ export class TelaTarefaComponent implements OnInit {
   async optionA(option: any) {
     this.visualizacaoVisible = false;
 
-    this.option = option;
+    this.option = option.name;
     console.log(option);
-    localStorage.setItem('taskViewPreference', option);
+    localStorage.setItem('taskViewPreference', option.name);
 
     this.projeto = await this.service.getOne('project', this.projeto.id);
     this.listaTarefas = this.projeto.tasks;
@@ -191,10 +191,37 @@ export class TelaTarefaComponent implements OnInit {
 
     console.log(option);
     console.log(this.listOptions);
-    if(option.type="date"){
+    if(option.type=="date"){
+      if(option.name=="Data final"){
+        console.log("wgdg");
+        
+        this.listaTarefas.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
+          }
+        })
+        this.listaNova.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
+          }
+        })
+      }
+      console.log(this.listaNova);
+      console.log(this.listaTarefas);
 
-    }
-  }
+      
+      }
+      }
+      
+  
   changeFiltro(e: any) {
     this.visualizacaoVisible = false;
     this.ordenacaoVisible = false;
@@ -232,12 +259,12 @@ export class TelaTarefaComponent implements OnInit {
   }
 
   async optionC(option: any) {
-    if (option== 'Status') {
+    if (option.name== 'Status') {
       this.optionFilter = '';
       
       
     } else {
-      this.optionFilter = option;
+      this.optionFilter = option.name;
       console.log(this.optionFilter);
       
       this.optionFilter = this.optionFilter.toLowerCase();
@@ -246,8 +273,8 @@ export class TelaTarefaComponent implements OnInit {
     this.visualizacaoVisible = false;
 
     this.projeto.statusList.map((status: Status) => {
-      if (status.name == option) {
-        this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option)
+      if (status.name == option.name) {
+        this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option.name)
       this.filtroVisible = false;
       }
 
@@ -255,8 +282,11 @@ export class TelaTarefaComponent implements OnInit {
       this.sortLists();
     });
 
-    if (option == 'Favorito') {
+    if (option.name == 'Favorito') {
+      console.log(this.listaNova);
+
       this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
+      
       this.filtroVisible = false;
       this.sortLists();
     
@@ -284,9 +314,9 @@ export class TelaTarefaComponent implements OnInit {
   async removeFilter() {
     console.log('pobbbb');
     this.optionFilter = '';
+console.log(this.listaNova);
 
-    this.projeto = await this.service.getOne('project', this.projeto.id);
-    this.listaTarefas = this.projeto.tasks;
+    this.listaTarefas = this.listaNova;
     this.sortLists();
   }
 

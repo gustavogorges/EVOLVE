@@ -1,10 +1,12 @@
 import { Priority } from "./priority";
+import { PriorityRecord } from "./PriorityRecord";
 import { Project } from "./project";
 import { Property } from "./propriedade/property";
 import { TaskProjectProperty } from "./propriedade/task-project-property";
 import { Status } from "./status";
 import { Subtask } from "./subtask";
 import { User } from "./user";
+
 
 export class Task{
     id!: number ;
@@ -16,7 +18,7 @@ export class Task{
     currentStatus: Status = new Status;
   
     conclusionPercentage:number=0;
-    priority:Priority = 0;
+    priority:PriorityRecord = new PriorityRecord();
 
     creator:User = new User;
     project:Project | Partial<Project> = new Project;
@@ -24,7 +26,7 @@ export class Task{
     subtasks: Array<Subtask> = new Array;
     statusListIndex :number = -1;
 
-    associates:Array<User> = new Array;
+    associates:Array<User|Pick<User, "id">> = new Array;
     isVisible: boolean = false;
     scheduledDate: Date = new Date;
 }
