@@ -10,6 +10,7 @@ export class ScreenViewInterativeLandingPageComponent implements OnInit {
   constructor() { }
 
   indexSlide:number = 0
+  slideInterval: any;
 
   ngOnInit(): void {
     this.startSlideLoop();
@@ -23,5 +24,7 @@ export class ScreenViewInterativeLandingPageComponent implements OnInit {
 
   slide(index:number){
     this.indexSlide = index
+    setTimeout(() => {
+    }, 5000)
   }
 }

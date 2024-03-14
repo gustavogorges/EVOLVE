@@ -30,7 +30,7 @@
 }
 
 .search-input {
-    @apply w-2/3 h-full outline-none ml-2
+    @apply w-2/3 h-full outline-none border-none ml-2
 }
 
 .icon {
@@ -42,5 +42,5 @@
 }
 
 .span-input {
-    @apply w-2/3 h-1/2 bg-white rounded-xl border-2 rounded-md 
+    @apply w-2/3 h-1/2 bg-white border-2 rounded-md 
 }
