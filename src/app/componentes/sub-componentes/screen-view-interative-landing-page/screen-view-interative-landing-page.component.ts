@@ -25,6 +25,6 @@ export class ScreenViewInterativeLandingPageComponent implements OnInit {
   slide(index:number){
     this.indexSlide = index
     setTimeout(() => {
-    }, 5000)
+    }, 10000)
   }
 }
