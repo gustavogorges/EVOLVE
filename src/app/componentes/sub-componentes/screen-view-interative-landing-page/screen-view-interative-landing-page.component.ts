@@ -9,7 +9,19 @@ export class ScreenViewInterativeLandingPageComponent implements OnInit {
 
   constructor() { }
 
+  indexSlide:number = 0
+
   ngOnInit(): void {
+    this.startSlideLoop();
   }
 
+  startSlideLoop(): void {
+    setInterval(() => {
+      this.indexSlide = (this.indexSlide + 1) % 4;
+    }, 5000);
+  }
+
+  slide(index:number){
+    this.indexSlide = index
+  }
 }

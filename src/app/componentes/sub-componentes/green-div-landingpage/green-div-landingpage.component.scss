@@ -1,7 +1,7 @@
 .element{
     @apply grid grid-cols-3 grid-rows-2 h-[90vh];
     grid-template-columns: 45% 15% 40%;
-    grid-template-rows: 61% 40%;
+    grid-template-rows: 62% 40%;
     .div1{
         @apply bg-[#D4DFE3] w-full h-full row-start-1 col-start-1 col-end-2
     }
