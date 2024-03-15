@@ -3,6 +3,7 @@ import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { MessageStatus } from 'src/model/messageStatus';
 
 @Component({
   selector: 'app-message-bar',
@@ -32,9 +33,11 @@ export class MessageBarComponent implements OnInit {
     this.newMessage.chatId = this.chat.id
 
     //mudar status ao receber mensagem (backend?)
-    this.newMessage.messageStatus = 0
+    this.newMessage.status = MessageStatus.AWAITING
 
     this.newMessage.date = messageDate.toISOString()
+    
+    console.log(this.newMessage);
 
     console.log(await this.service.postMessage(this.newMessage))
 

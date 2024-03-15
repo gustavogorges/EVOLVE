@@ -1,19 +1,19 @@
 <div class="contact">
 
-    <div class="img-container" [ngStyle]="{ 'background-color': image }">
-        <img *ngIf="isImageAHex()" src="{{image}}"
+    <div class="img-container" [ngStyle]="{ 'background-color': contact.imageColor }">
+        <img *ngIf="contact.image?.data" src="{{contact.image.data}}"
             alt="" class="img">
     </div>
 
     <div class="body">
         <div class="name-container ">
             <p class="name">
-                {{name}}
+                {{contact?.name}}
             </p>
         </div>
         <div class="last-message-container">
             <p *ngIf="lastMessage" class="last-message">
-                {{lastMessage.content}}
+                {{getLastMessageContent()}}
             </p>
         </div>
     </div>
