@@ -5,6 +5,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { Project } from 'src/model/project';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -32,6 +33,7 @@ export class TelaInicialComponent implements OnInit {
   loggedUser: User = new User;
 
   booleanTask: boolean = false;
+  projectList : Array<Project> =[]
 
   constructor(
     private service: BackendEVOLVEService,
@@ -50,9 +52,14 @@ export class TelaInicialComponent implements OnInit {
 
     //this.cookieService.setOne(this.loggedUser)
 
-    this.listaTarefas = await this.service.getAllSomething('task');
+
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+    this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
+    //this.projectList = await this.service.getProjectsByUserId(this.loggedUser.id)
+
+    console.log(this.listaTarefas);
+    
   }
   tarefaSelecionada: Task = new Task();
   openTask(tarefa: Task): void {

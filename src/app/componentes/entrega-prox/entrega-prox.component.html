@@ -1,24 +1,54 @@
-<div class="main relative py-2">
-    <div class="date">
-
-        <!-- <p class="date-text">data final : {{dataFinal | date: "dd" + "/" + "MM"}}</p> -->
-        <p class="date-text">data final : {{tarefa.finalDate | date: "dd" + "/" + "MM"}}</p>
-
-        <p class="status-text" [ngStyle]="{'background-color':tarefa.currentStatus.backgroundColor,'color': tarefa.currentStatus.textColor}">{{tarefa.currentStatus.name}}</p>
-
-    </div>
-    <div class="name">
-        <p class="name-text whitespace-nowrap max-h-full ">{{tarefa.name}}</p>
-    </div>
-    <div class="star">
-
-        <img *ngIf="!tarefa.favorited" src="../../../assets/estrelaNaoMarcada.svg" alt="" (click)="alterarTarefaFavoritado()" >
-        <img *ngIf="tarefa.favorited" src="../../../assets/estrelaMarcada.svg" alt="" (click)="alterarTarefaFavoritado()">
-
-    </div>
-    <div  *ngIf="withProgressBar" class="progress-bar-container">
-        <div class="progress-bar" [ngStyle]="{'width': tarefa.conclusionPercentage+'%'}">
-            
+<div class="flex justify-between items-center w-full">
+  <div class="star">
+    <img
+      *ngIf="!tarefa.favorited"
+      src="../../../assets/estrelaNaoMarcada.svg"
+      alt=""
+      style="width: 30px ; height: 30px"   
+      (click)="alterarTarefaFavoritado()"
+    />
+    <img
+      *ngIf="tarefa.favorited"
+      src="../../../assets/estrelaMarcada.svg"
+      alt=""
+      style="width: 30px; height: 30px"   
+      (click)="alterarTarefaFavoritado()"
+    />
+  </div>
+  <div class="main relative py-2 ">
+    <div class="flex gap-5 items-center">
+      <p
+        class="status-text"
+        [ngStyle]="{
+          'background-color': tarefa.currentStatus.backgroundColor,
+          color: tarefa.currentStatus.textColor
+        }"
+      ></p>
+      <div class="">
+        <div class="name">
+          <p class="name-text whitespace-nowrap max-h-full">
+            {{ tarefa.name }}
+          </p>
         </div>
+        <div class="date">
+          <!-- <p class="date-text">data final : {{dataFinal | date: "dd" + "/" + "MM"}}</p> -->
+          <p class="date-text">
+            {{ tarefa.finalDate | date : "dd" + "/" + "MM" }}
+          </p>
+        </div>
+      </div>
     </div>
+    <div class="flex flex-col gap-2 justify-end items-end">
+      <div *ngFor="let user of tarefa.associates" class="flex gap-1">
+        <div class="w-7 h-7 overflow-clip rounded-full bg-orange-400"></div>
+        <div class="w-7 h-7 overflow-clip rounded-full bg-pink-400"></div>
+        <div class="w-7 h-7 overflow-clip rounded-full bg-yellow-400"></div>
+      </div>
+      <div>
+        <div class="progress-bar-container">
+          <div class="w-1/2 h-2.5 bg-primary rounded-md"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

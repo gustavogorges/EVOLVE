@@ -1,5 +1,5 @@
 .main {
-    @apply w-full h-full bg-white rounded-lg grid grid-cols-3 grid-rows-3 pt-2 pl-3 pr-3;
+    @apply w-[580px] h-[87px] bg-white rounded-lg p-3 shadow-md px-6 flex items-center justify-between;
     //  border-b-4 border-primary 
 }
 
@@ -13,19 +13,19 @@
 }
 
 .date-text {
-    @apply text-primary
+    @apply text-secondary font-hind-madurai text-xl
 }
 
 .name-text {
 
-    @apply text-primary font-bold text-lg ;
+    @apply text-primary font-bold text-[22px] ;
     animation: 5s ease-in 1s slidein;
 
 }
 
 .status-text {
 
-    @apply  rounded-lg text-sm py-0 px-4 h-5  ;
+    @apply  rounded-full  h-5 w-5 ;
 
     animation: 5s ease-in 1s slidein;
 
@@ -36,11 +36,11 @@
 }
 
 .progress-bar-container{
-    @apply w-full absolute bottom-0 bg-gray-200 h-1 ;
+    @apply w-52 bg-[#E9EDF1] h-2.5 rounded-md ;
 }
 
 .progress-bar{
-    @apply absolute bg-primary h-1;
+    @apply absolute w-1/2 bg-primary h-3;
 }
 
 

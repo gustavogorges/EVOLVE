@@ -80,6 +80,7 @@ import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar
 import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
+import { ImportantProjectComponent } from './important-project/important-project.component';
 registerLocaleData(localePT);
 
 
@@ -139,7 +140,8 @@ registerLocaleData(localePT);
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
-    TaskCalendarComponent
+    TaskCalendarComponent,
+    ImportantProjectComponent
 
   ],
   
