@@ -26,8 +26,13 @@ export class PropriedadeTarefaComponent implements OnInit {
   // porém seriam vários if's, tentar achar uma maneira de não usar 
   // tantos if's
   newPropertyObject:any;
+  propertyValue : any;
 
   ngOnInit(): void {
+    this.propertyValue = this.property.propertyValues[0]
+    console.log(this.propertyValue);
+    
+  
     this.eventsSubscription = 
     this.events.subscribe(() => 
     this.oldValueFunction()
@@ -120,9 +125,8 @@ export class PropriedadeTarefaComponent implements OnInit {
 
     // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
      if(property.propertyValues[0] != undefined) {
-       console.log(property.propertyValues);
       
-       this.oldValue = property.propertyValues[0].value.toString();
+       this.oldValue = this.propertyValue.toString();
      }
      property.propertyValues = new Array;
    
