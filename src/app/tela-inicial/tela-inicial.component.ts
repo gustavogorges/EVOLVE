@@ -52,12 +52,35 @@ export class TelaInicialComponent implements OnInit {
 
     //this.cookieService.setOne(this.loggedUser)
 
-
+    
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
-    //this.projectList = await this.service.getProjectsByUserId(this.loggedUser.id)
+     this.listaTarefas.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
+          }
+        })
+   let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
 
+   console.log(this.loggedUser.teams);
+
+   projects.map((project: Project)=>{
+    if(project.favorited){
+      console.log(project);
+      this.projectList.push(project)
+      
+    }
+   })
+  
+   console.log(this.projectList);
+   
+     
+      
     console.log(this.listaTarefas);
     
   }

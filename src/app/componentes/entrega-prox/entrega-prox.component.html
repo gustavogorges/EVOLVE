@@ -39,10 +39,12 @@
       </div>
     </div>
     <div class="flex flex-col gap-2 justify-end items-end">
-      <div *ngFor="let user of tarefa.associates" class="flex gap-1">
-        <div class="w-7 h-7 overflow-clip rounded-full bg-orange-400"></div>
-        <div class="w-7 h-7 overflow-clip rounded-full bg-pink-400"></div>
-        <div class="w-7 h-7 overflow-clip rounded-full bg-yellow-400"></div>
+      <div class="flex gap-1">
+        <div *ngFor="let user of tarefa.associates" >
+          <div class="w-7 h-7 overflow-clip rounded-full" [ngStyle]="getUserStyles(user)">
+        </div>
+      </div>
+      
       </div>
       <div>
         <div class="progress-bar-container">

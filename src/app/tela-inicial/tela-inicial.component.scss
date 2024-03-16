@@ -4,7 +4,7 @@
 }
 
 .main-box {
-    @apply w-full h-[92%] flex justify-end items-center
+    @apply w-full h-full flex items-center justify-end p-10
 }
 
 .left-side {
@@ -16,11 +16,11 @@
 }
 
 .card-deliveries-box {
-    @apply w-full h-4/6  rounded-xl flex flex-col items-center gap-4  max-h-[72vh] 
+    @apply w-full h-[55%]  rounded-xl flex flex-col items-center gap-4  max-h-[72vh] 
 }
 
 .right-side {
-    @apply w-full h-full flex flex-col
+    @apply  h-full flex flex-col
 }
 
 .right-side-box {
@@ -55,7 +55,7 @@
 
 
 .tarefa {
-    @apply w-[45%] h-[92vh] fixed z-50;
+    @apply w-[45%] h-[92vh] fixed z-50 ;
 }
 
 .title-box {

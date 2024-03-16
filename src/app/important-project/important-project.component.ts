@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from 'src/model/project';
 
+
 @Component({
   selector: 'app-important-project',
   templateUrl: './important-project.component.html',
@@ -32,4 +33,6 @@ project !: Project;
 
 
   }
+ 
 }
+
