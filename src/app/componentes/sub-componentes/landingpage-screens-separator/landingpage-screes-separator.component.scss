@@ -1,0 +1,18 @@
+.cards{
+    @apply w-[15vw] h-[21vh] rounded-lg shadow-lg;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 20% 2% 58% 20%;
+
+    .task{
+        @apply px-4;
+
+        p{
+            @apply text-fontGray mb-1
+        }
+    }
+
+    img{
+        @apply cursor-pointer;
+    }
+}
