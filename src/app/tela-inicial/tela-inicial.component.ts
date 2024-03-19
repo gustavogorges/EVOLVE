@@ -66,6 +66,7 @@ export class TelaInicialComponent implements OnInit {
           }
         })
    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
+   this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
 
    console.log(this.loggedUser.teams);
 
@@ -95,5 +96,12 @@ export class TelaInicialComponent implements OnInit {
   closeTask(tarefa: Task) {
     this.booleanTask = false;
     this.tarefaSelecionada = new Task();
+  }
+  indiceAtual: number = 0;
+
+  mudarItem(novoIndice: number) {
+    if (novoIndice >= 0 && novoIndice < this.listaTarefas.length) {
+      this.indiceAtual = novoIndice;
+    }
   }
 }

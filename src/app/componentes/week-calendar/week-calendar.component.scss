@@ -1,0 +1,13 @@
+.day-and-month-calendar{
+    @apply  flex flex-col gap-2
+}
+.text-p{
+    @apply text-white;
+    font-family: "Montserrat", "sans-serif";
+}
+.todayText {
+    @apply bg-primary text-primaryWhite  ;
+  }
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+}

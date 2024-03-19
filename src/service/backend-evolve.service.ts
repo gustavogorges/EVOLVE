@@ -32,6 +32,9 @@ export class BackendEVOLVEService {
   async getProjectsByUserId( userId: number )  {
     return (await axios.get(this.URL+"project" + "/user/"+userId)).data
   }
+  async getTeamsByUserId( userId: number )  {
+    return (await axios.get(this.URL+"team" + "/user/"+userId)).data
+  }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }

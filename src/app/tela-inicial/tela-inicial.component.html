@@ -39,15 +39,15 @@
 
 <!-- </div> -->
 <!-- <script src="tela-inicial.component.ts"></script> -->
-<div class="flex w-full h-full justify-between mx-16">
-  <div class="w-[40%] flex p-10">
+<div class="flex w-screen h-screen justify-center gap-[88px] px-16">
+  <div class="w-[40%] h-full flex pt-14">
     <div class="close-deliveries">
       <p class="title-text">Entregas Próximas</p>
 
       <div class="card-deliveries-box">
         <div
           *ngFor="let tarefa of listaTarefas; index as i"
-          class="w-full gap-3 flex flex-col items-center justify-center"
+          class="w-full gap-3 flex flex-col items-center "
         >
           <app-entrega-prox
             *ngIf="i <= 3"
@@ -75,17 +75,27 @@
       </div>
     </div>
   </div>
-  <div class=" w-[60%] p-10 flex  justify-end ">
-    <div class="flex flex-col gap-6 w-full h-[350px] ">
-        <p class="title-text">Suas Equipes: </p>
-        <div class="flex w-[900px] overflow-x-scroll gap-3">
-            <div *ngFor=" let team of loggedUser.teams" class="w-[900px] flex justify-center h-[250px]">
-           
-                <app-equipe-recente-card  [team]="team" class="w-[900px]"></app-equipe-recente-card>
-
-            </div>
-        </div>
+  <div class="w-full max-w-[845px]  flex flex-col gap-6 pt-14">
+    <div class="flex flex-col gap-6 w-full h-[350px]">
+      <p class="title-text">Suas Equipes:</p>
+      <div class="w-full flex justify-center">
+      <div class="flex w-full relative  gap-3">
        
+        <button class="absolute top-1/2 -translate-y-1/2 -left-5 pi pi-chevron-left text-[#aaa]" (click)="mudarItem(indiceAtual - 1)"></button>
+       
+          <app-equipe-recente-card
+            [team]="loggedUser.teams[indiceAtual]"
+            class="w-full"
+          ></app-equipe-recente-card>
+          <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>
+      
+      </div>
+    </div>
+    </div>
+    <div class="flex flex-col w-full gap-6 ">
+      <p class="title-text">Calendário Semanal</p>
+
+      <app-week-calendar class="w-full"></app-week-calendar>
     </div>
   </div>
 </div>

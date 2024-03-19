@@ -12,11 +12,11 @@
 }
 
 .close-deliveries {
-    @apply flex flex-col gap-5
+    @apply flex flex-col gap-5 w-full
 }
 
 .card-deliveries-box {
-    @apply w-full h-[55%]  rounded-xl flex flex-col items-center gap-4  max-h-[72vh] 
+    @apply w-full  rounded-xl flex flex-col items-center gap-4  
 }
 
 .right-side {
