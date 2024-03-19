@@ -30,8 +30,6 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   ngOnInit(): void {
     this.propertyValue = this.property.propertyValues[0]
-    console.log(this.propertyValue);
-    
   
     this.eventsSubscription = 
     this.events.subscribe(() => 
@@ -95,6 +93,8 @@ export class PropriedadeTarefaComponent implements OnInit {
   @Input()
   booleanEdit !: boolean;
 
+  booleanValue : boolean = false;
+
   @Input()
   property : Property = new Property();
 
@@ -106,6 +106,7 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   addPropertyValue(property : Property): void {
     this.booleanEditProperty = true;
+    this.booleanValue = true;
     property.editable = true;
     
     this.eventEmitter.emit();
@@ -121,6 +122,14 @@ export class PropriedadeTarefaComponent implements OnInit {
   
   }
 
+  checkTypeValue() : boolean {
+    if(this.booleanValue) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   saveProperty(property:Property) : void {
 
     // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
@@ -134,14 +143,16 @@ export class PropriedadeTarefaComponent implements OnInit {
         
      property.propertyValues.push(this.newPropertyObject)
 
+     this.propertyValue = this.property.propertyValues[0];
+     if(this.propertyValue.value.value == null) {
+      this.booleanValue = true;
+     }
+     
+
     this.stackProperty = property;
     
     property.editable = false;
     this.booleanEditProperty = true;
-
-    console.log("Log property, no property save");
-    
-    console.log(property);
     
 
     this.eventEmitterValue.emit(property);
