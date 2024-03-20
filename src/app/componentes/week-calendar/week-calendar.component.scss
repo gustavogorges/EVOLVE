@@ -11,3 +11,8 @@
   .scroll-container::-webkit-scrollbar {
     display: none;
 }
+.title-text {
+    @apply font-bold text-2xl text-secondary ;
+    font-family: "Montserrat", sans-serif;
+
+}

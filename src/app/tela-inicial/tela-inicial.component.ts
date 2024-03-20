@@ -66,9 +66,12 @@ export class TelaInicialComponent implements OnInit {
           }
         })
    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
+   console.log(projects);
+   
    this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
 
-   console.log(this.loggedUser.teams);
+ 
+   
 
    projects.map((project: Project)=>{
     if(project.favorited){
@@ -77,12 +80,14 @@ export class TelaInicialComponent implements OnInit {
       
     }
    })
+   console.log("dfg"+this.projectList);
+   
   
-   console.log(this.projectList);
+
    
      
       
-    console.log(this.listaTarefas);
+
     
   }
   tarefaSelecionada: Task = new Task();

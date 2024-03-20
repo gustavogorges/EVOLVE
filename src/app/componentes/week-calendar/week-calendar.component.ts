@@ -69,11 +69,14 @@ export class WeekCalendarComponent implements OnInit {
     // Atualizar o calendário com as novas tarefas
   }
 
+ 
   isSameDay(date1: Date, date2: Date | string) {
     if (typeof date2 === 'string') {
       // Converta a string para objeto Date, se necessário
       date2 = new Date(date2);
     }
+   
+    
   
     return date1.getFullYear() === date2.getFullYear() &&
       date1.getMonth() === date2.getMonth() &&
@@ -84,7 +87,7 @@ export class WeekCalendarComponent implements OnInit {
     today.setHours(0, 0, 0, 0)
     dia.setHours(0, 0, 0, 0)
 
-   console.log(today);
+
    
    
    

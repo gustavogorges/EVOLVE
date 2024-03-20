@@ -1,10 +1,12 @@
-<div class="bg-white w-full min-h-[250px] rounded-lg flex">
-    <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/3">
-        <div class=" w-24 h-24 rounded-full bg-orange-400 overflow-clip"></div>
-    
-    <p class="  @apply text-primary font-bold text-[22px] name-text text-center">{{team.name}}</p>
+<div class="bg-white w-full h-[220px] rounded-lg flex">
+    <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/4 min-h-min ">
+        <div class=" w-20 h-20 rounded-full bg-orange-400 overflow-clip"></div>
+   
+        <p class="  @apply text-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team.name}}</p>
+   
+   
     </div>
-    <div class="p-7 w-full flex flex-col gap-3">
+    <div class="p-7 w-full flex-1 flex flex-col gap-3">
 
         <div *ngFor="let member of team.participants">
             <div class="flex items-center justify-between">

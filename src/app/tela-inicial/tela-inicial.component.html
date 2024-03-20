@@ -40,11 +40,11 @@
 <!-- </div> -->
 <!-- <script src="tela-inicial.component.ts"></script> -->
 <div class="flex w-screen h-screen justify-center gap-[88px] px-16">
-  <div class="w-[40%] h-full flex pt-14">
+  <div class="w-[40%] h-full flex pt-9">
     <div class="close-deliveries">
       <p class="title-text">Entregas Próximas</p>
 
-      <div class="card-deliveries-box">
+      <div class="card-deliveries-box h-[424px]">
         <div
           *ngFor="let tarefa of listaTarefas; index as i"
           class="w-full gap-3 flex flex-col items-center "
@@ -75,8 +75,8 @@
       </div>
     </div>
   </div>
-  <div class="w-full max-w-[845px]  flex flex-col gap-6 pt-14">
-    <div class="flex flex-col gap-6 w-full h-[350px]">
+  <div class="w-full max-w-[845px]  flex flex-col gap-6 pt-9">
+    <div class="flex flex-col gap-6 w-full h-[280px]">
       <p class="title-text">Suas Equipes:</p>
       <div class="w-full flex justify-center">
       <div class="flex w-full relative  gap-3">
@@ -85,7 +85,7 @@
        
           <app-equipe-recente-card
             [team]="loggedUser.teams[indiceAtual]"
-            class="w-full"
+            class="w-full max-h-[200px]"
           ></app-equipe-recente-card>
           <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>
       
@@ -93,8 +93,7 @@
     </div>
     </div>
     <div class="flex flex-col w-full gap-6 ">
-      <p class="title-text">Calendário Semanal</p>
-
+     
       <app-week-calendar class="w-full"></app-week-calendar>
     </div>
   </div>

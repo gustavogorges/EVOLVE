@@ -69,7 +69,6 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
       this.construirCalendario();
   }
   teste(){
-    console.log(this.taskList)
     for(let task of this.taskList){
       if(task.finalDate!=null){
      
@@ -77,7 +76,6 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
         task.project = {
           id:this.project.id
         }
-        console.log(task)
         this.service.putTarefa(task);
       
         this.diasCalendario.map(dia =>{
@@ -85,7 +83,6 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
         
         
           if(dia.getTime()==task.finalDate.getTime()){
-            console.log("dsdas");
           }
            
         })
