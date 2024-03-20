@@ -1,7 +1,6 @@
-import { Component, ElementRef, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, SimpleChanges,ViewChild, ViewChildren } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
-
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -9,7 +8,12 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   templateUrl: './week-calendar.component.html',
   styleUrls: ['./week-calendar.component.scss']
 })
-export class WeekCalendarComponent implements OnInit {
+export class WeekCalendarComponent implements OnInit{
+
+  @ViewChildren('scrollContainer') scrollContainers!: QueryList<ElementRef>;
+
+
+
 
   constructor(private service: BackendEVOLVEService, private elRef: ElementRef) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,6 +35,8 @@ export class WeekCalendarComponent implements OnInit {
 
   atualizarSemana() {
     this.semanaAtual = this.getWeek(new Date());
+
+    
     this.construirDiasSemana();
   }
 
@@ -96,32 +102,30 @@ export class WeekCalendarComponent implements OnInit {
     
     return dia.getTime()==today.getTime()
   }
-  isDragging = false;
-  startX!: number;
-  scrollLeft!: number;
+  
+  filterTasksDay(date: Date):any[]{
+    let tasks: Array<Task> =[]
 
- 
+    date.setHours(0, 0, 0, 0)
 
-  startDrag(event: MouseEvent) {
-    this.isDragging = true;
-    this.startX = event.pageX - this.elRef.nativeElement.querySelector('.scroll-content').offsetLeft;
-    this.scrollLeft = this.elRef.nativeElement.querySelector('.scroll-content').scrollLeft;
+   
+   this.taskList.map((task)=>{
+    task.finalDate = new Date(task.finalDate)
+    task.scheduledDate = new Date(task.scheduledDate)
+    console.log(task.finalDate.getFullYear() );
+    
+   
+    
+    if(date.getFullYear() === task.finalDate.getFullYear() &&
+    date.getMonth() === task.finalDate.getMonth() &&
+   date.getDate() === task.finalDate.getDate() ||date.getFullYear() === task.scheduledDate.getFullYear() &&
+   date.getMonth() === task.scheduledDate.getMonth() &&
+  date.getDate() === task.scheduledDate.getDate()){
+      tasks.push(task)
+    }
 
-    document.addEventListener('mousemove', this.drag.bind(this));
-    document.addEventListener('mouseup', this.endDrag.bind(this));
-  }
-
-  endDrag() {
-    this.isDragging = false;
-    document.removeEventListener('mousemove', this.drag.bind(this));
-    document.removeEventListener('mouseup', this.endDrag.bind(this));
-  }
-
-  drag(event: MouseEvent) {
-    if (!this.isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - this.elRef.nativeElement.querySelector('.scroll-content').offsetLeft;
-    const walk = (x - this.startX) * 2; // Ajuste a sensibilidade aqui
-    this.elRef.nativeElement.querySelector('.scroll-content').scrollLeft = this.scrollLeft - walk;
+   })
+   return tasks; 
+      
   }
 }

@@ -69,9 +69,31 @@
 }
 
     .container {
-        @apply w-[642px];
+        @apply w-[660px] h-[248px] overflow-y-auto;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); /* Define a largura mínima e a fração de espaço disponível */
-        gap: 10px; /* Espaçamento entre os boards */
+        gap: 10px;
+
+         /* Espaçamento entre os boards */
       }
       
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px; 
+
+        
+        /* largura do scroll */
+       
+      }
+      
+      /* Define a cor do fundo do scroll */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      
+      /* Define a cor do thumb (a alça do scroll) */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 7px;
+        background: #E5E5E5 
+        
+      }

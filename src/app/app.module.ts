@@ -82,6 +82,7 @@ import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ImportantProjectComponent } from './important-project/important-project.component';
 import { WeekCalendarComponent } from './componentes/week-calendar/week-calendar.component';
+import { TasksWeekComponent } from './componentes/tasks-week/tasks-week.component';
 registerLocaleData(localePT);
 
 
@@ -143,7 +144,8 @@ registerLocaleData(localePT);
     SelectPropriedadeComponent,
     TaskCalendarComponent,
     ImportantProjectComponent,
-    WeekCalendarComponent
+    WeekCalendarComponent,
+    TasksWeekComponent
 
   ],
   

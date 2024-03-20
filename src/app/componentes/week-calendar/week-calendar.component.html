@@ -18,9 +18,12 @@
     </div>
   </div>
     <div>
-      <div class="days-row flex flex-col gap-4 items-center">
+      <div class="days-row flex flex-col gap-6 items-center">
         <ng-container *ngFor="let dia of diasSemana; let i = index">
-          <div class="flex w-full bg-white gap-2">
+        
+         
+          <div class="flex w-full bg-white gap-3 relative">
+            
             <div
               class="max-w-[160px] w-full bg-secondary rounded-lg flex flex-col items-center p-1"
               [ngClass]="{ todayText: isToday(dia) }"
@@ -31,34 +34,12 @@
               </p>
             </div>
             <div
-              class="flex w-full items-center gap-2 bg-white overflow-x-scroll scroll-container"
-              (mousedown)="startDrag($event)"
+              class="flex w-full items-center  bg-white overflow-hidden scroll-container"
+            
             >
-              <div
-                *ngFor="let task of taskList"
-                class="scroll-content"
-                #scrollContent
-              >
-                <div
-                  *ngIf="isSameDay(dia, task.finalDate) "
-                  class="p-1 rounded-lg w-36 text-center"
-                  [ngStyle]="{
-                    'background-color': task.currentStatus.backgroundColor,
-                    color: task.currentStatus.textColor
-                  }"
-                >
-                  {{ task.name }}
-                </div>
-                <div
-                  *ngIf="isSameDay(dia, task.scheduledDate)"
-                  class="p-1 rounded-lg w-36 text-center border-2 border-dashed"
-                  [ngStyle]="{
-                    'border-color': task.currentStatus.backgroundColor
-                  }"
-                >
-                  {{ task.name }}
-                </div>
-              </div>
+           
+        <app-tasks-week [taskList]="filterTasksDay(dia)" class=""[day]=dia></app-tasks-week>
+              
             </div>
           </div>
         </ng-container>
