@@ -9,6 +9,7 @@ import { User } from 'src/model/user';
 import { Status } from 'src/model/status';
 import { Property } from 'src/model/propriedade/property';
 import { Priority } from 'src/model/priority';
+import { PropertyValue } from 'src/model/propriedade/propertyValue';
 
 
 @Injectable({
@@ -48,8 +49,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(property:Property) {
-    return (await axios.put(this.URL+"task/property/put",property)).data
+  async putPropertyValue(propertyId:number, propertyValue:PropertyValue) {
+    return (await axios.put(this.URL+"task/property/put/"+propertyId,propertyValue)).data
   }
 
   async getAllPriorities() {

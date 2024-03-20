@@ -77,6 +77,11 @@ export class PropriedadeTarefaComponent implements OnInit {
   DOUBLE : string = "DOUBLE";
   TEXT : string = "TEXT";
 
+  
+  propertyValueObject : PropertyValue = new PropertyValue;
+
+  propertyTest : Property = new Property;
+
   newPropertyValue:string = '';
 
   oldValue : string = '';
@@ -85,7 +90,8 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   eventsSubscription !: Subscription;
 
-  stackProperty : Property = new Property;
+  propertyStack : Property = new Property;
+  propertyValueStack : PropertyValue = new PropertyValue;
 
   @Input()
   events!:Observable<Property>
@@ -103,6 +109,9 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   @Output()
   eventEmitterValue = new EventEmitter<Property>();
+
+  @Output()
+  eventEmitterValue2 = new EventEmitter<PropertyValue>();
 
   addPropertyValue(property : Property): void {
     this.booleanEditProperty = true;
@@ -132,6 +141,7 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   saveProperty(property:Property) : void {
 
+
     // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
      if(property.propertyValues[0] != undefined) {
       
@@ -141,21 +151,33 @@ export class PropriedadeTarefaComponent implements OnInit {
    
      this.newPropertyObject.value = this.newPropertyValue;
         
-     property.propertyValues.push(this.newPropertyObject)
+     this.propertyValue = this.newPropertyObject;
 
-     this.propertyValue = this.property.propertyValues[0];
+     this.propertyTest = property;
+
+     this.propertyValueObject.property = this.propertyTest;
+     this.propertyValueObject.value[0] = this.newPropertyObject;
+
+     console.log(this.propertyValueObject);
+
+     property.propertyValues.push(this.propertyValueObject)
+
+     this.propertyTest.propertyValues = [];
+
      if(this.propertyValue.value.value == null) {
       this.booleanValue = true;
      }
      
 
-    this.stackProperty = property;
+    this.propertyStack = property;
+    this.propertyValueStack = this.propertyValueObject;
     
     property.editable = false;
     this.booleanEditProperty = true;
     
 
     this.eventEmitterValue.emit(property);
+    this.eventEmitterValue2.emit(this.propertyValueStack);
   }
 
   oldValueFunction() {

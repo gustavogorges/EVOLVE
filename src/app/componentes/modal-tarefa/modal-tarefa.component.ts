@@ -5,6 +5,7 @@ import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
+import { PropertyValue } from 'src/model/propriedade/propertyValue';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -33,6 +34,7 @@ export class ModalTarefaComponent implements OnInit {
   booleanPlayPause : boolean = false; 
 
   propertyStack : Property = new Property;
+  propertyValueStack : PropertyValue = new PropertyValue;
 
   propertiesList : Array<Property> = new Array();
 
@@ -208,6 +210,7 @@ export class ModalTarefaComponent implements OnInit {
 
 
   eventsSubject: Subject<Property> = new Subject<Property>();
+  eventsSubject2: Subject<PropertyValue> = new Subject<PropertyValue>();
 
   booleanEditFalse() {
     this.booleanEdit = false;
@@ -217,6 +220,7 @@ export class ModalTarefaComponent implements OnInit {
     this.tarefa.description = this.descricaoAntiga;
     this.tarefa.name = this.nomeAntigo;
     this.eventsSubject.next(this.propertyStack);
+    this.eventsSubject2.next(this.propertyValueStack);
   }
 
   async salvarTarefa() {
@@ -227,8 +231,11 @@ export class ModalTarefaComponent implements OnInit {
       if(this.propertyStack != null ) {
         console.log("Log property stack");
         console.log(this.propertyStack);
+        console.log("Log propertyValue stack");
+        console.log(this.propertyValueStack);
         
-        this.service.putPropertyValue(this.propertyStack)
+        
+        this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
       }
 
     } else if (this.tarefa.id == 0) {
@@ -255,10 +262,11 @@ export class ModalTarefaComponent implements OnInit {
   setPropertyValue(property:Property) {
     console.log("Log property recebida");
     this.propertyStack = property;
-    console.log("Log property stack atribuida");
-    console.log(this.propertyStack);
-    
-    
+  }
+
+  setPropertyValue2(propertyValue:PropertyValue) {
+    console.log("Log propertyValue recebida");
+    this.propertyValueStack= propertyValue;
   }
 
   startFocus() {
