@@ -64,14 +64,14 @@
           <h1>Parece que você concluiu todas suas tarefas!</h1>
         </div>
       </div>
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-3">
         <p class="title-text">Projetos Favoritados</p>
         <div></div>
-        <div class="container">
-          <div *ngFor="let project of projectList">
-            <app-important-project [project]="project"></app-important-project>
+        <div class="container ">
+          <div *ngFor="let project of projectList; index as i">
+            <app-important-project [project]="project" ></app-important-project>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>

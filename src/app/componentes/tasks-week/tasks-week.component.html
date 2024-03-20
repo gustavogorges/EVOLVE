@@ -1,0 +1,27 @@
+<div class=" flex gap-2 items-center    " #scrollContainer>
+    <div class="flex  gap-4 bg-white items-center ">
+
+  
+    <div *ngFor="let task of tasks">
+        <div *ngIf="isSameDay(task.finalDate)" class="p-1 rounded-lg w-36 text-center" [ngStyle]="{
+        'background-color': task.currentStatus.backgroundColor,
+        color: task.currentStatus.textColor
+      }">
+            {{ task.name }}
+        </div>
+        <div *ngIf="isSameDay(task.scheduledDate)" class="p-1 rounded-lg w-36 text-center border-2 border-dashed"
+            [ngStyle]="{
+        'border-color': task.currentStatus.backgroundColor
+      }">
+            {{ task.name }}
+        </div>
+    </div>
+</div>  
+    <div *ngIf="taskList.length > 4" class="max-w-[32px] absolute right-0 -top-[22px]  z-50" >
+        <button class="pi pi-chevron-left text-[#aaa]" [ngStyle]="{'opacity': this.indice > 0 ? 100 : 0}" [disabled]="!(this.indice>0)" (click)="scrollLeft()" style="font-size: 0.8rem;"></button>
+       
+        <button class="pi pi-chevron-right text-[#aaa]" style="font-size: 0.8rem;"  [ngStyle]="{'opacity': this.indice +4< this.taskList.length ? 100 : 0}" [disabled]="!(this.indice+4<this.taskList.length)" 
+            (click)="scrollRight()"></button>
+          
+    </div>
+</div>
