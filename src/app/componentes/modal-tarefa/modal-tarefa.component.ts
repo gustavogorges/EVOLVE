@@ -224,17 +224,10 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   async salvarTarefa() {
-    console.log(this.tarefa);
   
     if (this.tarefa.id != 0) {
       this.service.putTarefa(this.tarefa);
       if(this.propertyStack != null ) {
-        console.log("Log property stack");
-        console.log(this.propertyStack);
-        console.log("Log propertyValue stack");
-        console.log(this.propertyValueStack);
-        
-        
         this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
       }
 
@@ -260,12 +253,10 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   setPropertyValue(property:Property) {
-    console.log("Log property recebida");
     this.propertyStack = property;
   }
 
   setPropertyValue2(propertyValue:PropertyValue) {
-    console.log("Log propertyValue recebida");
     this.propertyValueStack= propertyValue;
   }
 

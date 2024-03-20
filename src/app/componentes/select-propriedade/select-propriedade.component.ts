@@ -47,8 +47,6 @@ export class SelectPropriedadeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.tarefa);
-    console.log(this.selectOption.backgroundColor)
   }
 
   options: any[] = [
@@ -130,7 +128,6 @@ export class SelectPropriedadeComponent implements OnInit {
   }
 
   savePropertie() {
-    console.log(this.tarefa)
     if(this.optionType == 'numero inteiro') {
        this.newPropertie.propertyType = PropertyType.IntegerValue;
         this.tarefa.properties.push(this.newPropertie);
