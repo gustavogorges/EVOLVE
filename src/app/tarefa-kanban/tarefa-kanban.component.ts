@@ -13,6 +13,7 @@ import {
   DropEffect,
 } from 'ngx-drag-drop';
 import { Project } from 'src/model/project';
+import { User } from 'src/model/user';
 interface NestableListItem {
   content: string;
   disable?: boolean;
@@ -172,7 +173,17 @@ export class TarefaKanbanComponent  implements OnChanges{
         task.project = {
           id: this.project.id
         }
-        this.service.putTarefa(task)
+        console.log(task);
+        
+        task.associates = task.associates.map(user => {
+          return {id:user.id}
+        })
+
+        console.log(task.associates);
+        
+
+        console.log(this.service.putTarefa(task));
+         
       })
       this.taskList == list;
     }else{

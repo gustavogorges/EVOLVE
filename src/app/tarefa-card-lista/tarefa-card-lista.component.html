@@ -1,30 +1,46 @@
-<div class="main">
-  <div class=" name-box">
-    <div *ngIf="tarefaAtual.name.length > 10">
-      <p class="taskName">{{ tarefaAtual.name }}</p>
-    </div>
-    <div *ngIf="tarefaAtual.name.length <= 10">
-      <p class="name">{{ tarefaAtual.name }}</p>
-    </div>
+<div class="flex items-center">
+
+<div class=" name-box">
+  <div *ngIf="tarefaAtual.name.length > 10">
+    <p class="taskName">{{ tarefaAtual.name }}</p>
   </div>
+  <div *ngIf="tarefaAtual.name.length <= 10">
+    <p class="name">{{ tarefaAtual.name }}</p>
+  </div>
+</div>
+<div class="main">
+  <div class="status-box">
+    <div
+    class="status"
+    [ngStyle]="{ 'background-color': tarefaAtual.currentStatus.backgroundColor }"
+  >
+  
+  </div>
+  </div>
+
+ 
   <div class="grey-progress">
     <div class="blue-progress" [ngStyle]="{ width: valorBarra }"></div>
   </div>
   <div class="finalDate-box">
-    <p class="finalDate">{{ tarefaAtual.finalDate }}</p>
+    <p class="finalDate">{{ tarefaAtual.finalDate | date: "dd" }}/{{ tarefaAtual.finalDate | date: "LL" }}/ {{ tarefaAtual.finalDate | date: "yyyy" }}</p>
   </div>
-  <div
-    class="status"
-    [ngStyle]="{ 'background-color': tarefaAtual.currentStatus.backgroundColor }"
+ 
+  <div class="flex gap-2 w-28">
+    <div class="taskMemberPhoto bg-yellow-300"></div>
+    <div class="taskMemberPhoto bg-pink-400"></div>
+    <div class="taskMemberPhoto bg-blue-400"></div>
+   
+  </div>
+  <div class="priority-box">
+    <div
+    class="priority"
   >
-    {{ tarefaAtual.currentStatus.name }}
+  {{tarefaAtual.priority  }}
   </div>
-  <div class="flex gap-2">
-    <div class="taskMemberPhoto bg-secondary"></div>
-    <div class="taskMemberPhoto">
-      <img src="assets/pessoaTeste.svg" />
-    </div>
-    <div class="taskMemberPhoto bg-fuchsia-400"></div>
+  </div>
+  <div class="finalDate-box">
+    <p class="text-black text-lg font-hind-madurai">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
   </div>
   <div class="star-box">
     <img
@@ -35,4 +51,7 @@
       style="width: 1.5rem"
     />
   </div>
+
 </div>
+</div>
+

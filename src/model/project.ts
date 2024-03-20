@@ -10,6 +10,8 @@ export class Project{
     finalDate: string = "";
     description: string ="";
     image:string=""
+    imageColor:string=""
+
     creator!:User
     adimnistrators:Array<User>=new Array
     members:Array<User> = new Array;
@@ -18,4 +20,5 @@ export class Project{
     tasks: Array<Task> = new Array;
     adimnistrator: Array<User> = new Array;
     isVisible: boolean = false 
+    favorited : boolean =false 
 }

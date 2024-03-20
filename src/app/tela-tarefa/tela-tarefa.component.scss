@@ -42,13 +42,13 @@
 
 }
 .box-list{
-  @apply flex flex-col h-full w-full gap-6  items-center justify-center
+  @apply flex flex-col h-full w-full gap-2  items-center justify-center
 }
 
 
 
   .cardLista {
-    @apply bg-[#FFFFFF] rounded-lg drop-shadow-md  w-[78%];
+    @apply w-[78%];
   }
   .card-box {
     @apply w-full h-full
@@ -98,4 +98,10 @@
 .text-filterBy{
   font-family: 'Hind Madurai', sans-serif;
   @apply text-lg text-[#6A7181] 
+}
+.width-name-propertys{
+@apply w-[120px]  max-h-6 text-lg text-gray-500 font-hind-madurai;
+
+
+
 }

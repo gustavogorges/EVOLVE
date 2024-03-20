@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
@@ -76,6 +76,13 @@ import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { DndModule } from 'ngx-drag-drop';
+import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+import { ImportantProjectComponent } from './important-project/important-project.component';
+import { WeekCalendarComponent } from './componentes/week-calendar/week-calendar.component';
+registerLocaleData(localePT);
 
 
 
@@ -133,7 +140,10 @@ import { DndModule } from 'ngx-drag-drop';
     ChartModalComponent,
 
     TarefaKanbanComponent,
-    SelectPropriedadeComponent
+    SelectPropriedadeComponent,
+    TaskCalendarComponent,
+    ImportantProjectComponent,
+    WeekCalendarComponent
 
   ],
   
@@ -157,11 +167,12 @@ import { DndModule } from 'ngx-drag-drop';
     CdTimerModule,
     BrowserModule,
     DragDropModule,
-    DndModule
+    DndModule,
+    CommonModule
 
   ],
   
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

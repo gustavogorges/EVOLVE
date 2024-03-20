@@ -1,18 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
+import { Team } from 'src/model/team';
 
 @Component({
   selector: 'app-equipe-recente-card',
   templateUrl: './equipe-recente-card.component.html',
   styleUrls: ['./equipe-recente-card.component.scss']
 })
-export class EquipeRecenteComponent implements OnInit {
+export class EquipeRecenteComponent implements OnInit, OnChanges {
 
-  @Input() projeto: Project = new Project
+  @Input() team!: Team 
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['team']) {
+      console.log(this.team);
+      
+      
+    }  }
 }

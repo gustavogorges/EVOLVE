@@ -1,30 +1,25 @@
-<div class="main-box">
+<!-- <div class="main-box">
     <app-modal-tarefa class="tarefa" *ngIf="booleanTask" [tarefa]="tarefaSelecionada"></app-modal-tarefa>
-    <div class="main">
-        <div class="left-side">
-           <div class="close-deliveries">
-                <div class="title-box">
-                    <p class="title-text">Entregas Próximas</p>
-                </div>
-                <div class="card-deliveries-box">
-
-                    <div *ngFor="let tarefa of listaTarefas" class="w-full gap-5 flex flex-col items-center justify-center">
-                        <app-entrega-prox 
-                        class="card-deliveries"
-                         [tarefa]="tarefa" 
-                         (click)="openTask(tarefa)"
-                        ></app-entrega-prox>
-                       
-                    </div>
-                    <div *ngIf="listaTarefas.length == 0" class="flex flex-col items-center justify-center text-center font-bold text-primary text-xl ">
-                        <h1> Parece que você concluiu todas suas tarefas!</h1>
-                    </div>
-                </div>
+    
+        <div class="left-side w-[30%] ">
+           
            </div>
+          
         </div>
-        <div class="right-side">
+        <div class="right-side ">
         <div class="right-side-box">
-            <app-equipes-recentes class="w-full"></app-equipes-recentes>
+            <div class="flex flex-col gap-6 w-full h-[350px] ">
+                <p class="title-text">Suas Equipes: </p>
+                <div class="flex w-[900px] overflow-x-scroll gap-3">
+                    <div *ngFor=" let team of loggedUser.teams" class="w-[900px] flex justify-center h-[250px]">
+                   
+                        <app-equipe-recente-card  [team]="team" class="w-[900px]"></app-equipe-recente-card>
+    
+                    </div>
+                </div>
+               
+            </div>
+            
 
             <div class="calendar-box">
               <div class="calendar">
@@ -40,7 +35,66 @@
               </div>
             </div>
         </div>
-        </div>
-    </div>
-</div>
+        </div> -->
+
+<!-- </div> -->
 <!-- <script src="tela-inicial.component.ts"></script> -->
+<div class="flex w-screen h-screen justify-center gap-[88px] px-16">
+  <div class="w-[40%] h-full flex pt-9">
+    <div class="close-deliveries">
+      <p class="title-text">Entregas Próximas</p>
+
+      <div class="card-deliveries-box h-[424px]">
+        <div
+          *ngFor="let tarefa of listaTarefas; index as i"
+          class="w-full gap-3 flex flex-col items-center "
+        >
+          <app-entrega-prox
+            *ngIf="i <= 3"
+            class="card-deliveries"
+            [tarefa]="tarefa"
+            [withProgressBar]="true"
+            (click)="openTask(tarefa)"
+          ></app-entrega-prox>
+        </div>
+        <div
+          *ngIf="listaTarefas.length == 0"
+          class="flex flex-col items-center justify-center text-center font-bold text-primary text-xl"
+        >
+          <h1>Parece que você concluiu todas suas tarefas!</h1>
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
+        <p class="title-text">Projetos Favoritados</p>
+        <div></div>
+        <div class="container">
+          <div *ngFor="let project of projectList">
+            <app-important-project [project]="project"></app-important-project>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full max-w-[845px]  flex flex-col gap-6 pt-9">
+    <div class="flex flex-col gap-6 w-full h-[280px]">
+      <p class="title-text">Suas Equipes:</p>
+      <div class="w-full flex justify-center">
+      <div class="flex w-full relative  gap-3">
+       
+        <button class="absolute top-1/2 -translate-y-1/2 -left-5 pi pi-chevron-left text-[#aaa]" (click)="mudarItem(indiceAtual - 1)"></button>
+       
+          <app-equipe-recente-card
+            [team]="loggedUser.teams[indiceAtual]"
+            class="w-full max-h-[200px]"
+          ></app-equipe-recente-card>
+          <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>
+      
+      </div>
+    </div>
+    </div>
+    <div class="flex flex-col w-full gap-6 ">
+     
+      <app-week-calendar class="w-full"></app-week-calendar>
+    </div>
+  </div>
+</div>
