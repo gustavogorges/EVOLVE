@@ -150,13 +150,15 @@ export class PropriedadeTarefaComponent implements OnInit {
      property.propertyValues = new Array;
    
      this.newPropertyObject.value = this.newPropertyValue;
+     this.newPropertyObject.property = this.property;
         
      this.propertyValue = this.newPropertyObject;
 
      this.propertyTest = property;
 
+     this.propertyValueObject.value.propertyType = this.propertyTest.propertyType.toString();
      this.propertyValueObject.property = this.propertyTest;
-     this.propertyValueObject.value[0] = this.newPropertyObject;
+     this.propertyValueObject.value = this.newPropertyObject;
 
      console.log(this.propertyValueObject);
 

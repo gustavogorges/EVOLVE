@@ -3,6 +3,6 @@ import { Value } from "./property-values/value"
 
 export class PropertyValue {
     id : number = 0;
-    value : Array<Value> = [];
+    value : Value = new Value;
     property : Property = new Property();
 }
