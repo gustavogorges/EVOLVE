@@ -1,39 +1,47 @@
-<div class="w-full h-full flex flex-wrap gap-5 justify-center">
-    <div class="cards" *ngFor="let item of cards, index as i">
-        <div>
-            <div class="flex justify-between px-2 items-center h-full">
-                <p class="text-primary font-semibold">Data final: 00/00</p>
-                <p class="p-1 px-2 rounded-lg h-fit font-hind-madurai" [style.background]="item.color">{{item.text}}</p>
+<!-- <div class="w-full h-full flex flex-wrap gap-5 justify-center" >
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4">Projeto Padrão</p>
+            <button class="bg-secondary p-2 px-4 w-full rounded-lg duration-200 text-primaryWhite font-semibold hover:scale-105"><i class="pi pi-plus"></i> Adicionar Tarefa</button>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">Visualização</p>
+            <p class="cursor-pointer hover:scale-105 duration-200" >Ordenação</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer ">Filtro</p>
+                <i class="pi pi-filter text-secondary"></i>
             </div>
         </div>
-        <div class="bg-gray-300">
-            <div class="w-1/2 h-full bg-primary rounded-r-lg"></div>
-        </div>
-        <div class="px-2">
-            <p class="font-semibold text-primary text-lg my-1">Titulo da tarefa</p>
-            <div class="flex gap-2 items-center task">
-                <p-checkbox [(ngModel)]="item.checked1" [binary]="true" inputId="binary"></p-checkbox>
+    </div>
+    <div *ngFor="let item of cards, index as i">
+    </div>
+</div> -->
 
-                <p>Tarefa 1</p>
-            </div>
-            <div class="flex gap-2 items-center task">
-                <p-checkbox [(ngModel)]="item.checked2" [binary]="true" inputId="binary"></p-checkbox>
-
-                <p>Tarefa 2</p>
-            </div>
-            <div class="flex gap-2 items-center task">
-                <p-checkbox [(ngModel)]="item.checked3" [binary]="true" inputId="binary"></p-checkbox>
-                <p>Tarefa 3</p>
+<div class="w-full h-full">
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4">Projeto Padrão</p>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">Visualização</p>
+            <p class="cursor-pointer hover:scale-105 duration-200" >Ordenação</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer ">Filtro</p>
+                <i class="pi pi-filter text-secondary"></i>
             </div>
         </div>
-        <div class="flex items-center px-5 pt-2 justify-between">
-            <img *ngIf="!item.favorited" src="../../../assets/estrelaNaoMarcada.svg" alt=""
-                style="width: 27px ; height: 20px" (click)="alterarTarefaFavoritado(i)" />
-            <img *ngIf="item.favorited" src="../../../assets/estrelaMarcada.svg" alt=""
-                style="width: 27px ; height: 20px" (click)="alterarTarefaFavoritado(i)" />
-            <div class="flex">
-                <div class="w-[20px] h-[20px] bg-secondary rounded-full"></div>
-                <div class="w-[20px] h-[20px] bg-gray-300 rounded-full -translate-x-1"></div>
+    </div>
+    
+    <div class="w-fit h-full flex justify-center gap-5">
+        <div class="w-full h-full" *ngFor="let status of status">
+            <div class="w-full flex justify-end my-1">
+                <p class="w-[5vw] text-center font-hind-madurai rounded-lg bg-blue-500" [style.background]="status.color">{{status.status}}</p>
+            </div>
+            <div class="w-[20vw] h-[75%] rounded-lg bg-gray-200 overflow-hidden">
+                <button class="w-full px-4 h-10 text-fontGray font-semibold text-lg border-b-2 border-gray-300 hover:scale-105 duration-100"><i class="pi pi-plus text-secondary"></i> Adicionar tarefa</button>
+                <div class="py-2 h-[90%] flex flex-col items-center gap-5 overflow-y-scroll">
+                    <app-cards-carrosel *ngFor="let item of cards" [ngClass]="status.status === item.status ? 'visible':'invisible h-0'"  [task]="item" (favorited)="alterarTarefaFavoritado($event)" ></app-cards-carrosel>
+                </div>
             </div>
         </div>
     </div>

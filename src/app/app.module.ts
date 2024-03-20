@@ -80,6 +80,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { GreenDivLandingpageComponent } from './componentes/sub-componentes/green-div-landingpage/green-div-landingpage.component';
 import { ScreenViewInterativeLandingPageComponent } from './componentes/sub-componentes/screen-view-interative-landing-page/screen-view-interative-landing-page.component';
 import { LandingpageScreesSeparatorComponent } from './componentes/sub-componentes/landingpage-screens-separator/landingpage-screes-separator.component';
+import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carrosel/cards-carrosel.component';
 
 
 
@@ -141,7 +142,8 @@ import { LandingpageScreesSeparatorComponent } from './componentes/sub-component
     LandingPageComponent,
     GreenDivLandingpageComponent,
     ScreenViewInterativeLandingPageComponent,
-    LandingpageScreesSeparatorComponent
+    LandingpageScreesSeparatorComponent,
+    CardsCarroselComponent,
   ],
   
   imports: [
