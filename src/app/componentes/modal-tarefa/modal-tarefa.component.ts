@@ -240,7 +240,7 @@ export class ModalTarefaComponent implements OnInit {
 
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
-      this.tarefa.creator.id = 1;
+      this.tarefa.creator.id = 1; 
       this.service.postTarefa(this.tarefa);
       //if(this.propertyStack != null ) {
       //  this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)

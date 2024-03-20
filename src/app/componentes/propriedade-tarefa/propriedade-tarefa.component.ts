@@ -142,8 +142,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   saveProperty(property:Property) : void {
 
 
-    // LÓGICA DE SALVAR AS PROPRIEDADES DEVE SER MUDADA DE ACORDO COM AS NOVAS MODELS
-     if(property.propertyValues[0] != undefined) {
+     if(property.propertyValues[property.propertyValues.length] != undefined) {
       
        this.oldValue = this.propertyValue.toString();
      }
@@ -156,9 +155,13 @@ export class PropriedadeTarefaComponent implements OnInit {
 
      this.propertyTest = property;
 
-     this.propertyValueObject.value.propertyType = this.propertyTest.propertyType.toString();
+     console.log("log do propertyType da property");
+     console.log(this.propertyTest.propertyType.toString());
+     
      this.propertyValueObject.property = this.propertyTest;
      this.propertyValueObject.value = this.newPropertyObject;
+     this.propertyValueObject.value.propertyType = property.propertyType.toString();
+     console.log(this.propertyValueObject);
 
      console.log(this.propertyValueObject);
 
