@@ -4,7 +4,7 @@ import { Task } from "./task";
 
 export class User {
     [x: string]: any;
-    id: number = 0;
+    id!: number;
     email: string = "";
     password: string = "";
     name : string = "";
@@ -13,4 +13,6 @@ export class User {
     createdTasks: Array<Task> = new Array;
     managedTeams: Array<Team> = new Array;
     teams: Array<Team> = new Array;
+    // image!:File
+    imageColor!:string
 }

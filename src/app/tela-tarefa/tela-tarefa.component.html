@@ -1,25 +1,23 @@
-
 <div class="gorgees">
   <app-modal-tarefa
-  class="tarefa"
-  *ngIf="booleanTask"
-  [tarefa]="tarefaSelecionada"
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
   ></app-modal-tarefa>
 </div>
 
-
 <div class="main-box">
-
   <div class="main">
     <div class="header">
       <div class="button-name-box">
         <h1 class="project-name">Projeto Padrão</h1>
         <app-botao-add-tarefa
           class="w-[100%]"
-          (click)="openTaskEdit()"
+          (click)="openTaskEdit(tarefaNova)"
           *ngIf="!(option == 'Kanban')"
         ></app-botao-add-tarefa>
-
       </div>
       <div class="box-selections">
         <div class="relative">
@@ -29,6 +27,7 @@
           </button>
           <div *ngIf="visualizacaoVisible" class="selections absolute z-10">
             <app-select-custom
+              [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionA($event)"
@@ -43,6 +42,7 @@
           </button>
           <div *ngIf="ordenacaoVisible" class="selections absolute z-10">
             <app-select-custom
+              [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionB($event)"
@@ -51,11 +51,12 @@
         </div>
         <div>
           <button (click)="changeFiltro($event)" class="select-button">
-            <i class="pi pi-filter icon" style="font-size: 1rem "></i>
+            <i class="pi pi-filter icon" style="font-size: 1rem"></i>
             Filtros
           </button>
           <div *ngIf="filtroVisible" class="selections absolute z-10">
             <app-select-custom
+              [projeto]="projeto"
               [listOptions]="listOptions"
               [listIcons]="listIcons"
               (newItem)="optionC($event)"
@@ -78,40 +79,75 @@
       </div>
     </div>
 
-    <div *ngIf="option == 'Padrão'">
+    <div *ngIf="option == 'Cards'">
       <div class="tasks-grid-padrao">
-        <div *ngFor="let tarefa of listaTarefas; index as indice" class="card">
+        <div
+          *ngFor="
+            let tarefa of listaTarefas;
+            index as indice;
+            trackBy: trackById
+          "
+          class="card"
+        >
           <app-tarefa-card-padrao
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (click)="openTask(tarefa)"
             (newItem)="ngOnInit()"
+            [project]="projeto"
           ></app-tarefa-card-padrao>
         </div>
       </div>
     </div>
     <div *ngIf="option == 'Lista'">
       <div class="box-list">
+        <div class="flex gap-7    justify-between">
+  
+
+          <p class="width-name-propertys">status:</p>
+          <p class="width-name-propertys">
+            progresso:
+          </p>
+          <p class="width-name-propertys"> data final:</p>
+          <p class="width-name-propertys">membros:</p>
+          <p class="width-name-propertys">
+            prioridade:
+          </p>
+          <p class="width-name-propertys">data agendada: </p>
+
+        </div>
         <div
-          *ngFor="let tarefa of listaTarefas; index as indice"
+          *ngFor="
+            let tarefa of listaTarefas;
+            index as indice;
+            trackBy: trackById
+          "
           class="cardLista"
         >
           <app-tarefa-card-lista
             class="h-full w-full"
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
-            (newItem)="ngOnInit()"
+            (newItem)="atualizar($event)"
+            [project]="projeto"
           ></app-tarefa-card-lista>
         </div>
       </div>
     </div>
-    
+  </div>
+  <div *ngIf="option == 'Kanban'">
+    <div class="w-full">
+      <app-tarefa-kanban
+        [taskList]="listaTarefas"
+        [project]="projeto"
+      ></app-tarefa-kanban>
+    </div>
+  </div>
+  <div *ngIf="option == 'Calendario'">
+ 
+    <div class="w-full">
       
-      </div>
-      <div *ngIf="option == 'Kanban'" >
-        <div class="w-full" cdkDropListGroup >
-            <app-tarefa-kanban [listaTarefas]="listaTarefas" [listaStatus] = "projeto.statusList"
-            ></app-tarefa-kanban>
-        </div>
+     <app-task-calendar  [taskList]="listaTarefas" [project]="projeto"></app-task-calendar>
+    </div>
   </div>
 </div>

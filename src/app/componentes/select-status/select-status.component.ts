@@ -34,13 +34,12 @@ export class SelectStatusComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.statusLista)
     console.log(this.projeto)
-    console.log(this.status.backgroundColor)
   }
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;
+    console.log(this.tarefa.currentStatus)
     this.newItem.emit(false);
   }
 
@@ -48,11 +47,17 @@ export class SelectStatusComponent implements OnInit {
     this.booleanAddStatus = !this.booleanAddStatus;
   }
 
-  novoStatus() {
+  async novoStatus(): Promise<void> {
     this.status.textColor = "#000000";
-    this.projeto.statusList.push(this.status)
-    this.service.putProjeto(this.projeto)
+    this.projeto.id=2;
+
+    console.log(this.status);
+
+
+    this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
+    
     console.log(this.projeto)
+
     this.addStatus();
   }
 

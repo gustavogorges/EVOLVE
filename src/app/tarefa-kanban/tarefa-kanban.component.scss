@@ -1,7 +1,51 @@
 
 
 .status {
-    @apply rounded-lg  px-4 w-max text-sm ;
+    @apply rounded-lg  px-7 text-sm text-end w-max  ;
     font-family: "Montserrat", sans-serif;
   }
+  .dndDraggingSource {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
   
+  .dndPlaceholder {
+    background: #fdfdfd;
+    min-height: 46px;
+    min-width: 46px;
+  }
+  
+  [dnddropzone] {
+    background: #f8f8f8;
+    min-height: 60px;
+    display: flex;
+  }
+
+.oba{
+   overflow-x: auto;
+   overflow-y: auto;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px; /* largura do scroll */
+ 
+}
+
+/* Define a cor do fundo do scroll */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Define a cor do thumb (a alça do scroll) */
+::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #E5E5E5 
+  
+}
+
+// /* Define o comportamento do thumb quando estiver sendo arrastado */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #555; 
+// }

@@ -1,14 +1,25 @@
-<div class="main">
-    <div class="pic-project">
-        <img class="pic" src="{{projeto.image}}" alt="">
+<div class="bg-white w-full h-[220px] rounded-lg flex">
+    <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/4 min-h-min ">
+        <div class=" w-20 h-20 rounded-full bg-orange-400 overflow-clip"></div>
+   
+        <p class="  @apply text-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team.name}}</p>
+   
+   
     </div>
-    <div class="name-project">
-        <p>NOME</p>
-    </div>
-    <div class="responsible-project flex gap-4">
-        <p class="responsible-text">criador :</p>
-        <div class="flex items-center justify-center">
-            <img class="responsible-circle" src="{{projeto.creator.profilePicture}}" alt="">
+    <div class="p-7 w-full flex-1 flex flex-col gap-3">
+
+        <div *ngFor="let member of team.participants">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full overflow-clip bg-blue-300">
+                    
+                    </div>
+                    <div class="text-xl">{{member.name}}</div>
+                </div>
+                
+                <i class="pi  pi-comment" style="font-size: 1.5rem; color: green"></i>
+            </div>
+
         </div>
     </div>
 </div>

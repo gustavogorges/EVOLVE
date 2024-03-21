@@ -4,23 +4,23 @@
 }
 
 .main-box {
-    @apply w-full h-[92%] flex justify-end items-center
+    @apply w-full h-full flex items-center justify-end p-10
 }
 
 .left-side {
-    @apply h-full w-full flex justify-center
+    @apply h-full w-full flex justify-center 
 }
 
 .close-deliveries {
-    @apply w-[70%] h-full bg-primaryGray rounded-lg flex-col items-center justify-center shadow-xl
+    @apply flex flex-col gap-5 w-full
 }
 
 .card-deliveries-box {
-    @apply w-full h-5/6 bg-primaryWhite rounded-xl flex flex-col items-center gap-6 mt-5 mb-5 max-h-[72vh] overflow-y-scroll
+    @apply w-full  rounded-xl flex flex-col items-center gap-4  
 }
 
 .right-side {
-    @apply w-full h-full flex flex-col
+    @apply  h-full flex flex-col
 }
 
 .right-side-box {
@@ -37,7 +37,7 @@
 }
 
 .card-deliveries {
-    @apply w-4/5 shadow-lg;
+    @apply w-full ;
 }
 
 .icon {
@@ -55,7 +55,7 @@
 
 
 .tarefa {
-    @apply w-[45%] h-[92vh] fixed z-50;
+    @apply w-[45%] h-[92vh] fixed z-50 ;
 }
 
 .title-box {
@@ -63,5 +63,37 @@
 }
 
 .title-text {
-    @apply font-semibold text-2xl text-primaryWhite
+    @apply font-bold text-2xl text-secondary ;
+    font-family: "Montserrat", sans-serif;
+
 }
+
+    .container {
+        @apply w-[660px] h-[248px] overflow-y-auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); /* Define a largura mínima e a fração de espaço disponível */
+        gap: 10px;
+
+         /* Espaçamento entre os boards */
+      }
+      
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px; 
+
+        
+        /* largura do scroll */
+       
+      }
+      
+      /* Define a cor do fundo do scroll */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      
+      /* Define a cor do thumb (a alça do scroll) */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 7px;
+        background: #E5E5E5 
+        
+      }

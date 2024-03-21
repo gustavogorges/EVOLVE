@@ -1,234 +1,308 @@
-
 import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
 import { Project } from 'src/model/project';
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-
 import { Status } from 'src/model/status';
 
+interface OptionOrder {
+  name: string;
+  type: string;
 
-interface Bah {
-  name:string,
-  type:string
-  id:number
 }
 
 @Component({
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
-  styleUrls: ['./tela-tarefa.component.scss']
-  // 
+  styleUrls: ['./tela-tarefa.component.scss'],
+  //
 })
 export class TelaTarefaComponent implements OnInit {
+  selectedVisualizacao = 'Visualização';
+  select: string = 'Padrao';
+  listaTarefas: Array<Task> = [];
+  booleanTask: boolean = false;
 
-  selectedVisualizacao = "Visualização";
-  select : string = "Padrao";
-  listaTarefas: Array<Task> =[]
-  booleanTask : boolean = false;
+  tarefaSelecionada: Task = new Task();
+  tarefaNova: Task = new Task();
+  listaNova: Array<Task> = [];
+  tarefaMovida!: any;
 
-  tarefaSelecionada:Task = new Task
-  tarefaNova : Task = new Task;
-  listaNova :Array<Task>=[];
-  tarefaMovida !:any
+  listOptions: Array<any> = [];
+  listIcons: Array<string> = [];
+  visualizacaoVisible: boolean = false;
+  ordenacaoVisible: boolean = false;
+  filtroVisible: boolean = false;
+  projeto!: Project;
 
-  listOptions :Array<string>=[]
-  listIcons : Array<string>=[]
-  visualizacaoVisible:boolean = false
-  ordenacaoVisible:boolean = false
-  filtroVisible:boolean = false
-  projeto !:Project
-  option  : string ="Kanban"
-  optionFilter : string = ""
+  option: string | null = 'Cards';
+  optionFilter: string = '';
 
-  constructor(private service : BackendEVOLVEService, private sla2: Location) {}
+  constructor(private service: BackendEVOLVEService) {}
+
+  async atualizar(favoritado: boolean): Promise<void> {
+    if (favoritado) {
+      console.log(this.listaTarefas);
+      this.projeto = await this.service.getOne('project', 1);
+      this.listaTarefas = this.projeto.tasks;
+      this.sortLists();
+    }
+  }
 
   async ngOnInit(): Promise<void> {
-    this.listaNova = await this.service.getAllSomething("task")
-    this.listaTarefas =await this.service.getAllSomething("task")
-    this.projeto = await this.service.getOne("project",2652)
-    console.log(this.projeto.statusList)
+    if (localStorage.getItem('taskViewPreference') != null) {
+      this.option = localStorage.getItem('taskViewPreference');
+    }
+
+    this.projeto = await this.service.getOne('project', 1);
+    this.listaTarefas = this.projeto.tasks;
+    this.listaNova = this.projeto.tasks;
+    this.sortLists();
+    console.log(this.listaTarefas);
+    console.log(this.projeto);
+  }
+  sortLists() {
+    this.listaTarefas.sort(this.opa);
+    this.listaNova.sort(this.opa);
   }
 
-  changeVisualizacao(e:any){
-    this.ordenacaoVisible=false
-    this.filtroVisible=false
-
-    e.target.value = "Visualização"
-
-    this.listOptions = [
-      "Padrão","Kanban","Lista","Calendario"
-    ]
-    this.listIcons = [
-      PrimeIcons.TH_LARGE, PrimeIcons.MAP, PrimeIcons.BARS, PrimeIcons.CALENDAR
-    ]
-if( this.visualizacaoVisible==true){
-    this.visualizacaoVisible=false;
-
-  }else {
-    this.visualizacaoVisible=true;
-
+  opa = (a:Task, b:Task) => {
+    return a.favorited === b.favorited ? 0 : a.favorited ? -1 : 1;
   }
 
-
-    
+  trackById(index: number, item: any): any {
+    return item.id;
   }
-  
-  optionA(option : any){
-  
-    this.visualizacaoVisible=false;
-    
-    this.option=option
-    console.log(option)
-  }
+  changeVisualizacao(e: any) {
+    this.ordenacaoVisible = false;
+    this.filtroVisible = false;
 
-
-  changeOrdenacao(e:any){
-    this.visualizacaoVisible=false
-    this.filtroVisible=false
-
-    console.log(this.ordenacaoVisible)
-    e.target.value = "Visualização"
-
-    this.listOptions = [
-      "Data final","Progresso","Prioridade","Agendamento"
-    ]
-    this.listIcons = [
-      PrimeIcons.CALENDAR, PrimeIcons.CHART_LINE, PrimeIcons.EXCLAMATION_CIRCLE, PrimeIcons.CALENDAR_TIMES
-    ]
-if( this.ordenacaoVisible==true){
-    this.ordenacaoVisible=false;
-
-  }else {
-    this.ordenacaoVisible=true;
-
-  }
-  console.log(this.ordenacaoVisible)
-  }
-
-  @HostListener('click', ['$event'])
-  clicouFora(event:any){
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c77') ||
-    name.includes('c72') ||
-    name.includes('c64') ||
-    name.includes('c70') || 
-    name.includes('c73') || 
-    name.includes('c78') ||
-    name.includes('c71') ||
-    name.includes('c79'));
-     if(!element){
-       for(let pFor of this.listaTarefas){
-           this.closeTask();
-       }
+    e.target.value = 'Visualização'; 
+    let op : OptionOrder ={
+      name: "Cards",
+      type: " "
      }
-  }
-
-  closeTask() {
-    this.tarefaNova = new Task;
-    this.booleanTask = false;
-  }
-  
-  optionB(option : any){
-  
-    this.ordenacaoVisible=false;
-    this.visualizacaoVisible=false;
-
-
-    console.log(option)
-  }
-  changeFiltro(e:any){
-    this.visualizacaoVisible=false
-    this.ordenacaoVisible=false
-
+     let op1 : OptionOrder ={
+      name: "Kanban",
+      type: ""
+     }
+     let op2 : OptionOrder ={
+      name: "Lista",
+      type: ""
+     }
+     let op3 : OptionOrder ={
+      name: "Calendario",
+      type: ""
+     }
     
-    this.listOptions = [
-      "Status","Associado","Prioridade","Favorito"
-    ]
+
+     this.listOptions = [op, op1, op2, op3];
     this.listIcons = [
-      PrimeIcons.SPINNER, PrimeIcons.USER, PrimeIcons.EXCLAMATION_CIRCLE, PrimeIcons.STAR
-    ]
-if( this.filtroVisible==true){
-    this.filtroVisible=false;
-
-  }else {
-    this.filtroVisible=true;
-
-
+      PrimeIcons.TH_LARGE,
+      PrimeIcons.MAP,
+      PrimeIcons.BARS,
+      PrimeIcons.CALENDAR,
+    ];
+    if (this.visualizacaoVisible == true) {
+      this.visualizacaoVisible = false;
+    } else {
+      this.visualizacaoVisible = true;
+    }
   }
-  console.log(this.filtroVisible)
 
+  async optionA(option: any) {
+    this.visualizacaoVisible = false;
 
-    
+    this.option = option.name;
+    console.log(option);
+    localStorage.setItem('taskViewPreference', option.name);
+
+    this.projeto = await this.service.getOne('project', this.projeto.id);
+    this.listaTarefas = this.projeto.tasks;
+    this.sortLists();
   }
-  
-   async optionC(option : any){
-    if(option=="Status"){
-      this.optionFilter="";
-  }else{
-    this.optionFilter=option
-    this.optionFilter=this.optionFilter.toLowerCase()
 
+  changeOrdenacao(e: any) {
+    this.visualizacaoVisible = false;
+    this.filtroVisible = false;
 
-  }
-    this.ordenacaoVisible=false;
-    this.visualizacaoVisible=false;
-    
    
-      this.projeto.statusList.map((status : Status)=>{
-      
-        if(status.name==option){
-          this.listaTarefas =[]
-          console.log("foi puta merdaaa")
-          this.listaNova.map((task : Task)=>{
-            console.log(task.currentStatus.name)
 
-            if(task.currentStatus.name==option){
-              this.listaTarefas.push(task)
-              console.log("eueuue")
-              this.filtroVisible=false      
+    console.log(this.ordenacaoVisible);
+    e.target.value = 'Visualização';
 
-            }
-          })
+   
+   let op : OptionOrder ={
+    name: "Data final",
+    type: "date"
+   }
+   let op1 : OptionOrder ={
+    name: "Progresso",
+    type: "number"
+   }
+   let op2 : OptionOrder ={
+    name: "Prioridade",
+    type: "priority"
+   }
+   let op3 : OptionOrder ={
+    name: "Data final",
+    type: "date"
+   }
+   this.listOptions = [op, op1, op2, op3];
+    this.listIcons = [
+      PrimeIcons.CALENDAR,
+      PrimeIcons.CHART_LINE,
+      PrimeIcons.EXCLAMATION_CIRCLE,
+      PrimeIcons.CALENDAR_TIMES,
+    ];
+    if (this.ordenacaoVisible == true) {
+      this.ordenacaoVisible = false;
+    } else {
+      this.ordenacaoVisible = true;
+    }
+    console.log(this.ordenacaoVisible);
+  }
 
-        } 
+  closeTask(event: boolean) {
+    console.log('ta entrando no close task');
+    if (event) {
+      this.tarefaNova = new Task();
+      this.booleanTask = false;
+    }
+  }
 
-      }
-    
-      )
-    
-      if(option=="Favorito"){
-        this.listaTarefas =[]
-        console.log("de novvooo")
-        this.listaNova.map((task : Task)=>{
-          if(task.favorited==true){
-            this.listaTarefas.push(task)
+  optionB(option: any) {
+    this.ordenacaoVisible = false;
+    this.visualizacaoVisible = false;
+
+    console.log(option);
+    console.log(this.listOptions);
+    if(option.type=="date"){
+      if(option.name=="Data final"){
+        console.log("wgdg");
+        
+        this.listaTarefas.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
           }
-        }
-        )
-        this.filtroVisible=false      
-
+        })
+        this.listaNova.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
+          }
+        })
       }
+      console.log(this.listaNova);
+      console.log(this.listaTarefas);
+
+      
+      }
+      }
+      
+  
+  changeFiltro(e: any) {
+    this.visualizacaoVisible = false;
+    this.ordenacaoVisible = false;
+
     
-  
+    let op : OptionOrder ={
+      name: "Status",
+      type: "status"
+     }
+     let op1 : OptionOrder ={
+      name: "Associado",
+      type: "associate"
+     }
+     let op2 : OptionOrder ={
+      name: "Prioridade",
+      type: "priority"
+     }
+     let op3 : OptionOrder ={
+      name: "Favorito",
+      type: "favorited"
+     }
+     this.listOptions = [op, op1, op2, op3];
+        this.listIcons = [
+      PrimeIcons.SPINNER,
+      PrimeIcons.USER,
+      PrimeIcons.EXCLAMATION_CIRCLE,
+      PrimeIcons.STAR,
+    ];
+    if (this.filtroVisible == true) {
+      this.filtroVisible = false;
+    } else {
+      this.filtroVisible = true;
+    }
+    console.log(this.filtroVisible);
   }
 
+  async optionC(option: any) {
+    if (option.name== 'Status') {
+      this.optionFilter = '';
+      
+      
+    } else {
+      this.optionFilter = option.name;
+      console.log(this.optionFilter);
+      
+      this.optionFilter = this.optionFilter.toLowerCase();
+    }
+    this.ordenacaoVisible = false;
+    this.visualizacaoVisible = false;
 
-  
+    this.projeto.statusList.map((status: Status) => {
+      if (status.name == option.name) {
+        this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option.name)
+      this.filtroVisible = false;
+      }
 
+     
+      this.sortLists();
+    });
 
-  openTask(task:Task) :void {
+    if (option.name == 'Favorito') {
+      console.log(this.listaNova);
+
+      this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
+      
+      this.filtroVisible = false;
+      this.sortLists();
+    
+    
+    }
+  }
+
+  openTask(tarefa: Task): void {
+    this.tarefaSelecionada = tarefa;
     this.booleanTask = !this.booleanTask;
-
-    this.tarefaSelecionada = task;
-
+    console.log(this.booleanTask);
+    console.log('ta vindo');
+    this.tarefaSelecionada = tarefa;
   }
 
-  openTaskEdit() {
+  openTaskEdit(tarefa: Task) {
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }
@@ -237,46 +311,19 @@ if( this.filtroVisible==true){
     this.tarefaSelecionada.id = 0;
     this.booleanTask = !this.booleanTask;
   }
-  async removeFilter(){
-    this.listaTarefas =await this.service.getAllSomething("tarefa")
-    this.optionFilter=""
-  }
-  onDropSuccess(event: any, novoIndice: number): void {
-    const task: Task = event.dragData;
-    // Aqui você pode realizar a lógica de atualização do estado da tarefa no seu modelo de dados
-    // por exemplo, mover a tarefa para o novo índice na lista de tarefas
-  }
+  async removeFilter() {
+    console.log('pobbbb');
+    this.optionFilter = '';
+console.log(this.listaNova);
 
-  filtrarLista(status:Status): Array<Task> {
-    let listaFiltrada = this.listaTarefas.filter(
-      (task: Task) => task.currentStatus.name === status.name
-    );
-    return listaFiltrada 
+    this.listaTarefas = this.listaNova;
+    this.sortLists();
   }
 
-  onDrop(event: CdkDragDrop<Task[]>, status:Status): void {
-    console.log("sto aq")
-    console.log(event.item)
-    console.log(event.container)
-    console.log(event.previousIndex)
-
-    if (event.previousContainer === event.container) {
-        // Reorder within the same list
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      // Move item to a different list
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-
-      // Update the status of the task in your data model
-      const movedTask: Task = event.container.data[event.currentIndex];
-      movedTask.currentStatus = status;
-    }
-  }
-  
-
+  // filtrarLista(status:Status): Array<Task> {
+  //   let listaFiltrada = this.listaTarefas.filter(
+  //     (tarefa: Task) => tarefa.currentStatus.name === status.name
+  //   );
+  //   return listaFiltrada
+  // }
 }

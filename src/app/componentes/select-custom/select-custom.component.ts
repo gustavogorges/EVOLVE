@@ -13,14 +13,15 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class SelectCustomComponent implements OnInit {
   
   @Input()
-  listOptions : Array<string> = new Array
+  listOptions !: Array<any> 
   @Input()
-  listIcons : Array<string>=new Array
+  listIcons !: Array<string>
+  @Input()
   projeto !: Project 
 
   
 
-  @Output() newItem = new EventEmitter<string>();
+  @Output() newItem = new EventEmitter<any>();
 
 
   constructor(private service : BackendEVOLVEService 
@@ -29,21 +30,23 @@ export class SelectCustomComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log(this.listOptions)
     console.log(this.listIcons)
-    this.projeto = await this.service.getOne("project",2652)
+
+    this.projeto = await this.service.getOne("project",this.projeto.id)
+
 
     
   }
 
-  saveOption(option:string) {
+  saveOption(option:any) {
     this.listOptions=[]
     this.listIcons=[]
 
     this.newItem.emit(option);
     console.log(option)
-    if(option=="Status"){
+    if(option.name=="Status"){
       this.projeto.statusList.map((status :Status)=>{
         console.log(status.name)
-        this.listOptions.push(status.name)
+        this.listOptions.push(status)
        })
   
       

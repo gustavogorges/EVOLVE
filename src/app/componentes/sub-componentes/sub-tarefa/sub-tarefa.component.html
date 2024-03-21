@@ -1,70 +1,70 @@
 <div class="main">
-    <div class="main-card">
-        <div class="card">
-            <div class="tasks">
-                <div class="task" *ngFor="let sub of listaSubtarefas; index as i">
-                    <div class="main-task">
-                        <div *ngIf="!sub.editable" class="s-input flex gap-1 w-[80%]">
-                            <input type="checkbox" id="{{i}}">
-                            <label class="task-label" for="{{i}}">{{sub.name}}</label> 
-                         </div>
-                         <div *ngIf="sub.editable" class=" flex justify-between gap-1 w-full">
-                            <div class="divInputEdit">
-                                <input 
-                                type="text" 
-                                class="inputEditNameSubtarefa" 
-                                placeholder="Digite o novo nome..."
-                                [(ngModel)]="newNameEdit"
-                                >
-                            </div>
-                            <div class="btn-confirm cursor-pointer" (click)="confirmEdit(sub)">
-                                <i class="pi pi-check text-primaryWhite text-xl"></i>
-                            </div>
-                         </div>
-                         <div class="w-[20%] gap-2" *ngIf="!sub.editable">
-                            <div class=" w-full">
-                                <div class="flex justify-end cursor-pointer">
-                                    <i class="pi pi-ellipsis-v" (click)="openModalSubtarefa(sub)"></i>
-                                </div>
-                            </div>
-                            <div class="w-[20%] pr-7 pt-1 absolute flex flex-col items-end">
-                                <div *ngIf="sub.modalEdit" class="modal-subtarefa">
-                                    <div class="main-modal-subtarefa">
-                                        <div class="w-full flex justify-center items-center gap-1 border-b  px-2">
-                                            <i class="pi pi-pencil icon "></i>
-                                            <div class="w-full cursor-pointer" (click)="editSubtarefa(sub)">
-                                                <p class=" text-primaryFontBlack">editar</p>
-                                            </div>
-                                        </div>
-                                        <div class="w-full flex justify-center items-center gap-1 px-2">
-                                            <i class="pi pi-trash icon"></i>
-                                            <div class="w-full cursor-pointer" (click)="removeSubtarefa(sub, i)">
-                                                <p class=" text-primaryFontBlack">remover</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="!booleanAddSubtarefa" class="box-btn-add">
-            <div *ngIf="!booleanAddSubtarefa" (click)="booleanSubtarefa()" class="btn-add-content">
-                <i class="pi pi-plus btn-add-text"></i>
-                <p class="btn-add-text">adicionar sub-tarefa </p>
-            </div>
-        </div>
-        <div *ngIf="booleanAddSubtarefa" class=" h-min w-full flex py-3 px-2 border-x-2 border-b-2 items-center">
-            <div class=" w-[80%] h-full">
-                <input type="text" class=" w-full h-[80%] input-new-sub border-b-2 pb-2 " [(ngModel)]="subtarefa.nome" placeholder="Digite a sub-tarefa aqui ...">
-            </div>
-            <div class=" w-[20%] h-full flex justify-center items-center gap-3">
-                <i (click)="adicionarSubtarefa()" class="pi pi-check p-2 bg-secondary text-primaryWhite rounded-lg"></i>
-                <i class="pi pi-trash p-2 bg-red-500 text-primaryWhite rounded-lg"></i>
-            </div>
-        </div>
-    </div>
+  <div class="main-card">
+      <div class="card">
+          <div class="tasks">
+              <div class="task" *ngFor="let sub of listaSubtarefas; index as i">
+                  <div class="main-task">
+                      <div *ngIf="!sub.editable" class="s-input flex gap-1 w-[80%]">
+                          <input type="checkbox" id="{{i}}">
+                          <label class="task-label" for="{{i}}">{{sub.name}}</label> 
+                       </div>
+                       <div *ngIf="sub.editable" class=" flex justify-between gap-1 w-full">
+                          <div class="divInputEdit">
+                              <input 
+                              type="text" 
+                              class="inputEditNameSubtarefa" 
+                              placeholder="Digite o novo nome..."
+                              [(ngModel)]="newNameEdit"
+                              >
+                          </div>
+                          <div class="btn-confirm cursor-pointer" (click)="confirmEdit(sub)">
+                              <i class="pi pi-check text-primaryWhite text-xl"></i>
+                          </div>
+                       </div>
+                       <div class="w-[20%] gap-2" *ngIf="!sub.editable">
+                          <div class=" w-full">
+                              <div class="flex justify-end cursor-pointer">
+                                  <i class="pi pi-ellipsis-v" (click)="openModalSubtarefa(sub)"></i>
+                              </div>
+                          </div>
+                          <div class="w-[20%] pr-7 pt-1 absolute flex flex-col items-end">
+                              <div *ngIf="sub.modalEdit" class="modal-subtarefa">
+                                  <div class="main-modal-subtarefa">
+                                      <div class="w-full flex justify-center items-center gap-1 border-b  px-2">
+                                          <i class="pi pi-pencil icon "></i>
+                                          <div class="w-full cursor-pointer" (click)="editSubtarefa(sub)">
+                                              <p class=" text-primaryFontBlack">editar</p>
+                                          </div>
+                                      </div>
+                                      <div class="w-full flex justify-center items-center gap-1 px-2">
+                                          <i class="pi pi-trash icon"></i>
+                                          <div class="w-full cursor-pointer" (click)="removeSubtarefa(sub, i)">
+                                              <p class=" text-primaryFontBlack">remover</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                       </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="!booleanAddSubtarefa" class="box-btn-add">
+          <div *ngIf="!booleanAddSubtarefa" (click)="booleanSubtarefa()" class="btn-add-content">
+              <i class="pi pi-plus btn-add-text"></i>
+              <p class="btn-add-text">adicionar sub-tarefa </p>
+          </div>
+      </div>
+      <div *ngIf="booleanAddSubtarefa" class=" h-min w-full flex py-3 px-2 border-x-2 border-b-2 items-center">
+          <div class=" w-[80%] h-full">
+              <input type="text" class=" w-full h-[80%] input-new-sub border-b-2 pb-2 " [(ngModel)]="subtarefa.nome" placeholder="Digite a sub-tarefa aqui ...">
+          </div>
+          <div class=" w-[20%] h-full flex justify-center items-center gap-3">
+              <i (click)="adicionarSubtarefa()" class="pi pi-check p-2 bg-secondary text-primaryWhite rounded-lg"></i>
+              <i class="pi pi-trash p-2 bg-red-500 text-primaryWhite rounded-lg"></i>
+          </div>
+      </div>
+  </div>
 </div>

@@ -5,11 +5,13 @@ import { Task } from "./task";
 import { User } from "./user";
 
 export class Project{
-    id: number = 0;
+    id!: number;
     name: string = "";
     finalDate: string = "";
     description: string ="";
     image:string=""
+    imageColor:string=""
+
     creator!:User
     adimnistrators:Array<User>=new Array
     members:Array<User> = new Array;
@@ -18,4 +20,5 @@ export class Project{
     tasks: Array<Task> = new Array;
     adimnistrator: Array<User> = new Array;
     isVisible: boolean = false 
+    favorited : boolean =false 
 }

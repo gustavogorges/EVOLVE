@@ -1,4 +1,4 @@
 export class CardPermissions{
-    id: number = 0;
+    id!: number;
     nome: string = "";
 }

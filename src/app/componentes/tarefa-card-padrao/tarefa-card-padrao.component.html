@@ -1,7 +1,7 @@
 <div class="main">
   <div class="flex gap-1 flex-col h-max">
     <div class="top-box p-3 pb-0">
-      <p class="endDate">data final:{{ tarefaAtual.finalDate }}</p>
+      <p class="endDate">data final:{{ tarefaAtual.finalDate | date:"dd/MM" }} </p>
       <div
         class="status"
         [ngStyle]="{
@@ -43,7 +43,7 @@
     <div class="star">
       <img
       [src]="caminhoEstrela"
-      (click)="favoritar()"
+      (click)="favoritar($event)"
       alt=""
       class="cursor-pointer"
       style="width: 21px"

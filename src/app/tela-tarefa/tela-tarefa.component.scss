@@ -5,8 +5,13 @@
 .gorgees{
   @apply flex justify-end w-screen
 }
+
+.tarefa {
+  @apply  w-[50%] h-[92vh] z-[999] fixed;
+}
+
 .main{
-  @apply w-3/4 flex flex-col gap-3
+  @apply w-4/5 flex flex-col gap-3
 }
 .header{
   @apply w-full flex flex-row justify-between py-6 items-center 
@@ -29,16 +34,21 @@
     @apply text-2xl
 }
 .tasks-grid-padrao{
-  @apply grid grid-cols-4 gap-6 w-full justify-center
+  width: 100%;
+  display: grid;
+  justify-self: center;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
+  grid-gap: 20px; 
+
 }
 .box-list{
-  @apply flex flex-col h-full w-full gap-6  items-center justify-center
+  @apply flex flex-col h-full w-full gap-2  items-center justify-center
 }
 
 
 
   .cardLista {
-    @apply bg-[#FFFFFF] rounded-lg drop-shadow-md  w-[78%];
+    @apply w-[78%];
   }
   .card-box {
     @apply w-full h-full
@@ -76,9 +86,7 @@
 }
  
 
-.tarefa {
-  @apply  w-[45%] h-[92vh] z-50 fixed;
-}
+
 .box-filterBy{
   @apply flex flex-row gap-1 items-center
 }
@@ -91,4 +99,9 @@
   font-family: 'Hind Madurai', sans-serif;
   @apply text-lg text-[#6A7181] 
 }
+.width-name-propertys{
+@apply w-[120px]  max-h-6 text-lg text-gray-500 font-hind-madurai;
 
+
+
+}

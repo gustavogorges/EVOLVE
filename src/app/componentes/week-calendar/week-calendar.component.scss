@@ -1,0 +1,40 @@
+.day-and-month-calendar{
+    @apply  flex flex-col gap-2
+}
+.text-p{
+    @apply text-white;
+    font-family: "Montserrat", "sans-serif";
+}
+.todayText {
+    @apply bg-primary text-primaryWhite  ;
+  }
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+}
+.title-text {
+    @apply font-bold text-2xl text-secondary ;
+    font-family: "Montserrat", sans-serif;
+
+}
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+  }
+  .scroll-content {
+    flex: 0 0 auto;
+  }
+  .scroll-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 1.5rem;
+  }
+  
+  .left {
+    float: left;
+  }
+  
+  .right {
+    float: right;
+  }

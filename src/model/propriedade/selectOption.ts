@@ -1,5 +1,5 @@
 export class SelectOption {
-    id:number =0
+    id!:number 
     backgroundColor : string = "#FFFFFFF"
     name : string = ""
 }

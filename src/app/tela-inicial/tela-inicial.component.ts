@@ -5,6 +5,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { Project } from 'src/model/project';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -32,6 +33,7 @@ export class TelaInicialComponent implements OnInit {
   loggedUser: User = new User;
 
   booleanTask: boolean = false;
+  projectList : Array<Project> =[]
 
   constructor(
     private service: BackendEVOLVEService,
@@ -50,9 +52,43 @@ export class TelaInicialComponent implements OnInit {
 
     //this.cookieService.setOne(this.loggedUser)
 
-    this.listaTarefas = await this.service.getAllSomething('task');
+    
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+    this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
+     this.listaTarefas.sort((a,b)=>{
+          if (a.finalDate < b.finalDate) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.finalDate > b.finalDate) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // datas são iguais
+          }
+        })
+   let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
+   console.log(projects);
+   
+   this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
+
+ 
+   
+
+   projects.map((project: Project)=>{
+    if(project.favorited){
+      console.log(project);
+      this.projectList.push(project)
+      
+    }
+   })
+   console.log("dfg"+this.projectList);
+   
+  
+
+   
+     
+      
+
+    
   }
   tarefaSelecionada: Task = new Task();
   openTask(tarefa: Task): void {
@@ -65,5 +101,12 @@ export class TelaInicialComponent implements OnInit {
   closeTask(tarefa: Task) {
     this.booleanTask = false;
     this.tarefaSelecionada = new Task();
+  }
+  indiceAtual: number = 0;
+
+  mudarItem(novoIndice: number) {
+    if (novoIndice >= 0 && novoIndice < this.listaTarefas.length) {
+      this.indiceAtual = novoIndice;
+    }
   }
 }
