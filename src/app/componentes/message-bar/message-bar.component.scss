@@ -1,0 +1,15 @@
+.main{
+    @apply w-full h-full flex items-center justify-center gap-8 ;
+}
+
+.message-input{
+    @apply  flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4  ;
+}
+
+.send-icon-container{
+    @apply flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem] ;
+}
+
+.annex-icon-container{
+    @apply flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem] ;
+}

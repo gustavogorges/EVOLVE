@@ -3,15 +3,15 @@ import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
+import { File } from "./file";
 
 export class Project{
     id!: number;
     name: string = "";
     finalDate: string = "";
     description: string ="";
-    image:string=""
-    imageColor:string=""
-
+    imageColor:string="#000000"
+    image:File = new File
     creator!:User
     adimnistrators:Array<User>=new Array
     members:Array<User> = new Array;

@@ -1,92 +1,88 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MessageDTO } from 'src/model/DTO/messageDTO';
 import { Chat } from 'src/model/chat';
-import { Message } from 'src/model/message';
-import { TeamChat } from 'src/model/team-chat';
+import { TeamChat } from 'src/model/teamChat';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
+
+interface ChatHeaderInfo{
+  name:String,
+  image:string
+}
 
 @Component({
   selector: 'app-tela-chat',
   templateUrl: './tela-chat.component.html',
   styleUrls: ['./tela-chat.component.scss']
 })
+
 export class TelaChatComponent implements OnInit {
 
-  // messageAlignment:String = "end"
-  // senderImagePointerAlignment:String = "right"
-  // senderImagePointerDirection:Number = 46
-  // showSenderImagePointer:Boolean = false
-
+  chatListTypeCookieField = "chatListType"
   loggedUser: User = new User
   search:string = ""
-  // newMessage: MessageDTO = new MessageDTO
 
   chatList:Array<Chat> = new Array
 
-  chatTypeUsers:string = "pessoas"
-  chatTypeTeams:string = "equipes"
-  chatTypeProjects:string = "projetos"
+  chatTypeUsers:string = "users"
+  chatTypeTeams:string = "teams"
+  chatTypeProjects:string = "projects"
   chatType:string = ""
 
-  selectedChat:Chat = new UserChat
+  selectedChat!:Chat
 
   constructor(
     private service: BackendEVOLVEService,
+    private cookiesService: CookiesService
   ) { }
 
   contact: User = new User
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.service.getOne("user", 1202)
-    this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
+    this.loggedUser = await this.cookiesService.getLoggedUser()
+    // this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
     console.log(this.loggedUser)
 
     // this.contact = chat.getContactFromUser(user)
     // console.log(this.getContactFromUser(this.loggedUser.chats[1], this.loggedUser))
 
     this.selectedChat = await this.getLastChat()
+    console.log("this.selectedChat");
+    console.log(this.selectedChat);
+    
+    
     this.contact = this.getContactFromUser(this.selectedChat, this.loggedUser)
   }
 
   async getLastChat():Promise<Chat>{
-    return await this.service.getChatsByUserId(this.loggedUser.id).then( (chats:Array<Chat>) => {
-
-      for(let chat of chats){
-        if(chat.id == JSON.parse(localStorage.getItem("lastChatId") ?? "")){
-          return chat
-        }
-      }
-
-      return new UserChat
-    })
+    return await this.service.getUserChatsByUserId(this.loggedUser.id)
+      .then((chats:Array<Chat>) => 
+        chats.find((chat) => chat.id == this.cookiesService.get("lastChatId"))!
+      )
   }
 
-  setChatListType(type:string):void{
+  async setChatListType(type:string):Promise<void>{
     if(type == this.chatTypeUsers){
-      this.chatList = this.loggedUser.chats
+      console.log(this.loggedUser);
+      this.chatList = await this.service.getUserChatsByUserId(this.loggedUser.id)
     }
     if(type == this.chatTypeProjects){
-      console.log("aaaaaaaaaaaaa")
-      this.chatList = this.filterTeamChats(this.loggedUser)
     }
     if(type == this.chatTypeTeams){
-
+      this.chatList = await this.service.getTeamChatsByUserId(this.loggedUser.id)
     }
+    this.cookiesService.set(this.chatListTypeCookieField, type)
   }
 
-  filterTeamChats(loggedUser:User):Array<Chat>{
-    let teamChats = new Array<TeamChat>
-    for(let team of loggedUser.teams){
-      teamChats.push(team.chat)
-    }
-    return teamChats
-  }
 
   checkSearch(chat:Chat):Boolean{
+    console.log(chat);
+    console.log(this.getContactFromUser(chat, this.loggedUser));
+    
     let contactName = this.getContactFromUser(chat, this.loggedUser).name.toLowerCase()
+    console.log(contactName);
+    
     return contactName.includes(this.search.toLowerCase())
   }
 
@@ -95,15 +91,15 @@ export class TelaChatComponent implements OnInit {
     this.contact = this.getContactFromUser(chat, this.loggedUser)
     console.log(chat)
     this.selectedChat = chat
-    localStorage.setItem("lastChatId",JSON.stringify(this.selectedChat.id))
+    this.cookiesService.set("lastChatId", this.selectedChat.id)
   }
 
   getContactFromUser(chat: UserChat, user: User) {
-    let users:Array<User> = chat.users
-    if (users[0].id != user.id) {
-      return users[0]
+    // let users:Array<User> = chat.users
+    if (chat.users[0]?.id != user.id) {
+      return chat.users[0]
     }
-    return users[1]
+    return chat.users[1]
   }
 
 }

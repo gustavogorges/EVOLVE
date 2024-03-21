@@ -51,8 +51,10 @@ export class TelaTarefaComponent implements OnInit {
   filtroVisible: boolean = false;
   projeto!: Project;
 
+
   option: string | null = 'Cards';
   optionFilter: string = '';
+
 
   constructor(private service: BackendEVOLVEService) {}
 
@@ -66,6 +68,7 @@ export class TelaTarefaComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
     if (localStorage.getItem('taskViewPreference') != null) {
       this.option = localStorage.getItem('taskViewPreference');
     }
@@ -76,6 +79,7 @@ export class TelaTarefaComponent implements OnInit {
     this.sortLists();
     console.log(this.listaTarefas);
     console.log(this.projeto);
+
   }
   sortLists() {
     this.listaTarefas.sort(this.opa);

@@ -112,39 +112,6 @@
           <i class="icon-propertie pi pi-calendar"></i>
           <p class="name-propertie">data final:</p>
         </div>
-        <div class="responsible-propertie">
-          <div class="name-icon">
-            <i class="icon-propertie pi pi-users"></i>
-            <p class="name-propertie">associados:</p>
-          </div>
-          <div class="responsible-icon-box">
-            <div class="responsible-icon"></div>
-          </div>
-        </div>
-        <div class="status-propertie">
-          <div class="name-icon">
-            <i class="icon-propertie pi pi-spinner"></i>
-            <p class="name-propertie">status:</p>
-          </div>
-          <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-            <div
-              (click)="editStatus()"
-              class="status-icon"
-              [ngStyle]="{
-                'background-color': tarefa.currentStatus.backgroundColor
-              }"
-            >
-              {{ tarefa.currentStatus.name }}
-            </div>
-          </div>
-          <!--[projeto]="tarefa.projeto"-->
-          <app-select-status
-            (newItem)="editStatus()"
-            [projeto]="projeto"
-            [tarefa]="tarefa"
-            [statusLista]="projeto.statusList"
-            *ngIf="booleanStatus"
-          ></app-select-status>
         <div class="date-end">
           <p
             *ngIf="!booleanCalendarioFinalDate"
@@ -158,7 +125,6 @@
             type="date"
             [(ngModel)]="tarefa.finalDate"
           />
-
         </div>
       </div>
       <div class="propertie">

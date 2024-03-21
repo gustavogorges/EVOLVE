@@ -26,14 +26,18 @@ export class MembrosEquipeComponent implements OnInit {
     
   }
 
-  async verifyImage(){
-    if(this.user.profilePicture === null){
-      this.user.profilePicture = this.randomizeColor()
-      await this.service.putUsuario(this.user)
+  verifyImage(){
+    if(this.user.image.data){
       return false
-    }else{
+    } else if(this.user.imageColor){
       return true
     }
+    return true
+    // if(this.user.profilePicture.length>10){
+    //   return false
+    // }else{
+    //   return true
+    // }
   }
 
   randomizeColor(){

@@ -1,6 +1,6 @@
 export class File {
-    id!: number;
-    name:String = "";
-    type:string="";
-    data:string = ""
+    id!:number
+    name:String=""
+    type:String = ""
+    data:String = ""
 }

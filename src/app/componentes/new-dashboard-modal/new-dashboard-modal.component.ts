@@ -14,7 +14,7 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
   @Input() newDashBool!:Boolean
   @Output() newDash : EventEmitter<any> = new EventEmitter<any>()
   @Input() newDashId !: number
-  nome = "Becker Viado"
+  nome = "teste"
 
   ngOnInit(): void {
     this.squads.push(

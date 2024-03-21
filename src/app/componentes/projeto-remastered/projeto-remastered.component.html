@@ -33,7 +33,7 @@
             <span><</span>
             <div class="users">
                 <div class="users-spam" *ngFor="let p of projeto.members">
-                    <div *ngIf="verifyImg(p)" [ngStyle]="{'background': p.profilePicture, 'background-color': p.profilePicture}" class="user-image-chartAt">{{p.name.charAt(0).toUpperCase()}}</div>
+                    <div *ngIf="verifyImg(p)" [ngStyle]="{'background': p.image.data, 'background-color': p.imageColor}" class="user-image-chartAt">{{p.name.charAt(0).toUpperCase()}}</div>
                     <p>{{p.name}}</p>
                 </div>
             </div>

@@ -6,10 +6,15 @@ import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
+
 import { Status } from 'src/model/status';
 import { Property } from 'src/model/propriedade/property';
 import { Priority } from 'src/model/priority';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
+
+import { Chat } from 'src/model/chat';
+import { TeamChat } from 'src/model/teamChat';
+
 
 
 @Injectable({
@@ -129,9 +134,18 @@ export class BackendEVOLVEService {
 
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
-  async getChatsByUserId(id:number) {
-    let path:string = "userChat/user/" 
-    console.log((await axios.get(this.URL+path+id)).data)
+  async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {
+    let path:string = "userChat/user/"
+    
+    console.log((await axios.get(this.URL+path+id)).data);
+    
+    return (await axios.get(this.URL+path+id)).data
+  }
+
+  async getTeamChatsByUserId(id:number) : Promise<Array<TeamChat>>{
+    let path:String = "teamChat/user/";
+    console.log((await axios.get(this.URL+path+id)).data);
+    
     return (await axios.get(this.URL+path+id)).data
   }
 

@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit {
 
   messageAlignment:string = "end"
   senderImagePointerAlignment:String = "right"
-  senderImagePointerDirection:number = 46
+  messagePointerLoggedUser:boolean = true
   showSenderImagePointer:boolean = false
 
   constructor() { }
@@ -26,8 +26,9 @@ export class MessageComponent implements OnInit {
   ngOnInit(): void {
     this.messageAlignment = "end"
     this.senderImagePointerAlignment = "right"
-    this.senderImagePointerDirection = 46
+    this.messagePointerLoggedUser = true
     this.showSenderImagePointer = false
+    console.log(this.message.sender)
   }
 
   previousMessageIsFromLoggedUser(currentMessageIndex:Number):Boolean{
@@ -64,11 +65,11 @@ export class MessageComponent implements OnInit {
     if(message.sender.id == this.loggedUser.id){
       this.messageAlignment = "end"
       this.senderImagePointerAlignment = "right"
-      this.senderImagePointerDirection = 46
+      this.messagePointerLoggedUser = true
     } else {
       this.messageAlignment = "start"
       this.senderImagePointerAlignment = "left"
-      this.senderImagePointerDirection = -46
+      this.messagePointerLoggedUser = false
     }
 
   }

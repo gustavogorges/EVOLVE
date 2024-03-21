@@ -1,0 +1,33 @@
+<div class="contact">
+
+    <div class="img-container" [ngStyle]="{ 'background-color': contact.imageColor }">
+        <img *ngIf="contact.image?.data" src="{{contact.image.data}}"
+            alt="" class="img">
+    </div>
+
+    <div class="body">
+        <div class="name-container ">
+            <p class="name">
+                {{contact?.name}}
+            </p>
+        </div>
+        <div class="last-message-container">
+            <p *ngIf="lastMessage" class="last-message">
+                {{getLastMessageContent()}}
+            </p>
+        </div>
+    </div>
+
+    <div class="side-info">
+
+        <div class="last-message-date-container">
+            <p *ngIf="lastMessage">
+                {{lastMessage.date | date : "dd"+"/"+"MM"}} 
+            </p>
+        </div>
+        <div class="">
+            <div class="unseen-message-icon"></div>
+        </div>
+
+    </div>
+</div>
