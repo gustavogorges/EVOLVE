@@ -1,5 +1,11 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { LogarithmicScale } from 'chart.js';
+import { Subject } from 'rxjs';
+import { Priority } from 'src/model/priority';
+import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
+import { Property } from 'src/model/propriedade/property';
+import { PropertyValue } from 'src/model/propriedade/propertyValue';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -16,14 +22,21 @@ export class ModalTarefaComponent implements OnInit {
   editBoolean: boolean = false;
   booleanEdit: boolean = false;
   booleanStatus: boolean = false;
-  booleanCalendario: boolean = false;
+  booleanCalendarioFinalDate: boolean = false;
+  booleanCalendariosScheduling : boolean = false;
   booleanDescription: boolean = false;
   booleanFoco: boolean = false;
+  booleanSelectPrioridade : boolean = false;
   booleanAddPropriedade: boolean = false;
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
   nomeAntigo: string = '';
   booleanPlayPause : boolean = false; 
+
+  propertyStack : Property = new Property;
+  propertyValueStack : PropertyValue = new PropertyValue;
+
+  propertiesList : Array<Property> = new Array();
 
   interval : any;
 
@@ -77,6 +90,16 @@ export class ModalTarefaComponent implements OnInit {
     clearInterval(this.interval);
   }
 
+  finishEditPriority() {
+    this.booleanSelectPrioridade = false;
+  }
+
+  updatePropertiesList() : void {
+      this.propertiesList = this.tarefa.properties;
+      this.booleanAddPropriedade = false;
+  }
+
+
   
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
@@ -86,19 +109,23 @@ export class ModalTarefaComponent implements OnInit {
   sendEventEmitter():void {
     this.closeModalTask.emit(true);
   }
-
-  tarefaTeste : Task = this.tarefa;
   tarefaNova: Task = new Task();
 
+  listPriorities !: PriorityRecord[];
+
   async ngOnInit(): Promise<void> {
-    console.log(this.tarefa);
-    console.log(this.projeto)
+    
+    this.listPriorities = await this.service.getAllPriorities()
+    this.propertiesList = this.tarefa.properties;
+
     // this.verificaTamanhoString();
-    if (this.tarefa.id == 0) {
+    if (this.tarefa.id == 0) {      
       this.booleanEdit = true;
-      this.booleanCalendario = true;
+      this.booleanCalendarioFinalDate = true;
       this.tarefa = this.tarefaNova;
-      this.tarefaNova.currentStatus.name = 'sem status';
+      this.tarefa.currentStatus.name = "sem status";
+      this.tarefa.priority.name = "NENHUMA"
+      this.tarefa.priority.backgroundColor = "#cccccc"
     } else if (this.tarefa.id != 0) {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
@@ -106,15 +133,12 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
-
-  @HostListener('click', ['$event'])
-  clicouFora(event:any){
-   const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c71') || name.includes('c72'))
-     if(!element){
-       
-      this.closeAddPropertie();
-     }
+  editNoValue() : void {
+    if(this.booleanEdit == false) {
+      this.edit();
+    }
   }
+
 
   openDesc(): void {
     this.booleanDesc = !this.booleanDesc;
@@ -141,13 +165,13 @@ export class ModalTarefaComponent implements OnInit {
       this.nomeGrande = this.tarefa.name;
       let nome = this.tarefa.name.split(' ', 4).toString();
       this.tarefa.name = nome.replace(/,/g, ' ');
-      console.log(this.tarefa.name);
     }
   }
 
   edit() {
     this.booleanEdit = !this.booleanEdit;
-    this.booleanCalendario = !this.booleanCalendario;
+    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling
   }
 
   editStatus() {
@@ -160,38 +184,67 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
-  editData() {
-    this.booleanCalendario = !this.booleanCalendario;
-    this.booleanEdit = !this.booleanEdit;
+  editPriority() {
+    if (this.booleanEdit) {
+      this.booleanEdit = true;
+      this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
+    } else {
+      this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
+      this.booleanEdit = !this.booleanEdit;
+    }
   }
 
-  editDescription() {
-    console.log(this.editBoolean);
+  editDataFinalDate() {
+    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
+    if(!this.booleanEdit) {
+      this.booleanEdit = !this.booleanEdit;
+    }
   }
+
+  editDataScheduling() {
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
+    if(!this.booleanEdit) {
+      this.booleanEdit = !this.booleanEdit;
+    }
+  }
+
+
+  eventsSubject: Subject<Property> = new Subject<Property>();
+  eventsSubject2: Subject<PropertyValue> = new Subject<PropertyValue>();
 
   booleanEditFalse() {
     this.booleanEdit = false;
-    this.booleanCalendario = false;
+    this.booleanCalendarioFinalDate = false;
     this.booleanStatus = false;
     this.tarefa.currentStatus = this.statusAntigo;
     this.tarefa.description = this.descricaoAntiga;
     this.tarefa.name = this.nomeAntigo;
+    this.eventsSubject.next(this.propertyStack);
+    this.eventsSubject2.next(this.propertyValueStack);
   }
 
   async salvarTarefa() {
+  
     if (this.tarefa.id != 0) {
-      console.log("TA ENTRANDO ERRADO")
       this.service.putTarefa(this.tarefa);
+      if(this.propertyStack != null ) {
+        this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
+      }
+
     } else if (this.tarefa.id == 0) {
-      console.log("TA ENTRANDO CERTO")
-      this.tarefa.project.id = 2;
-      this.tarefa.creator.id = 1;
-      console.log(this.tarefa);
+      this.tarefa.project.id = 1;
+      this.tarefa.creator.id = 1; 
       this.service.postTarefa(this.tarefa);
+      //if(this.propertyStack != null ) {
+      //  this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
+      //}
     }
 
-    if (this.booleanCalendario == true) {
-      this.booleanCalendario = false;
+    if (this.booleanCalendarioFinalDate == true) {
+      this.booleanCalendarioFinalDate = false;
+    }
+    if(this.booleanCalendariosScheduling == true) {
+      this.booleanCalendariosScheduling = false;
     }
     if (this.booleanStatus == true) {
       this.booleanStatus = false;
@@ -199,10 +252,16 @@ export class ModalTarefaComponent implements OnInit {
     this.booleanEdit = !this.booleanEdit;
   }
 
+  setPropertyValue(property:Property) {
+    this.propertyStack = property;
+  }
+
+  setPropertyValue2(propertyValue:PropertyValue) {
+    this.propertyValueStack= propertyValue;
+  }
+
   startFocus() {
-    console.log('entrou no teste');
     this.booleanFoco = true;
-    console.log(this.booleanFoco);
     this.startTimer();
   }
 

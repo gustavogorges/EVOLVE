@@ -1,0 +1,51 @@
+.propertie {
+    @apply flex w-full h-full items-center gap-4
+}
+
+.propertie-value {
+    @apply h-full flex items-center hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
+}
+
+.propertie-value-no {
+    @apply h-full flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
+}
+
+.name-icon {
+    @apply flex items-center
+}
+
+.icon-propertie {
+    @apply text-lg text-secondary
+}
+
+.name-propertie {
+    @apply pl-3 text-lg text-primaryFontBlack
+}
+
+.propertie-value {
+    @apply h-full flex items-center
+}
+
+.inputPropertyValue {
+    @apply w-[50%] h-full outline-none
+}
+
+.inputPropertyValueTextArea {
+    @apply w-full p-0
+}
+.confirmation-buttons {
+    @apply flex items-center h-[80%] w-[20%] gap-2
+}
+
+.btn {
+    @apply h-full w-[60%] rounded text-white flex items-center justify-center cursor-pointer
+}
+
+.confirm-btn {
+    @apply bg-secondary
+}
+
+.cancel-btn {
+    @apply bg-primary
+}
+

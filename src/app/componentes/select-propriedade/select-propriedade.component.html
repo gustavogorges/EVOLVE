@@ -18,7 +18,7 @@
         pInputText
         class="inputNamePropertie text-primary font-semibold"
         placeholder="escreva o nome"
-        [(ngModel)]="newPropertie.property.name"
+        [(ngModel)]="newPropertie.name"
       />
     </div>
     <div
@@ -41,7 +41,7 @@
         class="input-add-status"
         type="text"
         placeholder="escreva o nome"
-        [(ngModel)]="selectOption.name"
+        [(ngModel)]="selectOption.value"
       />
       <div
         class="w-full flex justify-center items-center"
@@ -56,7 +56,7 @@
           class="w-[75%] h-full p-2 flex justify-center items-center rounded-md"
           [ngStyle]="{ 'background-color': option.backgroundColor }"
         >
-          <p>{{ option.name }}</p>
+          <p>{{ option.value }}</p>
         </div>
         <div class="w-[25%] h-full flex items-center justify-center gap-1">
           <input

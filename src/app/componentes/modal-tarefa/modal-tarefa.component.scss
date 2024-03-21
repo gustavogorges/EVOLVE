@@ -7,7 +7,7 @@
 }
 
 .close-btn {
-    @apply h-12 w-[95%] flex items-end cursor-pointer
+    @apply h-12 w-[95%] flex items-end cursor-pointer mt-2
 }
 
 .icon-close {
@@ -86,20 +86,24 @@
     @apply w-[70%] h-3 bg-primaryGray rounded-md;
 }
 
-.date-propertie {
-    @apply flex  w-full
+.propertie {
+    @apply flex w-full h-8 gap-4 items-center
 }
 
-.task-properties {
-    @apply w-[35%] min-h-[20%] 
+.propertie-value {
+    @apply h-full flex items-center
+}
+
+.date-propertie {
+    @apply flex  w-full items-center cursor-pointer
 }
 
 .task-properties-box {
-    @apply flex gap-20
+    @apply grid grid-cols-2 min-h-[15%] mb-10
 }
 
 .date-end {
-    @apply flex justify-center ml-2
+    @apply flex justify-center ml-2 hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .name-icon {
@@ -127,11 +131,11 @@
 }
 
 .date-end-text {
-    @apply text-xl 
+    @apply text-lg 
 }
 
 .responsible-propertie {
-    @apply flex w-full mt-3
+    @apply flex w-full 
 } 
 
 .responsible-icon {
@@ -143,11 +147,11 @@
 }
 
 .status-propertie {
-    @apply flex w-full mt-3 gap-5
+    @apply flex w-full gap-5
 } 
 
 .status-icon {
-    @apply h-8 w-24 rounded-xl flex justify-center items-center text-sm text-primaryFontBlack
+    @apply h-8 px-4 rounded-xl flex justify-center items-center text-sm text-primaryFontBlack
 }
 
 .status-icon-box {

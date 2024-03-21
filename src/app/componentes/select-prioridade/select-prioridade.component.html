@@ -1,0 +1,18 @@
+<div 
+class="main" 
+style="background-color: #ffff"
+>
+  <div 
+  class="status-box"
+  *ngFor="let priority of prioritiesStandard"
+  >
+    <div
+      class="status"
+      
+      [ngStyle]="{ 'background-color': priority.backgroundColor}"
+      (click)="savePriority(priority)"
+    >
+      <p>{{priority.name.toLowerCase()}}</p>
+    </div>
+  </div>
+</div>

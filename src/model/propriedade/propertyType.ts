@@ -1,9 +1,10 @@
+import { Value } from "./property-values/value";
+
 export enum PropertyType{
-    TEXT,
-    DOUBLE,
-    INTEGER,
-    DATE,
-    MULTISELECT,
-    UNISELECT,
-    ASSOCIATES
+    MultiSelectValue,
+    UniSelectValue,
+    IntegerValue,
+    DoubleValue,
+    DataValue,
+    TextValue
 }

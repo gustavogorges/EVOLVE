@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { isNullOrUndef } from 'chart.js/dist/helpers/helpers.core';
+import { PropertyType } from 'src/model/propriedade/propertyType';
+import { Option } from 'src/model/propriedade/option';
 import { Property } from 'src/model/propriedade/property';
-import { SelectOption } from 'src/model/propriedade/selectOption';
-import { TaskProjectProperty } from 'src/model/propriedade/task-project-property';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -25,24 +26,27 @@ export class SelectPropriedadeComponent implements OnInit {
 
   optionName:string = '';
 
-  selectOption : SelectOption = new SelectOption;
+  optionType : string = '';
 
-  listOptions : Array<SelectOption> = new Array;
+  selectOption : Option = new Option;
+
+  listOptions : Array<Option> = new Array;
 
   @Input()
   tarefa: Task = new Task();
 
-  newPropertie:TaskProjectProperty = new TaskProjectProperty();
+  @Output() 
+  newItemEvent = new EventEmitter<Array<Property>>();
+
+  newPropertie:Property = new Property();
   
-  elemento: TaskProjectProperty = new TaskProjectProperty();
+  elemento: Property = new Property();
 
   constructor(
     private service : BackendEVOLVEService
   ) {}
 
   ngOnInit(): void {
-    console.log(this.tarefa);
-    console.log(this.selectOption.backgroundColor)
   }
 
   options: any[] = [
@@ -72,10 +76,15 @@ export class SelectPropriedadeComponent implements OnInit {
       showing: true
     },
     {
-      text: 'text',
+      text: 'texto',
       icon: 'pi pi-book',
       showing: true
     },
+    {
+      text: 'associados',
+      icon: 'pi pi-users',
+      showing: true
+    }
   ];
 
   clickDate(option: any) {
@@ -84,6 +93,7 @@ export class SelectPropriedadeComponent implements OnInit {
     });
     option.showing = true;
     this.anySelected();
+    this.optionType = option.text;
   }
 
   anySelected(): void {
@@ -108,20 +118,46 @@ export class SelectPropriedadeComponent implements OnInit {
   }
 
   addOneOption() {
-    const newOption: SelectOption = {
-      name: this.selectOption.name,
+    const newOption: Option = {
+      value: this.selectOption.value,
       backgroundColor: this.selectOption.backgroundColor,
       id: 0
     }
     this.listOptions.push(newOption);
-    this.selectOption.name = '';
+    this.selectOption.value = '';
   }
 
   savePropertie() {
-    console.log(this.tarefa)
-    this.tarefa.properties.push(this.newPropertie);
-    this.service.putTarefa(this.tarefa);
-    console.log(this.service.getAllSomething("task"))
-    console.log(this.tarefa.properties);
+    if(this.optionType == 'numero inteiro') {
+       this.newPropertie.propertyType = PropertyType.IntegerValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      } else if(this.optionType == 'data') {
+        this.newPropertie.propertyType = PropertyType.DataValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'seleção única') {
+        this.newPropertie.propertyType = PropertyType.UniSelectValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'seleção múltipla') {
+        this.newPropertie.propertyType = PropertyType.MultiSelectValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'número double') {
+        this.newPropertie.propertyType = PropertyType.DoubleValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'texto') {
+        this.newPropertie.propertyType = PropertyType.TextValue;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }  else if(this.optionType == 'associados') {
+        //Há de ser implementado ainda no enum, ou de algum outra forma
+        //this.newPropertie.propertyType = PropertyType;
+        this.tarefa.properties.push(this.newPropertie);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+      }
+    this.newItemEvent.emit()  
   }
 }

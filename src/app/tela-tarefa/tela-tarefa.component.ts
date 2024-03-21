@@ -18,6 +18,7 @@ import {
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
+import { PriorityRecord } from 'src/model/priorityRecord';
 
 interface OptionOrder {
   name: string;
@@ -29,7 +30,8 @@ interface OptionOrder {
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
   styleUrls: ['./tela-tarefa.component.scss'],
-  //
+
+
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = 'Visualização';
@@ -78,6 +80,7 @@ export class TelaTarefaComponent implements OnInit {
   sortLists() {
     this.listaTarefas.sort(this.opa);
     this.listaNova.sort(this.opa);
+
   }
 
   opa = (a:Task, b:Task) => {
@@ -302,7 +305,12 @@ export class TelaTarefaComponent implements OnInit {
     this.tarefaSelecionada = tarefa;
   }
 
-  openTaskEdit(tarefa: Task) {
+
+  openTaskEdit(tarefa:Task) {
+    let priorityTeste : PriorityRecord = new PriorityRecord();
+    priorityTeste.name = "nenhuma";
+    priorityTeste.backgroundColor = "#cccccc" 
+    this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }

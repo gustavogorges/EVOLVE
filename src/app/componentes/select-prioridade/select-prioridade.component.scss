@@ -1,0 +1,11 @@
+.main {
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center py-3 gap-2
+}
+
+.status {
+     @apply w-full h-[18%] rounded-md flex justify-center items-center  cursor-pointer
+}
+
+.status-box {
+    @apply w-full flex items-center flex-col px-1 
+}

@@ -1,5 +1,6 @@
-export class Opcao {
-  id!: number;
+
+export class Option {
+  id: number = 0;
   value: string = '';
   backgroundColor: string = '';
 }

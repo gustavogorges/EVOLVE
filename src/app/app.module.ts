@@ -29,6 +29,7 @@ import { AnexosComponent } from './componentes/sub-componentes/anexos/anexos.com
 import { AutomacaoComponent } from './componentes/sub-componentes/automacao/automacao.component';
 import { IntegracaoComponent } from './componentes/sub-componentes/integracao/integracao.component';
 
+import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 
 import { SelectStatusComponent } from './componentes/select-status/select-status.component';
@@ -73,6 +74,7 @@ import {MessageModule} from 'primeng/message';
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/projeto-remastered.component';
 
@@ -90,6 +92,10 @@ import { TasksWeekComponent } from './componentes/tasks-week/tasks-week.componen
 registerLocaleData(localePT);
 
 
+import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
+import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
+
+
 
 
 
@@ -101,11 +107,9 @@ registerLocaleData(localePT);
     TelaInicialComponent,
     NavegacaoComponent,
     EntregaProxComponent,
-
-
+    TelaProjetoRemasteredComponent,
     TelaTarefaComponent,
     TarefaCardPadraoComponent,
-
     EquipeRecenteComponent,
     DiaCalendarioComponent,
     TarefaDiaComponent,
@@ -117,7 +121,6 @@ registerLocaleData(localePT);
     AutomacaoComponent,
     IntegracaoComponent,
     TarefaDiaComponent,
-
     TelaCriarProjetoComponent,
     MembrosEquipeComponent,
     StatusComponentCriarTarefaComponent,
@@ -156,9 +159,9 @@ registerLocaleData(localePT);
     TaskCalendarComponent,
     ImportantProjectComponent,
     WeekCalendarComponent,
-    TasksWeekComponent
-
-
+    TasksWeekComponent,
+    PropriedadeTarefaComponent,
+    SelectPrioridadeComponent
 
   ],
   
@@ -182,9 +185,11 @@ registerLocaleData(localePT);
     CdTimerModule,
     BrowserModule,
     DragDropModule,
-    DndModule,
-    CommonModule
 
+    DndModule,
+    CommonModule,
+
+    InputNumberModule
   ],
   
   providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ],

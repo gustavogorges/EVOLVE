@@ -7,6 +7,9 @@ import { Task } from 'src/model/task';
 import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { Status } from 'src/model/status';
+import { Property } from 'src/model/propriedade/property';
+import { Priority } from 'src/model/priority';
+import { PropertyValue } from 'src/model/propriedade/propertyValue';
 
 
 @Injectable({
@@ -44,8 +47,30 @@ export class BackendEVOLVEService {
   }
  
 
+  async patchProperty(taskProjectProperty:Property, taskId:number) {
+    console.log(taskProjectProperty)
+  
+    return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
+  }
+
+  async patchPriority(priority:number,taskId:number) {
+    console.log(priority);
+    
+    return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
+  }
+
+  async putPropertyValue(propertyId:number, propertyValue:PropertyValue) {
+    return (await axios.put(this.URL+"task/property/put/"+propertyId,propertyValue)).data
+  }
+
+  async getAllPriorities() {
+    return (await axios.get(this.URL+"task/priorities")).data
+  }
+
   async postTarefa (tarefa:Task){
-    (await axios.post(this.URL+"task", tarefa)).data 
+    console.log("POST SERVICE");
+    console.log(tarefa);
+    return (await axios.post(this.URL+"task", tarefa)).data 
   }
 
   async putTarefa (tarefa:Task){

@@ -78,7 +78,6 @@
         <div class="flex gap-5">
           <div
           *ngIf="!booleanEdit"
-          (click)="editDescription()"
           (click)="edit()"
           class="edit-button flex justify-center items-center"
         >
@@ -91,40 +90,27 @@
           <i class="text-white pi pi-trash"></i>
         </div>
         </div>
-        
       </div>
     </div>
-    <div class="add-icon hover" >
+    <div class="add-icon hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus " style="color: white;"></i>
-      <p class="add-propertie-text " style="color: white;" (click)="addPropertie()">
+      <p class="add-propertie-text " style="color: white;">
         adicionar propriedade
       </p>
     </div>
     <app-select-propriedade
             *ngIf="booleanAddPropriedade"
             [tarefa]="tarefa"
+            (newItemEvent)="updatePropertiesList()"
           ></app-select-propriedade>
-    <div class="task-properties-box">
-      <div class="task-properties">
-        <div class="date-propertie">
-          <div class="name-icon">
-            <i class="icon-propertie pi pi-calendar"></i>
-            <p class="name-propertie">data final:</p>
-          </div>
-          <div class="date-end">
-            <p
-              *ngIf="!booleanCalendario"
-              (click)="editData()"
-              class="date-end-text cursor-pointer"
-            >
-              {{ tarefa.finalDate }}
-            </p>
-            <input
-              *ngIf="booleanCalendario"
-              type="date"
-              [(ngModel)]="tarefa.finalDate"
-            />
-          </div>
+    <div 
+    class="task-properties-box"
+    [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
+    >
+      <div class="propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-calendar"></i>
+          <p class="name-propertie">data final:</p>
         </div>
         <div class="responsible-propertie">
           <div class="name-icon">
@@ -159,44 +145,107 @@
             [statusLista]="projeto.statusList"
             *ngIf="booleanStatus"
           ></app-select-status>
+        <div class="date-end">
+          <p
+            *ngIf="!booleanCalendarioFinalDate"
+            (click)="editDataFinalDate()"
+            class="date-end-text cursor-pointer"
+          >
+            {{ tarefa.finalDate }}
+          </p>
+          <input
+            *ngIf="booleanCalendarioFinalDate"
+            type="date"
+            [(ngModel)]="tarefa.finalDate"
+          />
+
         </div>
       </div>
-      <div class="task-properties">
-        <div class="date-propertie">
-          <div class="name-icon">
-            <i class="icon-propertie pi pi-calendar"></i>
-            <p class="name-propertie">agendamento:</p>
+      <div class="propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-users"></i>
+          <p class="name-propertie">associados:</p>
+        </div>
+        <div class="responsible-icon-box">
+          <div class="responsible-icon"></div>
+        </div>
+      </div>
+      <div class="propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-spinner"></i>
+          <p class="name-propertie">status:</p>
+        </div>
+        <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
+          <div
+            (click)="editStatus()"
+            class="status-icon"
+            [ngStyle]="{
+              'background-color': tarefa.currentStatus.backgroundColor
+            }"
+          >
+            {{ tarefa.currentStatus.name }}
           </div>
-          <!-- ADICIONAR AGENDAMENTO DIV FUTURA
-                <div class="date-end">
-                <p *ngIf="!booleanCalendario" (click)="editData()" class="date-end-text cursor-pointer">{{tarefa.dataFinal}}</p>
-                <input *ngIf="booleanCalendario" type="date" [(ngModel)]="tarefa.dataFinal">
-            </div>-->
         </div>
-        <div class="responsible-propertie">
-          <div class="name-icon">
-            <i class="icon-propertie pi pi-exclamation-circle"></i>
-            <p class="name-propertie">prioridade:</p>
+        <!--[projeto]="tarefa.projeto"-->
+        <app-select-status
+          (newItem)="editStatus()"
+          [projeto]="projeto"
+          [tarefa]="tarefa"
+          [statusLista]="projeto.statusList"
+          *ngIf="booleanStatus"
+        ></app-select-status>
+      </div>
+      <div class="propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-calendar"></i>
+          <p class="name-propertie">agendamento:</p>
+        </div>
+              <div class="date-end">
+              <p *ngIf="!booleanCalendariosScheduling" (click)="editDataScheduling()" class="date-end-text cursor-pointer">{{tarefa.schedulingData}}</p>
+              <input *ngIf="booleanCalendariosScheduling" type="date" [(ngModel)]="tarefa.schedulingData">
           </div>
-          <!-- ADICIONAR PRIORIDADE DIV FUTURA 
-                <div class="responsible-icon-box">
-                <div class="responsible-icon"></div>
-            </div>-->
+      </div>
+      <div class="propertie">
+        <div class="name-icon">
+          <i class="icon-propertie pi pi-exclamation-circle"></i>
+          <p class="name-propertie">prioridade:</p>
         </div>
-        <div class="status-propertie">
-          <!-- ADICIONAR PROPRIEDADE DIV FUTURA
-                <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
-                <div 
-                (click)="editStatus()" 
-                class="status-icon " 
-                [ngStyle]="{'background-color': tarefa.statusAtual.corFundo}"
-                >{{tarefa.statusAtual.nome}}</div>
-            </div> -->
-          
+        <div *ngIf="!booleanSelectPrioridade" class="status-icon-box cursor-pointer">
+          <div
+            (click)="editPriority()"
+            class="status-icon"
+            [ngStyle]="{
+              'background-color': tarefa.priority.backgroundColor
+            }"
+          >
+            {{tarefa.priority.name.toLowerCase()}}
+          </div>
         </div>
+        <div>
+          <app-select-prioridade
+          [task]="tarefa"
+          [listPriorities]="listPriorities"
+          *ngIf="booleanSelectPrioridade"
+          (eventEmitter)="finishEditPriority()"
+          >
+          </app-select-prioridade>
+        </div>
+      </div>
+      <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
+      <div 
+      *ngFor="let property of propertiesList"
+      class=" h-full w-full gap-4"
+      >
+        <app-propriedade-tarefa 
+        class="propertie"
+        [property]="property"
+        [events]="eventsSubject.asObservable()"
+        (eventEmitter)="editNoValue()"
+        (eventEmitterValue)="setPropertyValue($event)"
+        (eventEmitterValue2)="setPropertyValue2($event)"
+        ></app-propriedade-tarefa>
       </div>
     </div>
-    <div class="created-properties"></div>
     <div class="description-box">
       <div class="description-propertie">
         <div class="name-icon">
