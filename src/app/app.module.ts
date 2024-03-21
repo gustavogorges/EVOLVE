@@ -75,6 +75,10 @@ import {MessageModule} from 'primeng/message';
 import { CdTimerModule } from 'angular-cd-timer';
 
 import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
+
+import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/new-dashboard-modal.component';
+import { NewChartModalComponent } from './componentes/new-chart-modal/new-chart-modal.component';
+
 import { DndModule } from 'ngx-drag-drop';
 import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
 import { CommonModule } from '@angular/common';
@@ -84,6 +88,7 @@ import { ImportantProjectComponent } from './important-project/important-project
 import { WeekCalendarComponent } from './componentes/week-calendar/week-calendar.component';
 import { TasksWeekComponent } from './componentes/tasks-week/tasks-week.component';
 registerLocaleData(localePT);
+
 
 
 
@@ -142,10 +147,15 @@ registerLocaleData(localePT);
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
+
+    NewDashboardModalComponent,
+    NewChartModalComponent,
+
     TaskCalendarComponent,
     ImportantProjectComponent,
     WeekCalendarComponent,
     TasksWeekComponent
+
 
   ],
   
