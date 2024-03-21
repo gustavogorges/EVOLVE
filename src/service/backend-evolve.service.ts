@@ -14,7 +14,7 @@ import { TeamChat } from 'src/model/teamChat';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://10.4.96.2:8087/"
+  URL : string = "http://10.4.96.18:8087/"
 
   constructor() { }
 
