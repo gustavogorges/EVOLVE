@@ -1,0 +1,23 @@
+<div class="screen">
+    <div class="tittle">
+        <h1>Equipe Padrão</h1>
+        <button (click)="goToCreateProject()"><i class="pi pi-plus"></i> Adicionar Projeto</button>
+    </div>
+
+    <div class="projects">
+        <div *ngFor="let p of projetos" #projectElement>
+
+            <app-projeto-remastered 
+
+                (salvarProjeto)="salvarPai($event)"
+                [projectOpen]="p.isVisible" 
+                [projeto]="p" 
+                (click)="openProject(p)" 
+                (noCloseProject)="noCloseProject(p)"
+                (deletar)="deletarPai($event)"
+                (editProject)="editProject($event, p)"
+            ></app-projeto-remastered>
+
+        </div>
+    </div>
+</div>

@@ -1,8 +1,8 @@
 .titulo{
-    @apply w-full px-[14%] h-[13%] flex items-center;
+    @apply w-full px-[12%] h-[12%] flex items-center;
 
     p{
-        @apply text-4xl text-primary dark:text-dark-primary font-titulo font-semibold
+        @apply text-3xl text-primary dark:text-dark-primary font-titulo font-semibold
     }
 }
 
@@ -101,10 +101,6 @@
         .add-priority{
             @apply bg-secondary dark:bg-dark-secundary-green
         }
-    }
-
-    app-status-component-criar-tarefa{
-        @apply col-start-3 shadow-lg col-end-4 z-10 row-start-3 ml-[2%] mt-[8%] duration-300 w-[50%]
     }
 
     .lembrete{

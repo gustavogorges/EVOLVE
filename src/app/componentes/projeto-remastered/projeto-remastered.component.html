@@ -1,0 +1,52 @@
+<div class="component" #project>
+
+    <div class="project" [ngClass]="projectOpen ? 'rounded-s-xl' : 'rounded-xl'" >
+        <div class="project-image"><div></div><span [ngClass]="projeto.editOn ? 'visible':'invisible'"><i class="pi pi-pencil"></i></span></div>
+        <div class="project-name"><input [disabled]="!projeto.editOn" type="text" [(ngModel)]="projeto.name"></div>
+        <div class="project-desc"><textarea [disabled]="!projeto.editOn" name="" id="" cols="30" rows="10" [(ngModel)]="projeto.description"></textarea></div>
+        <div class="project-response"><p>Responsaveis:</p></div>
+        <div class="project-users-response"><div></div><div></div></div>
+        <div class="project-progress"><div></div></div>
+        <div class="project-final-date"><p>data final: 
+            <input #data [disabled]="!projeto.editOn" type="date" [(ngModel)]="projeto.finalDate" class="bg-transparent">
+        </p></div>
+    </div>
+    <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
+        <div class="project-open-infos">
+            <div class="tittle-infos">
+                <p>Nome</p>
+                <p>Progresso</p>
+                <p>Status</p>
+                <p>Prazo</p>
+            </div>
+            
+            <div class="value-infos" *ngFor="let t of tarefas">
+                <p class="Nome">{{t.nome}}dawdawd</p>
+                <div class="Progresso">
+                    <div class="valor-progresso"  [style.width.%]="t.progresso" ></div>
+                </div>
+                <p class="Status">{{t.status}}</p>
+                <p class="Prazo">{{t.prazo}}</p>
+            </div>
+        </div>
+        <div class="project-open-users">
+            <span><</span>
+            <div class="users">
+                <div class="users-spam" *ngFor="let p of projeto.members">
+                    <div *ngIf="verifyImg(p)" [ngStyle]="{'background': p.profilePicture, 'background-color': p.profilePicture}" class="user-image-chartAt">{{p.name.charAt(0).toUpperCase()}}</div>
+                    <p>{{p.name}}</p>
+                </div>
+            </div>
+            <span>></span>
+        </div>
+
+        <div class="botoes">
+            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
+            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
+            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editProjectEmit(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
+            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
+            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto()">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
+        </div>
+    </div>
+</div>
+

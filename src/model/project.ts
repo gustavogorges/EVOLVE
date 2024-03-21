@@ -20,5 +20,9 @@ export class Project{
     tasks: Array<Task> = new Array;
     adimnistrator: Array<User> = new Array;
     isVisible: boolean = false 
+
+    editOn: boolean = false
+
     favorited : boolean =false 
+
 }

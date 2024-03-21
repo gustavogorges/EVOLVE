@@ -1,0 +1,20 @@
+.screen{
+    @apply p-4 px-[10%] pt-10;
+
+    .tittle{
+        @apply w-fit mb-[4%];
+
+        h1{
+            @apply text-4xl font-bold text-primary dark:text-dark-primary w-auto mb-4
+        }
+
+        button{
+            @apply w-full h-10 bg-secondary text-lg text-secondaryWhite font-semibold rounded-lg hover:scale-105 duration-200
+        }
+    }
+
+    .projects{
+        @apply flex flex-wrap gap-10 justify-center;
+
+    }
+}

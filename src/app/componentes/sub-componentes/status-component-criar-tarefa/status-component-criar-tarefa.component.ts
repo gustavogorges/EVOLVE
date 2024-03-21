@@ -47,12 +47,8 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
 
   async atualizaStatus(){
-    for (let i = this.statusNovo.length -1 ; i >= 0; i-- ){
-      this.statusNovo.splice(this.statusNovo.indexOf(this.statusNovo[i]), 1)
-    }
-    for (let i = this.statusPadrao.length -1 ; i >= 0; i-- ){
-      this.statusPadrao.splice(this.statusPadrao.indexOf(this.statusPadrao[i]), 1)
-    }
+    this.statusPadrao = []
+    this.statusNovo = []
     this.projeto = await this.service.getOne('project',this.projeto.id)
     this.projeto.statusList.forEach(e => {
       if((e.name === 'não atribuido' ||
