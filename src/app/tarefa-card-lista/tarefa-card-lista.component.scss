@@ -1,8 +1,9 @@
 .main{
-  @apply w-full flex h-[60px] items-center  py-2 gap-12 justify-center
+  @apply w-full flex h-[60px] items-center  py-2 justify-center gap-9 bg-[#FFFFFF] rounded-lg   ;
+  
 }
 .taskName {
-  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  @apply text-primary text-xl font-extrabold overflow-hidden absolute;
   font-family: "Hind Madurai", sans-serif;
   white-space: nowrap;
   position: absolute;
@@ -10,32 +11,35 @@
   transition: transform 5s linear; 
 }
 .name {
-  @apply text-primary text-2xl font-extrabold overflow-hidden absolute;
+  @apply text-primary text-xl font-extrabold overflow-hidden absolute;
   font-family: "Hind Madurai", sans-serif;
 
 }
   .grey-progress {
-    @apply  w-[23%] h-5 rounded-md bg-[#d9d9d9];
+    @apply  w-[110px] h-3 rounded-[4px] bg-[#d9d9d9];
   }
   .blue-progress {
-    @apply  h-full text-center text-xs text-white bg-primary rounded-md;
+    @apply  h-full text-center text-xs text-white bg-primary rounded-[4px];
     width: valorBarra;
 
   }
   .finalDate-box{
-    @apply w-[5%]
+    @apply w-[110px]
   }
   .finalDate {
-    @apply text-lg text-primary;
-    font-family: "Hind Madurai", sans-serif;
+    @apply text-lg text-primary font-hind-madurai;
+  
   }
+  .status-box{
+    @apply  flex w-16; 
+
   .status {
-    @apply rounded-lg h-6 px-6 w-[15%] flex text-sm justify-center items-center;
-    font-family: "Montserrat", sans-serif;
+    @apply rounded-full h-6 w-6 flex text-sm 
   }
+}
  
   .taskMemberPhoto{
-    @apply w-11 h-11 rounded-full  overflow-clip
+    @apply w-8 h-8 rounded-full  overflow-clip
   }
   .name-box {
     @apply h-6 w-[10%] ;
@@ -52,6 +56,13 @@
     }
     
     .star-box{
-      @apply flex items-center
+      @apply flex items-center justify-end
+    }
+    .priority-box{
+      @apply w-28
+    }
+    .priority {
+      @apply rounded-lg  px-4 w-full text-center text-sm self-center bg-gray-400 ;
+      font-family: "Montserrat", sans-serif;
     }
     

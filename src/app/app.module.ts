@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
@@ -76,6 +76,20 @@ import { TarefaKanbanComponent } from './tarefa-kanban/tarefa-kanban.component';
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/projeto-remastered.component';
 
+import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/new-dashboard-modal.component';
+import { NewChartModalComponent } from './componentes/new-chart-modal/new-chart-modal.component';
+
+import { DndModule } from 'ngx-drag-drop';
+import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
+import { ImportantProjectComponent } from './important-project/important-project.component';
+import { WeekCalendarComponent } from './componentes/week-calendar/week-calendar.component';
+import { TasksWeekComponent } from './componentes/tasks-week/tasks-week.component';
+registerLocaleData(localePT);
+
+
 
 
 
@@ -131,8 +145,20 @@ import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/pro
 
     TarefaKanbanComponent,
     SelectPropriedadeComponent,
+
     TelaProjetoRemasteredComponent,
-    ProjetoRemasteredComponent
+    ProjetoRemasteredComponent,
+
+
+    NewDashboardModalComponent,
+    NewChartModalComponent,
+
+    TaskCalendarComponent,
+    ImportantProjectComponent,
+    WeekCalendarComponent,
+    TasksWeekComponent
+
+
 
   ],
   
@@ -155,10 +181,13 @@ import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/pro
     BrowserAnimationsModule,
     CdTimerModule,
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    DndModule,
+    CommonModule
+
   ],
   
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,8 @@
 export class Status {
-    id: number = 0;
+    id!: number;
     name : string = "";
     backgroundColor: string = "";
     textColor: string = "";
-    enabled: boolean = true
+    enabled: boolean = true;
+    columnIndex : number = 0; 
 }

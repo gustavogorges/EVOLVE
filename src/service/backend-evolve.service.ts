@@ -26,6 +26,15 @@ export class BackendEVOLVEService {
   async getUser( email: string )  {
     return (await axios.get(this.URL+"user/login" + "/"+email)).data
   }
+  async getTasksByUserId( userId: number )  {
+    return (await axios.get(this.URL+"task/user" + "/"+userId)).data
+  }
+  async getProjectsByUserId( userId: number )  {
+    return (await axios.get(this.URL+"project" + "/user/"+userId)).data
+  }
+  async getTeamsByUserId( userId: number )  {
+    return (await axios.get(this.URL+"team" + "/user/"+userId)).data
+  }
   async deleteById(caminho : string, id:number){
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
@@ -33,12 +42,16 @@ export class BackendEVOLVEService {
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
+ 
 
   async postTarefa (tarefa:Task){
     (await axios.post(this.URL+"task", tarefa)).data 
   }
 
   async putTarefa (tarefa:Task){
+    console.log(tarefa);
+    console.log(JSON.stringify(tarefa));
+    
     return (await axios.put(this.URL+"task", tarefa)).data
   }
 

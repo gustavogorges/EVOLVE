@@ -1,0 +1,27 @@
+<ul class="modal rotate-180" [ngClass]="!newDashBool ? 'h-0 w-0':'h-[40vh] w-[30vw]'">
+
+    <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="dashChoosed === -1 ? 'h-0':'h-[20%]'">
+        <button (click)="createNewDash()" class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Criar</button>
+        <input [(ngModel)]="nome" class=" h-[50%] rotate-180 w-full px-2 outline-none" type="text" placeholder="Nome da dashboard">
+    </div>
+
+    <div class="div-modal rotate-180" >
+        <p class="title min-w-max" >Escolha o estilo da nova DashBoard</p>
+
+        <div class="invisible">
+            <div class="grid">
+                <div class="col-start-2 col-end-5 row-start-2"></div>
+                <div class="col-span-2 row-span-2"></div>
+                <div class="col-start-3 col-end-5"></div>
+                <div class="col-span-full row-span-full"></div>
+            </div>
+        </div>
+        
+        <div class="box duration-100">
+            <div class="squads" *ngFor="let squad of squads" (click)="chooseDash(squad.id)" [ngClass]="squad.style">
+                <div class="squad min-w-max" *ngFor="let div of squad.squad" [ngClass]="div"></div>
+            </div>
+        </div>
+
+    </div>
+</ul>

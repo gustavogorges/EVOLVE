@@ -9,11 +9,10 @@
 @import "primeng/resources/primeng.css";
 
 * {
-    @apply m-0 p-0
-    
+    @apply m-0 p-0 
 }
+
 
 ::-webkit-scrollbar{
     @apply hidden;
-  
 }

@@ -1,19 +1,4 @@
-<div class="recent-projects-box">
-    <div class="recent-projects">
-      <div class="title-box">
-        <p class="title-text">Projetos Recentes</p>
-      </div>
-      <div class="content-box">
-        <div class="set-left" *ngIf="mostrarSetas"><i class="pi icon pi-angle-left" (click)="regredirVisualizacaoCarrosel()"></i></div>
+<div>
   
-        <div class="w-full h-full flex px-16 gap-4 justify-center items-center">
-          <div *ngFor="let projeto of listaProjetosVisualizacao">
-            <app-equipe-recente-card class="card-project " [projeto]="projeto"></app-equipe-recente-card>
-          </div>
-        </div>
-  
-        <div class="set-right" *ngIf="mostrarSetas" (click)="avancarVisualizacaoCarrosel()"><i class="pi icon pi-angle-right"></i></div>
-      </div>
-    </div>
 </div>
  
