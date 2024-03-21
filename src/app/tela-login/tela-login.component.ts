@@ -20,7 +20,7 @@ export class TelaLoginComponent implements OnInit {
 
   async login(): Promise<void> {
     this.usuario = await this.service.getUser(this.email);
-    if (this.usuario.password == this.senha) {
+    if (this.usuario) {
       this.router.navigate(['/tela-inicial'], { state: { user: this.usuario } });
     }
   }
