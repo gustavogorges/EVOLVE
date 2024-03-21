@@ -55,9 +55,7 @@ data : Date = new Date
 
    }
    console.log(this.tarefaAtual)
-  this.tarefaAtual.project = {
-    id : this.project.id
-  }
+
   console.log(this.caminhoEstrela)
   console.log(this.service.putTarefa(this.tarefaAtual))
    this.newItem.emit(true);
