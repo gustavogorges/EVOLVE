@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,103 +8,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingpageScreesSeparatorComponent implements OnInit {
 
-  constructor() { }
-
   status : any[] = [
     {
       status: "to-do",
-      color: "#67BFE0"
+      color: "#67BFE0",
+      tasks: []
     },
     {
       status: "done",
-      color: "#4C956C"
+      color: "#4C956C",
+      tasks: []
     },
     {
       status: "doing",
-      color: "#F5D112"
+      color: "#F5D112",
+      tasks: []
     },
-  ]
+  ];
 
-  cards : any[] = [
-    {
-      status : this.status[0].status,
-      color : this.status[0].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[1].status,
-      color : this.status[1].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[1].status,
-      color : this.status[1].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[2].status,
-      color : this.status[2].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[2].status,
-      color : this.status[2].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[0].status,
-      color : this.status[0].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[2].status,
-      color : this.status[2].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    },
-
-    {
-      status : this.status[1].status,
-      color : this.status[1].color,
-      checked1 : false,
-      checked2 : false,
-      checked3 : false,
-      favorited: false
-    }
-  ]
+  cards: any[] = [{},{},{},{},{},{},{},{}];
 
   ngOnInit(): void {
-    console.log(this.cards[0].checked1);
+    this.cards.forEach((element, index) => {
+      if (index < 3) {
+        element.status = this.status[0];
+        this.status[0].tasks.push(element);
+      } else if (index < 5) {
+        element.status = this.status[1];
+        this.status[1].tasks.push(element);
+      } else {
+        element.status = this.status[2];
+        this.status[2].tasks.push(element);
+      }
+    });
   }
 
-  alterarTarefaFavoritado(task:any){
-    task.favorited = !task.favorited
-  }
 
+  drop(event: CdkDragDrop<any[]>) {
+    const movedItem = event.previousContainer.data[event.previousIndex];
+        transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+        );
+        event.container.data[event.currentIndex] = movedItem;
+  }
+  
+
+  
+
+
+  alterarTarefaFavoritado(task: any) {
+    task.favorited = !task.favorited;
+  }
 }
