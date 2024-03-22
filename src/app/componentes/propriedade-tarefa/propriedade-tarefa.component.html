@@ -8,11 +8,22 @@
     class="propertie-value"
     (click)="editPropertyValue(property)"
     >
-    <div *ngIf="checkTypeValue()">
+    <div *ngIf="checkTypeValue() && !booleanValueOption">
         {{propertyValue.value}}
     </div>
-    <div *ngIf="!checkTypeValue()">
+    <div *ngIf="!checkTypeValue() && !booleanValueOption">
         {{propertyValue.value.value}}
+    </div>
+    <div *ngIf="booleanValueOption">
+        <div
+            (click)="editOption()"
+            class="status-icon"
+            [ngStyle]="{
+              'background-color': property.currentOptions[0].backgroundColor
+            }"
+          >
+            {{ property.currentOptions[0].value }}
+          </div>
     </div>
     </div>
     <div 
@@ -44,8 +55,15 @@
         type="text"
         [(ngModel)]="newPropertyValue"
         >
+        <app-select-opcao
+        *ngIf="booleanSelectOption && property.propertyType.toString() == 'UniSelectValue' "
+        [property]="property"
+        (newItem)="selectOptionEmitter()"
+        >
+        </app-select-opcao>
         <div
-        *ngIf="property.editable"
+        *ngIf="property.editable && 
+        property.propertyType.toString() != 'UniSelectValue'"
         class="confirmation-buttons"
         (click)="saveProperty(property)"
         >

@@ -1,0 +1,37 @@
+<div class="main" style="background-color: #ffff;">
+    <div class="status-box" >
+        <div
+         class="status "
+         [ngStyle]="{'background-color': option.backgroundColor}"
+         *ngFor="let option of property.options"
+         (click)="salvarOption(option)"
+         >
+            <p>{{option.value}}</p>
+        </div>
+    </div>
+    <div *ngIf="!booleanAddOption" (click)="addOption()" class="add-box">
+        <i class="pi pi-plus text-primary font-bold"></i>
+        <p class=" text-fontGray">adicionar opção</p>
+    </div>
+    <div *ngIf="booleanAddOption" class="new-status">
+        <div class="nome-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="option.value">
+                <div class="w-full flex justify-center items-center">
+                    <i class="pi pi-pencil text-primary font-bold" ></i>
+                </div>
+            </div>
+        </div>
+        <div class="cor-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input class="input-add-status" type="text" value="{{option.backgroundColor}}"  placeholder="selecione uma cor">
+                <div class="w-full flex justify-center items-center">
+                    <input type="color" class="w-7" [(ngModel)]="option.backgroundColor">
+                </div>
+            </div>
+        </div>
+        <div class="confirmar-status-box">
+            <p class=" text-primaryWhite font-semibold" (click)="novaOption()">confirmar</p>
+        </div>
+    </div>
+</div>

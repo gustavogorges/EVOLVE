@@ -30,6 +30,10 @@
     @apply w-[50%] h-full outline-none
 }
 
+.status-icon {
+    @apply h-8 px-4 rounded-xl flex justify-center items-center text-sm text-primaryFontBlack
+}
+
 .inputPropertyValueTextArea {
     @apply w-full p-0
 }

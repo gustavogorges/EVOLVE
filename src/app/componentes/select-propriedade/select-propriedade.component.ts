@@ -138,10 +138,12 @@ export class SelectPropriedadeComponent implements OnInit {
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção múltipla') {
         this.newPropertie.propertyType = PropertyType.MultiSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'número double') {

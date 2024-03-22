@@ -92,6 +92,8 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   propertyStack : Property = new Property;
   propertyValueStack : PropertyValue = new PropertyValue;
+  
+  booleanSelectOption : boolean = false;
 
   @Input()
   events!:Observable<Property>
@@ -100,6 +102,8 @@ export class PropriedadeTarefaComponent implements OnInit {
   booleanEdit !: boolean;
 
   booleanValue : boolean = false;
+
+  booleanValueOption : boolean = false;
 
   @Input()
   property : Property = new Property();
@@ -117,6 +121,10 @@ export class PropriedadeTarefaComponent implements OnInit {
     this.booleanEditProperty = true;
     this.booleanValue = true;
     property.editable = true;
+
+    if(property.propertyType.toString() == 'UniSelectValue') {
+      this.booleanSelectOption = true;
+    }
     
     this.eventEmitter.emit();
   }
@@ -124,6 +132,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   checkEditable(property:Property) : boolean {
     if(property.editable == false) {
       if(this.booleanEditProperty == true) {
+        console.log("check editable ta retornando true");
         return true;
       }
     }
@@ -137,6 +146,20 @@ export class PropriedadeTarefaComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  editOption() : void {
+    console.log("existe");
+  }
+
+  selectOptionEmitter() : void {
+    console.log("chegou no select option emitter !");
+    this.booleanSelectOption = false;
+    this.booleanValueOption = true;
+    this.property.editable =false;
+    console.log(this.booleanValueOption);
+    console.log("log da property current option");
+    console.log(this.property.currentOptions[0]);
   }
 
   saveProperty(property:Property) : void {

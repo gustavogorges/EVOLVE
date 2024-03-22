@@ -94,6 +94,7 @@ registerLocaleData(localePT);
 
 import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
 import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
+import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
 
 
 
@@ -161,7 +162,8 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
     WeekCalendarComponent,
     TasksWeekComponent,
     PropriedadeTarefaComponent,
-    SelectPrioridadeComponent
+    SelectPrioridadeComponent,
+    SelectOpcaoComponent
 
   ],
   

@@ -18,6 +18,7 @@ export class Property {
     propertyType !: PropertyType ;
 
     options : Array<Option> = [];
+    currentOptions : Array<Option> = [];
 
     editable:boolean = false;
 
