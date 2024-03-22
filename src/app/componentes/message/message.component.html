@@ -2,7 +2,7 @@
     
     <div class="sender-img-box" [ngStyle]="{ 'justify-content': messageAlignment}" *ngIf="showImage(message) ">
         <div class="sender-img-container" [ngStyle]="{'background-color': message.sender.imageColor}">
-            <img class="sender-img"  *ngIf="message.sender.image?.data" src="data:image/png;base64,{{message.sender.image.data}}" alt="" >
+            <img class="sender-img"  *ngIf="message.sender.image?.data" src="{{message.sender.image.data}}" alt="" >
         </div>
     </div>
 
