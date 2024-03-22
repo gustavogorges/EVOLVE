@@ -1,19 +1,19 @@
 <div class="main" style="background-color: #ffff;">
     <div class="status-box" >
         <div
-         class="status "
+         class="status cursor-pointer"
          [ngStyle]="{'background-color': status.backgroundColor}"
          *ngFor="let status of projeto.statusList"
-         (click)="salvarStatus(status)"
+         (click)="editStatus(status)"
          >
             <p>{{status.name}}</p>
         </div>
     </div>
-    <div *ngIf="!booleanAddStatus" (click)="addStatus()" class="add-box">
+    <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
         <i class="pi pi-plus text-primary font-bold"></i>
         <p class=" text-fontGray">adicionar status</p>
     </div>
-    <div *ngIf="booleanAddStatus" class="new-status">
+    <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
         <div class="nome-status-box">
             <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
                 <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.name">
@@ -30,8 +30,11 @@
                 </div>
             </div>
         </div>
-        <div class="confirmar-status-box">
+        <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer">
             <p class=" text-primaryWhite font-semibold" (click)="novoStatus()">confirmar</p>
+        </div>
+        <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer">
+            <p class=" text-primaryWhite font-semibold" (click)="editStatusPut()">Editar Status</p>
         </div>
     </div>
 </div>

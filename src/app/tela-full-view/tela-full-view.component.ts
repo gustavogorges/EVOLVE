@@ -57,23 +57,25 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     @ViewChild ('Options') optionsMenu !: ElementRef
+    @ViewChild ('dashElement') dashElement !: ElementRef
+    @ViewChild ('newChartElement') newChartElement !: ElementRef
     @HostListener('click', ['$event'])
     outsideClick(event:any){
+            
+        if(!this.optionsMenu.nativeElement.contains(event.target) && !(event.target.tagName === "I")){
+            this.viewOptionsBol = true
+            this.viewEditBol = false
+        }
+        console.log(this.dashElement.nativeElement.contains(event.target));
         
-    if(!this.optionsMenu.nativeElement.contains(event.target) && !(event.target.tagName === "I")){
-        this.viewOptionsBol = true
-        this.viewEditBol = false
-    }
+        if(!(this.dashElement.nativeElement.contains(event.target))){
+            this.newDashVisibleBol = false
+        }
+
+        if(!(this.newChartElement.nativeElement.contains(event.target))){
+            this.newChartBool = false
+        }
         
-    const element = event.target.getAttributeNames().find((name: string | string[]) => name.includes('c105') || name.includes('c106')) || event.target.tagName === "I"
-    || event.target.tagName === "BUTTON"
-    || event.target.tagName === "BUTTON" || event.target.tagName === "P" 
-    || event.target.tagName === "CANVAS";
-      if(!element){
-        this.newDashVisibleBol = false
-        this.newChartBool = false
-        this.viewEditBol = false
-      }
     }
 
     createNewDashBoard(dash:any){

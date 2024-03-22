@@ -11,7 +11,7 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
 
   dashChoosed:number = -1
   squads: any[] = []
-  @Input() newDashBool!:Boolean
+  @Input() newDashBool:Boolean = false
   @Output() newDash : EventEmitter<any> = new EventEmitter<any>()
   @Input() newDashId !: number
   nome = "teste"

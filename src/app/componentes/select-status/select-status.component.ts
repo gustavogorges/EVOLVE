@@ -14,6 +14,7 @@ export class SelectStatusComponent implements OnInit {
   booleanAddStatus : boolean = false;
   booleanTeste : boolean = false;
   color : string = "";
+  boolEditStatus : boolean = false;
 
   status : Status = new Status();
 
@@ -49,7 +50,6 @@ export class SelectStatusComponent implements OnInit {
 
   async novoStatus(): Promise<void> {
     this.status.textColor = "#000000";
-    this.projeto.id=2;
 
     console.log(this.status);
 
@@ -59,6 +59,17 @@ export class SelectStatusComponent implements OnInit {
     console.log(this.projeto)
 
     this.addStatus();
+  }
+
+  editStatus(status:Status){
+    this.status.name = status.name
+    this.status.backgroundColor = status.backgroundColor
+    this.boolEditStatus = true
+    this.booleanAddStatus = false
+  }
+
+  async editStatusPut(){
+    this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
   }
 
 }

@@ -31,7 +31,11 @@
                 <div class="membro-equipe">
                     <label class="label" for="Membro equipe">Pesquise um membro da sua equipe:</label>
                     <div class="absolute w-fit h-fit" #statusClose >
-                        <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa>
+                        <!-- <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa> -->
+                        <app-select-status
+                        [projeto]="projeto"
+                        [statusLista]="projeto.statusList"
+                        ></app-select-status>
                     </div>                    
                     <input class="membro-input" placeholder="email do usuário" type="text" pInputText />
                 </div>

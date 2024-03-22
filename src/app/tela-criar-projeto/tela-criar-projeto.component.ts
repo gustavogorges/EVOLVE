@@ -29,6 +29,10 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.statusVisible = !this.statusVisible
   }
 
+  editStatus(){
+    
+  }
+
   updateProject(p:Project){
     this.projeto.statusList = p.statusList
     this.service.putProjeto(p)
@@ -37,8 +41,6 @@ export class TelaCriarProjetoComponent implements OnInit {
   @ViewChild('statusClose') statusClose!:ElementRef
   @HostListener('click', ['$event'])
   clickOutside(event:any){
-    console.log(this.statusClose.nativeElement);
-    
     if(event.target.contains(this.statusClose.nativeElement) || event.target.classList.contains("membros")){
       this.statusVisible = false
     }
@@ -52,7 +54,6 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.projeto.finalDate = this.data.nativeElement.value
     this.projeto.description = this.descricao.nativeElement.value
     await this.service.putProjeto(this.projeto);
-    localStorage.removeItem('projeto')
     this.route.navigate(['tela-projeto'])
   }
 
@@ -65,7 +66,10 @@ export class TelaCriarProjetoComponent implements OnInit {
    async createStatus(event:any){
     this.projeto.statusList.push(event)
     this.projeto = await this.service.putProjeto(this.projeto)
-    console.log(this.projeto);
+   }
+
+   ngOnDestroy(){
+    console.log("dawdawda");
     
    }
 

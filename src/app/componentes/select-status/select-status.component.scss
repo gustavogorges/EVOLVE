@@ -30,6 +30,10 @@
     @apply bg-secondary flex justify-center items-center rounded-b-lg
 }
 
+.edit-status-box{
+    @apply bg-primary flex justify-center items-center rounded-b-lg
+}
+
 .input-add-status {
     @apply bg-primaryWhite outline-none pl-3
 }
