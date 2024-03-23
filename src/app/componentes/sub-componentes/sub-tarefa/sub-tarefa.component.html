@@ -2,10 +2,10 @@
   <div class="main-card">
       <div class="card">
           <div class="tasks">
-              <div class="task" *ngFor="let sub of listaSubtarefas; index as i">
+              <div class="task" *ngFor="let sub of tarefa.subtasks; index as i">
                   <div class="main-task">
                       <div *ngIf="!sub.editable" class="s-input flex gap-1 w-[80%]">
-                          <input type="checkbox" id="{{i}}">
+                          <input type="checkbox" id="{{i}}" [(ngModel)]="sub.concluded" (click)="completed(sub)">
                           <label class="task-label" for="{{i}}">{{sub.name}}</label> 
                        </div>
                        <div *ngIf="sub.editable" class=" flex justify-between gap-1 w-full">

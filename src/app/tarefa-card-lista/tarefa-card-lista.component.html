@@ -20,7 +20,7 @@
 
  
   <div class="grey-progress">
-    <div class="blue-progress" [ngStyle]="{ width: valorBarra }"></div>
+    <div class="blue-progress" [ngStyle]="{ 'width': tarefaAtual.progress + '%' }"></div>
   </div>
   <div class="finalDate-box">
     <p class="finalDate">{{ tarefaAtual.finalDate | date: "dd" }}/{{ tarefaAtual.finalDate | date: "LL" }}/ {{ tarefaAtual.finalDate | date: "yyyy" }}</p>
@@ -40,7 +40,7 @@
   </div>
   </div>
   <div class="finalDate-box">
-    <p class="text-black text-lg font-hind-madurai">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
+    <p class="text-black dark:text-secondaryWhite text-lg font-hind-madurai">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
   </div>
   <div class="star-box">
     <img

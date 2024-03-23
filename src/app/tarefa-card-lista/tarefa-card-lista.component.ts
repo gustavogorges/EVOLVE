@@ -45,7 +45,7 @@ data : Date = new Date
  
  }
 
- favoritar(){
+ async favoritar(){
    if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
      this.caminhoEstrela = "assets/estrelaMarcada.svg"
      this.tarefaAtual.favorited=true;
@@ -57,7 +57,7 @@ data : Date = new Date
    console.log(this.tarefaAtual)
 
   console.log(this.caminhoEstrela)
-  console.log(this.service.putTarefa(this.tarefaAtual))
+   console.log( await this.service.putTarefa(this.tarefaAtual))
    this.newItem.emit(true);
 
 

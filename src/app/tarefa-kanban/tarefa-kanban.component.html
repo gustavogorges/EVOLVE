@@ -14,7 +14,7 @@
     >
       <div class="flex justify-between w-full py-2">
         <i
-          class="pi pi-arrows-h text-secondary"
+          class="pi pi-arrows-h text-secondary dark:text-dark-secundary-green"
           dndHandle
           id="{{ item.columnIndex }}"
         ></i>
@@ -29,7 +29,7 @@
           {{ item.name }}
         </p>
         <i
-          class="pi pi-ellipsis-v text-secondary"
+          class="pi pi-ellipsis-v text-secondary dark:text-dark-secundary-green"
           (click)="openSelect(item.id, $event)"
         ></i>
         <div *ngIf="selectOpen && statusId==item.id" class="absolute z-10 top-8 ">
@@ -41,8 +41,8 @@
       </div>
    
 
-      <button class="bg-primaryWhite w-full text-lg text-fontGray border-b p-1">
-        <i class="pi pi-plus text-secondary p-1" style="font-size: 1rem" ></i>
+      <button class="bg-primaryWhite dark:bg-dark-theme-back w-full text-lg text-fontGray dark:text-secondaryWhite border-b dark:border-dark-secundary-gray p-1">
+        <i class="pi pi-plus text-secondary dark:text-dark-secundary-green p-1" style="font-size: 1rem" ></i>
         adicionar tarefa
       </button>
 
@@ -72,7 +72,7 @@
         >
           <div
             *ngIf="task.currentStatus?.id == item.id"
-            class="bg-primaryWhite rounded-md p-5"
+            class="bg-primaryWhite dark:bg-dark-theme-back rounded-md p-5"
           >
             <app-tarefa-card-padrao
               [tarefaAtual]="task"

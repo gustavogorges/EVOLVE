@@ -32,4 +32,5 @@ export class Task{
     associates:Array<User|Pick<User, "id">> = new Array;
     isVisible: boolean = false;
     scheduledDate: Date = new Date;
+    progress: number = 0; 
 }

@@ -4,17 +4,17 @@
   .calendar-title {
     @apply flex items-end m-3 gap-2;
     .calendario-title-year-month {
-      @apply text-center text-2xl text-secondary font-bold;
+      @apply text-center text-2xl text-secondary dark:text-dark-secundary-green font-bold;
       font-family: "Montserrat", sans-serif;
     }
   }
   .day-and-month-calendar {
     @apply flex gap-9 w-[1655px] overflow-x-auto justify-center h-full;
     .day-open {
-      @apply w-[400px] bg-primary rounded-[10px] flex flex-col  p-10;
+      @apply w-[400px] bg-primary dark:bg-dark-primary rounded-[10px] flex flex-col  p-10;
     }
     .text-day-open {
-      @apply text-center text-2xl text-primaryWhite font-bold;
+      @apply text-center text-2xl text-primaryWhite dark:text-black font-bold;
       font-family: "Montserrat", sans-serif;
     }
     .tasks.day-open {
@@ -31,7 +31,7 @@
         .each-day {
           @apply w-[140px]  min-w-[164px] flex justify-center;
           .day-text {
-            @apply w-full text-center font-medium;
+            @apply w-full text-center font-medium dark:text-gray-300;
             font-family: "Montserrat", sans-serif;
           }
         }
@@ -42,7 +42,7 @@
         @apply w-full h-full gap-2  grid mt-2;
       }
       .calendario-dia-nao-faz-parte-mes-atual {
-        @apply border-none bg-primaryGray;
+        @apply border-none bg-primaryGray dark:bg-dark-primary-gray;
       }
       .grid-calendar > div {
         @apply w-[164px] h-[140px] flex-col rounded-xl flex border-[#ddd] border-[1px] justify-end p-3 gap-1 items-end;
@@ -58,7 +58,7 @@
               @apply rounded-md text-sm w-full;
 
               .todayText {
-                @apply bg-primary text-primaryWhite rounded-full px-1.5 py-1;
+                @apply text-primary dark:bg-dark-primary rounded-full px-1.5 py-1;
               }
             }
           }

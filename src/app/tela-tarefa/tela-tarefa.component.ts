@@ -63,7 +63,10 @@ export class TelaTarefaComponent implements OnInit {
       console.log(this.listaTarefas);
       this.projeto = await this.service.getOne('project', 1);
       this.listaTarefas = this.projeto.tasks;
+      this.listaNova = this.projeto.tasks;
       this.sortLists();
+      console.log(this.listaTarefas);
+
     }
   }
 
