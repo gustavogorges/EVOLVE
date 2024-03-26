@@ -31,7 +31,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   ngOnInit(): void {
     this.propertyValue = this.property.propertyValues[0]
 
-    if(this.property.currentOptions != null) {
+    if(this.property.currentOptions.length > 0) {
       this.booleanValueOption = true;
     }
   
@@ -76,6 +76,8 @@ export class PropriedadeTarefaComponent implements OnInit {
      }
 
      console.log(this.booleanEditProperty);
+     console.log(this.booleanValueOption);
+     
      
      
   }
