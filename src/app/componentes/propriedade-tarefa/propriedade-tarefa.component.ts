@@ -30,6 +30,10 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   ngOnInit(): void {
     this.propertyValue = this.property.propertyValues[0]
+
+    if(this.property.currentOptions != null) {
+      this.booleanValueOption = true;
+    }
   
     this.eventsSubscription = 
     this.events.subscribe(() => 
@@ -65,10 +69,14 @@ export class PropriedadeTarefaComponent implements OnInit {
        this.property.icon = 'pi pi-users'
      }
 
-     if(this.property.propertyValues.length != 0) {
+     if(this.property.propertyValues.length != 0 ||
+        this.property.currentOptions.length != 0) {
       
        this.booleanEditProperty = true;
      }
+
+     console.log(this.booleanEditProperty);
+     
      
   }
 
@@ -122,7 +130,8 @@ export class PropriedadeTarefaComponent implements OnInit {
     this.booleanValue = true;
     property.editable = true;
 
-    if(property.propertyType.toString() == 'UniSelectValue') {
+    if(property.propertyType.toString() == 'UniSelectValue' ||
+    property.propertyType.toString() == 'MultiSelectValue') {
       this.booleanSelectOption = true;
     }
     
@@ -132,7 +141,6 @@ export class PropriedadeTarefaComponent implements OnInit {
   checkEditable(property:Property) : boolean {
     if(property.editable == false) {
       if(this.booleanEditProperty == true) {
-        console.log("check editable ta retornando true");
         return true;
       }
     }
@@ -140,26 +148,41 @@ export class PropriedadeTarefaComponent implements OnInit {
   
   }
 
-  checkTypeValue() : boolean {
-    if(this.booleanValue) {
+  confirmButtonCheck() : boolean {
+    if(this.property.editable) {
+      if(this.property.propertyType.toString() == 'UniSelectValue' ||
+      this.property.propertyType.toString() == 'MultiSelectValue') {
+        return false;
+      }
       return true;
-    } else {
-      return false;
     }
+    return false;
+  }
+
+  checkTypeValue() : boolean {
+   return this.booleanValue;
   }
 
   editOption() : void {
-    console.log("existe");
+    this.booleanSelectOption = true;
   }
 
   selectOptionEmitter() : void {
-    console.log("chegou no select option emitter !");
     this.booleanSelectOption = false;
     this.booleanValueOption = true;
     this.property.editable =false;
-    console.log(this.booleanValueOption);
-    console.log("log da property current option");
-    console.log(this.property.currentOptions[0]);
+  }
+
+  selectOptionTypeCheck() : boolean {
+    if(this.booleanSelectOption) {
+      if(this.property.propertyType.toString() == 'UniSelectValue' ||
+         this.property.propertyType.toString() == 'MultiSelectValue'
+      ) {
+        console.log("ENTROU AQ");
+        return true;
+      }
+    }
+    return false;
   }
 
   saveProperty(property:Property) : void {

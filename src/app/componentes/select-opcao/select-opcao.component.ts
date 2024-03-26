@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Option } from 'src/model/propriedade/option';
 import { Property } from 'src/model/propriedade/property';
+import { PropertyType } from 'src/model/propriedade/propertyType';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -34,8 +35,13 @@ export class SelectOpcaoComponent implements OnInit {
   }
 
   salvarOption(option:Option) {
-    this.property.currentOptions.push(option);
-    console.log("enviou !!");
+
+    if(this.property.propertyType.toString() == "UniSelectValue") {
+      this.property.currentOptions = [];
+      this.property.currentOptions.push(option);
+    } else if (this.property.propertyType.toString() == "MultiSelectValue") {
+      this.property.currentOptions.push(option);
+    }
     
     this.newItem.emit();
   }

@@ -56,14 +56,13 @@
         [(ngModel)]="newPropertyValue"
         >
         <app-select-opcao
-        *ngIf="booleanSelectOption && property.propertyType.toString() == 'UniSelectValue' "
+        *ngIf="selectOptionTypeCheck()"
         [property]="property"
         (newItem)="selectOptionEmitter()"
         >
         </app-select-opcao>
         <div
-        *ngIf="property.editable && 
-        property.propertyType.toString() != 'UniSelectValue'"
+        *ngIf="confirmButtonCheck()"
         class="confirmation-buttons"
         (click)="saveProperty(property)"
         >
