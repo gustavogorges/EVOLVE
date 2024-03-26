@@ -30,8 +30,7 @@
             <div class="membro-components">
                 <div class="membro-equipe">
                     <label class="label" for="Membro equipe">Pesquise um membro da sua equipe:</label>
-                    <div class="absolute w-fit h-fit" #statusClose >
-                        <!-- <app-status-component-criar-tarefa (projetoNew)="updateProject($event)" [projeto]="projeto" [isVisible]="statusVisible" ></app-status-component-criar-tarefa> -->
+                    <div class="absolute w-fit h-fit translate-y-20" #statusClose >
                         <app-select-status
                         [projeto]="projeto"
                         [statusLista]="projeto.statusList"

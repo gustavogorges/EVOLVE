@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
@@ -9,7 +9,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   templateUrl: './select-status.component.html',
   styleUrls: ['./select-status.component.scss']
 })
-export class SelectStatusComponent implements OnInit {
+export class SelectStatusComponent implements OnInit{
 
   booleanAddStatus : boolean = false;
   booleanTeste : boolean = false;
@@ -35,7 +35,7 @@ export class SelectStatusComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.projeto)
+    // this.projeto.statusList.reverse()
   }
 
   salvarStatus(status:Status) {
@@ -57,6 +57,7 @@ export class SelectStatusComponent implements OnInit {
       this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
       this.addStatus();
     }
+    // this.projeto.statusList.reverse()
   }
 
   editStatus(status:Status){
@@ -70,6 +71,8 @@ export class SelectStatusComponent implements OnInit {
     this.boolEditStatus = false
     this.booleanAddStatus = false
     this.status = new Status
+    // this.projeto.statusList.reverse()
+
   }
 
   verifyStatusDefault(status:Status){
@@ -85,11 +88,14 @@ export class SelectStatusComponent implements OnInit {
   async enableStatus(status:Status){
     status.enabled = !status.enabled
     this.projeto = await this.service.updateStatusList(this.projeto.id, status);
-    console.log(this.projeto);
+    // this.projeto.statusList.reverse()
+
   }
 
   async deleteStatus(status:Status){
     this.projeto = await this.service.deleteStatus(this.projeto.id, status);
+    // this.projeto.statusList.reverse()
+
   }
 
 }
