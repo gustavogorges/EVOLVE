@@ -51,6 +51,9 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
  
+  async deleteStatus(projetoId:number,status:Status) {
+    return (await axios.patch(this.URL+"project/delete/"+projetoId, status )).data
+  }
 
   async patchProperty(taskProjectProperty:Property, taskId:number) {
     console.log(taskProjectProperty)

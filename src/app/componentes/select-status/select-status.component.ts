@@ -40,7 +40,6 @@ export class SelectStatusComponent implements OnInit {
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;
-    console.log(this.tarefa.currentStatus)
     this.newItem.emit(false);
   }
 
@@ -49,27 +48,48 @@ export class SelectStatusComponent implements OnInit {
   }
 
   async novoStatus(): Promise<void> {
-    this.status.textColor = "#000000";
-
-    console.log(this.status);
-
-
-    this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
-    
-    console.log(this.projeto)
-
-    this.addStatus();
+    if(this.status.name != ''){
+      if(this.status.backgroundColor === ''){
+        this.status.backgroundColor = "#ff0000"
+      }
+      this.status.backgroundColor.toUpperCase()
+      this.status.textColor = "#000000";
+      this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
+      this.addStatus();
+    }
   }
 
   editStatus(status:Status){
-    this.status.name = status.name
-    this.status.backgroundColor = status.backgroundColor
+    this.status = status
     this.boolEditStatus = true
     this.booleanAddStatus = false
   }
 
   async editStatusPut(){
     this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
+    this.boolEditStatus = false
+    this.booleanAddStatus = false
+    this.status = new Status
+  }
+
+  verifyStatusDefault(status:Status){
+    if(status.name === 'não atribuido' ||
+    status.name === 'concluido' ||
+    status.name === 'pendente' ||
+    status.name === 'em progresso'){
+      return true
+    }
+    return false
+  }
+
+  async enableStatus(status:Status){
+    status.enabled = !status.enabled
+    this.projeto = await this.service.updateStatusList(this.projeto.id, status);
+    console.log(this.projeto);
+  }
+
+  async deleteStatus(status:Status){
+    this.projeto = await this.service.deleteStatus(this.projeto.id, status);
   }
 
 }
