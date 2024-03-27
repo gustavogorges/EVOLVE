@@ -33,4 +33,5 @@ export class Task{
     isVisible: boolean = false;
     scheduledDate: Date = new Date;
     progress: number = 0; 
+    
 }

@@ -1,5 +1,5 @@
 .main{
-  @apply w-full flex h-[60px] items-center  py-2 justify-center gap-9 bg-[#FFFFFF] dark:bg-dark-primary-black rounded-lg   ;
+  @apply w-full flex h-[60px] px-10 items-center justify-between p-2  gap-9 bg-[#FFFFFF] dark:bg-dark-primary-black rounded-lg   ;
   
 }
 .taskName {
@@ -62,7 +62,7 @@
       @apply w-28
     }
     .priority {
-      @apply rounded-lg  px-4 w-full text-center text-sm self-center bg-gray-400 ;
+      @apply rounded-lg  px-4 w-full text-center text-sm self-center  ;
       font-family: "Montserrat", sans-serif;
     }
     

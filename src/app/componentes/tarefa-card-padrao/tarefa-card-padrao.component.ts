@@ -20,6 +20,7 @@ import { Subtask } from 'src/model/subtask';
     @Input() id: string = "";
     @Input() project !: Project
     @Output() newItem = new EventEmitter<boolean>();
+    teste !:string;
 
   data : Date = new Date
 
@@ -29,7 +30,8 @@ import { Subtask } from 'src/model/subtask';
   
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+      this.teste = await this.service.getOne("aws", this.tarefaAtual.id)
   
       this.trocaCor()
       if(this.tarefaAtual.favorited){

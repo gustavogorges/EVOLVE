@@ -76,6 +76,17 @@ data : Date = new Date
    }
    
  }
+ getUserStyles(user: any): any {
+  let styles: any = {};
+
+  if(user.image!=null){
+    styles['background'] = user.imageColor;
+  }
+  styles['background-color'] = user.imageColor;
+    
+  
+  return styles;
+}
 
 
 
