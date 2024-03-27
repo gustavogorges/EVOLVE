@@ -1,9 +1,9 @@
 .contact{
-    @apply w-full h-full p-4 bg-[#f5f5f5] border-b-2 flex items-center ;
+    @apply w-full h-full p-4 bg-[#f5f5f5] border-b-2 flex gap-8 items-center ;
 }
 
 .img-container{
-    @apply  w-16 h-16 flex justify-center rounded-full;
+    @apply  w-16 h-16 min-w-[4rem]  flex justify-center rounded-full;
 }
 
 .img{
@@ -11,27 +11,24 @@
 }
 
 .body{
-    @apply  flex flex-col justify-center items-start w-[70%] h-full pl-8 bg-blue-200 ;
+    @apply  flex  justify-between items-center  max-w-[70%] w-full h-full ;
 }
 
-.name-container .last-message-container{
-    @apply w-full ;
-}
 
 .name{
-    @apply w-full truncate font-bold ;
+    @apply w-[70%] truncate font-bold ;
 }
 
 .last-message{
-    @apply w-[24rem] max-w-full truncate text-[95%] bg-pink-200;
+    @apply  truncate text-[95%] w-full;
 }
 
 .side-info{
-    @apply flex flex-col justify-end items-center h-full ;
+    @apply flex flex-col justify-end items-center h-min h-full ;
 }
 
 .last-message-date-container{
-    @apply  flex items-center w-full h-1/2 ;
+    @apply  flex items-center w-full h-1/2  ;
 }
 .unseen-message-icon{
     @apply rounded-full w-4 h-4 bg-secondary ;

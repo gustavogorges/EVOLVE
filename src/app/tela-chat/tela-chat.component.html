@@ -36,6 +36,12 @@
                 <div class="contacts-list"  *ngFor="let chat of chatList">
                     <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
                 </div>
+                <!-- <div class="contacts-list"  *ngFor="let chat of teamChatList">
+                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
+                </div>
+                <div class="contacts-list"  *ngFor="let chat of userChatList">
+                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
+                </div> -->
                 
             </div>
 

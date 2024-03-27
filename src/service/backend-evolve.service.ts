@@ -14,6 +14,8 @@ import { PropertyValue } from 'src/model/propriedade/propertyValue';
 
 import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
+import { Message } from 'src/model/message';
+import { MessageStatus } from 'src/model/messageStatus';
 
 
 
@@ -121,14 +123,21 @@ export class BackendEVOLVEService {
   }
 
 
-  async postMessage (message:MessageDTO){
-    (await axios.post(this.URL+"message", message)).data 
+  async postMessage (message:MessageDTO): Promise<Message>{
+    return (await axios.post(this.URL+"message", message)).data 
   }
 
-  async putMessage (message:MessageDTO){
+  async putMessage (message:MessageDTO): Promise<Message>{
+    console.log("fazendo update na service");
+    
+    console.log(message);
+    
     return (await axios.put(this.URL+"message", message)).data
   }
 
+  async patchMessageStatus(messageId:number, newMessageStatus:string):Promise<Message>{
+    return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
+  }
 
 
 
@@ -144,7 +153,9 @@ export class BackendEVOLVEService {
 
   async getTeamChatsByUserId(id:number) : Promise<Array<TeamChat>>{
     let path:String = "teamChat/user/";
+    
     console.log((await axios.get(this.URL+path+id)).data);
+    console.log("teamChats da service");
     
     return (await axios.get(this.URL+path+id)).data
   }

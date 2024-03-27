@@ -5,6 +5,8 @@ import { UserChat } from 'src/model/userChat';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { Project } from 'src/model/project';
+import { Team } from 'src/model/team';
 
 interface ChatHeaderInfo{
   name:String,
@@ -23,12 +25,15 @@ export class TelaChatComponent implements OnInit {
   loggedUser: User = new User
   search:string = ""
 
-  chatList:Array<Chat> = new Array
+  chatList:Array<UserChat>|Array<TeamChat> = new Array
+
+  // userChatList:Array<UserChat> = new Array
+  // teamChatList:Array<TeamChat> = new Array
 
   chatTypeUsers:string = "users"
   chatTypeTeams:string = "teams"
   chatTypeProjects:string = "projects"
-  chatType:string = ""
+  chatType:string = "users";
 
   selectedChat!:Chat
 
@@ -37,21 +42,12 @@ export class TelaChatComponent implements OnInit {
     private cookiesService: CookiesService
   ) { }
 
-  contact: User = new User
+  contact: User|Team|Project = new User
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookiesService.getLoggedUser()
-    // this.loggedUser.chats = await this.service.getChatsByUserId(this.loggedUser.id)
-    console.log(this.loggedUser)
-
-    // this.contact = chat.getContactFromUser(user)
-    // console.log(this.getContactFromUser(this.loggedUser.chats[1], this.loggedUser))
-
-    this.selectedChat = await this.getLastChat()
-    console.log("this.selectedChat");
-    console.log(this.selectedChat);
-    
-    
+    this.setChatListType(await this.cookiesService.get(this.chatListTypeCookieField))
+    this.selectChat(await this.getLastChat())
     this.contact = this.getContactFromUser(this.selectedChat, this.loggedUser)
   }
 
@@ -63,43 +59,71 @@ export class TelaChatComponent implements OnInit {
   }
 
   async setChatListType(type:string):Promise<void>{
+    this.chatType = type
     if(type == this.chatTypeUsers){
-      console.log(this.loggedUser);
       this.chatList = await this.service.getUserChatsByUserId(this.loggedUser.id)
+      // this.userChatList = await this.service.getUserChatsByUserId(this.loggedUser.id)
+      // this.teamChatList = new Array
     }
     if(type == this.chatTypeProjects){
     }
     if(type == this.chatTypeTeams){
+      console.log("AAAAAAAAA");
+      console.log( await this.service.getTeamChatsByUserId(this.loggedUser.id));
+      
       this.chatList = await this.service.getTeamChatsByUserId(this.loggedUser.id)
+      // this.teamChatList = await this.service.getTeamChatsByUserId(this.loggedUser.id)
+      // this.userChatList = new Array
     }
     this.cookiesService.set(this.chatListTypeCookieField, type)
   }
 
 
-  checkSearch(chat:Chat):Boolean{
-    console.log(chat);
-    console.log(this.getContactFromUser(chat, this.loggedUser));
+  checkSearch(chat:UserChat|TeamChat):Boolean{
+    let contactName 
     
-    let contactName = this.getContactFromUser(chat, this.loggedUser).name.toLowerCase()
-    console.log(contactName);
+    if(this.chatType==this.chatTypeTeams){
+      
+      contactName = (chat as TeamChat).team.name.toLowerCase()
+      return contactName.includes(this.search.toLowerCase())
+    }
+    if(this.chatType == this.chatTypeUsers){
+      
+      contactName = this.getContactFromUser(chat, this.loggedUser).name.toLowerCase()
+      return contactName.includes(this.search.toLowerCase())
+    }
+    // console.log("nao entrei");
     
-    return contactName.includes(this.search.toLowerCase())
+    return false
   }
 
 
   selectChat(chat:Chat):void{
     this.contact = this.getContactFromUser(chat, this.loggedUser)
-    console.log(chat)
     this.selectedChat = chat
+    
+    this.selectedChat.messages.forEach(async message => {
+      if(message.messageStatus!=3){
+        if(message.sender!=this.loggedUser){
+          message = await this.service.patchMessageStatus(message.id, "VISUALIZED")
+        }
+      }
+    })
     this.cookiesService.set("lastChatId", this.selectedChat.id)
   }
 
-  getContactFromUser(chat: UserChat, user: User) {
+  getContactFromUser(chat: UserChat|TeamChat, user: User):User|Team {
     // let users:Array<User> = chat.users
+
+    if(this.chatType == this.chatTypeTeams){
+      return (chat as TeamChat).team
+    }
+
     if (chat.users[0]?.id != user.id) {
       return chat.users[0]
     }
     return chat.users[1]
   }
+
 
 }
