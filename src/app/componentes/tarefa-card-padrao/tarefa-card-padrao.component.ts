@@ -1,5 +1,6 @@
   import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,Input, Output, EventEmitter } from '@angular/core';
 import { Project } from 'src/model/project';
+import { Subtask } from 'src/model/subtask';
   import { Task } from 'src/model/task';
   import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -12,13 +13,14 @@ import { Project } from 'src/model/project';
   @Input() tarefaAtual!:Task
 
   valorBarra="0%";
-    caminho = "assets/naoVector.svg"
+    caminho = "assets/estrelaMarcada.svg"
     caminhoEstrela="assets/estrelaNaoMarcada.svg"
     nomeGrande ="";
     corStatus=""; 
     @Input() id: string = "";
     @Input() project !: Project
     @Output() newItem = new EventEmitter<boolean>();
+    teste !:string;
 
   data : Date = new Date
 
@@ -28,7 +30,7 @@ import { Project } from 'src/model/project';
   
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
   
       this.trocaCor()
       if(this.tarefaAtual.favorited){
@@ -41,7 +43,7 @@ import { Project } from 'src/model/project';
     
     }
 
-    favoritar(event: MouseEvent){
+    async favoritar(event: MouseEvent){
       event.stopPropagation();
 
       if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
@@ -55,7 +57,7 @@ import { Project } from 'src/model/project';
       this.tarefaAtual.project = {
         id : this.project.id
       }
-       this.service.putTarefa(this.tarefaAtual)
+       await this.service.putTarefa(this.tarefaAtual)
       this.newItem.emit(true);
 
 
@@ -73,6 +75,23 @@ import { Project } from 'src/model/project';
         this.corStatus="#9CA3AE"
       }
     }
+    async completed(sub : Subtask){
+      console.log(sub);
+      if(sub.concluded){
+        sub.concluded=false;
+      }else{
+        sub.concluded=true;
+      }
+      console.log(sub);
+      this.tarefaAtual.subtasks.map((s)=>{
+        if(s.id ==sub.id){
+          s.concluded=sub.concluded
+        }
+      })
+
+      await this.service.putTarefa(this.tarefaAtual); 
+      
+      }
       
     }
 

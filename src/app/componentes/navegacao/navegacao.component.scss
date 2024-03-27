@@ -1,6 +1,7 @@
 .main {
 
-    @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-full fixed border-b-2;
+    @apply bg-primaryNav dark:bg-dark-theme-back h-20 w-full fixed border-b-2 dark:border-dark-secundary-gray
+    ;
     z-index: 9999;
 }
 

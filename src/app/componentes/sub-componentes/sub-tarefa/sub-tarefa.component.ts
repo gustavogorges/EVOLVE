@@ -11,9 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 export class SubTarefaComponent implements OnInit {
 
   booleanAddSubtarefa : boolean = false;
-  subtarefa  = {
-    nome: ''
-  };
+  
   checked:boolean = false;
 
   modalSubtarefa:boolean = false;
@@ -22,28 +20,32 @@ export class SubTarefaComponent implements OnInit {
 
   @Input()
   tarefa : Task = new Task;
-  
   @Input()
   listaSubtarefas : Array<Subtask> = new Array;
+  subtarefa  = {
+    nome: ''
+  };
+  
+ 
 
   constructor(
     private service : BackendEVOLVEService
   ) { }
 
   ngOnInit(): void {
-
+    console.log(this.tarefa);
+    
   }
 
-  adicionarSubtarefa() {
-    const subtarefaNova: Subtask = {
-      name: this.subtarefa.nome,
-      concluded: false,
-      id: 0,
-      modalEdit : false,
-      editable: false
-    }
-    this.listaSubtarefas.push(subtarefaNova);
-    this.service.putTarefa(this.tarefa)
+  async adicionarSubtarefa() {
+    const subtarefaNova = new Subtask()
+    subtarefaNova.name= this.subtarefa.nome
+   
+    console.log(subtarefaNova);
+    
+    this.tarefa.subtasks.push(subtarefaNova);
+    await this.service.putTarefa(this.tarefa)
+    this.tarefa = await this.service.getOne("task", this.tarefa.id)
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
     console.log(this.tarefa)
@@ -63,7 +65,7 @@ export class SubTarefaComponent implements OnInit {
   }
 
   removeSubtarefa(subtarefa : Subtask, i : number) {
-    this.listaSubtarefas.splice(i,1)
+    this.tarefa.subtasks.splice(i,1)
     console.log(this.listaSubtarefas)
     this.service.putTarefa(this.tarefa);
   }
@@ -76,5 +78,22 @@ export class SubTarefaComponent implements OnInit {
     console.log(this.tarefa.subtasks)
     this.service.putTarefa(this.tarefa);
   }
+  async completed(sub : Subtask){
+      console.log(sub);
+      if(sub.concluded){
+        sub.concluded=false;
+      }else{
+        sub.concluded=true;
+      }
+      console.log(sub.id);
+      this.tarefa.subtasks.map((s)=>{
+        if(s.id ==sub.id){
+          s.concluded=sub.concluded
+        }
+      })
+
+      await this.service.putTarefa(this.tarefa); 
+      
+      }
 
 }
