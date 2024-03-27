@@ -13,7 +13,7 @@ import { Subtask } from 'src/model/subtask';
   @Input() tarefaAtual!:Task
 
   valorBarra="0%";
-    caminho = "assets/naoVector.svg"
+    caminho = "assets/estrelaMarcada.svg"
     caminhoEstrela="assets/estrelaNaoMarcada.svg"
     nomeGrande ="";
     corStatus=""; 
@@ -31,7 +31,6 @@ import { Subtask } from 'src/model/subtask';
     }
 
     async ngOnInit(): Promise<void> {
-      this.teste = await this.service.getOne("aws", this.tarefaAtual.id)
   
       this.trocaCor()
       if(this.tarefaAtual.favorited){
