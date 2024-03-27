@@ -30,8 +30,8 @@ export class SelectOpcaoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.property);
     this.optionsList = this.property.options;
+    console.log(this.property.currentOptions);
   }
 
   saveOptionUniSelect(option:Option) {
@@ -45,25 +45,23 @@ export class SelectOpcaoComponent implements OnInit {
   saveOptionMultiSelect(option:Option) {
      if (!this.verifyIfObjectExists(option)) {
       this.property.currentOptions.push(option);
+      console.log(this.property.currentOptions);
     }
   }
 
   removeOptionMultiSelect(option:Option) {
     if (this.verifyIfObjectExists(option)) {
-      this.property.currentOptions =
-      this.property.currentOptions.filter(optionFilter => optionFilter.id != option.id)
-      console.log(this.property.currentOptions);
+      this.property.currentOptions.forEach(elementFor => {
+        if(elementFor.id == option.id) {
+          const index:number =  this.property.currentOptions.indexOf(elementFor);
+          this.property.currentOptions.splice(index,1)
+        }
+      });
     }
   }
 
   verifyIfObjectExists(option:Option) : boolean {
-    const foundObject = this.property.currentOptions.find(optionFind => optionFind.id = option.id);
-
-    if(foundObject) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.property.currentOptions.some(optionFind => optionFind.id == option.id);
   }
 
   addOption() {
