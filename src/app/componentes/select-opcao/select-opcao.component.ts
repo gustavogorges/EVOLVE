@@ -34,16 +34,26 @@ export class SelectOpcaoComponent implements OnInit {
     this.optionsList = this.property.options;
   }
 
-  salvarOption(option:Option) {
-
+  saveOptionUniSelect(option:Option) {
     if(this.property.propertyType.toString() == "UniSelectValue") {
       this.property.currentOptions = [];
       this.property.currentOptions.push(option);
-    } else if (this.property.propertyType.toString() == "MultiSelectValue") {
+      this.newItem.emit();
+    }
+  }
+
+  saveOptionMultiSelect(option:Option) {
+    const foundObject = this.property.currentOptions.find(optionFind => {
+      optionFind = option;
+    })
+
+    if(foundObject) {
+      console.log("ja existe");
+      
+    } else if (!foundObject) {
       this.property.currentOptions.push(option);
     }
-    
-    this.newItem.emit();
+   
   }
 
   addOption() {
@@ -53,5 +63,14 @@ export class SelectOpcaoComponent implements OnInit {
   async novaOption(): Promise<void> {
     this.property.options.push(this.option);
     this.addOption();
+  }
+
+  checkTypeAndBoolean() : boolean {
+      if(this.property.propertyType.toString() == "MultiSelectValue") {
+        return true;
+      } else  {
+        return false;
+      }
+    
   }
 }

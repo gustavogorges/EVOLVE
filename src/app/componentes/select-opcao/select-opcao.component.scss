@@ -1,9 +1,9 @@
 .main {
-    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center
 }
 
 .status {
-     @apply w-full h-[18%] rounded-lg flex justify-center items-center  cursor-pointer
+     @apply w-full h-7 rounded-lg flex items-center  cursor-pointer
 }
 
 .status-box {
@@ -11,7 +11,7 @@
 }
 
 .add-box {
-    @apply w-full h-[15%] flex justify-center items-center gap-x-2 cursor-pointer mb-2
+    @apply w-full h-8 flex justify-center items-center  
 }
 
 .new-status {
@@ -32,4 +32,12 @@
 
 .input-add-status {
     @apply bg-primaryWhite outline-none pl-3
+}
+
+.pi-plus-circle {
+    font-size: large;
+}
+
+.pi-trash {
+    font-size: large;
 }

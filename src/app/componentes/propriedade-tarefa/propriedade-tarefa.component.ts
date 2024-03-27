@@ -147,7 +147,6 @@ export class PropriedadeTarefaComponent implements OnInit {
       }
     }
     return false;
-  
   }
 
   confirmButtonCheck() : boolean {
@@ -172,7 +171,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   selectOptionEmitter() : void {
     this.booleanSelectOption = false;
     this.booleanValueOption = true;
-    this.property.editable =false;
+    this.property.editable = false;
   }
 
   selectOptionTypeCheck() : boolean {
@@ -180,7 +179,6 @@ export class PropriedadeTarefaComponent implements OnInit {
       if(this.property.propertyType.toString() == 'UniSelectValue' ||
          this.property.propertyType.toString() == 'MultiSelectValue'
       ) {
-        console.log("ENTROU AQ");
         return true;
       }
     }
