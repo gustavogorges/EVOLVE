@@ -87,11 +87,11 @@
 }
 
 .propertie {
-    @apply flex w-full h-8 gap-4 items-center
+    @apply flex w-full gap-4 items-center
 }
 
 .propertie-value {
-    @apply h-full flex items-center
+    @apply h-full 
 }
 
 .date-propertie {
@@ -99,7 +99,9 @@
 }
 
 .task-properties-box {
-    @apply grid grid-cols-2 min-h-[15%] mb-10
+    
+   
+    @apply flex flex-col w-full gap-0 
 }
 
 .date-end {
@@ -135,7 +137,7 @@
 }
 
 .responsible-propertie {
-    @apply flex w-full 
+    @apply flex w-full justify-center
 } 
 
 .responsible-icon {

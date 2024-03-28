@@ -14,15 +14,19 @@
     <div *ngIf="!checkTypeValue() && !booleanValueOption">
         {{propertyValue.value.value}}
     </div>
-    <div *ngIf="booleanValueOption">
+    <div 
+    *ngIf="booleanValueOption"
+    class="flex flex-wrap gap-2 flex-1"
+    >
         <div
+            *ngFor="let option of property.currentOptions"
             (click)="editOption()"
             class="status-icon"
             [ngStyle]="{
-              'background-color': property.currentOptions[0].backgroundColor
+              'background-color': option.backgroundColor
             }"
           >
-            {{ property.currentOptions[0].value }}
+            {{ option.value }}
           </div>
     </div>
     </div>
@@ -35,7 +39,7 @@
     </div>
     <div
     *ngIf="property.editable == true" 
-    class=" h-full w-full flex items-center justify-start gap-3">
+    class=" h-full flex items-center justify-start gap-3">
     <!-- ARRUMAR OS NGIF DOS INPUT COM NOVA LÓGICA TAMBÉM -->
         <input 
         *ngIf="property.propertyType.toString() == 'IntegerValue'"

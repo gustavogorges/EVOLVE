@@ -18,19 +18,20 @@
             </p>
             <div *ngIf="checkTypeAndBoolean()" class="flex w-1/4 justify-between">
                 <i 
-                *ngIf="!verifyIfObjectExists(option)"
+                *ngIf="!verifyIfCurrentOptionExists(option)"
                 class="pi pi-plus-circle text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
                 (click)="saveOptionMultiSelect(option)"
                 >
                 </i>
                 <i 
-                *ngIf="verifyIfObjectExists(option)"
+                *ngIf="verifyIfCurrentOptionExists(option)"
                 class="pi pi-minus-circle text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
                 (click)="removeOptionMultiSelect(option)"
                 >
                 </i>
                 <i 
                 class="pi pi-trash text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
+                (click)="excludeOptionMultiSelect(option)"
                 >
                 </i>
             </div>

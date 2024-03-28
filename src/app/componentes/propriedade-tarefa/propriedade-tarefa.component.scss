@@ -1,9 +1,9 @@
 .propertie {
-    @apply flex w-full h-full items-center gap-4
+    @apply flex w-full items-start gap-4
 }
 
 .propertie-value {
-    @apply h-full flex items-center hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
+    @apply  hover:bg-slate-100 items-center px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .propertie-value-no {
@@ -42,7 +42,7 @@
 }
 
 .btn {
-    @apply h-full w-[60%] rounded text-white flex items-center justify-center cursor-pointer
+    @apply h-6 w-[65%] rounded text-white flex items-center justify-center cursor-pointer
 }
 
 .confirm-btn {

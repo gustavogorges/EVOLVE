@@ -43,14 +43,14 @@ export class SelectOpcaoComponent implements OnInit {
   }
 
   saveOptionMultiSelect(option:Option) {
-     if (!this.verifyIfObjectExists(option)) {
+     if (!this.verifyIfCurrentOptionExists(option)) {
       this.property.currentOptions.push(option);
       console.log(this.property.currentOptions);
     }
   }
 
   removeOptionMultiSelect(option:Option) {
-    if (this.verifyIfObjectExists(option)) {
+    if (this.verifyIfCurrentOptionExists(option)) {
       this.property.currentOptions.forEach(elementFor => {
         if(elementFor.id == option.id) {
           const index:number =  this.property.currentOptions.indexOf(elementFor);
@@ -60,8 +60,25 @@ export class SelectOpcaoComponent implements OnInit {
     }
   }
 
-  verifyIfObjectExists(option:Option) : boolean {
+  excludeOptionMultiSelect(option:Option) {
+    if(this.verifyIfOptionExists(option)) {
+      this.removeOptionMultiSelect(option);
+      this.property.options.forEach(optionFor => {
+        if(optionFor.id == option.id) {
+          console.log("entrand no if");
+          const index: number = this.property.options.indexOf(optionFor);
+          this.property.options.splice(index,1);
+        }
+      })
+    }
+  }
+
+  verifyIfCurrentOptionExists(option:Option) : boolean {
     return this.property.currentOptions.some(optionFind => optionFind.id == option.id);
+  }
+
+  verifyIfOptionExists(option:Option) : boolean {
+    return this.property.options.some(optionFind => optionFind.id == option.id);
   }
 
   addOption() {
