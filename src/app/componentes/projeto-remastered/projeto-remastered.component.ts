@@ -27,7 +27,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   @Input() projeto!:Project;
   
   ngOnChanges(): void {
-    if(!this.projeto.editOn){
+    if(!this.projeto.editOn && this.resetProject){
       this.cancelEdit()
     }
   }
@@ -40,6 +40,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   md: any
   corAtual: string = ''
   valorProgresso = 0;
+
+  @Input() resetProject : Boolean = false
   
   @Input() projectOpen !: Boolean
 
@@ -52,6 +54,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   @Output() salvarProjeto: EventEmitter<Project> = new EventEmitter<Project>()
 
   @Output() editProject: EventEmitter<Boolean> = new EventEmitter<Boolean>()
+  @Output() resetProjectOff: EventEmitter<Boolean> = new EventEmitter<Boolean>()
 
 
   openAgain(){
@@ -116,6 +119,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
       this.projeto.finalDate = projeto.finalDate
       this.editProjectEmit(false)
     }, 500);
+    this.resetProjectOff.emit(false)
   }
 
 }

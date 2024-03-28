@@ -15,7 +15,9 @@
                 (click)="openProject(p)" 
                 (noCloseProject)="noCloseProject(p)"
                 (deletar)="deletarPai($event)"
+                [resetProject]="resetProject"
                 (editProject)="editProject($event, p)"
+                (resetProjectOff)="resetProjectOff()"
             ></app-projeto-remastered>
 
         </div>

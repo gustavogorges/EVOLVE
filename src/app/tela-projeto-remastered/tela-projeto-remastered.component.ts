@@ -14,6 +14,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
   id!: number
   projetos !: Project[]
+  resetProject: Boolean = false
 
   ngOnInit(): void {
     this.funcao()
@@ -23,22 +24,20 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.funcao()
   }
 
+  resetProjectOff(){
+    this.resetProject = false
+  }
+
   async funcao(){
     this.projetos = await this.service.getAllSomething('project')
 
-    this.projetos.forEach(element => {
-      if(element.name === ''){
-        this.deletarPai(element.id)        
+    this.projetos.forEach((e) =>{
+      if(e.name === ''){
+        window.location.reload()
       }
-    });
+    })
 
     this.projetos = this.projetos.reverse()
-
-    this.projetos.forEach(element => {
-      if(element.name === ''){
-        this.deletarPai(element.id)        
-      }
-    });
   }
 
   openProject(p:any){
@@ -56,11 +55,16 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   @ViewChild('projectElement') projectElement!:ElementRef
   @HostListener('click', ['$event'])
   clickOutside(event:any){
-    if(event.target.contains(this.projectElement.nativeElement)){
-      this.projetos.forEach(element => {
-        element.editOn = false
-        element.isVisible = false
-      });
+    if(this.projectElement){
+      if(event.target.contains(this.projectElement.nativeElement)){
+        this.projetos.forEach(element => {
+          if(element.editOn){
+            this.resetProject = true
+          }
+          element.editOn = false
+          element.isVisible = false
+        });
+      }
     }
   }
 

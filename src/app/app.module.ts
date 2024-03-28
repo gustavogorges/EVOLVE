@@ -166,6 +166,7 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
   ],
   
   imports: [
+    
     MessageModule,
     MessagesModule,
     ChartModule,

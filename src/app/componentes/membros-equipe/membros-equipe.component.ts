@@ -17,27 +17,32 @@ export class MembrosEquipeComponent implements OnInit {
   @Input() projeto!:Project
 
   ngOnInit(){
-    this.projeto.members.forEach(element => {
-      if(element.id === this.user.id){
-        this.adicionado = true
-      }
-    });
     console.log(this.user);
+    
+    if(this.projeto.members != null){
+      this.projeto.members.forEach(element => {
+        if(element.id === this.user.id){
+          this.adicionado = true
+        }
+      });
+    }else{
+      this.projeto.members = []
+    }
     
   }
 
   verifyImage(){
-    if(this.user.image.data){
-      return false
-    } else if(this.user.imageColor){
-      return true
-    }
-    return true
-    // if(this.user.profilePicture.length>10){
+    // if(this.user.image){
     //   return false
-    // }else{
+    // } else if(this.user.imageColor){
     //   return true
     // }
+    // return true
+    if(this.user.image != null){
+      return false
+    }else{
+      return true
+    }
   }
 
   randomizeColor(){

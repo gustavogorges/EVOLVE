@@ -16,14 +16,14 @@ export class TelaCriarProjetoComponent implements OnInit {
   
   async ngOnInit(){
     this.projeto = await this.service.postProjeto(new Project)
-    this.usuarios = await this.service.getAllSomething('user')
-    console.log(this.projeto);
-    
+    this.usuarios = await this.service.getAllSomething('user') || []
   }
   
   messages: Message[] | undefined;
   projeto!:Project
-  usuarios!: User[]
+  usuarios : User[] = []
+  saveProject : Boolean = false
+  date !: Date
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
@@ -41,25 +41,41 @@ export class TelaCriarProjetoComponent implements OnInit {
   @ViewChild('statusClose') statusClose!:ElementRef
   @HostListener('click', ['$event'])
   clickOutside(event:any){
-    if(event.target.contains(this.statusClose.nativeElement) || event.target.classList.contains("membros")){
-      this.statusVisible = false
+    if(this.statusClose){
+      if(event.target.contains(this.statusClose.nativeElement) || event.target.classList.contains("membros")){
+        this.statusVisible = false
+      }
     }
   }
 
-  @ViewChild('nome') nome!:ElementRef
-  @ViewChild('data') data!:ElementRef
-  @ViewChild('descricao') descricao!:ElementRef
+  dateFormat(data: Date): string {
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+    const ano = data.getFullYear();
+
+    return `${ano}-${mes}-${dia}`;
+  }
+
+  
   async salvarProjeto(){
-    this.projeto.name = this.nome.nativeElement.value
-    this.projeto.finalDate = this.data.nativeElement.value
-    this.projeto.description = this.descricao.nativeElement.value
-    await this.service.putProjeto(this.projeto);
-    this.route.navigate(['tela-projeto'])
+    if(this.projeto.name != '' && this.date != null){
+      this.projeto.finalDate = this.dateFormat(this.date);
+      console.log(this.dateFormat(this.date));
+      
+      if(this.projeto.members === null){
+        this.projeto.members = []
+      }
+      await this.service.putProjeto(this.projeto);
+      this.saveProject = true
+      this.route.navigate(['/tela-projeto'])
+    }else{
+      
+    }
   }
 
    async cancelar(){
-    localStorage.removeItem('projeto')
-      this.service.deleteById('project', this.projeto.id)
+    this.saveProject = true
+      await this.service.deleteById("project", this.projeto.id)
       this.route.navigate(['/tela-projeto'])
    }
 
@@ -68,9 +84,10 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.projeto = await this.service.putProjeto(this.projeto)
    }
 
-   ngOnDestroy(){
-    console.log("dawdawda");
-    
+   async ngOnDestroy(){
+    if(!this.saveProject){
+      await this.service.deleteById("project", this.projeto.id)
+    }
    }
 
    statusVisible = false

@@ -29,13 +29,17 @@ export class SelectStatusComponent implements OnInit{
 
   @Output() newItem = new EventEmitter<boolean>();
 
-
   constructor(
     private service : BackendEVOLVEService
   ) { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     // this.projeto.statusList.reverse()
+    this.getProject()
+  }
+  
+  async getProject(){
+    this.projeto = await this.service.getOne("project", this.projeto.id)
   }
 
   salvarStatus(status:Status) {
@@ -58,6 +62,7 @@ export class SelectStatusComponent implements OnInit{
       this.addStatus();
     }
     // this.projeto.statusList.reverse()
+
   }
 
   editStatus(status:Status){
@@ -89,13 +94,11 @@ export class SelectStatusComponent implements OnInit{
     status.enabled = !status.enabled
     this.projeto = await this.service.updateStatusList(this.projeto.id, status);
     // this.projeto.statusList.reverse()
-
   }
 
   async deleteStatus(status:Status){
     this.projeto = await this.service.deleteStatus(this.projeto.id, status);
     // this.projeto.statusList.reverse()
-
   }
 
 }
