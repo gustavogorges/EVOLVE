@@ -157,7 +157,7 @@ export class SelectPropriedadeComponent implements OnInit {
       }  else if(this.optionType == 'associados') {
         //Há de ser implementado ainda no enum, ou de algum outra forma
         //this.newPropertie.propertyType = PropertyType;
-        this.tarefa.properties.push(this.newPropertie);
+        this.tarefa.properties.push(this.newPropertie); 
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }
     this.newItemEvent.emit()  

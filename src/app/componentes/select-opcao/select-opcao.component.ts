@@ -31,7 +31,6 @@ export class SelectOpcaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.optionsList = this.property.options;
-    console.log(this.property.currentOptions);
   }
 
   saveOptionUniSelect(option:Option) {
@@ -45,7 +44,6 @@ export class SelectOpcaoComponent implements OnInit {
   saveOptionMultiSelect(option:Option) {
      if (!this.verifyIfCurrentOptionExists(option)) {
       this.property.currentOptions.push(option);
-      console.log(this.property.currentOptions);
     }
   }
 
@@ -65,7 +63,6 @@ export class SelectOpcaoComponent implements OnInit {
       this.removeOptionMultiSelect(option);
       this.property.options.forEach(optionFor => {
         if(optionFor.id == option.id) {
-          console.log("entrand no if");
           const index: number = this.property.options.indexOf(optionFor);
           this.property.options.splice(index,1);
         }
@@ -85,8 +82,9 @@ export class SelectOpcaoComponent implements OnInit {
     this.booleanAddOption = !this.booleanAddOption;
   }
 
-  async novaOption(): Promise<void> {
-    this.property.options.push(this.option);
+  async newOption(): Promise<void> {
+    const newOption:Option = await this.service.putPropertyOption(this.option);
+    this.property.options.push(newOption);
     this.addOption();
   }
 

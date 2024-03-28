@@ -74,11 +74,6 @@ export class PropriedadeTarefaComponent implements OnInit {
       
        this.booleanEditProperty = true;
      }
-
-     console.log(this.booleanEditProperty);
-     console.log(this.booleanValueOption);
-     
-     
      
   }
 

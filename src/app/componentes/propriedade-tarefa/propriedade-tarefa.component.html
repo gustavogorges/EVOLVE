@@ -1,78 +1,78 @@
 <div class="propertie">
-    <div class="name-icon">
-        <i class="icon-propertie {{property.icon}}"></i>
-        <p class="name-propertie">{{property.name}}:</p>
-    </div>
-    <div 
-    *ngIf="checkEditable(property)" 
-    class="propertie-value"
-    (click)="editPropertyValue(property)"
+  <div class="name-icon">
+    <i class="icon-propertie {{ property.icon }}"></i>
+    <p class="name-propertie">{{ property.name }}:</p>
+  </div>
+  <div *ngIf="checkEditable(property)" (click)="editPropertyValue(property)">
+    <div
+      *ngIf="checkTypeValue() && !booleanValueOption"
+      class="propertie-value"
     >
-    <div *ngIf="checkTypeValue() && !booleanValueOption">
-        {{propertyValue.value}}
+      {{ propertyValue.value }}
     </div>
-    <div *ngIf="!checkTypeValue() && !booleanValueOption">
-        {{propertyValue.value.value}}
-    </div>
-    <div 
-    *ngIf="booleanValueOption"
-    class="flex flex-wrap gap-2 flex-1"
+    <div
+      *ngIf="!checkTypeValue() && !booleanValueOption"
+      class="propertie-value"
     >
-        <div
-            *ngFor="let option of property.currentOptions"
-            (click)="editOption()"
-            class="status-icon"
-            [ngStyle]="{
-              'background-color': option.backgroundColor
-            }"
-          >
-            {{ option.value }}
-          </div>
+      {{ propertyValue.value.value }}
     </div>
+    <div *ngIf="booleanValueOption" class="flex flex-wrap gap-2 flex-1">
+      <div
+        *ngFor="let option of property.currentOptions"
+        (click)="editOption()"
+        class="status-icon cursor-pointer"
+        [ngStyle]="{
+          'background-color': option.backgroundColor
+        }"
+      >
+        {{ option.value }}
+      </div>
     </div>
-    <div 
+  </div>
+  <div
     *ngIf="!booleanEditProperty"
     class="propertie-value-no"
     (click)="addPropertyValue(property)"
-    >
-        sem valor
-    </div>
-    <div
-    *ngIf="property.editable == true" 
-    class=" h-full flex items-center justify-start gap-3">
+  >
+    sem valor
+  </div>
+  <div
+    *ngIf="property.editable == true"
+    class="h-full flex items-center justify-start gap-3"
+  >
     <!-- ARRUMAR OS NGIF DOS INPUT COM NOVA LÓGICA TAMBÉM -->
-        <input 
-        *ngIf="property.propertyType.toString() == 'IntegerValue'"
-        class="inputPropertyValue"
-        type="number"
-        [(ngModel)]="newPropertyValue"
-        >
-        <input 
-        *ngIf="property.propertyType.toString() == 'DoubleValue'"
-        class="inputPropertyValue"
-        type="number"
-        [(ngModel)]="newPropertyValue"
-        >
-        <input 
-        *ngIf="property.propertyType.toString() == 'TextValue'"
-        class="inputPropertyValue"
-        type="text"
-        [(ngModel)]="newPropertyValue"
-        >
-        <app-select-opcao
-        *ngIf="selectOptionTypeCheck()"
-        [property]="property"
-        (newItem)="selectOptionEmitter()"
-        >
-        </app-select-opcao>
-        <div
-        *ngIf="confirmButtonCheck()"
-        class="confirmation-buttons"
-        (click)="saveProperty(property)"
-        >
-            <div class="btn confirm-btn">
-                <i class="pi pi-check"></i>
-            </div>
-        </div>
+    <input
+      *ngIf="property.propertyType.toString() == 'IntegerValue'"
+      class="inputPropertyValue"
+      type="number"
+      [(ngModel)]="newPropertyValue"
+    />
+    <input
+      *ngIf="property.propertyType.toString() == 'DoubleValue'"
+      class="inputPropertyValue"
+      type="number"
+      [(ngModel)]="newPropertyValue"
+    />
+    <input
+      *ngIf="property.propertyType.toString() == 'TextValue'"
+      class="inputPropertyValue"
+      type="text"
+      [(ngModel)]="newPropertyValue"
+    />
+    <app-select-opcao
+      *ngIf="selectOptionTypeCheck()"
+      [property]="property"
+      (newItem)="selectOptionEmitter()"
+    >
+    </app-select-opcao>
+    <div
+      *ngIf="confirmButtonCheck()"
+      class="confirmation-buttons"
+      (click)="saveProperty(property)"
+    >
+      <div class="btn confirm-btn">
+        <i class="pi pi-check"></i>
+      </div>
     </div>
+  </div>
 </div>
