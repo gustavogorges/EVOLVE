@@ -71,7 +71,7 @@
         <div class="option-filterBy">
           <p>{{ optionFilter }}</p>
           <p
-            class="pi pi-times-circle"
+            class="pi pi-times-circle dark:text-dark-primary"
             style="font-size: 1rem; color: #185e77"
             (click)="removeFilter()"
           ></p>
@@ -93,8 +93,8 @@
             [id]="tarefa.name + indice"
             [tarefaAtual]="tarefa"
             (click)="openTask(tarefa)"
-            (newItem)="ngOnInit()"
-            [project]="projeto"
+            (newItem)="atualizar($event)"
+           [project]="projeto"
           ></app-tarefa-card-padrao>
         </div>
       </div>

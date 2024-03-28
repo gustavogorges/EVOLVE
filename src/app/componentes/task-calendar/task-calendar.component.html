@@ -8,7 +8,7 @@
       {{ dataAtual | date : "MMMM yyyy" }}
     </div>
     <div>
-      <button (click)="alterarMes(+1)" class="pi pi-chevron-right text-[#aaa]"></button>
+      <button (click)="alterarMes(+1)" class="pi pi-chevron-right text-[#aaa] dark:text-gray-300"></button>
     </div>
   </div>
   <div class="day-and-month-calendar">
@@ -22,7 +22,7 @@
       </p>
       <div *ngFor="let task of taskList" class="tasks.day-open">
         <div *ngIf="dayOpen.getTime() == task.finalDate.getTime()" class="task-day-open">
-          <app-entrega-prox [tarefa]="task" [withProgressBar]="false"></app-entrega-prox>
+          <app-entrega-prox [tarefa]="task" [favoritedAble]="false"></app-entrega-prox>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
       <div class="days-row">
         <ng-container *ngFor="let dia of diasCalendario; let i = index">
           <div *ngIf="i < 7" class="each-day">
-            <p class="days-text">{{ dia | date : "EEEE" }}</p>
+            <p class="day-text">{{ dia | date : "EEEE" }}</p>
           </div>
         </ng-container>
       </div>
@@ -74,7 +74,7 @@
             </div>
           </div>
 
-          <p class="text-sm text-gray-500"  [ngClass]="{'todayText': isToday(dia)}">
+          <p class="text-sm text-gray-500 dark:text-gray-300"  [ngClass]="{'todayText': isToday(dia)}">
             {{ dia | date : "dd" }}
           </p>
         </div>

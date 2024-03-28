@@ -1,11 +1,11 @@
 .main {
-  @apply bg-[#F8F8F8] rounded-xl  drop-shadow-md w-[360px]   h-[211px]  flex flex-col justify-between;
+  @apply bg-[#F8F8F8] dark:bg-dark-primary-black rounded-xl  drop-shadow-md w-[360px]   h-[211px]  flex flex-col justify-between;
 }
 .top-box {
   @apply flex  justify-between;
 }
 .endDate {
-  @apply text-lg text-primary;
+  @apply text-lg text-primary dark:text-dark-primary;
   font-family: "Hind Madurai", sans-serif;
 }
 
@@ -15,16 +15,16 @@
 }
 
 .progress-bar {
-  @apply w-full h-2 bg-[#d9d9d9];
+  @apply w-full h-2 bg-[#d9d9d9]  dark:bg-dark-secundary-gray;
 }
 .progress-blue {
-  @apply  h-full text-center text-xs text-white bg-primary rounded-e-md;
+  @apply  h-full text-center text-xs text-white bg-primary dark:bg-dark-primary rounded-e-md;
 }
 .center-box {
-  @apply flex flex-col h-full gap-1 px-3 pt-1;
+  @apply flex flex-col h-full gap-1 px-3 pt-1 w-full;
 }
 .taskName {
-  @apply text-primary text-xl font-extrabold overflow-hidden absolute;
+  @apply text-primary dark:text-dark-primary text-xl font-extrabold overflow-hidden absolute;
   font-family: "Hind Madurai", sans-serif;
   white-space: nowrap;
   position: absolute;
@@ -32,7 +32,7 @@
   transition: transform 5s linear;
 }
 .name {
-  @apply text-primary text-[22px] leading-7 font-extrabold;
+  @apply text-primary dark:text-dark-primary text-[22px] leading-7 font-extrabold;
   font-family: "Hind Madurai", sans-serif;
 }
 .taskName-box {
@@ -48,7 +48,7 @@
   transition: none;
 }
 .subTasks {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 max-h-full overflow-hidden dark:text-secondaryWhite;
 }
 .subTask {
   @apply s-input flex gap-1;

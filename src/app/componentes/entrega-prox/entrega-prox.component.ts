@@ -15,13 +15,15 @@ export class EntregaProxComponent implements OnInit {
   
 
   @Input() tarefa: Task = new Task
-  @Input() withProgressBar!: boolean 
+  @Input() favoritedAble: boolean = true
   defaultColor = "#F5B1B1"
   constructor(private service: BackendEVOLVEService) { }
 
   ngOnInit(): void {
     //retirar quando fizer o calculo automatico
     this.tarefa.conclusionPercentage = 75
+    console.log(this.tarefa);
+    
   }
 
   alterarTarefaFavoritado(){
@@ -34,6 +36,10 @@ export class EntregaProxComponent implements OnInit {
   }
   getUserStyles(user: any): any {
     let styles: any = {};
+ 
+    if(user.image!=null){
+      styles['background'] = user.imageColor;
+    }
     styles['background-color'] = user.imageColor;
       
     

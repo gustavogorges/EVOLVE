@@ -1,5 +1,5 @@
 .main-box{
-  @apply w-full flex  flex-col items-center
+  @apply w-full flex  flex-col items-center dark:bg-dark-theme-back
 }
 
 .gorgees{
@@ -20,13 +20,13 @@
   @apply flex flex-col gap-4 max-w-fit
 }
 .project-name{
-    @apply  text-primary text-[42px] font-bold ;
+    @apply  text-primary  dark:text-dark-primary text-[42px] font-bold ;
     font-family: 'Montserrat', sans-serif;
 
 }
 
 .button-AddProject{
-    @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
+    @apply bg-secondary dark:bg-dark-secundary-green rounded-xl p-3 text-white font-bold text-xl
       }
 
 .botao-opcoes{
@@ -54,7 +54,7 @@
     @apply w-full h-full
   }
   .icon {
-    @apply text-2xl text-secondary cursor-pointer
+    @apply text-2xl text-secondary dark:text-dark-secundary-green cursor-pointer
   }
   select{
     @apply bg-secondaryWhite m-1 border-0 p-1;
@@ -78,7 +78,7 @@
 }
 
 .select-button{
-  @apply text-xl;
+  @apply text-xl dark:text-gray-300;
   font-family: 'Montserrat', sans-serif;
 }
 .box-selections{
@@ -91,16 +91,16 @@
   @apply flex flex-row gap-1 items-center
 }
 .option-filterBy{
-  @apply bg-primaryNav  px-2 rounded-md text-[#6A7181] text-base flex items-center flex gap-2;
+  @apply bg-primaryNav dark:bg-dark-theme-back px-2 rounded-md text-[#6A7181] dark:text-gray-50 text-base flex items-center flex gap-2;
   font-family: 'Hind Madurai', sans-serif;
 
 }
 .text-filterBy{
   font-family: 'Hind Madurai', sans-serif;
-  @apply text-lg text-[#6A7181] 
+  @apply text-lg text-[#6A7181] dark:text-gray-200
 }
 .width-name-propertys{
-@apply w-[120px]  max-h-6 text-lg text-gray-500 font-hind-madurai;
+@apply w-[120px]  max-h-6 text-lg text-gray-500 dark:text-gray-300  font-hind-madurai;
 
 
 
