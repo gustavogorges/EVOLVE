@@ -1,0 +1,20 @@
+<div class="w-full h-full p-2">
+  <div class="flex flex-col gap-6">
+    <div *ngFor="let project of team?.projects" class="flex flex-col gap-4">
+      <p class="font-titulo font-bold text-2xl">
+        {{ project.name }}
+       
+      </p>
+      <div>
+        <div class="w-[170px] flex flex-col gap-1">
+            <p class="font-hind-madurai text-fontGray font-light text-base leading-4">Horas totais trabalhadas no projeto:</p>
+            <p class="rounded-xl max-w-max py-5 px-8 bg-secondary text-center text-3xl font-titulo text-white  font-semibold "> 02:40h</p>
+
+        </div>
+        <div>
+            <p class="rounded-xl max-w-max py-5 px-8 bg-secondary text-center text-3xl font-titulo text-white  font-semibold "> {{totalTask}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

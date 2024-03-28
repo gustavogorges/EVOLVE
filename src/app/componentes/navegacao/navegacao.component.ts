@@ -1,5 +1,6 @@
 import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { window } from 'rxjs';
 
 @Component({
@@ -9,7 +10,7 @@ import { window } from 'rxjs';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('theme') === 'dark'){
@@ -33,6 +34,9 @@ export class NavegacaoComponent implements OnInit {
       localStorage.setItem('theme','light')
     }
     this.themeDark = !this.themeDark
+  }
+  irParaPerfil(): void {
+    this.router.navigateByUrl('/tela-perfil');
   }
 
 }
