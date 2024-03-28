@@ -36,11 +36,8 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible: boolean = false;
   filtroVisible: boolean = false;
   projeto!: Project;
-<<<<<<< HEAD
 
-=======
 ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
   option: string | null = 'Cards';
   optionFilter: string = '';
 
@@ -129,28 +126,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   changeOrdenacao(e: any) {
     this.visualizacaoVisible = false;
     this.filtroVisible = false;
-<<<<<<< HEAD
 
-    e.target.value = 'Visualização';
-
-    let op: OptionOrder = {
-      name: 'Data final',
-      type: 'date',
-    };
-    let op1: OptionOrder = {
-      name: 'Progresso',
-      type: 'number',
-    };
-    let op2: OptionOrder = {
-      name: 'Prioridade',
-      type: 'priority',
-    };
-    let op3: OptionOrder = {
-      name: 'Data final',
-      type: 'date',
-    };
-    this.listOptions = [op, op1, op2, op3];
-=======
     e.target.value = 'Visualização';
    let op : OptionOrder ={
     name: "Data final",
@@ -169,7 +145,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     type: "date"
    }
    this.listOptions = [op, op1, op2, op3];
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
     this.listIcons = [
       PrimeIcons.CALENDAR,
       PrimeIcons.CHART_LINE,
@@ -193,56 +168,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   optionB(option: any) {
     this.ordenacaoVisible = false;
     this.visualizacaoVisible = false;
-<<<<<<< HEAD
 
-    if (option.type == 'date') {
-      if (option.name == 'Data final') {
-
-        this.listaTarefas.sort((a, b) => {
-          if (a.finalDate < b.finalDate) {
-            return -1; // 'a' vem antes de 'b'
-          } else if (a.finalDate > b.finalDate) {
-            return 1; // 'b' vem antes de 'a'
-          } else {
-            return 0; // datas são iguais
-          }
-        });
-        this.listaNova.sort((a, b) => {
-          if (a.finalDate < b.finalDate) {
-            return -1; // 'a' vem antes de 'b'
-          } else if (a.finalDate > b.finalDate) {
-            return 1; // 'b' vem antes de 'a'
-          } else {
-            return 0; // datas são iguais
-          }
-        });
-      }
-    }
-  }
-
-  changeFiltro(e: any) {
-    this.visualizacaoVisible = false;
-    this.ordenacaoVisible = false;
-
-    let op: OptionOrder = {
-      name: 'Status',
-      type: 'status',
-    };
-    let op1: OptionOrder = {
-      name: 'Associado',
-      type: 'associate',
-    };
-    let op2: OptionOrder = {
-      name: 'Prioridade',
-      type: 'priority',
-    };
-    let op3: OptionOrder = {
-      name: 'Favorito',
-      type: 'favorited',
-    };
-    this.listOptions = [op, op1, op2, op3];
-    this.listIcons = [
-=======
     if (option.type == "date") {
       if (option.name == "Data final") {
         this.sortByDate(this.listaTarefas, 'finalDate');
@@ -337,7 +263,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
      }
      this.listOptions = [op, op1, op2, op3];
         this.listIcons = [
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
       PrimeIcons.SPINNER,
       PrimeIcons.USER,
       PrimeIcons.EXCLAMATION_CIRCLE,
@@ -347,17 +272,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.filtroVisible = false;
     } else {
       this.filtroVisible = true;
-<<<<<<< HEAD
-    }
-  }
 
-  async optionC(option: any) {
-    if (option.name == 'Status') {
-      this.optionFilter = '';
-    } else {
-      this.optionFilter = option.name;
-
-=======
     }  }
 
   async optionC(option: any) {
@@ -366,7 +281,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     } 
     else {      
       this.optionFilter = option.name ?? option;
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
       this.optionFilter = this.optionFilter.toLowerCase();
     }
     this.ordenacaoVisible = false;
@@ -374,14 +288,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
 
     this.projeto.statusList.map((status: Status) => {
       if (status.name == option.name) {
-<<<<<<< HEAD
-        this.listaTarefas = this.listaNova.filter(
-          (task) => task.currentStatus.name == option.name
-        );
-        this.filtroVisible = false;
-      }
 
-=======
         this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option.name)
       this.filtroVisible = false;
       } });
@@ -399,24 +306,15 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
             this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));
           this.filtroVisible = false;
           }
-          
-    
-     
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
+  
       this.sortLists();
     });
 
     if (option.name == 'Favorito') {
-<<<<<<< HEAD
-      this.listaTarefas = this.listaNova.filter((task) => task.favorited);
 
-      this.filtroVisible = false;
-      this.sortLists();
-=======
       this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
       this.filtroVisible = false;
       this.sortLists()
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
     }
   }
 
@@ -427,19 +325,12 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.tarefaSelecionada = tarefa;
   }
 
-<<<<<<< HEAD
-  openTaskEdit(tarefa: Task) {
-    let priorityTeste: PriorityRecord = new PriorityRecord();
-    priorityTeste.name = 'nenhuma';
-    priorityTeste.backgroundColor = '#cccccc';
-    this.tarefaNova.priority = priorityTeste;
-=======
+
   openTaskEdit(tarefa:Task) {
     let priorityTeste : PriorityRecord = new PriorityRecord();
     priorityTeste.name = "nenhuma";
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.priority = priorityTeste; 
->>>>>>> c87ee9cb660e44b2c4f8c14839cf1af1d10fe4b9
     this.tarefaSelecionada = this.tarefaNova;
     this.booleanTask = true;
   }
