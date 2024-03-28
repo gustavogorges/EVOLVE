@@ -8,6 +8,7 @@ import { Property } from 'src/model/propriedade/property';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -99,8 +100,6 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanAddPropriedade = false;
   }
 
-
-  
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
@@ -112,8 +111,11 @@ export class ModalTarefaComponent implements OnInit {
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
+  listAssociates !: Array<User>;
 
   async ngOnInit(): Promise<void> {
+
+    this.listAssociates != this.tarefa.associates;
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
@@ -137,6 +139,13 @@ export class ModalTarefaComponent implements OnInit {
     if(this.booleanEdit == false) {
       this.edit();
     }
+  }
+
+  listAssociatesVerify() : boolean {
+    if(this.listAssociates == null || this.listAssociates == undefined) {
+      return true;
+    }
+    return false;
   }
 
 

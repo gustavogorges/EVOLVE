@@ -141,11 +141,11 @@
 } 
 
 .responsible-icon {
-    @apply h-8 w-8 bg-purple-400 rounded-full
+    @apply h-8 w-8 bg-slate-100 rounded-full 
 }
 
 .responsible-icon-box {
-    @apply flex items-center  ml-2
+    @apply flex items-center cursor-pointer ml-2
 }
 
 .status-propertie {

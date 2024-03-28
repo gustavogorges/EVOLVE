@@ -65,6 +65,11 @@
       (newItem)="selectOptionEmitter()"
     >
     </app-select-opcao>
+    <app-select-associates
+    *ngIf="property.propertyType.toString() == 'Associates'"
+    >
+
+    </app-select-associates>
     <div
       *ngIf="confirmButtonCheck()"
       class="confirmation-buttons"

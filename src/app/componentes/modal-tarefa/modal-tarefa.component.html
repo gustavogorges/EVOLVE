@@ -162,9 +162,28 @@
               <i class="icon-propertie pi pi-users"></i>
               <p class="name-propertie">associados:</p>
             </div>
-            <div class="responsible-icon-box">
-              <div class="responsible-icon"></div>
+            <div
+              class="responsible-icon-box"
+              *ngFor="let associate of listAssociates"
+            >
+              <div
+                class="responsible-icon"
+                [ngStyle]="{
+                  'background-image':
+                    associate.image != null
+                      ? 'url(' + associate.image.data + ')'
+                      : associate.imageColor,
+                  'background-size': 'cover',
+                  'background-color': associate.imageColor
+                }"
+              ></div>
             </div>
+            <div
+              *ngIf="listAssociatesVerify()"
+              class="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer flex justify-center items-center"
+            >
+            <i class="pi pi-plus text-primary font-bold"></i>
+          </div>
           </div>
           <div class="propertie">
             <div class="name-icon">
@@ -222,7 +241,7 @@
           </div>
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full min-w-[50%] "
+            class="h-full min-w-[50%]"
           >
             <div *ngIf="indice % 2 == 0">
               <app-propriedade-tarefa

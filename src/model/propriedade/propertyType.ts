@@ -6,5 +6,6 @@ export enum PropertyType{
     IntegerValue,
     DoubleValue,
     DataValue,
-    TextValue
+    TextValue,
+    Associates
 }

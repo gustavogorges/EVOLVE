@@ -97,6 +97,7 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
 
 import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
+import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
 
 
 
@@ -167,7 +168,8 @@ import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
     PropriedadeTarefaComponent,
     SelectPrioridadeComponent,
     SelectOpcaoComponent,
-    TelaPerfilComponent
+    TelaPerfilComponent,
+    SelectAssociatesComponent
 
   ],
   
