@@ -109,4 +109,8 @@ export class TelaInicialComponent implements OnInit {
       this.indiceAtual = novoIndice;
     }
   }
+
+  goToPerfilPage(){
+    
+  }
 }

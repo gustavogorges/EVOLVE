@@ -97,6 +97,7 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { UserCardPerfilComponent } from './componentes/user-card-perfil/user-card-perfil.component';
 import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/projects-info-perfil.component';
+import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboard-perfil.component';
 
 
 
@@ -167,7 +168,8 @@ import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/
     SelectPrioridadeComponent,
     TelaPerfilComponent,
     UserCardPerfilComponent,
-    ProjectsInfoPerfilComponent
+    ProjectsInfoPerfilComponent,
+    DashboardPerfilComponent
 
   ],
   

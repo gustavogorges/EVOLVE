@@ -36,7 +36,9 @@ export class NavegacaoComponent implements OnInit {
     this.themeDark = !this.themeDark
   }
   irParaPerfil(): void {
-    this.router.navigateByUrl('/tela-perfil');
+    this.router.navigate(['/tela-perfil'], { state: { user: null } });  }
+  goInitialPage(): void {
+    this.router.navigateByUrl('/tela-inicial');
   }
 
 }

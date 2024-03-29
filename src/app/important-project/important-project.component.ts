@@ -28,7 +28,7 @@ project !: Project;
       this.project.favorited=false;
 
     }
-    
+
   
 
 

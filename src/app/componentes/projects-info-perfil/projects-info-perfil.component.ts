@@ -1,6 +1,10 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Project } from 'src/model/project';
+import { Status } from 'src/model/status';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+
 
 @Component({
   selector: 'app-projects-info-perfil',
@@ -9,30 +13,25 @@ import { User } from 'src/model/user';
 })
 export class ProjectsInfoPerfilComponent implements OnInit, OnChanges {
 
-  constructor() { }
-  ngOnChanges(changes: SimpleChanges): void {
+  constructor(private service : BackendEVOLVEService) { }
 
-    console.log(this.team?.projects);
-    
-      
-    
-  }
   @Input()
   team !: Team
   @Input()
   user !: User
-  totalTask : number =0
-   ngOnInit(): void {
-    console.log(this.team?.name);
-    
-    this.team?.projects.map((p)=>{
-      console.log(4);
-      
-      if(p.members.includes(this.user)){
-        this.totalTask+=1
-      }
-    })
-  }
-  
 
-}
+  ngOnChanges(changes: SimpleChanges): void {
+    // Handle changes in input data
+    console.log('Input data changed:', changes);
+    if (changes['team'] || changes['user']) {
+      // Re-calculate total tasks or perform necessary actions
+    }
+  }
+
+  ngOnInit(): void {
+    console.log('Team name:', this.team?.name);
+    // Initialize component properties
+  }
+
+ 
+  }

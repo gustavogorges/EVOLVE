@@ -3,6 +3,7 @@ import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tela-perfil',
@@ -11,7 +12,8 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class TelaPerfilComponent implements OnInit {
 
-  constructor(private cookieService: CookiesService,  private service: BackendEVOLVEService,
+  constructor(private cookieService: CookiesService,  private service: BackendEVOLVEService,    private location: Location
+
     ) { }
 
   @Input()
@@ -20,11 +22,19 @@ export class TelaPerfilComponent implements OnInit {
   teamUsers !: Array<any>
   teamShowing !: Team
 
+  data: any;
 
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
-    this.user = this.loggedUser
+    this.data = this.location.getState();
+    let userData: User = await this.data.user
+    if(userData!=null){
+      this.user=userData
+    }else{
+      this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+      this.user = this.loggedUser
+    }
+
     console.log(this.loggedUser);
     
     // Converte o conjunto de usuários únicos de volta para um array
@@ -46,10 +56,10 @@ export class TelaPerfilComponent implements OnInit {
     
   }
   async teste(){
-    this.user.teams = await this.service.getTeamsByUserId(this.loggedUser.id);
+    this.user.teams = await this.service.getTeamsByUserId(this.user.id);
     let users:any = []
     this.user.teams.forEach(team => {
-     users = team.participants.filter(participant => participant.id != this.loggedUser.id && !users.includes(participant));
+     users = team.participants.filter(participant => participant.id != this.user.id && !users.includes(participant));
     });
     this.teamUsers =  users
     
