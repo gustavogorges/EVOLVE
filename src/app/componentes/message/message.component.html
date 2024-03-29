@@ -12,6 +12,11 @@
             <p class="message-content">
                 {{message.content}}
             </p>
+            <hr class="py-1">
+            <div class="flex items-center w-full h-full gap-4 text-[12px]" [ngStyle]="{'justify-content': messageInfoAlignment}">
+                <p *ngIf="showName()">{{message.sender.name}}</p>
+                <p>{{message.date | date: "h:mm a"}}  </p>
+            </div>
         </div>
     </div>
 

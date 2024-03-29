@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="contacts-list"  *ngFor="let chat of chatList">
-                    <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
+                    <app-contact [contact]="getContact(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
                 </div>
                 <!-- <div class="contacts-list"  *ngFor="let chat of teamChatList">
                     <app-contact [contact]="getContactFromUser(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
@@ -66,6 +66,11 @@
             <div class="messages-container ">
 
                 <div class="message-box" *ngFor="let message of selectedChat?.messages; index as index ">
+                    <div *ngIf ="showDateMesssage(message)" class="w-full h-16  flex justify-center items-center">
+                        <div class="w-28 h-8 flex justify-center items-center  rounded-[10px]">
+                            {{message.date | date: "MMM d, y"}}
+                        </div>
+                    </div>
                     <app-message [loggedUser]="loggedUser" [chat]="selectedChat" [message]="message"></app-message>
                 </div>
 

@@ -16,6 +16,7 @@ import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
 import { Message } from 'src/model/message';
 import { MessageStatus } from 'src/model/messageStatus';
+import { ProjectChat } from 'src/model/projectChat';
 
 
 
@@ -145,18 +146,16 @@ export class BackendEVOLVEService {
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {
     let path:string = "userChat/user/"
-    
-    console.log((await axios.get(this.URL+path+id)).data);
-    
     return (await axios.get(this.URL+path+id)).data
   }
 
   async getTeamChatsByUserId(id:number) : Promise<Array<TeamChat>>{
     let path:String = "teamChat/user/";
-    
-    console.log((await axios.get(this.URL+path+id)).data);
-    console.log("teamChats da service");
-    
+    return (await axios.get(this.URL+path+id)).data
+  }
+
+  async getProjectChatsByUserId(id:number):Promise<Array<ProjectChat>>{
+    let path:string = "projectChat/user/"
     return (await axios.get(this.URL+path+id)).data
   }
 
