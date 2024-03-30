@@ -1,0 +1,90 @@
+<div class="h-screen w-80 bg-[#eeeeee] absolute z-50 flex flex-col p-5 gap-10">
+  <i
+    class="pi pi-angle-double-left self-end text-fontGray"
+    (click)="closeSideBar()"
+  ></i>
+  <div class="flex gap-1">
+    <img src="../../../assets/logoSimples.svg" alt="" class="" />
+    <button class="font-titulo text-3xl text-primary font-semibold">
+      Home
+    </button>
+  </div>
+  <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-2">
+      <div class="flex gap-2"  (click)="openConfig()">
+          <!-- <i class="pi pi-cog self-center text-fontGray" style="width: 20px"></i> -->
+        <p class="title">Configurações</p>
+        <i
+          class="pi pi-angle-right self-center text-fontGray"
+          style="width: 20px"
+        ></i>
+      </div>
+
+      <!-- <div class="px-5 flex flex-col gap-2">
+        <div class="flex">
+          <p class="font-titulo text-base">Configurações do usuario</p>
+          <i
+            class="pi pi-angle-right self-center text-fontGray"
+            style="width: 20px"
+          ></i>
+         
+        </div>
+        <div class="flex">
+          <p class="font-titulo" (click)="openConfig()">Configurações gerais</p>
+          <i
+            class="pi pi-angle-right self-center text-fontGray"
+            style="width: 1.5rem"
+          ></i> -->
+          <app-modal-config *ngIf="config" (close)="closeConfig()"></app-modal-config>
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+    <div *ngFor="let team of loggedUser.teams" class="flex flex-col gap-2">
+      <div class="flex gap-2">
+        <p class="title">
+          {{ team.name }}
+        </p>
+        <i
+          class="pi pi-angle-down self-end text-fontGray"
+          style="width: 20px"
+        ></i>
+      </div>
+      <div>
+        <div *ngFor="let project of team.projects">
+          <div class="px-5 flex flex-col gap-2">
+            <div class="flex gap-2">
+              <p class="font-titulo text-lg font-medium text-[#414651]">
+                {{ project.name }}
+              </p>
+              <i
+                class="pi pi-angle-down self-center text-fontGray"
+                style="width: 1.5rem"
+              ></i>
+            </div>
+            <div>
+              <div class="flex gap-2" (click)="goTelaTarefa(project)">
+                <p class="font-titulo text-lg font-medium text-fontGray">
+                  Visualizar tarefas
+                </p>
+                <i
+                  class="pi pi-angle-right self-center text-fontGray"
+                  style="width: 1.5rem"
+                ></i>
+              </div>
+              <div class="flex gap-2">
+                <p class="font-titulo text-lg font-medium text-fontGray">
+                  Pagina do projeto
+                </p>
+                <i
+                  class="pi pi-angle-right self-center text-fontGray"
+                  style="width: 1.5rem"
+                ></i>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

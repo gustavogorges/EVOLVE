@@ -1,7 +1,10 @@
-<div class="main">
+<div class="main ">
+  <app-side-bar *ngIf="sideBar" (sideBar)="closeSideBar($event)"></app-side-bar>   
+
   <div class="main-grid">
     <div class="column1">
-      <i class="icon pi pi-align-justify"></i>
+      <i class="icon pi pi-align-justify" (click)="openSideBar()"></i>
+      
     </div>
     <div class="column2">
       <img src="../../../assets/logo.svg" (click)="goInitialPage()">

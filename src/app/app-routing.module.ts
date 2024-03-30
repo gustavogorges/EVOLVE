@@ -32,7 +32,7 @@ const routes: Routes = [
     component: TelaProjetoRemasteredComponent
   },
   {
-    path:"tela-tarefa",
+    path:"tela-tarefa/:projectId",
     component: TelaTarefaComponent
   },
   {

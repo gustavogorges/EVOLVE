@@ -98,6 +98,8 @@ import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { UserCardPerfilComponent } from './componentes/user-card-perfil/user-card-perfil.component';
 import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/projects-info-perfil.component';
 import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboard-perfil.component';
+import { SideBarComponent } from './componentes/side-bar/side-bar.component';
+import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
 
 
 
@@ -169,7 +171,9 @@ import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboa
     TelaPerfilComponent,
     UserCardPerfilComponent,
     ProjectsInfoPerfilComponent,
-    DashboardPerfilComponent
+    DashboardPerfilComponent,
+    SideBarComponent,
+    ModalConfigComponent
 
   ],
   

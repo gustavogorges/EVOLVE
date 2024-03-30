@@ -11,6 +11,7 @@ import { window } from 'rxjs';
 export class NavegacaoComponent implements OnInit {
 
   constructor(private router: Router) { }
+  sideBar = true
 
   ngOnInit(): void {
     if(localStorage.getItem('theme') === 'dark'){
@@ -39,6 +40,18 @@ export class NavegacaoComponent implements OnInit {
     this.router.navigate(['/tela-perfil'], { state: { user: null } });  }
   goInitialPage(): void {
     this.router.navigateByUrl('/tela-inicial');
+  }
+  openSideBar(){
+    if(this.sideBar==true){
+      this.sideBar=false
+    }else{
+      this.sideBar=true
+    }
+    console.log(this.sideBar);
+    
+  }
+  closeSideBar(bar : boolean){
+    this.sideBar=false
   }
 
 }
