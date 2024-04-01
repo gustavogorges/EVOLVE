@@ -180,9 +180,15 @@
             </div>
             <div
               *ngIf="listAssociatesVerify()"
+              (click)="openSelectAssociates()"
               class="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer flex justify-center items-center"
             >
             <i class="pi pi-plus text-primary font-bold"></i>
+          </div>
+          <div>
+            <app-select-associates
+            *ngIf="booleanSelectAssociates"
+            ></app-select-associates>
           </div>
           </div>
           <div class="propertie">

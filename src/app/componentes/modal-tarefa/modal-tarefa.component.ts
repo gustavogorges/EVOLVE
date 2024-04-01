@@ -28,6 +28,7 @@ export class ModalTarefaComponent implements OnInit {
   booleanDescription: boolean = false;
   booleanFoco: boolean = false;
   booleanSelectPrioridade : boolean = false;
+  booleanSelectAssociates : boolean = false;
   booleanAddPropriedade: boolean = false;
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
@@ -143,9 +144,15 @@ export class ModalTarefaComponent implements OnInit {
 
   listAssociatesVerify() : boolean {
     if(this.listAssociates == null || this.listAssociates == undefined) {
-      return true;
+      if(this.booleanSelectAssociates == false) {
+        return true;
+      }
     }
     return false;
+  }
+
+  openSelectAssociates() : void {
+    this.booleanSelectAssociates = true;
   }
 
 
