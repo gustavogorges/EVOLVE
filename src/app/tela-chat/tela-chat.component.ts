@@ -26,7 +26,7 @@ export class TelaChatComponent implements OnInit {
   search:string = ""
   selectedChat!:Chat
   chatType:string = "users";
-  chatList:Array<UserChat>|Array<TeamChat>|Array<ProjectChat> = new Array  
+  chatList:Array<Chat> = new Array  
 
   constructor(
     private service: BackendEVOLVEService,
@@ -50,7 +50,7 @@ export class TelaChatComponent implements OnInit {
   async setChatListType(type:string):Promise<void>{
     this.chatType = type
     this.chatList = await this.getChatType(type)
-    this.cookiesService.set(this.cookiesService.chatListTypeField, type)
+    // this.cookiesService.set(this.cookiesService.chatListTypeField, type)
   }
 
   async getChatType(type:string){
@@ -62,40 +62,39 @@ export class TelaChatComponent implements OnInit {
     }
   }
 
-  getContactName(chat:UserChat|TeamChat|ProjectChat){
+  getContactName(chat:Chat){
     switch(this.chatType){
       case this.chatTypeTeams : return (chat as TeamChat).team.name.toLowerCase();
-      case this.chatTypeProjects : console.log("(chat as ProjectChat).project");
-      console.log((chat as ProjectChat).project);
-       return (chat as ProjectChat).project.name.toLowerCase();
+      case this.chatTypeProjects : return (chat as ProjectChat).project.name.toLowerCase();
       default : return this.getContact(chat, this.loggedUser).name.toLowerCase();
     }
   }
 
-  checkSearch(chat:UserChat|TeamChat|ProjectChat):Boolean{
+  checkSearch(chat:Chat):Boolean{
     let contactName = this.getContactName(chat);
     return contactName.includes(this.search.toLowerCase())
   }
 
-  //rever para que atualize nos chats de projetos e equipes quando todos verem
-  updateMessageStatus(){
-    this.selectedChat.messages.forEach(async message => {
-      if(message.messageStatus!=3){
-        if(this.chatTypeUsers && message.sender!=this.loggedUser){
-          message = await this.service.patchMessageStatus(message.id, "VISUALIZED")
-        }
-      }
-    })
-  }
+  //rever para que atualize nos chats de projetos e equipes quando todos verem (caiu em desuso)
+  // updateMessageStatus(){
+  //   this.selectedChat.messages.forEach(async message => {
+  //     if(message.messageStatus!=3){
+  //       if(this.chatTypeUsers && message.sender!=this.loggedUser){
+  //         message = await this.service.patchMessageStatus(message.id, "VISUALIZED")
+  //       }
+  //     }
+  //   })
+  // }
 
   selectChat(chat:Chat):void{
     this.contact = this.getContact(chat, this.loggedUser)
     this.selectedChat = chat
-    this.updateMessageStatus()
+    // this.updateMessageStatus()
     this.cookiesService.set("lastChatId", this.selectedChat.id)
+    this.cookiesService.set(this.cookiesService.chatListTypeField, this.chatType)
   }
 
-  getContact(chat: UserChat|TeamChat|ProjectChat, user: User):User|Team|Project {
+  getContact(chat:Chat, user: User):User|Team|Project {
     switch(this.chatType){
       case this.chatTypeTeams : return (chat as TeamChat).team
       case this.chatTypeProjects : return (chat as ProjectChat).project
@@ -111,8 +110,8 @@ export class TelaChatComponent implements OnInit {
   }
 
   showDateMesssage(message:Message){
-    // console.log(this.isFirstMessage(message, this.selectedChat.messages) || new Date(this.getPreviousMessage(message).date + "T00:00:00-03:00").getDay()!=new Date(message.date + "T00:00:00-03:00").getDay());
-    return this.isFirstMessage(message, this.selectedChat.messages) || new Date(this.getPreviousMessage(message).date + "T00:00:00-03:00").getDay()!=new Date(message.date + "T00:00:00-03:00").getDay();
+    return this.isFirstMessage(message, this.selectedChat.messages) ||
+     new Date(this.getPreviousMessage(message).date).getDay()!=new Date(message.date).getDay();
   }
 
   getPreviousMessage(message:Message){

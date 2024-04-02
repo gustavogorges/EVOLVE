@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center gap-4 w-full p-4 border-b-2">
 
     <div *ngIf="!contact?.image?.data" class="h-16 aspect-square rounded-full " [ngStyle]="{ 'background-color': contact?.imageColor }">
-        
+   
     </div>
     <img *ngIf="contact?.image?.data" src="{{contact.image.data}}" alt=""  class="h-16 w-16 rounded-full">
 
@@ -14,7 +14,7 @@
         </div>
         <div class="flex justify-between w-full ">
             <p *ngIf="lastMessage" class="last-message">
-                {{getLastMessageContent()}} 
+                {{getLastMessageContent()}}
             </p>    
             <div class="w-24 flex justify-center items-center">
                 <!-- <p *ngIf="lastMessage?.messageStatus!=3 && lastMessage" class="unseen-message-icon"></p> -->

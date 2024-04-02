@@ -26,6 +26,7 @@ export class MessageBarComponent implements OnInit {
     if(this.newMessage.content.length>0 || this.newMessage.attachments.length>0){
 
       let messageDate: Date = new Date()
+      messageDate.setHours(new Date().getHours()-3)
   
       let sender = new User()
       sender.id = this.loggedUser.id
