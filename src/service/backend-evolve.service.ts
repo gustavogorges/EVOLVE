@@ -48,7 +48,7 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
-  async patchAssociate(taskId:number, associates:Array<User>) {
+  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>) {
     return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
   }
 
