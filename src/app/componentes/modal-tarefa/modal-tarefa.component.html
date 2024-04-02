@@ -108,7 +108,7 @@
       [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
     >
       <aside class="flex justify-between">
-        <section class="w-1/2 gap-2 flex flex-col">
+        <section class="w-1/2 flex flex-col  ">
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
@@ -129,7 +129,7 @@
               />
             </div>
           </div>
-          <div class="propertie">
+          <div class="propertie ">
             <div class="name-icon">
               <i class="icon-propertie pi pi-spinner"></i>
               <p class="name-propertie">status:</p>
@@ -156,17 +156,19 @@
           </div>
         </section>
 
-        <article class="w-1/2 gap-2 flex flex-col">
+        <article class="w-1/2 flex flex-col">
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-users"></i>
               <p class="name-propertie">associados:</p>
             </div>
             <div
-              class="responsible-icon-box"
-              *ngFor="let associate of listAssociates"
+              class="gap-1 responsible-icon-box hover:px-2 hover:py-1 hover:bg-slate-100 rounded-lg"
+              *ngIf="!booleanSelectAssociates"
+              (click)="openSelectAssociates()"
             >
               <div
+              *ngFor="let associate of listAssociates"
                 class="responsible-icon"
                 [ngStyle]="{
                   'background-image':
@@ -183,10 +185,13 @@
               (click)="openSelectAssociates()"
               class="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer flex justify-center items-center"
             >
-            <i class="pi pi-plus text-primary font-bold"></i>
+            <i class="pi pi-plus text-primary text-base font-bold"></i>
           </div>
           <div>
             <app-select-associates
+            [project]="projeto"
+            [task]="tarefa"
+            (newItem)="updateAssociatesList($event)"
             *ngIf="booleanSelectAssociates"
             ></app-select-associates>
           </div>
@@ -215,8 +220,8 @@
       </aside>
 
       <div class="flex justify-between w-full">
-        <div class="flex flex-col h-max w-1/2 gap-y-2 mt-2">
-          <div class="propertie min-w-[40%] gap-2 mb-2">
+        <div class="flex flex-col h-max w-1/2 ">
+          <div class="propertie min-w-[40%] ">
             <div class="name-icon">
               <i class="icon-propertie pi pi-exclamation-circle"></i>
               <p class="name-propertie">prioridade:</p>
@@ -262,10 +267,10 @@
           </div>
         </div>
 
-        <div class="flex flex-col h-max w-1/2 gap-y-2">
+        <div class="flex flex-col h-full w-1/2 ">
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full w-[85%] gap-4"
+            class="h-full w-[85%]"
           >
             <div *ngIf="indice % 2 != 0">
               <app-propriedade-tarefa

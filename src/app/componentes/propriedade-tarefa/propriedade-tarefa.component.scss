@@ -1,5 +1,5 @@
 .propertie {
-    @apply flex w-full items-start gap-4
+    @apply flex w-full items-center gap-4 h-11
 }
 
 .propertie-value {
@@ -7,7 +7,7 @@
 }
 
 .propertie-value-no {
-    @apply h-full flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
+    @apply h-8 flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .name-icon {

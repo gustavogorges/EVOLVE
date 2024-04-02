@@ -112,11 +112,14 @@ export class ModalTarefaComponent implements OnInit {
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
-  listAssociates !: Array<User>;
+  listAssociates !: Array<any>;
 
   async ngOnInit(): Promise<void> {
+    console.log(this.projeto);
+    
+    this.listAssociates = this.tarefa.associates;
 
-    this.listAssociates != this.tarefa.associates;
+    console.log(this.listAssociates);
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
@@ -143,8 +146,10 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   listAssociatesVerify() : boolean {
-    if(this.listAssociates == null || this.listAssociates == undefined) {
+    if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
       if(this.booleanSelectAssociates == false) {
+        console.log("ta chegando nesse if errado!");
+        
         return true;
       }
     }
@@ -153,6 +158,14 @@ export class ModalTarefaComponent implements OnInit {
 
   openSelectAssociates() : void {
     this.booleanSelectAssociates = true;
+    if(this.booleanEdit == false) {
+      this.edit();
+    }
+  }
+
+  updateAssociatesList(arrayForce : Array<User>) : void {
+    this.listAssociates = arrayForce;
+    this.booleanSelectAssociates = false;
   }
 
 
@@ -243,7 +256,7 @@ export class ModalTarefaComponent implements OnInit {
   
     if (this.tarefa.id != 0) {
       this.service.putTarefa(this.tarefa);
-      if(this.propertyStack != null ) {
+      if(this.propertyStack.name != '' ) {
         this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
       }
 
