@@ -23,9 +23,6 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService) { }
 
-  // instanciando o objeto especifico o método funcionaria de acordo
-  // porém seriam vários if's, tentar achar uma maneira de não usar 
-  // tantos if's
   newPropertyObject:any;
   propertyValue : any;
 

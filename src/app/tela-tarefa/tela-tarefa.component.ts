@@ -332,6 +332,8 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
+    console.log(this.tarefaSelecionada);
+    
     this.booleanTask = true;
   }
 
