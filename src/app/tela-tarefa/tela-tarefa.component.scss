@@ -20,8 +20,7 @@
   @apply flex flex-col gap-4 max-w-fit
 }
 .project-name{
-    @apply  text-primary  dark:text-dark-primary text-[42px] font-bold ;
-    font-family: 'Montserrat', sans-serif;
+    @apply  text-primary  dark:text-dark-primary text-[42px] font-bold font-titulo ;
 
 }
 
@@ -30,8 +29,7 @@
       }
 
 .botao-opcoes{
-    font-family: 'Montserrat', sans-serif;
-    @apply text-2xl
+    @apply text-2xl font-titulo
 }
 .tasks-grid-padrao{
   width: 100%;
@@ -78,8 +76,7 @@
 }
 
 .select-button{
-  @apply text-xl dark:text-gray-300;
-  font-family: 'Montserrat', sans-serif;
+  @apply text-xl dark:text-gray-300 font-titulo;
 }
 .box-selections{
   @apply flex flex-row gap-3
@@ -91,13 +88,11 @@
   @apply flex flex-row gap-1 items-center
 }
 .option-filterBy{
-  @apply bg-primaryNav dark:bg-dark-theme-back px-2 rounded-md text-[#6A7181] dark:text-gray-50 text-base flex items-center flex gap-2;
-  font-family: 'Hind Madurai', sans-serif;
+  @apply bg-primaryNav font-hind-madurai dark:bg-dark-theme-back px-2 rounded-md text-[#6A7181] dark:text-gray-50 text-base flex items-center flex gap-2;
 
 }
 .text-filterBy{
-  font-family: 'Hind Madurai', sans-serif;
-  @apply text-lg text-[#6A7181] dark:text-gray-200
+  @apply text-lg text-[#6A7181] dark:text-gray-200 font-hind-madurai
 }
 .width-name-propertys{
 @apply w-[120px]  max-h-6 text-lg text-gray-500 dark:text-gray-300  font-hind-madurai;

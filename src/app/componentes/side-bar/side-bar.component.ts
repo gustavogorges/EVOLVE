@@ -32,6 +32,7 @@ config = true
   }
   openConfig(){
     this.config=true
+   // this.closeSideBar()
     
   }
   closeConfig(){

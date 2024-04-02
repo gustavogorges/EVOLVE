@@ -15,5 +15,6 @@ export class User {
     createdTasks: Array<Task> = new Array;
     managedTeams: Array<Team> = new Array;
     teams: Array<Team> = new Array;
+    theme: string = "light"; 
  
 }

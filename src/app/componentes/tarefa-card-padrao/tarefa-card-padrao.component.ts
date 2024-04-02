@@ -40,7 +40,10 @@ import { Subtask } from 'src/model/subtask';
       }
       this.valorBarra = 60 +"%"; 
   
-    
+      this.teste = await this.service.getOne("aws", this.tarefaAtual.id)
+      console.log(this.teste);
+      
+
     }
 
     async favoritar(event: MouseEvent){

@@ -1,31 +1,40 @@
-<div class="w-full h-full flex px-44 py-10 flex flex-col gap-16">
+<div class="w-full h-full flex px-44 py-10  flex-col gap-16">
     <div class="w-full h-64 border-slate-300 border rounded-xl flex items-center p-14  justify-between">
         <div class="flex items-center gap-4">
             <div
             [ngStyle]="{
               'background-image':
-                user.image != null
+                user?.image != null
                   ? 'url(' + user.image.data + ')'
-                  : user.imageColor,
+                  : user?.imageColor,
               'background-size': 'cover',
-              'background-color': user.imageColor
+              'background-color': user?.imageColor
             }"
             class="w-32 h-32 rounded-full overflow-clip"
           >
             
           </div>
             <div class=" flex flex-col gap-1">
-                <p class="user-name">{{user.name}}</p>
-                <p class="text-xl font-hind-madurai">{{user.email}}</p>
+                <p class="user-name">{{user?.name}}</p>
+                <p class="text-xl font-hind-madurai">{{user?.email}}</p>
             </div>
         </div>
         <div class="flex flex-col gap-3">
-            <button (click)="abu()" class="p-1.5 px-6 w-full bg-secondary rounded-md text-white text-xl font-hind-madurai  flex items-center gap-2 justify-center">
+            <button (click)="abu()" *ngIf="userData==null" class="p-1.5 px-6 w-full bg-secondary rounded-md text-white text-xl font-hind-madurai  flex items-center gap-2 justify-center">
                 configuração 
                 <i class="pi  pi-cog "style="font-size: 1.2rem" ></i>
             </button>
-            <button class="p-1.5 px-6 w-full bg-primary rounded-md text-white text-xl font-hind-madurai flex items-center gap-2">
+            <button (click)="goToChat()" *ngIf="userData!=null" class="p-1.5 px-6 w-full bg-secondary rounded-md text-white text-xl font-hind-madurai  flex items-center gap-2 justify-center">
+                iniciar chat 
+                <i class="pi  pi-cog "style="font-size: 1.2rem" ></i>
+            </button>
+            <button *ngIf="userData==null" class="p-1.5 px-6 w-full bg-primary rounded-md text-white text-xl font-hind-madurai flex items-center gap-2">
                 editar informações  
+                <i class="pi pi-user-edit
+                "style="font-size: 1.2rem" ></i>
+            </button>
+            <button *ngIf="userData!=null" (click)="sendEmail()" class="p-1.5 px-6 w-full bg-primary rounded-md text-white text-xl font-hind-madurai flex items-center gap-2">
+                mandar email
                 <i class="pi pi-user-edit
                 "style="font-size: 1.2rem" ></i>
             </button>
@@ -42,7 +51,7 @@
         </div>
         <div class="flex flex-col gap-2 w-2/3 ">
             <div class="flex w-full gap-10 border-b-2">
-                <div *ngFor="let team of user.teams">
+                <div *ngFor="let team of user?.teams">
                     <p class="font-hind-madurai text-xl text-fontGray cursor-pointer" (click)="changeTeam(team)">{{team.name}}</p>
                     
                 </div>

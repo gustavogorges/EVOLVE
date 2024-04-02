@@ -4,6 +4,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-perfil',
@@ -14,7 +15,8 @@ export class TelaPerfilComponent implements OnInit {
   constructor(
     private cookieService: CookiesService,
     private service: BackendEVOLVEService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   @Input()
@@ -24,12 +26,13 @@ export class TelaPerfilComponent implements OnInit {
   teamShowing!: Team;
 
   data: any;
+  userData !:User
 
   async ngOnInit(): Promise<void> {
     this.data = this.location.getState();
-    let userData: User = await this.data.user;
-    if (userData != null) {
-      this.user = userData;
+     this.userData = await this.data.user;
+    if (this.userData != null) {
+      this.user = this.userData;
     } else {
       this.loggedUser = await this.cookieService
         .getLoggedUser()
@@ -83,5 +86,18 @@ export class TelaPerfilComponent implements OnInit {
     console.log(team);
 
     this.teamShowing = team;
+  }
+  sendEmail(){
+    const destinatario = this.user.email;
+    const assunto = '';
+    const corpo = '';
+  
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(destinatario)}&su=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+  
+    window.open(gmailLink, '_blank');
+  }
+  goToChat(){
+    this.router.navigate(['/tela-chat']);
+
   }
 }
