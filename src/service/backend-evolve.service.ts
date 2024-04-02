@@ -48,6 +48,10 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
+  async patchAssociate(taskId:number, associates:Array<User>) {
+    return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
+  }
+
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }

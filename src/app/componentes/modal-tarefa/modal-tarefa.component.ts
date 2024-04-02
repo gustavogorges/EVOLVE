@@ -259,6 +259,9 @@ export class ModalTarefaComponent implements OnInit {
       if(this.propertyStack.name != '' ) {
         this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
       }
+      if(this.listAssociates != null) {
+        this.service.patchAssociate(this.tarefa.id, this.listAssociates);
+      }
 
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
