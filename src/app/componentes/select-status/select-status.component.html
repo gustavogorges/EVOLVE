@@ -5,7 +5,7 @@
              class="status cursor-pointer"
              [ngStyle]="{'background-color': status.backgroundColor}"
              >
-                <p>{{status.name}}</p>
+                <p class="truncate px-4">{{status.name}}</p>
             </div>
             <i *ngIf="verifyStatusDefault(status)" class="pi " [ngClass]="!status.enabled ? 'pi-plus-circle':'pi-minus-circle'" (click)="enableStatus(status)"></i>
             <i *ngIf="!verifyStatusDefault(status)" class="pi pi-pencil" (click)="editStatus(status)"></i>

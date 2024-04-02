@@ -28,18 +28,13 @@ export class SelectStatusComponent implements OnInit{
   tarefa : Task = new Task;
 
   @Output() newItem = new EventEmitter<boolean>();
+  @Output() addNewStatus = new EventEmitter<Status>();
 
   constructor(
     private service : BackendEVOLVEService
   ) { }
 
    ngOnInit(): void {
-    // this.projeto.statusList.reverse()
-    this.getProject()
-  }
-  
-  async getProject(){
-    this.projeto = await this.service.getOne("project", this.projeto.id)
   }
 
   salvarStatus(status:Status) {
@@ -58,11 +53,9 @@ export class SelectStatusComponent implements OnInit{
       }
       this.status.backgroundColor.toUpperCase()
       this.status.textColor = "#000000";
-      this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
+      this.addNewStatus.emit(this.status)
       this.addStatus();
     }
-    // this.projeto.statusList.reverse()
-
   }
 
   editStatus(status:Status){
@@ -72,12 +65,11 @@ export class SelectStatusComponent implements OnInit{
   }
 
   async editStatusPut(){
-    this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
     this.boolEditStatus = false
     this.booleanAddStatus = false
     this.status = new Status
-    // this.projeto.statusList.reverse()
-
+    console.log(this.projeto);
+    
   }
 
   verifyStatusDefault(status:Status){
@@ -92,13 +84,10 @@ export class SelectStatusComponent implements OnInit{
 
   async enableStatus(status:Status){
     status.enabled = !status.enabled
-    this.projeto = await this.service.updateStatusList(this.projeto.id, status);
-    // this.projeto.statusList.reverse()
   }
 
   async deleteStatus(status:Status){
     this.projeto = await this.service.deleteStatus(this.projeto.id, status);
-    // this.projeto.statusList.reverse()
   }
 
 }

@@ -34,14 +34,15 @@
                         <app-select-status
                         [projeto]="projeto"
                         [statusLista]="projeto.statusList"
+                        (addNewStatus)="createStatus($event)"
                         ></app-select-status>
                     </div>                    
-                    <input class="membro-input" placeholder="email do usuário" type="text" pInputText />
+                    <input class="membro-input" placeholder="email do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
                 </div>
                 <button class="botao-pesquisar"><p>Pesquisar</p> <i class="pi pi-search dark:text-gray-900"></i></button>
             </div>
             <div *ngIf="usuarios.length > 0" class="membros">
-                <div *ngFor="let p of usuarios">
+                <div *ngFor="let p of filteredNames()">
                     <app-membros-equipe [user]="p" [projeto]="projeto" ></app-membros-equipe>
                 </div>
             </div>

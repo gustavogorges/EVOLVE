@@ -29,15 +29,10 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   async funcao(){
-    this.projetos = await this.service.getAllSomething('project')
-
-    this.projetos.forEach((e) =>{
-      if(e.name === ''){
-        window.location.reload()
-      }
-    })
-
+    this.projetos = await this.service.getAllSomething('project') || []
+    
     this.projetos = this.projetos.reverse()
+    console.log(this.projetos);
   }
 
   openProject(p:any){

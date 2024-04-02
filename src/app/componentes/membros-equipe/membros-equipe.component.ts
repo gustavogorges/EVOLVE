@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { File } from 'src/model/file';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -17,18 +18,6 @@ export class MembrosEquipeComponent implements OnInit {
   @Input() projeto!:Project
 
   ngOnInit(){
-    console.log(this.user);
-    
-    if(this.projeto.members != null){
-      this.projeto.members.forEach(element => {
-        if(element.id === this.user.id){
-          this.adicionado = true
-        }
-      });
-    }else{
-      this.projeto.members = []
-    }
-    
   }
 
   verifyImage(){
@@ -39,10 +28,11 @@ export class MembrosEquipeComponent implements OnInit {
     // }
     // return true
     if(this.user.image != null){
-      return false
-    }else{
-      return true
+      if(this.user.image.data != null){
+        return false
+      }
     }
+    return true
   }
 
   randomizeColor(){
@@ -64,12 +54,10 @@ export class MembrosEquipeComponent implements OnInit {
 
   addUser(){
     this.projeto.members.push(this.user)
-    this.arrayAlterada()
+    console.log(this.projeto);
+    
   }
 
-  async arrayAlterada(){
-    await this.service.putProjeto(this.projeto)
-  }
 
   removeUser(){
     this.projeto.members.forEach(element => {
@@ -77,7 +65,6 @@ export class MembrosEquipeComponent implements OnInit {
         this.projeto.members.splice(this.projeto.members.indexOf(element), 1)
       }
     });
-    this.arrayAlterada()
   }
 
 }

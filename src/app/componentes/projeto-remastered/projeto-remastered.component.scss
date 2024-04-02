@@ -127,7 +127,7 @@
                 @apply flex gap-2 w-full overflow-x-auto;
 
                 .users-spam{
-                    @apply flex flex-col items-center;
+                    @apply flex flex-col items-center gap-1;
 
                     div{
                         @apply w-[4.2vw] h-[4.2vw] rounded-full flex items-center justify-center font-bold text-4xl

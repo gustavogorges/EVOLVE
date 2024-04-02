@@ -4,6 +4,7 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
+import { Status } from 'src/model/status';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -15,8 +16,9 @@ export class TelaCriarProjetoComponent implements OnInit {
   constructor(private service : BackendEVOLVEService, private route: Router){}
   
   async ngOnInit(){
-    this.projeto = await this.service.postProjeto(new Project)
+    this.projeto = new Project
     this.usuarios = await this.service.getAllSomething('user') || []
+    this.getStatusList()
   }
   
   messages: Message[] | undefined;
@@ -24,18 +26,51 @@ export class TelaCriarProjetoComponent implements OnInit {
   usuarios : User[] = []
   saveProject : Boolean = false
   date !: Date
+  searchTerm : string = ''
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
   }
 
-  editStatus(){
-    
-  }
+  getStatusList(){
+    this.projeto.statusList = [
+      {
+        id :  0,
+        name : "pendente",
+        backgroundColor: "#7CD5F4",
+        textColor: "#000000",
+        enabled:  true,
+        columnIndex :  0 
 
-  updateProject(p:Project){
-    this.projeto.statusList = p.statusList
-    this.service.putProjeto(p)
+      },
+      {
+        id :  1,
+        name : "em progresso",
+        backgroundColor: "#FCEC62",
+        textColor: "#000000",
+        enabled:  true,
+        columnIndex :  0 
+
+      },
+      {
+        id :  2,
+        name : "concluido",
+        backgroundColor: "#86C19F",
+        textColor: "#000000",
+        enabled:  true,
+        columnIndex :  0 
+
+      },
+      {
+        id :  3,
+        name : "não atribuido",
+        backgroundColor: "#9CA3AE",
+        textColor: "#000000",
+        enabled:  true,
+        columnIndex :  0 
+
+      }
+    ]
   }
 
   @ViewChild('statusClose') statusClose!:ElementRef
@@ -46,6 +81,10 @@ export class TelaCriarProjetoComponent implements OnInit {
         this.statusVisible = false
       }
     }
+  }
+
+  filteredNames() {
+    return this.usuarios.filter(element => element.email.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }
 
   dateFormat(data: Date): string {
@@ -60,34 +99,19 @@ export class TelaCriarProjetoComponent implements OnInit {
   async salvarProjeto(){
     if(this.projeto.name != '' && this.date != null){
       this.projeto.finalDate = this.dateFormat(this.date);
-      console.log(this.dateFormat(this.date));
+      console.log(this.projeto);
       
-      if(this.projeto.members === null){
-        this.projeto.members = []
-      }
-      await this.service.putProjeto(this.projeto);
-      this.saveProject = true
+      await this.service.postProjeto(this.projeto);
       this.route.navigate(['/tela-projeto'])
-    }else{
-      
     }
   }
 
    async cancelar(){
-    this.saveProject = true
-      await this.service.deleteById("project", this.projeto.id)
       this.route.navigate(['/tela-projeto'])
    }
 
    async createStatus(event:any){
     this.projeto.statusList.push(event)
-    this.projeto = await this.service.putProjeto(this.projeto)
-   }
-
-   async ngOnDestroy(){
-    if(!this.saveProject){
-      await this.service.deleteById("project", this.projeto.id)
-    }
    }
 
    statusVisible = false

@@ -85,6 +85,11 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   verifyImg(user:User){
+    if(user.image != null){
+      if(user.image.data != null){
+        return false
+      }
+    }
     return true
   }
 
