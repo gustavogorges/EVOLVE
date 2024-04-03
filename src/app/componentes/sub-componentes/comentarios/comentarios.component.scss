@@ -3,15 +3,15 @@
 }
 
 .main-card {
-    @apply  w-[90%] h-2/3 rounded-t-xl
+    @apply  w-full h-2/3 rounded-t-xl
 }
 
 .card {
-    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite
+    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center
 }
 
 .box-btn-add {
-    @apply w-full h-1/4 border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+    @apply w-full h-[20%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
 
 .s-input input {
@@ -50,8 +50,8 @@
   }
 
   .comment {
-    @apply w-full h-1/2 grid grid-cols-2 border-b-2 ;
-    grid-template-columns : 20% 80%;
+    @apply w-full grid grid-cols-2 ;
+    grid-template-columns : 15% 85%;
   }
 
   .profile-picture-box {
@@ -59,7 +59,7 @@
   }
 
   .profile-picture {
-    @apply w-20 h-20 rounded-full bg-purple-500
+    @apply w-12 h-12 rounded-full bg-purple-500
   }
 
   .comment-content {
@@ -68,13 +68,17 @@
   }
 
   .commentor-name {
-    @apply text-2xl text-primary font-bold 
+    @apply text-xl text-primary font-bold
   }
 
   .commentor-name-box {
-    @apply flex items-end mt-5 p-2
+    @apply flex items-end mt-5 
   }
 
   .comment-text-box {
-    @apply flex items-start font-semibold p-2
+    @apply flex items-start p-2
+  }
+
+  .comment-text {
+    @apply text-base
   }
