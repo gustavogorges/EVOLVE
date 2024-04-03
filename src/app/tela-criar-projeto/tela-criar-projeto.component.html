@@ -46,12 +46,12 @@
                     <app-membros-equipe [user]="p" [projeto]="projeto" ></app-membros-equipe>
                 </div>
             </div>
-            <div *ngIf="usuarios.length <= 0" class="membros w-full h-full flex items-center justify-center">
-                <p class="text-xl text-fontGray">Nenhum membro encontrado</p>
+            <div *ngIf="filteredNames().length <= 0" class="membros w-full h-full flex items-center justify-center">
+                <p class="text-xl text-fontGray">Nenhum usuário encontrado</p>
             </div>
             <div class="status-priority">
                 <button class="add-status" (click)="statusEnabled()">Adicionar status</button>
-                <button class="add-priority">Adicionar prioridade</button>
+                <button class="add-priority" (click)="priorityEnabled()">Adicionar prioridade</button>
             </div>
             <div class="lembrete">
                 <p>Os status e propriedades criadas serão adicionados a todas as tarefas</p>

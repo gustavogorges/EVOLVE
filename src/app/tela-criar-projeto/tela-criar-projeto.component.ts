@@ -27,6 +27,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   saveProject : Boolean = false
   date !: Date
   searchTerm : string = ''
+  priorityBol : boolean = false
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
@@ -100,8 +101,15 @@ export class TelaCriarProjetoComponent implements OnInit {
     if(this.projeto.name != '' && this.date != null){
       this.projeto.finalDate = this.dateFormat(this.date);
       console.log(this.projeto);
-      
-      await this.service.postProjeto(this.projeto);
+      let postProject:any = this.projeto
+      let lista: Array<Pick<User, "id">> = new Array
+      this.projeto.members.forEach(element => {
+        lista.push({
+          "id" : element.id
+        })
+      });
+      postProject.members = lista
+      await this.service.postProjeto(postProject);
       this.route.navigate(['/tela-projeto'])
     }
   }
@@ -112,6 +120,10 @@ export class TelaCriarProjetoComponent implements OnInit {
 
    async createStatus(event:any){
     this.projeto.statusList.push(event)
+   }
+
+   priorityEnabled(){
+    this.priorityBol = !this.priorityBol
    }
 
    statusVisible = false
