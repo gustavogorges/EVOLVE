@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
 import { UserChat } from 'src/model/userChat';
@@ -16,7 +16,7 @@ import { Message } from 'src/model/message';
   styleUrls: ['./tela-chat.component.scss']
 })
 
-export class TelaChatComponent implements OnInit {
+export class TelaChatComponent implements OnInit, AfterViewChecked {
 
   chatTypeUsers:string = "users"
   chatTypeTeams:string = "teams"
@@ -28,6 +28,8 @@ export class TelaChatComponent implements OnInit {
   chatType:string = "users";
   chatList:Array<Chat> = new Array  
 
+  @ViewChild('messagesContainer') chatMessages!: ElementRef;
+
   constructor(
     private service: BackendEVOLVEService,
     private cookiesService: CookiesService
@@ -38,19 +40,36 @@ export class TelaChatComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookiesService.getLoggedUser()
     this.setChatListType(await this.cookiesService.get(this.cookiesService.chatListTypeField))
-    this.selectChat(await this.getLastChat())
-    this.contact = this.getContact(this.selectedChat, this.loggedUser)
+    this.selectChat(await this.getLastChat(this.chatType))
+    this.sortChatList()
   }
 
-  async getLastChat():Promise<Chat>{
-    return (await this.service.getUserChatsByUserId(this.loggedUser.id))
-    .find(chat => chat.id == this.cookiesService.get("lastChatId"))!
+  // Esta função será chamada sempre que houver mudanças na view
+  ngAfterViewChecked() {
+    this.chatScrollToBottom();
+  }
+
+  // Função para rolar para o final do chat
+  chatScrollToBottom(): void {
+    try {
+      this.chatMessages.nativeElement.scrollTop = this.chatMessages.nativeElement.scrollHeight;
+    } catch(err) { }
+  }  
+
+  async getLastChat(chatType:string):Promise<Chat>{
+    switch(chatType){
+      case this.chatTypeTeams : return (await this.service.getTeamChatsByUserId(this.loggedUser.id))
+      .find(chat => chat.id == this.cookiesService.get("lastChatId"))!
+      case this.chatTypeProjects : return (await this.service.getProjectChatsByUserId(this.loggedUser.id))
+      .find(chat => chat.id == this.cookiesService.get("lastChatId"))!
+      default : return (await this.service.getUserChatsByUserId(this.loggedUser.id))
+      .find(chat => chat.id == this.cookiesService.get("lastChatId"))!
+    }
   }
 
   async setChatListType(type:string):Promise<void>{
     this.chatType = type
     this.chatList = await this.getChatType(type)
-    // this.cookiesService.set(this.cookiesService.chatListTypeField, type)
   }
 
   async getChatType(type:string){
@@ -96,7 +115,8 @@ export class TelaChatComponent implements OnInit {
 
   getContact(chat:Chat, user: User):User|Team|Project {
     switch(this.chatType){
-      case this.chatTypeTeams : return (chat as TeamChat).team
+      case this.chatTypeTeams :console.log("opa");
+       return (chat as TeamChat).team
       case this.chatTypeProjects : return (chat as ProjectChat).project
       default : return this.getContactFromUserChat(chat, user)
     }
@@ -124,8 +144,25 @@ export class TelaChatComponent implements OnInit {
     return messageList[0] == message
   }
 
-  // sortChatList(){
-  //   this.chatList.sort()
-  // }
+  sortChatList(){
+    this.chatList.sort(this.orderChatByMostRecentMessage);
+  }
+
+  orderChatByMostRecentMessage(a:Chat, b:Chat){
+    if(!(a.messages.length>0) && !(b.messages.length>0)){
+      return 0
+    } else if (!(a.messages.length>0)){
+      return 1
+    } else if(!(b.messages.length>0)){
+      return -1
+    }
+    let verificacao = new Date(this.getlastMessage(b).date).getTime() - new Date(this.getlastMessage(b).date).getTime();
+  
+    return verificacao  
+  }
+
+  getlastMessage(chat:Chat){
+    return chat.messages.find(message => chat.messages.indexOf(message) == chat.messages.length -1)!
+  }
 
 }

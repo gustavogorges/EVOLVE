@@ -3,7 +3,7 @@
 }
 
 .main{
-  @apply flex items-center w-[80%]  h-[80%];
+  @apply flex items-center w-[80%]  h-[80%] rounded-[1rem] overflow-clip;
 }
 
 .contacts-container{
@@ -97,4 +97,8 @@
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
+}
+
+::-webkit-scrollbar{
+    @apply hidden;
 }

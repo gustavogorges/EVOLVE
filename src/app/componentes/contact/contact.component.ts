@@ -30,35 +30,18 @@ lastMessage:Message = new Message
   }
 
   ngOnInit(): void {
+    this.setlastMessage()
+  }
+
+  setlastMessage(){
     let lastMessageIndex = this.chat.messages.length - 1
     this.lastMessage = this.chat.messages[lastMessageIndex]
-
-
-
-    // this.name = this.contact.name
-
-    // this.image = this.contact.image
-
-    // this.setContactInfo()
   }
+
   setInfos(contact:User|Team|Project){
     this.image = contact.image
     this.imageColor = contact.imageColor
     this.name = contact.name
   }
-
-  // isImageAHex(){
-  //   console.log(this.image)
-  //   return this.image?.slice()[0]!='#'
-  // }
-
-  // setContactInfo(){
-  //   if(this.contact instanceof User){
-  //     this.image = this.contact.profilePicture
-  //   } else {
-  //     this.image = this.contact.image
-  //   }
-  //   this.name = this.contact.name
-  // }
 
 }
