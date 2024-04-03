@@ -1,0 +1,43 @@
+.main {
+    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center
+}
+
+.status {
+     @apply w-full h-9 flex items-center justify-between border-b-2
+}
+
+.status-box {
+    @apply w-full flex items-center gap-2 border-b-2 flex-col 
+}
+
+.add-box {
+    @apply w-full h-8 flex justify-center items-center bg-primary rounded-b-lg
+}
+
+.new-status {
+    @apply w-full h-28 grid grid-rows-3
+}
+
+.cor-status-box {
+    @apply flex items-center w-full justify-between
+}
+
+.nome-status-box {
+    @apply flex items-center w-full justify-between border-b-2
+}
+
+.confirmar-status-box {
+    @apply bg-secondary flex justify-center items-center rounded-b-lg
+}
+
+.input-add-status {
+    @apply bg-primaryWhite outline-none pl-3
+}
+
+.pi-plus-circle {
+    font-size: larger;
+}
+
+.pi-minus-circle {
+    font-size: larger;
+}

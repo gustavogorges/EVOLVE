@@ -1,0 +1,51 @@
+<div class="main" style="background-color: #ffff;">
+    <div class="status-box" >
+        <div
+         class="status "
+         *ngFor="let associate of project.members"
+         >
+         <div 
+         class="flex items-center w-full gap-x-2 pb-2"
+         >
+            <div class="h-9 w-9 bg-fontGray rounded-full ml-2"
+            [ngStyle]="{
+                'background-image':
+                associate.image != null
+                    ? 'url(' + associate.image.data + ')'
+                    : associate.imageColor,
+                'background-size': 'cover',
+                'background-color': associate.imageColor
+              }">
+            </div>
+             <p 
+             class="w-[40%] ml-1 h-full flex justify-start "
+             >
+             {{associate.name}}
+            </p>
+            <div class="flex w-1/3 justify-end items-center">
+                <i 
+                *ngIf="!verifyIfAssociateExists(associate)"
+                class="pi pi-plus-circle text-primary font-bold p-1 hover:bg-slate-100 hover:rounded-md cursor-pointer" 
+                (click)="saveAssociate(associate)"
+                >
+                </i>
+                <i 
+                *ngIf="verifyIfAssociateExists(associate)"
+                class="pi pi-minus-circle text-primary font-bold text-4xl p-1 hover:bg-slate-100 hover:rounded-md cursor-pointer" 
+                (click)="removeAssociate(associate)"
+                >
+                </i>
+            </div>
+         </div>
+        </div>
+    </div>
+    <div *ngIf="!booleanAddAssociate" class="add-box" (click)="eventEmitterFunc()">
+        <div 
+        class="w-[100%] flex justify-center items-center gap-2 h-full rounded-bl-lg cursor-pointer"
+        >
+            <p 
+            class=" text-primaryWhite "
+            >confirmar</p>
+        </div>
+    </div>
+</div>

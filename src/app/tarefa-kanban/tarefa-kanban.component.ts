@@ -169,21 +169,13 @@ export class TarefaKanbanComponent  implements OnChanges{
       }
       
 
-      list.map((task : Task)=>{
+      list.map(async(task : Task) =>{
         task.statusListIndex=list.indexOf(task)
         task.project = {
           id: this.project.id
         }
         console.log(task);
-        
-        task.associates = task.associates.map(user => {
-          return {id:user.id}
-        })
-
-        console.log(task.associates);
-        
-
-        console.log(this.service.putTarefa(task));
+        await this.service.putTarefa(task);
          
       })
       this.taskList == list;

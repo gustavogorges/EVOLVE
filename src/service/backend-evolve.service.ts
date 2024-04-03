@@ -14,9 +14,13 @@ import { PropertyValue } from 'src/model/propriedade/propertyValue';
 
 import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
+
 import { Message } from 'src/model/message';
 import { MessageStatus } from 'src/model/messageStatus';
 import { ProjectChat } from 'src/model/projectChat';
+
+import { Option } from 'src/model/propriedade/option';
+
 
 
 
@@ -50,15 +54,21 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
+  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>) {
+    return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
+  }
+
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
  
 
   async patchProperty(taskProjectProperty:Property, taskId:number) {
-    console.log(taskProjectProperty)
-  
     return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
+  }
+
+  async putPropertyOption(newOption:Option) {
+    return (await axios.put(this.URL+"task/property/put/option",newOption)).data
   }
 
   async patchPriority(priority:number,taskId:number) {
@@ -76,15 +86,10 @@ export class BackendEVOLVEService {
   }
 
   async postTarefa (tarefa:Task){
-    console.log("POST SERVICE");
-    console.log(tarefa);
     return (await axios.post(this.URL+"task", tarefa)).data 
   }
 
   async putTarefa (tarefa:Task){
-    console.log(tarefa);
-    console.log(JSON.stringify(tarefa));
-    
     return (await axios.put(this.URL+"task", tarefa)).data
   }
 
@@ -119,7 +124,6 @@ export class BackendEVOLVEService {
   }
 
   async putUserChat (chat:UserChat){
-    console.log("Eu cheguei aqui")
     return (await axios.put(this.URL+"userChat", chat)).data
   }
 

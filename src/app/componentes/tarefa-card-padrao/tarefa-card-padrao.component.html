@@ -13,11 +13,11 @@
       </div>
     </div>
     <div class="progress-bar">
-      <div class="progress-blue" [ngStyle]="{ width: valorBarra }"></div>
+      <div class="progress-blue" [ngStyle]="{ 'width': tarefaAtual.progress + '%'  }"> </div>
     </div>
   </div>
 
-  <div class="center-box ">
+  <div class="center-box overflow-clip">
     <div class="nameTask-box">
       <div *ngIf="tarefaAtual.name.length > 20">
         <p class="nameTask">{{ tarefaAtual.name }}</p>
@@ -29,7 +29,7 @@
     <div class="subTasks">
       <div *ngFor="let sub of tarefaAtual.subtasks; index as indice">
         <div class="subTask">
-          <input type="checkbox" id="({{ id }}+{{ sub }}+{{ indice }})" />
+          <input type="checkbox" id="({{ id }}+{{ sub }}+{{ indice }})" [(ngModel)]="sub.concluded" (click)="completed(sub)" />
           <label
             class="leading-[18px]"
             for="({{ id }}+{{ sub }}+{{ indice }})"
@@ -50,7 +50,8 @@
     />
     </div>
     <div class="members">
-      <div class="photoMember"></div>
+      <div class="photoMember" ></div>
+      <img [src]="teste"class="photoMember" >
       <div class="photoMember"><img src="assets/pessoaTeste.svg" /></div>
     </div>
   </div>

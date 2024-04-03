@@ -1,5 +1,5 @@
 .main {
-    @apply w-[580px] h-[87px] bg-white rounded-lg p-3 shadow-md px-6 flex items-center justify-between;
+    @apply w-[80%] h-[87px] bg-white dark:bg-dark-primary-black rounded-lg p-3 shadow-md px-6 flex items-center justify-between;
     //  border-b-4 border-primary 
 }
 
@@ -13,12 +13,12 @@
 }
 
 .date-text {
-    @apply text-secondary font-hind-madurai text-xl
+    @apply text-secondary dark:text-dark-secundary-green font-hind-madurai text-xl
 }
 
 .name-text {
 
-    @apply text-primary font-bold text-[22px] ;
+    @apply text-primary dark:text-dark-primary font-bold text-[22px] ;
     animation: 5s ease-in 1s slidein;
 
 }
@@ -36,11 +36,11 @@
 }
 
 .progress-bar-container{
-    @apply w-52 bg-[#E9EDF1] h-2.5 rounded-md ;
+    @apply w-full  bg-[#E9EDF1] dark:bg-dark-primary-gray h-2.5 rounded-md ;
 }
 
 .progress-bar{
-    @apply absolute w-1/2 bg-primary h-3;
+    @apply absolute w-1/2 bg-primary dark:bg-dark-primary h-3;
 }
 
 
