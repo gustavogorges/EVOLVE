@@ -9,5 +9,5 @@ export class Comment {
     project : Project = new Project;
     value : string = "";
     timeHour : string = "";
-    timeDayAndMontg : string = "";
+    timeDayAndMonth : string = "";
 }

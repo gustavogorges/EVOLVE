@@ -7,7 +7,7 @@
 }
 
 .card {
-    @apply w-full min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
+    @apply w-full pt-3 min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
 }
 
 .box-btn-add {

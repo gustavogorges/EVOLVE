@@ -6,6 +6,7 @@ import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Subtask } from "./subtask";
 import { User } from "./user";
+import { Comment } from 'src/model/comment';
 
 
 export class Task{
@@ -22,6 +23,8 @@ export class Task{
   
     conclusionPercentage:number=0;
     priority:PriorityRecord = new PriorityRecord();
+
+    comments:Array<Comment> = new Array;
 
     creator:User = new User;
     project:Project | Partial<Project> = new Project;
