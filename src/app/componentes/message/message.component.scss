@@ -19,7 +19,7 @@
 }
 
 .message-body{
-    @apply bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[80%] min-h-[10%] rounded-[0.625rem] self-end ;
+    @apply bg-primaryWhite relative min-w-[10%] w-min p-4 max-w-[40rem] min-h-[10%] rounded-[0.625rem] self-end ;
 }
 
 .sender-image-pointer{
@@ -35,5 +35,5 @@
  }
 
  .message-content{
-    @apply break-words max-w-full w-max h-max ;
+    @apply  break-words w-max max-w-full h-max ;
  }

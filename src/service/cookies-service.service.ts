@@ -14,6 +14,7 @@ import { BackendEVOLVEService } from './backend-evolve.service';
 
 export class CookiesService {
   
+  chatListTypeField = "chatListType"
 
   constructor(private cookieService : CookieService, private service : BackendEVOLVEService) { }
 
