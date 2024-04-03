@@ -3,19 +3,40 @@
 }
 
 .main-card {
-    @apply  w-full h-2/3 rounded-t-xl
+    @apply  w-full max-h-[80%] rounded-t-xl 
 }
 
 .card {
-    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center
+    @apply w-full min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
 }
 
 .box-btn-add {
-    @apply w-full h-[20%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
 
 .s-input input {
     display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+
+    
+    /* largura do scroll */
+   
+  }
+  
+  /* Define a cor do fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Define a cor do thumb (a alça do scroll) */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background: #E5E5E5 
+    
   }
   
   .s-input input + label:before {
@@ -50,7 +71,7 @@
   }
 
   .comment {
-    @apply w-full grid grid-cols-2 ;
+    @apply w-full grid grid-cols-2 h-[30%] my-2;
     grid-template-columns : 15% 85%;
   }
 
@@ -72,11 +93,15 @@
   }
 
   .commentor-name-box {
-    @apply flex items-end mt-5 
+    @apply flex items-end justify-between w-[95%]
+  }
+
+  .comment-date {
+     @apply text-fontGray text-sm
   }
 
   .comment-text-box {
-    @apply flex items-start p-2
+    @apply flex items-start
   }
 
   .comment-text {

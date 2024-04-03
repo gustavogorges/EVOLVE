@@ -15,6 +15,7 @@ import { PropertyValue } from 'src/model/propriedade/propertyValue';
 import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
 import { Option } from 'src/model/propriedade/option';
+import { Comment } from 'src/model/comment';
 
 
 
@@ -50,6 +51,18 @@ export class BackendEVOLVEService {
 
   async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>) {
     return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
+  }
+
+  async getAllCommentsOfTask(taskId:number) {
+    return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
+  }
+
+  async patchNewComment(taskId:number, newComment:Comment) {
+    return (await axios.patch(this.URL+"task/comments/patch/"+taskId,newComment)).data
+  }
+
+  async deleteComment(taskId:number, commentId:number) {
+    return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId)).data
   }
 
   async updateStatusList(projetoId:number,novoStatus:Status) {

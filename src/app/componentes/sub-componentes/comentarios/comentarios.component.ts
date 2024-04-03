@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComentariosComponent implements OnInit {
 
+  booleanAddComment : boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addCommentInput() : void {
+    this.booleanAddComment = true;
+  }
+
+  addCommentValue() : void {
+    
+
+
+    this.booleanAddComment = false;
   }
 
 }

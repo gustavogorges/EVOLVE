@@ -200,6 +200,9 @@
     @apply w-full h-full flex justify-center
 }
 
+.p-inputtext {
+    @apply p-0
+}
 
 .name-box {
     @apply min-w-min h-10 ;
