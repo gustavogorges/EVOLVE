@@ -8,6 +8,7 @@ export class Message {
     sender:User = new User;
     date:string = "";
     messageStatus:MessageStatus = 0;
-    chat:Array<Chat> = new Array
+    chat!:Chat
+    attachments:Array<File> = new Array
 
 }
