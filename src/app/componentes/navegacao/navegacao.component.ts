@@ -53,5 +53,9 @@ export class NavegacaoComponent implements OnInit {
   closeSideBar(bar : boolean){
     this.sideBar=false
   }
+  teste(){
+    document.querySelector('.pi-moon')?.classList.add('pi-sun')
+    document.querySelector('.pi-moon')?.classList.remove('pi-moon')
+  }
 
 }

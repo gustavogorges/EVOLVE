@@ -1,49 +1,181 @@
-<div class="w-[890px] h-[790px] shadow-lg bg-white absolute left-[500px] top-24 flex flex-col p-9 rounded-xl" >
- 
+<div
+  class="w-[890px] h-[790px] shadow-lg bg-white dark:bg-dark-primary-black absolute left-[500px] top-24 flex flex-col p-9 rounded-xl"
+>
   <div class="border-b-2 flex justify-between pb-2">
-    <h1 class="text-3xl font-titulo text-secondary font-semibold">
+    <h1 class="text-3xl font-titulo text-secondary dark:text-dark-secondary font-semibold">
       Configurações
-      </h1>
-    <i
-    class="pi pi-times self-center text-gray-400"
-    (click)="closeModal()"
-  ></i>
+    </h1>
+    <i class="pi pi-times self-center text-fontGray" (click)="closeModal()"></i>
   </div>
-  <div class="p-5 flex flex-col gap-5">
-      <div>
-        <div class="flex justify-between items-center">
-          <div>
-          
-          <p class="font-titulo font-medium">Email: </p>
-          
-          <input type="email" name="" id="" [placeholder]="loggedUser?.email" [disabled]="true" class="py-1 px-3 rounded-md disabled:bg-transparent bg-slate-100 font-hind-madurai">
+  <div class="p-5 flex flex-col gap-5 w-full">
+    <div>
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="font-titulo font-medium">Email:</p>
+
+          <input
+            type="email"
+            name=""
+            id=""
+            [placeholder]="loggedUser?.email"
+            [disabled]="disabledEmail"
+            [(ngModel)]="email"
+            class="py-1 px-3 rounded-md font-hind-madurai disabled:bg-transparent bg-slate-100 "
+          />
         </div>
-        <button class="px-7 font-hind-madurai h-min bg-primary text-white rounded-md">editar</button>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between items-center">
-          <div>
-          
-          <p class="font-titulo font-medium">Senha: </p>
-          
-          <input type="password" name="" id="" placeholder="**********" [disabled]="false" class="py-1 px-3 rounded-md disabled:bg-transparent bg-slate-100 outline-none">
-        </div>
-        <button class="px-7 font-hind-madurai h-min bg-primary text-white rounded-md">editar</button>
-        </div>
-      </div>
-      <div>
-        <div class="flex justify-between items-center">
-          <div>
-          
-          <p class="font-titulo font-medium">Tema padrão: </p>
-          <p class=" font-hind-madurai text-slate-400">{{theme}}</p>
-          
-        </div>
-        <button class="px-3 py-1 font-hind-madurai h-min bg-primary text-white rounded-md" > <i class="icon pi pi-moon self-center" (click)="darkMode()"></i>
+        <button
+        *ngIf="disabledEmail"
+
+          class="px-7 font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+          (click)="editEmail()"
+        >
+          editar
         </button>
+        <button 
+        *ngIf="disabledEmail==false"
+        class="px-7 font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
+        (click)="putEmail()"
+      >
+        confirmar 
+      </button>
+      </div>
+    </div>
+    <div>
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="font-titulo font-medium">Senha:</p>
+
+          <input
+            type="password"
+            name=""
+            id=""
+            placeholder="********"
+            [(ngModel)]="password"
+
+            [disabled]="disabledPassword"
+            class="py-1 px-3 rounded-md disabled:bg-transparent bg-slate-100 outline-none"
+          />
+        </div>
+        <button 
+        (click)="editPassword()"
+        *ngIf="disabledPassword"
+          class="px-7 font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+        >
+          editar
+        </button>
+        <div class="flex gap-2"          *ngIf="!disabledPassword"
+        >
+          <button 
+          (click)="putPassword()"
+            class="px-7 font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
+          >
+            confirmar 
+          </button>
+          <button 
+          (click)="cancelPassword()"
+            class="px-7 font-hind-madurai h-min bg-red-700 text-white rounded-md"
+          >
+            cancelar  
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    <div>
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="font-titulo font-medium">Tema padrão:</p>
+          <p class="font-hind-madurai text-fontGray">{{ loggedUser.theme }}</p>
+        </div>
+        <button
+          class="px-3 py-1 font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+        >
+          <i class="icon pi pi-moon self-center" (click)="darkMode()"></i>
+        </button>
+      </div>
+    </div>
+    <div class="w-full">
+      <div class="flex justify-between w-full">
+        <div class="flex flex-col gap-2 w-full">
+          <p class="font-titulo font-medium">Cores do sistema:</p>
+          <p class="font-titulo text-fontGray font-medium text-base">
+            cores atuais:
+          </p>
+          <div class="flex justify-between items-end w-full">
+            <div class="flex gap-2">
+              <div class="w-12 h-12 bg-primary  rounded"></div>
+              <div class="w-12 h-12 bg-secondary  rounded"></div>
+              <div class="w-12 h-12 bg-dark-primary rounded"></div>
+              <div class="w-12 h-12 bg-dark-secondary rounded"></div>
+            </div>
+            <button
+              [disabled]="true"
+              class="px-7 h-min py-1 bg-primary dark:bg-dark-primary text-white font-titulo font-medium rounded-lg disabled: opacity-60"
+            >
+              restaurar cores padrões
+            </button>
+          </div>
         </div>
       </div>
+
+    </div>
+    <div class="flex flex-col gap-2">
+      <p class="font-titulo font-medium">Altere as cores do sistema:</p>
+      <p class="font-titulo text-fontGray font-medium text-base">
+        selecione duas cores para o modo claro e duas para o modo escuro:
+      </p>
+      <div class="flex  justify-between">
+
+      
+      <div class="flex flex-col gap-2">
+
+        <div class="flex gap-2" >
+    
+          <div class="w-12 h-12 bg-[#185e77] rounded" (click)="changeColor('#185e77')"  ></div>
+          <div class="w-12 h-12 bg-[#00AAF0] rounded"></div>
+          <div class="w-12 h-12 bg-[#E91818] rounded"></div>
+          <div class="w-12 h-12 bg-[#A20021] rounded"></div>
+          <div class="w-12 h-12 bg-[#008000] rounded"></div>
+          <div class="w-12 h-12 bg-[#2E8B57] rounded"></div>
+         
+        </div>
+        <div class="flex gap-2">
+          <div class="w-12 h-12 bg-[#FAA613] rounded"></div>
+          <div class="w-12 h-12 bg-[#F44708] rounded"></div>
+          <div class="w-12 h-12 bg-[#E01A4F] rounded"></div>
+          <div class="w-12 h-12 bg-[#E072A4] rounded" (click)="changeColor('#E072A4')" ></div>
+          <div class="w-12 h-12 bg-[#3B429F] rounded"></div>
+          <div class="w-12 h-12 bg-[#AA7DCE] rounded" (click)="changeColor('#AA7DCE')"></div>
+        </div>
+
+      </div>
+      <div class="flex flex-col gap-2">
+
+        <div class="flex gap-2" >
+    
+          <div class="w-12 h-12 bg-[#4E97FD] rounded" (click)="changeDarkColor('#185e77')"  ></div>
+          <div class="w-12 h-12 bg-[#67F6F6] rounded"></div>
+          <div class="w-12 h-12 bg-[#FF4747] rounded"></div>
+          <div class="w-12 h-12 bg-[#CE2F4F] rounded"></div>
+          <div class="w-12 h-12 bg-[#68B245] rounded"></div>
+          <div class="w-12 h-12 bg-[#35C979] rounded"></div>
+         
+        </div>
+        <div class="flex gap-2">
+          <div class="w-12 h-12 bg-[#FFC052] rounded"></div>
+          <div class="w-12 h-12 bg-[#FC6B2E] rounded"></div>
+          <div class="w-12 h-12 bg-[#FF5C88] rounded"></div>
+          <div class="w-12 h-12 bg-[#FF6CDF] rounded" (click)="changeDarkColor('#E072A4')" ></div>
+          <div class="w-12 h-12 bg-[#7560F9] rounded"></div>
+          <div class="w-12 h-12 bg-[#CD8EFF] rounded" (click)="changeDarkColor('#AA7DCE')"></div>
+        </div>
+
+      </div>
+    </div>
+    </div>
   </div>
 
+
+
+  
 </div>

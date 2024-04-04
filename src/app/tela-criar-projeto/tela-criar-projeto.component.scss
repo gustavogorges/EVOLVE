@@ -73,7 +73,7 @@
         }
 
         .botao-pesquisar{
-            @apply w-[20%] h-10 bg-secondary dark:bg-dark-secundary-green text-white rounded-lg flex justify-center gap-3 items-center;
+            @apply w-[20%] h-10 bg-secondary dark:bg-dark-secondary text-white rounded-lg flex justify-center gap-3 items-center;
 
             p{
                 @apply text-lg dark:text-gray-900 font-semibold
@@ -99,7 +99,7 @@
         
 
         .add-priority{
-            @apply bg-secondary dark:bg-dark-secundary-green
+            @apply bg-secondary dark:bg-dark-secondary
         }
     }
 
@@ -119,7 +119,7 @@
         }
 
         .salvar{
-            @apply bg-secondary dark:bg-dark-secundary-green
+            @apply bg-secondary dark:bg-dark-secondary
         }
     }
 }

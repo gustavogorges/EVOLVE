@@ -97,7 +97,7 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL+"user", usuario)).data
   }
 
-  async putUsuario (usuario:User){
+  async putUsuario (usuario:User|Pick<User, "id">){
     return (await axios.put(this.URL+"user", usuario)).data
   }
 
@@ -109,7 +109,15 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"team", equipe)).data
   }
 
-
+  async patchUserEmail(userId:number, email:string):Promise<User>{
+    return (await axios.patch(this.URL+"user"+"/email/"+userId+"/"+email )).data
+  }
+  async patchUserTheme(userId:number, theme:string):Promise<User>{
+    return (await axios.patch(this.URL+"user"+"/theme/"+userId+"/"+theme )).data
+  }
+  async patchUserPassword(userId:number, password:string):Promise<User>{
+    return (await axios.patch(this.URL+"user"+"/password/"+userId+"/"+password )).data
+  }
 
   async postUserChat (chat:UserChat){
     (await axios.post(this.URL+"userChat", chat)).data 

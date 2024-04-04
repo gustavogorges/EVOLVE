@@ -38,7 +38,7 @@ export class TelaInicialComponent implements OnInit {
   constructor(
     private service: BackendEVOLVEService,
     private location: Location,
-    private cookieService: CookiesService
+    private cookieService: CookiesService, 
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -48,9 +48,7 @@ export class TelaInicialComponent implements OnInit {
       this.cookieService.setLoggedUserId( userData)
     }
      
-    //this.loggedUser = await this.data.user;
-
-    //this.cookieService.setOne(this.loggedUser)
+  
 
     
     
@@ -66,7 +64,6 @@ export class TelaInicialComponent implements OnInit {
           }
         })
    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
-   console.log(projects);
    
    this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
 
@@ -75,13 +72,20 @@ export class TelaInicialComponent implements OnInit {
 
    projects.map((project: Project)=>{
     if(project.favorited){
-      console.log(project);
       this.projectList.push(project)
       
     }
    })
-   console.log("dfg"+this.projectList);
-   
+   if(this.loggedUser.theme=="dark"){
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme','dark')
+  }else{
+    document.documentElement.classList.remove('dark')
+    document.querySelector('.pi-sun')?.classList.add('pi-moon')
+    document.querySelector('.pi-sun')?.classList.remove('pi-sun')
+    localStorage.setItem('theme','light')
+
+  }   
   
 
    
@@ -92,7 +96,6 @@ export class TelaInicialComponent implements OnInit {
   }
   tarefaSelecionada: Task = new Task();
   openTask(tarefa: Task): void {
-    console.log('teste 1');
     this.booleanTask = true;
 
     this.tarefaSelecionada = tarefa;

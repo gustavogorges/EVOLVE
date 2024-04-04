@@ -25,7 +25,7 @@
 }
 
 .button-AddProject{
-    @apply bg-secondary dark:bg-dark-secundary-green rounded-xl p-3 text-white font-bold text-xl
+    @apply bg-secondary dark:bg-dark-secondary rounded-xl p-3 text-white font-bold text-xl
       }
 
 .botao-opcoes{
@@ -52,7 +52,7 @@
     @apply w-full h-full
   }
   .icon {
-    @apply text-2xl text-secondary dark:text-dark-secundary-green cursor-pointer
+    @apply text-2xl text-secondary dark:text-dark-secondary cursor-pointer
   }
   select{
     @apply bg-secondaryWhite m-1 border-0 p-1;
