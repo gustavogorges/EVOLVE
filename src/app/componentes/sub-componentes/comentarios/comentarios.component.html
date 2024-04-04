@@ -27,6 +27,11 @@
             <p class="comment-text">
               {{comment.value}}
             </p>
+            <i 
+            class="pi pi-trash p-2 hover:bg-slate-100 rounded-full cursor-pointer text-primary"
+            *ngIf="verifyCommentOwner(comment)"
+            (click)="deleteComment(comment)"
+            ></i>
           </div>
         </div>
       </div>

@@ -101,9 +101,9 @@
   }
 
   .comment-text-box {
-    @apply flex items-start
+    @apply flex items-center justify-between w-[95%]
   }
 
   .comment-text {
-    @apply text-base
+    @apply text-base 
   }

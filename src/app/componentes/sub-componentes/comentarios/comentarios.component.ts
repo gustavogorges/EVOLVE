@@ -36,6 +36,18 @@ export class ComentariosComponent implements OnInit {
     
   }
 
+  verifyCommentOwner(comment : Comment) : boolean {
+    if(comment.user.id == this.loggedUser.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async deleteComment(comment : Comment) {
+    this.comments = await this.service.deleteComment(this.task.id,comment.id);
+  }
+
   addCommentInput() : void {
     this.booleanAddComment = true;
   }
