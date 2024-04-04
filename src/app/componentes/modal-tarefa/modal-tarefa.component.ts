@@ -274,7 +274,6 @@ export class ModalTarefaComponent implements OnInit {
       if(this.listAssociates != null) {
         let associates : Array<Pick<User, "id">> = new Array;
         this.listAssociates.forEach(associate => associates.push({"id":associate.id}))
-        console.log(associates);  
         this.service.patchAssociate(this.tarefa.id, associates);
       }
 
