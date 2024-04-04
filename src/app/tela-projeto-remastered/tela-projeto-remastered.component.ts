@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -13,30 +14,29 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   constructor(private service : BackendEVOLVEService, private route:Router) { }
 
   id!: number
-  projetos !: Project[]
+  projects !: Project[]
   resetProject: Boolean = false
 
   ngOnInit(): void {
-    this.funcao()
+    this.getProjects()
   }
 
   ngOnChange(): void {
-    this.funcao()
+    this.getProjects()
   }
 
   resetProjectOff(){
     this.resetProject = false
   }
 
-  async funcao(){
-    this.projetos = await this.service.getAllSomething('project') || []
+  async getProjects(){
+    this.projects = await this.service.getAllSomething('project') || []
     
-    this.projetos = this.projetos.reverse()
-    console.log(this.projetos);
+    this.projects = this.projects.reverse()
   }
 
   openProject(p:any){
-        this.projetos.forEach(element => {
+        this.projects.forEach(element => {
           if(element.id != p.id){
             element.isVisible = false
             element.editOn = false
@@ -52,7 +52,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   clickOutside(event:any){
     if(this.projectElement){
       if(event.target.contains(this.projectElement.nativeElement)){
-        this.projetos.forEach(element => {
+        this.projects.forEach(element => {
           if(element.editOn){
             this.resetProject = true
           }
@@ -67,17 +67,25 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.openProject(project)
   }
 
-  async deletarPai(id:number){
-    this.projetos.forEach((e) =>{
+  async delete(id:number){
+    this.projects.forEach((e) =>{
       if(e.id == id){
-        this.projetos.splice(this.projetos.indexOf(e),1)
+        this.projects.splice(this.projects.indexOf(e),1)
       }
     })
     await this.service.deleteById("project",id);
   }
 
-  async salvarPai(p:Project){
-   await this.service.putProjeto(p)
+  async editFun(p:Project){
+    let postProject:any = p
+    let listUsers : Array<Pick<User, "id">> = new Array
+    p.members.forEach(element => {
+      listUsers.push({
+        "id" : element.id
+      })
+    });
+    postProject.members = listUsers
+    p = await this.service.putProjeto(postProject)
   }
 
   async goToCreateProject(){
@@ -85,7 +93,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   editProject(event:any, p:any){
-    this.projetos.forEach(element => {
+    this.projects.forEach(element => {
       if(element.id === p.id){
         element.editOn = event
       }

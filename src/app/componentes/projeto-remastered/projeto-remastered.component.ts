@@ -32,7 +32,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit(): void {
-    this.criaTarefa()
+    console.log(this.projeto.tasks);
+    
   }
 
   date: string = ''
@@ -61,32 +62,18 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     this.noCloseProject.emit()
   }
 
-  criaTarefa(){
-    const task: Tarefa = {
-      nome : 'Nome tarefa',
-      prazo : '10/02',
-      progresso : 60,
-      status : 'Doing'
-    }
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-  }
-
   verifyImg(user:User){
     if(user.image != null){
       if(user.image.data != null){
+        return false
+      }
+    }
+    return true
+  }
+
+  verifyImgproject(){
+    if(this.projeto.image != null){
+      if(this.projeto.image.data != null){
         return false
       }
     }
@@ -102,6 +89,10 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     this.editProjectEmit(false)
   }
 
+  getTasksLength(){
+    return this.projeto.tasks.length
+  }
+
   openEfechaProjeto(){
     if(!this.projeto.editOn){
       this.openProjeto.emit(this.projeto)
@@ -113,7 +104,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async irParaProjeto(){
-    this.route.navigate(['view-project'])
+    this.route.navigate(['tela-tarefa'])
   }
 
   async cancelEdit(){

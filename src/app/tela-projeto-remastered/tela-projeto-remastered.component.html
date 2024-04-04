@@ -5,16 +5,16 @@
     </div>
 
     <div class="projects">
-        <div *ngFor="let p of projetos" #projectElement>
+        <div *ngFor="let p of projects" #projectElement>
 
             <app-projeto-remastered 
 
-                (salvarProjeto)="salvarPai($event)"
+                (salvarProjeto)="editFun($event)"
                 [projectOpen]="p.isVisible" 
                 [projeto]="p" 
                 (click)="openProject(p)" 
                 (noCloseProject)="noCloseProject(p)"
-                (deletar)="deletarPai($event)"
+                (deletar)="delete($event)"
                 [resetProject]="resetProject"
                 (editProject)="editProject($event, p)"
                 (resetProjectOff)="resetProjectOff()"

@@ -100,7 +100,6 @@ export class TelaCriarProjetoComponent implements OnInit {
   async salvarProjeto(){
     if(this.projeto.name != '' && this.date != null){
       this.projeto.finalDate = this.dateFormat(this.date);
-      console.log(this.projeto);
       let postProject:any = this.projeto
       let lista: Array<Pick<User, "id">> = new Array
       this.projeto.members.forEach(element => {
@@ -109,6 +108,11 @@ export class TelaCriarProjetoComponent implements OnInit {
         })
       });
       postProject.members = lista
+      postProject.creator = {
+        "id":1
+      }
+      console.log(postProject.creator);
+      
       await this.service.postProjeto(postProject);
       this.route.navigate(['/tela-projeto'])
     }
