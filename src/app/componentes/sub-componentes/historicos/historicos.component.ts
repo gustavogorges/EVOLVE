@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from 'src/model/task';
 
 @Component({
   selector: 'app-historicos',
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class HistoricosComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  task : Task = new Task;
 
   ngOnInit(): void {
   }

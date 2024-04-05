@@ -45,7 +45,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   async deleteComment(comment : Comment) {
-    this.comments = await this.service.deleteComment(this.task.id,comment.id);
+    this.comments = await this.service.deleteComment(this.task.id,comment.id,this.loggedUser.id);
   }
 
   addCommentInput() : void {
@@ -74,7 +74,7 @@ export class ComentariosComponent implements OnInit {
     postComment.user = {"id":newComment.user.id}
 
 
-    this.service.patchNewComment(postComment.task.id,postComment);
+    this.service.patchNewComment(postComment.task.id,postComment,this.loggedUser.id);
     
     const taskUpdated : Task = await this.service.getOne("task",postComment.task.id);
     

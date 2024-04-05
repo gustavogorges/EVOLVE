@@ -3,7 +3,9 @@ import { Option } from 'src/model/propriedade/option';
 import { Property } from 'src/model/propriedade/property';
 import { PropertyType } from 'src/model/propriedade/propertyType';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-select-opcao',
@@ -24,13 +26,16 @@ export class SelectOpcaoComponent implements OnInit {
   @Output() newItem = new EventEmitter<boolean>();
 
   optionsList : Array<Option> = new Array;
+  loggedUser : User = new User;
 
   constructor(
-    private service : BackendEVOLVEService
+    private service : BackendEVOLVEService,
+    private cookies_service : CookiesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.optionsList = this.property.options;
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
   }
 
   saveOptionUniSelect(option:Option) {
@@ -83,7 +88,7 @@ export class SelectOpcaoComponent implements OnInit {
   }
 
   async newOption(): Promise<void> {
-    const newOption:Option = await this.service.putPropertyOption(this.option);
+    const newOption:Option = await this.service.putPropertyOption(this.option, this.loggedUser.id);
     this.property.options.push(newOption);
     this.addOption();
   }

@@ -10,6 +10,7 @@ import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-modal-tarefa',
@@ -104,7 +105,8 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanAddPropriedade = false;
   }
 
-  constructor(private service: BackendEVOLVEService) {}
+  constructor(private service: BackendEVOLVEService,
+    private cookies_service:CookiesService) {}
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
   @Output() closeModalTask = new EventEmitter<boolean>();
@@ -116,13 +118,13 @@ export class ModalTarefaComponent implements OnInit {
 
   listPriorities !: PriorityRecord[];
   listAssociates !: Array<any>;
+  loggedUser : User = new User;
 
   async ngOnInit(): Promise<void> {
-    console.log(this.projeto);
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
     
     this.listAssociates = this.tarefa.associates;
 
-    console.log(this.listAssociates);
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
@@ -264,7 +266,7 @@ export class ModalTarefaComponent implements OnInit {
         if(propertieStackFor.name != '' ) {
           this.propertiesValuesStack.forEach(propertiesValueStackFor => {
             if(propertiesValueStackFor.property == propertieStackFor) {
-              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor)
+              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id)
             }
           })
           
@@ -274,7 +276,7 @@ export class ModalTarefaComponent implements OnInit {
       if(this.listAssociates != null) {
         let associates : Array<Pick<User, "id">> = new Array;
         this.listAssociates.forEach(associate => associates.push({"id":associate.id}))
-        this.service.patchAssociate(this.tarefa.id, associates);
+        this.service.patchAssociate(this.tarefa.id, associates,this.loggedUser.id);
       }
 
     } else if (this.tarefa.id == 0) {

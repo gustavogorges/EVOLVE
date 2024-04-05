@@ -55,20 +55,20 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
-  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>) {
-    return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
+  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>, userId:number) {
+    return (await axios.patch(this.URL+"task/property/associates/"+taskId+"/"+userId,associates)).data
   }
 
   async getAllCommentsOfTask(taskId:number) {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
 
-  async patchNewComment(taskId:number, newComment:Comment) {
-    return (await axios.patch(this.URL+"task/comments/patch/"+taskId,newComment)).data
+  async patchNewComment(taskId:number, newComment:Comment, userId:number) {
+    return (await axios.patch(this.URL+"task/comments/patch/"+taskId+"/"+userId,newComment)).data
   }
 
-  async deleteComment(taskId:number, commentId:number) {
-    return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId)).data
+  async deleteComment(taskId:number, commentId:number, userId:number) {
+    return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId+"/"+userId)).data
   }
 
   async updateStatusList(projetoId:number,novoStatus:Status) {
@@ -76,12 +76,12 @@ export class BackendEVOLVEService {
   }
  
 
-  async patchProperty(taskProjectProperty:Property, taskId:number) {
-    return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
+  async patchProperty(taskProjectProperty:Property, taskId:number, userId:number) {
+    return (await axios.patch(this.URL+"task/property/"+taskId+"/"+userId,taskProjectProperty )).data
   }
 
-  async putPropertyOption(newOption:Option) {
-    return (await axios.put(this.URL+"task/property/put/option",newOption)).data
+  async putPropertyOption(newOption:Option, userId:number) {
+    return (await axios.put(this.URL+"task/property/put/option/"+userId,newOption)).data
   }
 
   async patchPriority(priority:number,taskId:number) {
@@ -90,8 +90,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(propertyId:number, propertyValue:PropertyValue) {
-    return (await axios.put(this.URL+"task/property/put/"+propertyId,propertyValue)).data
+  async putPropertyValue(propertyId:number, propertyValue:PropertyValue, userId:number) {
+    return (await axios.put(this.URL+"task/property/put/"+propertyId+"/"+userId,propertyValue)).data
   }
 
   async getAllPriorities() {
