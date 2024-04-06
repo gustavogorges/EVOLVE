@@ -26,7 +26,7 @@
         <button
         *ngIf="disabledEmail"
 
-          class="px-7 font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+          class="px-7 font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white   rounded-md"
           (click)="editEmail()"
         >
           editar
@@ -109,9 +109,10 @@
               <div class="w-12 h-12 bg-dark-secondary rounded"></div>
             </div>
             <button
-              [disabled]="true"
-              class="px-7 h-min py-1 bg-primary dark:bg-dark-primary text-white font-titulo font-medium rounded-lg disabled: opacity-60"
-            >
+              [disabled]="defaultColors"
+              class="px-7 h-min py-1 bg-primary dark:bg-dark-primary text-white font-titulo font-medium rounded-lg disabled:opacity-60"
+              (click)="changeToDefault()"
+              >
               restaurar cores padrões
             </button>
           </div>
@@ -128,46 +129,48 @@
 
       
       <div class="flex flex-col gap-2">
+        <p class="font-titulo font-medium text-fontGray">Modo claro:</p>
 
         <div class="flex gap-2" >
     
-          <div class="w-12 h-12 bg-[#185e77] rounded" (click)="changeColor('#185e77')"  ></div>
-          <div class="w-12 h-12 bg-[#00AAF0] rounded"></div>
-          <div class="w-12 h-12 bg-[#E91818] rounded"></div>
-          <div class="w-12 h-12 bg-[#A20021] rounded"></div>
-          <div class="w-12 h-12 bg-[#008000] rounded"></div>
-          <div class="w-12 h-12 bg-[#2E8B57] rounded"></div>
+          <div class="w-12 h-12 bg-[#0047AB] rounded " (click)="changeColor('#0047AB')" [ngClass]="primaryColor == '#0047AB' ? 'selected' : ''|| secondaryColor == '#0047AB' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#00AAF0] rounded"  (click)="changeColor('#00AAF0')" [ngClass]="primaryColor == '#00AAF0' ? 'selected' : ''||secondaryColor == '#00AAF0' ? 'selected' : ''" ></div>
+          <div class="w-12 h-12 bg-[#E91818] rounded"  (click)="changeColor('#E91818')"  [ngClass]="primaryColor == '#E91818' ? 'selected' : ''||secondaryColor == '#E91818' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#A20021] rounded"  (click)="changeColor('#A20021')"  [ngClass]="primaryColor == '#A20021' ? 'selected' : ''||secondaryColor == '#A20021' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#3D9614] rounded"  (click)="changeColor('#3D9614')" [ngClass]="primaryColor == '#3D9614' ? 'selected' : ''||secondaryColor == '#3D9614' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#2E8B57] rounded"  (click)="changeColor('#2E8B57')" [ngClass]="primaryColor == '#2E8B57' ? 'selected' : ''||secondaryColor == '#2E8B57' ? 'selected' : ''"></div>
          
         </div>
         <div class="flex gap-2">
-          <div class="w-12 h-12 bg-[#FAA613] rounded"></div>
-          <div class="w-12 h-12 bg-[#F44708] rounded"></div>
-          <div class="w-12 h-12 bg-[#E01A4F] rounded"></div>
-          <div class="w-12 h-12 bg-[#E072A4] rounded" (click)="changeColor('#E072A4')" ></div>
-          <div class="w-12 h-12 bg-[#3B429F] rounded"></div>
-          <div class="w-12 h-12 bg-[#AA7DCE] rounded" (click)="changeColor('#AA7DCE')"></div>
+          <div class="w-12 h-12 bg-[#FAA613] rounded"  (click)="changeColor('#FAA613')"[ngClass]="primaryColor == '#FAA613' ? 'selected' : ''|| secondaryColor == '#FAA613' ? 'selected' : ''" ></div>
+          <div class="w-12 h-12 bg-[#F44708] rounded"  (click)="changeColor('#F44708')"[ngClass]="primaryColor == '#F44708' ? 'selected' : ''|| secondaryColor == '#F44708' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#E01A4F] rounded"  (click)="changeColor('#E01A4F')"[ngClass]="primaryColor == '#E01A4F' ? 'selected' : ''|| secondaryColor == '#E01A4F' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#E072A4] rounded"  (click)="changeColor('#E072A4')"[ngClass]="primaryColor == '#E072A4' ? 'selected' : ''|| secondaryColor == '#E072A4' ? 'selected' : ''" ></div>
+          <div class="w-12 h-12 bg-[#3B429F] rounded"  (click)="changeColor('#3B429F')"[ngClass]="primaryColor == '#3B429F' ? 'selected' : ''|| secondaryColor == '#3B429F' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#AA7DCE] rounded"  (click)="changeColor('#AA7DCE')"[ngClass]="primaryColor == '#AA7DCE' ? 'selected' : ''|| secondaryColor == '#AA7DCE' ? 'selected' : ''" ></div>
         </div>
 
       </div>
       <div class="flex flex-col gap-2">
+        <p class="font-titulo font-medium text-fontGray">Modo escuro:</p>
 
         <div class="flex gap-2" >
     
-          <div class="w-12 h-12 bg-[#4E97FD] rounded" (click)="changeDarkColor('#185e77')"  ></div>
-          <div class="w-12 h-12 bg-[#67F6F6] rounded"></div>
-          <div class="w-12 h-12 bg-[#FF4747] rounded"></div>
-          <div class="w-12 h-12 bg-[#CE2F4F] rounded"></div>
-          <div class="w-12 h-12 bg-[#68B245] rounded"></div>
-          <div class="w-12 h-12 bg-[#35C979] rounded"></div>
+          <div class="w-12 h-12 bg-[#4E97FD] rounded"  (click)="changeDarkColor('#4E97FD')" [ngClass]="primaryColor == '#4E97FD' ? 'selected' : ''|| secondaryColor == '#4E97FD' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#67F6F6] rounded"  (click)="changeDarkColor('#67F6F6')"[ngClass]="primaryColor == '#67F6F6' ? 'selected' : ''|| secondaryColor == '#67F6F6' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#FF4747] rounded"  (click)="changeDarkColor('#FF4747')"[ngClass]="primaryColor == '#FF4747' ? 'selected' : ''|| secondaryColor == '#FF4747' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#CE2F4F] rounded"  (click)="changeDarkColor('#CE2F4F')"[ngClass]="primaryColor == '#CE2F4F' ? 'selected' : ''|| secondaryColor == '#CE2F4F' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#68B245] rounded"  (click)="changeDarkColor('#68B245')"[ngClass]="primaryColor == '#68B245' ? 'selected' : ''|| secondaryColor == '#68B245' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#35C979] rounded"  (click)="changeDarkColor('#35C979')"[ngClass]="primaryColor == '#35C979' ? 'selected' : ''|| secondaryColor == '#35C979' ? 'selected' : ''"></div>
          
         </div>
         <div class="flex gap-2">
-          <div class="w-12 h-12 bg-[#FFC052] rounded"></div>
-          <div class="w-12 h-12 bg-[#FC6B2E] rounded"></div>
-          <div class="w-12 h-12 bg-[#FF5C88] rounded"></div>
-          <div class="w-12 h-12 bg-[#FF6CDF] rounded" (click)="changeDarkColor('#E072A4')" ></div>
-          <div class="w-12 h-12 bg-[#7560F9] rounded"></div>
-          <div class="w-12 h-12 bg-[#CD8EFF] rounded" (click)="changeDarkColor('#AA7DCE')"></div>
+          <div class="w-12 h-12 bg-[#FFC052] rounded" (click)="changeDarkColor('#FFC052')" [ngClass]="primaryColor == '#FFC052' ? 'selected' : ''|| secondaryColor == '#FFC052' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#FC6B2E] rounded" (click)="changeDarkColor('#FC6B2E')" [ngClass]="primaryColor == '#FC6B2E' ? 'selected' : ''|| secondaryColor == '#FC6B2E' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#FF5C88] rounded"(click)="changeDarkColor('#FF5C88')" [ngClass]="primaryColor == '#FF5C88' ? 'selected' : ''|| secondaryColor == '#FF5C88' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#FF6CDF] rounded" (click)="changeDarkColor('#FF6CDF')" [ngClass]="primaryColor == '#FF6CDF' ? 'selected' : ''|| secondaryColor == '#FF6CDF' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#7560F9] rounded"(click)="changeDarkColor('#7560F9')" [ngClass]="primaryColor == '#7560F9' ? 'selected' : ''|| secondaryColor == '#7560F9' ? 'selected' : ''"></div>
+          <div class="w-12 h-12 bg-[#CD8EFF] rounded" (click)="changeDarkColor('#CD8EFF')"[ngClass]="primaryColor == '#CD8EFF' ? 'selected' : ''|| secondaryColor == '#CD8EFF' ? 'selected' : ''"></div>
         </div>
 
       </div>

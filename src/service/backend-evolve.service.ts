@@ -118,6 +118,26 @@ export class BackendEVOLVEService {
   async patchUserPassword(userId:number, password:string):Promise<User>{
     return (await axios.patch(this.URL+"user"+"/password/"+userId+"/"+password )).data
   }
+  async patchUserPrimaryColor(userId:number, primaryColor:string):Promise<User>{
+    let formsData = new FormData()
+    formsData.append("primaryColor",primaryColor)    
+    return (await axios.patch(this.URL+"user"+"/primaryColor/"+userId,formsData )).data
+  }
+  async patchUserSecondaryColor(userId:number, secondaryColor:string):Promise<User>{
+    let formsData = new FormData()
+    formsData.append("secondaryColor",secondaryColor)    
+    return (await axios.patch(this.URL+"user"+"/secondaryColor/"+userId,formsData )).data
+  }
+  async patchUserPrimaryDarkColor(userId:number, primaryDarkColor:string):Promise<User>{
+    let formsData = new FormData()
+    formsData.append("primaryColor",primaryDarkColor)    
+    return (await axios.patch(this.URL+"user"+"/primaryDarkColor/"+userId,formsData )).data
+  }
+  async patchUserSecondaryDarkColor(userId:number, secondaryDarkColor:string):Promise<User>{
+    let formsData = new FormData()
+    formsData.append("secondaryColor",secondaryDarkColor)    
+    return (await axios.patch(this.URL+"user"+"/secondaryDarkColor/"+userId,formsData )).data
+  }
 
   async postUserChat (chat:UserChat){
     (await axios.post(this.URL+"userChat", chat)).data 

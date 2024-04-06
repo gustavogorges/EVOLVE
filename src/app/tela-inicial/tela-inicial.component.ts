@@ -6,6 +6,8 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { Project } from 'src/model/project';
+import { ColorService } from 'src/service/colorService';
+import { LogarithmicScale } from 'chart.js';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -15,7 +17,6 @@ import { Project } from 'src/model/project';
 export class TelaInicialComponent implements OnInit {
   @HostListener('click', ['$event'])
   clicouFora(event: any) {
-    console.log('TESTE 2');
     const element = event.target
       .getAttributeNames()
       .find((name: string | string[]) => name.includes('c60'));
@@ -39,6 +40,7 @@ export class TelaInicialComponent implements OnInit {
     private service: BackendEVOLVEService,
     private location: Location,
     private cookieService: CookiesService, 
+    private colorService : ColorService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -66,7 +68,7 @@ export class TelaInicialComponent implements OnInit {
    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
    
    this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
-
+    this.userColors()
  
    
 
@@ -93,6 +95,24 @@ export class TelaInicialComponent implements OnInit {
       
 
     
+
+  }
+  userColors(){
+    console.log(this.loggedUser);
+    
+    if(this.loggedUser.primaryColor || this.loggedUser.secondaryColor){
+      this.colorService.setPrimaryColor(this.loggedUser.primaryColor)
+      this.colorService.setSecondaryColor(this.loggedUser.secondaryColor)
+      this.colorService.setPrimaryDarkColor(this.loggedUser.primaryDarkColor)
+      this.colorService.setSecondaryDarkColor(this.loggedUser.secondaryDarkColor)
+    }else{
+
+      this.colorService.setPrimaryDarkColor("#67BFE0")
+      this.colorService.setSecondaryDarkColor("#86C19F")
+      this.colorService.setPrimaryColor("#185E77")
+      this.colorService.setSecondaryColor("#4C956C")
+    }
+   
   }
   tarefaSelecionada: Task = new Task();
   openTask(tarefa: Task): void {
@@ -116,4 +136,5 @@ export class TelaInicialComponent implements OnInit {
   goToPerfilPage(){
     
   }
+  
 }
