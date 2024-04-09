@@ -1,5 +1,5 @@
 export class PriorityRecord {
+    value!:number
     name !: string;
     backgroundColor !: string;
-    value: number =0;
 }
