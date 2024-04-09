@@ -3,9 +3,9 @@
     <div class="project" [ngClass]="projectOpen ? 'rounded-s-xl' : 'rounded-xl'" >
         <div class="project-image">
             <div class="image">
-                
+                <img *ngIf="!verifyImgproject() && preImage" [src]="preImage" alt="">
+                <img *ngIf="!verifyImgproject() && !preImage && projeto.image" [src]="projeto.image.data" alt="">
             </div>
-            <img *ngIf="!verifyImgproject()" src="{{projeto.image.data}}" alt="">
             <label [ngClass]="!projeto.editOn ? 'invisible':'visible'" class=" border-primary dark:border-secondary bottom-3 right-10 rounded-full p-2 bg-white dark:bg-back-grey w-12 h-12 absolute cursor-pointer">
                 <div class="flex items-center justify-center w-full h-full">
                     <i class="pi pi-camera cursor-pointer"></i>
@@ -13,7 +13,7 @@
                 <input
                     [disabled]="!projeto.editOn"
                     class="invisible w-full  cursor-pointer h-full absolute top-0 left-0"
-                    [(ngModel)]="projeto.image"
+                    (change)="setImageProject($event)"
                     type="file"
                 />
             </label>
@@ -22,7 +22,7 @@
         <div class="project-desc"><textarea [disabled]="!projeto.editOn" name="" id="" cols="30" rows="10" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
             <p>Criador:</p>
-            <div *ngIf="verifyImg(projeto.creator)" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
+            <div *ngIf="verifyImg(projeto.creator) && projeto.creator" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
             <div class="overflow-hidden object-center" *ngIf="!verifyImg(projeto.creator)">
                 <img class="fotoImagem" class="" *ngIf="!verifyImg(projeto.creator)" src="{{projeto.creator.image.data}}" alt="">
             </div>
@@ -59,7 +59,7 @@
             <span><</span>
             <div class="users">
                 <div class="users-spam" *ngFor="let p of projeto.members">
-                    <div *ngIf="verifyImg(p)" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
+                    <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
                     <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
                         <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
                     </div>

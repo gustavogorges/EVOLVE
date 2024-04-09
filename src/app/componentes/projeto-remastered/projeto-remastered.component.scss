@@ -12,7 +12,11 @@
             grid-template-rows: 50% 50%;
 
             .image{
-                @apply w-[7vw] h-[7vw] rounded-full bg-yellow-400 col-span-full row-span-full;
+                @apply w-[7vw] h-[7vw] rounded-full bg-yellow-400 col-span-full row-span-full overflow-hidden;
+
+                img{
+                    @apply h-full w-full object-cover;
+                }
             }
 
             label{

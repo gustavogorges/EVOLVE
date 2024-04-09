@@ -16,6 +16,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   id!: number
   projects !: Project[]
   resetProject: Boolean = false
+  formData!:FormData
 
   ngOnInit(): void {
     this.getProjects()
@@ -33,6 +34,8 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.projects = await this.service.getAllSomething('project') || []
     
     this.projects = this.projects.reverse()
+    console.log(this.projects);
+    
   }
 
   openProject(p:any){
@@ -85,7 +88,24 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       })
     });
     postProject.members = listUsers
+    console.log(postProject.members);
+    
+    postProject.image = null
     p = await this.service.putProjeto(postProject)
+    if(this.formData!=null){
+      p = await this.createImageProject(p)
+    }
+    postProject.image = p.image
+    postProject.members = p.members
+    console.clear()
+  }
+
+  async createImageProject(p:Project){
+    return await this.service.patchImage(p.id, this.formData)
+  }
+
+  async saveImage(event:any){
+    this.formData = event
   }
 
   async goToCreateProject(){

@@ -1,128 +1,316 @@
-.titulo{
-    @apply w-full px-[12%] h-[12%] flex items-center;
-
-    p{
-        @apply text-3xl text-primary dark:text-dark-primary font-titulo font-semibold
+.xl-maior{
+    .titulo{
+        @apply w-full px-[12%] h-[12%] flex items-center;
+    
+        p{
+            @apply text-3xl text-primary dark:text-dark-primary font-titulo font-semibold
+        }
     }
-}
-
-.separa-component{
-    @apply grid grid-cols-4 justify-center grid-rows-[7] gap-4;
-    grid-template-columns: 5% 15% 90% 5%;
-    grid-template-rows: 5vh 15vh 12vh 23vh 7vh 3vh 3vh;
-
-    .imagem-projeto{
-        @apply col-start-2 col-end-3 row-start-1 row-end-2;
     
-        .div-foto-centraliza{
-            
-            @apply w-full h-full;
+    .separa-component{
+        @apply grid grid-cols-4 justify-center grid-rows-[7] gap-6;
+        grid-template-columns: 5% 15% 90% 5%;
+        grid-template-rows: 5vh 15vh 12vh 23vh 7vh 3vh;
     
-            .foto{
-                @apply h-[7rem] w-[7rem] rounded-full relative bg-yellow-400;
-
-                .lapis-edit{
-                    @apply absolute bg-primaryGray h-7 w-7 flex justify-center items-center rounded-full bottom-2 right-1 duration-200 dark:bg-dark-secundary-gray;
+        .project-image{
+            @apply col-start-1 col-end-2 row-start-1 mx-[100%] row-end-2 w-fit h-fit items-start relative justify-items-center;
+            grid-template-columns: 40% 40% 20%;
+            grid-template-rows: 50% 50%;
+    
+            .image{
+                @apply w-[7vw] h-[7vw] rounded-full col-span-full row-span-full overflow-hidden;
+    
+                img{
+                    @apply h-full w-full object-cover;
                 }
             }
-        } }
-
-    .inputs{
-        @apply col-start-3 col-end-4;
-
-        div{
+    
+            .input-image{
+                @apply w-[2vw] h-[2vw] absolute right-0 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;
+    
+                i{
+                    @apply text-xl text-primary dark:text-dark-primary
+                }
+            }
+    
+            .alterateColor{
+                @apply w-[2vw] h-[2vw] absolute rounded-xl shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;;
+            }
+        }
+    
+        .inputs{
+            @apply col-start-3 col-end-4;
+    
             div{
-                @apply flex flex-col;
-            }
-
-            .nome-projeto{
-                @apply w-[70%] ;
-                
-                .nome-input{
-                    @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-10 dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
+                div{
+                    @apply flex flex-col;
                 }
-            }
-
-            .data-projeto{
-                @apply w-[22%];
-                
-                .data-input{
-                    @apply w-full rounded-lg shadow-md outline-none text-center dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
-                }
-            }
-        }
-    }
-
-    .descricao{
-        @apply col-start-3 col-end-4 row-start-2 pt-4;
-
-        textarea{
-            @apply w-full p-3 resize-none h-full outline-none rounded-lg shadow-md dark:shadow-gray-700 dark:bg-dark-primary-gray dark:text-white
-        }
-    }
-
-    .membro-components{
-        @apply col-start-2 col-end-4 row-start-3 flex justify-between items-end;
-
-        .membro-equipe{
-            @apply  w-[77%];
     
-            .membro-input{
-                @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-8 dark:bg-dark-primary-gray dark:text-white dark:shadow-gray-700
+                .nome-projeto{
+                    @apply w-[70%] ;
+                    
+                    .nome-input{
+                        @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-10 dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
+                    }
+                }
+    
+                .data-projeto{
+                    @apply w-[22%];
+                    
+                    .data-input{
+                        @apply w-full rounded-lg shadow-md outline-none text-center dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
+                    }
+                }
             }
         }
-
-        .botao-pesquisar{
-            @apply w-[20%] h-10 bg-secondary dark:bg-dark-secundary-green text-white rounded-lg flex justify-center gap-3 items-center;
-
-            p{
-                @apply text-lg dark:text-gray-900 font-semibold
+    
+        .descricao{
+            @apply col-start-3 col-end-4 row-start-2 pt-4;
+    
+            textarea{
+                @apply w-full p-3 resize-none h-full outline-none rounded-lg shadow-md dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
             }
         }
-    }
-
-    .membros{
-        @apply col-start-2 col-end-4 row-start-4 overflow-auto
-    }
-
-    .status-priority{
-        @apply col-start-2 col-end-4 row-start-5 flex justify-between items-center;
-
-        button{
-            @apply h-[4vh] w-1/2 p-2 rounded-lg text-white dark:text-gray-900 text-lg font-semibold flex items-center justify-center
-        }
-
-        .add-status{
-            @apply bg-primary whitespace-nowrap dark:bg-dark-primary
-        }
-
+    
+        .membro-components{
+            @apply col-start-2 col-end-4 row-start-3 flex justify-between items-end;
+    
+            .membro-equipe{
+                @apply  w-[77%];
         
-
+                .membro-input{
+                    @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-8 dark:bg-dark-primary-gray dark:text-white dark:shadow-dark-primary-black
+                }
+            }
+    
+            .botao-pesquisar{
+                @apply w-[20%] h-10 bg-secondary dark:bg-dark-secundary-green text-white rounded-lg flex justify-center gap-3 items-center;
+    
+                p{
+                    @apply text-lg  font-semibold;
+                }
+            }
+        }
+    
+        .membros{
+            @apply col-start-2 col-end-4 row-start-4 overflow-auto
+        }
+    
+        .status-priority{
+            @apply col-start-2 col-end-4 row-start-5 flex justify-between items-center;
+    
+            button{
+                @apply h-[4vh] w-1/2 p-2 rounded-lg text-white dark:text-gray-900 text-lg font-semibold flex items-center justify-center
+            }
+    
+            .add-status{
+                @apply bg-primary whitespace-nowrap dark:bg-dark-primary
+            }
+    
+            
+    
+        }
+    
+        .lembrete{
+            @apply row-start-5 flex justify-center w-full col-start-4 col-end-5 items-start text-gray-500 dark:text-gray-400
+        }
+    
+    
+    
+        .botoes{
+            @apply col-span-full row-start-6 flex justify-between items-center;
+    
+            button{
+                @apply h-[5vh] w-[17%] rounded-lg text-white dark:text-gray-900 text-xl font-semibold 
+            }
+    
+            .cancelar{
+                @apply bg-primary dark:bg-dark-primary
+            }
+    
+            .salvar{
+                @apply bg-secondary dark:bg-dark-secundary-green
+            }
+        }
     }
-
-    .lembrete{
-        @apply row-start-5 flex justify-center w-full col-start-4 col-end-5 items-start text-gray-500 dark:text-gray-400
-    }
-
-
-
-    .botoes{
-        @apply col-span-full row-start-7 flex justify-between items-center;
-
-        button{
-            @apply h-[5vh] w-[17%] rounded-lg text-white dark:text-gray-900 text-xl font-semibold 
-        }
-
-        .cancelar{
-            @apply bg-primary dark:bg-dark-primary
-        }
-
-        .salvar{
-            @apply bg-secondary dark:bg-dark-secundary-green
-        }
+    
+    .label{
+        @apply px-2 text-lg font-titulo font-semibold text-primary dark:text-dark-primary
     }
 }
 
-.label{
-    @apply px-2 text-lg font-titulo font-semibold text-primary dark:text-dark-primary
+
+
+
+
+//######################################################################################################################################################
+//    SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM 
+//######################################################################################################################################################
+//######################################################################################################################################################
+//    SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM 
+//######################################################################################################################################################
+//######################################################################################################################################################
+//    SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM 
+//######################################################################################################################################################
+//######################################################################################################################################################
+//    SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM SM 
+//######################################################################################################################################################
+
+
+
+
+.sm{
+    @apply px-5 py-2;
+
+    .titulo{
+        @apply w-full xl:px-[12%] flex items-center pt-20 xl:pt-10;
+    
+        p{
+            @apply text-3xl text-primary dark:text-dark-primary font-titulo font-semibold
+        }
+    }
+    
+    .separa-component{
+        @apply xl:grid grid-cols-4 justify-center grid-rows-[7] gap-6;
+        grid-template-columns: 5% 15% 90% 5%;
+        grid-template-rows: 5vh 15vh 12vh 23vh 7vh 3vh;
+    
+        .project-image{
+            @apply col-start-1 col-end-2 row-start-1 xl:mx-[100%] row-end-2 xl:w-fit h-fit relative flex justify-center mb-14 pt-5;
+            grid-template-columns: 40% 40% 20%;
+            grid-template-rows: 50% 50%;
+    
+            .image{
+                @apply w-[30vw] h-[30vw] xl:w-[7vw] xl:h-[7vw] rounded-full col-span-full row-span-full overflow-hidden;
+    
+                img{
+                    @apply h-full w-full object-cover;
+                }
+            }
+    
+            .input-image{
+                @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute sm:right-0 -bottom-12 right-[30vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;
+    
+                i{
+                    @apply text-xl text-primary dark:text-dark-primary
+                }
+            }
+    
+            .alterateColor{
+                @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute -bottom-12 rounded-xl sm:left-0 left-[30vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;;
+            }
+        }
+    
+        .inputs{
+            @apply col-start-3 col-end-4;
+    
+            div{
+                div{
+                    @apply xl:flex flex-col;
+                }
+    
+                .nome-projeto{
+                    @apply xl:w-[70%] flex flex-col mb-5;
+                    
+                    .nome-input{
+                        @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-10 dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
+                    }
+                }
+    
+                .data-projeto{
+                    @apply xl:w-[22%];
+                    
+                    .data-input{
+                        @apply w-full rounded-lg shadow-md outline-none text-center dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
+                    }
+                }
+            }
+        }
+    
+        .descricao{
+            @apply col-start-3 col-end-4 row-start-2 pt-4 mb-3 xl:mb-0;
+    
+            textarea{
+                @apply w-full p-3 resize-none h-[10vh] xl:h-full outline-none rounded-lg shadow-md dark:shadow-dark-primary-black dark:bg-dark-primary-gray dark:text-white
+            }
+        }
+    
+        .membro-components{
+            @apply col-start-2 col-end-4 row-start-3 flex justify-between items-end;
+    
+            .membro-equipe{
+                @apply  w-full ;
+        
+                .membro-input{
+                    @apply w-full rounded-lg shadow-md outline-none p-2 px-3 pr-8 dark:bg-dark-primary-gray dark:text-white dark:shadow-dark-primary-black
+                }
+            }
+    
+            .botao-pesquisar{
+                @apply xl:w-[20%] h-10 bg-secondary dark:bg-dark-secundary-green text-white rounded-lg hidden xl:flex justify-center gap-3 items-center;
+    
+                p{
+                    @apply text-lg  font-semibold;
+                }
+            }
+        }
+    
+        .membros{
+            @apply col-start-2 col-end-4 row-start-4 overflow-auto h-[25vh]
+        }
+    
+        .status-priority{
+            @apply col-start-2 col-end-4 row-start-5 flex flex-col justify-center xl:flex-row xl:justify-between items-center mb-10 xl:mb-0;
+    
+            button{
+                @apply h-[4vh] w-1/2 p-2 rounded-lg text-white dark:text-gray-900 text-lg font-semibold flex items-center justify-center
+            }
+    
+            .add-status{
+                @apply bg-primary whitespace-nowrap dark:bg-dark-primary
+            }
+    
+            
+    
+        }
+    
+        .lembrete{
+            @apply row-start-5 flex justify-center w-full col-start-4 col-end-5 items-start text-gray-500 dark:text-gray-400
+        }
+    
+    
+    
+        .botoes{
+            @apply col-span-full row-start-6 flex justify-between items-center;
+    
+            button{
+                @apply h-[5vh] xl:w-[17%] w-1/4 rounded-lg text-white dark:text-gray-900 text-xl font-semibold 
+            }
+    
+            .cancelar{
+                @apply bg-primary dark:bg-dark-primary
+            }
+    
+            .salvar{
+                @apply bg-secondary dark:bg-dark-secundary-green
+            }
+        }
+    }
+    
+    .label{
+        @apply px-2 text-sm lg:text-lg xl:text-lg font-titulo font-semibold text-primary dark:text-dark-primary
+    }
 }
+
+// :host {
+//     ::ng-deep .prime-data {
+//         background-color: #26A3D1;
+//         background-image:none;
+//         border:none;
+//         color:white;
+
+//         .ui-slider-range {
+//             background: red;
+//         }
+//     }    
+// }

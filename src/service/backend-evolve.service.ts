@@ -152,4 +152,8 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+path+id)).data
   }
 
+  async patchImage(id:number, image:any){
+    return (await (axios.patch(this.URL+"project/"+id+"/setImage", image))).data;
+  }
+
 }

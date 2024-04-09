@@ -5,6 +5,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -12,13 +13,17 @@ import { Status } from 'src/model/status';
   styleUrls: ['./tela-criar-projeto.component.scss']
 })
 export class TelaCriarProjetoComponent implements OnInit {
+  imagemBlob: any;
+  preImage: any;
+  formData: any;
 
-  constructor(private service : BackendEVOLVEService, private route: Router){}
+  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer){}
   
   async ngOnInit(){
     this.projeto = new Project
     this.usuarios = await this.service.getAllSomething('user') || []
     this.getStatusList()
+    this.randomColor()
   }
   
   messages: Message[] | undefined;
@@ -28,6 +33,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   date !: Date
   searchTerm : string = ''
   priorityBol : boolean = false
+  backGroundColorProject : string = ''
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
@@ -111,11 +117,34 @@ export class TelaCriarProjetoComponent implements OnInit {
       postProject.creator = {
         "id":1
       }
-      console.log(postProject.creator);
+      postProject = await this.service.postProjeto(postProject);
+      if(this.formData != null){
+        console.log(await this.service.patchImage(postProject.id, this.formData));
+      }
       
-      await this.service.postProjeto(postProject);
       this.route.navigate(['/tela-projeto'])
     }
+  }
+
+  async setImageProject(event:any){
+    if(event.target.files && event.target.files[0]){
+      if(event.target.files[0].type === "image/jpeg" 
+      || event.target.files[0].type === "image/webp" 
+      || event.target.files[0].type === "image/png"){
+        this.imagemBlob = event.target.files[0]
+        const formData = new FormData();
+        formData.append('image', event.target.files[0]);
+        this.formData = formData;
+        const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
+
+        const imageUrl = URL.createObjectURL(blob);
+        this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      }
+    }
+  }
+
+  randomColor(){
+    this.backGroundColorProject = '#' + Math.floor(Math.random()*16777215).toString(16);
   }
 
    async cancelar(){
@@ -131,5 +160,14 @@ export class TelaCriarProjetoComponent implements OnInit {
    }
 
    statusVisible = false
+
+   verifyDarkTheme(){
+    let sla = localStorage.getItem('theme')
+    if(sla === 'dark'){
+      return true
+    }else{
+      return false
+    }
+   }
 
 }
