@@ -1,16 +1,38 @@
 .main {
-    @apply w-full h-full flex justify-center
+    @apply w-full max-h-[80%] flex justify-center overflow-y-auto border-2 rounded-xl 
 }
 
 .card-box {
-    @apply w-full h-min  border-2 rounded-xl
+    @apply w-full h-min
 }
 
 .card {
-    @apply w-full h-full grid;
+    @apply w-full h-fit grid;
     grid-template-columns: 15% 85%;
 }
 
 .left {
     @apply w-full border-r-2
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+
+    
+    /* largura do scroll */
+   
+  }
+  
+  /* Define a cor do fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    @apply rounded-md
+  }
+  
+  /* Define a cor do thumb (a alça do scroll) */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background: #E5E5E5 
+    
+  }

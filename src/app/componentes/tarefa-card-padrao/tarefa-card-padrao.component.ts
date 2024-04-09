@@ -2,7 +2,9 @@
 import { Project } from 'src/model/project';
 import { Subtask } from 'src/model/subtask';
   import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
   import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
   @Component({
     selector: 'app-tarefa-card-padrao',
@@ -23,15 +25,19 @@ import { Subtask } from 'src/model/subtask';
     teste !:string;
 
   data : Date = new Date
+  loggedUser : User = new User;
 
   
 
-    constructor(private service : BackendEVOLVEService ) {
+    constructor(private service : BackendEVOLVEService ,
+      private cookies_service:CookiesService) {
   
     }
 
     async ngOnInit(): Promise<void> {
   
+      this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+
       this.trocaCor()
       if(this.tarefaAtual.favorited){
         this.caminhoEstrela = "assets/estrelaMarcada.svg"
@@ -57,7 +63,7 @@ import { Subtask } from 'src/model/subtask';
       this.tarefaAtual.project = {
         id : this.project.id
       }
-       await this.service.putTarefa(this.tarefaAtual)
+       await this.service.putTarefa(this.tarefaAtual, this.loggedUser.id)
       this.newItem.emit(true);
 
 
@@ -89,7 +95,7 @@ import { Subtask } from 'src/model/subtask';
         }
       })
 
-      await this.service.putTarefa(this.tarefaAtual); 
+      await this.service.putTarefa(this.tarefaAtual, this.loggedUser.id); 
       
       }
       

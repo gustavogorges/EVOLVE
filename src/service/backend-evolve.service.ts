@@ -90,8 +90,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(propertyId:number, propertyValue:PropertyValue, userId:number) {
-    return (await axios.put(this.URL+"task/property/put/"+propertyId+"/"+userId,propertyValue)).data
+  async putPropertyValue(propertyId:number, propertyValue:PropertyValue, userId:number, taskId:number) {
+    return (await axios.put(this.URL+"task/property/put/"+propertyId+"/"+userId+"/"+taskId,propertyValue)).data
   }
 
   async getAllPriorities() {
@@ -102,8 +102,8 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL+"task", tarefa)).data 
   }
 
-  async putTarefa (tarefa:Task){
-    return (await axios.put(this.URL+"task", tarefa)).data
+  async putTarefa (tarefa:Task, userId:number){
+    return (await axios.put(this.URL+"task/"+userId, tarefa)).data
   }
 
   async postProjeto (projeto:Project){

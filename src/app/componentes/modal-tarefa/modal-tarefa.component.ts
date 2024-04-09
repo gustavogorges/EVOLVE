@@ -259,14 +259,15 @@ export class ModalTarefaComponent implements OnInit {
 
   async salvarTarefa() {
   
-    if (this.tarefa.id != 0) {
-      this.service.putTarefa(this.tarefa);
+    if (this.tarefa.id != 0 && this.tarefa.id != null) {
+      this.service.putTarefa(this.tarefa,this.loggedUser.id);
 
       this.propertiesStack.forEach(propertieStackFor => {
         if(propertieStackFor.name != '' ) {
           this.propertiesValuesStack.forEach(propertiesValueStackFor => {
             if(propertiesValueStackFor.property == propertieStackFor) {
-              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id)
+              console.log("ENTROU NO PUT PROPERTY VALUE");
+              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id,this.tarefa.id)
             }
           })
           
@@ -281,11 +282,8 @@ export class ModalTarefaComponent implements OnInit {
 
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
-      this.tarefa.creator.id = 1; 
+      this.tarefa.creator.id = this.loggedUser.id; 
       this.service.postTarefa(this.tarefa);
-      //if(this.propertyStack != null ) {
-      //  this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
-      //}
     }
 
     if (this.booleanCalendarioFinalDate == true) {

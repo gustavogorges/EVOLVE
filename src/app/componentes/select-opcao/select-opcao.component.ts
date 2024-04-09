@@ -42,7 +42,7 @@ export class SelectOpcaoComponent implements OnInit {
     if(this.property.propertyType.toString() == "UniSelectValue") {
       this.property.currentOptions = [];
       this.property.currentOptions.push(option);
-      this.newItem.emit();
+      this.newItem.emit(true);
     }
   }
 
