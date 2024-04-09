@@ -8,6 +8,7 @@ import { Property } from 'src/model/propriedade/property';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class ModalTarefaComponent implements OnInit {
   booleanDescription: boolean = false;
   booleanFoco: boolean = false;
   booleanSelectPrioridade : boolean = false;
+  booleanSelectAssociates : boolean = false;
   booleanAddPropriedade: boolean = false;
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
@@ -34,7 +36,10 @@ export class ModalTarefaComponent implements OnInit {
   booleanPlayPause : boolean = false; 
 
   propertyStack : Property = new Property;
+  propertiesStack : Array<Property> = new Array;
+
   propertyValueStack : PropertyValue = new PropertyValue;
+  propertiesValuesStack : Array<PropertyValue> = new Array;
 
   propertiesList : Array<Property> = new Array();
 
@@ -99,8 +104,6 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanAddPropriedade = false;
   }
 
-
-  
   constructor(private service: BackendEVOLVEService) {}
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
@@ -112,14 +115,20 @@ export class ModalTarefaComponent implements OnInit {
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
+  listAssociates !: Array<any>;
 
   async ngOnInit(): Promise<void> {
+    console.log(this.projeto);
+    
+    this.listAssociates = this.tarefa.associates;
+
+    console.log(this.listAssociates);
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
 
     // this.verificaTamanhoString();
-    if (this.tarefa.id == 0) {      
+    if (this.tarefa.name == '') {      
       this.booleanEdit = true;
       this.booleanCalendarioFinalDate = true;
       this.tarefa = this.tarefaNova;
@@ -137,6 +146,29 @@ export class ModalTarefaComponent implements OnInit {
     if(this.booleanEdit == false) {
       this.edit();
     }
+  }
+
+  listAssociatesVerify() : boolean {
+    if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
+      if(this.booleanSelectAssociates == false) {
+        console.log("ta chegando nesse if errado!");
+        
+        return true;
+      }
+    }
+    return false;
+  }
+
+  openSelectAssociates() : void {
+    this.booleanSelectAssociates = true;
+    if(this.booleanEdit == false) {
+      this.edit();
+    }
+  }
+
+  updateAssociatesList(arrayForce : Array<User>) : void {
+    this.listAssociates = arrayForce;
+    this.booleanSelectAssociates = false;
   }
 
 
@@ -227,8 +259,23 @@ export class ModalTarefaComponent implements OnInit {
   
     if (this.tarefa.id != 0) {
       this.service.putTarefa(this.tarefa);
-      if(this.propertyStack != null ) {
-        this.service.putPropertyValue(this.propertyStack.id,this.propertyValueStack)
+
+      this.propertiesStack.forEach(propertieStackFor => {
+        if(propertieStackFor.name != '' ) {
+          this.propertiesValuesStack.forEach(propertiesValueStackFor => {
+            if(propertiesValueStackFor.property == propertieStackFor) {
+              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor)
+            }
+          })
+          
+        }
+      })
+      
+      if(this.listAssociates != null) {
+        let associates : Array<Pick<User, "id">> = new Array;
+        this.listAssociates.forEach(associate => associates.push({"id":associate.id}))
+        console.log(associates);  
+        this.service.patchAssociate(this.tarefa.id, associates);
       }
 
     } else if (this.tarefa.id == 0) {
@@ -254,10 +301,12 @@ export class ModalTarefaComponent implements OnInit {
 
   setPropertyValue(property:Property) {
     this.propertyStack = property;
+    this.propertiesStack.push(this.propertyStack);
   }
 
   setPropertyValue2(propertyValue:PropertyValue) {
-    this.propertyValueStack= propertyValue;
+    this.propertyValueStack = propertyValue;
+    this.propertiesValuesStack.push(this.propertyValueStack);
   }
 
   startFocus() {

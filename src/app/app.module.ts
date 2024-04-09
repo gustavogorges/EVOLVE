@@ -95,6 +95,11 @@ registerLocaleData(localePT);
 import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
 import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
 
+import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
+import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
+import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+
+
 
 
 
@@ -161,7 +166,10 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
     WeekCalendarComponent,
     TasksWeekComponent,
     PropriedadeTarefaComponent,
-    SelectPrioridadeComponent
+    SelectPrioridadeComponent,
+    SelectOpcaoComponent,
+    TelaPerfilComponent,
+    SelectAssociatesComponent
 
   ],
   

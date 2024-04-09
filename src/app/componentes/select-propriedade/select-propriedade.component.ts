@@ -138,10 +138,12 @@ export class SelectPropriedadeComponent implements OnInit {
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'seleção múltipla') {
         this.newPropertie.propertyType = PropertyType.MultiSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }  else if(this.optionType == 'número double') {
@@ -155,7 +157,7 @@ export class SelectPropriedadeComponent implements OnInit {
       }  else if(this.optionType == 'associados') {
         //Há de ser implementado ainda no enum, ou de algum outra forma
         //this.newPropertie.propertyType = PropertyType;
-        this.tarefa.properties.push(this.newPropertie);
+        this.tarefa.properties.push(this.newPropertie); 
         this.service.patchProperty(this.newPropertie,this.tarefa.id);
       }
     this.newItemEvent.emit()  

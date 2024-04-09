@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class SelectCustomComponent implements OnInit {
   @Input()
   projeto !: Project 
 
-  
+  ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
+
 
   @Output() newItem = new EventEmitter<any>();
 
@@ -28,8 +30,6 @@ export class SelectCustomComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    console.log(this.listOptions)
-    console.log(this.listIcons)
     this.projeto = await this.service.getOne("project",this.projeto.id)
   }
 
@@ -38,11 +38,28 @@ export class SelectCustomComponent implements OnInit {
     this.listIcons=[]
 
     this.newItem.emit(option);
-    console.log(option)
     if(option.name=="Status"){
       this.projeto.statusList.map((status :Status)=>{
-        console.log(status.name)
         this.listOptions.push(status)
+       })
+  
+      
+
+     }
+     if(option.name=="Associado"){
+      this.projeto.members.map((user :User)=>{
+        this.listOptions.push(user)
+       })
+  
+      
+
+     }
+     if(option.name=="Prioridade"){
+      this.ordemPrioridades.map((s)=>{
+        console.log(s)
+        this.listOptions.push(s)
+        console.log(this.listOptions);
+        
        })
   
       

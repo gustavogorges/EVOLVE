@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { LogarithmicScale } from 'chart.js';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 
@@ -22,4 +23,21 @@ export class EquipeRecenteComponent implements OnInit, OnChanges {
       
       
     }  }
+    getUserStyles(user: any): any {
+      let styles: any = {};
+      console.log(user);
+      
+      if(user.image!=null){
+        styles['background'] = user.image.data;
+        
+      
+      }
+      styles['background-color'] = user.imageColor;
+
+      
+      
+      
+      return styles;
+    }
+    
 }

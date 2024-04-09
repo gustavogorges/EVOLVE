@@ -9,5 +9,6 @@ export class MessageDTO {
     date:String = new String;
     status:MessageStatus = 0;
     chatId:Number = new Number
+    attachments: Array<File> = new Array
 
 }

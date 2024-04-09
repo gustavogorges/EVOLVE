@@ -1,38 +1,76 @@
 <div class="main">
-    <div class="main-card">
-        <div class="card">
-           <div class="comment">
-                <div class="profile-picture-box">
-                    <div class="profile-picture"></div>
-                </div>
-                <div class="comment-content">
-                    <div class="commentor-name-box">
-                        <p class="commentor-name">Clarice Lispector</p>
-                    </div>
-                    <div class="comment-text-box">
-                        <p class="comment-text">estou adicionando um comentário a essa tarefa posso escrever um monte,tarefa posso escrever um monte</p>
-                    </div>
-                </div>
-           </div>
-           <div class="comment">
-            <div class="profile-picture-box">
-                <div class="profile-picture"></div>
-            </div>
-            <div class="comment-content">
-                <div class="commentor-name-box">
-                    <p class="commentor-name">Clarice Lispector</p>
-                </div>
-                <div class="comment-text-box">
-                    <p class="comment-text">estou adicionando um comentário a essa tarefa posso escrever um monte,tarefa posso escrever um monte</p>
-                </div>
-            </div>
-       </div>
+  <div class="main-card">
+
+<!-- main content part -->
+    <div class="card ">
+      <div class="comment" *ngFor="let comment of comments">
+        <div class="profile-picture-box">
+          <div 
+          class="profile-picture"
+          [ngStyle]="{
+            'background-image':
+              comment.user.image != null
+                ? 'url(' + comment.user.image.data + ')'
+                : comment.user.imageColor,
+            'background-size': 'cover',
+            'background-color': comment.user.imageColor
+          }"
+          class="w-12 h-12 rounded-full overflow-clip"
+          ></div>
         </div>
-        <div class="box-btn-add">
-            <div class="btn-add-content">
-                <i class="pi pi-plus btn-add-text"></i>
-                <p class="btn-add-text">adicionar comentário</p>
+        <div class="comment-content">
+          <div class="commentor-name-box">
+            <p class="commentor-name">{{comment.user.name}}</p>
+            <p class="comment-date">{{comment.timeDayAndMonth}} - {{comment.timeHour}}</p>
+          </div>
+          <div class="comment-text-box">
+            <p class="comment-text">
+              {{comment.value}}
+            </p>
+            <i 
+            class="pi pi-trash p-2 hover:bg-slate-100 rounded-full cursor-pointer text-primary"
+            *ngIf="verifyCommentOwner(comment)"
+            (click)="deleteComment(comment)"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- button part  -->
+    <div class="box-btn-add" *ngIf="!booleanAddComment" (click)="addCommentInput()">
+      <div class="btn-add-content">
+        <i class="pi pi-plus btn-add-text"></i>
+        <p class="btn-add-text">adicionar comentário</p>
+      </div>
+    </div>
+
+<!-- input part -->
+    <div class="box-comment-input h-min w-full flex py-3 px-2 border-x-2 justify-center border-primaryWhite border-b-2 items-center" *ngIf="booleanAddComment">
+        <div class=" w-[65%] h-full flex items-center">
+            <textarea
+            rows="2"
+            cols="80"
+            pInputTextarea
+            [autoResize]="true"
+            placeholder="Digite seu comentário aqui ..."
+            class=" w-full border-2 border-primaryGray rounded-xl p-1"
+            [(ngModel)]="comment.value"
+          ></textarea>
+        </div>
+        <div class=" w-[30%] h-full flex flex-col items-end gap-2">
+            <div 
+            (click)="addCommentValue()"
+            class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-primary flex justify-between gap-1 items-center rounded-lg">
+                <p class="text-primaryWhite font-semibold text-sm">salvar comentário</p>
+                <i class="pi pi-check text-primaryWhite "></i>
+            </div>
+            <div class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-red-500 flex justify-between items-center rounded-lg">
+                <p class="text-primaryWhite font-semibold text-sm">cancelar comentário</p>
+                <i class="pi pi-trash  text-primaryWhite"></i>
             </div>
         </div>
     </div>
+
+  </div>
 </div>

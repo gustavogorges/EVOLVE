@@ -1,6 +1,6 @@
 <div class="bg-white w-full h-[220px] rounded-lg flex">
     <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/4 min-h-min ">
-        <div class=" w-20 h-20 rounded-full bg-orange-400 overflow-clip"></div>
+        <div class=" w-20 h-20 rounded-full overflow-clip" [ngStyle]="getUserStyles(team)"></div>
    
         <p class="  @apply text-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team.name}}</p>
    
@@ -11,7 +11,7 @@
         <div *ngFor="let member of team.participants">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full overflow-clip bg-blue-300">
+                    <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="getUserStyles(member)">
                     
                     </div>
                     <div class="text-xl">{{member.name}}</div>
