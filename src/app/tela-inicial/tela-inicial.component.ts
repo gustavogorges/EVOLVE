@@ -8,6 +8,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
 import { Project } from 'src/model/project';
 import { ColorService } from 'src/service/colorService';
 import { LogarithmicScale } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -40,7 +41,8 @@ export class TelaInicialComponent implements OnInit {
     private service: BackendEVOLVEService,
     private location: Location,
     private cookieService: CookiesService, 
-    private colorService : ColorService
+    private colorService : ColorService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -136,5 +138,8 @@ export class TelaInicialComponent implements OnInit {
   goToPerfilPage(){
     
   }
-  
+  goTasks(projectId : number){
+    this.router.navigate(['/tela-tarefa/'+projectId]);
+
+  }
 }

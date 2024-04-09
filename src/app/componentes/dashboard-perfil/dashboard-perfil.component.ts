@@ -36,7 +36,6 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
       console.log(this.listaTasks);
       
     }
-    console.log(5);
     
     if(changes['listaTasks']){
       this.dashboard()
@@ -51,7 +50,6 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     
   }
   setData(project: Project): any {
-    console.log(9);
     console.log(this.listaTasks);
     
 
@@ -128,15 +126,17 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
   }
   async calculateTotalTasks():Promise<void> {
     this.totalTask = 0;
+   console.log("abu");
    
        this.project =await this.service.getOne("project", this.project.id)
+       console.log(this.project);
        
        this.project.tasks.map((t: Task)=>{
         console.log(this.user);
         console.log(t.associates);
         
 
-        if(t.associates.find(user=> this.user.id ==user.id)){
+        if(t.associates?.find(user=> this.user.id ==user.id)){
           this.totalTask+=1   
           
           this.listaTasks.push(t)   

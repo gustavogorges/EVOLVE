@@ -2,6 +2,8 @@ import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
 import { filter, window } from 'rxjs';
+import { User } from 'src/model/user';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-navegacao',
@@ -10,8 +12,9 @@ import { filter, window } from 'rxjs';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor(private router: Router) { }
-  sideBar = true
+  constructor(private router: Router,     private cookieService: CookiesService,
+    ) { }
+  sideBar = false
 
   ngOnInit(): void {
     if(localStorage.getItem('theme') === 'dark'){
@@ -36,21 +39,16 @@ export class NavegacaoComponent implements OnInit {
     }
     this.themeDark = !this.themeDark
   }
-  irParaPerfil(): void {
-      this.router.events.pipe(
-        filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        console.log(event.url);
+  loggedUser !: User; 
+  async irParaPerfil(): Promise<void> {
+    this.loggedUser = await this.cookieService
+        .getLoggedUser()
+        .then((user) => {
+          return user;
+        });
+    this.router.navigate(['/tela-perfil/'+this.loggedUser.id]);
 
-        // Faça algo quando a navegação for concluída
-        if (event.url === '/tela-perfil') {
-          
-
-        }
-      });
-    
-  
-    this.router.navigate(['/tela-perfil'], { state: { user: null } });  }
+    }
   goInitialPage(): void {
     this.router.navigateByUrl('/tela-inicial');
   }

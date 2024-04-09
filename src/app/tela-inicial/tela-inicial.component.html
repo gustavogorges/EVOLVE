@@ -2,7 +2,7 @@
 <div class="flex w-screen h-screen justify-center gap-[88px] px-16">
   <div class="w-[40%] h-full flex pt-9">
     <div class="close-deliveries">
-      <p class="title-text">Entregas Próximas</p>
+      <p class="title-text ">Entregas Próximas</p>
 
       <div class="card-deliveries-box h-[424px]">
         <div
@@ -29,7 +29,7 @@
         <div></div>
         <div class="container ">
           <div *ngFor="let project of projectList; index as i">
-            <app-important-project [project]="project" ></app-important-project>
+            <app-important-project [project]="project" (click)="goTasks(project.id)" ></app-important-project>
           </div>
           </div>
       </div>

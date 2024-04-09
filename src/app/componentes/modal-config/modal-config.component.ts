@@ -24,17 +24,18 @@ export class ModalConfigComponent implements OnInit {
   disabledEmail = true
   password!: string
   disabledPassword = true
-  defaultColors!:boolean
+  defaultColors = false
   async ngOnInit(): Promise<void> {
 
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     this.theme=this.loggedUser.theme
+    this.checkDefaultColors();
+
     if(this.loggedUser.theme === 'dark'){
       this.themeDark = true
       this.theme='dark'
     }
     if(this.loggedUser){
-      this.checkDefaultColors();
 
     }
   }
@@ -128,13 +129,27 @@ secondaryColor = ""
 
 changeColor(novaCor: string){
   this.divSelecionada = !this.divSelecionada;
+  console.log(3);
+  console.log(this.primaryColor);
+  if(this.primaryColor =="#185E77"  ){
+    this.primaryColor="";
+   
+  }else if(this.secondaryColor=="#4C956C"){
+    this.secondaryColor=""; 
+
+  }
+  
   if(!this.primaryColor){
+    console.log(4);
+
     this.loggedUser.primaryColor=novaCor
     this.primaryColor=this.loggedUser.primaryColor
     this.service.patchUserPrimaryColor(this.loggedUser.id, this.loggedUser.primaryColor)
     
     this.colorService.setPrimaryColor(novaCor);
   }else if(!this.secondaryColor && this.primaryColor){
+    console.log(5);
+
     this.loggedUser.secondaryColor=novaCor
     this.service.patchUserSecondaryColor(this.loggedUser.id, this.loggedUser.secondaryColor)
 
@@ -143,12 +158,15 @@ changeColor(novaCor: string){
     this.colorService.setSecondaryColor(novaCor)
 
   }else if(this.primaryColor==novaCor){
+    console.log(46);
+
     this.primaryColor="";
   }else if(this.secondaryColor==novaCor){
+    console.log(47);
+
     this.secondaryColor=""
   }
   
-this.checkDefaultColors(); 
 
 }
 primaryDarkColor = ""
@@ -156,12 +174,23 @@ secondaryDarkColor = ""
 divSelecionada: boolean = false;
 
 changeDarkColor(novaCor: string){
+  console.log(this.primaryColor);
+  if(this.primaryDarkColor =="#67BFE0"  ){
+    this.primaryDarkColor="";
+   
+  }else if(this.secondaryDarkColor=="#86C19F"){
+    this.secondaryDarkColor=""; 
+
+  }
+  
   if(!this.primaryDarkColor){
+    
     this.loggedUser.primaryDarkColor=novaCor
     this.primaryDarkColor=this.loggedUser.primaryDarkColor
     this.service.patchUserPrimaryDarkColor(this.loggedUser.id, this.loggedUser.primaryDarkColor)
     this.colorService.setPrimaryDarkColor(novaCor);
   }else if(!this.secondaryDarkColor && this.primaryDarkColor){
+
     this.loggedUser.secondaryDarkColor=novaCor
     this.service.patchUserSecondaryDarkColor(this.loggedUser.id, this.loggedUser.secondaryDarkColor)
 
@@ -169,24 +198,40 @@ changeDarkColor(novaCor: string){
     this.colorService.setSecondaryDarkColor(novaCor)
 
   }else if(this.primaryDarkColor==novaCor){
+
     this.primaryDarkColor="";
   }else if(this.secondaryDarkColor==novaCor){
+    console.log(47);
+
     this.secondaryDarkColor=""
   }
+  this.checkDefaultColors()
   
 
 
 }
 checkDefaultColors(){
   console.log(this.loggedUser);
+  console.log(this.defaultColors);
+  
   
   if(this.loggedUser.primaryColor=='#185E77'||this.loggedUser.secondaryColor=='#4C956C'||this.loggedUser.primaryDarkColor=='#67BFE0'||this.loggedUser.secondaryDarkColor=='#86C19F' ){
-    this.defaultColors=false
-  }else{
+    console.log(1
+    );
+    
     this.defaultColors=true
+    return true; 
+  }else{
+    console.log(2);
+    
+    this.defaultColors=false
+    return false 
   }
+  console.log(this.defaultColors);
+  
 }
 async changeToDefault(){
+  this.defaultColors = true;
   this.loggedUser.primaryColor='#185E77'
   this.primaryColor=this.loggedUser.primaryColor
   await this.service.patchUserPrimaryColor(this.loggedUser.id, this.loggedUser.primaryColor)

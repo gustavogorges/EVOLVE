@@ -16,7 +16,7 @@ export class SideBarComponent implements OnInit {
   
 @Output() sideBar = new EventEmitter<boolean>();
 loggedUser !: User
-config = true
+config = false
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
 
@@ -37,6 +37,10 @@ config = true
   }
   closeConfig(){
     this.config=false
+  }
+  goTelaInicial(){
+    this.router.navigateByUrl('/tela-inicial');
+
   }
 
 }

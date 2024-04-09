@@ -21,7 +21,7 @@
         }}
       </p>
       <div *ngFor="let task of taskList" class="tasks.day-open">
-        <div *ngIf="dayOpen.getTime() == task.finalDate.getTime()" class="task-day-open">
+        <div *ngIf="dayOpen.getTime() == task?.finalDate?.getTime()" class="task-day-open">
           <app-entrega-prox [tarefa]="task" [favoritedAble]="false"></app-entrega-prox>
         </div>
       </div>
@@ -62,7 +62,7 @@
           >
             <div *ngFor="let task of taskList" class="tasks-day-box">
               <div
-                *ngIf="dia.getTime() == task.finalDate.getTime()"
+                *ngIf="dia.getTime() == task.finalDate?.getTime()"
                 class="task-day-box"
                 [ngStyle]="{
                   'background-color': task.currentStatus.backgroundColor,

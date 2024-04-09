@@ -55,7 +55,7 @@ const routes: Routes = [
   },
   {
 
-    path:"tela-perfil",
+    path:"tela-perfil/:userId",
     component: TelaPerfilComponent
   }
 ];

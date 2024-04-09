@@ -1,7 +1,7 @@
 .text{
-    @apply text-dark-primary-gray font-bold text-xl ;
+    @apply text-dark-primary-gray dark:text-white font-bold text-xl ;
     font-family: "Montserrat", sans-serif;
 }
 .date-text {
-    @apply text-primary font-normal font-hind-madurai text-lg
+    @apply text-primary dark:text-dark-primary font-normal font-hind-madurai text-lg
 }

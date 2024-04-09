@@ -42,7 +42,8 @@ export class EquipeRecenteComponent implements OnInit, OnChanges {
       return styles;
     }
     goToPerfil(member: User){
-      this.router.navigate(['/tela-perfil'], { state: { user: member } });
+      this.router.navigate(['/tela-perfil/'+member.id]);
+
     }
     
 }

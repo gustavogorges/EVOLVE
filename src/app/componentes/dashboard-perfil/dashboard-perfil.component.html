@@ -1,14 +1,14 @@
 <div class=" w-full flex items-center justify-between">
     <div class="w-[170px] flex flex-col gap-1">
-        <p class="font-hind-madurai text-fontGray font-light text-base leading-4">Horas totais trabalhadas no projeto:</p>
-        <p class="rounded-xl max-w-max py-5 px-8 bg-secondary text-center text-3xl font-titulo text-white  font-semibold "> 02:40h</p>
+        <p class="font-hind-madurai text-fontGray dark:text-gray-300 font-light text-base leading-4">Horas totais trabalhadas no projeto:</p>
+        <p class="rounded-xl max-w-max py-5 px-8 bg-secondary dark:bg-dark-secondary text-center text-3xl font-titulo text-white  font-semibold "> 02:40h</p>
 
     </div>
     <div class="w-[400px] ">
-      <p-chart type="bar" [data]="stackedData" [options]="stackedOptions" #chart  ></p-chart>
+      <p-chart type="bar" [data]="stackedData" [options]="stackedOptions" #chart ></p-chart>
 
     </div>
     <div>
-        <p class="rounded-xl w-[190px] py-3 px-9 bg-primary text-center text-2xl font-titulo text-white  font-semibold "> {{totalTask}} tarefas atribuidas</p>
+        <p class="rounded-xl w-[190px] py-3 px-9 bg-primary dark:bg-dark-primary text-center text-2xl font-titulo text-white  font-semibold "> {{totalTask}} tarefas atribuidas</p>
     </div>
   </div>

@@ -1,23 +1,37 @@
-<div class="bg-white w-full h-[220px] rounded-lg flex">
+<div class="bg-white dark:bg-dark-primary-black w-full h-[220px] rounded-lg flex">
     <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/4 min-h-min ">
-        <div class=" w-20 h-20 rounded-full overflow-clip" [ngStyle]="getUserStyles(team)"></div>
+        <div class=" w-20 h-20 rounded-full overflow-clip" [ngStyle]="{
+            'background-image':
+              team?.image != null
+                ? 'url(' + team.image.data + ')'
+                : team?.imageColor,
+            'background-size': 'cover',
+            'background-color': team?.imageColor
+          }"  ></div>
    
-        <p class="  @apply text-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team.name}}</p>
+        <p class="text-primary dark:text-dark-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team?.name}}</p>
    
    
     </div>
     <div class="p-7 w-full flex-1 flex flex-col gap-3">
 
-        <div *ngFor="let member of team.participants" (click)="goToPerfil(member)">
+        <div *ngFor="let member of team?.participants" (click)="goToPerfil(member)">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="getUserStyles(member)">
+                    <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
+                        'background-image':
+                          member?.image != null
+                            ? 'url(' + member.image.data + ')'
+                            : member?.imageColor,
+                        'background-size': 'cover',
+                        'background-color': member?.imageColor
+                      }">
                     
                     </div>
-                    <div class="text-xl">{{member.name}}</div>
+                    <div class="text-xl dark:text-gray-300">{{member?.name}}</div>
                 </div>
                 
-                <i class="pi  pi-comment" style="font-size: 1.5rem; color: green"></i>
+                <i class="pi  pi-comment text-primary dark:text-dark-primary" style="font-size: 1.5rem; "></i>
             </div>
 
         </div>

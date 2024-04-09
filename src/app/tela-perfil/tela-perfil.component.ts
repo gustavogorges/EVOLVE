@@ -4,7 +4,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-perfil',
@@ -16,7 +16,8 @@ export class TelaPerfilComponent implements OnInit {
     private cookieService: CookiesService,
     private service: BackendEVOLVEService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute 
   ) {}
 
   @Input()
@@ -26,38 +27,33 @@ export class TelaPerfilComponent implements OnInit {
   teamShowing!: Team;
 
   data: any;
-  userData !:User
-
+  userData !:User|null
+  logged = false
   async ngOnInit(): Promise<void> {
-    this.data = this.location.getState();
-     this.userData = await this.data.user;
-    if (this.userData != null) {
-      this.user = this.userData;
-    } else {
-      this.loggedUser = await this.cookieService
-        .getLoggedUser()
-        .then((user) => {
-          return user;
-        });
-      this.user = this.loggedUser;
-    }
+    this.route.paramMap.subscribe( async params  => {
+      // Obtém o parâmetro do projeto da rota
+      const projectId = params.get('userId');
+      const id  = Number(projectId)
+      this.user = await this.service.getOne('user', id);
+      console.log(this.user);
+      this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+      if(this.loggedUser.id!=this.user.id){
+        this.logged=false
+      }else{
+        this.logged=true;
+      }
+      await this.teste()
 
-    console.log(this.loggedUser);
+      this.changeTeam(this.user?.teams[0]);
 
-    // Converte o conjunto de usuários únicos de volta para um array
-    await this.teste();
-    console.log(this.teamUsers);
+    });
+    
 
-    this.changeTeam(this.user.teams[0]);
-    console.log(this.teamShowing);
-
-    // Inicializa um conjunto para armazenar usuários únicos
-    const uniqueUsers = new Map<number, any>();
-
-    // Itera sobre cada equipe e adiciona os participantes ao conjunto
   }
   async teste() {
-    this.user.teams = await this.service.getTeamsByUserId(this.user.id);
+    this.user.teams = await this.service.getTeamsByUserId(this.user?.id);
+    console.log(this.user.teams);
+    
     let users: any = [];
     this.user.teams.forEach((team) => {
       users = team.participants.filter(
