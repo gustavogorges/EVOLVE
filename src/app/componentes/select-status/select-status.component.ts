@@ -56,6 +56,7 @@ export class SelectStatusComponent implements OnInit{
       this.addNewStatus.emit(this.status)
       this.addStatus();
     }
+    this.status = new Status
   }
 
   editStatus(status:Status){
@@ -68,8 +69,6 @@ export class SelectStatusComponent implements OnInit{
     this.boolEditStatus = false
     this.booleanAddStatus = false
     this.status = new Status
-    console.log(this.projeto);
-    
   }
 
   verifyStatusDefault(status:Status){
@@ -87,7 +86,11 @@ export class SelectStatusComponent implements OnInit{
   }
 
   async deleteStatus(status:Status){
-    this.projeto = await this.service.deleteStatus(this.projeto.id, status);
+    if(this.projeto.id != null){
+      this.projeto = await this.service.deleteStatus(this.projeto.id, status)
+    }else{
+      this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
+    }
   }
 
 }
