@@ -98,6 +98,8 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
 import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+import { SearchUsersComponent } from './componentes/search-users/search-users.component';
+import { UserMemberComponent } from './componentes/user-member/user-member.component';
 
 
 
@@ -169,7 +171,9 @@ import { SelectAssociatesComponent } from './componentes/select-associates/selec
     SelectPrioridadeComponent,
     SelectOpcaoComponent,
     TelaPerfilComponent,
-    SelectAssociatesComponent
+    SelectAssociatesComponent,
+    SearchUsersComponent,
+    UserMemberComponent
 
   ],
   

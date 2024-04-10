@@ -1,0 +1,14 @@
+<div class="flex flex-col w-56 h-80 bg-primaryWhite items-center rounded-lg overflow-clip shadow-2xl">
+    <div class="search-bar-container  z-20 flex justify-center items-center relative w-full h-[15%] bg-[#f5f5f5] border-b-2  top-0">
+        <div class="search-bar  flex justify-end items-center w-[80%] h-[60%] bg-[#F0F0F0] rounded-xl px-4 gap-2 border-2  border-primary">
+            <input class="search-input  w-full bg-[#F0F0F0] outline-none" type="text" [(ngModel)]="search" placeholder="Pesquise aqui...">
+            <i class="search-icon pi pi-search  text-primary"></i>
+        </div>
+    </div>
+    <p class="flex justify-center items-center bg-slate-200 w-full h-[10%]">{{selectedUsers.length}} usuarios selecionados</p>
+    <div class="user-list w-full h-[75%] overflow-scroll" >
+        <div class="w-full h-full" *ngFor="let user of users">
+            <app-user-member  *ngIf="matchSearch(user)" [user]="user" (click)="manageSelectedUsersUser(user)"></app-user-member>
+        </div>
+    </div>
+</div>
