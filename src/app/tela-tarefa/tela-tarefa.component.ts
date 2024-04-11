@@ -37,6 +37,7 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible: boolean = false;
   filtroVisible: boolean = false;
   projeto!: Project;
+
 ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
   option: string | null = 'Cards';
   optionFilter: string = '';
@@ -45,7 +46,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
 
   async atualizar(favoritado: boolean): Promise<void> { 
     if (favoritado) {
-      console.log(this.listaTarefas);
       this.projeto = await this.service.getOne('project', this.projeto.id);
       this.listaTarefas = this.projeto.tasks;
       this.listaNova = this.projeto.tasks;
@@ -56,7 +56,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   }
 
   async ngOnInit(): Promise<void> {
-
     if (localStorage.getItem('taskViewPreference') != null) {
       this.option = localStorage.getItem('taskViewPreference');
     }
@@ -80,19 +79,15 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.listaTarefas = this.projeto.tasks;
     this.listaNova = this.projeto.tasks;
     this.sortLists();
-    console.log(this.listaTarefas);
-    console.log(this.projeto);
-
   }
   sortLists() {
     this.listaTarefas.sort(this.opa);
     this.listaNova.sort(this.opa);
-
   }
 
-  opa = (a:Task, b:Task) => {
+  opa = (a: Task, b: Task) => {
     return a.favorited === b.favorited ? 0 : a.favorited ? -1 : 1;
-  }
+  };
 
   trackById(index: number, item: any): any {
     return item.id;
@@ -101,26 +96,25 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.ordenacaoVisible = false;
     this.filtroVisible = false;
 
-    e.target.value = 'Visualização'; 
-    let op : OptionOrder ={
-      name: "Cards",
-      type: " "
-     }
-     let op1 : OptionOrder ={
-      name: "Kanban",
-      type: ""
-     }
-     let op2 : OptionOrder ={
-      name: "Lista",
-      type: ""
-     }
-     let op3 : OptionOrder ={
-      name: "Calendario",
-      type: ""
-     }
-    
+    e.target.value = 'Visualização';
+    let op: OptionOrder = {
+      name: 'Cards',
+      type: ' ',
+    };
+    let op1: OptionOrder = {
+      name: 'Kanban',
+      type: '',
+    };
+    let op2: OptionOrder = {
+      name: 'Lista',
+      type: '',
+    };
+    let op3: OptionOrder = {
+      name: 'Calendario',
+      type: '',
+    };
 
-     this.listOptions = [op, op1, op2, op3];
+    this.listOptions = [op, op1, op2, op3];
     this.listIcons = [
       PrimeIcons.TH_LARGE,
       PrimeIcons.MAP,
@@ -148,6 +142,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   changeOrdenacao(e: any) {
     this.visualizacaoVisible = false;
     this.filtroVisible = false;
+
     e.target.value = 'Visualização';
    let op : OptionOrder ={
     name: "Data final",
@@ -189,6 +184,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   optionB(option: any) {
     this.ordenacaoVisible = false;
     this.visualizacaoVisible = false;
+
     if (option.type == "date") {
       if (option.name == "Data final") {
         this.sortByDate(this.listaTarefas, 'finalDate');
@@ -292,6 +288,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.filtroVisible = false;
     } else {
       this.filtroVisible = true;
+
     }  }
 
   async optionC(option: any) {
@@ -307,6 +304,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
 
     this.projeto.statusList.map((status: Status) => {
       if (status.name == option.name) {
+
         this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option.name)
       this.filtroVisible = false;
       } });
@@ -324,13 +322,12 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
             this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));
           this.filtroVisible = false;
           }
-          
-    
-     
+  
       this.sortLists();
     });
 
     if (option.name == 'Favorito') {
+
       this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
       this.filtroVisible = false;
       this.sortLists()
@@ -344,12 +341,15 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.tarefaSelecionada = tarefa;
   }
 
+
   openTaskEdit(tarefa:Task) {
     let priorityTeste : PriorityRecord = new PriorityRecord();
     priorityTeste.name = "nenhuma";
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
+    console.log(this.tarefaSelecionada);
+    
     this.booleanTask = true;
   }
 

@@ -94,12 +94,18 @@ registerLocaleData(localePT);
 
 import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
 import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
+
+import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { UserCardPerfilComponent } from './componentes/user-card-perfil/user-card-perfil.component';
 import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/projects-info-perfil.component';
 import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboard-perfil.component';
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
+
+import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+
+
 
 
 
@@ -173,11 +179,16 @@ import { ModalConfigComponent } from './componentes/modal-config/modal-config.co
     ProjectsInfoPerfilComponent,
     DashboardPerfilComponent,
     SideBarComponent,
-    ModalConfigComponent
+    ModalConfigComponent,
+
+    SelectOpcaoComponent,
+    TelaPerfilComponent,
+    SelectAssociatesComponent
 
   ],
   
   imports: [
+    
     MessageModule,
     MessagesModule,
     ChartModule,

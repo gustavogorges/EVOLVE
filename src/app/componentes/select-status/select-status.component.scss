@@ -1,13 +1,22 @@
 .main {
-    @apply w-64 bg-primaryWhite absolute rounded-md shadow-lg flex flex-col items-center gap-2
+    @apply w-64 bg-primaryWhite absolute rounded-lg shadow-lg flex flex-col items-center gap-2
 }
 
 .status {
-     @apply w-full h-[18%] rounded-lg flex justify-center items-center  cursor-pointer
+     @apply w-full h-full rounded-lg flex justify-center items-center cursor-pointer
 }
 
 .status-box {
-    @apply w-full flex items-center gap-2 border-b-2 flex-col px-1 py-2
+    @apply w-full flex items-center gap-2 flex-col px-1 py-2 max-h-[19vh] overflow-auto
+}
+
+.status-adjust{
+    @apply grid grid-cols-3 grid-rows-1 w-full items-center justify-items-center;
+    grid-template-columns: 80% 10% 10%;
+
+    i{
+        @apply text-primary dark:text-dark-primary cursor-pointer;
+    }
 }
 
 .add-box {
@@ -28,6 +37,10 @@
 
 .confirmar-status-box {
     @apply bg-secondary flex justify-center items-center rounded-b-lg
+}
+
+.edit-status-box{
+    @apply bg-primary flex justify-center items-center rounded-b-lg
 }
 
 .input-add-status {

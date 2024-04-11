@@ -8,7 +8,8 @@
         <img src="../../assets/sendButton.svg" alt="" class="">
     </div>
 
-    <div class="annex-icon-container">
+    <div class="annex-icon-container relative">
+        <input type="file" class="opacity-0 absolute w-full z-10 bg-black top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2" [(ngModel)]="newMessage.attachments">
         <img src="../../assets/clip.svg" alt="">
     </div>
 

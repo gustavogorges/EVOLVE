@@ -30,8 +30,6 @@ export class SelectCustomComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    console.log(this.listOptions)
-    console.log(this.listIcons)
     this.projeto = await this.service.getOne("project",this.projeto.id)
   }
 
@@ -40,10 +38,8 @@ export class SelectCustomComponent implements OnInit {
     this.listIcons=[]
 
     this.newItem.emit(option);
-    console.log(option)
     if(option.name=="Status"){
       this.projeto.statusList.map((status :Status)=>{
-        console.log(status.name)
         this.listOptions.push(status)
        })
   

@@ -3,19 +3,40 @@
 }
 
 .main-card {
-    @apply  w-[90%] h-2/3 rounded-t-xl
+    @apply  w-full max-h-[80%] rounded-t-xl 
 }
 
 .card {
-    @apply w-full h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite
+    @apply w-full pt-3 min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
 }
 
 .box-btn-add {
-    @apply w-full h-1/4 border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
 
 .s-input input {
     display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+
+    
+    /* largura do scroll */
+   
+  }
+  
+  /* Define a cor do fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Define a cor do thumb (a alça do scroll) */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background: #E5E5E5 
+    
   }
   
   .s-input input + label:before {
@@ -50,8 +71,8 @@
   }
 
   .comment {
-    @apply w-full h-1/2 grid grid-cols-2 border-b-2 ;
-    grid-template-columns : 20% 80%;
+    @apply w-full grid grid-cols-2 h-[30%] my-2;
+    grid-template-columns : 15% 85%;
   }
 
   .profile-picture-box {
@@ -59,7 +80,7 @@
   }
 
   .profile-picture {
-    @apply w-20 h-20 rounded-full bg-purple-500
+    @apply w-12 h-12 rounded-full bg-purple-500
   }
 
   .comment-content {
@@ -68,13 +89,21 @@
   }
 
   .commentor-name {
-    @apply text-2xl text-primary font-bold 
+    @apply text-xl text-primary font-bold
   }
 
   .commentor-name-box {
-    @apply flex items-end mt-5 p-2
+    @apply flex items-end justify-between w-[95%]
+  }
+
+  .comment-date {
+     @apply text-fontGray text-sm
   }
 
   .comment-text-box {
-    @apply flex items-start font-semibold p-2
+    @apply flex items-center justify-between w-[95%]
+  }
+
+  .comment-text {
+    @apply text-base 
   }

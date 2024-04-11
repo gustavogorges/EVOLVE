@@ -1,13 +1,13 @@
 .propertie {
-    @apply flex w-full h-full items-center gap-4
+    @apply flex w-full items-center gap-4 h-11
 }
 
 .propertie-value {
-    @apply h-full flex items-center hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
+    @apply  hover:bg-slate-100 items-center px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .propertie-value-no {
-    @apply h-full flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
+    @apply h-8 flex items-center hover:bg-slate-100 px-2 rounded-lg cursor-pointer text-slate-500
 }
 
 .name-icon {
@@ -30,6 +30,10 @@
     @apply w-[50%] h-full outline-none
 }
 
+.status-icon {
+    @apply h-6 px-4 rounded-lg flex justify-center items-center text-sm text-primaryFontBlack
+}
+
 .inputPropertyValueTextArea {
     @apply w-full p-0
 }
@@ -38,7 +42,7 @@
 }
 
 .btn {
-    @apply h-full w-[60%] rounded text-white flex items-center justify-center cursor-pointer
+    @apply h-6 w-[65%] rounded text-white flex items-center justify-center cursor-pointer
 }
 
 .confirm-btn {
