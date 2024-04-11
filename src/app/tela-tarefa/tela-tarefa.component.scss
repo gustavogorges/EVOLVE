@@ -20,17 +20,14 @@
   @apply flex flex-col gap-4 max-w-fit
 }
 .project-name{
-    @apply  text-primary  dark:text-dark-primary text-[42px] font-bold font-titulo ;
+    @apply  text-primary  dark:text-dark-primary text-2xl font-bold font-titulo 
+    lg:text-4xl
+    md:text-3xl
+    2xl:text-[42px]
 
 }
 
-.button-AddProject{
-    @apply bg-secondary dark:bg-dark-secondary rounded-xl p-3 text-white font-bold text-xl
-      }
 
-.botao-opcoes{
-    @apply text-2xl font-titulo
-}
 .tasks-grid-padrao{
   width: 100%;
   display: grid;
@@ -76,10 +73,27 @@
 }
 
 .select-button{
-  @apply text-xl dark:text-gray-300 font-titulo;
+  @apply text-xs dark:text-gray-300 font-titulo flex gap-1
+  md:text-base
+  lg:text-xl
+  2xl:text-xl
+
+}
+.icon2{
+  @apply text-lg
 }
 .box-selections{
-  @apply flex flex-row gap-3
+  @apply flex  gap-4
+   
+
+}
+.text-select{
+  @apply hidden 
+  sm:block sm:text-base
+  md:block md:text-base
+  lg:block lg:text-lg
+  xl:block xl:text-xl
+  2xl:block 
 }
  
 
@@ -95,7 +109,7 @@
   @apply text-lg text-[#6A7181] dark:text-gray-200 font-hind-madurai
 }
 .width-name-propertys{
-@apply w-[120px]  max-h-6 text-lg text-gray-500 dark:text-gray-300  font-hind-madurai;
+@apply w-[112px] text-lg text-gray-500 dark:text-gray-300  font-hind-madurai;
 
 
 

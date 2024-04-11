@@ -31,46 +31,13 @@ export class ModalConfigComponent implements OnInit {
     this.theme=this.loggedUser.theme
     this.checkDefaultColors();
 
-    if(this.loggedUser.theme === 'dark'){
-      this.themeDark = true
-      this.theme='dark'
-    }
-    if(this.loggedUser){
-
-    }
+ 
   }
   
 
   themeDark = false
 
-   async darkMode(){
-
-    
-    if(this.themeDark){
-      document.documentElement.classList.add('dark')
-      document.querySelector('.pi-moon')?.classList.add('pi-sun')
-      document.querySelector('.pi-moon')?.classList.remove('pi-moon')
-      this.loggedUser.theme = 'dark'
-      this.theme='dark'
-      localStorage.setItem('theme','dark')
-
-    }else{
-      document.documentElement.classList.remove('dark')
-      document.querySelector('.pi-sun')?.classList.add('pi-moon')
-      document.querySelector('.pi-sun')?.classList.remove('pi-sun')
-      localStorage.setItem('theme','light')
-      this.loggedUser.theme = 'light'
-      this.theme='light'
-
-
-    }
-
-    await this.service.patchUserTheme(this.loggedUser.id, this.loggedUser.theme);
-
-    
-    this.themeDark = !this.themeDark
-
-  }
+   
   closeModal(){
     this.close.emit(false)
 

@@ -112,6 +112,9 @@ export class BackendEVOLVEService {
   async patchUserEmail(userId:number, email:string):Promise<User>{
     return (await axios.patch(this.URL+"user"+"/email/"+userId+"/"+email )).data
   }
+  async patchUserName(userId:number, name:string):Promise<User>{
+    return (await axios.patch(this.URL+"user"+"/name/"+userId+"/"+name )).data
+  }
   async patchUserTheme(userId:number, theme:string):Promise<User>{
     return (await axios.patch(this.URL+"user"+"/theme/"+userId+"/"+theme )).data
   }
@@ -137,6 +140,9 @@ export class BackendEVOLVEService {
     let formsData = new FormData()
     formsData.append("secondaryColor",secondaryDarkColor)    
     return (await axios.patch(this.URL+"user"+"/secondaryDarkColor/"+userId,formsData )).data
+  }
+  async patchImageUser(id:number, image:any){
+    return (await (axios.patch(this.URL+"user/"+id, image))).data;
   }
 
   async postUserChat (chat:UserChat){

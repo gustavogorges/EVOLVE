@@ -49,10 +49,20 @@
       style="width: 21px"
     />
     </div>
-    <div class="members">
-      <div class="photoMember" ></div>
-      <img [src]="teste"class="photoMember" >
-      <div class="photoMember"><img src="assets/pessoaTeste.svg" /></div>
+ 
+     <div *ngFor=" let associate of arrayForce" class="member">     
+     <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
+        'background-image':
+          associate.image != null
+            ? 'url(' + associate.image.data + ')'
+            : associate?.imageColor,
+        'background-size': 'cover',
+        'background-color': associate?.imageColor
+      }">
+    
+    </div>
+
+
     </div>
   </div>
   <!-- <div class="bg-blue-500 absolute h-2 w-full"></div> -->

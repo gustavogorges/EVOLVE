@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
 import { filter, window } from 'rxjs';
 import { User } from 'src/model/user';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
@@ -12,34 +13,60 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor(private router: Router,     private cookieService: CookiesService,
+  constructor(private router: Router,     private cookieService: CookiesService,  private service: BackendEVOLVEService,
     ) { }
   sideBar = false
+  loggedUser !: User; 
 
-  ngOnInit(): void {
-    if(localStorage.getItem('theme') === 'dark'){
-      this.themeDark = true
+
+  async ngOnInit(): Promise<void> {
+    this.loggedUser = await this.cookieService
+    .getLoggedUser()
+    .then((user) => {
+      return user;
+    });
+    if(this.loggedUser){
+
+      if(this.loggedUser.theme == 'dark'){
+        this.themeDark = true
+      }
+    }else{
+      this.themeDark=false
     }
+   
     this.darkMode()
   }
 
   themeDark = false
 
-  darkMode(){
+  async darkMode(){
     if(this.themeDark){
       document.documentElement.classList.add('dark')
       document.querySelector('.pi-moon')?.classList.add('pi-sun')
       document.querySelector('.pi-moon')?.classList.remove('pi-moon')
       localStorage.setItem('theme','dark')
+      if(this.loggedUser){
+        this.loggedUser.theme = 'dark'
+      }
+    
+
     }else{
       document.documentElement.classList.remove('dark')
       document.querySelector('.pi-sun')?.classList.add('pi-moon')
       document.querySelector('.pi-sun')?.classList.remove('pi-sun')
       localStorage.setItem('theme','light')
+      if(this.loggedUser){
+        this.loggedUser.theme = 'light'
+      }
+    
+
     }
     this.themeDark = !this.themeDark
+    if(this.loggedUser){
+      await this.service.patchUserTheme(this.loggedUser.id, this.loggedUser.theme);
+
+    }
   }
-  loggedUser !: User; 
   async irParaPerfil(): Promise<void> {
     this.loggedUser = await this.cookieService
         .getLoggedUser()

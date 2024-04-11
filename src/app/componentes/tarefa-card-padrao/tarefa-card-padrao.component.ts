@@ -2,6 +2,7 @@
 import { Project } from 'src/model/project';
 import { Subtask } from 'src/model/subtask';
   import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
   import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
   @Component({
@@ -29,9 +30,10 @@ import { Subtask } from 'src/model/subtask';
     constructor(private service : BackendEVOLVEService ) {
   
     }
-
+      arrayForce : Array<User> = new Array;
     async ngOnInit(): Promise<void> {
-  
+
+      
       this.trocaCor()
       if(this.tarefaAtual.favorited){
         this.caminhoEstrela = "assets/estrelaMarcada.svg"
@@ -40,8 +42,8 @@ import { Subtask } from 'src/model/subtask';
       }
       this.valorBarra = 60 +"%"; 
   
-      this.teste = await this.service.getOne("aws", this.tarefaAtual.id)
-      console.log(this.teste);
+    this.arrayForce =  this.tarefaAtual.associates as Array<User> 
+      console.log(this.arrayForce);
       
 
     }
