@@ -11,6 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { User } from 'src/model/user';
+import { ActivatedRoute } from '@angular/router';
 
 interface OptionOrder {
   name: string;
@@ -41,11 +42,11 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   option: string | null = 'Cards';
   optionFilter: string = '';
 
-  constructor(private service: BackendEVOLVEService) {}
+  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute  ) {}
 
-  async atualizar(favoritado: boolean): Promise<void> {
+  async atualizar(favoritado: boolean): Promise<void> { 
     if (favoritado) {
-      this.projeto = await this.service.getOne('project', 1);
+      this.projeto = await this.service.getOne('project', this.projeto.id);
       this.listaTarefas = this.projeto.tasks;
       this.listaNova = this.projeto.tasks;
       this.sortLists();
@@ -58,8 +59,23 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     if (localStorage.getItem('taskViewPreference') != null) {
       this.option = localStorage.getItem('taskViewPreference');
     }
+    this.route.paramMap.subscribe( async params  => {
+      // Obtém o parâmetro do projeto da rota
+      const projectId = params.get('projectId');
+      const id  = Number(projectId)
+      this.projeto = await this.service.getOne('project', id);
+      console.log(this.projeto);
+      this.teste()
 
-    this.projeto = await this.service.getOne('project', 1);
+     
+    });
+  
+   
+
+  }
+  teste(){
+    console.log(this.projeto);
+    
     this.listaTarefas = this.projeto.tasks;
     this.listaNova = this.projeto.tasks;
     this.sortLists();

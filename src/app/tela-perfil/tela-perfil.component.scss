@@ -1,0 +1,15 @@
+.user-name{
+    @apply  text-4xl font-bold dark:text-primaryWhite;
+    font-family: 'Montserrat', sans-serif;
+} 
+.title{
+    @apply  text-2xl font-bold text-primary;
+    font-family: 'Montserrat', sans-serif;
+}
+.input-image{
+    @apply w-[2vw] h-[2vw] absolute shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;
+
+    i{
+        @apply text-xl text-primary dark:text-dark-primary
+    }
+}

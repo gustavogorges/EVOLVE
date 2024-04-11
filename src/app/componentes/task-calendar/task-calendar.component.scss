@@ -4,7 +4,7 @@
   .calendar-title {
     @apply flex items-end m-3 gap-2;
     .calendario-title-year-month {
-      @apply text-center text-2xl text-secondary dark:text-dark-secundary-green font-bold;
+      @apply text-center text-2xl text-secondary dark:text-dark-secondary font-bold;
       font-family: "Montserrat", sans-serif;
     }
   }

@@ -14,7 +14,7 @@
 }
 
 .column2 {
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center text-primary dark:text-dark-primary;
     
     label, input{
         @apply dark:bg-dark-primary-black dark:border-dark-primary dark:text-white

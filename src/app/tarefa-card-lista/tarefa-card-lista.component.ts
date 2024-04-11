@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -27,7 +28,9 @@ data : Date = new Date
    "b",
    "b",
    
- ]
+ ]     
+  arrayForce : Array<User> = new Array;
+
 
  constructor(private service : BackendEVOLVEService ) {
 
@@ -42,6 +45,9 @@ data : Date = new Date
    }
    this.valorBarra = 60 +"%"; 
    console.log(this.tarefaAtual.id + " "+this.tarefaAtual.currentStatus)
+   this.arrayForce =  this.tarefaAtual.associates as Array<User> 
+   console.log(this.arrayForce);
+   
  
  }
 

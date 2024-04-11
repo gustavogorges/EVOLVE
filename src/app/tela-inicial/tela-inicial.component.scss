@@ -63,7 +63,7 @@
 }
 
 .title-text {
-    @apply font-bold text-2xl text-secondary ;
+    @apply font-bold text-2xl text-secondary dark:text-dark-secondary ;
     font-family: "Montserrat", sans-serif;
 
 }

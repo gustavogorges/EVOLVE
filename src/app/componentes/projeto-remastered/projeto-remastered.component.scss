@@ -179,7 +179,10 @@
                 }
             }
         
-            .botao-ir-para-tarefa{
+            .botao-ir-para-projeto{
+                @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secondary rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
+            }
+                .botao-ir-para-tarefa{
                 @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
             }
         }

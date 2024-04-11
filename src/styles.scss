@@ -9,5 +9,27 @@
 @import "primeng/resources/primeng.css";
 
 * {
-    @apply m-0 p-0 
+    @apply m-0 p-0;   
+// --primary-color:#185e77;
+// --secondary-color: red;
 }
+$base-color: #185e77;
+$primary-color: rgba($base-color, 0.88);
+
+
+::-webkit-scrollbar{
+    @apply hidden;
+}
+
+
+:root{
+    --main-color:#185e77;
+    --secondary-color:#4C956C;
+    --main-dark-color:#67BFE0;
+    --secondary-dark-color:#86C19F ;
+}
+
+
+// * {
+
+// }
