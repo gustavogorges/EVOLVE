@@ -106,21 +106,21 @@
     </div>
     <div *ngIf="option == 'Lista'">
       <div class="box-list">
-        <div class="flex gap-14   w-[70%] ml-28 ">
-  
+          <!-- <div class="flex gap-14   w-[70%] ml-28 ">
+    
 
-          <p class="width-name-propertys">status:</p>
-          <p class="width-name-propertys">
-            progresso:
-          </p>
-          <p class="width-name-propertys"> data final:</p>
-          <p class="width-name-propertys">membros:</p>
-          <p class="width-name-propertys">
-            prioridade:
-          </p>
-          <p class="width-name-propertys">agendamento: </p>
+            <p class="width-name-propertys">status:</p>
+            <p class="width-name-propertys">
+              progresso:
+            </p>
+            <p class="width-name-propertys"> data final:</p>
+            <p class="width-name-propertys">membros:</p>
+            <p class="width-name-propertys">
+              prioridade:
+            </p>
+            <p class="width-name-propertys">agendamento: </p>
 
-        </div>
+          </div> -->
         <div
           *ngFor="
             let tarefa of listaTarefas;
@@ -148,7 +148,7 @@
       ></app-tarefa-kanban>
     </div>
   </div>
-  <div *ngIf="option == 'Calendario'">
+  <div *ngIf="option == 'Calendario'" class="w-full">
  
     <div class="w-full">
       
