@@ -81,6 +81,8 @@
 }
 .icon2{
   @apply text-lg
+  sm:text-sm
+  md:text-base
 }
 .box-selections{
   @apply flex  gap-4
@@ -89,7 +91,7 @@
 }
 .text-select{
   @apply hidden 
-  sm:block sm:text-base
+  sm:block sm:text-sm
   md:block md:text-base
   lg:block lg:text-lg
   xl:block xl:text-xl
