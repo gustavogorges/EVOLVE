@@ -1,10 +1,11 @@
 <div class="component" #project>
 
-    <div class="project" [ngClass]="projectOpen ? 'rounded-s-xl' : 'rounded-xl'" >
+    <div class="project" [ngClass]="projectOpen ? 'rounded-t-xl xl:rounded-tr-none xl:rounded-l-xl' : 'rounded-xl'" >
         <div class="project-image">
-            <div class="image">
-                <img *ngIf="!verifyImgproject() && preImage" [src]="preImage" alt="">
-                <img *ngIf="!verifyImgproject() && !preImage && projeto.image" [src]="projeto.image.data" alt="">
+            <div class="image" *ngIf="projeto">
+                <div *ngIf="preImage === '' && projeto.image === null" [ngStyle]="{'background-color': projeto.imageColor}" class="w-full h-full"></div>
+                <img *ngIf="(preImage !== '')" [src]="preImage" alt="">
+                <img *ngIf="(preImage === '') && (projeto.image !== null)" [src]="projeto.image.data" alt="">
             </div>
             <label [ngClass]="!projeto.editOn ? 'invisible':'visible'" class=" border-primary dark:border-secondary bottom-3 right-10 rounded-full p-2 bg-white dark:bg-back-grey w-12 h-12 absolute cursor-pointer">
                 <div class="flex items-center justify-center w-full h-full">
@@ -32,6 +33,7 @@
             <input #data [disabled]="!projeto.editOn" type="date" [(ngModel)]="projeto.finalDate" class="bg-transparent">
         </p></div>
     </div>
+    
     <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
         <div class="project-open-infos">
             <div class="tittle-infos">
@@ -56,26 +58,95 @@
             </div>
         </div>
         <div class="project-open-users">
-            <span><</span>
-            <div class="users">
-                <div class="users-spam" *ngFor="let p of projeto.members">
-                    <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
-                    <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
-                        <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
-                    </div>
-                    <p>{{p.name}}</p>
-                </div>
+            <div class="bg-primaryGray dark:bg-dark-secundary-gray dark:text-secondaryWhite w-full h-[30%] flex justify-center items-center rounded-t-lg">
+                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <i class="pi pi-search text-primary dark:text-dark-primary"></i>
             </div>
-            <span>></span>
+            <div class="users">
+                <span><</span>
+                <div class="users" *ngIf="projeto">
+                    <div class="users-spam" *ngFor="let p of filteredNames()">
+                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        </div>
+                        <p>{{p.name}}</p>
+                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                    </div>
+                    <div *ngIf="filteredNames().length <= 0" class="membros w-full h-full flex items-center justify-center">
+                        <p class="text-xl text-fontGray">Nenhum membro encontrado</p>
+                    </div>
+                </div>
+                <span>></span>
+            </div>
         </div>
 
         <div class="botoes">
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
-            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editProjectEmit(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
+            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
             <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-tarefa" (click)="irParaProjeto()">Ir para tarefas <i class="pi pi-angle-double-right"></i></button>
         </div>
     </div>
+
+    <div class="project-open-sm" [ngClass]="!projectOpen ? 'h-0':'h-[45vh] pt-[2%] py-[1%] rounded-b-xl'" (click)="openAgain()">
+    
+        <div class="project-open-infos">
+            <div class="tittle-infos">
+                <p>Nome</p>
+                <p>Progresso</p>
+                <p>Status</p>
+                <p>Prazo</p>
+            </div>
+            
+            <div class="value-infos">
+                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks">
+                    <p class="Nome">{{t.name}}</p>
+                    <div class="Progresso">
+                        <div class="valor-progresso"  [style.width.%]="t.conclusionPercentage" ></div>
+                    </div>
+                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
+                    <p class="Prazo">{{t.finalDate}}</p>
+                </div>
+                <div *ngIf="getTasksLength() === 0" class="h-[80%] w-full flex justify-center items-center text-xl text-fontGray whitespace-nowrap">
+                    <p>Nenhuma tarefa criada</p>
+                </div>
+            </div>
+        </div>
+        <div class="project-open-users">
+            <div class="bg-primaryGray dark:bg-dark-secundary-gray dark:text-secondaryWhite w-full h-[30%] flex justify-center items-center rounded-t-lg">
+                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <i class="pi pi-search text-primary dark:text-dark-primary"></i>
+            </div>
+            <div class="users">
+                <span><</span>
+                <div class="users" *ngIf="projeto">
+                    <div class="users-spam" *ngFor="let p of filteredNames()">
+                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        </div>
+                        <p>{{p.name}}</p>
+                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                    </div>
+                    <div *ngIf="filteredNames().length <= 0" class="membros w-full h-full flex items-center justify-center">
+                        <p class="text-xl text-fontGray">Nenhum membro encontrado</p>
+                    </div>
+                </div>
+                <span>></span>
+            </div>
+        </div>
+
+        <div class="botoes">
+            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
+            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
+            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
+            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
+            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-tarefa" (click)="irParaProjeto()">Ir para tarefas <i class="pi pi-angle-double-right"></i></button>
+        </div>
+
+    </div>
 </div>
 
+<!-- right-[50%] left-[50%] top-[40%] bottom-[50%]"  -->

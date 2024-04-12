@@ -37,7 +37,7 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+caminho)).data
   }
   async getOne(caminho : string, id:number){
-    return (await axios.get(this.URL+caminho + "/"+id)).data
+    return (await axios.get(this.URL + caminho + "/" + id)).data
   }
   async getUser( email: string )  {
     return (await axios.get(this.URL+"user/login" + "/"+email)).data
@@ -160,8 +160,9 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
   }
 
-
-
+  async deleteUserFromProject(idProject:number, users:Array<Pick<User, "id">>){
+    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user", users)).data
+  }
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {

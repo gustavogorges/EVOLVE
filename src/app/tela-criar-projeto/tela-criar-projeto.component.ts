@@ -117,6 +117,7 @@ export class TelaCriarProjetoComponent implements OnInit {
       postProject.creator = {
         "id":1
       }
+      postProject.imageColor = this.backGroundColorProject
       postProject = await this.service.postProjeto(postProject);
       if(this.formData != null){
         console.log(await this.service.patchImage(postProject.id, this.formData));
@@ -142,6 +143,8 @@ export class TelaCriarProjetoComponent implements OnInit {
       }
     }
   }
+
+  
 
   randomColor(){
     this.backGroundColorProject = '#' + Math.floor(Math.random()*16777215).toString(16);

@@ -17,9 +17,28 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   projects !: Project[]
   resetProject: Boolean = false
   formData!:FormData
+  response !: boolean | undefined
+  quest !: string
+  confirmationActionModalBol : boolean = false
+  listFromRemove = new Array
 
   ngOnInit(): void {
     this.getProjects()
+  }
+
+  getResponse(){
+    return this.response
+  }
+
+  setResponse(event:any){
+    this.response = event
+    this.confirmationActionModalBol = false
+  }
+
+  setQuest(event:any){
+    this.quest = event
+    this.response = undefined
+    this.confirmationActionModalBol = true
   }
 
   ngOnChange(): void {
@@ -66,6 +85,10 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     }
   }
 
+  setListFromRemove(event:any){
+    this.listFromRemove = event
+  }
+
   noCloseProject(project:any){
     this.openProject(project)
   }
@@ -79,25 +102,39 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     await this.service.deleteById("project",id);
   }
 
-  async editFun(p:Project){
-    let postProject:any = p
+  
+
+   async editFun(project:Project){
+    let postProject:any = project
     let listUsers : Array<Pick<User, "id">> = new Array
-    p.members.forEach(element => {
-      listUsers.push({
-        "id" : element.id
-      })
-    });
-    postProject.members = listUsers
-    console.log(postProject.members);
     
-    postProject.image = null
-    p = await this.service.putProjeto(postProject)
-    if(this.formData!=null){
-      p = await this.createImageProject(p)
-    }
-    postProject.image = p.image
-    postProject.members = p.members
-    console.clear()
+    setTimeout(() => {
+      project.members.forEach(element => {
+        listUsers.push({
+          "id" : element.id
+        })
+      });
+      postProject.members = listUsers
+      postProject.image = null
+    },);
+
+    setTimeout(async () => {
+      await this.service.putProjeto(postProject)
+    
+      if(this.listFromRemove.length != 0){
+        await this.service.deleteUserFromProject(project.id, this.listFromRemove)
+      }
+
+      if(this.formData!=null){
+        await this.createImageProject(project)
+      } 
+    });
+
+    project = await this.service.getOne("project", project.id)
+
+    postProject.image = project.image
+    postProject.members = project.members
+    postProject.editOn = false
   }
 
   async createImageProject(p:Project){
@@ -119,7 +156,13 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       }
     });
   }
+  
 
-
+  closeModal(): void {
+    this.confirmationActionModalBol = false;
+    // Reagendar a contagem regressiva
+    if (this.quest) {
+      this.setQuest(this.quest);
+    }
+  }
 }
-
