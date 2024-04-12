@@ -245,7 +245,7 @@
                 [task]="tarefa"
                 [listPriorities]="listPriorities"
                 *ngIf="booleanSelectPrioridade"
-                (eventEmitter)="finishEditPriority()"
+                (eventEmitter)="finishEditPriority($event)"
               >
               </app-select-prioridade>
             </div>

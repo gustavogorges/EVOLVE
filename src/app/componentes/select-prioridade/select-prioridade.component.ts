@@ -14,9 +14,7 @@ export class SelectPrioridadeComponent implements OnInit {
   constructor(private service:BackendEVOLVEService) { }
 
   ngOnInit(): void {
-   
     this.prioritiesStandard = this.listPriorities;
-    
   }
 
   prioritiesStandard !: PriorityRecord[];
@@ -28,11 +26,12 @@ export class SelectPrioridadeComponent implements OnInit {
   listPriorities !: PriorityRecord[];
 
   @Output()
-  eventEmitter: EventEmitter<boolean> = new EventEmitter();
+  eventEmitter: EventEmitter<PriorityRecord> = new EventEmitter();
 
   savePriority(priority : PriorityRecord) {
     this.task.priority = priority;
-    this.eventEmitter.emit(false);
+    
+    this.eventEmitter.emit(this.task.priority);
   }
 
 

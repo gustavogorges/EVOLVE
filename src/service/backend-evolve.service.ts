@@ -21,6 +21,7 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
+import { PriorityRecord } from 'src/model/priorityRecord';
 
 
 
@@ -74,10 +75,17 @@ export class BackendEVOLVEService {
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
- 
 
   async patchProperty(taskProjectProperty:Property, taskId:number, userId:number) {
     return (await axios.patch(this.URL+"task/property/"+taskId+"/"+userId,taskProjectProperty )).data
+  }
+
+  async updateCurrentStatus(taskId:number, userId:number, newStatus:Status) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/currentStatus/"+userId, newStatus)).data
+  }
+
+  async updateCurrentPriority(taskId:number, userId:number, newPriority:PriorityRecord) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/"+userId+"/currentPriority", newPriority)).data
   }
 
   async putPropertyOption(newOption:Option, userId:number) {
@@ -130,8 +138,6 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"team", equipe)).data
   }
 
-
-
   async postUserChat (chat:UserChat){
     (await axios.post(this.URL+"userChat", chat)).data 
   }
@@ -156,9 +162,6 @@ export class BackendEVOLVEService {
   async patchMessageStatus(messageId:number, newMessageStatus:string):Promise<Message>{
     return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
   }
-
-
-
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {

@@ -44,15 +44,12 @@ export class SubTarefaComponent implements OnInit {
   async adicionarSubtarefa() {
     const subtarefaNova = new Subtask()
     subtarefaNova.name= this.subtarefa.nome
-   
-    console.log(subtarefaNova);
     
     this.tarefa.subtasks.push(subtarefaNova);
     await this.service.putTarefa(this.tarefa, this.loggedUser.id)
     this.tarefa = await this.service.getOne("task", this.tarefa.id)
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
-    console.log(this.tarefa)
   }
 
   booleanSubtarefa() {
@@ -70,7 +67,6 @@ export class SubTarefaComponent implements OnInit {
 
   removeSubtarefa(subtarefa : Subtask, i : number) {
     this.tarefa.subtasks.splice(i,1)
-    console.log(this.listaSubtarefas)
     this.service.putTarefa(this.tarefa, this.loggedUser.id);
   }
 
@@ -78,8 +74,6 @@ export class SubTarefaComponent implements OnInit {
     console.log(this.listaSubtarefas)
     subtarefa.name = this.newNameEdit;
     subtarefa.editable = false;
-    console.log(this.listaSubtarefas)
-    console.log(this.tarefa.subtasks)
     this.service.putTarefa(this.tarefa, this.loggedUser.id);
   }
   async completed(sub : Subtask){
@@ -89,7 +83,6 @@ export class SubTarefaComponent implements OnInit {
       }else{
         sub.concluded=true;
       }
-      console.log(sub.id);
       this.tarefa.subtasks.map((s)=>{
         if(s.id ==sub.id){
           s.concluded=sub.concluded

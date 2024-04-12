@@ -96,10 +96,6 @@ export class ModalTarefaComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  finishEditPriority() {
-    this.booleanSelectPrioridade = false;
-  }
-
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
@@ -119,9 +115,11 @@ export class ModalTarefaComponent implements OnInit {
   listPriorities !: PriorityRecord[];
   listAssociates !: Array<any>;
   loggedUser : User = new User;
+  taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+    this.taskUnchanged = await this.service.getOne("task",this.tarefa.id);  
     
     this.listAssociates = this.tarefa.associates;
 
@@ -153,8 +151,6 @@ export class ModalTarefaComponent implements OnInit {
   listAssociatesVerify() : boolean {
     if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
       if(this.booleanSelectAssociates == false) {
-        console.log("ta chegando nesse if errado!");
-        
         return true;
       }
     }
@@ -258,26 +254,36 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   async salvarTarefa() {
+    console.log(this.tarefa);
+    
   
     if (this.tarefa.id != 0 && this.tarefa.id != null) {
-      this.service.putTarefa(this.tarefa,this.loggedUser.id);
+      //this.service.putTarefa(this.tarefa,this.loggedUser.id);
 
       this.propertiesStack.forEach(propertieStackFor => {
         if(propertieStackFor.name != '' ) {
           this.propertiesValuesStack.forEach(propertiesValueStackFor => {
             if(propertiesValueStackFor.property == propertieStackFor) {
-              console.log("ENTROU NO PUT PROPERTY VALUE");
               this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id,this.tarefa.id)
             }
           })
           
         }
       })
-      
-      if(this.listAssociates != null) {
-        let associates : Array<Pick<User, "id">> = new Array;
-        this.listAssociates.forEach(associate => associates.push({"id":associate.id}))
-        this.service.patchAssociate(this.tarefa.id, associates,this.loggedUser.id);
+
+      if (this.tarefa.currentStatus != this.taskUnchanged.currentStatus) {
+        // implementar novo patch para status aqui
+        this.tarefa = await this.service.updateCurrentStatus(this.tarefa.id, this.loggedUser.id, this.tarefa.currentStatus);
+      }
+
+      if(this.tarefa.priority.name != this.taskUnchanged.priority.name) {
+        this.tarefa = await this.service.updateCurrentPriority(this.tarefa.id, this.loggedUser.id, this.tarefa.priority);
+      }
+
+      if (this.listAssociates != null) {
+        let associates: Array<Pick<User, "id">> = new Array;
+        this.listAssociates.forEach(associate => associates.push({ "id": associate.id }))
+        this.service.patchAssociate(this.tarefa.id, associates, this.loggedUser.id);
       }
 
     } else if (this.tarefa.id == 0) {
@@ -286,6 +292,16 @@ export class ModalTarefaComponent implements OnInit {
       this.service.postTarefa(this.tarefa);
     }
 
+    this.verifyBooleans();
+  }
+
+  
+  finishEditPriority(priority:PriorityRecord) {
+    this.tarefa.priority = priority;
+    this.booleanSelectPrioridade = false;
+  }
+
+  verifyBooleans() : void {
     if (this.booleanCalendarioFinalDate == true) {
       this.booleanCalendarioFinalDate = false;
     }
