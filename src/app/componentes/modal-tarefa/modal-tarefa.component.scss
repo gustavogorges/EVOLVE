@@ -27,7 +27,7 @@
 }
 
 .foco-name-box {
-    @apply flex w-full h-full items-center
+    @apply flex w-full h-[60%] items-center
 }
 
 .foco-on {
@@ -71,7 +71,7 @@
 }
 
 .progress-bar-box {
-    @apply w-full h-[30%] flex items-center gap-3 justify-between mb-5
+    @apply w-full h-[40%] flex items-center gap-3 justify-between mb-3
 }
 
 .edit-button {
@@ -79,7 +79,7 @@
 }
 
 .remove-button {
-    @apply w-12 h-7 bg-red-500 rounded-md
+    @apply h-7 bg-red-500 rounded-md
 }
 
 .progress-bar {
