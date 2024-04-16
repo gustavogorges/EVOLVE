@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/model/user';
 
 @Component({
@@ -10,9 +10,15 @@ export class UserMemberComponent implements OnInit {
 
   @Input() user!:User
 
+  @Input() isUserSelected:boolean = false
+
   constructor() { 
   }
 
   async ngOnInit(): Promise<void> {  }
+
+  getBackgroundColor(){
+    return this.isUserSelected ? "bg-slate-200" : "bg-primaryWhite"
+  }
 
 }

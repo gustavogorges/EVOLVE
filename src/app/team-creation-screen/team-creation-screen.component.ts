@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from 'src/model/team';
+import { User } from 'src/model/user';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-team-creation-screen',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamCreationScreenComponent implements OnInit {
 
-  constructor() { }
+  isSearchUserModalOpen:boolean=false
 
-  ngOnInit(): void {
+  teamParticipants:Array<User> = new Array
+
+  team!:Team
+
+
+  constructor(private service:BackendEVOLVEService) { }
+
+  async ngOnInit(): Promise<void> {
+    this.team = new Team
+    // this.team = await this.service.postEquipe(this.team)
+    // this.team.imageColor = "#05ff9e"
+  }
+
+
+  setSearchUserModal(){
+    this.isSearchUserModalOpen = !this.isSearchUserModalOpen
+  }
+
+  addUsers(users:Array<User>){
+    users.forEach(user => this.teamParticipants.push(user))
+    this.isSearchUserModalOpen=false
   }
 
 }
