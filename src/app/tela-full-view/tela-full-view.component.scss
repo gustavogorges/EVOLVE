@@ -142,20 +142,24 @@
             }
 
             .membros{
-                @apply py-[7%];
+                @apply my-[2%] h-[20vh] overflow-auto;
 
                 .membro{
-                    @apply grid grid-cols-2 items-center grid-rows-1;
+                    @apply grid grid-cols-2 items-center grid-rows-1 duration-200;
                     grid-template-columns: 10% 80%;
                     grid-template-rows: 2.5rem;
     
                     .ponto{
-                        @apply col-start-1 col-end-2 dark:text-dark-secundary-green text-secondary
+                        @apply col-start-1 col-end-2 dark:text-dark-secundary-green text-secondary duration-200
                     }
     
                     .name-user{
                         @apply col-start-2 dark:text-gray-100
                     }
+                }
+
+                .member-infos-view{
+                    @apply w-full duration-200 overflow-hidden;
                 }
             }
             .propriedades{

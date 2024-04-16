@@ -130,11 +130,15 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       } 
     });
 
-    project = await this.service.getOne("project", project.id)
+    setTimeout(async () => {
+      project = await this.service.getOne("project", project.id)
+    })
 
-    postProject.image = project.image
-    postProject.members = project.members
-    postProject.editOn = false
+    setTimeout(() => {
+      postProject.image = project.image
+      postProject.members = project.members
+      postProject.editOn = false
+    })
   }
 
   async createImageProject(p:Project){

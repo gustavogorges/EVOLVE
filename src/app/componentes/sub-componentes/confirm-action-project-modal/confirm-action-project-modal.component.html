@@ -1,0 +1,13 @@
+<div class="xl:w-[25vw] h-[25vh] xl:h-[15vw] bg-secondaryWhite rounded-xl border-4 justify-items-center shadow-xl grid grid-cols-1 grid-rows-4" style="grid-template-rows: 33% 37% 17% 13%;">
+    <div class="flex h-full items-center">
+        <i class="pi pi-exclamation-triangle p-2 text-red-600" style="font-size: 40px;"></i>
+    </div>
+    <div class="">
+        <p class="text-2xl font-semibold text-center font-hind-madurai px-10">{{quest}}</p>
+    </div>
+    <div class="flex justify-evenly w-full">
+        <button (click)="confirm()" class="p-2 bg-red-600 rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">Confirmar</button>
+        <button (click)="cancel()" class="p-2 bg-secondary rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">Cancelar</button>
+    </div>
+    <div class="flex justify-center items-end h-full row-start-4 text-fontGray"><p>Cancelamento automático em {{time}}</p></div>
+</div>

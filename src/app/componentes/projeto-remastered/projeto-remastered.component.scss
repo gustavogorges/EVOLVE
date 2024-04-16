@@ -2,7 +2,7 @@
     @apply xl:flex mb-14 drop-shadow-2xl dark:shadow-secondaryWhite;;
 
     .project{
-        @apply grid grid-rows-6 grid-cols-3 xl:w-[25.6vw] xl:h-[56vh] bg-secondaryWhite dark:bg-dark-primary-black duration-300;
+        @apply grid grid-rows-6 grid-cols-3 2xl:w-[25.6vw] xl:h-[56vh] bg-secondaryWhite dark:bg-dark-primary-black duration-300;
         grid-template-rows: 30% 15% 25% 10% 9% 1% 10%;
         grid-template-columns: 28% 44% 28%;
 
@@ -12,7 +12,7 @@
             grid-template-rows: 50% 50%;
 
             .image{
-                @apply w-[7vw] h-[7vw] rounded-full col-span-full row-span-full overflow-hidden;
+                @apply sm:w-[11vw] sm:h-[11vw] xl:h-[7vw] xl:w-[7vw] w-[20vw] h-[20vw] rounded-full col-span-full row-span-full overflow-hidden;
 
                 img{
                     @apply h-full w-full object-cover;
@@ -32,15 +32,15 @@
             @apply row-start-2 col-start-2 col-end-3 flex items-center ;
 
             input{
-                @apply w-full px-2 h-[6vh] rounded-lg text-clip text-2xl bg-transparent text-center outline-gray-300 dark:text-secondaryWhite; 
+                @apply w-full px-2 h-[6vh] rounded-lg text-clip text-sm lg:text-2xl bg-transparent text-center outline-gray-300 dark:text-secondaryWhite; 
             }
         }
 
         .project-desc{
-            @apply col-span-full px-[10%] row-start-3 row-end-4 flex justify-center items-center;
+            @apply col-span-full px-[10%] row-start-3 row-end-4 flex justify-center items-center py-2;
 
             textarea{
-                @apply h-full resize-none w-full bg-gray-100 rounded-lg outline-none shadow-inner p-4 px-5 truncate dark:bg-dark-primary-gray dark:text-secondaryWhite;
+                @apply h-full resize-none w-full whitespace-pre-wrap bg-gray-100 text-sm lg:text-lg rounded-lg outline-none shadow-inner p-4 px-5 truncate dark:bg-dark-primary-gray dark:text-secondaryWhite;
             }
         }
 
@@ -55,7 +55,7 @@
             @apply row-start-7 col-start-3 col-end-3 w-full h-full flex items-center gap-3;
 
             div{
-                @apply w-[2vw] h-[2vw] rounded-full flex justify-center items-center select-none
+                @apply xl:w-[2vw] xl:h-[2vw] w-[4vw] h-[4vw] rounded-full flex justify-center items-center select-none
             }
 
             p{
@@ -75,7 +75,7 @@
             @apply row-start-7 h-full w-full flex items-center px-[10%] col-span-full;
 
             p{
-                @apply text-primary text-xl dark:text-dark-primary;
+                @apply text-primary text-sm 2xl:text-xl dark:text-dark-primary;
             }
         }
     }
@@ -125,6 +125,10 @@
                         @apply font-semibold
                     }
                 }
+                
+                .noneTask{
+                    @apply h-[80%] w-full flex justify-center items-center text-xl text-fontGray whitespace-nowrap;
+                }
             }
         }
 
@@ -155,6 +159,10 @@
                         .delete-member{
                             @apply absolute right-0 rounded-full bg-red-600 flex justify-center items-center hover:scale-110 duration-150 overflow-hidden;
                         }
+                    }
+
+                    .membros{
+                        @apply w-full h-full flex items-center justify-center;
                     }
                 }
 
@@ -188,7 +196,7 @@
                 }
             }
         
-            .botao-ir-para-tarefa{
+            .botao-ir-para-projeto{
                 @apply w-auto px-1 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
             }
         }
@@ -238,6 +246,10 @@
                         @apply font-semibold
                     }
                 }
+
+                .noneTask{
+                    @apply h-[20%] w-full flex justify-center items-center text-xl text-fontGray whitespace-nowrap;
+                }
             }
         }
 
@@ -252,22 +264,26 @@
                 }
 
                 .users{
-                    @apply flex gap-2 w-full overflow-x-auto;
+                    @apply flex gap-6 w-full overflow-x-auto;
 
                     .users-spam{
                         @apply flex flex-col items-center gap-1 relative;
 
                         div{
-                            @apply w-[4.2vw] h-[4.2vw] rounded-full flex items-center justify-center font-bold text-4xl 
+                            @apply w-[12vw] h-[12vw] lg:w-[8vw] lg:h-[8vw] rounded-full flex items-center justify-center font-bold text-4xl 
                         }
 
                         p{
-                            @apply text-sm truncate max-w-[5vw] dark:text-secondaryWhite
+                            @apply text-sm truncate max-w-[14vw] dark:text-secondaryWhite
                         }
                         
                         .delete-member{
                             @apply absolute right-0 rounded-full bg-red-600 flex justify-center items-center hover:scale-110 duration-150 overflow-hidden;
                         }
+                    }
+
+                    .membros{
+                        @apply w-full h-full text-sm flex items-center justify-center;
                     }
                 }
 
@@ -282,11 +298,11 @@
             }
 
             .botao-cancelar{
-                @apply w-auto px-1 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105
+                @apply w-[30%] px-1 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105
             }
         
             .botao-salvar-projeto{
-                @apply w-auto 2xl:px-3 h-10 bg-secondary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+                @apply w-[30%] px-3 h-10 bg-secondary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
         
                 i{
                     @apply px-1 text-sm
@@ -294,15 +310,19 @@
             }
 
             .botao-editar-projeto{
-                @apply w-auto px-1 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+                @apply w-[30%] px-1 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
         
                 i{
-                    @apply px-1 text-sm
+                    @apply text-sm
                 }
             }
+
+            .botao-ir-para-projeto{
+                @apply w-[30%] px-1 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
         
-            .botao-ir-para-tarefa{
-                @apply w-auto px-1 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
+                i{
+                    @apply text-sm
+                }
             }
         }
     }

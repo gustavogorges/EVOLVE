@@ -98,7 +98,7 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
 import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
-import { ConfirmActionProjectModalComponent } from './componentes/sub-componentes/delete-member-of-project-modal/confirm-action-project-modal.component';
+import { ConfirmActionProjectModalComponent } from './componentes/sub-componentes/confirm-action-project-modal/confirm-action-project-modal.component';
 
 
 

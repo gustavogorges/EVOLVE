@@ -130,6 +130,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
       this.confirmationAction = undefined;
       
       if (confirmation) {
+        this.projeto.editOn = false
         this.projetoSave = cloneDeep(this.projeto);
         this.salvarProjeto.emit(this.projeto)
         this.editProjectEmit(false)
@@ -163,7 +164,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async irParaProjeto(){
-    this.route.navigate(['tela-tarefa'])
+    localStorage.setItem("project-view", JSON.stringify(this.projeto.id))
+    this.route.navigate(['view-project'])
   }
 
   cancelEdit(){
@@ -175,6 +177,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
         this.projeto.finalDate = this.projetoSave.finalDate
         this.projeto.members = this.projetoSave.members
         this.projeto.tasks = this.projetoSave.tasks
+        this.projeto.editOn = false
         this.preImage = ''
         this.editProjectEmit(false)
         this.resetProjectOff.emit(false)
@@ -183,20 +186,31 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async removeMember(user:User) {
-    this.quest.emit("Realmente deseja remover um membro?");
+    if(user.id != this.projeto.creator.id){
+      this.quest.emit("Realmente deseja remover um membro?");
   
-    try {
-      const confirmation = await this.waitForConfirmation();
-      this.confirmationAction = undefined;
+      try {
+        const confirmation = await this.waitForConfirmation();
+        this.confirmationAction = undefined;
 
-      if (confirmation) {
-        this.projeto.members.splice(this.projeto.members.indexOf(user), 1)
-        this.listIdsFromRemove.push({
-          "id" : user.id
-        })
-      }
+        if (confirmation) {
+          this.projeto.members.splice(this.projeto.members.indexOf(user), 1)
+          this.listIdsFromRemove.push({
+            "id" : user.id
+          })
+        }
 
-    } catch (ignore) {}
+      } catch (ignore) {}
+    }
+  }
+
+  verifyIsCreator(p:User){
+    console.log(p.id, this.projeto.creator.id);
+    
+    if(p.id != this.projeto.creator.id){
+      return true
+    }
+    return false
   }
   
   waitForConfirmation(): Promise<boolean> {

@@ -68,28 +68,35 @@
         <div class="name">
             <p class="name-text">Membros</p>
         </div>
-        <div class="membros">
-            <div class="membro">
-                <i class="pi pi-ellipsis-v ponto"></i>
-                <p class="name-user">José Almeida</p>
+        <div *ngIf="projeto" class="membros">
+            <div *ngFor="let member of projeto.members, index as index">
+                <div class="membro" *ngIf="index < blockMember()">
+                    <div><i [ngClass]="openMemberView != undefined && openMemberView === index ? 'rotate-90':''" (click)="openMember(index)" class="pi pi-ellipsis-v ponto cursor-pointer"></i></div>
+                    <p class="name-user">{{member.name}}</p>
+                </div>
+
+                <div [ngClass]="openMemberView != undefined && openMemberView === index ? 'h-[2vw]':'h-0'"
+                class="member-infos-view">
+                    <div class="flex justify-between h-full items-center px-4">
+                        <div class="flex justify-center gap-2 text-primary dark:text-dark-primary">
+                            <div><i class="pi pi-envelope"></i></div>
+                            <div><p class="truncate">{{member.email}}</p></div>
+                        </div>
+                        <button class="px-2 p-1 bg-secondary rounded-lg flex gap-2"><i class="pi pi-user"></i>   <i class="pi pi-angle-double-right"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="membro">
-                <i class="pi pi-ellipsis-v ponto"></i>
-                <p class="name-user">Clarice Lispector</p>
-            </div>
-            <div class="membro">
-                <i class="pi pi-ellipsis-v ponto"></i>
-                <p class="name-user">Jorge Amado</p>
-            </div>
-            <div class="membro">
-                <i class="pi pi-ellipsis-v ponto"></i>
-                <p class="name-user">Fernando Pessoa</p>
-            </div>
+        </div>
+        <div class="flex justify-end">
+            <button *ngIf="!unlockAllMembersView" (click)="unlockMembersView()" class="text-primary font-semibold dark:text-dark-primary">Ver todos</button>
+            <button *ngIf="unlockAllMembersView" (click)="unlockMembersView()" class="text-primary font-semibold dark:text-dark-primary">Ver menos</button>
         </div>
         <div class="name">
             <p class="name-text">Status das Tarefas</p>
         </div>
-        <app-status-component-criar-tarefa [isVisible]="true"></app-status-component-criar-tarefa>
+        <div>
+
+        </div>
         <div class="name">
             <p class="name-text pt-[8%]">Propriedades</p>
         </div>

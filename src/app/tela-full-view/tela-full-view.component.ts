@@ -2,6 +2,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs';
 import { Project } from 'src/model/project';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-tela-full-view',
   templateUrl: './tela-full-view.component.html',
@@ -19,6 +20,11 @@ export class TelaFullViewComponent implements OnInit {
     newChartBool: Boolean = false
     viewOptionsBol: Boolean = true
     viewEditBol: Boolean = false
+    openMemberView : number | undefined
+    unlockAllMembersView = false;
+    statusNames:any[] = []
+
+    constructor(private service : BackendEVOLVEService){}
 
     deleteDashboard(dashboard:any){
         this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
@@ -40,8 +46,61 @@ export class TelaFullViewComponent implements OnInit {
         dashboard.charts.splice(i, 1)
     }
 
-    ngOnInit() {
-        this.chartsInitialize()
+    async ngOnInit() {
+        let projectId = localStorage.getItem("project-view") as unknown as number  
+
+        if(projectId >= 0){
+            this.projeto = await this.service.getOne("project", projectId)
+        }
+        console.log(this.projeto);
+        
+        setTimeout(() => {
+            this.getStatusChart()   
+        });
+        setTimeout(() => {
+            this.chartsInitialize()   
+        });
+    }
+
+    getStatusChart(){
+        this.projeto.statusList.forEach(element => {
+            this.statusNames.push([
+                element.name
+            ])
+        });
+    }
+
+    openMember(index:number){
+        if(this.openMemberView != undefined){
+            if(this.openMemberView === index){
+                this.closeMember()
+            }else{
+                this.openMemberView = index
+            }
+        }
+        else{
+            this.openMemberView = index
+        }
+    }
+
+    blockMember(){
+       if(!this.unlockAllMembersView){
+        return 4;
+       }else{
+        return 9999999;
+       }
+    }
+
+    unlockMembersView(){
+        this.unlockAllMembersView = !this.unlockAllMembersView
+     }
+
+    closeMember(){
+        this.openMemberView = undefined
+    }
+
+    ngOnDestroy(){
+        localStorage.removeItem("project-view")
     }
     
     newDashVisible(){
@@ -90,15 +149,16 @@ export class TelaFullViewComponent implements OnInit {
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
+        
         this.charts.push({
             id: 0,
             type: 'bar',
             data : {
-                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                labels: ['a','b','c','d','e','f','g','h'],
                 datasets: [
                     {
-                        label: 'Sales',
-                        data: [540, 325, 702, 620],
+                        label: 'Status do projeto',
+                        data: [540, 325, 702, 620, 33, 33, 33],
                         backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
                         borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
                         borderWidth: 1
