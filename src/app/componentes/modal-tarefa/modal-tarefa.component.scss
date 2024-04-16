@@ -64,10 +64,6 @@
 
 .name {
     @apply text-4xl text-primary font-bold ;
-    white-space: nowrap; /* Evita a quebra de linha */
-  position: absolute;
-  transform: translateX(0); /* Inicia na posição original */
-  transition: transform 5s linear;
 }
 
 .progress-bar-box {
@@ -104,8 +100,16 @@
     @apply flex flex-col w-full gap-0 
 }
 
+.confirmation-buttons {
+    @apply flex items-center justify-center h-[70%] w-[18%] gap-2 bg-secondary text-primaryWhite rounded
+}
+
+.btn {
+    @apply h-6 w-[65%] rounded text-white flex items-center justify-center cursor-pointer
+}
+
 .date-end {
-    @apply flex justify-center ml-2 hover:bg-slate-100  px-2 rounded-lg cursor-pointer text-slate-500
+    @apply flex justify-center ml-2 hover:bg-slate-100  gap-1 rounded-lg cursor-pointer text-slate-500
 }
 
 .name-icon {
@@ -205,22 +209,8 @@
 }
 
 .name-box {
-    @apply min-w-min h-10 ;
-      overflow: hidden; 
-      position: relative;
-    }
-    
-    
-    
-    .name-box:hover .name {
-      transform: translateX(-100%);
-      overflow:visible; 
-    }
-    
-    .name-box:not(:hover) .name {
-      transition: none; 
-    }
-
+    @apply min-w-min h-10 flex ;
+}
 
 .cancel-button {
     @apply bg-primary px-5 py-1 rounded-lg

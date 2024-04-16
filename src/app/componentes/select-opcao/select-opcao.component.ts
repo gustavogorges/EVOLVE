@@ -23,6 +23,9 @@ export class SelectOpcaoComponent implements OnInit {
   @Input()
   property : Property = new Property;
 
+  @Input()
+  task : Task = new Task;
+
   @Output() newItem = new EventEmitter<boolean>();
 
   optionsList : Array<Option> = new Array;
@@ -36,23 +39,27 @@ export class SelectOpcaoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.optionsList = this.property.options;
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+    console.log(this.task);
+    
   }
 
-  saveOptionUniSelect(option:Option) {
+  async saveOptionUniSelect(option:Option) {
     if(this.property.propertyType.toString() == "UniSelectValue") {
       this.property.currentOptions = [];
       this.property.currentOptions.push(option);
+      this.property = await this.service.updatePropertyOptions(this.task.id, this.loggedUser.id, this.property.id, this.property.currentOptions);
       this.newItem.emit(true);
     }
   }
 
-  saveOptionMultiSelect(option:Option) {
+  async saveOptionMultiSelect(option:Option) {
      if (!this.verifyIfCurrentOptionExists(option)) {
       this.property.currentOptions.push(option);
+      this.property = await this.service.updatePropertyOptions(this.task.id, this.loggedUser.id, this.property.id, this.property.currentOptions);
     }
   }
 
-  removeOptionMultiSelect(option:Option) {
+  async removeOptionMultiSelect(option:Option) {
     if (this.verifyIfCurrentOptionExists(option)) {
       this.property.currentOptions.forEach(elementFor => {
         if(elementFor.id == option.id) {
@@ -61,6 +68,7 @@ export class SelectOpcaoComponent implements OnInit {
         }
       });
     }
+    this.property = await this.service.updatePropertyOptions(this.task.id, this.loggedUser.id, this.property.id, this.property.currentOptions);
   }
 
   excludeOptionMultiSelect(option:Option) {

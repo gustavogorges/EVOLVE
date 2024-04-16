@@ -5,13 +5,27 @@
   <div class="the-box">
     <div class="name-progress">
       <div class="foco-name-box">
-        <div class="name-box">
-          <p class="name" *ngIf="!booleanEdit">{{ tarefa.name }}</p>
-          <span
-            class="p-input-icon-right w-full h-full flex items-center"
-            *ngIf="booleanEdit"
+        <div class="name-box items-center justify-between">
+          <p class="name" 
+          style="font-size: 2.25rem"
+          *ngIf="!booleanEditName"
+          >{{ tarefa.name }}
+          </p>
+          <i
+              *ngIf="!booleanEditName"
+              class="pi pi-pencil text-primary cursor-pointer rounded-md"
+              style="font-size: 1.3rem"
+              (click)="this.booleanEditName = true"
+            >
+          </i>
+          <span class="p-input-icon-right w-full h-full flex items-center"
+          *ngIf="booleanEditName"
           >
-            <i class="pi pi-pencil" style="font-size: 1.3rem"></i>
+            <i
+              class="pi pi-check p-2 bg-secondary cursor-pointer rounded-md"
+              style="font-size: 1.3rem; color: white;"
+              (click)="saveName()"
+            ></i>
             <input
               class="input-box"
               style="font-size: 30px; color: #185e77; font-weight: bold"
@@ -21,7 +35,7 @@
             />
           </span>
         </div>
-        <div *ngIf="!booleanEdit" class="foco-box">
+        <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
             <p class="font-bold">iniciar foco</p>
@@ -62,13 +76,11 @@
         </div>
         <!-- BOTÃO QUE DELETA A TAREFA -->
         <div class="flex gap-5 h-full w-[21%] cursor-pointer">
-          <div
-            class="remove-button flex w-full justify-center items-center"
-          >
-          <div class="flex w-full justify-center items-center gap-2">
-            <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-            <p class="text-white font-bold">exluir tarefa</p>
-          </div>
+          <div class="remove-button flex w-full justify-center items-center">
+            <div class="flex w-full justify-center items-center gap-2">
+              <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
+              <p class="text-white font-bold">exluir tarefa</p>
+            </div>
           </div>
         </div>
       </div>
@@ -89,7 +101,7 @@
       [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
     >
       <aside class="flex justify-between">
-        <section class="w-1/2 flex flex-col  ">
+        <section class="w-1/2 flex flex-col">
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
@@ -108,9 +120,18 @@
                 type="date"
                 [(ngModel)]="tarefa.finalDate"
               />
+              <div
+                *ngIf="booleanCalendarioFinalDate"
+                class="confirmation-buttons"
+                (click)="saveProperty()"
+              >
+                <div class="btn confirm-btn">
+                  <i class="pi pi-check"></i>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="propertie ">
+          <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-spinner"></i>
               <p class="name-propertie">status:</p>
@@ -126,12 +147,11 @@
                 {{ tarefa.currentStatus.name }}
               </div>
             </div>
-            <!--[projeto]="tarefa.projeto"-->
             <app-select-status
               (newItem)="editStatus()"
               [projeto]="projeto"
               [tarefa]="tarefa"
-              [statusLista]="projeto.statusList"
+              [loggedUser]="loggedUser"
               *ngIf="booleanStatus"
             ></app-select-status>
           </div>
@@ -149,7 +169,7 @@
               (click)="openSelectAssociates()"
             >
               <div
-              *ngFor="let associate of listAssociates"
+                *ngFor="let associate of listAssociates"
                 class="responsible-icon"
                 [ngStyle]="{
                   'background-image':
@@ -166,16 +186,16 @@
               (click)="openSelectAssociates()"
               class="h-9 w-9 bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer flex justify-center items-center"
             >
-            <i class="pi pi-plus text-primary text-base font-bold"></i>
-          </div>
-          <div>
-            <app-select-associates
-            [project]="projeto"
-            [task]="tarefa"
-            (newItem)="updateAssociatesList($event)"
-            *ngIf="booleanSelectAssociates"
-            ></app-select-associates>
-          </div>
+              <i class="pi pi-plus text-primary text-base font-bold"></i>
+            </div>
+            <div>
+              <app-select-associates
+                [project]="projeto"
+                [task]="tarefa"
+                (newItem)="updateAssociatesList($event)"
+                *ngIf="booleanSelectAssociates"
+              ></app-select-associates>
+            </div>
           </div>
           <div class="propertie">
             <div class="name-icon">
@@ -201,8 +221,8 @@
       </aside>
 
       <div class="flex justify-between w-full">
-        <div class="flex flex-col h-max w-1/2 ">
-          <div class="propertie min-w-[40%] ">
+        <div class="flex flex-col h-max w-1/2">
+          <div class="propertie min-w-[40%]">
             <div class="name-icon">
               <i class="icon-propertie pi pi-exclamation-circle"></i>
               <p class="name-propertie">prioridade:</p>
@@ -225,6 +245,7 @@
               <app-select-prioridade
                 [task]="tarefa"
                 [listPriorities]="listPriorities"
+                [loggedUser]="loggedUser"
                 *ngIf="booleanSelectPrioridade"
                 (eventEmitter)="finishEditPriority($event)"
               >
@@ -239,8 +260,9 @@
               <app-propriedade-tarefa
                 class="propertie"
                 [property]="property"
+                [task]="tarefa"
+                [loggedUser]="loggedUser"
                 [events]="eventsSubject.asObservable()"
-                (eventEmitter)="editNoValue()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
               ></app-propriedade-tarefa>
@@ -248,7 +270,7 @@
           </div>
         </div>
 
-        <div class="flex flex-col h-full w-1/2 ">
+        <div class="flex flex-col h-full w-1/2">
           <div
             *ngFor="let property of propertiesList; index as indice"
             class="h-full w-[85%]"
@@ -257,8 +279,9 @@
               <app-propriedade-tarefa
                 class="propertie"
                 [property]="property"
+                [task]="tarefa"
+                [loggedUser]="loggedUser"
                 [events]="eventsSubject.asObservable()"
-                (eventEmitter)="editNoValue()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
               ></app-propriedade-tarefa>
@@ -293,18 +316,13 @@
           pInputTextarea
           [autoResize]="true"
           [(ngModel)]="tarefa.description"
-          [disabled]="!booleanEdit"
           [ngClass]="booleanDesc ? 'min-w-[80%] h-48' : 'w-0 h-0'"
           class="box-description"
           *ngIf="booleanDesc"
         ></textarea>
       </div>
     </div>
-    <div
-      class="tabs"
-      [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'"
-      *ngIf="!booleanEdit"
-    >
+    <div class="tabs" [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'">
       <div class="pages">
         <p
           [ngClass]="
@@ -357,7 +375,7 @@
           class="page-name"
           (click)="changePage('automacao')"
         >
-          automoção
+          automação
         </p>
         <p
           [ngClass]="

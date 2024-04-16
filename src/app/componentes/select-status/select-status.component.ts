@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -21,10 +22,10 @@ export class SelectStatusComponent implements OnInit {
   projeto : Project = new Project;
 
   @Input()
-  statusLista : Array<Status> = new Array
+  tarefa : Task = new Task;
 
   @Input()
-  tarefa : Task = new Task;
+  loggedUser : User = new User;
 
   @Output() newItem = new EventEmitter<boolean>();
 
@@ -39,6 +40,7 @@ export class SelectStatusComponent implements OnInit {
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;
+    this.service.updateCurrentStatus(this.tarefa.id,this.loggedUser.id,status);
     this.newItem.emit(false);
   }
 

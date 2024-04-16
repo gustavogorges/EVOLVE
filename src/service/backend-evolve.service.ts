@@ -179,4 +179,16 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+path+id)).data
   }
 
+  async updateTaskName(taskId:number, userId:number, newName:string) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/name/"+userId+"/"+newName)).data
+  }
+
+  async updatePropertyOptions(taskId:number, userId:number, propertyId:number, newOptions:Array<Option>) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/currentOptions/"+userId+"/"+propertyId,newOptions)).data
+  }
+
+  async updateTaskFinalDate(taskId:number, userId:number, newDate:Date) {
+    return (await axios.put(this.URL+"task/update/finalDate/"+taskId+"/"+userId+"/calendar/"+newDate)).data
+  }
+
 }
