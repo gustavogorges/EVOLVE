@@ -111,6 +111,8 @@ export class ModalTarefaComponent implements OnInit {
   sendEventEmitter():void {
     this.closeModalTask.emit(true);
   }
+  booleanDeleteProperty:boolean = false;
+
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
@@ -317,5 +319,10 @@ export class ModalTarefaComponent implements OnInit {
 
   closeAddPropertie() {
     this.booleanAddPropriedade = false;
+  }
+
+  deleteTask() {
+    this.service.deleteTask(this.tarefa.id);
+    this.closeModalTask.emit(true);
   }
 }

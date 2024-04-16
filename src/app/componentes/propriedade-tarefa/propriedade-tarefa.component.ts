@@ -116,6 +116,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   loggedUser : User = new User();
 
   booleanValue : boolean = false;
+  booleanDeleteProperty: boolean = false;
 
   booleanValueOption : boolean = false;
 
@@ -224,6 +225,10 @@ export class PropriedadeTarefaComponent implements OnInit {
 
     this.eventEmitterValue.emit(property);
     this.eventEmitterValue2.emit(this.propertyValueStack);
+  }
+
+  async deleteProperty(property:Property) {
+    this.task = await this.service.deleteProperty(this.task.id,this.loggedUser.id,property.id);
   }
 
   oldValueFunction() {

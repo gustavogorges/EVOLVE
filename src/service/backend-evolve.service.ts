@@ -192,6 +192,10 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+path+id)).data
   }
 
+  async deleteProperty(taskId:number, userId:number, propertyId:number) {
+    return (await axios.delete(this.URL+"task/property/delete/"+taskId+"/"+userId+"/"+propertyId)).data
+  }
+
   async updateTaskName(taskId:number, userId:number, newName:string) {
     return (await axios.patch(this.URL+"task/update/"+taskId+"/name/"+userId+"/"+newName)).data
   }
@@ -204,4 +208,7 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"task/update/finalDate/"+taskId+"/"+userId+"/calendar/"+newDate)).data
   }
 
+  async deleteTask(taskId:number) {
+    return (await axios.delete(this.URL+"task/delete/"+taskId)).data
+  }
 }
