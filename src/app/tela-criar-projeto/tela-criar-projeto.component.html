@@ -53,7 +53,6 @@
                     <div *ngIf="statusVisible" class="absolute translate-y-20 " #statusClose >
                         <app-select-status
                         [projeto]="projeto"
-                        [statusLista]="projeto.statusList"
                         (addNewStatus)="createStatus($event)"
                         ></app-select-status>
                     </div>                    
@@ -153,7 +152,6 @@
                     <div *ngIf="statusVisible" class="absolute translate-y-20 translate-x-14 xl:translate-x-1" #statusClose >
                         <app-select-status
                         [projeto]="projeto"
-                        [statusLista]="projeto.statusList"
                         (addNewStatus)="createStatus($event)"
                         ></app-select-status>
                     </div>                    

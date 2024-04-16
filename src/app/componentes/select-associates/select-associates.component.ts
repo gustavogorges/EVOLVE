@@ -40,6 +40,7 @@ export class SelectAssociatesComponent implements OnInit {
 
   saveAssociate(associate:User) { 
     this.task.associates.push(associate)
+    this.service.patchAssociate(this.task.id, this.task.associates, this.project.id);
   }
 
   eventEmitterFunc() : void {

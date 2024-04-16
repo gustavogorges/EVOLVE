@@ -10,6 +10,7 @@ import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-modal-tarefa',
@@ -21,7 +22,6 @@ export class ModalTarefaComponent implements OnInit {
   page_task: string = 'sub-tarefas';
   nomeGrande: string = '';
   editBoolean: boolean = false;
-  booleanEdit: boolean = false;
   booleanStatus: boolean = false;
   booleanCalendarioFinalDate: boolean = false;
   booleanCalendariosScheduling : boolean = false;
@@ -42,6 +42,8 @@ export class ModalTarefaComponent implements OnInit {
   propertiesValuesStack : Array<PropertyValue> = new Array;
 
   propertiesList : Array<Property> = new Array();
+
+  booleanEditName : boolean = false;
 
   interval : any;
 
@@ -95,16 +97,13 @@ export class ModalTarefaComponent implements OnInit {
     clearInterval(this.interval);
   }
 
-  finishEditPriority() {
-    this.booleanSelectPrioridade = false;
-  }
-
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
   }
 
-  constructor(private service: BackendEVOLVEService) {}
+  constructor(private service: BackendEVOLVEService,
+    private cookies_service:CookiesService) {}
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
   @Output() closeModalTask = new EventEmitter<boolean>();
@@ -112,24 +111,27 @@ export class ModalTarefaComponent implements OnInit {
   sendEventEmitter():void {
     this.closeModalTask.emit(true);
   }
+  booleanDeleteProperty:boolean = false;
+
   tarefaNova: Task = new Task();
 
   listPriorities !: PriorityRecord[];
   listAssociates !: Array<any>;
+  loggedUser : User = new User;
+  taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
-    console.log(this.projeto);
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+    this.taskUnchanged = await this.service.getOne("task",this.tarefa.id);  
     
     this.listAssociates = this.tarefa.associates;
 
-    console.log(this.listAssociates);
     
     this.listPriorities = await this.service.getAllPriorities()
     this.propertiesList = this.tarefa.properties;
 
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
-      this.booleanEdit = true;
       this.booleanCalendarioFinalDate = true;
       this.tarefa = this.tarefaNova;
       this.tarefa.currentStatus.name = "sem status";
@@ -142,28 +144,31 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
-  editNoValue() : void {
-    if(this.booleanEdit == false) {
-      this.edit();
-    }
-  }
+  
 
   listAssociatesVerify() : boolean {
     if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
       if(this.booleanSelectAssociates == false) {
-        console.log("ta chegando nesse if errado!");
-        
         return true;
       }
     }
     return false;
   }
 
+  saveProperty() : void {
+    console.log(this.tarefa.finalDate);
+    
+    this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
+    this.booleanCalendarioFinalDate = false;
+  }
+
+  async saveName() : Promise<void> {
+    this.tarefa = await this.service.updateTaskName(this.tarefa.id,this.loggedUser.id,this.tarefa.name);
+    this.booleanEditName = false;
+  }
+
   openSelectAssociates() : void {
     this.booleanSelectAssociates = true;
-    if(this.booleanEdit == false) {
-      this.edit();
-    }
   }
 
   updateAssociatesList(arrayForce : Array<User>) : void {
@@ -201,92 +206,83 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   edit() {
-    this.booleanEdit = !this.booleanEdit;
     this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
     this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling
   }
 
   editStatus() {
-    if (this.booleanEdit) {
-      this.booleanEdit = true;
       this.booleanStatus = !this.booleanStatus;
-    } else {
-      this.booleanStatus = !this.booleanStatus;
-      this.booleanEdit = !this.booleanEdit;
-    }
   }
 
   editPriority() {
-    if (this.booleanEdit) {
-      this.booleanEdit = true;
+ 
       this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
-    } else {
-      this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
-      this.booleanEdit = !this.booleanEdit;
-    }
+    
   }
 
   editDataFinalDate() {
     this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
-    if(!this.booleanEdit) {
-      this.booleanEdit = !this.booleanEdit;
-    }
+   
   }
 
   editDataScheduling() {
     this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
-    if(!this.booleanEdit) {
-      this.booleanEdit = !this.booleanEdit;
-    }
+    
   }
 
 
   eventsSubject: Subject<Property> = new Subject<Property>();
   eventsSubject2: Subject<PropertyValue> = new Subject<PropertyValue>();
 
-  booleanEditFalse() {
-    this.booleanEdit = false;
-    this.booleanCalendarioFinalDate = false;
-    this.booleanStatus = false;
-    this.tarefa.currentStatus = this.statusAntigo;
-    this.tarefa.description = this.descricaoAntiga;
-    this.tarefa.name = this.nomeAntigo;
-    this.eventsSubject.next(this.propertyStack);
-    this.eventsSubject2.next(this.propertyValueStack);
-  }
-
   async salvarTarefa() {
+    console.log(this.tarefa);
+    
   
-    if (this.tarefa.id != 0) {
-      this.service.putTarefa(this.tarefa);
+    if (this.tarefa.id != 0 && this.tarefa.id != null) {
+      //this.service.putTarefa(this.tarefa,this.loggedUser.id);
 
       this.propertiesStack.forEach(propertieStackFor => {
         if(propertieStackFor.name != '' ) {
           this.propertiesValuesStack.forEach(propertiesValueStackFor => {
             if(propertiesValueStackFor.property == propertieStackFor) {
-              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor)
+              this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id,this.tarefa.id)
             }
           })
           
         }
       })
-      
-      if(this.listAssociates != null) {
-        let associates : Array<Pick<User, "id">> = new Array;
-        this.listAssociates.forEach(associate => associates.push({"id":associate.id}))
-        console.log(associates);  
-        this.service.patchAssociate(this.tarefa.id, associates);
+
+      if (this.tarefa.currentStatus != this.taskUnchanged.currentStatus) {
+        // implementar novo patch para status aqui
+        this.tarefa = await this.service.updateCurrentStatus(this.tarefa.id, this.loggedUser.id, this.tarefa.currentStatus);
+      }
+
+      if(this.tarefa.priority.name != this.taskUnchanged.priority.name) {
+        this.tarefa = await this.service.updateCurrentPriority(this.tarefa.id, this.loggedUser.id, this.tarefa.priority);
+      }
+
+      if (this.listAssociates != null) {
+        let associates: Array<Pick<User, "id">> = new Array;
+        this.listAssociates.forEach(associate => associates.push({ "id": associate.id }))
+        this.service.patchAssociate(this.tarefa.id, associates, this.loggedUser.id);
       }
 
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
-      this.tarefa.creator.id = 1; 
+      this.tarefa.creator.id = this.loggedUser.id; 
       this.service.postTarefa(this.tarefa);
-      //if(this.propertyStack != null ) {
-      //  this.service.putPropertyValue(this.propertyStack.id,this.propertyStack)
-      //}
     }
 
+    this.verifyBooleans();
+  }
+
+  
+  finishEditPriority(priority:PriorityRecord) {
+    this.tarefa.priority = priority;
+    this.booleanSelectPrioridade = false;
+  }
+
+  verifyBooleans() : void {
     if (this.booleanCalendarioFinalDate == true) {
       this.booleanCalendarioFinalDate = false;
     }
@@ -296,7 +292,6 @@ export class ModalTarefaComponent implements OnInit {
     if (this.booleanStatus == true) {
       this.booleanStatus = false;
     }
-    this.booleanEdit = !this.booleanEdit;
   }
 
   setPropertyValue(property:Property) {
@@ -324,5 +319,10 @@ export class ModalTarefaComponent implements OnInit {
 
   closeAddPropertie() {
     this.booleanAddPropriedade = false;
+  }
+
+  deleteTask() {
+    this.service.deleteTask(this.tarefa.id);
+    this.closeModalTask.emit(true);
   }
 }

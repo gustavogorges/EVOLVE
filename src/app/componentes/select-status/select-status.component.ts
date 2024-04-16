@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -22,10 +23,10 @@ export class SelectStatusComponent implements OnInit{
   projeto : Project = new Project;
 
   @Input()
-  statusLista : Array<Status> = new Array
+  tarefa : Task = new Task;
 
   @Input()
-  tarefa : Task = new Task;
+  loggedUser : User = new User;
 
   @Output() newItem = new EventEmitter<boolean>();
   @Output() addNewStatus = new EventEmitter<Status>();
@@ -39,6 +40,7 @@ export class SelectStatusComponent implements OnInit{
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;
+    this.service.updateCurrentStatus(this.tarefa.id,this.loggedUser.id,status);
     this.newItem.emit(false);
   }
 
@@ -47,6 +49,7 @@ export class SelectStatusComponent implements OnInit{
   }
 
   async novoStatus(): Promise<void> {
+
     if(this.status.name != ''){
       if(this.status.backgroundColor === ''){
         this.status.backgroundColor = "#ff0000"
@@ -58,6 +61,7 @@ export class SelectStatusComponent implements OnInit{
     }
     this.status = new Status
   }
+
 
   editStatus(status:Status){
     this.status = status

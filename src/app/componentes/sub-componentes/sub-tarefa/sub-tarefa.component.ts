@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/model/task';
 import { Subtask } from 'src/model/subtask';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { User } from 'src/model/user';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-sub-tarefa',
@@ -29,26 +31,24 @@ export class SubTarefaComponent implements OnInit {
  
 
   constructor(
-    private service : BackendEVOLVEService
+    private service : BackendEVOLVEService,
+    private cookies_service:CookiesService
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.tarefa);
-    
-  }
+  loggedUser : User = new User;
+ 
+  async ngOnInit(): Promise<void> {
+   this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+   }
 
   async adicionarSubtarefa() {
     const subtarefaNova = new Subtask()
     subtarefaNova.name= this.subtarefa.nome
-   
-    console.log(subtarefaNova);
     
     this.tarefa.subtasks.push(subtarefaNova);
-    await this.service.putTarefa(this.tarefa)
-    this.tarefa = await this.service.getOne("task", this.tarefa.id)
+    this.tarefa = await this.service.patchSubtask(subtarefaNova,this.tarefa.id, this.loggedUser.id);
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
-    console.log(this.tarefa)
   }
 
   booleanSubtarefa() {
@@ -64,19 +64,16 @@ export class SubTarefaComponent implements OnInit {
     subtarefa.editable = true;
   }
 
-  removeSubtarefa(subtarefa : Subtask, i : number) {
+  async removeSubtarefa(subtarefa : Subtask, i : number) {
     this.tarefa.subtasks.splice(i,1)
-    console.log(this.listaSubtarefas)
-    this.service.putTarefa(this.tarefa);
+    this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
   }
 
   confirmEdit(subtarefa : Subtask) {
     console.log(this.listaSubtarefas)
     subtarefa.name = this.newNameEdit;
     subtarefa.editable = false;
-    console.log(this.listaSubtarefas)
-    console.log(this.tarefa.subtasks)
-    this.service.putTarefa(this.tarefa);
+    this.service.putTarefa(this.tarefa, this.loggedUser.id);
   }
   async completed(sub : Subtask){
       console.log(sub);
@@ -85,14 +82,13 @@ export class SubTarefaComponent implements OnInit {
       }else{
         sub.concluded=true;
       }
-      console.log(sub.id);
       this.tarefa.subtasks.map((s)=>{
         if(s.id ==sub.id){
           s.concluded=sub.concluded
         }
       })
 
-      await this.service.putTarefa(this.tarefa); 
+      await this.service.putTarefa(this.tarefa, this.loggedUser.id); 
       
       }
 

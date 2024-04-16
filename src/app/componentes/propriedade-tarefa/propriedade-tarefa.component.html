@@ -1,6 +1,11 @@
-<div class="propertie">
+<div class="propertie" (mouseover)="booleanDeleteProperty = true" (mouseout)="booleanDeleteProperty = false">
   <div class="name-icon">
-    <i class="icon-propertie {{ property.icon }}"></i>
+    <i  *ngIf="!booleanDeleteProperty"  class="icon-propertie {{ property.icon }}"></i>
+    <i 
+    *ngIf="booleanDeleteProperty" 
+    class="icon-propertie pi pi-trash hover:bg-slate-300 bg-slate-200 px-1 rounded-full hover:rounded-full hover:px-1 cursor-pointer"
+    (click)="deleteProperty(property)"
+    ></i>
     <p class="name-propertie">{{ property.name }}:</p>
   </div>
   <div *ngIf="checkEditable(property)" (click)="editPropertyValue(property)">
@@ -62,13 +67,13 @@
     <app-select-opcao
       *ngIf="selectOptionTypeCheck()"
       [property]="property"
+      [task]="task"
       (newItem)="selectOptionEmitter()"
     >
     </app-select-opcao>
     <app-select-associates
     *ngIf="property.propertyType.toString() == 'Associates'"
     >
-
     </app-select-associates>
     <div
       *ngIf="confirmButtonCheck()"

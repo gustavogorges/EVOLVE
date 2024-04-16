@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 
 @Component({
@@ -11,7 +13,8 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TaskCalendarComponent implements OnInit, OnChanges{
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService,
+    private cookies_service : CookiesService) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['taskList']) {
       // Call your function here, now that inputData has been received
@@ -26,11 +29,13 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
   diasCalendario: Date[] = [];
   dayOpen = new Date;
 
-  ngOnInit() {
+  loggedUser : User = new User;
+
+  async ngOnInit() {
     this.construirCalendario();
     this.dayOpen.setHours(0, 0, 0, 0)
 
-
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
     
   }
 
@@ -76,7 +81,7 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
         task.project = {
           id:this.project.id
         }
-        this.service.putTarefa(task);
+        this.service.putTarefa(task, this.loggedUser.id);
       
         this.diasCalendario.map(dia =>{
         

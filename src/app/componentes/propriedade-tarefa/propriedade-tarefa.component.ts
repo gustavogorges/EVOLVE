@@ -13,6 +13,8 @@ import { DataValue } from 'src/model/propriedade/property-values/dataValue';
 import { MultiSelectValue } from 'src/model/propriedade/property-values/multiSelectValue';
 import { UniSelectValue } from 'src/model/propriedade/property-values/uniSelectValue';
 import { AssociatesValue } from 'src/model/propriedade/property-values/associatesValue';
+import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -20,6 +22,9 @@ import { AssociatesValue } from 'src/model/propriedade/property-values/associate
   styleUrls: ['./propriedade-tarefa.component.scss']
 })
 export class PropriedadeTarefaComponent implements OnInit {
+  
+  @Input()
+  task : Task = new Task();
 
   constructor(private service : BackendEVOLVEService) { }
 
@@ -27,6 +32,9 @@ export class PropriedadeTarefaComponent implements OnInit {
   propertyValue : any;
 
   ngOnInit(): void {
+    console.log(this.task);
+    
+
     this.propertyValue = this.property.propertyValues[0]
 
     if(this.property.currentOptions.length > 0) {
@@ -104,7 +112,11 @@ export class PropriedadeTarefaComponent implements OnInit {
   @Input()
   booleanEdit !: boolean;
 
+  @Input()
+  loggedUser : User = new User();
+
   booleanValue : boolean = false;
+  booleanDeleteProperty: boolean = false;
 
   booleanValueOption : boolean = false;
 
@@ -130,7 +142,6 @@ export class PropriedadeTarefaComponent implements OnInit {
       this.booleanSelectOption = true;
     }
     
-    this.eventEmitter.emit();
   }
 
   checkEditable(property:Property) : boolean {
@@ -206,9 +217,7 @@ export class PropriedadeTarefaComponent implements OnInit {
       this.booleanValue = true;
      }
      
-
-    this.propertyStack = property;
-    this.propertyValueStack = this.propertyValueObject;
+      this.service.putPropertyValue(this.property.id,this.propertyValueObject,this.loggedUser.id,this.task.id)
     
     property.editable = false;
     this.booleanEditProperty = true;
@@ -216,6 +225,10 @@ export class PropriedadeTarefaComponent implements OnInit {
 
     this.eventEmitterValue.emit(property);
     this.eventEmitterValue2.emit(this.propertyValueStack);
+  }
+
+  async deleteProperty(property:Property) {
+    this.task = await this.service.deleteProperty(this.task.id,this.loggedUser.id,property.id);
   }
 
   oldValueFunction() {

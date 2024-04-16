@@ -1,3 +1,4 @@
+import { Historic } from "./historic";
 import { Priority } from "./priority";
 
 import { PriorityRecord } from "./priorityRecord";
@@ -25,6 +26,8 @@ export class Task{
     priority:PriorityRecord = new PriorityRecord();
 
     comments:Array<Comment> = new Array;
+
+    historic:Array<Historic> = new Array;
 
     creator:User = new User;
     project:Project | Partial<Project> = new Project;

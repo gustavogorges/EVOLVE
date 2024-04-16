@@ -1,5 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'

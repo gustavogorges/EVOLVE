@@ -1,4 +1,4 @@
 export class Value {
-    id : Number = new Number;
+    id !: number;
     propertyType : string = '';
 }

@@ -21,6 +21,8 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
+import { PriorityRecord } from 'src/model/priorityRecord';
+import { Subtask } from 'src/model/subtask';
 
 
 
@@ -55,20 +57,20 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+caminho + "/"+id)).data
   }
 
-  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>) {
-    return (await axios.patch(this.URL+"task/property/associates/"+taskId,associates)).data
+  async patchAssociate(taskId:number, associates:Array<Pick<User, "id">>, userId:number) {
+    return (await axios.patch(this.URL+"task/property/associates/"+taskId+"/"+userId,associates)).data
   }
 
   async getAllCommentsOfTask(taskId:number) {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
 
-  async patchNewComment(taskId:number, newComment:Comment) {
-    return (await axios.patch(this.URL+"task/comments/patch/"+taskId,newComment)).data
+  async patchNewComment(taskId:number, newComment:Comment, userId:number) {
+    return (await axios.patch(this.URL+"task/comments/patch/"+taskId+"/"+userId,newComment)).data
   }
 
-  async deleteComment(taskId:number, commentId:number) {
-    return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId)).data
+  async deleteComment(taskId:number, commentId:number, userId:number) {
+    return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId+"/"+userId)).data
   }
 
   async updateStatusList(projetoId:number,novoStatus:Status) {
@@ -79,12 +81,32 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"project/delete/"+projetoId, status )).data
   }
 
-  async patchProperty(taskProjectProperty:Property, taskId:number) {
-    return (await axios.patch(this.URL+"task/property/"+taskId,taskProjectProperty )).data
+  async patchProperty(taskProjectProperty:Property, taskId:number, userId:number) {
+    return (await axios.patch(this.URL+"task/property/"+taskId+"/"+userId,taskProjectProperty )).data
   }
 
-  async putPropertyOption(newOption:Option) {
-    return (await axios.put(this.URL+"task/property/put/option",newOption)).data
+  async updateCurrentStatus(taskId:number, userId:number, newStatus:Status) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/currentStatus/"+userId, newStatus)).data
+  }
+
+  async updateCurrentPriority(taskId:number, userId:number, newPriority:PriorityRecord) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/"+userId+"/currentPriority", newPriority)).data
+  }
+
+  async putPropertyOption(newOption:Option, userId:number, taskId:number, propertyId:number) {
+    return (await axios.put(this.URL+"task/property/put/option/"+userId+"/"+taskId+"/"+propertyId,newOption)).data
+  }
+
+  async deletePropertyOption(optionId:number, userId:number, taskId:number, propertyId:number) {
+    return (await axios.delete(this.URL+"task/property/delete/option/"+userId+"/"+taskId+"/"+propertyId+"/"+optionId)).data
+  }
+
+  async patchSubtask(subtask : Subtask, taskId:number, userId:number) {
+    return (await axios.patch(this.URL+"task/subtask/"+taskId+"/"+userId,subtask)).data
+  }
+
+  async deleteSubtask(subtaskId:number, taskId:number, userId:number) {
+    return (await axios.delete(this.URL+"task/subtask/delete/"+subtaskId+"/"+taskId+"/"+userId)).data
   }
 
   async patchPriority(priority:number,taskId:number) {
@@ -93,8 +115,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/priority/patch/"+taskId+"/"+priority)).data
   }
 
-  async putPropertyValue(propertyId:number, propertyValue:PropertyValue) {
-    return (await axios.put(this.URL+"task/property/put/"+propertyId,propertyValue)).data
+  async putPropertyValue(propertyId:number, propertyValue:PropertyValue, userId:number, taskId:number) {
+    return (await axios.put(this.URL+"task/property/put/"+propertyId+"/"+userId+"/"+taskId,propertyValue)).data
   }
 
   async getAllPriorities() {
@@ -105,8 +127,8 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL+"task", tarefa)).data 
   }
 
-  async putTarefa (tarefa:Task){
-    return (await axios.put(this.URL+"task", tarefa)).data
+  async putTarefa (tarefa:Task, userId:number){
+    return (await axios.put(this.URL+"task/"+userId, tarefa)).data
   }
 
   async postProjeto (projeto:Project){
@@ -194,9 +216,6 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
   }
 
-
-
-
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {
     let path:string = "userChat/user/"
@@ -215,6 +234,27 @@ export class BackendEVOLVEService {
 
   async patchImage(id:number, image:any){
     return (await (axios.patch(this.URL+"project/"+id+"/setImage", image))).data;
+  }
+
+
+  async deleteProperty(taskId:number, userId:number, propertyId:number) {
+    return (await axios.delete(this.URL+"task/property/delete/"+taskId+"/"+userId+"/"+propertyId)).data
+  }
+
+  async updateTaskName(taskId:number, userId:number, newName:string) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/name/"+userId+"/"+newName)).data
+  }
+
+  async updatePropertyOptions(taskId:number, userId:number, propertyId:number, newOptions:Array<Option>) {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/currentOptions/"+userId+"/"+propertyId,newOptions)).data
+  }
+
+  async updateTaskFinalDate(taskId:number, userId:number, newDate:Date) {
+    return (await axios.put(this.URL+"task/update/finalDate/"+taskId+"/"+userId+"/calendar/"+newDate)).data
+  }
+
+  async deleteTask(taskId:number) {
+    return (await axios.delete(this.URL+"task/delete/"+taskId)).data
   }
 
 }
