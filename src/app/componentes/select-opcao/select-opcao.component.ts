@@ -71,13 +71,14 @@ export class SelectOpcaoComponent implements OnInit {
     this.property = await this.service.updatePropertyOptions(this.task.id, this.loggedUser.id, this.property.id, this.property.currentOptions);
   }
 
-  excludeOptionMultiSelect(option:Option) {
+  async excludeOptionMultiSelect(option:Option) {
     if(this.verifyIfOptionExists(option)) {
       this.removeOptionMultiSelect(option);
-      this.property.options.forEach(optionFor => {
+      this.property.options.forEach(async optionFor => {
         if(optionFor.id == option.id) {
           const index: number = this.property.options.indexOf(optionFor);
           this.property.options.splice(index,1);
+          this.property = await this.service.deletePropertyOption(option.id, this.loggedUser.id, this.task.id, this.property.id);
         }
       })
     }
@@ -96,7 +97,7 @@ export class SelectOpcaoComponent implements OnInit {
   }
 
   async newOption(): Promise<void> {
-    const newOption:Option = await this.service.putPropertyOption(this.option, this.loggedUser.id);
+    const newOption:Option = await this.service.putPropertyOption(this.option, this.loggedUser.id, this.task.id, this.property.id);
     this.property.options.push(newOption);
     this.addOption();
   }

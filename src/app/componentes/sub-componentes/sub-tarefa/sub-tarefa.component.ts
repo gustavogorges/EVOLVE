@@ -46,8 +46,7 @@ export class SubTarefaComponent implements OnInit {
     subtarefaNova.name= this.subtarefa.nome
     
     this.tarefa.subtasks.push(subtarefaNova);
-    await this.service.putTarefa(this.tarefa, this.loggedUser.id)
-    this.tarefa = await this.service.getOne("task", this.tarefa.id)
+    this.tarefa = await this.service.patchSubtask(subtarefaNova,this.tarefa.id, this.loggedUser.id);
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
   }
@@ -65,9 +64,9 @@ export class SubTarefaComponent implements OnInit {
     subtarefa.editable = true;
   }
 
-  removeSubtarefa(subtarefa : Subtask, i : number) {
+  async removeSubtarefa(subtarefa : Subtask, i : number) {
     this.tarefa.subtasks.splice(i,1)
-    this.service.putTarefa(this.tarefa, this.loggedUser.id);
+    this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
   }
 
   confirmEdit(subtarefa : Subtask) {

@@ -22,6 +22,7 @@ import { ProjectChat } from 'src/model/projectChat';
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
 import { PriorityRecord } from 'src/model/priorityRecord';
+import { Subtask } from 'src/model/subtask';
 
 
 
@@ -88,8 +89,20 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/update/"+taskId+"/"+userId+"/currentPriority", newPriority)).data
   }
 
-  async putPropertyOption(newOption:Option, userId:number) {
-    return (await axios.put(this.URL+"task/property/put/option/"+userId,newOption)).data
+  async putPropertyOption(newOption:Option, userId:number, taskId:number, propertyId:number) {
+    return (await axios.put(this.URL+"task/property/put/option/"+userId+"/"+taskId+"/"+propertyId,newOption)).data
+  }
+
+  async deletePropertyOption(optionId:number, userId:number, taskId:number, propertyId:number) {
+    return (await axios.delete(this.URL+"task/property/delete/option/"+userId+"/"+taskId+"/"+propertyId+"/"+optionId)).data
+  }
+
+  async patchSubtask(subtask : Subtask, taskId:number, userId:number) {
+    return (await axios.patch(this.URL+"task/subtask/"+taskId+"/"+userId,subtask)).data
+  }
+
+  async deleteSubtask(subtaskId:number, taskId:number, userId:number) {
+    return (await axios.delete(this.URL+"task/subtask/delete/"+subtaskId+"/"+taskId+"/"+userId)).data
   }
 
   async patchPriority(priority:number,taskId:number) {
