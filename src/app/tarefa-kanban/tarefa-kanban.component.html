@@ -10,7 +10,7 @@
       (dndEnd)="onDragEnd($event)"
       (dndStart)="onDragStartStatus($event)"
       dndEffectAllowed="move"
-      class="w-[400px] relative flex flex-col mx-4 items-end"
+      class="xl:w-[400px] lg:w-[300px] md:w-[280px] sm:w-[260px] w-[250px] relative flex flex-col xl:mx-4 mx-2 items-end"
     >
       <div class="flex justify-between w-full py-2">
         <i
@@ -28,21 +28,21 @@
         >
           {{ item.name }}
         </p>
-        <i
+        <!-- <i
           class="pi pi-ellipsis-v text-secondary dark:text-dark-secondary"
           (click)="openSelect(item.id, $event)"
         ></i>
         <div *ngIf="selectOpen && statusId==item.id" class="absolute z-10 top-8 ">
           <app-select-custom [listOptions]="optionsSelect" [listIcons]="IconsOptionsSelect" [projeto]="project" ></app-select-custom>
-        </div>
+        </div> -->
        
       </div>
      
       </div>
    
 
-      <button class="bg-primaryWhite dark:bg-dark-theme-back w-full text-lg text-fontGray dark:text-secondaryWhite border-b dark:border-dark-secundary-gray p-1">
-        <i class="pi pi-plus text-secondary dark:text-dark-secondary p-1" style="font-size: 1rem" ></i>
+      <button class="bg-primaryWhite dark:bg-dark-theme-back w-full md:text-lg text-sm text-fontGray dark:text-secondaryWhite border-b dark:border-dark-secundary-gray p-1">
+        <i class="pi pi-plus text-secondary dark:text-dark-secondary p-1 icon2" ></i>
         adicionar tarefa
       </button>
 
@@ -72,21 +72,22 @@
         >
           <div
             *ngIf="task.currentStatus?.id == item.id"
-            class="bg-primaryWhite dark:bg-dark-theme-back rounded-md p-5"
+            class="bg-primaryWhite dark:bg-dark-theme-back rounded-md xl:p-5 p-3"
           >
             <app-tarefa-card-padrao
               [tarefaAtual]="task"
               dndHandle
               id="2"
+            
             ></app-tarefa-card-padrao>
           </div>
         </div>
       </div>
     </div>
   </ng-template>
-  <div class="flex flex-row w-[1600px] h-[720px]  oba">
+  <div class="flex flex-row 2xl:w-[1600px] lg:w-[1000px] md:w-[680px] sm:w-[600px] w-[360px] h-[700px] oba">
     <ng-container *ngIf="dropStatus; else pwp">
-      <div class="p-5" (dndDrop)="onDrop($event, statusList)" dndDropzone>
+      <div class="xl:p-5 p-2"  (dndDrop)="onDrop($event, statusList)" dndDropzone>
         <ng-container *ngTemplateOutlet="recursiveList"></ng-container>
       </div>
     </ng-container>

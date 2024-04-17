@@ -1,16 +1,17 @@
 .main {
-  @apply bg-[#F8F8F8] dark:bg-dark-primary-black rounded-xl  drop-shadow-md w-[360px]   h-[211px]  flex flex-col justify-between;
+  @apply bg-[#F8F8F8] dark:bg-dark-primary-black rounded-xl  drop-shadow-md sm:w-full w-[230px]    lg:h-[211px] sm:h-[180px] h-[150px]  flex flex-col justify-between
+
 }
 .top-box {
   @apply flex  justify-between;
 }
 .endDate {
-  @apply text-lg text-primary dark:text-dark-primary;
+  @apply xl:text-lg text-primary dark:text-dark-primary text-base;
   font-family: "Hind Madurai", sans-serif;
 }
 
 .status {
-  @apply rounded-lg  px-4 w-max text-sm self-center;
+  @apply rounded-lg  md:px-4 w-max xl:text-sm self-center text-[12px] px-2;
   font-family: "Montserrat", sans-serif;
 }
 

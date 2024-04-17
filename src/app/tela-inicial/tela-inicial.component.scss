@@ -1,99 +1,97 @@
 .main {
-    @apply grid grid-cols-2 h-[85%] w-full;
-    grid-template-columns: 40% 60%;
+  @apply grid grid-cols-1 lg:grid-cols-2 h-[85%] w-full;
+  grid-template-columns: 40% 60%;
 }
 
-.main-box {
-    @apply w-full h-full flex items-center justify-end p-10
+
+.main-box  {
+  @apply w-full h-full flex items-center justify-end p-10;
 }
 
-.left-side {
-    @apply h-full w-full flex justify-center 
+.left-side  {
+  @apply h-full w-full flex justify-center;
 }
 
-.close-deliveries {
-    @apply flex flex-col gap-5 w-full
+.close-deliveries  {
+  @apply flex flex-col gap-5 w-full;
 }
 
-.card-deliveries-box {
-    @apply w-full  rounded-xl flex flex-col items-center gap-4  
+.card-deliveries-box  {
+  @apply w-full  rounded-xl flex flex-col items-center gap-4;
 }
 
 .right-side {
-    @apply  h-full flex flex-col
+  @apply h-full flex flex-col;
 }
 
 .right-side-box {
-    @apply h-full w-full grid grid-rows-2;
-    grid-template-rows: 45% 55%;
+  @apply h-full w-full grid grid-rows-2;
+  grid-template-rows: 45% 55%;
 }
 
 .calendar-box {
-    @apply h-full w-full flex justify-start
+  @apply h-full w-full flex justify-start;
 }
 
 .calendar {
-    @apply w-[90%] h-full bg-primaryGray rounded-lg shadow-xl
+  @apply w-[90%] h-full bg-primaryGray rounded-lg shadow-xl;
 }
 
 .card-deliveries {
-    @apply w-full ;
+  @apply w-full;
 }
 
 .icon {
-    @apply text-xl
+  @apply text-xl;
 }
-
 
 .delivery {
-    @apply w-full justify-center h-24 flex mb-8
-} 
-
-.calendar-content {
-    @apply w-full h-[87%] grid grid-cols-4
+  @apply w-full justify-center h-24 flex mb-8;
 }
 
+.calendar-content {
+  @apply w-full h-[87%] grid grid-cols-4;
+}
 
 .tarefa {
-    @apply w-[45%] h-[92vh] fixed z-50 ;
+  @apply w-[45%] h-[92vh] fixed z-50;
 }
 
 .title-box {
-    @apply w-full h-14 bg-secondary flex justify-center items-center rounded-t-md
+  @apply w-full h-14 bg-secondary flex justify-center items-center rounded-t-md;
 }
 
 .title-text {
-    @apply font-bold text-2xl text-secondary dark:text-dark-secondary ;
-    font-family: "Montserrat", sans-serif;
-
+  @apply font-bold md:text-2xl text-lg text-secondary dark:text-dark-secondary;
+  font-family: "Montserrat", sans-serif;
 }
 
-    .container {
-        @apply w-[660px] h-[248px] overflow-y-auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); /* Define a largura mínima e a fração de espaço disponível */
-        gap: 10px;
+.container {
+  @apply 2xl:w-[660px] xl:w-[500px] md:w-[480px] lg:w-[350px] w-full max-h-[248px] overflow-y-auto;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(310px, 1fr)
+  ); /* Define a largura mínima e a fração de espaço disponível */
+  gap: 10px;
 
-         /* Espaçamento entre os boards */
-      }
-      
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px; 
+  /* Espaçamento entre os boards */
+}
 
-        
-        /* largura do scroll */
-       
-      }
-      
-      /* Define a cor do fundo do scroll */
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-      }
-      
-      /* Define a cor do thumb (a alça do scroll) */
-      ::-webkit-scrollbar-thumb {
-        border-radius: 7px;
-        background: #E5E5E5 
-        
-      }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+
+  /* largura do scroll */
+}
+
+/* Define a cor do fundo do scroll */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Define a cor do thumb (a alça do scroll) */
+::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: #e5e5e5;
+}

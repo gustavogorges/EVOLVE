@@ -1,65 +1,84 @@
 .main {
-  @apply flex flex-col items-end w-[1655px] h-full;
+  @apply flex flex-col items-center  xl:w-[97%] 2xl:w-[94%]  h-full justify-center xl:items-end   w-full;
 
   .calendar-title {
     @apply flex items-end m-3 gap-2;
     .calendario-title-year-month {
-      @apply text-center text-2xl text-secondary dark:text-dark-secondary font-bold;
+      @apply text-center text-lg  md:text-2xl text-secondary dark:text-dark-secondary font-bold;
       font-family: "Montserrat", sans-serif;
     }
   }
   .day-and-month-calendar {
-    @apply flex gap-9 w-[1655px] overflow-x-auto justify-center h-full;
+    @apply  flex flex-col xl:flex-row gap-9  xl:w-[100%]  2xl:w-[94%] w-full px-[2%] overflow-x-auto justify-center h-full;
     .day-open {
-      @apply w-[400px] bg-primary dark:bg-dark-primary rounded-[10px] flex flex-col  p-10;
+      @apply w-full md:w-[90%] xl:w-[350px] 2xl:w-[400px]  order-1 xl:-order-1 bg-primary dark:bg-dark-primary rounded-[10px] flex flex-col items-center p-5;
     }
     .text-day-open {
-      @apply text-center text-2xl text-primaryWhite dark:text-black font-bold;
+      @apply text-center text-base lg:text-2xl text-primaryWhite dark:text-black font-bold;
       font-family: "Montserrat", sans-serif;
     }
     .tasks.day-open {
-      @apply flex justify-center ;
+      @apply flex  ;
     }
     .task-day-open {
-        @apply w-[300px] m-2;
+        @apply w-[300px] md:w-[410px] xl:w-[300px] 2xl:w-[350px] m-2 ;
       }
     .full-calendar {
-      @apply max-w-[1330px] h-full overflow-x-auto flex flex-col justify-center;
+      @apply w-full h-full items-center overflow-x-auto flex flex-col justify-center;
 
       .days-row {
-        @apply flex flex-row w-full justify-between gap-2;
+        @apply  flex-row w-full justify-between gap-2 xl:px-4  hidden lg:flex;
         .each-day {
-          @apply w-[140px]  min-w-[164px] flex justify-center;
+          @apply 
+          xl:min-w-[100px] flex justify-center;
           .day-text {
-            @apply w-full text-center font-medium dark:text-gray-300;
+            @apply w-full xl:text-sm text-center font-medium dark:text-gray-300;
             font-family: "Montserrat", sans-serif;
           }
         }
       }
+      .days-row2 {
+        @apply flex flex-row w-full  justify-between lg:hidden;
+        .each-day {
+          @apply 
+          xl:w-12 min-w-[48px] flex justify-center;
+          .day-text {
+            @apply w-full text-center text-xs font-medium dark:text-gray-300;
+            font-family: "Montserrat", sans-serif;
+          }
+        }
+      }
+     
       .grid-calendar {
         grid-template-columns: repeat(7, 1fr);
         text-align: center;
-        @apply w-full h-full gap-2  grid mt-2;
+        order: 1;
+        @apply w-full h-full gap-1  grid mt-2 xl:order-1 ;
       }
       .calendario-dia-nao-faz-parte-mes-atual {
         @apply border-none bg-primaryGray dark:bg-dark-primary-gray;
       }
       .grid-calendar > div {
-        @apply w-[164px] h-[140px] flex-col rounded-xl flex border-[#ddd] border-[1px] justify-end p-3 gap-1 items-end;
+        @apply w-full h-14 sm:h-20 md:h-24 2xl:h-32 flex-col text-xs p-1
+        xl:text-base rounded-lg lg:p-2
+        xl:rounded-xl flex border-[#ddd] border-[1px] justify-end   items-end;
 
-        font-size: 16px;
+        
         .day-box {
-          @apply flex flex-col w-full h-full overflow-hidden items-start gap-0.5;
+          @apply flex flex-col w-full h-full overflow-hidden items-start gap-0.5 sm:gap-1;
 
           .tasks-day-box {
             @apply w-full;
 
             .task-day-box {
-              @apply rounded-md text-sm w-full;
+              @apply rounded-md text-sm w-full h-max px-0.5 hidden md:flex;
 
               .todayText {
-                @apply text-primary dark:bg-dark-primary rounded-full px-1.5 py-1;
+                @apply text-primary dark:bg-dark-primary md:text-xs  rounded-full px-1.5 py-1;
               }
+            }
+            .aaaa{
+              @apply w-full h-1.5 rounded-sm md:hidden
             }
           }
         }

@@ -1,28 +1,36 @@
 <div class="main">
   <div class="calendar-title">
     <div>
-      <button (click)="alterarMes(-1)" class="pi pi-chevron-left text-[#aaa]
-      "></button>
+      <button
+        (click)="alterarMes(-1)"
+        class="pi pi-chevron-left text-[#aaa] dark:text-gray-300"
+      ></button>
     </div>
     <div class="calendario-title-year-month">
       {{ dataAtual | date : "MMMM yyyy" }}
     </div>
     <div>
-      <button (click)="alterarMes(+1)" class="pi pi-chevron-right text-[#aaa] dark:text-gray-300"></button>
+      <button
+        (click)="alterarMes(+1)"
+        class="pi pi-chevron-right text-[#aaa] dark:text-gray-300"
+      ></button>
     </div>
   </div>
   <div class="day-and-month-calendar">
-    <div
-      class="day-open"
-    >
+    <div class="day-open">
       <p class="text-day-open">
-        {{ dayOpen | date : "EEEE" |uppercase}} : {{ dayOpen | date : "dd" }}/{{
-          dayOpen | date : "LL"
-        }}
+        {{ dayOpen | date : "EEEE" | uppercase }} :
+        {{ dayOpen | date : "dd" }}/{{ dayOpen | date : "LL" }}
       </p>
       <div *ngFor="let task of taskList" class="tasks.day-open">
-        <div *ngIf="dayOpen.getTime() == task?.finalDate?.getTime()" class="task-day-open">
-          <app-entrega-prox [tarefa]="task" [favoritedAble]="false"></app-entrega-prox>
+        <div
+          *ngIf="dayOpen.getTime() == task?.finalDate?.getTime()"
+          class="task-day-open"
+        >
+          <app-entrega-prox
+            [tarefa]="task"
+            [favoritedAble]="false"
+          ></app-entrega-prox>
         </div>
       </div>
     </div>
@@ -35,31 +43,25 @@
           </div>
         </ng-container>
       </div>
+      <div class="days-row2">
+        <ng-container *ngFor="let dia of diasCalendario; let i = index">
+          <div *ngIf="i < 7" class="each-day">
+            <p class="day-text">{{ dia | date : "EEEEE" }}</p>
+          </div>
+        </ng-container>
+      </div>
 
       <div class="grid-calendar">
-        <!-- Aqui renderizamos o nome do dia da semana -->
 
-        <!-- 
-         Dias que aparecem no calendário.
-
-         Aqui vale comentar que podemos adicionar
-         classes CSS de forma condicional da
-         seguinte forma:
-           [class.minhaclasse]="condição"
-    -->
         <div
           *ngFor="let dia of diasCalendario; let i = index"
           [class.calendario-quebrar-linha]="i % 7 === 0"
           [class.calendario-dia-nao-faz-parte-mes-atual]="
             dataAtual.getMonth() !== dia.getMonth()
           "
-          [ngClass]="{'today': isToday(dia)}"
+          [ngClass]="{ today: isToday(dia) }"
         >
-          <div
-            class="day-box"
-            (click)="openSideDayTasks(dia)"
-           
-          >
+          <div class="day-box" (click)="openSideDayTasks(dia)">
             <div *ngFor="let task of taskList" class="tasks-day-box">
               <div
                 *ngIf="dia.getTime() == task.finalDate?.getTime()"
@@ -71,10 +73,21 @@
               >
                 {{ task.name }}
               </div>
+              <div
+                *ngIf="dia.getTime() == task.finalDate?.getTime()"
+                class="aaaa"
+                [ngStyle]="{
+                  'background-color': task.currentStatus.backgroundColor,
+                  color: task.currentStatus.textColor
+                }"
+              ></div>
             </div>
           </div>
 
-          <p class="text-sm text-gray-500 dark:text-gray-300"  [ngClass]="{'todayText': isToday(dia)}">
+          <p
+            class="text-[10px] lg:text-sm text-gray-500 dark:text-gray-300"
+            [ngClass]="{ todayText: isToday(dia) }"
+          >
             {{ dia | date : "dd" }}
           </p>
         </div>

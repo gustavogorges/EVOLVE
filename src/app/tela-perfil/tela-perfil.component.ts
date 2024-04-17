@@ -74,6 +74,9 @@ export class TelaPerfilComponent implements OnInit {
   openConfig(){
       if(this.disabledInfo==false){
         this.disabledInfo= true
+        
+  this.edit_confirm = "editar perfil"
+  this.config_cancel = "configuração"
       }  else{
         this.config=true
 
@@ -117,13 +120,13 @@ export class TelaPerfilComponent implements OnInit {
   email !:string
 
   name !:string
-  edit_confirm = "editar informações"
+  edit_confirm = "editar perfil"
   config_cancel = "configuração"
   editInfo(){
     if(this.disabledInfo==false){
       this.disabledInfo= true
       
-      this.edit_confirm = "editar informações"
+      this.edit_confirm = "editar perfil"
       this.config_cancel="configurção"  
       if(this.email){
         this.putEmail(); 

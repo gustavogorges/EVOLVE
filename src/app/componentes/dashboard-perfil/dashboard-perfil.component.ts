@@ -76,7 +76,7 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     
   
  this.stackedData = {
-      labels: ['January'],
+      labels: [''],
       datasets: datasets,
     };
 

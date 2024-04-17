@@ -29,21 +29,22 @@
 
 
 .tasks-grid-padrao{
-  width: 100%;
-  display: grid;
-  justify-self: center;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
-  grid-gap: 20px; 
+  // width: 100%;
+  // display: grid;
+  // justify-self: center;
+  // grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
+  // grid-gap: 20px; 
+@apply w-full grid justify-center gap-4 grid-cols-1 px-5 sm:px-0 sm:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4;
 
 }
 .box-list{
   @apply flex flex-col h-full w-full gap-2  items-center justify-center
 }
 
-
+  
 
   .cardLista {
-    @apply w-[78%];
+    @apply w-[100%] xl:w-[78%] ;
   }
   .card-box {
     @apply w-full h-full
@@ -81,6 +82,8 @@
 }
 .icon2{
   @apply text-lg
+  sm:text-sm
+  md:text-base
 }
 .box-selections{
   @apply flex  gap-4
@@ -89,7 +92,7 @@
 }
 .text-select{
   @apply hidden 
-  sm:block sm:text-base
+  sm:block sm:text-sm
   md:block md:text-base
   lg:block lg:text-lg
   xl:block xl:text-xl

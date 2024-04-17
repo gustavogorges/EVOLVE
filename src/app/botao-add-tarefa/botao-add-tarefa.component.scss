@@ -1,10 +1,10 @@
 .botao-adicionaProjeto{
-    @apply bg-secondary  dark:bg-dark-secondary rounded-lg text-sm px-10 w-max py-3 text-white font-bold 
+    @apply bg-secondary  dark:bg-dark-secondary rounded-lg text-sm px-6 w-max py-2 text-white font-bold 
     2xl:text-xl 2xl:px-20
     lg:text-lg lg:px-16
     md:text-lg md:px-14
 
 }
 .icon2{
-    @apply text-xs
+    @apply text-xs font-bold 
   }
