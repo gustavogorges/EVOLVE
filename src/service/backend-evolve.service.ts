@@ -176,4 +176,12 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+path+id)).data
   }
 
+
+  async patchTeamName(teamId:number, name:string):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("name",name)
+    return (await axios.patch(this.URL+path+teamId, formData)).data
+  }
+
 }

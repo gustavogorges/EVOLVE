@@ -4,12 +4,17 @@
 
         <div class="header  w-full max-h-[20%] min-h-[20%] flex justify-start gap-8 items-center">
             
-            <div class="img-test aspect-square h-32 rounded-full bg-purple-200" [ngStyle]="{'background-color': team?.imageColor}">
+            <div class="img-test aspect-square h-32 rounded-full " [ngStyle]="{'background-color': team?.imageColor}">
                 <img *ngIf="team?.image?.data" src="{{team.image.data}}" alt="" class="h-full aspect-square rounded-full">
             </div>
 
-            <div class="team-name flex justify-center items-center w-[30%] px-4 h-16 bg-secondaryWhite">
-                <input class=" w-full h-full bg-secondaryWhite text-primary font-bold outline-none" type="text" placeholder="Nome da equipe" >
+            <div class="team-name flex justify-center items-center w-[30%] px-4 h-16 gap-4 bg-primaryWhite">
+                <input #teamNameInput class="bg-primaryWhite w-full h-full text-xl text-primary font-bold outline-none focus:border-b-2" type="text" disabled placeholder="Nome da equipe" [(ngModel)]="team.name">
+                <div class="flex gap-2">
+                    <i class="pi pi-pencil text-primary" *ngIf="!isEditingTeamName" (click)="editTeamName()"></i>
+                    <i class="pi pi-times text-red-700" *ngIf="isEditingTeamName" (click)="cancelEditingTeamName()" ></i>
+                    <i class="pi pi-check text-secondary" *ngIf="isEditingTeamName" (click)="saveTeamName()"></i>
+                </div>
             </div>
         </div>
 

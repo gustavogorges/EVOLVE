@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LogarithmicScale } from 'chart.js';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -12,18 +13,40 @@ export class TeamCreationScreenComponent implements OnInit {
 
   isSearchUserModalOpen:boolean=false
 
+  @ViewChild("teamNameInput") teamNameInput!:any;
+
   teamParticipants:Array<User> = new Array
 
   team!:Team
-
+  isEditingTeamName:boolean=false
 
   constructor(private service:BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
     this.team = new Team
-    // this.team = await this.service.postEquipe(this.team)
-    // this.team.imageColor = "#05ff9e"
+    this.team.name = "Nova Equipe"
   }
+
+
+  editTeamName(){
+    this.isEditingTeamName = true
+    this.teamNameInput.nativeElement.disabled = false
+    console.log(this.teamNameInput);
+    this.teamNameInput.nativeElement.focus()
+  }
+
+  async saveTeamName():Promise<void>{
+    this.isEditingTeamName = false
+    this.team = await this.service.patchTeamName(this.team.id, this.team.name)
+    this.teamNameInput.nativeElement.disabled = true
+  }
+
+  cancelEditingTeamName(){
+    this.isEditingTeamName = false
+    this.teamNameInput.nativeElement.disabled = true
+  }
+
+
 
 
   setSearchUserModal(){
