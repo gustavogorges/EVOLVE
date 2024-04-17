@@ -1,103 +1,214 @@
-<div class="h-screen w-80 bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
-  <i
-    class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray"
-    (click)="closeSideBar()"
-  ></i>
-  <div class="flex w-full justify-center  gap-1 text-primary dark:text-dark-primary" (click)="goTelaInicial()">
-    <svg width="48" height="48" viewBox="0 0 58 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20.0606 16.8553C16.9203 8.40379 10.669 6.02347 7.93583 5.88975C20.9474 3.51877 30.9275 10.4547 38.1148 19.3747C43.8647 26.5106 51.2348 25.634 54.2011 24.3037C51.3479 27.8157 44.4175 37.5092 34.5906 35.943C24.7636 34.3767 23.986 27.4197 20.0606 16.8553Z" fill="currentColor" />
-      <path d="M45.1268 22.2968C46.4958 16.1491 42.28 9.81244 40.001 7.4126C42.3207 16.1656 41.5485 14.6889 42.0843 18.1431C42.513 20.9065 44.2913 22.0637 45.1268 22.2968Z" fill="currentColor"/>
-      <path d="M39.0185 17.309C41.4008 5.23859 28.9249 3.61664 23.075 5.89835C32.3564 8.94169 36.2157 13.6654 36.97 14.9383C37.4359 15.7247 38.4798 16.8861 39.0185 17.309Z" fill="currentColor"/>
-      <path d="M14.7697 12.9973C15.6594 13.4696 17.237 16.3603 16.039 23.4244C15.5864 26.093 17.3996 38.7542 26.7177 40.6453L26.9666 40.7279C28.8522 41.3342 31.0348 41.5885 33.5538 41.3458C35.6126 40.8953 39.6961 39.712 39.5604 38.5834C34.6302 39.7312 28.8967 40.6979 23.0468 36.4767C17.6391 32.5745 19.2789 23.6727 18.9651 21.2393C18.9214 21.0763 18.881 20.9222 18.844 20.7785C18.9007 20.8847 18.9394 21.0404 18.9651 21.2393C19.6493 23.7958 21.1203 28.5661 22.411 30.3785C24.1273 32.7885 25.6884 35.5066 30.3898 37.0829C35.0913 38.6591 40.1675 37.8526 42.3949 36.6493C44.6222 35.4461 33.4043 48.3429 19.9674 40.4792C6.68096 32.7035 10.4193 17.8626 14.7697 12.9973Z" fill="currentColor"/>
-      </svg>
-      
-    <button class="font-titulo text-3xl text-primary dark:text-dark-primary font-semibold ">
-      Home
-    </button>
-  </div>
-  <div class="flex flex-col gap-5 w-full justify-center">
-    <div class="flex flex-col gap-2">
-      <div class="flex gap-1"  (click)="openConfig()">
-        <i
-        class="pi pi-cog self-center text-secondary dark:text-dark-secondary"
-        style="width: 16px"></i>        
-        <p class="title">Configurações</p>
-        <i
-          class="pi pi-angle-right self-center text-fontGray dark:text-gray-300"
-          style="width: 1.5rem"
-        ></i>
-      </div>
-
-      <!-- <div class="px-5 flex flex-col gap-2">
-        <div class="flex">
-          <p class="font-titulo text-base">Configurações do usuario</p>
+<div *ngIf="config">
+  <div class="h-screen xl:w-80 w-64 hidden lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
+    <i
+      class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray"
+      (click)="closeSideBar()"
+    ></i>
+    <div class="flex w-full justify-center  gap-1 text-primary dark:text-dark-primary" (click)="goTelaInicial()">
+      <svg width="48" height="48" viewBox="0 0 58 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.0606 16.8553C16.9203 8.40379 10.669 6.02347 7.93583 5.88975C20.9474 3.51877 30.9275 10.4547 38.1148 19.3747C43.8647 26.5106 51.2348 25.634 54.2011 24.3037C51.3479 27.8157 44.4175 37.5092 34.5906 35.943C24.7636 34.3767 23.986 27.4197 20.0606 16.8553Z" fill="currentColor" />
+        <path d="M45.1268 22.2968C46.4958 16.1491 42.28 9.81244 40.001 7.4126C42.3207 16.1656 41.5485 14.6889 42.0843 18.1431C42.513 20.9065 44.2913 22.0637 45.1268 22.2968Z" fill="currentColor"/>
+        <path d="M39.0185 17.309C41.4008 5.23859 28.9249 3.61664 23.075 5.89835C32.3564 8.94169 36.2157 13.6654 36.97 14.9383C37.4359 15.7247 38.4798 16.8861 39.0185 17.309Z" fill="currentColor"/>
+        <path d="M14.7697 12.9973C15.6594 13.4696 17.237 16.3603 16.039 23.4244C15.5864 26.093 17.3996 38.7542 26.7177 40.6453L26.9666 40.7279C28.8522 41.3342 31.0348 41.5885 33.5538 41.3458C35.6126 40.8953 39.6961 39.712 39.5604 38.5834C34.6302 39.7312 28.8967 40.6979 23.0468 36.4767C17.6391 32.5745 19.2789 23.6727 18.9651 21.2393C18.9214 21.0763 18.881 20.9222 18.844 20.7785C18.9007 20.8847 18.9394 21.0404 18.9651 21.2393C19.6493 23.7958 21.1203 28.5661 22.411 30.3785C24.1273 32.7885 25.6884 35.5066 30.3898 37.0829C35.0913 38.6591 40.1675 37.8526 42.3949 36.6493C44.6222 35.4461 33.4043 48.3429 19.9674 40.4792C6.68096 32.7035 10.4193 17.8626 14.7697 12.9973Z" fill="currentColor"/>
+        </svg>
+        
+      <button class="font-titulo text-3xl text-primary dark:text-dark-primary font-semibold ">
+        Home
+      </button>
+    </div>
+    <div class="flex flex-col gap-5 w-full justify-center">
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-1"  (click)="openConfig()">
           <i
-            class="pi pi-angle-right self-center text-fontGray"
-            style="width: 20px"
-          ></i>
-         
-        </div>
-        <div class="flex">
-          <p class="font-titulo" (click)="openConfig()">Configurações gerais</p>
+          class="pi pi-cog self-center text-secondary dark:text-dark-secondary"
+          style="width: 16px"></i>        
+          <p class="title">Configurações</p>
           <i
-            class="pi pi-angle-right self-center text-fontGray"
+            class="pi pi-angle-right self-center text-fontGray dark:text-gray-300"
             style="width: 1.5rem"
-          ></i> -->
-          <app-modal-config *ngIf="config" (close)="closeConfig()"></app-modal-config>
+          ></i>
+        </div>
+  
+        <!-- <div class="px-5 flex flex-col gap-2">
+          <div class="flex">
+            <p class="font-titulo text-base">Configurações do usuario</p>
+            <i
+              class="pi pi-angle-right self-center text-fontGray"
+              style="width: 20px"
+            ></i>
+           
+          </div>
+          <div class="flex">
+            <p class="font-titulo" (click)="openConfig()">Configurações gerais</p>
+            <i
+              class="pi pi-angle-right self-center text-fontGray"
+              style="width: 1.5rem"
+            ></i> -->
+          <!-- </div> -->
         <!-- </div> -->
-      <!-- </div> -->
-    </div>
-    <div *ngFor="let team of loggedUser?.teams" class="flex flex-col gap-2">
-      <div class="flex gap-1">
-        <p class="title truncate">
-          {{ team.name }}
-        </p>
-      
       </div>
-      <div  class="flex flex-col gap-5">
-        <div *ngFor="let project of team.projects">
-          <div class="px-5 flex flex-col gap-1">
-            <div class="flex gap-2">
-              <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">
-                {{ project.name }}
-              </p>
-          
-            </div>
-            <div class="flex flex-col gap-1">
-              <div class="flex " (click)="goTelaTarefa(project)">
-                <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 cursor-pointer">
-                  Visualizar tarefas
+      <div *ngFor="let team of loggedUser?.teams" class="flex flex-col gap-2">
+        <div class="flex gap-1">
+          <p class="title truncate">
+            {{ team.name }}
+          </p>
+        
+        </div>
+        <div  class="flex flex-col gap-5">
+          <div *ngFor="let project of team.projects">
+            <div class="px-5 flex flex-col gap-1">
+              <div class="flex gap-2">
+                <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">
+                  {{ project.name }}
                 </p>
-                <i
-                  class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
-                  style="width: 1.5rem"
-                ></i>
+            
               </div>
-              <div class="flex ">
-                <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
-                  Pagina do projeto
-                </p>
-                <i
-                  class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
-                  style="width: 1.5rem"
-                ></i>
+              <div class="flex flex-col gap-1">
+                <div class="flex " (click)="goTelaTarefa(project)">
+                  <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 cursor-pointer">
+                    Visualizar tarefas
+                  </p>
+                  <i
+                    class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                    style="width: 1.5rem"
+                  ></i>
+                </div>
+                <div class="flex ">
+                  <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
+                    Pagina do projeto
+                  </p>
+                  <i
+                    class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                    style="width: 1.5rem"
+                  ></i>
+                </div>
+                
               </div>
-              
             </div>
           </div>
-        </div>
-        <div *ngIf="team.projects.length==0 " class="px-5">
-          <div class="flex ">
-            <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
-              Criar projeto
-            </p>
-            <i
-              class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
-              style="width: 1.5rem"
-            ></i>
+          <div *ngIf="team.projects.length==0 " class="px-5">
+            <div class="flex ">
+              <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
+                Criar projeto
+              </p>
+              <i
+                class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                style="width: 1.5rem"
+              ></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 </div>
+<app-modal-config *ngIf="config" (close)="closeConfig()" class="w-screen"></app-modal-config>
+
+<div *ngIf="!config">
+  <div class="h-screen xl:w-80 w-64   bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
+    <i
+      class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray"
+      (click)="closeSideBar()"
+    ></i>
+    <div class="flex w-full justify-center  gap-1 text-primary dark:text-dark-primary" (click)="goTelaInicial()">
+      <svg width="48" height="48" viewBox="0 0 58 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.0606 16.8553C16.9203 8.40379 10.669 6.02347 7.93583 5.88975C20.9474 3.51877 30.9275 10.4547 38.1148 19.3747C43.8647 26.5106 51.2348 25.634 54.2011 24.3037C51.3479 27.8157 44.4175 37.5092 34.5906 35.943C24.7636 34.3767 23.986 27.4197 20.0606 16.8553Z" fill="currentColor" />
+        <path d="M45.1268 22.2968C46.4958 16.1491 42.28 9.81244 40.001 7.4126C42.3207 16.1656 41.5485 14.6889 42.0843 18.1431C42.513 20.9065 44.2913 22.0637 45.1268 22.2968Z" fill="currentColor"/>
+        <path d="M39.0185 17.309C41.4008 5.23859 28.9249 3.61664 23.075 5.89835C32.3564 8.94169 36.2157 13.6654 36.97 14.9383C37.4359 15.7247 38.4798 16.8861 39.0185 17.309Z" fill="currentColor"/>
+        <path d="M14.7697 12.9973C15.6594 13.4696 17.237 16.3603 16.039 23.4244C15.5864 26.093 17.3996 38.7542 26.7177 40.6453L26.9666 40.7279C28.8522 41.3342 31.0348 41.5885 33.5538 41.3458C35.6126 40.8953 39.6961 39.712 39.5604 38.5834C34.6302 39.7312 28.8967 40.6979 23.0468 36.4767C17.6391 32.5745 19.2789 23.6727 18.9651 21.2393C18.9214 21.0763 18.881 20.9222 18.844 20.7785C18.9007 20.8847 18.9394 21.0404 18.9651 21.2393C19.6493 23.7958 21.1203 28.5661 22.411 30.3785C24.1273 32.7885 25.6884 35.5066 30.3898 37.0829C35.0913 38.6591 40.1675 37.8526 42.3949 36.6493C44.6222 35.4461 33.4043 48.3429 19.9674 40.4792C6.68096 32.7035 10.4193 17.8626 14.7697 12.9973Z" fill="currentColor"/>
+        </svg>
+        
+      <button class="font-titulo text-3xl text-primary dark:text-dark-primary font-semibold ">
+        Home
+      </button>
+    </div>
+    <div class="flex flex-col gap-5 w-full justify-center">
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-1"  (click)="openConfig()">
+          <i
+          class="pi pi-cog self-center text-secondary dark:text-dark-secondary"
+          style="width: 16px"></i>        
+          <p class="title">Configurações</p>
+          <i
+            class="pi pi-angle-right self-center text-fontGray dark:text-gray-300"
+            style="width: 1.5rem"
+          ></i>
+        </div>
+  
+        <!-- <div class="px-5 flex flex-col gap-2">
+          <div class="flex">
+            <p class="font-titulo text-base">Configurações do usuario</p>
+            <i
+              class="pi pi-angle-right self-center text-fontGray"
+              style="width: 20px"
+            ></i>
+           
+          </div>
+          <div class="flex">
+            <p class="font-titulo" (click)="openConfig()">Configurações gerais</p>
+            <i
+              class="pi pi-angle-right self-center text-fontGray"
+              style="width: 1.5rem"
+            ></i> -->
+            <app-modal-config *ngIf="config" (close)="closeConfig()"></app-modal-config>
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+      <div *ngFor="let team of loggedUser?.teams" class="flex flex-col gap-2">
+        <div class="flex gap-1">
+          <p class="title truncate">
+            {{ team.name }}
+          </p>
+        
+        </div>
+        <div  class="flex flex-col gap-5">
+          <div *ngFor="let project of team.projects">
+            <div class="px-5 flex flex-col gap-1">
+              <div class="flex gap-2">
+                <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">
+                  {{ project.name }}
+                </p>
+            
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex " (click)="goTelaTarefa(project)">
+                  <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 cursor-pointer">
+                    Visualizar tarefas
+                  </p>
+                  <i
+                    class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                    style="width: 1.5rem"
+                  ></i>
+                </div>
+                <div class="flex ">
+                  <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
+                    Pagina do projeto
+                  </p>
+                  <i
+                    class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                    style="width: 1.5rem"
+                  ></i>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div *ngIf="team.projects.length==0 " class="px-5">
+            <div class="flex ">
+              <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
+                Criar projeto
+              </p>
+              <i
+                class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
+                style="width: 1.5rem"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
