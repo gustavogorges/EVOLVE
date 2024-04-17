@@ -1,6 +1,6 @@
 <div class="main w-full flex gap-4 flex-col">
   <div class="flex w-full justify-between">
-    <p class="title-text">Calendário Semanal</p>
+    <p class="title-text ">Calendário Semanal</p>
     <div class="flex gap-2">
       <button
         (click)="alterarSemana(-1)"
@@ -22,10 +22,10 @@
         <ng-container *ngFor="let dia of diasSemana; let i = index">
         
          
-          <div class="flex w-full bg-white dark:bg-dark-primary-black rounded-md gap-3 relative shadow-sm">
+          <div class="flex w-full md:bg-white dark:bg-dark-primary-black rounded-md grelative shadow-sm flex-col md:flex-row  gap-2">
             
             <div
-              class="max-w-[160px] w-full bg-secondary dark:bg-dark-secondary rounded-lg flex flex-col items-center p-1"
+              class="xl:max-w-[160px]  xl:w-full sm:w-1/4 w-full     bg-secondary dark:bg-dark-secondary md:rounded-lg rounded-md flex md:flex-col flex-row gap-3 md:gap-0 items-center p-1"
               [ngClass]="{ todayText: isToday(dia) }"
             >
               <p class="text-p">{{ dia | date : "EEEE" }}</p>

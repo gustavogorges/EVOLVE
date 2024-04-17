@@ -1,6 +1,6 @@
-<div class="bg-white dark:bg-dark-primary-black w-full h-[220px] rounded-lg flex">
-    <div class=" p-7 flex flex-col gap-2 justify-center items-center w-1/4 min-h-min ">
-        <div class=" w-20 h-20 rounded-full overflow-clip" [ngStyle]="{
+<div class="bg-white dark:bg-dark-primary-black w-full sm:h-[220px]  rounded-lg flex">
+    <div class=" sm:p-7 p-3 flex flex-col gap-2 justify-center items-center md:w-1/4 w-1/3 min-h-min ">
+        <div class=" sm:w-20 sm:h-20 w-12 h-12 rounded-full overflow-clip" [ngStyle]="{
             'background-image':
               team?.image != null
                 ? 'url(' + team.image.data + ')'
@@ -9,16 +9,16 @@
             'background-color': team?.imageColor
           }"  ></div>
    
-        <p class="text-primary dark:text-dark-primary truncate font-bold text-[22px] name-text  text-center overflow-hidden min-h-min w-full ">{{team?.name}}</p>
+        <p class="text-primary dark:text-dark-primary truncate font-bold sm:text-[22px] text-xs name-text  text-center overflow-hidden min-h-min w-full ">{{team?.name}}</p>
    
    
     </div>
-    <div class="p-7 w-full flex-1 flex flex-col gap-3">
+    <div class="md:p-7 p-3 sm:p-4 w-full flex-1 flex flex-col sm:gap-3 gap-1">
 
         <div *ngFor="let member of team?.participants" (click)="goToPerfil(member)">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
+                    <div class="sm:w-8 sm:h-8 w-6 h-6 rounded-full overflow-clip " [ngStyle]="{
                         'background-image':
                           member?.image != null
                             ? 'url(data:image/jpeg;base64,' + member.image.data + ')'
@@ -28,10 +28,10 @@
                       }">
                     
                     </div>
-                    <div class="text-xl dark:text-gray-300">{{member?.name}}</div>
+                    <div class="sm:text-xl text-sm dark:text-gray-300">{{member?.name}}</div>
                 </div>
                 
-                <i class="pi  pi-comment text-primary dark:text-dark-primary" style="font-size: 1.5rem; "></i>
+                <i class="pi  pi-comment text-primary dark:text-dark-primary text-base sm:text-xl icon2" ></i>
             </div>
 
         </div>

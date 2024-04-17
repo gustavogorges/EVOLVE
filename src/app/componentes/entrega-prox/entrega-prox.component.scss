@@ -1,5 +1,5 @@
 .main {
-    @apply  w-full md:h-[87px] h-full bg-white dark:bg-dark-primary-black rounded-lg md:p-3 py-3 px-4 shadow-md md:px-6 flex items-center justify-between;
+    @apply  w-full md:h-[87px] lg:h-[65px] xl:h-[87px] h-full bg-white dark:bg-dark-primary-black rounded-lg md:p-3 py-3 px-4 shadow-md md:px-6 flex items-center justify-between;
     //  border-b-4 border-primary 
 }
 
@@ -13,12 +13,12 @@
 }
 
 .date-text {
-    @apply text-secondary dark:text-dark-secondary font-hind-madurai md:text-xl text-sm
+    @apply text-secondary dark:text-dark-secondary font-hind-madurai md:text-xl lg:text-sm xl:text-xl text-sm
 }
 
 .name-text {
 
-    @apply text-primary dark:text-dark-primary font-bold md:text-[22px] text-lg ;
+    @apply text-primary dark:text-dark-primary font-bold md:text-[22px] lg:text-lg xl:text-[22px] text-lg ;
     animation: 5s ease-in 1s slidein;
 
 }

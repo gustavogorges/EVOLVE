@@ -2,7 +2,7 @@
     @apply  flex flex-col gap-2
 }
 .text-p{
-    @apply text-white;
+    @apply text-white xl:text-base text-xs;
     font-family: "Montserrat", "sans-serif";
 }
 .todayText {
@@ -12,7 +12,7 @@
     display: none;
 }
 .title-text {
-    @apply font-bold text-2xl text-secondary dark:text-dark-secondary ;
+    @apply font-bold md:text-2xl text-lg text-secondary dark:text-dark-secondary ;
     font-family: "Montserrat", sans-serif;
 
 }

@@ -67,7 +67,7 @@
 }
 
 .container {
-  @apply lg:w-[660px] md:w-[480px] w-full h-[248px] overflow-y-auto;
+  @apply 2xl:w-[660px] xl:w-[500px] md:w-[480px] lg:w-[350px] w-full max-h-[248px] overflow-y-auto;
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
