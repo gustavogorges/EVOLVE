@@ -75,8 +75,8 @@
                 </div>
             </div>
             <div class="botoes">
-                <button class="cancelar" (click)="cancelar()">Cancelar</button>
-                <button class="salvar" (click)="salvarProjeto()">Salvar</button>
+                <button class="cancelar" (click)="cancelar(this.team.id)">Cancelar</button>
+                <button class="salvar" (click)="salvarProjeto(this.team.id)">Salvar</button>
             </div>
         </div>
     </div>

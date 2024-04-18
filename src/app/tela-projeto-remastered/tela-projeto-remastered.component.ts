@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -11,7 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaProjetoRemasteredComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService, private route:Router) { }
+  constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute) { }
 
   id!: number
   projects !: Project[]
@@ -21,6 +21,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   quest !: string
   confirmationActionModalBol : boolean = false
   listFromRemove = new Array
+  teamId : number = 0
 
   ngOnInit(): void {
     this.getProjects()
@@ -50,11 +51,12 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   async getProjects(){
-    this.projects = await this.service.getAllSomething('project') || []
-    
-    this.projects = this.projects.reverse()
-    console.log(this.projects);
-    
+    this.activatedRoute.paramMap.subscribe( async params  => {
+      const getTeamId = params.get('teamId');
+      this.teamId  = Number(getTeamId)
+      this.projects = await this.service.getProjectsByTeamId(this.teamId, 1)
+      console.log(this.projects);
+    });
   }
 
   openProject(p:any){
@@ -149,8 +151,8 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.formData = event
   }
 
-  async goToCreateProject(){
-    this.route.navigate(['/criar-projeto'])
+  async goToCreateProject(teamId : number){
+    this.route.navigate(['/criar-projeto', teamId])
   }
 
   editProject(event:any, p:any){

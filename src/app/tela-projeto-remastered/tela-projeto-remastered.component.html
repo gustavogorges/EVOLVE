@@ -2,7 +2,7 @@
 <div class="screen duration-150" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50':'blur-0'">
     <div class="tittle">
         <p>Equipe Padrão</p>
-        <button (click)="goToCreateProject()"><i class="pi pi-plus"></i> Adicionar Projeto</button>
+        <button (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> Adicionar Projeto</button>
     </div>
     
     <div class="projects">

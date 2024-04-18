@@ -1,7 +1,7 @@
 import { Component,EventEmitter,Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
@@ -163,9 +163,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     this.editProjectEmit(bol)
   }
 
-  async irParaProjeto(){
-    localStorage.setItem("project-view", JSON.stringify(this.projeto.id))
-    this.route.navigate(['view-project'])
+  async irParaProjeto(projectId: number){
+    this.route.navigate(['view-project', projectId])
   }
 
   cancelEdit(){

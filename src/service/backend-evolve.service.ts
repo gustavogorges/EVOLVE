@@ -29,7 +29,7 @@ import { Comment } from 'src/model/comment';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
-  URL : string = "http://localhost:8088/"
+  URL : string = "http://localhost:8087/"
 
   constructor() { }
 
@@ -47,6 +47,9 @@ export class BackendEVOLVEService {
   }
   async getProjectsByUserId( userId: number )  {
     return (await axios.get(this.URL+"project" + "/user/"+userId)).data
+  }
+  async getProjectsByTeamId( teamId: number, userId: number )  {
+    return (await axios.get(this.URL+"project" + "/team/"+teamId+"/"+userId)).data
   }
   async getTeamsByUserId( userId: number )  {
     return (await axios.get(this.URL+"team" + "/user/"+userId)).data
@@ -182,6 +185,10 @@ export class BackendEVOLVEService {
 
   async patchImage(id:number, image:any){
     return (await (axios.patch(this.URL+"project/"+id+"/setImage", image))).data;
+  }
+
+  async getCharts(idProject:number){
+    return (await (axios.patch(this.URL+"project/"+idProject+"/charts"))).data;
   }
 
 }

@@ -27,7 +27,7 @@ const routes: Routes = [
     component : TelaInicialComponent
   },
   {
-    path:"tela-projeto",
+    path:"tela-projeto/:teamId",
     component: TelaProjetoRemasteredComponent
   },
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
     component: TelaTarefaComponent
   },
   {
-    path:"criar-projeto",
+    path:"criar-projeto/:teamId",
     component: TelaCriarProjetoComponent
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     component: TeamCreationScreenComponent
   },
   {
-    path:'view-project',
+    path:'view-project/:projectId',
     component: TelaFullViewComponent
 
   }

@@ -1,6 +1,9 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
+import { Chart } from 'chart.js';
 import { map } from 'rxjs';
+import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { Project } from 'src/model/project';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
@@ -23,8 +26,9 @@ export class TelaFullViewComponent implements OnInit {
     openMemberView : number | undefined
     unlockAllMembersView = false;
     statusNames:any[] = []
+    chartstoDash : Array<DashBoardCharts> = new Array
 
-    constructor(private service : BackendEVOLVEService){}
+    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute){}
 
     deleteDashboard(dashboard:any){
         this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
@@ -47,12 +51,20 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async ngOnInit() {
-        let projectId = localStorage.getItem("project-view") as unknown as number  
+        this.route.paramMap.subscribe( async params  => {
+            const projectId = params.get('projectId');
+            const id  = Number(projectId)
+            this.projeto = await this.service.getOne('project', id);
+            console.log(this.projeto);
+        });
+          
+        // let projectId = localStorage.getItem("project-view") as unknown as number  
 
-        if(projectId >= 0){
-            this.projeto = await this.service.getOne("project", projectId)
-        }
-        console.log(this.projeto);
+        // if(projectId >= 0){
+        //     this.projeto = await this.service.getOne("project", projectId)
+        //     // this.chartstoDash = await this.service.getCharts(projectId);
+        // }
+        // console.log(this.projeto);
         
         setTimeout(() => {
             this.getStatusChart()   
@@ -144,6 +156,11 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     chartsInitialize(){
+        let namesStatus : any = []
+        let valueStatus : any = []
+
+       
+
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -154,11 +171,11 @@ export class TelaFullViewComponent implements OnInit {
             id: 0,
             type: 'bar',
             data : {
-                labels: ['a','b','c','d','e','f','g','h'],
+                labels: namesStatus,
                 datasets: [
                     {
                         label: 'Status do projeto',
-                        data: [540, 325, 702, 620, 33, 33, 33],
+                        data: valueStatus,
                         backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
                         borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
                         borderWidth: 1

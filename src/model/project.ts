@@ -4,6 +4,8 @@ import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
 import { File } from "./file";
+import { Chart } from "chart.js";
+import { DashBoardCharts } from "./DashBoardCharts";
 
 export class Project{
     id!: number;

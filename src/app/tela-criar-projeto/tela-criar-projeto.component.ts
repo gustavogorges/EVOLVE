@@ -1,11 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Team } from 'src/model/team';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -17,11 +18,20 @@ export class TelaCriarProjetoComponent implements OnInit {
   preImage: any;
   formData: any;
 
-  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer){}
+  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
   
   async ngOnInit(){
+    this.activatedRoute.paramMap.subscribe( async params  => {
+      const teamId = params.get('teamId');
+      const teamid  = Number(teamId)
+      this.team = await this.service.getOne("team", teamid) as Team
+      console.log(this.team);
+      
+      this.usuarios = this.team.participants || []
+      console.log(this.usuarios);
+    });
+
     this.projeto = new Project
-    this.usuarios = await this.service.getAllSomething('user') || []
     this.getStatusList()
     this.randomColor()
   }
@@ -34,7 +44,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   searchTerm : string = ''
   priorityBol : boolean = false
   backGroundColorProject : string = ''
-
+  team !: Team
   statusEnabled(){
     this.statusVisible = !this.statusVisible
   }
@@ -103,7 +113,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   
-  async salvarProjeto(){
+  async salvarProjeto(teamId:number){
     if(this.projeto.name != '' && this.date != null){
       this.projeto.finalDate = this.dateFormat(this.date);
       let postProject:any = this.projeto
@@ -117,13 +127,16 @@ export class TelaCriarProjetoComponent implements OnInit {
       postProject.creator = {
         "id":1
       }
+      postProject.team = this.team
       postProject.imageColor = this.backGroundColorProject
+      postProject.image = null
+      console.log(postProject);
       postProject = await this.service.postProjeto(postProject);
       if(this.formData != null){
         console.log(await this.service.patchImage(postProject.id, this.formData));
       }
       
-      this.route.navigate(['/tela-projeto'])
+      this.route.navigate(['/tela-projeto', teamId])
     }
   }
 
@@ -150,8 +163,8 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.backGroundColorProject = '#' + Math.floor(Math.random()*16777215).toString(16);
   }
 
-   async cancelar(){
-      this.route.navigate(['/tela-projeto'])
+   async cancelar(teamId:number){
+      this.route.navigate(['/tela-projeto', teamId])
    }
 
    async createStatus(event:any){
