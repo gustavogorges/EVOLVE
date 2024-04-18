@@ -122,8 +122,8 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"user", usuario)).data
   }
 
-  async postEquipe (equipe:Team){
-    return (await axios.post(this.URL+"team", equipe)).data
+  async postEquipe (adminId:number){
+    return (await axios.post(this.URL+"team/admin/"+adminId)).data
   }
 
   async putEquipe (equipe:Team){
@@ -181,7 +181,7 @@ export class BackendEVOLVEService {
     let path:string = "team/"
     let formData:FormData = new FormData
     formData.append("name",name)
-    return (await axios.patch(this.URL+path+teamId, formData)).data
+    return (await axios.patch(this.URL+path+teamId+"/name", formData)).data
   }
 
 }

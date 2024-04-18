@@ -3,6 +3,7 @@ import { LogarithmicScale } from 'chart.js';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-team-creation-screen',
@@ -20,11 +21,21 @@ export class TeamCreationScreenComponent implements OnInit {
   team!:Team
   isEditingTeamName:boolean=false
 
-  constructor(private service:BackendEVOLVEService) { }
+  constructor(
+    private service:BackendEVOLVEService,
+    private cookiesService:CookiesService
+    ) { }
 
   async ngOnInit(): Promise<void> {
-    this.team = new Team
-    this.team.name = "Nova Equipe"
+    this.team = await this.createNewTeam()
+    console.log(this.team);
+    
+  }
+
+  async createNewTeam():Promise<Team>{
+    let team = new Team
+    team.administrator = await this.cookiesService.getLoggedUser()
+    return await this.service.postEquipe(team.administrator.id)
   }
 
 
