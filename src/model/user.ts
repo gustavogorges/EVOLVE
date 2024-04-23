@@ -1,7 +1,7 @@
 import { UserChat } from "./userChat";
 import { Team } from "./team";
 import { Task } from "./task";
-import { File } from "./file";
+import { TaskFile } from "./file";
 
 export class User {
     [x: string]: any;
@@ -10,7 +10,7 @@ export class User {
     password: string = "";
     name : string = "";
     imageColor!:String 
-    image!:File
+    image!:TaskFile
     chats:Array<UserChat> = new Array
     createdTasks: Array<Task> = new Array;
     managedTeams: Array<Team> = new Array;

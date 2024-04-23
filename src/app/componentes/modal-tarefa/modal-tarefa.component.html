@@ -409,6 +409,8 @@
         <app-anexos
           class="component"
           *ngIf="page_task == 'anexos'"
+          [task]="tarefa"
+          [loggedUser]="loggedUser"
         ></app-anexos>
         <app-automacao
           class="component"

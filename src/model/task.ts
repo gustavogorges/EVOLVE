@@ -1,13 +1,14 @@
+
 import { Historic } from "./historic";
 import { Priority } from "./priority";
-
-import { PriorityRecord } from "./priorityRecord";
+import { PriorityRecord } from "./PriorityRecord";
 import { Project } from "./project";
 import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Subtask } from "./subtask";
 import { User } from "./user";
 import { Comment } from 'src/model/comment';
+import { TaskFile } from "./file";
 
 
 export class Task{
@@ -34,6 +35,7 @@ export class Task{
     properties:Array<Property> = new Array;
     subtasks: Array<Subtask> = new Array;
     statusListIndex :number = -1;
+    files : Array<TaskFile> = new Array;
 
     associates:Array<User|Pick<User, "id">> = new Array;
     isVisible: boolean = false;

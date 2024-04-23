@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Priority } from 'src/model/priority';
-import { PriorityRecord } from 'src/model/priorityRecord';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { PriorityRecord } from 'src/model/PriorityRecord';
 
 @Component({
   selector: 'app-select-prioridade',

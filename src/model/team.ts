@@ -1,12 +1,12 @@
 import { Project } from "./project";
 import { TeamChat } from "./teamChat";
 import { User } from "./user";
-import { File } from "./file";
+import { TaskFile } from "./file";
 
 export class Team{
     id!:number;
     name : string = "";
-    image:File = new File;
+    image:TaskFile = new TaskFile;
     imageColor:String = "#000000"
     adimnistrator : User = new User;
     projects: Array<Project> = new Array;

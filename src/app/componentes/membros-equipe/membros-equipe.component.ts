@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { File } from 'src/model/file';
+import { TaskFile } from 'src/model/file';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
