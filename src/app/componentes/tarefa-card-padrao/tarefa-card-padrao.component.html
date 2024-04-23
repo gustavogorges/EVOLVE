@@ -49,9 +49,10 @@
       style="width: 21px"
     />
     </div>
- 
-     <div *ngFor=" let associate of arrayForce" class="member">     
-     <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
+ <div class="flex gap-2">
+  <div *ngFor=" let associate of arrayForce; index as inidice " class="member">  
+    <div *ngIf="inidice<3">
+      <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
         'background-image':
           associate.image != null
             ? 'url(' + associate.image.data + ')'
@@ -61,9 +62,13 @@
       }">
     
     </div>
+    </div>   
+ 
 
 
-    </div>
+   </div>
+ </div>
+    
   </div>
   <!-- <div class="bg-blue-500 absolute h-2 w-full"></div> -->
 </div>

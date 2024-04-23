@@ -62,7 +62,7 @@
       @apply flex items-center justify-end
     }
     .priority-box{
-      @apply w-max
+      @apply w-max xl:w-32
     }
     .priority {
       @apply rounded-lg px-2 lg:px-4 sm:p-1 p-0.5  w-full text-center lg:text-sm text-[10px] self-center  ;

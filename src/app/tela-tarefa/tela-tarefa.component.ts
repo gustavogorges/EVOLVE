@@ -337,7 +337,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   
   openTask(tarefa: Task): void {
     this.tarefaSelecionada = tarefa;
-    this.booleanTask = !this.booleanTask;
+    this.booleanTask = true;
     this.tarefaSelecionada = tarefa;
   }
 

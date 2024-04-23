@@ -107,5 +107,25 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
     
     return dia.getTime()==today.getTime()
   }
+  booleanTask: boolean = false;
+  tarefaSelecionada: Task = new Task();
+  tarefaNova: Task = new Task();
+  projeto :Project = new Project()
+async openTask(tarefa: Task): Promise<void> {
+    this.booleanTask = true;
+
+    this.tarefaSelecionada = tarefa;
+    if(this.tarefaSelecionada.project.id!=undefined){
+       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+
+    }
+  }
+    closeTask(event: boolean) {
+      if (event) {
+        this.tarefaNova = new Task();
+        this.booleanTask = false;
+      }
+    }  
+
   
 }

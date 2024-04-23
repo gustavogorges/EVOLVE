@@ -1,14 +1,28 @@
+<div class="gorgees">
+  <app-modal-tarefa
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
+  ></app-modal-tarefa>
+</div>
+
 
 <div class="flex lg:flex-row flex-col w-full h-full lg:justify-center  xl:gap-[88px] lg:gap-[40px] md:px-16 px-8 dark:bg-dark-theme-back">
+
+
   <div class="lg:w-[40%] h-full flex lg:pt-9">
+  
     <div class="close-deliveries">
       <p class="title-text ">Entregas Próximas</p>
-
+      
       <div class="card-deliveries-box sm:h-[424px]">
         <div
           *ngFor="let tarefa of listaTarefas; index as i"
           class="w-full gap-3 flex flex-col items-center "
         >
+
           <app-entrega-prox
             *ngIf="i <= 3"
             class="card-deliveries"
@@ -44,6 +58,7 @@
         <button class="absolute top-1/2 -translate-y-1/2 -left-5 pi pi-chevron-left text-[#aaa]" (click)="mudarItem(indiceAtual - 1)"></button>
        
           <app-equipe-recente-card
+            (click)="goProjetos()"
             [team]="loggedUser.teams[indiceAtual]"
             class="w-full max-h-[200px]"
           ></app-equipe-recente-card>

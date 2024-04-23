@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid flex   w-full">
   <ng-template #recursiveList statusList>
     <!-- sou a porra toda -->
@@ -78,6 +80,8 @@
               [tarefaAtual]="task"
               dndHandle
               id="2"
+              (click)="openTask(task)"
+
             
             ></app-tarefa-card-padrao>
           </div>

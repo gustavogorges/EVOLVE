@@ -1,4 +1,4 @@
-<div class="gorgees">
+ <div class="gorgees">
   <app-modal-tarefa
     class="tarefa"
     *ngIf="booleanTask"
@@ -9,6 +9,7 @@
 </div>
 
 <div class="main-box">
+
   <div class="main">
     <div class="header">
       <div class="button-name-box">
@@ -135,6 +136,8 @@
             [tarefaAtual]="tarefa"
             (newItem)="atualizar($event)"
             [project]="projeto"
+            (click)="openTask(tarefa)"
+
           ></app-tarefa-card-lista>
         </div>
       </div>

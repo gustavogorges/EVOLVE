@@ -1,21 +1,35 @@
-<div class=" flex gap-2 items-center justify-center     " #scrollContainer>
-    <div class="flex  md:gap-4 gap-1 bg-white items-center p-2 h-12 md:h-max">
+<div class="fixed z-[1000] top-14 left-1/2 h-full">
+  <app-modal-tarefa
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
+  ></app-modal-tarefa>
+</div>
 
-  
-    <div *ngFor="let task of tasks">
-        <div *ngIf="isSameDay(task.finalDate)" class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20  text-center  text-sm md:text-base" [ngStyle]="{
-        'background-color': task.currentStatus.backgroundColor,
-        color: task.currentStatus.textColor
-      }">
-            {{ task.name }}
-        </div>
-        <div *ngIf="isSameDay(task.scheduledDate)" class="md:p-1 rounded-lg xl:w-36 w-20  text-center border-2 border-dashed text-sm md:text-base"
-            [ngStyle]="{
-        'border-color': task.currentStatus.backgroundColor
-      }">
-            {{ task.name }}
-        </div>
+<div class="flex gap-2 items-center justify-center" #scrollContainer>
+  <div class="flex md:gap-4 gap-1 bg-white items-center p-2 h-12 md:h-max">
+    <div *ngFor="let task of tasks" (click)="openTask(task)">
+      <div
+        *ngIf="isSameDay(task.finalDate)"
+        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center text-sm md:text-base"
+        [ngStyle]="{
+          'background-color': task.currentStatus.backgroundColor,
+          color: task.currentStatus.textColor
+        }"
+      >
+        {{ task.name }}
+      </div>
+      <div
+        *ngIf="isSameDay(task.scheduledDate)"
+        class="md:p-1 rounded-lg xl:w-36 w-20 text-center border-2 border-dashed text-sm md:text-base"
+        [ngStyle]="{
+          'border-color': task.currentStatus.backgroundColor
+        }"
+      >
+        {{ task.name }}
+      </div>
     </div>
-</div>  
-   
+  </div>
 </div>

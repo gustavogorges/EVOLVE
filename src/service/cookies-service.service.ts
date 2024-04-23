@@ -18,8 +18,8 @@ export class CookiesService {
 
   constructor(private cookieService : CookieService, private service : BackendEVOLVEService) { }
 
-    setLoggedUserId(user : User) : void {
-      this.cookieService.set('loggedUserId',JSON.stringify(user.id));
+    setLoggedUserId(user : User|null) : void {
+      this.cookieService.set('loggedUserId',JSON.stringify(user?.id));
     }
 
      async getLoggedUser() : Promise<User> {

@@ -22,12 +22,14 @@ export class EntregaProxComponent implements OnInit {
     private cookies_service:CookiesService) { }
 
     loggedUser : User = new User;
+    arrayForce : Array<User> = new Array;
 
   async ngOnInit() {
     //retirar quando fizer o calculo automatico
     this.tarefa.conclusionPercentage = 75
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    
+    this.arrayForce =  this.tarefa.associates as Array<User> 
+
   }
 
   alterarTarefaFavoritado(){

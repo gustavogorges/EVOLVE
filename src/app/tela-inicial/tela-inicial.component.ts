@@ -16,17 +16,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./tela-inicial.component.scss'],
 })
 export class TelaInicialComponent implements OnInit {
-  @HostListener('click', ['$event'])
-  clicouFora(event: any) {
-    const element = event.target
-      .getAttributeNames()
-      .find((name: string | string[]) => name.includes('c60'));
-    if (!element) {
-      for (let pFor of this.listaTarefas) {
-        this.booleanTask = false;
-      }
-    }
-  }
+  
+     
+  
 
   listaTarefas: Array<Task> = [];
 
@@ -117,16 +109,19 @@ export class TelaInicialComponent implements OnInit {
    
   }
   tarefaSelecionada: Task = new Task();
-  openTask(tarefa: Task): void {
+  projeto :Project = new Project()
+  id =0
+async openTask(tarefa: Task): Promise<void> {
     this.booleanTask = true;
 
     this.tarefaSelecionada = tarefa;
+    if(this.tarefaSelecionada.project.id!=undefined){
+       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+
+    }
   }
 
-  closeTask(tarefa: Task) {
-    this.booleanTask = false;
-    this.tarefaSelecionada = new Task();
-  }
+ 
   indiceAtual: number = 0;
 
   mudarItem(novoIndice: number) {
@@ -141,5 +136,16 @@ export class TelaInicialComponent implements OnInit {
   goTasks(projectId : number){
     this.router.navigate(['/tela-tarefa/'+projectId]);
 
+  }
+  goProjetos(){
+    this.router.navigate(["/tela-projeto"])
+  }
+  
+  tarefaNova: Task = new Task();
+  closeTask(event: boolean) {
+    if (event) {
+      this.tarefaNova = new Task();
+      this.booleanTask = false;
+    }
   }
 }

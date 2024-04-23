@@ -16,7 +16,9 @@ export class ModalConfigComponent implements OnInit {
   constructor( private cookieService: CookiesService, 
     private router: Router,
     private service: BackendEVOLVEService,
-    private colorService: ColorService) { }
+    private colorService: ColorService) {
+      this.currentFontSize = parseFloat(window.getComputedStyle(document.body).fontSize);
+     }
   @Output() close = new EventEmitter<boolean>();
   loggedUser !: User
   theme !: string
@@ -25,6 +27,16 @@ export class ModalConfigComponent implements OnInit {
   password!: string
   disabledPassword = true
   defaultColors = false
+  currentFontSize: number;
+  increaseFontSize() {
+    this.currentFontSize += 2; // Aumenta o tamanho da fonte em 2 pixels
+    document.body.style.fontSize = this.currentFontSize + 'px'; // Define o novo tamanho da fonte para o body
+  }
+
+  decreaseFontSize() {
+    this.currentFontSize -= 2; // Diminui o tamanho da fonte em 2 pixels
+    document.body.style.fontSize = this.currentFontSize + 'px'; // Define o novo tamanho da fonte para o body
+  }
   async ngOnInit(): Promise<void> {
 
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})

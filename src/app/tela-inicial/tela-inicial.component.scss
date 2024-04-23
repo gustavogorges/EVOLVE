@@ -3,6 +3,10 @@
   grid-template-columns: 40% 60%;
 }
 
+.gorgees{
+  @apply flex justify-end w-screen px-10
+}
+
 
 .main-box  {
   @apply w-full h-full flex items-center justify-end p-10;
