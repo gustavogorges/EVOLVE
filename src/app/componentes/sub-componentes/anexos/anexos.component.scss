@@ -1,6 +1,10 @@
 .main {
-    @apply h-5/6 w-5/6 border-2 rounded-xl grid grid-rows-2;
+    @apply h-5/6 w-full border-2 rounded-xl grid grid-rows-2;
     grid-template-rows: 85% 15%;
+}
+
+.file-input {
+  @apply hidden
 }
 
 .box-btn-add {
@@ -41,9 +45,21 @@
   }
 
   .content {
-    @apply flex justify-center items-center flex-col gap-4
+    @apply flex justify-center items-center flex-col gap-4 h-full
   }
 
   .file-icon {
     @apply text-8xl text-secondary
+  }
+
+  .file-icon2 {
+    @apply text-2xl text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded-xl
+  }
+
+  .file-icon3 {
+    @apply text-2xl text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded
+  }
+
+  .fileFor {
+    @apply min-h-[25%] w-full border-b-2 flex items-center px-4 justify-between
   }

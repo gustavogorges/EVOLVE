@@ -9,7 +9,7 @@ import {
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
-import { PriorityRecord } from 'src/model/priorityRecord';
+import { PriorityRecord } from 'src/model/PriorityRecord'; 
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
 

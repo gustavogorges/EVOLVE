@@ -3,7 +3,7 @@ import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
-import { File } from "./file";
+import { TaskFile } from "./file";
 
 export class Project{
     id!: number;
@@ -11,7 +11,7 @@ export class Project{
     finalDate: string = "";
     description: string ="";
     imageColor:string="#000000"
-    image:File = new File
+    image:TaskFile = new TaskFile
     creator!:User
     adimnistrators:Array<User> = new Array
     members:Array<User> = new Array;

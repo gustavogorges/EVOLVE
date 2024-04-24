@@ -1,10 +1,39 @@
 <div class="main">
-    <div class="content">
-        <i class="pi pi-file-import file-icon"></i>
-        <p class=" text-fontGray">arraste seu arquivo aqui para anexa-lo</p>
+    <input type="file" class="file-input"
+        (change)="onFileSelected($event)" #fileUpload>
+    <div class="content max-h-[100%]">
+        <div 
+        class="flex flex-col justify-center items-center"
+        *ngIf="task.files == null"
+        >
+            <i class="pi pi-file-import file-icon"></i>
+            <p class=" text-fontGray">arraste seu arquivo aqui para anexa-lo</p>
+        </div>
+        <div 
+        class="flex flex-col justify-start h-full w-full items-center overflow-y-auto"
+        *ngIf="task.files != null"
+        >
+            <div 
+            class="fileFor"
+            *ngFor="let file of task.files; let index = index"
+            >
+            <a [download]="file.name" [href]="file.url" [type]="file.type">
+            <i 
+            class="pi pi-download file-icon2">
+             </i>
+            </a>
+            
+        
+            <p>{{file.name}}</p>
+            <i
+            (click)="removeTaskFile(file)" 
+            class="pi pi-trash file-icon3 text-xl"
+            ></i>
+            </div>
+        </div>
     </div>
     <div class="box-btn-add">
-        <div class="btn-add-content">
+        <div class="btn-add-content" (click)="fileUpload.click()">
             <i class="pi pi-plus btn-add-text"></i>
             <p class="btn-add-text">adicionar anexo</p>
         </div>

@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input,
 import { LogarithmicScale } from 'chart.js';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
-import { PriorityRecord } from 'src/model/priorityRecord';
+import { PriorityRecord } from 'src/model/PriorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';

@@ -1,6 +1,7 @@
-export class File {
+export class TaskFile {
     id!:number
-    name:String=""
-    type:String = ""
-    data:String = ""
+    name:string=""
+    type:string = ""
+    data:string = ""
+    url:string =""
 }
