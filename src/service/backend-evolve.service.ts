@@ -263,4 +263,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/patch/task/file/"+taskId+"/"+userId,formData)).data
   }
 
+  async deleteTaskFile(taskId:number, fileId:number,userId:number) {
+    return (await axios.delete(this.URL+"task/delete/task/file/"+taskId+"/"+fileId+"/"+userId)).data
+  }
+
 }

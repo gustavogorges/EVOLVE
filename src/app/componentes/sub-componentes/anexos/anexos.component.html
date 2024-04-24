@@ -10,14 +10,14 @@
             <p class=" text-fontGray">arraste seu arquivo aqui para anexa-lo</p>
         </div>
         <div 
-        class="flex flex-col justify-start min-h-[40%] w-full items-center overflow-y-auto"
+        class="flex flex-col justify-start h-full w-full items-center overflow-y-auto"
         *ngIf="task.files != null"
         >
             <div 
             class="fileFor"
             *ngFor="let file of task.files; let index = index"
             >
-            <a [download]="file.name" [href]="file.url" [type]="file.type" (click)="a(file)">
+            <a [download]="file.name" [href]="file.url" [type]="file.type">
             <i 
             class="pi pi-download file-icon2">
              </i>
@@ -25,7 +25,10 @@
             
         
             <p>{{file.name}}</p>
-            <i class="pi pi-trash file-icon3 text-xl"></i>
+            <i
+            (click)="removeTaskFile(file)" 
+            class="pi pi-trash file-icon3 text-xl"
+            ></i>
             </div>
         </div>
     </div>
