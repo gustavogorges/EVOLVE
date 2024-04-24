@@ -43,7 +43,7 @@ export class TelaInicialComponent implements OnInit {
     if(userData){
       this.cookieService.setLoggedUserId( userData)
     }
-     
+
   
 
     
@@ -91,6 +91,7 @@ export class TelaInicialComponent implements OnInit {
     
 
   }
+
   userColors(){
     console.log(this.loggedUser);
     

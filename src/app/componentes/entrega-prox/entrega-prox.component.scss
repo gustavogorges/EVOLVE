@@ -18,7 +18,7 @@
 
 .name-text {
 
-    @apply text-primary dark:text-dark-primary font-bold md:text-[22px] lg:text-lg xl:text-[22px] text-lg ;
+    @apply text-primary dark:text-dark-primary font-bold md:text-xl lg:text-lg xl:text-xl text-lg ;
     animation: 5s ease-in 1s slidein;
 
 }

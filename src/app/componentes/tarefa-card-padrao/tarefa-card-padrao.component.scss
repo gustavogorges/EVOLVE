@@ -33,7 +33,7 @@
   transition: transform 5s linear;
 }
 .name {
-  @apply text-primary dark:text-dark-primary text-[22px] leading-7 font-extrabold;
+  @apply text-primary dark:text-dark-primary text-xl leading-7 font-extrabold;
   font-family: "Hind Madurai", sans-serif;
 }
 .taskName-box {
