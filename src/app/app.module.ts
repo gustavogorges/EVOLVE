@@ -104,6 +104,7 @@ import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
 
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+import { NotificationModalComponent } from './componentes/notification-modal/notification-modal.component';
 
 
 
@@ -183,7 +184,8 @@ import { SelectAssociatesComponent } from './componentes/select-associates/selec
 
     SelectOpcaoComponent,
     TelaPerfilComponent,
-    SelectAssociatesComponent
+    SelectAssociatesComponent,
+    NotificationModalComponent
 
   ],
   

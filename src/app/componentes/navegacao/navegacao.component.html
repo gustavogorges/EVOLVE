@@ -1,6 +1,6 @@
 <div class="main ">
   <app-side-bar *ngIf="sideBar" (sideBar)="closeSideBar($event)"></app-side-bar>   
-
+  <app-notification-modal *ngIf="notification"> </app-notification-modal>
   <div class="main-grid">
     <div class="column1">
       <i class="icon pi pi-align-justify icon2" (click)="openSideBar()"></i>
@@ -33,7 +33,7 @@
         </label>
     </div>
     <div class="column3">
-        <i class="icon pi pi-bell icon2" ></i>
+        <i class="icon pi pi-bell icon2" (click)="openNotification()"  ></i>
         <i class="icon pi pi-moon icon2" (click)="darkMode()" ></i>
         <i class="icon pi pi-user icon2" (click)="irParaPerfil()"></i>
     </div>

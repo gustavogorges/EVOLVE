@@ -17,7 +17,7 @@ export class NavegacaoComponent implements OnInit {
     ) { }
   sideBar = false
   loggedUser !: User; 
-
+  notification = false 
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService
@@ -94,6 +94,9 @@ export class NavegacaoComponent implements OnInit {
   teste(){
     document.querySelector('.pi-moon')?.classList.add('pi-sun')
     document.querySelector('.pi-moon')?.classList.remove('pi-moon')
+  }
+  openNotification(){
+    this.notification= !this.notification
   }
 
 }
