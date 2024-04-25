@@ -1,3 +1,26 @@
-<div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg" >
+<div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col justify-between " >
+    <div class="main-box">
+        <div class="teams-box" *ngFor="let team of loggedUser.teams">
+            <div class="h-16 w-full flex justify-between items-center">
+                <i class="pi pi-users team-icon"></i>
+                <p class="text-primaryFontBlack text-lg font-semibold">Equipe CentroWEG</p>
+                <i class="pi pi-angle-down team-icon2"></i>
+            </div>
+            <div class="notifications-box">
+                <div class="notification-item">
+                    <div class="notification-item-header">
+                        <p class="text-primaryFontBlack text-lg font-semibold">Notificação</p>
+                        <p class="text-primaryFontBlack text-sm font-semibold">Hoje</p>
+                    </div> 
+                    <div class="notification-item-content">
+                        <p class="text-primaryFontBlack text-sm font-semibold">Você tem uma nova tarefa</p>
+                        <p class="text-primaryFontBlack text-xs font-semibold">Tarefa 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clean-box">
 
+    </div>
 </div>

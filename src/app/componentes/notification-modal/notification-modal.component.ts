@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/model/user';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-notification-modal',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification-modal.component.scss']
 })
 export class NotificationModalComponent implements OnInit {
+  loggedUser : User = new User;
 
-  constructor() { }
+  constructor(private service : BackendEVOLVEService,
+    private cookies_service : CookiesService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
 }
