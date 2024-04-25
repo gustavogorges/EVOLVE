@@ -28,12 +28,14 @@ export class ModalConfigComponent implements OnInit {
   disabledPassword = true
   defaultColors = false
   currentFontSize: number;
+  sliderValue = 0
 
   async ngOnInit(): Promise<void> {
 
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     this.theme=this.loggedUser.theme
     this.checkDefaultColors();
+    this.sliderValue = this.loggedUser.fontSize
 
  
   }
@@ -227,50 +229,61 @@ async changeToDefault(){
     this.colorService.setSecondaryDarkColor(this.loggedUser.secondaryDarkColor)
 
 }
-
-base = 16
-sm = 14
-lg=18
-xl=20
-xl2=24
-xl3 =30
- increaseFontSize() {
-  this.base+=2
-  this.sm+=2
-  this.lg+=2
-  this.xl+=2
-  console.log(this.xl2);
+ 
+changeFont(){
   
-  this.xl2+=2
-  this.xl3+=2
-  console.log(this.xl2);
-  
+  document.documentElement.style.setProperty('--font-size-base', ''+this.sliderValue+'px');
+  document.documentElement.style.setProperty('--font-size-sm', ''+(this.sliderValue-2)+'px');
+  document.documentElement.style.setProperty('--font-size-lg', ''+(this.sliderValue+2)+'px');
+  document.documentElement.style.setProperty('--font-size-xl', ''+(this.sliderValue+4)+'px');
+  document.documentElement.style.setProperty('--font-size-2xl', ''+(this.sliderValue+8)+'px');
+  document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
 
-  document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
-  document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
-  document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
-  document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
-  document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
-  document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
-
-
-
-
+ this.service.patchUserFontSize(this.loggedUser.id, this.sliderValue)
 }
+// base = 16
+// sm = 14
+// lg=18
+// xl=20
+// xl2=24
+// xl3 =30
+//  increaseFontSize() {
+//   this.base+=2
+//   this.sm+=2
+//   this.lg+=2
+//   this.xl+=2
+//   console.log(this.xl2);
+  
+//   this.xl2+=2
+//   this.xl3+=2
+//   console.log(this.xl2);
+  
 
-// Diminuir o tamanho da fonte
- decreaseFontSize() {
-  this.base-=2
-  this.sm-=2
-  this.lg-=2
-  this.xl-=2
-  this.xl2-=2
-  this.xl3-=2
-  document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
-  document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
-  document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
-  document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
-  document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
-  document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
-} 
+//   document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
+//   document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
+//   document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
+//   document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
+//   document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
+//   document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
+
+
+
+
+// }
+
+// // Diminuir o tamanho da fonte
+//  decreaseFontSize() {
+//   this.base-=2
+//   this.sm-=2
+//   this.lg-=2
+//   this.xl-=2
+//   this.xl2-=2
+//   this.xl3-=2
+//   document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
+//   document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
+//   document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
+//   document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
+//   document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
+//   document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
+// } 
 }

@@ -9,7 +9,7 @@
 </div>
 
 <div class="flex gap-2 items-center justify-center" #scrollContainer>
-  <div class="flex md:gap-4 gap-1 bg-white items-center p-2 h-12 md:h-max">
+  <div class="flex md:gap-4 gap-1 bg-white dark:bg-dark-primary-black items-center p-2 h-12 md:h-max">
     <div *ngFor="let task of tasks" (click)="openTask(task)">
       <div
         *ngIf="isSameDay(task.finalDate)"

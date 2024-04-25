@@ -20,5 +20,6 @@ export class User {
     secondaryColor: string = "#4C956C"; 
     primaryDarkColor: string = "#67BFE0"; 
     secondaryDarkColor: string = "#86C19F"; 
+    fontSize : number =16; 
  
 }

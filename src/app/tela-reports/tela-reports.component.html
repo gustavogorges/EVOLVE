@@ -1,0 +1,22 @@
+<div #content id="content">
+    <div class="contenido-pdf">
+     
+      <div class="cliente">
+        <span>Cliente: </span>
+        <div class="campo"></div>
+      </div>
+      <div class="fecha">
+          <span>Fecha: </span>
+          <div class="campo"></div>
+        </div>
+      <ul class="satisfacion">
+        <li>El servicio es muy satisfactorio</li>
+        <li>El servicio es satisfactorio</li>
+        <li>El servico es normal</li>
+        <li>El servicio no es satisfactorio</li>
+      </ul>
+    </div>
+  </div>
+  <button mat-raised-button (click)="generarPDF()" id="donwloadpdf">
+  DESCARGAR CARTA DE CONFORMIDAD
+</button>

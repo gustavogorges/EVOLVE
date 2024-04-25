@@ -105,6 +105,7 @@ import { ModalConfigComponent } from './componentes/modal-config/modal-config.co
 
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
 import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
+import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 
 
 
@@ -185,7 +186,8 @@ import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
     SelectOpcaoComponent,
     TelaPerfilComponent,
     SelectAssociatesComponent,
-    VlibrasComponent
+    VlibrasComponent,
+    TelaReportsComponent
 
   ],
   

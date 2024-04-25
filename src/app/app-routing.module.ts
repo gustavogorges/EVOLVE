@@ -12,6 +12,7 @@ import { TeamCreationScreenComponent } from './team-creation-screen/team-creatio
 import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
+import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,11 @@ const routes: Routes = [
   {
     path:'view-project',
     component: TelaFullViewComponent
+
+  },
+  {
+    path:'reports',
+    component: TelaReportsComponent
 
   },
   {

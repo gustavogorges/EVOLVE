@@ -2,3 +2,26 @@
   @apply  dark:border-white;
     border: 2px solid black; /* Altere o estilo conforme necessário */
   }
+  .range-slider {
+    -webkit-appearance: none;
+    width: 35%;
+    height: 15px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--main-color);
+    box-shadow:  -410px 0 0 400px var(--main-color)
+    ;
+    cursor: pointer;
+    border-radius: 50%;
+  }

@@ -3,7 +3,9 @@ import { PrimeIcons } from 'primeng/api';
 import { Project } from 'src/model/project';
 import {
   Component,
+  ElementRef,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 ;
 import { Task } from 'src/model/task';
@@ -12,6 +14,10 @@ import { Status } from 'src/model/status';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
+
+import * as jspdf from 'jspdf';
+ import html2canvas from 'html2canvas';
+ import { HttpClient } from '@angular/common/http';
 
 interface OptionOrder {
   name: string;
@@ -42,7 +48,8 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   option: string | null = 'Cards';
   optionFilter: string = '';
 
-  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute  ) {}
+  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, 
+    private http: HttpClient  ) {}
 
   async atualizar(favoritado: boolean): Promise<void> { 
     if (favoritado) {
@@ -70,9 +77,11 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
      
     });
   
+  
    
 
   }
+ 
   teste(){
     console.log(this.projeto);
     

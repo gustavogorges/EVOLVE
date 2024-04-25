@@ -16,7 +16,7 @@
     <div class="w-full">
       <div class="flex justify-between items-center w-full">
         <div>
-          <p class="font-titulo font-medium dark:text-white">Email:</p>
+          <p class="font-titulo font-medium text-lg dark:text-white">Email:</p>
 
           <input
             type="email"
@@ -56,7 +56,7 @@
     <div class="w-full">
       <div class="flex justify-between items-center w-full">
         <div>
-          <p class="font-titulo font-medium dark:text-white">Senha:</p>
+          <p class="font-titulo font-medium text-lg dark:text-white">Senha:</p>
 
           <input
             type="password"
@@ -107,7 +107,7 @@
     <div class="w-full">
       <div class="flex justify-between w-full">
         <div class="flex flex-col gap-2 w-full">
-          <p class="font-titulo font-medium dark:text-white">
+          <p class="font-titulo font-medium text-lg dark:text-white">
             Cores do sistema:
           </p>
           <p
@@ -136,7 +136,7 @@
       </div>
     </div>
     <div class="flex flex-col gap-2">
-      <p class="font-titulo font-medium dark:text-white">
+      <p class="font-titulo font-medium text-lg dark:text-white">
         Altere as cores do sistema:
       </p>
       <p
@@ -438,9 +438,18 @@
        
       </div>
     </div>
-    <div id="font-size-controls">
-      <button (click)="increaseFontSize()">Aumentar</button>
-      <button (click)="decreaseFontSize()">Diminuir</button>
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-2 w-1/2">
+        <p class="font-titulo font-medium text-lg dark:text-white">
+          Altere o tamanho da fonte:
+        </p>
+        <p
+          class="font-hind-madurai text-fontGray dark:text-gray-300 font-sm md:text-base text-xs"
+        >
+        Personalize o tamanho da fonte para uma experiência de leitura ideal. Ajuste o tamanho da fonte para tornar o texto mais confortável e legível conforme suas preferências.
+        </p>
+      </div>
+      <input type="range" min="12" max="24" step="2"  [(ngModel)]="sliderValue" (ngModelChange)="changeFont() " value="12" class="range-slider" id="font-size-slider"> 
     </div>
   </div>
 </div>

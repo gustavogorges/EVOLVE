@@ -187,6 +187,9 @@ export class BackendEVOLVEService {
     formsData.append("secondaryColor",secondaryDarkColor)    
     return (await axios.patch(this.URL+"user"+"/secondaryDarkColor/"+userId,formsData )).data
   }
+  async patchUserFontSize(userId:number, fontSize:number):Promise<User>{
+    return (await axios.patch(this.URL+"user"+"/fontSize/"+userId+"/"+fontSize )).data
+  }
   async patchImageUser(id:number, image:any){
     return (await (axios.patch(this.URL+"user/"+id, image))).data;
   }

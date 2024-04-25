@@ -44,6 +44,7 @@ config = false
     this.router.navigateByUrl('/tela-inicial');
 
   }
+  sliderValue = 16 
   logOut(){
     this.cookieService.setLoggedUserId( null)
     this.closeSideBar()
@@ -51,6 +52,13 @@ config = false
     this.colorService.setSecondaryColor("#4C956C")
     this.colorService.setPrimaryDarkColor("#67BFE0")
     this.colorService.setSecondaryDarkColor("#86C19F")
+    document.documentElement.style.setProperty('--font-size-base', ''+this.sliderValue+'px');
+    document.documentElement.style.setProperty('--font-size-sm', ''+(this.sliderValue-2)+'px');
+    document.documentElement.style.setProperty('--font-size-lg', ''+(this.sliderValue+2)+'px');
+    document.documentElement.style.setProperty('--font-size-xl', ''+(this.sliderValue+4)+'px');
+    document.documentElement.style.setProperty('--font-size-2xl', ''+(this.sliderValue+8)+'px');
+    document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
+  
     this.router.navigate(['/']);
 
 

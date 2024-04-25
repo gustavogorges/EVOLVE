@@ -26,6 +26,7 @@ export class NavegacaoComponent implements OnInit {
       return user;
     });
     if(this.loggedUser){
+      this.changeFont()
 
       if(this.loggedUser.theme == 'dark'){
         this.themeDark = true
@@ -94,6 +95,15 @@ export class NavegacaoComponent implements OnInit {
   teste(){
     document.querySelector('.pi-moon')?.classList.add('pi-sun')
     document.querySelector('.pi-moon')?.classList.remove('pi-moon')
+  }
+  changeFont(){
+    document.documentElement.style.setProperty('--font-size-base', ''+this.loggedUser.fontSize+'px');
+    document.documentElement.style.setProperty('--font-size-sm', ''+(this.loggedUser.fontSize-2)+'px');
+    document.documentElement.style.setProperty('--font-size-lg', ''+(this.loggedUser.fontSize+2)+'px');
+    document.documentElement.style.setProperty('--font-size-xl', ''+(this.loggedUser.fontSize+4)+'px');
+    document.documentElement.style.setProperty('--font-size-2xl', ''+(this.loggedUser.fontSize+8)+'px');
+    document.documentElement.style.setProperty('--font-size-3xl', ''+(this.loggedUser.fontSize+14)+'px');
+  
   }
 
 }
