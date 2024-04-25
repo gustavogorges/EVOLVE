@@ -1,21 +1,25 @@
 <div class="screen">
+
     <div class="tittle">
         <h1>Equipe Padrão</h1>
         <button (click)="goToCreateProject()"><i class="pi pi-plus"></i> Adicionar Projeto</button>
     </div>
 
     <div class="projects">
-        <div *ngFor="let p of projetos" #projectElement>
+        <div *ngFor="let p of projects" #projectElement>
 
             <app-projeto-remastered 
 
-                (salvarProjeto)="salvarPai($event)"
+                (salvarProjeto)="editFun($event)"
                 [projectOpen]="p.isVisible" 
                 [projeto]="p" 
                 (click)="openProject(p)" 
                 (noCloseProject)="noCloseProject(p)"
-                (deletar)="deletarPai($event)"
+                (deletar)="delete($event)"
+                [resetProject]="resetProject"
                 (editProject)="editProject($event, p)"
+                (resetProjectOff)="resetProjectOff()"
+                (MultipartFile)="saveImage($event)"
             ></app-projeto-remastered>
 
         </div>

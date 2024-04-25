@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -9,11 +10,12 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   templateUrl: './select-status.component.html',
   styleUrls: ['./select-status.component.scss']
 })
-export class SelectStatusComponent implements OnInit {
+export class SelectStatusComponent implements OnInit{
 
   booleanAddStatus : boolean = false;
   booleanTeste : boolean = false;
   color : string = "";
+  boolEditStatus : boolean = false;
 
   status : Status = new Status();
 
@@ -21,25 +23,24 @@ export class SelectStatusComponent implements OnInit {
   projeto : Project = new Project;
 
   @Input()
-  statusLista : Array<Status> = new Array
-
-  @Input()
   tarefa : Task = new Task;
 
-  @Output() newItem = new EventEmitter<boolean>();
+  @Input()
+  loggedUser : User = new User;
 
+  @Output() newItem = new EventEmitter<boolean>();
+  @Output() addNewStatus = new EventEmitter<Status>();
 
   constructor(
     private service : BackendEVOLVEService
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.projeto)
+   ngOnInit(): void {
   }
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;
-    console.log(this.tarefa.currentStatus)
+    this.service.updateCurrentStatus(this.tarefa.id,this.loggedUser.id,status);
     this.newItem.emit(false);
   }
 
@@ -48,17 +49,52 @@ export class SelectStatusComponent implements OnInit {
   }
 
   async novoStatus(): Promise<void> {
-    this.status.textColor = "#000000";
-    this.projeto.id=2;
 
-    console.log(this.status);
+    if(this.status.name != ''){
+      if(this.status.backgroundColor === ''){
+        this.status.backgroundColor = "#ff0000"
+      }
+      this.status.backgroundColor.toUpperCase()
+      this.status.textColor = "#000000";
+      this.addNewStatus.emit(this.status)
+      this.addStatus();
+    }
+    this.status = new Status
+  }
 
 
-    this.projeto = await this.service.updateStatusList(this.projeto.id,this.status);
-    
-    console.log(this.projeto)
+  editStatus(status:Status){
+    this.status = status
+    this.boolEditStatus = true
+    this.booleanAddStatus = false
+  }
 
-    this.addStatus();
+  async editStatusPut(){
+    this.boolEditStatus = false
+    this.booleanAddStatus = false
+    this.status = new Status
+  }
+
+  verifyStatusDefault(status:Status){
+    if(status.name === 'não atribuido' ||
+    status.name === 'concluido' ||
+    status.name === 'pendente' ||
+    status.name === 'em progresso'){
+      return true
+    }
+    return false
+  }
+
+  async enableStatus(status:Status){
+    status.enabled = !status.enabled
+  }
+
+  async deleteStatus(status:Status){
+    if(this.projeto.id != null){
+      this.projeto = await this.service.deleteStatus(this.projeto.id, status)
+    }else{
+      this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
+    }
   }
 
 }

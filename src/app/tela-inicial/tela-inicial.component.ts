@@ -6,6 +6,9 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { Project } from 'src/model/project';
+import { ColorService } from 'src/service/colorService';
+import { LogarithmicScale } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -13,18 +16,9 @@ import { Project } from 'src/model/project';
   styleUrls: ['./tela-inicial.component.scss'],
 })
 export class TelaInicialComponent implements OnInit {
-  @HostListener('click', ['$event'])
-  clicouFora(event: any) {
-    console.log('TESTE 2');
-    const element = event.target
-      .getAttributeNames()
-      .find((name: string | string[]) => name.includes('c60'));
-    if (!element) {
-      for (let pFor of this.listaTarefas) {
-        this.booleanTask = false;
-      }
-    }
-  }
+  
+     
+  
 
   listaTarefas: Array<Task> = [];
 
@@ -38,7 +32,9 @@ export class TelaInicialComponent implements OnInit {
   constructor(
     private service: BackendEVOLVEService,
     private location: Location,
-    private cookieService: CookiesService
+    private cookieService: CookiesService, 
+    private colorService : ColorService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -47,10 +43,8 @@ export class TelaInicialComponent implements OnInit {
     if(userData){
       this.cookieService.setLoggedUserId( userData)
     }
-     
-    //this.loggedUser = await this.data.user;
 
-    //this.cookieService.setOne(this.loggedUser)
+  
 
     
     
@@ -66,22 +60,29 @@ export class TelaInicialComponent implements OnInit {
           }
         })
    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
-   console.log(projects);
    
    this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
-
+    this.userColors()
  
    
 
    projects.map((project: Project)=>{
     if(project.favorited){
-      console.log(project);
       this.projectList.push(project)
       
     }
    })
-   console.log("dfg"+this.projectList);
-   
+   if(this.loggedUser.theme=="dark"){
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme','dark')
+  }else{
+    document.documentElement.classList.remove('dark')
+    document.querySelector('.pi-sun')?.classList.add('pi-moon')
+    document.querySelector('.pi-sun')?.classList.remove('pi-sun')
+    localStorage.setItem('theme','light')
+
+  }   
+  this.changeFont()
   
 
    
@@ -89,24 +90,73 @@ export class TelaInicialComponent implements OnInit {
       
 
     
+
+  }
+  changeFont(){
+    document.documentElement.style.setProperty('--font-size-base', ''+this.loggedUser.fontSize+'px');
+    document.documentElement.style.setProperty('--font-size-sm', ''+(this.loggedUser.fontSize-2)+'px');
+    document.documentElement.style.setProperty('--font-size-lg', ''+(this.loggedUser.fontSize+2)+'px');
+    document.documentElement.style.setProperty('--font-size-xl', ''+(this.loggedUser.fontSize+4)+'px');
+    document.documentElement.style.setProperty('--font-size-2xl', ''+(this.loggedUser.fontSize+8)+'px');
+    document.documentElement.style.setProperty('--font-size-3xl', ''+(this.loggedUser.fontSize+14)+'px');
+  
+  }
+
+  userColors(){
+    console.log(this.loggedUser);
+    
+    if(this.loggedUser.primaryColor || this.loggedUser.secondaryColor){
+      this.colorService.setPrimaryColor(this.loggedUser.primaryColor)
+      this.colorService.setSecondaryColor(this.loggedUser.secondaryColor)
+      this.colorService.setPrimaryDarkColor(this.loggedUser.primaryDarkColor)
+      this.colorService.setSecondaryDarkColor(this.loggedUser.secondaryDarkColor)
+    }else{
+
+      this.colorService.setPrimaryDarkColor("#67BFE0")
+      this.colorService.setSecondaryDarkColor("#86C19F")
+      this.colorService.setPrimaryColor("#185E77")
+      this.colorService.setSecondaryColor("#4C956C")
+    }
+   
   }
   tarefaSelecionada: Task = new Task();
-  openTask(tarefa: Task): void {
-    console.log('teste 1');
+  projeto :Project = new Project()
+  id =0
+async openTask(tarefa: Task): Promise<void> {
     this.booleanTask = true;
 
     this.tarefaSelecionada = tarefa;
+    if(this.tarefaSelecionada.project.id!=undefined){
+       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+
+    }
   }
 
-  closeTask(tarefa: Task) {
-    this.booleanTask = false;
-    this.tarefaSelecionada = new Task();
-  }
+ 
   indiceAtual: number = 0;
 
   mudarItem(novoIndice: number) {
     if (novoIndice >= 0 && novoIndice < this.listaTarefas.length) {
       this.indiceAtual = novoIndice;
+    }
+  }
+
+  goToPerfilPage(){
+    
+  }
+  goTasks(projectId : number){
+    this.router.navigate(['/tela-tarefa/'+projectId]);
+
+  }
+  goProjetos(){
+    this.router.navigate(["/tela-projeto"])
+  }
+  
+  tarefaNova: Task = new Task();
+  closeTask(event: boolean) {
+    if (event) {
+      this.tarefaNova = new Task();
+      this.booleanTask = false;
     }
   }
 }

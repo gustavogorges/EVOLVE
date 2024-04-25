@@ -1,22 +1,32 @@
 .main {
 
-    @apply bg-primaryNav dark:bg-dark-primary-gray h-20 w-full fixed border-b-2;
+    @apply bg-primaryNav dark:bg-dark-theme-back h-[8%]   w-full fixed border-b-2 dark:border-dark-secundary-gray
+
+    
+    ;
     z-index: 9999;
 }
 
 .main-grid {
-    @apply grid grid-cols-3 h-full 
+    @apply flex  justify-between h-full mx-[5%] 
 }
 
 .column1 {
-    @apply flex justify-start items-center ml-24
+    @apply flex justify-start items-center 
+
 }
 
 .column2 {
-    @apply flex justify-between items-center;
+    @apply flex gap-5 md:w-[70%] lg:w-[40%] items-center justify-center text-primary dark:text-dark-primary
+  ;
     
     label, input{
-        @apply dark:bg-dark-primary-black dark:border-dark-primary dark:text-white
+        @apply dark:bg-dark-primary-black  hidden sm:flex dark:border-dark-primary dark:text-white 
+    }
+    .search-input{
+    @apply    
+        placeholder:text-gray-400 placeholder:dark:text-white
+    
     }
 
     i{
@@ -26,13 +36,14 @@
 
 
 .column3 {
-    @apply flex justify-end items-center gap-8 mr-24
+    @apply flex justify-end items-center gap-4
+     lg:gap-8
+
 }
 
 .search-input {
     @apply w-2/3 h-full outline-none ml-2
 }
-
 .icon {
     @apply text-2xl text-primary dark:text-dark-primary cursor-pointer
 }
@@ -42,5 +53,19 @@
 }
 
 .span-input {
-    @apply w-2/3 h-1/2 bg-white rounded-xl border-2 rounded-md 
+    @apply w-2/3 h-1/2 bg-white  border-2 rounded-md 
 }
+
+// .logoSmall{
+//     @apply sm:hidden 
+// }
+// .logoBig{
+//     @apply hidden 
+//     sm:flex
+// }
+.icon2{
+    @apply text-lg
+    md:text-xl
+    lg:text-2xl
+
+  }

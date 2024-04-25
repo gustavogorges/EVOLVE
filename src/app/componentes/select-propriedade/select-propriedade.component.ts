@@ -5,6 +5,8 @@ import { Option } from 'src/model/propriedade/option';
 import { Property } from 'src/model/propriedade/property';
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { User } from 'src/model/user';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-select-propriedade',
@@ -41,12 +43,15 @@ export class SelectPropriedadeComponent implements OnInit {
   newPropertie:Property = new Property();
   
   elemento: Property = new Property();
+  loggedUser: User = new User;
 
   constructor(
-    private service : BackendEVOLVEService
+    private service : BackendEVOLVEService,
+    private cookies_service : CookiesService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
   }
 
   options: any[] = [
@@ -131,32 +136,34 @@ export class SelectPropriedadeComponent implements OnInit {
     if(this.optionType == 'numero inteiro') {
        this.newPropertie.propertyType = PropertyType.IntegerValue;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       } else if(this.optionType == 'data') {
         this.newPropertie.propertyType = PropertyType.DataValue;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'seleção múltipla') {
         this.newPropertie.propertyType = PropertyType.MultiSelectValue;
+        this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'número double') {
         this.newPropertie.propertyType = PropertyType.DoubleValue;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'texto') {
         this.newPropertie.propertyType = PropertyType.TextValue;
         this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'associados') {
         //Há de ser implementado ainda no enum, ou de algum outra forma
         //this.newPropertie.propertyType = PropertyType;
-        this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id);
+        this.tarefa.properties.push(this.newPropertie); 
+        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }
     this.newItemEvent.emit()  
   }

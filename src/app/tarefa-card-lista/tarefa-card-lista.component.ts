@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tarefa-card-lista',
@@ -27,13 +29,20 @@ data : Date = new Date
    "b",
    "b",
    
- ]
+ ]     
+  arrayForce : Array<User> = new Array;
 
- constructor(private service : BackendEVOLVEService ) {
+
+ constructor(private service : BackendEVOLVEService,
+  private cookies_service:CookiesService ) {
 
   }
 
-  ngOnInit(): void {
+  loggedUser : User = new User;
+
+
+   async ngOnInit(): Promise<void> {
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
    this.trocaCor()
    if(this.tarefaAtual.favorited){
      this.caminhoEstrela = "assets/estrelaMarcada.svg"
@@ -42,10 +51,13 @@ data : Date = new Date
    }
    this.valorBarra = 60 +"%"; 
    console.log(this.tarefaAtual.id + " "+this.tarefaAtual.currentStatus)
+   this.arrayForce =  this.tarefaAtual.associates as Array<User> 
+   console.log(this.arrayForce);
+   
  
  }
 
- favoritar(){
+ async favoritar(){
    if (this.caminhoEstrela == "assets/estrelaNaoMarcada.svg"){
      this.caminhoEstrela = "assets/estrelaMarcada.svg"
      this.tarefaAtual.favorited=true;
@@ -57,7 +69,7 @@ data : Date = new Date
    console.log(this.tarefaAtual)
 
   console.log(this.caminhoEstrela)
-  console.log(this.service.putTarefa(this.tarefaAtual))
+   console.log( await this.service.putTarefa(this.tarefaAtual, this.loggedUser.id))
    this.newItem.emit(true);
 
 
@@ -76,6 +88,17 @@ data : Date = new Date
    }
    
  }
+ getUserStyles(user: any): any {
+  let styles: any = {};
+
+  if(user.image!=null){
+    styles['background'] = user.imageColor;
+  }
+  styles['background-color'] = user.imageColor;
+    
+  
+  return styles;
+}
 
 
 

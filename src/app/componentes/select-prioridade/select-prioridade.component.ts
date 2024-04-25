@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -14,9 +15,7 @@ export class SelectPrioridadeComponent implements OnInit {
   constructor(private service:BackendEVOLVEService) { }
 
   ngOnInit(): void {
-   
     this.prioritiesStandard = this.listPriorities;
-    
   }
 
   prioritiesStandard !: PriorityRecord[];
@@ -27,12 +26,16 @@ export class SelectPrioridadeComponent implements OnInit {
   @Input()
   listPriorities !: PriorityRecord[];
 
+  @Input()
+  loggedUser : User = new User;
+
   @Output()
-  eventEmitter: EventEmitter<boolean> = new EventEmitter();
+  eventEmitter: EventEmitter<PriorityRecord> = new EventEmitter();
 
   savePriority(priority : PriorityRecord) {
     this.task.priority = priority;
-    this.eventEmitter.emit(false);
+    this.service.updateCurrentPriority(this.task.id, this.loggedUser.id, this.task.priority)
+    this.eventEmitter.emit(this.task.priority);
   }
 
 

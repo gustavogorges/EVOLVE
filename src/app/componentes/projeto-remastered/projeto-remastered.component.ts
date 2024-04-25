@@ -1,5 +1,6 @@
 import { Component,EventEmitter,Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { async } from '@angular/core/testing';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
@@ -19,7 +20,7 @@ interface Tarefa{
 })
 export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
-  constructor(private route:Router, private service:BackendEVOLVEService) { }
+  constructor(private route:Router, private service:BackendEVOLVEService, private sanitizer: DomSanitizer) { }
 
   
   tarefas : Tarefa[] = []
@@ -27,19 +28,27 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   @Input() projeto!:Project;
   
   ngOnChanges(): void {
-    if(!this.projeto.editOn){
+    if(!this.projeto.editOn && this.resetProject){
       this.cancelEdit()
     }
   }
   ngOnInit(): void {
-    this.criaTarefa()
+    console.log(this.projeto.tasks);
+    
   }
 
   date: string = ''
   progresso = 0
   md: any
   corAtual: string = ''
+  temporaryImage: string = ''
   valorProgresso = 0;
+  teste:string = ''
+  imagemBlob!:Blob
+  preImage:SafeUrl | undefined;
+  
+  
+  @Input() resetProject : Boolean = false
   
   @Input() projectOpen !: Boolean
 
@@ -52,37 +61,51 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   @Output() salvarProjeto: EventEmitter<Project> = new EventEmitter<Project>()
 
   @Output() editProject: EventEmitter<Boolean> = new EventEmitter<Boolean>()
+  
+  @Output() resetProjectOff: EventEmitter<Boolean> = new EventEmitter<Boolean>()
+
+  @Output() MultipartFile: EventEmitter<FormData> = new EventEmitter<FormData>()
 
 
   openAgain(){
     this.noCloseProject.emit()
   }
 
-  criaTarefa(){
-    const task: Tarefa = {
-      nome : 'Nome tarefa',
-      prazo : '10/02',
-      progresso : 60,
-      status : 'Doing'
+  verifyImg(user:User){
+    if(user.image != null){
+      if(user.image.data != null){
+        return false
+      }
     }
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
-    this.tarefas.push(task)
+    return true
   }
 
-  verifyImg(user:User){
+  verifyImgproject(){
+    if(this.projeto.image != null){
+      if(this.projeto.image.data != null){
+        return false
+      }
+    }
     return true
+  }
+
+  async setImageProject(event:any){
+    if(event.target.files && event.target.files[0]){
+      if(event.target.files[0].type === "image/jpeg" 
+      || event.target.files[0].type === "image/webp" 
+      || event.target.files[0].type === "image/png"){
+        this.imagemBlob = event.target.files[0]
+        const formData = new FormData();
+        formData.append('image', event.target.files[0]);
+        this.MultipartFile.emit(formData)
+
+        const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
+
+        // Criar URL segura da imagem
+        const imageUrl = URL.createObjectURL(blob);
+        this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      }
+    }
   }
 
   deletarProjeto(id:number){
@@ -92,6 +115,10 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   salvaProjeto(){
     this.salvarProjeto.emit(this.projeto)
     this.editProjectEmit(false)
+  }
+
+  getTasksLength(){
+    return this.projeto.tasks.length
   }
 
   openEfechaProjeto(){
@@ -105,7 +132,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async irParaProjeto(){
-    this.route.navigate(['view-project'])
+    this.route.navigate(['tela-tarefa'])
   }
 
   async cancelEdit(){
@@ -116,6 +143,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
       this.projeto.finalDate = projeto.finalDate
       this.editProjectEmit(false)
     }, 500);
+    this.resetProjectOff.emit(false)
   }
 
 }

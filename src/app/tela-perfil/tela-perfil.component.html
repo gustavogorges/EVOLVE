@@ -1,0 +1,126 @@
+
+<div class="main">
+
+  <div class="user-row">
+    <div class="user-info-container">
+      <div
+        [ngStyle]="{
+          'background-image':
+            user?.image?.data != null
+              ? 'url(' + user.image.data + ')'
+              : user?.imageColor,
+          'background-size': 'cover',
+          'background-color': user?.imageColor
+        }"
+        class="user-picture"
+      >
+        <label
+          class="input-image "
+          *ngIf="!disabledInfo"
+        >
+          <div class="flex items-center justify-center w-full h-full">
+            <i class="pi pi-camera cursor-pointer"></i>
+          </div>
+          <input
+            class="invisible w-full cursor-pointer h-full absolute top-0 left-0"
+            type="file"
+            [disabled]="disabledInfo"
+            (change)="setImage($event)"
+          />
+        </label>
+      </div>
+      <div class="flex flex-col gap-1">
+        <input
+          type="email"
+          name=""
+          id=""
+          [placeholder]="user?.name"
+          [disabled]="disabledInfo"
+          [(ngModel)]="name"
+          class="input-name"
+        />
+        <input
+          type="email"
+          name=""
+          id=""
+          [placeholder]="user?.email"
+          [disabled]="disabledInfo"
+          [(ngModel)]="email"
+          class="input-email"
+        />
+      </div>
+    </div>
+    <div class="buttons-container">
+      <button
+        (click)="openConfig()"
+        *ngIf="logged"
+        class="button-secondary"
+      >
+        {{ config_cancel }}
+        <i class="pi pi-cog icon"  *ngIf="disabledInfo"></i>
+      </button>
+
+      <button
+        (click)="goToChat()"
+        *ngIf="!logged"
+        class="button-secondary"
+      >
+        iniciar chat
+        <i class="pi pi-cog icon" ></i>
+      </button>
+      <button
+        (click)="editInfo()"
+        *ngIf="logged"
+        class="button-primary"
+      >
+        {{ edit_confirm }}
+        <i
+          class="pi pi-user-edit icon"
+          *ngIf="disabledInfo"
+        ></i>
+      </button>
+      <button
+        (click)="sendEmail()"
+        *ngIf="!logged"
+        class="button-primary"
+      >
+        mandar email
+        <i class="pi pi-user-edit icon" ></i>
+      </button>
+    </div>
+  </div>
+  <div class="members-dashboard-container">
+    <div class=" flex flex-col h-full gap-5 xl:w-[30%] 2xl:w-1/3 order-1 xl:-order-1 " >
+      <p class="title dark:text-dark-primary">Membros de suas Equipes:</p>
+      <div class="flex flex-col sm:flex-row sm:flex-wrap xl:flex-col xl:gap-5 gap-2 justify-between w-full">
+        <div *ngFor="let user1 of teamUsers" class="sm:w-[47%] w-full xl:w-full ">
+            <app-user-card-perfil
+              [user]="user1"
+              (click)="goToUser(user1)"
+             
+            ></app-user-card-perfil>
+          </div>
+      </div>
+    
+    </div>
+    <div class="flex flex-col gap-2 lg:w-[80%] self-center ">
+      <div class="flex w-full md:gap-10 gap-5 overflow-x-auto border-b-2 dark:border-gray-500 ">
+        <div *ngFor="let team of user?.teams">
+          <p
+            class="font-hind-madurai md:text-xl w-max sm:text-lg text-base text-fontGray dark:text-gray-300 cursor-pointer"
+            (click)="changeTeam(team)"
+          >
+            {{ team.name }}
+          </p>
+        </div>
+      </div>
+
+      <app-projects-info-perfil
+        [team]="teamShowing"
+        [user]="user"
+      ></app-projects-info-perfil>
+    </div>
+  </div>
+  <app-modal-config *ngIf="config" (close)="closeConfig()" class="h-full"></app-modal-config>
+
+</div>

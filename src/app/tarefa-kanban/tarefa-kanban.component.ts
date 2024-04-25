@@ -14,6 +14,7 @@ import {
 } from 'ngx-drag-drop';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
+import { CookiesService } from 'src/service/cookies-service.service';
 interface NestableListItem {
   content: string;
   disable?: boolean;
@@ -47,7 +48,8 @@ export class TarefaKanbanComponent  implements OnChanges{
   private currentDraggableEvent?: DragEvent;
   private currentDragEffectMsg?: string;
 
-  constructor(private service: BackendEVOLVEService) {
+  constructor(private service: BackendEVOLVEService,
+    private cookies_service:CookiesService) {
 
     this.optionsSelect =[
       "deletar", "renomear", "alterar cor"
@@ -169,21 +171,13 @@ export class TarefaKanbanComponent  implements OnChanges{
       }
       
 
-      list.map((task : Task)=>{
+      list.map(async(task : Task) =>{
         task.statusListIndex=list.indexOf(task)
         task.project = {
           id: this.project.id
         }
         console.log(task);
-        
-        task.associates = task.associates.map(user => {
-          return {id:user.id}
-        })
-
-        console.log(task.associates);
-        
-
-        console.log(this.service.putTarefa(task));
+        await this.service.putTarefa(task,this.loggedUser.id);
          
       })
       this.taskList == list;
@@ -213,73 +207,30 @@ export class TarefaKanbanComponent  implements OnChanges{
 
   }
 
+    loggedUser : User = new User;
  
-//   ngOnInit(): void { }
-
-//   filtrarLista(status: Status): Array<Task> {
-//     let listaFiltrada = this.listaTarefas
-//       .filter((task: Task) => task.currentStatus.name === status.name)
-//       .sort((a, b) => a.statusListIndex - b.statusListIndex);
-
-//     return listaFiltrada;
-//   }
-
-//   async drop(
-//     event: CdkDragDrop<Task[]>,
-//     status: Status,
-//     list: Array<Task>
-//   ) {
-//     if (event.previousContainer === event.container) {
-//       moveItemInArray(
-//         event.container.data,
-//         event.previousIndex,
-//         event.currentIndex
-//       );
-//     } else {
-//       (event.item.data as Task).currentStatus = status;
-//       this.service.putTarefa(event.item.data);
-//     }
-
-//     if (event.container.data.length == 0) {
-//       (event.item.data as Task).currentStatus = status;
-
-//       (event.item.data as Task).statusListIndex = event.currentIndex;
-
-//       this.service.putTarefa(event.item.data);
-//       await console.log(this.service.getOne('task', event.item.data.id));
-//     } else {
-//       for (let i of event.container.data) {
-//         let novoIndex = event.container.data.indexOf(i);
-//         i.statusListIndex = novoIndex;
-//         this.service.putTarefa(i);
-//       }
-//     }
-//   }
-//   dropTudo(event: CdkDragDrop<any[]>){    
-//     console.log(event.container)
-//     console.log(event.previousContainer)
-//     console.log(this.listaStatus)
-
-
-//       moveItemInArray(
-//         this.listaStatus,
-//         event.previousIndex,
-//         event.currentIndex
-//       );
-//       console.log(this.listaStatus)
+   async ngOnInit(): Promise<void> {
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+    }
     
-//   }
-//   updateListOrder(event: CdkDragMove<any>) {
-//     console.log(event.delta)
-//     console.log(event.event)
-//     console.log(event.pointerPosition);
-//     console.log(event.source)
-    
-   
-//     // if (previousIndex !== undefined) {
-//     //   // Atualiza a ordem da listaStatus
-//     //   const status = this.listaStatus.splice(currentIndex, 1)[0];
-//     //   this.listaStatus.splice(previousIndex, 0, status);
-//     // }
-//   }
+  booleanTask: boolean = false;
+  tarefaSelecionada: Task = new Task();
+  tarefaNova: Task = new Task();
+  projeto :Project = new Project()
+async openTask(tarefa: Task): Promise<void> {
+    this.booleanTask = true;
+
+    this.tarefaSelecionada = tarefa;
+    if(this.tarefaSelecionada.project.id!=undefined){
+       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+
+    }
+  }
+    closeTask(event: boolean) {
+      if (event) {
+        this.tarefaNova = new Task();
+        this.booleanTask = false;
+      }
+    }  
+
  }

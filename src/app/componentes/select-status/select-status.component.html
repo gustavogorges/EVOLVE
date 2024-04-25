@@ -1,19 +1,22 @@
 <div class="main" style="background-color: #ffff;">
     <div class="status-box" >
-        <div
-         class="status "
-         [ngStyle]="{'background-color': status.backgroundColor}"
-         *ngFor="let status of projeto.statusList"
-         (click)="salvarStatus(status)"
-         >
-            <p>{{status.name}}</p>
+        <div class="status-adjust" *ngFor="let status of projeto.statusList">
+            <div
+             class="status cursor-pointer"
+             [ngStyle]="{'background-color': status.backgroundColor}"
+             >
+                <p class="truncate px-4">{{status.name}}</p>
+            </div>
+            <i *ngIf="verifyStatusDefault(status)" class="pi " [ngClass]="!status.enabled ? 'pi-plus-circle':'pi-minus-circle'" (click)="enableStatus(status)"></i>
+            <i *ngIf="!verifyStatusDefault(status)" class="pi pi-pencil" (click)="editStatus(status)"></i>
+            <i *ngIf="!verifyStatusDefault(status)" class="pi pi-trash" (click)="deleteStatus(status)"></i>
         </div>
     </div>
-    <div *ngIf="!booleanAddStatus" (click)="addStatus()" class="add-box">
+    <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
         <i class="pi pi-plus text-primary font-bold"></i>
         <p class=" text-fontGray">adicionar status</p>
     </div>
-    <div *ngIf="booleanAddStatus" class="new-status">
+    <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
         <div class="nome-status-box">
             <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
                 <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.name">
@@ -24,14 +27,17 @@
         </div>
         <div class="cor-status-box">
             <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
-                <input class="input-add-status" type="text" value="{{status.backgroundColor}}"  placeholder="selecione uma cor">
+                <input class="input-add-status" type="text" value="{{status.backgroundColor.toUpperCase()}}"  placeholder="selecione uma cor">
                 <div class="w-full flex justify-center items-center">
                     <input type="color" class="w-7" [(ngModel)]="status.backgroundColor">
                 </div>
             </div>
         </div>
-        <div class="confirmar-status-box">
-            <p class=" text-primaryWhite font-semibold" (click)="novoStatus()">confirmar</p>
+        <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer" (click)="novoStatus()">
+            <p class=" text-primaryWhite font-semibold" >confirmar</p>
+        </div>
+        <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
+            <p class=" text-primaryWhite font-semibold">Editar Status</p>
         </div>
     </div>
 </div>

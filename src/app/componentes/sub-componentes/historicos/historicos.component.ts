@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from 'src/model/task';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-historicos',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoricosComponent implements OnInit {
 
-  constructor() { }
+  constructor( private service : BackendEVOLVEService) { }
 
-  ngOnInit(): void {
+  @Input()
+  task : Task = new Task;
+
+  async ngOnInit(): Promise<void> {
+    this.task = await this.service.getOne("task", this.task.id); 
+    console.log(this.task);
+   console.log
+   ( this.task.historic)
   }
 
 }

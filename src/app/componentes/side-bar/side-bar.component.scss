@@ -1,0 +1,10 @@
+.title{
+    @apply font-titulo text-xl text-primary dark:text-dark-primary font-medium 
+}
+.icon2{
+    @apply text-lg
+    sm:text-sm
+    md:text-base;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }

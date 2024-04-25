@@ -2,17 +2,17 @@
     @apply  flex flex-col gap-2
 }
 .text-p{
-    @apply text-white;
+    @apply text-white xl:text-base text-xs;
     font-family: "Montserrat", "sans-serif";
 }
 .todayText {
-    @apply bg-primary text-primaryWhite  ;
+    @apply bg-primary dark:bg-dark-primary text-primaryWhite  ;
   }
   .scroll-container::-webkit-scrollbar {
     display: none;
 }
 .title-text {
-    @apply font-bold text-2xl text-secondary ;
+    @apply font-bold md:text-2xl text-lg text-secondary dark:text-dark-secondary ;
     font-family: "Montserrat", sans-serif;
 
 }

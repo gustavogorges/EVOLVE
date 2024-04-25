@@ -1,57 +1,63 @@
-<div class="flex items-center">
-
-<div class=" name-box">
-  <div *ngIf="tarefaAtual.name.length > 10">
-    <p class="taskName">{{ tarefaAtual.name }}</p>
+<div class="flex items-center w-full">
+  <div class="name-box">
+    <div *ngIf="tarefaAtual.name.length > 10">
+      <p class="taskName">{{ tarefaAtual.name }}</p>
+    </div>
+    <div *ngIf="tarefaAtual.name.length <= 10">
+      <p class="name">{{ tarefaAtual.name }}</p>
+    </div>
   </div>
-  <div *ngIf="tarefaAtual.name.length <= 10">
-    <p class="name">{{ tarefaAtual.name }}</p>
+  <div class="main">
+    <div class="status-box">
+      <div class="status" [ngStyle]="{
+          'background-color': tarefaAtual.currentStatus.backgroundColor
+        }"></div>
+    </div>
+
+    <div class="grey-progress">
+      <div class="blue-progress" [ngStyle]="{ width: tarefaAtual.progress + '%' }"></div>
+    </div>
+    <div class="finalDate-box">
+      <p class="finalDate">
+        {{ tarefaAtual.finalDate | date : "dd" }}/{{
+        tarefaAtual.finalDate | date : "LL"
+        }} 
+      </p>
+    </div>
+<div class="flex gap-2 justify-end w-0 md:w-20 lg:w-28">
+  <div *ngFor="let user of arrayForce; index as i" class=" w-20 md:w-max  gap-2 items-end hidden md:flex">
+    <div class="taskMemberPhoto" [ngStyle]="{
+      'background-image':
+        user.image != null
+          ? 'url(' + user.image.data + ')'
+          : user?.imageColor,
+      'background-size': 'cover',
+      'background-color': user?.imageColor
+    }" *ngIf="i<3"></div>
+     
+        
   </div>
 </div>
-<div class="main">
-  <div class="status-box">
-    <div
-    class="status"
-    [ngStyle]="{ 'background-color': tarefaAtual.currentStatus.backgroundColor }"
-  >
-  
-  </div>
-  </div>
-
- 
-  <div class="grey-progress">
-    <div class="blue-progress" [ngStyle]="{ width: valorBarra }"></div>
-  </div>
-  <div class="finalDate-box">
-    <p class="finalDate">{{ tarefaAtual.finalDate | date: "dd" }}/{{ tarefaAtual.finalDate | date: "LL" }}/ {{ tarefaAtual.finalDate | date: "yyyy" }}</p>
-  </div>
- 
-  <div class="flex gap-2 w-28">
-    <div class="taskMemberPhoto bg-yellow-300"></div>
-    <div class="taskMemberPhoto bg-pink-400"></div>
-    <div class="taskMemberPhoto bg-blue-400"></div>
    
-  </div>
-  <div class="priority-box rounded-xl">
-    <div
-    class="priority p-1 "
-  >
-  {{tarefaAtual.priority.name  }}
-  </div>
-  </div>
-  <div class="finalDate-box">
-    <p class="text-black text-lg font-hind-madurai">{{ tarefaAtual.scheduledDate  | date: "dd" }}/{{ tarefaAtual.scheduledDate | date: "LL" }}/ {{ tarefaAtual.scheduledDate | date: "yyyy" }}</p>
-  </div>
-  <div class="star-box">
-    <img
-      [src]="caminhoEstrela"
-      (click)="favoritar()"
-      alt=""
-      class="cursor-pointer"
-      style="width: 1.5rem"
-    />
-  </div>
-
+    
+      
+      <div class="priority-box rounded-xl w-28">
+        <div class="priority " [ngStyle]="{
+            'background-color': tarefaAtual.priority.backgroundColor
+          }">
+          {{ tarefaAtual.priority.name }}
+        </div>
+      </div>
+      <div class="finalDate-box hidden lg:flex">
+        <p class=" scheduleDate">
+          {{ tarefaAtual.scheduledDate | date : "dd" }}/{{
+          tarefaAtual.scheduledDate | date : "LL"
+          }}
+        </p>
+      </div>
+      <div class="star-box">
+        <img [src]="caminhoEstrela" (click)="favoritar()" alt="" class="cursor-pointer w-4 lg:w-6"  />
+      </div>
+    </div>
+  
 </div>
-</div>
-

@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -13,36 +14,32 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   constructor(private service : BackendEVOLVEService, private route:Router) { }
 
   id!: number
-  projetos !: Project[]
+  projects !: Project[]
+  resetProject: Boolean = false
+  formData!:FormData
 
   ngOnInit(): void {
-    this.funcao()
+    this.getProjects()
   }
 
   ngOnChange(): void {
-    this.funcao()
+    this.getProjects()
   }
 
-  async funcao(){
-    this.projetos = await this.service.getAllSomething('project')
+  resetProjectOff(){
+    this.resetProject = false
+  }
 
-    this.projetos.forEach(element => {
-      if(element.name === ''){
-        this.deletarPai(element.id)        
-      }
-    });
-
-    this.projetos = this.projetos.reverse()
-
-    this.projetos.forEach(element => {
-      if(element.name === ''){
-        this.deletarPai(element.id)        
-      }
-    });
+  async getProjects(){
+    this.projects = await this.service.getAllSomething('project') || []
+    
+    this.projects = this.projects.reverse()
+    console.log(this.projects);
+    
   }
 
   openProject(p:any){
-        this.projetos.forEach(element => {
+        this.projects.forEach(element => {
           if(element.id != p.id){
             element.isVisible = false
             element.editOn = false
@@ -56,11 +53,16 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   @ViewChild('projectElement') projectElement!:ElementRef
   @HostListener('click', ['$event'])
   clickOutside(event:any){
-    if(event.target.contains(this.projectElement.nativeElement)){
-      this.projetos.forEach(element => {
-        element.editOn = false
-        element.isVisible = false
-      });
+    if(this.projectElement){
+      if(event.target.contains(this.projectElement.nativeElement)){
+        this.projects.forEach(element => {
+          if(element.editOn){
+            this.resetProject = true
+          }
+          element.editOn = false
+          element.isVisible = false
+        });
+      }
     }
   }
 
@@ -68,17 +70,42 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.openProject(project)
   }
 
-  async deletarPai(id:number){
-    this.projetos.forEach((e) =>{
+  async delete(id:number){
+    this.projects.forEach((e) =>{
       if(e.id == id){
-        this.projetos.splice(this.projetos.indexOf(e),1)
+        this.projects.splice(this.projects.indexOf(e),1)
       }
     })
     await this.service.deleteById("project",id);
   }
 
-  async salvarPai(p:Project){
-   await this.service.putProjeto(p)
+  async editFun(p:Project){
+    let postProject:any = p
+    let listUsers : Array<Pick<User, "id">> = new Array
+    p.members.forEach(element => {
+      listUsers.push({
+        "id" : element.id
+      })
+    });
+    postProject.members = listUsers
+    console.log(postProject.members);
+    
+    postProject.image = null
+    p = await this.service.putProjeto(postProject)
+    if(this.formData!=null){
+      p = await this.createImageProject(p)
+    }
+    postProject.image = p.image
+    postProject.members = p.members
+    console.clear()
+  }
+
+  async createImageProject(p:Project){
+    return await this.service.patchImage(p.id, this.formData)
+  }
+
+  async saveImage(event:any){
+    this.formData = event
   }
 
   async goToCreateProject(){
@@ -86,7 +113,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   editProject(event:any, p:any){
-    this.projetos.forEach(element => {
+    this.projects.forEach(element => {
       if(element.id === p.id){
         element.editOn = event
       }

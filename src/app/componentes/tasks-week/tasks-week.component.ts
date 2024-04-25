@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-tasks-week',
@@ -15,7 +17,7 @@ export class TasksWeekComponent implements OnInit {
   day !: Date;
 
   indice : number =0
-  constructor() { }
+  constructor(private service: BackendEVOLVEService,) { }
 
   ngOnInit(): void {
   
@@ -74,5 +76,25 @@ export class TasksWeekComponent implements OnInit {
  
      
   }
+  booleanTask: boolean = false;
+  tarefaSelecionada: Task = new Task();
+  tarefaNova: Task = new Task();
+  projeto :Project = new Project()
+async openTask(tarefa: Task): Promise<void> {
+    this.booleanTask = true;
+
+    this.tarefaSelecionada = tarefa;
+    if(this.tarefaSelecionada.project.id!=undefined){
+       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+
+    }
+  }
+    closeTask(event: boolean) {
+      if (event) {
+        this.tarefaNova = new Task();
+        this.booleanTask = false;
+      }
+    }  
+
 
 }

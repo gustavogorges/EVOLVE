@@ -1,0 +1,93 @@
+<div class="main" style="background-color: #ffff;">
+    <div class="status-box" >
+        <div
+         class="status "
+         *ngFor="let option of property.options"
+         (click)="saveOptionUniSelect(option)"
+         >
+         <div 
+         [ngClass]="checkTypeAndBoolean() ? 'w-full rounded-md justify-between' : 'w-full rounded-lg justify-center'"
+         class="flex items-center gap-x-2"
+         >
+             <p 
+             [ngClass]="checkTypeAndBoolean() ? 'text-base rounded-md w-1/2' : 'w-full text-base rounded-lg'"
+             [ngStyle]="{'background-color': option.backgroundColor}"
+             class="w-full h-full flex justify-center "
+             >
+             {{option.value}}
+            </p>
+            <div *ngIf="checkTypeAndBoolean()" class="flex w-1/4 justify-between">
+                <i 
+                *ngIf="!verifyIfCurrentOptionExists(option)"
+                class="pi pi-plus-circle text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
+                (click)="saveOptionMultiSelect(option)"
+                >
+                </i>
+                <i 
+                *ngIf="verifyIfCurrentOptionExists(option)"
+                class="pi pi-minus-circle text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
+                (click)="removeOptionMultiSelect(option)"
+                >
+                </i>
+                <i 
+                class="pi pi-trash text-primary font-bold text-3xl p-1 hover:bg-slate-100 hover:rounded-md" 
+                (click)="excludeOptionMultiSelect(option)"
+                >
+                </i>
+            </div>
+         </div>
+        </div>
+    </div>
+    <div *ngIf="!booleanAddOption && checkTypeAndBoolean()" class="add-box">
+        <div 
+        (click)="this.newItem.emit()"
+        class="w-[50%] flex justify-center items-center gap-2  h-full rounded-bl-lg cursor-pointer"
+        >
+            <p class=" text-fontGray">sair</p>
+        </div>
+        <div 
+        (click)="addOption()"
+         class="w-[50%] flex justify-center items-center gap-2  h-full rounded-br-lg border-l-2 cursor-pointer"
+         >
+            <p class="  text-fontGray">adicionar</p>
+        </div>
+    </div>
+    <div 
+    *ngIf="!booleanAddOption && !checkTypeAndBoolean()" 
+    (click)="addOption()" 
+    class="add-box cursor-pointer"
+    >
+        <p class=" text-fontGray">adicionar opção</p>
+    </div>
+    <div *ngIf="booleanAddOption" class="new-status">
+        <div class="nome-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input 
+                class="input-add-status"  
+                type="text" 
+                placeholder="escreva o nome" 
+                [(ngModel)]="option.value"
+                >
+                <div class="w-full flex justify-center items-center">
+                    <i class="pi pi-pencil text-primary font-bold" ></i>
+                </div>
+            </div>
+        </div>
+        <div class="cor-status-box">
+            <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                <input 
+                class="input-add-status" 
+                type="text" 
+                value="{{option.backgroundColor}}"  
+                placeholder="selecione uma cor"
+                >
+                <div class="w-full flex justify-center items-center">
+                    <input type="color" class="w-7" [(ngModel)]="option.backgroundColor">
+                </div>
+            </div>
+        </div>
+        <div class="confirmar-status-box">
+            <p class=" text-primaryWhite font-semibold" (click)="newOption()">confirmar</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<button mat-raised-button (click)="generatePdf()" id="donwloadpdf">
+  gerar relatorio 
+</button>
+
+<div #content id="content">
+  <div *ngIf="task!=undefined">
+    <app-historicos [task]="task"> </app-historicos>
+    <div class="h-[500px]  ">
+
+    </div>
+  </div>
+    
+    </div>
+   
+

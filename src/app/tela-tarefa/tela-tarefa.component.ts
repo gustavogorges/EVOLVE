@@ -2,48 +2,41 @@ import axios from 'axios';
 import { PrimeIcons } from 'primeng/api';
 import { Project } from 'src/model/project';
 import {
-  ChangeDetectorRef,
   Component,
-  HostListener,
-  Input,
-  OnChanges,
+  ElementRef,
   OnInit,
-  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+;
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
 import { PriorityRecord } from 'src/model/priorityRecord';
+import { User } from 'src/model/user';
+import { ActivatedRoute } from '@angular/router';
+
+import * as jspdf from 'jspdf';
+ import html2canvas from 'html2canvas';
+ import { HttpClient } from '@angular/common/http';
 
 interface OptionOrder {
   name: string;
   type: string;
-
 }
-
 @Component({
   selector: 'app-tela-tarefa',
   templateUrl: './tela-tarefa.component.html',
   styleUrls: ['./tela-tarefa.component.scss'],
-
-
 })
 export class TelaTarefaComponent implements OnInit {
   selectedVisualizacao = 'Visualização';
   select: string = 'Padrao';
   listaTarefas: Array<Task> = [];
   booleanTask: boolean = false;
-
   tarefaSelecionada: Task = new Task();
   tarefaNova: Task = new Task();
   listaNova: Array<Task> = [];
   tarefaMovida!: any;
-
   listOptions: Array<any> = [];
   listIcons: Array<string> = [];
   visualizacaoVisible: boolean = false;
@@ -51,45 +44,59 @@ export class TelaTarefaComponent implements OnInit {
   filtroVisible: boolean = false;
   projeto!: Project;
 
-
+ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
   option: string | null = 'Cards';
   optionFilter: string = '';
 
+  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, 
+ ) {}
 
-  constructor(private service: BackendEVOLVEService) {}
-
-  async atualizar(favoritado: boolean): Promise<void> {
+  async atualizar(favoritado: boolean): Promise<void> { 
     if (favoritado) {
-      console.log(this.listaTarefas);
-      this.projeto = await this.service.getOne('project', 1);
+      this.projeto = await this.service.getOne('project', this.projeto.id);
       this.listaTarefas = this.projeto.tasks;
+      this.listaNova = this.projeto.tasks;
       this.sortLists();
+      console.log(this.listaTarefas);
+
     }
   }
 
   async ngOnInit(): Promise<void> {
-
     if (localStorage.getItem('taskViewPreference') != null) {
       this.option = localStorage.getItem('taskViewPreference');
     }
+    this.route.paramMap.subscribe( async params  => {
+      // Obtém o parâmetro do projeto da rota
+      const projectId = params.get('projectId');
+      const id  = Number(projectId)
+      this.projeto = await this.service.getOne('project', id);
+      console.log(this.projeto);
+      this.teste()
 
-    this.projeto = await this.service.getOne('project', 1);
+     
+    });
+  
+  
+   
+
+  }
+ 
+  teste(){
+    console.log(this.projeto);
+    
     this.listaTarefas = this.projeto.tasks;
     this.listaNova = this.projeto.tasks;
     this.sortLists();
-    console.log(this.listaTarefas);
-    console.log(this.projeto);
-
   }
   sortLists() {
     this.listaTarefas.sort(this.opa);
     this.listaNova.sort(this.opa);
-
   }
 
-  opa = (a:Task, b:Task) => {
+  opa = (a: Task, b: Task) => {
     return a.favorited === b.favorited ? 0 : a.favorited ? -1 : 1;
-  }
+  };
 
   trackById(index: number, item: any): any {
     return item.id;
@@ -98,26 +105,25 @@ export class TelaTarefaComponent implements OnInit {
     this.ordenacaoVisible = false;
     this.filtroVisible = false;
 
-    e.target.value = 'Visualização'; 
-    let op : OptionOrder ={
-      name: "Cards",
-      type: " "
-     }
-     let op1 : OptionOrder ={
-      name: "Kanban",
-      type: ""
-     }
-     let op2 : OptionOrder ={
-      name: "Lista",
-      type: ""
-     }
-     let op3 : OptionOrder ={
-      name: "Calendario",
-      type: ""
-     }
-    
+    e.target.value = 'Visualização';
+    let op: OptionOrder = {
+      name: 'Cards',
+      type: ' ',
+    };
+    let op1: OptionOrder = {
+      name: 'Kanban',
+      type: '',
+    };
+    let op2: OptionOrder = {
+      name: 'Lista',
+      type: '',
+    };
+    let op3: OptionOrder = {
+      name: 'Calendario',
+      type: '',
+    };
 
-     this.listOptions = [op, op1, op2, op3];
+    this.listOptions = [op, op1, op2, op3];
     this.listIcons = [
       PrimeIcons.TH_LARGE,
       PrimeIcons.MAP,
@@ -135,7 +141,6 @@ export class TelaTarefaComponent implements OnInit {
     this.visualizacaoVisible = false;
 
     this.option = option.name;
-    console.log(option);
     localStorage.setItem('taskViewPreference', option.name);
 
     this.projeto = await this.service.getOne('project', this.projeto.id);
@@ -147,12 +152,7 @@ export class TelaTarefaComponent implements OnInit {
     this.visualizacaoVisible = false;
     this.filtroVisible = false;
 
-   
-
-    console.log(this.ordenacaoVisible);
     e.target.value = 'Visualização';
-
-   
    let op : OptionOrder ={
     name: "Data final",
     type: "date"
@@ -166,7 +166,7 @@ export class TelaTarefaComponent implements OnInit {
     type: "priority"
    }
    let op3 : OptionOrder ={
-    name: "Data final",
+    name: "Agendamento",
     type: "date"
    }
    this.listOptions = [op, op1, op2, op3];
@@ -181,11 +181,9 @@ export class TelaTarefaComponent implements OnInit {
     } else {
       this.ordenacaoVisible = true;
     }
-    console.log(this.ordenacaoVisible);
   }
 
   closeTask(event: boolean) {
-    console.log('ta entrando no close task');
     if (event) {
       this.tarefaNova = new Task();
       this.booleanTask = false;
@@ -196,43 +194,81 @@ export class TelaTarefaComponent implements OnInit {
     this.ordenacaoVisible = false;
     this.visualizacaoVisible = false;
 
-    console.log(option);
-    console.log(this.listOptions);
-    if(option.type=="date"){
-      if(option.name=="Data final"){
-        console.log("wgdg");
-        
-        this.listaTarefas.sort((a,b)=>{
-          if (a.finalDate < b.finalDate) {
-            return -1; // 'a' vem antes de 'b'
-          } else if (a.finalDate > b.finalDate) {
-            return 1; // 'b' vem antes de 'a'
-          } else {
-            return 0; // datas são iguais
-          }
-        })
-        this.listaNova.sort((a,b)=>{
-          if (a.finalDate < b.finalDate) {
-            return -1; // 'a' vem antes de 'b'
-          } else if (a.finalDate > b.finalDate) {
-            return 1; // 'b' vem antes de 'a'
-          } else {
-            return 0; // datas são iguais
-          }
-        })
+    if (option.type == "date") {
+      if (option.name == "Data final") {
+        this.sortByDate(this.listaTarefas, 'finalDate');
+        this.sortByDate(this.listaNova, 'finalDate');
       }
-      console.log(this.listaNova);
-      console.log(this.listaTarefas);
+      if (option.name == "Agendamento") {
+        this.sortByDate(this.listaTarefas, 'scheduledDate');
+        this.sortByDate(this.listaNova, 'scheduledDate');
+      }
+      }
+      if(option.type == "number"){
+        this.sortByDate(this.listaTarefas, "progress")
+        this.sortByDate(this.listaNova, "progress")
 
-      
       }
+      if (option.type == "priority") {
+        this.listaTarefas.forEach((t) => {
+          switch (t.priority.name) {
+            case "urgente":
+              t.priority.value = 100;
+              break;
+            case "alta":
+              t.priority.value = 80;
+              break;
+            case "media":
+              t.priority.value = 60;
+              break;
+            case "baixa":
+              t.priority.value = 40;
+              break;
+            case "muito_baixa":
+              t.priority.value = 20;
+              break;
+            case "nenhuma":
+              t.priority.value = 0;
+              break;
+          }
+        });
+      
+        this.sortByPriority(this.listaTarefas);
+        this.sortByPriority(this.listaNova);        
+      }
+    }
+      
+      // Função para obter o índice de uma prioridade na ordem definida
+      indicePrioridade(prioridade: string): number {
+        const indice = this.ordemPrioridades.indexOf(prioridade);
+        // Se a prioridade não estiver na lista, atribua um índice muito alto para classificá-la no final
+        return indice !== -1 ? indice : Number.MAX_SAFE_INTEGER;
       }
       
-  
+      // Função de comparação personalizada
+      compararPrioridades(a: any, b: any): number {
+        const indiceA = this.indicePrioridade(a.priority.name);
+        const indiceB = this.indicePrioridade(b.priority.name);      
+        return indiceA - indiceB;
+      }
+      // Função para classificar por prioridade
+      sortByPriority(tarefas: any[]) {
+        tarefas.sort(this.compararPrioridades.bind(this));
+      }
+       sortByDate(lista: any[], key: string) {
+        lista.sort((a, b) => {
+          if (a[key] < b[key]) {
+            return -1;
+          } else if (a[key] > b[key]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });        
+      }
   changeFiltro(e: any) {
     this.visualizacaoVisible = false;
     this.ordenacaoVisible = false;
-
     
     let op : OptionOrder ={
       name: "Status",
@@ -261,19 +297,15 @@ export class TelaTarefaComponent implements OnInit {
       this.filtroVisible = false;
     } else {
       this.filtroVisible = true;
-    }
-    console.log(this.filtroVisible);
-  }
+
+    }  }
 
   async optionC(option: any) {
-    if (option.name== 'Status') {
+    if (option.name== 'Status' || option.name== 'Prioridade' || option.name== 'Associado' ) {
       this.optionFilter = '';
-      
-      
-    } else {
-      this.optionFilter = option.name;
-      console.log(this.optionFilter);
-      
+    } 
+    else {      
+      this.optionFilter = option.name ?? option;
       this.optionFilter = this.optionFilter.toLowerCase();
     }
     this.ordenacaoVisible = false;
@@ -281,31 +313,40 @@ export class TelaTarefaComponent implements OnInit {
 
     this.projeto.statusList.map((status: Status) => {
       if (status.name == option.name) {
+
         this.listaTarefas = this.listaNova.filter((task)=> task.currentStatus.name==option.name)
       this.filtroVisible = false;
-      }
+      } });
+      this.ordemPrioridades.map((s) => {
+        if (s == option) {
+          this.listaTarefas = this.listaNova.filter((task)=> task.priority.name==option)
+        this.filtroVisible = false;
+        }
+      });
+        this.projeto.members.map((s) => {
+          
+          if (s.name == option.name) {
+            console.log(option.name);
 
-     
+            this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));
+          this.filtroVisible = false;
+          }
+  
       this.sortLists();
     });
 
     if (option.name == 'Favorito') {
-      console.log(this.listaNova);
 
       this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
-      
       this.filtroVisible = false;
-      this.sortLists();
-    
-    
+      this.sortLists()
     }
   }
 
+  
   openTask(tarefa: Task): void {
     this.tarefaSelecionada = tarefa;
-    this.booleanTask = !this.booleanTask;
-    console.log(this.booleanTask);
-    console.log('ta vindo');
+    this.booleanTask = true;
     this.tarefaSelecionada = tarefa;
   }
 
@@ -316,6 +357,8 @@ export class TelaTarefaComponent implements OnInit {
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
+    console.log(this.tarefaSelecionada);
+    
     this.booleanTask = true;
   }
 
@@ -324,18 +367,11 @@ export class TelaTarefaComponent implements OnInit {
     this.booleanTask = !this.booleanTask;
   }
   async removeFilter() {
-    console.log('pobbbb');
     this.optionFilter = '';
-console.log(this.listaNova);
 
     this.listaTarefas = this.listaNova;
     this.sortLists();
   }
 
-  // filtrarLista(status:Status): Array<Task> {
-  //   let listaFiltrada = this.listaTarefas.filter(
-  //     (tarefa: Task) => tarefa.currentStatus.name === status.name
-  //   );
-  //   return listaFiltrada
-  // }
+
 }

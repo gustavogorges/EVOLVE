@@ -6,12 +6,15 @@ import { PropertyType } from 'src/model/propriedade/propertyType';
 import { Property } from 'src/model/propriedade/property';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
-import { ValueText } from 'src/model/propriedade/property-values/valueText';
-import { ValueInteger } from 'src/model/propriedade/property-values/valueInteger';
-import { ValueDouble } from 'src/model/propriedade/property-values/valueDouble';
-import { ValueData } from 'src/model/propriedade/property-values/valueData';
-import { ValueMultiSelect } from 'src/model/propriedade/property-values/valueMultiSelect';
-import { ValueUniSelect } from 'src/model/propriedade/property-values/valueUniSelect';
+import { IntegerValue } from 'src/model/propriedade/property-values/integerValue';
+import { TextValue } from 'src/model/propriedade/property-values/textValue';
+import { DoubleValue } from 'src/model/propriedade/property-values/doubleValue';
+import { DataValue } from 'src/model/propriedade/property-values/dataValue';
+import { MultiSelectValue } from 'src/model/propriedade/property-values/multiSelectValue';
+import { UniSelectValue } from 'src/model/propriedade/property-values/uniSelectValue';
+import { AssociatesValue } from 'src/model/propriedade/property-values/associatesValue';
+import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 
 @Component({
   selector: 'app-propriedade-tarefa',
@@ -19,17 +22,24 @@ import { ValueUniSelect } from 'src/model/propriedade/property-values/valueUniSe
   styleUrls: ['./propriedade-tarefa.component.scss']
 })
 export class PropriedadeTarefaComponent implements OnInit {
+  
+  @Input()
+  task : Task = new Task();
 
   constructor(private service : BackendEVOLVEService) { }
 
-  // instanciando o objeto especifico o método funcionaria de acordo
-  // porém seriam vários if's, tentar achar uma maneira de não usar 
-  // tantos if's
   newPropertyObject:any;
   propertyValue : any;
 
   ngOnInit(): void {
+    console.log(this.task);
+    
+
     this.propertyValue = this.property.propertyValues[0]
+
+    if(this.property.currentOptions.length > 0) {
+      this.booleanValueOption = true;
+    }
   
     this.eventsSubscription = 
     this.events.subscribe(() => 
@@ -43,29 +53,30 @@ export class PropriedadeTarefaComponent implements OnInit {
     // LÓGICA DE ICONES A DE SER MUDADA TAMBÉM DE ACORDO COM AS NOVAS MODELS
 
      if(this.property.propertyType.toString() == "IntegerValue") {
-       this.newPropertyObject = new ValueInteger();
+       this.newPropertyObject = new IntegerValue();
        this.property.icon = 'pi pi-hashtag'
      } else if(this.property.propertyType.toString() == "TextValue") {
-      this.newPropertyObject = new ValueText();
+      this.newPropertyObject = new TextValue();
        this.property.icon = 'pi pi-book'
      }  else if(this.property.propertyType.toString() == "DoubleValue") {
-      this.newPropertyObject = new ValueDouble();
+      this.newPropertyObject = new DoubleValue();
        this.property.icon = 'pi pi-dollar'
      }  else if(this.property.propertyType.toString() == "DataValue") {
-      this.newPropertyObject = new ValueData();
+      this.newPropertyObject = new DataValue();
        this.property.icon = 'pi pi-calendar'
      }  else if(this.property.propertyType.toString() == "MultiSelectValue") {
-      this.newPropertyObject = new ValueMultiSelect();
+      this.newPropertyObject = new MultiSelectValue();
        this.property.icon = 'pi pi-tags'
      }  else if(this.property.propertyType.toString() == "UniSelectValue") {
-      this.newPropertyObject = new ValueUniSelect();
+      this.newPropertyObject = new UniSelectValue();
        this.property.icon = 'pi pi-tag'
-     }  else if(this.property.propertyType.toString() == "UniSelectValue") {
-      this.newPropertyObject = new ValueUniSelect();
+     }  else if(this.property.propertyType.toString() == "AssociatesValue") {
+      this.newPropertyObject = new AssociatesValue();
        this.property.icon = 'pi pi-users'
      }
 
-     if(this.property.propertyValues.length != 0) {
+     if(this.property.propertyValues.length != 0 ||
+        this.property.currentOptions.length != 0) {
       
        this.booleanEditProperty = true;
      }
@@ -92,6 +103,8 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   propertyStack : Property = new Property;
   propertyValueStack : PropertyValue = new PropertyValue;
+  
+  booleanSelectOption : boolean = false;
 
   @Input()
   events!:Observable<Property>
@@ -99,7 +112,13 @@ export class PropriedadeTarefaComponent implements OnInit {
   @Input()
   booleanEdit !: boolean;
 
+  @Input()
+  loggedUser : User = new User();
+
   booleanValue : boolean = false;
+  booleanDeleteProperty: boolean = false;
+
+  booleanValueOption : boolean = false;
 
   @Input()
   property : Property = new Property();
@@ -117,8 +136,12 @@ export class PropriedadeTarefaComponent implements OnInit {
     this.booleanEditProperty = true;
     this.booleanValue = true;
     property.editable = true;
+
+    if(property.propertyType.toString() == 'UniSelectValue' ||
+    property.propertyType.toString() == 'MultiSelectValue') {
+      this.booleanSelectOption = true;
+    }
     
-    this.eventEmitter.emit();
   }
 
   checkEditable(property:Property) : boolean {
@@ -128,15 +151,42 @@ export class PropriedadeTarefaComponent implements OnInit {
       }
     }
     return false;
-  
+  }
+
+  confirmButtonCheck() : boolean {
+    if(this.property.editable) {
+      if(this.property.propertyType.toString() == 'UniSelectValue' ||
+      this.property.propertyType.toString() == 'MultiSelectValue') {
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 
   checkTypeValue() : boolean {
-    if(this.booleanValue) {
-      return true;
-    } else {
-      return false;
+   return this.booleanValue;
+  }
+
+  editOption() : void {
+    this.booleanSelectOption = true;
+  }
+
+  selectOptionEmitter() : void {
+    this.booleanSelectOption = false;
+    this.booleanValueOption = true;
+    this.property.editable = false;
+  }
+
+  selectOptionTypeCheck() : boolean {
+    if(this.booleanSelectOption) {
+      if(this.property.propertyType.toString() == 'UniSelectValue' ||
+         this.property.propertyType.toString() == 'MultiSelectValue'
+      ) {
+        return true;
+      }
     }
+    return false;
   }
 
   saveProperty(property:Property) : void {
@@ -167,9 +217,7 @@ export class PropriedadeTarefaComponent implements OnInit {
       this.booleanValue = true;
      }
      
-
-    this.propertyStack = property;
-    this.propertyValueStack = this.propertyValueObject;
+      this.service.putPropertyValue(this.property.id,this.propertyValueObject,this.loggedUser.id,this.task.id)
     
     property.editable = false;
     this.booleanEditProperty = true;
@@ -177,6 +225,10 @@ export class PropriedadeTarefaComponent implements OnInit {
 
     this.eventEmitterValue.emit(property);
     this.eventEmitterValue2.emit(this.propertyValueStack);
+  }
+
+  async deleteProperty(property:Property) {
+    this.task = await this.service.deleteProperty(this.task.id,this.loggedUser.id,property.id);
   }
 
   oldValueFunction() {

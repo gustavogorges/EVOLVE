@@ -1,27 +1,35 @@
-<div class=" flex gap-2 items-center    " #scrollContainer>
-    <div class="flex  gap-4 bg-white items-center ">
+<div class="fixed z-[1000] top-14 left-1/2 h-full">
+  <app-modal-tarefa
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
+  ></app-modal-tarefa>
+</div>
 
-  
-    <div *ngFor="let task of tasks">
-        <div *ngIf="isSameDay(task.finalDate)" class="p-1 rounded-lg w-36 text-center" [ngStyle]="{
-        'background-color': task.currentStatus.backgroundColor,
-        color: task.currentStatus.textColor
-      }">
-            {{ task.name }}
-        </div>
-        <div *ngIf="isSameDay(task.scheduledDate)" class="p-1 rounded-lg w-36 text-center border-2 border-dashed"
-            [ngStyle]="{
-        'border-color': task.currentStatus.backgroundColor
-      }">
-            {{ task.name }}
-        </div>
+<div class="flex gap-2 items-center justify-center" #scrollContainer>
+  <div class="flex md:gap-4 gap-1 bg-white dark:bg-dark-primary-black items-center p-2 h-12 md:h-max">
+    <div *ngFor="let task of tasks" (click)="openTask(task)">
+      <div
+        *ngIf="isSameDay(task.finalDate)"
+        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center text-sm md:text-base"
+        [ngStyle]="{
+          'background-color': task.currentStatus.backgroundColor,
+          color: task.currentStatus.textColor
+        }"
+      >
+        {{ task.name }}
+      </div>
+      <div
+        *ngIf="isSameDay(task.scheduledDate)"
+        class="md:p-1 rounded-lg xl:w-36 w-20 text-center border-2 border-dashed text-sm md:text-base"
+        [ngStyle]="{
+          'border-color': task.currentStatus.backgroundColor
+        }"
+      >
+        {{ task.name }}
+      </div>
     </div>
-</div>  
-    <div *ngIf="taskList.length > 4" class="max-w-[32px] absolute right-0 -top-[22px]  z-50" >
-        <button class="pi pi-chevron-left text-[#aaa]" [ngStyle]="{'opacity': this.indice > 0 ? 100 : 0}" [disabled]="!(this.indice>0)" (click)="scrollLeft()" style="font-size: 0.8rem;"></button>
-       
-        <button class="pi pi-chevron-right text-[#aaa]" style="font-size: 0.8rem;"  [ngStyle]="{'opacity': this.indice +4< this.taskList.length ? 100 : 0}" [disabled]="!(this.indice+4<this.taskList.length)" 
-            (click)="scrollRight()"></button>
-          
-    </div>
+  </div>
 </div>

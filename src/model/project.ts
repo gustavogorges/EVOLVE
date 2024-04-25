@@ -13,7 +13,7 @@ export class Project{
     imageColor:string="#000000"
     image:File = new File
     creator!:User
-    adimnistrators:Array<User>=new Array
+    adimnistrators:Array<User> = new Array
     members:Array<User> = new Array;
     properties:Array<Property> = new Array;
     statusList : Array<Status> = new Array;

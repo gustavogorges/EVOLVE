@@ -31,9 +31,9 @@
         }
 
         .dashboard-pai{
-
+            
             .newDashBoard{
-                @apply bg-primaryGray w-[9.4vw] h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150;
+                @apply bg-primaryGray h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150 w-fit p-2 px-4;
 
                 i{
                     @apply text-primary dark:text-dark-primary
@@ -150,7 +150,7 @@
                     grid-template-rows: 2.5rem;
     
                     .ponto{
-                        @apply col-start-1 col-end-2 dark:text-dark-secundary-green text-secondary
+                        @apply col-start-1 col-end-2 dark:text-dark-secondary text-secondary
                     }
     
                     .name-user{

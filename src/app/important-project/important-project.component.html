@@ -1,6 +1,6 @@
-<div class="w-[310px] h-[124px] bg-white p-4  rounded-lg flex flex-col gap-2">
+<div class="2xl:w-[310px] xl:w-[215px] lg:w-full  md:w-[210px] lg:h-[124px] h-max w-full bg-white dark:bg-dark-primary-black p-4  rounded-lg flex flex-col gap-2">
   <div class="flex gap-4 items-center">
-    <div class="w-14 h-14 overflow-clip rounded-full" [ngStyle]="{'background-color': project.imageColor}"></div>
+    <div class="md:w-14 md:h-14 h-12 w-12 overflow-clip rounded-full" [ngStyle]="{'background-color': project.imageColor}"></div>
     <div class="text">
       {{ project.name }}
     </div>
@@ -14,7 +14,7 @@
           *ngIf="!project.favorited"
           src="../../../assets/estrelaNaoMarcada.svg"
           alt=""
-          style="width: 21px"          
+          class="w-5"          
 
           (click)="favorite()"
         />
@@ -22,7 +22,7 @@
           *ngIf="project.favorited"
           src="../../../assets/estrelaMarcada.svg"
           alt=""
-          style="width: 21px"          
+          class="w-5"           
           (click)="favorite()"
          
         />

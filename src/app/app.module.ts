@@ -95,6 +95,20 @@ registerLocaleData(localePT);
 import { PropriedadeTarefaComponent } from './componentes/propriedade-tarefa/propriedade-tarefa.component';
 import { SelectPrioridadeComponent } from './componentes/select-prioridade/select-prioridade.component';
 
+import { SelectOpcaoComponent } from './componentes/select-opcao/select-opcao.component';
+import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
+import { UserCardPerfilComponent } from './componentes/user-card-perfil/user-card-perfil.component';
+import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/projects-info-perfil.component';
+import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboard-perfil.component';
+import { SideBarComponent } from './componentes/side-bar/side-bar.component';
+import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
+
+import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
+import { TelaReportsComponent } from './tela-reports/tela-reports.component';
+
+
+
 
 
 
@@ -161,11 +175,24 @@ import { SelectPrioridadeComponent } from './componentes/select-prioridade/selec
     WeekCalendarComponent,
     TasksWeekComponent,
     PropriedadeTarefaComponent,
-    SelectPrioridadeComponent
+    SelectPrioridadeComponent,
+    TelaPerfilComponent,
+    UserCardPerfilComponent,
+    ProjectsInfoPerfilComponent,
+    DashboardPerfilComponent,
+    SideBarComponent,
+    ModalConfigComponent,
+
+    SelectOpcaoComponent,
+    TelaPerfilComponent,
+    SelectAssociatesComponent,
+    VlibrasComponent,
+    TelaReportsComponent
 
   ],
   
   imports: [
+    
     MessageModule,
     MessagesModule,
     ChartModule,

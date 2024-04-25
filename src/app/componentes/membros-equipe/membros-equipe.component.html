@@ -4,10 +4,9 @@
         <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.image.data}}" alt="">
     </div>
     <div class="infos">
-        <div class="nome"><p>{{user.name}}</p></div>
-        <div class="email"><p>{{user.email}}</p></div>
+        <div *ngIf="user" class="nome"><p>{{user.name}}</p></div>
+        <div *ngIf="user" class="email"><p>{{user.email}}</p></div>
     </div>
-    <div class="tipo"><p>Administrador</p></div>
     <button class="adicionar" (click)="adicionar()">
         <div class="fundo-icon">
             <i class="pi" [ngClass]="adicionado ? 'pi-check-circle':'pi-plus'"></i>

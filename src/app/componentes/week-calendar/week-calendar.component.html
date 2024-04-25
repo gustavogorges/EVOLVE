@@ -1,19 +1,19 @@
 <div class="main w-full flex gap-4 flex-col">
   <div class="flex w-full justify-between">
-    <p class="title-text">Calendário Semanal</p>
+    <p class="title-text ">Calendário Semanal</p>
     <div class="flex gap-2">
       <button
         (click)="alterarSemana(-1)"
-        class="pi pi-chevron-left text-[#aaa]"
+        class="pi pi-chevron-left text-[#aaa] dark:text-gray-200"
       ></button>
 
-      <div class="text-xl font-hind-madurai text-fontGray">
+      <div class="text-xl font-hind-madurai text-fontGray dark:text-gray-200">
         {{ semanaAtual[0] | date : "MMM yyyy" }}
       </div>
 
       <button
         (click)="alterarSemana(+1)"
-        class="pi pi-chevron-right text-[#aaa]"
+        class="pi pi-chevron-right text-[#aaa] dark:text-gray-200"
       ></button>
     </div>
   </div>
@@ -22,10 +22,10 @@
         <ng-container *ngFor="let dia of diasSemana; let i = index">
         
          
-          <div class="flex w-full bg-white gap-3 relative">
+          <div class="flex w-full md:h-12 h-20 items-center  md:bg-white dark:bg-dark-primary-black rounded-md grelative shadow-sm flex-col md:flex-row  gap-2">
             
             <div
-              class="max-w-[160px] w-full bg-secondary rounded-lg flex flex-col items-center p-1"
+              class="xl:max-w-[160px]  xl:w-full sm:w-1/4 w-full  h-full text-center    bg-secondary dark:bg-dark-secondary md:rounded-lg rounded-md flex md:flex-col flex-row gap-3 md:gap-1 justify-center items-center p-1"
               [ngClass]="{ todayText: isToday(dia) }"
             >
               <p class="text-p">{{ dia | date : "EEEE" }}</p>
@@ -34,7 +34,7 @@
               </p>
             </div>
             <div
-              class="flex w-full items-center  bg-white overflow-hidden scroll-container"
+              class="flex w-full items-center  bg-white dark:bg-dark-primary-black rounded-md overflow-hidden scroll-container"
             
             >
            

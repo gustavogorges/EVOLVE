@@ -1,5 +1,5 @@
 .main-box{
-  @apply w-full flex  flex-col items-center
+  @apply w-full flex  flex-col items-center dark:bg-dark-theme-back
 }
 
 .gorgees{
@@ -20,41 +20,37 @@
   @apply flex flex-col gap-4 max-w-fit
 }
 .project-name{
-    @apply  text-primary text-[42px] font-bold ;
-    font-family: 'Montserrat', sans-serif;
+    @apply  text-primary  dark:text-dark-primary text-2xl font-bold font-titulo 
+    lg:text-4xl
+    md:text-3xl
+    2xl:text-[42px]
 
 }
 
-.button-AddProject{
-    @apply bg-secondary rounded-xl p-3 text-white font-bold text-xl
-      }
 
-.botao-opcoes{
-    font-family: 'Montserrat', sans-serif;
-    @apply text-2xl
-}
 .tasks-grid-padrao{
-  width: 100%;
-  display: grid;
-  justify-self: center;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
-  grid-gap: 20px; 
+  // width: 100%;
+  // display: grid;
+  // justify-self: center;
+  // grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); /* Cada coluna tem 200px de largura mínima */
+  // grid-gap: 20px; 
+@apply w-full grid justify-center gap-4 grid-cols-1 px-5 sm:px-0 sm:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-4;
 
 }
 .box-list{
   @apply flex flex-col h-full w-full gap-2  items-center justify-center
 }
 
-
+  
 
   .cardLista {
-    @apply w-[78%];
+    @apply w-[100%] xl:w-[78%] ;
   }
   .card-box {
     @apply w-full h-full
   }
   .icon {
-    @apply text-2xl text-secondary cursor-pointer
+    @apply text-2xl text-secondary dark:text-dark-secondary cursor-pointer
   }
   select{
     @apply bg-secondaryWhite m-1 border-0 p-1;
@@ -78,11 +74,29 @@
 }
 
 .select-button{
-  @apply text-xl;
-  font-family: 'Montserrat', sans-serif;
+  @apply text-xs dark:text-gray-300 font-titulo flex gap-1
+  md:text-base
+  lg:text-xl
+  2xl:text-xl
+
+}
+.icon2{
+  @apply text-lg
+  sm:text-sm
+  md:text-base
 }
 .box-selections{
-  @apply flex flex-row gap-3
+  @apply flex  gap-4
+   
+
+}
+.text-select{
+  @apply hidden 
+  sm:block sm:text-sm
+  md:block md:text-base
+  lg:block lg:text-lg
+  xl:block xl:text-xl
+  2xl:block 
 }
  
 
@@ -91,16 +105,14 @@
   @apply flex flex-row gap-1 items-center
 }
 .option-filterBy{
-  @apply bg-primaryNav  px-2 rounded-md text-[#6A7181] text-base flex items-center flex gap-2;
-  font-family: 'Hind Madurai', sans-serif;
+  @apply bg-primaryNav font-hind-madurai dark:bg-dark-theme-back px-2 rounded-md text-[#6A7181] dark:text-gray-50 text-base flex items-center flex gap-2;
 
 }
 .text-filterBy{
-  font-family: 'Hind Madurai', sans-serif;
-  @apply text-lg text-[#6A7181] 
+  @apply text-lg text-[#6A7181] dark:text-gray-200 font-hind-madurai
 }
 .width-name-propertys{
-@apply w-[120px]  max-h-6 text-lg text-gray-500 font-hind-madurai;
+@apply w-[112px] text-lg text-gray-500 dark:text-gray-300  font-hind-madurai;
 
 
 

@@ -12,7 +12,7 @@
 }
 
 .name-project {
-    @apply h-[20%] w-full flex justify-center items-center
+    @apply w-full flex justify-center items-center
 }
 
 .responsible-project {
@@ -31,3 +31,8 @@
     font-family: "Montserrat", sans-serif;
 
 }
+.icon2{
+    @apply text-base
+    sm:text-lg
+    md:text-lg
+  }

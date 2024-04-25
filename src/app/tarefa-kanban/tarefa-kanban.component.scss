@@ -1,5 +1,6 @@
 
 
+
 .status {
     @apply rounded-lg  px-7 text-sm text-end w-max  ;
     font-family: "Montserrat", sans-serif;
@@ -10,12 +11,14 @@
   }
   
   .dndPlaceholder {
+    @apply dark:bg-dark-primary-gray;
     background: #fdfdfd;
     min-height: 46px;
     min-width: 46px;
   }
   
   [dnddropzone] {
+    @apply dark:bg-dark-theme-back; 
     background: #f8f8f8;
     min-height: 60px;
     display: flex;
@@ -49,3 +52,6 @@
 // ::-webkit-scrollbar-thumb:hover {
 //   background: #555; 
 // }
+.icon2{
+  @apply md:text-base text-sm
+}
