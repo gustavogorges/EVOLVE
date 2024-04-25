@@ -49,7 +49,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   optionFilter: string = '';
 
   constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, 
-    private http: HttpClient  ) {}
+ ) {}
 
   async atualizar(favoritado: boolean): Promise<void> { 
     if (favoritado) {
