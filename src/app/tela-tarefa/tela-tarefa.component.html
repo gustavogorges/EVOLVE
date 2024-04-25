@@ -1,4 +1,4 @@
-<div class="gorgees">
+ <div class="gorgees">
   <app-modal-tarefa
     class="tarefa"
     *ngIf="booleanTask"
@@ -8,9 +8,12 @@
   ></app-modal-tarefa>
 </div>
 
-<div class="main-box">
+<div class="main-box" >
+ 
   <div class="main">
-    <div class="header">
+    
+    <div class="header" >
+    
       <div class="button-name-box">
         <h1 class="project-name">{{projeto?.name}}</h1>
         <app-botao-add-tarefa
@@ -135,6 +138,8 @@
             [tarefaAtual]="tarefa"
             (newItem)="atualizar($event)"
             [project]="projeto"
+            (click)="openTask(tarefa)"
+
           ></app-tarefa-card-lista>
         </div>
       </div>
@@ -155,4 +160,5 @@
      <app-task-calendar  [taskList]="listaTarefas" [project]="projeto"></app-task-calendar>
     </div>
   </div>
+
 </div>

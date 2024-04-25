@@ -3,6 +3,10 @@
   grid-template-columns: 40% 60%;
 }
 
+.gorgees{
+  @apply flex justify-end w-screen px-10
+}
+
 
 .main-box  {
   @apply w-full h-full flex items-center justify-end p-10;
@@ -62,7 +66,6 @@
 }
 
 .title-text {
-  @apply font-bold md:text-2xl text-lg text-secondary dark:text-dark-secondary;
   font-family: "Montserrat", sans-serif;
 }
 

@@ -104,6 +104,8 @@ import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
 
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
+import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 
 
 
@@ -183,7 +185,9 @@ import { SelectAssociatesComponent } from './componentes/select-associates/selec
 
     SelectOpcaoComponent,
     TelaPerfilComponent,
-    SelectAssociatesComponent
+    SelectAssociatesComponent,
+    VlibrasComponent,
+    TelaReportsComponent
 
   ],
   

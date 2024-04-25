@@ -1,3 +1,12 @@
+<div class=" fixed z-[1000] top-14  left-1/2 h-full">
+  <app-modal-tarefa
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
+  ></app-modal-tarefa>
+</div>
 <div class="main">
   <div class="calendar-title">
     <div>
@@ -30,6 +39,7 @@
           <app-entrega-prox
             [tarefa]="task"
             [favoritedAble]="false"
+            (click)="openTask(task)"
           ></app-entrega-prox>
         </div>
       </div>

@@ -24,34 +24,22 @@
         }} 
       </p>
     </div>
-
+<div class="flex gap-2 justify-end w-0 md:w-20 lg:w-28">
+  <div *ngFor="let user of arrayForce; index as i" class=" w-20 md:w-max  gap-2 items-end hidden md:flex">
+    <div class="taskMemberPhoto" [ngStyle]="{
+      'background-image':
+        user.image != null
+          ? 'url(' + user.image.data + ')'
+          : user?.imageColor,
+      'background-size': 'cover',
+      'background-color': user?.imageColor
+    }" *ngIf="i<3"></div>
+     
+        
+  </div>
+</div>
    
-      <div *ngFor="let user of arrayForce; index as i" class=" w-20 md:w-max  gap-2 items-end hidden sm:flex">
-        <div class="taskMemberPhoto" [ngStyle]="{
-          'background-image':
-            user.image != null
-              ? 'url(' + user.image.data + ')'
-              : user?.imageColor,
-          'background-size': 'cover',
-          'background-color': user?.imageColor
-        }" *ngIf="i<3"></div>
-          <div class="taskMemberPhoto" [ngStyle]="{
-            'background-image':
-              user.image != null
-                ? 'url(' + user.image.data + ')'
-                : user?.imageColor,
-            'background-size': 'cover',
-            'background-color': user?.imageColor
-          }" *ngIf="i<3"></div>
-            <div class="taskMemberPhoto" [ngStyle]="{
-              'background-image':
-                user.image != null
-                  ? 'url(' + user.image.data + ')'
-                  : user?.imageColor,
-              'background-size': 'cover',
-              'background-color': user?.imageColor
-            }" *ngIf="i<3"></div>
-      </div>
+    
       
       <div class="priority-box rounded-xl w-28">
         <div class="priority " [ngStyle]="{

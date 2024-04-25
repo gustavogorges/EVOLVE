@@ -1,5 +1,5 @@
 <div *ngIf="config">
-  <div class="h-screen xl:w-80 w-64 hidden lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
+  <div class="overflow-y-auto h-screen xl:w-80 w-64 hidden lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
     <i
       class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray"
       (click)="closeSideBar()"
@@ -99,14 +99,29 @@
           </div>
         </div>
       </div>
+      <button class="w-full bg-secondary rounded-lg p-2 flex gap-2 items-center justify-center text-base text-white font-titulo font-semibold ">
+        criar equipe 
+        <i class="pi pi-plus font-bold " ></i>
+  
+      </button>
+    </div>
+    <div class="flex gap-3 items-center pt-48 " (click)="logOut()">
+      <p class="text-2xl font-semibold text-primary" >
+        logout
+      </p>
+      <i class="pi pi-sign-out icon2 text-primary 
+      ">
+  
+      </i>
     </div>
   </div>
+
   
 </div>
 <app-modal-config *ngIf="config" (close)="closeConfig()" class="w-screen"></app-modal-config>
 
 <div *ngIf="!config">
-  <div class="h-screen xl:w-80 w-64   bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
+  <div class="overflow-y-auto h-screen xl:w-80 w-64 hidden lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
     <i
       class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray"
       (click)="closeSideBar()"
@@ -151,7 +166,6 @@
               class="pi pi-angle-right self-center text-fontGray"
               style="width: 1.5rem"
             ></i> -->
-            <app-modal-config *ngIf="config" (close)="closeConfig()"></app-modal-config>
           <!-- </div> -->
         <!-- </div> -->
       </div>
@@ -207,8 +221,22 @@
           </div>
         </div>
       </div>
+      <button class="w-full bg-secondary rounded-lg p-2 flex gap-2 items-center justify-center text-base text-white font-titulo font-semibold ">
+        criar equipe 
+        <i class="pi pi-plus font-bold " ></i>
+  
+      </button>
+    </div>
+    <div class="flex gap-3 items-center pt-48 " (click)="logOut()">
+      <p class="text-2xl font-semibold text-primary" >
+        logout
+      </p>
+      <i class="pi pi-sign-out icon2 text-primary 
+      ">
+  
+      </i>
     </div>
   </div>
+
   
 </div>
-
