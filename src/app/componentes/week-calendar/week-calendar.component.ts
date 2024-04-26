@@ -112,7 +112,6 @@ export class WeekCalendarComponent implements OnInit{
    this.taskList.map((task)=>{
     task.finalDate = new Date(task.finalDate)
     task.scheduledDate = new Date(task.scheduledDate)
-    console.log(task.finalDate.getFullYear() );
     
    
     

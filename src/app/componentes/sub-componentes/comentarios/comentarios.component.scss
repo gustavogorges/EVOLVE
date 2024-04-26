@@ -3,7 +3,7 @@
 }
 
 .main-card {
-    @apply  w-full max-h-[70%] rounded-t-xl flex flex-col
+    @apply  w-full max-h-[80%] rounded-t-xl flex flex-col
 }
 
 .card {
@@ -11,7 +11,7 @@
 }
 
 .box-btn-add {
-    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl py-2 px-3 flex justify-center items-center cursor-pointer
 }
 
 .s-input input {
@@ -63,7 +63,7 @@
   }
 
   .btn-add-content {
-    @apply flex justify-center items-center gap-3
+    @apply flex justify-center items-center gap-3 
   }
 
   .btn-add-text {

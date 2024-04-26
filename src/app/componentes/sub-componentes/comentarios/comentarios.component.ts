@@ -46,7 +46,10 @@ export class ComentariosComponent implements OnInit {
 
   async deleteComment(comment : Comment) {
     this.comments = await this.service.deleteComment(this.task.id,comment.id,this.loggedUser.id);
-  }
+    this.comments = this.comments.filter(c => c.id !== comment.id);
+    console.log(this.comments);
+    
+   }
 
   addCommentInput() : void {
     this.booleanAddComment = true;
@@ -72,17 +75,23 @@ export class ComentariosComponent implements OnInit {
 
     let postComment:any = newComment
     postComment.user = {"id":newComment.user.id}
+    console.log(postComment);
+    
 
-
-    this.service.patchNewComment(postComment.task.id,postComment,this.loggedUser.id);
+   let returnComment: any = await   this.service.patchNewComment(postComment.task.id,postComment,this.loggedUser.id);
+    console.log(returnComment);
     
     const taskUpdated : Task = await this.service.getOne("task",postComment.task.id);
     
     this.task = taskUpdated;
+    returnComment.user = this.loggedUser
 
-    this.comments = [...this.comments, postComment];
+    this.comments = [...this.comments, returnComment];
 
     this.booleanAddComment = false;
+  }
+  cancelar(){
+    this.booleanAddComment = false 
   }
 
 }

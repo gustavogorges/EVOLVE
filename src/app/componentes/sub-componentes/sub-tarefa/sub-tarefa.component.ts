@@ -65,7 +65,8 @@ export class SubTarefaComponent implements OnInit {
   }
 
   async removeSubtarefa(subtarefa : Subtask, i : number) {
-    this.tarefa.subtasks.splice(i,1)
+      // this.tarefa.subtasks.splice(i,1)
+      this.tarefa.subtasks.filter(subtask => subtask.id != subtarefa.id)
     this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
   }
 
@@ -90,6 +91,10 @@ export class SubTarefaComponent implements OnInit {
 
       await this.service.putTarefa(this.tarefa, this.loggedUser.id); 
       
+      }
+      cancelar(){
+        this.booleanAddSubtarefa = false
+        this.subtarefa.nome = ""
       }
 
 }
