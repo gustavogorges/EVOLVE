@@ -7,7 +7,6 @@
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
           <p class="name" 
-          style="font-size: 2.25rem"
           *ngIf="!booleanEditName"
           >{{ tarefa.name }}
           </p>
@@ -22,8 +21,8 @@
           *ngIf="booleanEditName"
           >
             <i
-              class="pi pi-check p-2 bg-secondary cursor-pointer rounded-md"
-              style="font-size: 1.3rem; color: white;"
+              class="pi pi-check md:p-2 text-lg p-1 bg-secondary cursor-pointer rounded-md"
+              style=" color: white;"
               (click)="saveName()"
             ></i>
             <input
@@ -38,7 +37,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold">iniciar foco</p>
+            <p class="font-bold hidden md:flex">iniciar foco</p>
           </div>
         </div>
       </div>
@@ -72,20 +71,20 @@
 
       <div class="progress-bar-box">
         <div class="progress-bar">
-          <div class="w-full h-full bg-secondary rounded-md"></div>
+          <div class=" h-full bg-secondary rounded-md" [ngStyle]="{ width: tarefa.progress + '%' }"></div>
         </div>
         <!-- BOTÃO QUE DELETA A TAREFA -->
         <div class="flex gap-5 h-full w-[21%] cursor-pointer" (click)="deleteTask()">
           <div class="remove-button flex w-full justify-center items-center">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold">excluir tarefa</p>
+              <p class="text-white font-bold hidden md:flex">excluir tarefa</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="add-icon hover" (click)="addPropertie()">
+    <div class="add-icon self-start hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus" style="color: white"></i>
       <p class="add-propertie-text" style="color: white">
         adicionar propriedade
@@ -100,8 +99,8 @@
       class="task-properties-box"
       [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
     >
-      <aside class="flex justify-between">
-        <section class="w-1/2 flex flex-col">
+      <aside class="flex flex-col sm:flex-row justify-between">
+        <section class="w-full md:w-1/2 flex flex-col">
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
@@ -293,8 +292,8 @@
       <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
     </div>
 
-    <div class="description-box">
-      <div class="description-propertie">
+    <div class="description-box w-full self-start">
+      <div class="description-propertie ">
         <div class="name-icon">
           <i
             *ngIf="!booleanDesc"
@@ -306,7 +305,7 @@
             class="icon-propertie pi pi-angle-up"
             (click)="openDesc()"
           ></i>
-          <p class="name-propertie">descrição</p>
+          <p class="name-propertie ">descrição</p>
         </div>
       </div>
       <div class="w-full">
@@ -366,28 +365,7 @@
         >
           anexos
         </p>
-        <p
-          [ngClass]="
-            page_task == 'automacao'
-              ? 'border-b-2 border-primary'
-              : 'border-none'
-          "
-          class="page-name"
-          (click)="changePage('automacao')"
-        >
-          automação
-        </p>
-        <p
-          [ngClass]="
-            page_task == 'integracao'
-              ? 'border-b-2 border-primary'
-              : 'border-none'
-          "
-          class="page-name"
-          (click)="changePage('integracao')"
-        >
-          integração
-        </p>
+        
       </div>
       <div class="components">
         <app-sub-tarefa

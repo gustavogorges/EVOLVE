@@ -15,7 +15,7 @@
             'background-size': 'cover',
             'background-color': comment.user.imageColor
           }"
-          class="w-12 h-12 rounded-full overflow-clip"
+          class="md:w-12 md:h-12 w-8 h-8 rounded-full overflow-clip"
           ></div>
         </div>
         <div class="comment-content">
@@ -47,10 +47,10 @@
 
 <!-- input part -->
     <div class="box-comment-input h-min w-full flex py-3 px-2 border-x-2 justify-center border-primaryWhite border-b-2 items-center" *ngIf="booleanAddComment">
-        <div class=" w-[65%] h-full flex items-center">
+        <div class=" w-[90%]  flex items-center">
             <textarea
             rows="2"
-            cols="80"
+
             pInputTextarea
             [autoResize]="true"
             placeholder="Digite seu comentário aqui ..."
@@ -58,15 +58,15 @@
             [(ngModel)]="comment.value"
           ></textarea>
         </div>
-        <div class=" w-[30%] h-full flex flex-col items-end gap-2">
+        <div class=" w-[30%] h-full flex  flex-col items-end gap-2">
             <div 
             (click)="addCommentValue()"
-            class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-primary flex justify-between gap-1 items-center rounded-lg">
-                <p class="text-primaryWhite font-semibold text-sm">salvar comentário</p>
+            class="cursor-pointer w-min h-[40%] px-2 py-1 bg-primary flex  justify-between gap-1 items-center rounded-lg">
+                <p class="text-primaryWhite font-semibold text-sm hidden sm:flex">salvar comentário</p>
                 <i class="pi pi-check text-primaryWhite "></i>
             </div>
-            <div class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-red-500 flex justify-between items-center rounded-lg">
-                <p class="text-primaryWhite font-semibold text-sm">cancelar comentário</p>
+            <div class="cursor-pointer w-min h-[40%] px-2 py-1 bg-red-500 flex justify-between items-center rounded-lg">
+                <p class="text-primaryWhite font-semibold text-sm ">cancelar comentário</p>
                 <i class="pi pi-trash  text-primaryWhite"></i>
             </div>
         </div>

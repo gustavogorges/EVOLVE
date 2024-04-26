@@ -1,5 +1,5 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex flex-col items-center
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-full items-center fixed top-12 right-0 bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex flex-col items-center
 }
 
 .name-progress {
@@ -19,7 +19,7 @@
 }
 
 .foco-box {
-    @apply w-[35%] h-full flex justify-end
+    @apply w-[35%] h-min flex justify-end
 }
 
 .foco {
@@ -63,7 +63,7 @@
 }
 
 .name {
-    @apply text-4xl text-primary font-bold ;
+    @apply md:text-4xl text-3xl text-primary font-bold ;
 }
 
 .progress-bar-box {
@@ -117,7 +117,7 @@
 }
 
 .add-icon {
-    @apply flex items-center mb-10 px-1 py-1 bg-secondary rounded-md w-[30%] justify-center
+    @apply flex items-center mb-10 px-1 py-1 bg-secondary rounded-md w-[70%] justify-center
 }
 
 .add-icon:hover {
@@ -125,7 +125,7 @@
 }
 
 .name-propertie {
-    @apply pl-3 text-lg text-primaryFontBlack
+    @apply pl-3 sm:text-lg text-sm text-primaryFontBlack
 }
 
 .add-propertie-text  {
@@ -185,7 +185,7 @@
 }
 
 .page-name {
-    @apply text-fontGray text-lg 
+    @apply text-fontGray md:text-lg text-sm 
 }
 
 .page-name:hover {
@@ -227,5 +227,5 @@
 }
 
 .the-box {
-    @apply w-[80%] h-full
+    @apply w-[80%] h-full flex flex-col items-center
 }

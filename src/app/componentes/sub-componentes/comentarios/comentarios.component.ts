@@ -80,7 +80,7 @@ export class ComentariosComponent implements OnInit {
     
     this.task = taskUpdated;
 
-    this.comments = this.task.comments;
+    this.comments = [...this.comments, postComment];
 
     this.booleanAddComment = false;
   }

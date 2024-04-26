@@ -1,9 +1,9 @@
 .main {
-    @apply w-full max-h-[80%] flex justify-center overflow-y-auto border-2 rounded-xl 
+    @apply w-full max-h-[80%] flex justify-center overflow-y-scroll border-2 rounded-xl 
 }
 
 .card-box {
-    @apply w-full h-min
+    @apply w-full h-min flex flex-col max-h-[90%] min-h-full
 }
 
 .card {

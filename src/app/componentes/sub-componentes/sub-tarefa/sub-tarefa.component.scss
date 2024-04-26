@@ -3,19 +3,19 @@
 }
 
 .main-card {
-  @apply  w-full h-1/2 rounded-t-xl
+  @apply  w-full max-h-[70%] rounded-t-xl
 }
 
 .card {
-  @apply w-full min-h-full bg-white rounded-t-xl border-t-2 border-x-2
+  @apply w-full min-h-full bg-white rounded-t-xl border-t-2 border-x-2 max-h-[80%] overflow-y-auto
 }
 
 .tasks {
-@apply w-full h-full flex flex-col items-center p-5
+@apply w-full h-full flex flex-col items-center sm:p-5 p-4 gap-3  
 }
 
 .task {
-  @apply mt-4 w-full
+  @apply  w-full
 }
 
 .main-task {
@@ -23,7 +23,7 @@
 }
 
 .task-label {
-  @apply text-lg font-semibold
+  @apply sm:text-lg text-sm font-semibold
 }
 
 .box-btn-add {
@@ -62,7 +62,7 @@
 }
 
 .btn-add-text {
-  @apply text-primary text-xl font-bold
+  @apply text-primary sm:text-xl text-base font-bold
 }
 
 .input-new-sub {
