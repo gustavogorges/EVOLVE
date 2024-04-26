@@ -1,3 +1,41 @@
-<div class="w-80 h-96 bg-white fixed right-[230px] top-12 shadow-lg rounded-xl" >
-    
+<div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col justify-between " >
+    <div class="main-box">
+        <div class="teams-box" *ngFor="let team of loggedUser.teams">
+            <div class="h-16 w-full flex justify-between items-center px-4">
+                <i class="pi pi-users team-icon"></i>
+                <p class="text-primaryFontBlack text-lg font-semibold">Equipe CentroWEG</p>
+                <i 
+                class="pi pi-angle-down team-icon2" 
+                *ngIf="!team.booleanView"
+                (click)="team.booleanView = !team.booleanView"
+                >
+                </i>
+                <i 
+                class="pi pi-angle-up team-icon2" 
+                *ngIf="team.booleanView"
+                (click)="team.booleanView = !team.booleanView"
+                >
+                </i>
+            </div>
+            <div class="notifications-box" *ngIf="team.booleanView">
+                <div class="notification-item" >
+                    <div class="notification-item-user">
+                        <p class="text-fontGray">G</p>
+                    </div> 
+                    <div class="notification-item-content">
+                        <p class="text-primaryFontBlack text-sm font-semibold">Gorges editou o relatório</p>
+                        <p class="text-primaryFontBlack text-xs font-semibold">3 horas atrás</p>
+                    </div>
+                    <div class="notification-readed">
+                        <i class="pi pi-circle-fill notification-item-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clean-box">
+        <div class="clean-button">
+            <p class="text-base text-primaryWhite">limpar</p>
+        </div>
+    </div>
 </div>

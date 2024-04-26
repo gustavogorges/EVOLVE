@@ -10,14 +10,15 @@ import { CookiesService } from 'src/service/cookies-service.service';
   styleUrls: ['./notification-modal.component.scss']
 })
 export class NotificationModalComponent implements OnInit {
+  loggedUser : User = new User;
 
   constructor(private service : BackendEVOLVEService,
-    private cookies_service : CookiesService) { }
-
-  loggedUser : User = new User;
+    private cookies_service : CookiesService
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser();
-  } 
+  }
+
 
 }

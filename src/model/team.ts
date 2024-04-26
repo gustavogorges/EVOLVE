@@ -15,4 +15,5 @@ export class Team{
     chat: TeamChat = new TeamChat;
     notifications : Array<TeamNotification> = new Array;
     booleanView:boolean = false;
+
 }
