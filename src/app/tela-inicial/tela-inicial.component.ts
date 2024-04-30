@@ -127,7 +127,7 @@ async openTask(tarefa: Task): Promise<void> {
 
     this.tarefaSelecionada = tarefa;
     if(this.tarefaSelecionada.project.id!=undefined){
-       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
+       this.projeto = await this.service.getOne("project", this.tarefaSelecionada.project.id)
 
     }
   }

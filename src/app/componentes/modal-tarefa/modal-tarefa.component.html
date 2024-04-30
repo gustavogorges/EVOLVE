@@ -6,24 +6,21 @@
     <div class="name-progress">
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
-          <p class="name" 
-          style="font-size: 2.25rem"
-          *ngIf="!booleanEditName"
-          >{{ tarefa.name }}
-          </p>
+          <p class="name" *ngIf="!booleanEditName">{{ tarefa.name }}</p>
           <i
-              *ngIf="!booleanEditName"
-              class="pi pi-pencil text-primary cursor-pointer rounded-md"
-              style="font-size: 1.3rem"
-              (click)="this.booleanEditName = true"
-            >
+            *ngIf="!booleanEditName"
+            class="pi pi-pencil text-primary cursor-pointer rounded-md"
+            style="font-size: 1.3rem"
+            (click)="this.booleanEditName = true"
+          >
           </i>
-          <span class="p-input-icon-right w-full h-full flex items-center"
-          *ngIf="booleanEditName"
+          <span
+            class="p-input-icon-right w-full h-full flex items-center"
+            *ngIf="booleanEditName"
           >
             <i
-              class="pi pi-check p-2 bg-secondary cursor-pointer rounded-md"
-              style="font-size: 1.3rem; color: white;"
+              class="pi pi-check md:p-2 text-lg p-1 bg-secondary cursor-pointer rounded-md"
+              style="color: white"
               (click)="saveName()"
             ></i>
             <input
@@ -38,7 +35,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold">iniciar foco</p>
+            <p class="font-bold hidden md:flex text-sm">iniciar foco</p>
           </div>
         </div>
       </div>
@@ -48,44 +45,60 @@
         </div>
         <div class="actions-timer">
           <div class="cancel action" (click)="finishFocus()">
-            <i class="pi pi-times" style="font-size: 1rem"></i>cancelar
+            <i class="pi pi-times" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
+              cancelar
+            </p>
           </div>
           <div class="pause action" (click)="stopTimer()">
-            <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
+            <i class="pi pi-pause" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
+              pausar
+            </p>
           </div>
           <div
             *ngIf="booleanPlayPause"
             (click)="startTimer()"
             class="stop action"
           >
-            <i class="pi pi-play" style="font-size: 1rem"></i>começar
+            <i class="pi pi-play" style="font-size: 1rem"></i>  
+            <p class="hidden sm:flex">
+              começar
+            </p>
           </div>
           <div
             *ngIf="!booleanPlayPause"
             class="stop action"
             (click)="stopTimer()"
           >
-            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>parar
+            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>
+            <p class="hidden sm:flex">
+              parar
+            </p>
           </div>
         </div>
       </div>
 
       <div class="progress-bar-box">
         <div class="progress-bar">
-          <div class="w-full h-full bg-secondary rounded-md"></div>
+          <div
+            class="h-full bg-primary rounded-md"
+            [ngStyle]="{ width: tarefa.progress + '%' }"
+          ></div>
         </div>
         <!-- BOTÃO QUE DELETA A TAREFA -->
-        <div class="flex gap-5 h-full w-[21%] cursor-pointer" (click)="deleteTask()">
-          <div class="remove-button flex w-full justify-center items-center">
+        <div
+          class="flex gap-5 h-full w-max cursor-pointer"
+          (click)="deleteTask()"
+        >
+          <div class="remove-button flex  justify-center items-center p-2">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold">excluir tarefa</p>
+              <p class="text-white font-bold hidden md:flex text-sm">excluir tarefa</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="add-icon hover" (click)="addPropertie()">
+    <div class="add-icon self-start hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus" style="color: white"></i>
       <p class="add-propertie-text" style="color: white">
         adicionar propriedade
@@ -100,8 +113,8 @@
       class="task-properties-box"
       [ngClass]="propertiesList.length > 0 ? 'gap-3' : ''"
     >
-      <aside class="flex justify-between">
-        <section class="w-1/2 flex flex-col">
+      <aside class="flex flex-col sm:flex-row justify-between">
+        <section class="w-full md:w-1/2 flex flex-col">
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
@@ -293,7 +306,7 @@
       <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
     </div>
 
-    <div class="description-box">
+    <div class="description-box w-full self-start">
       <div class="description-propertie">
         <div class="name-icon">
           <i
@@ -366,34 +379,13 @@
         >
           anexos
         </p>
-        <p
-          [ngClass]="
-            page_task == 'automacao'
-              ? 'border-b-2 border-primary'
-              : 'border-none'
-          "
-          class="page-name"
-          (click)="changePage('automacao')"
-        >
-          automação
-        </p>
-        <p
-          [ngClass]="
-            page_task == 'integracao'
-              ? 'border-b-2 border-primary'
-              : 'border-none'
-          "
-          class="page-name"
-          (click)="changePage('integracao')"
-        >
-          integração
-        </p>
       </div>
       <div class="components">
         <app-sub-tarefa
           [tarefa]="tarefa"
           [listaSubtarefas]="tarefa.subtasks"
           class="component"
+          (customEvent)="updateTask()"
           *ngIf="page_task == 'sub-tarefas'"
         ></app-sub-tarefa>
         <app-comentarios

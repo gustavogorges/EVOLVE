@@ -325,4 +325,7 @@ export class ModalTarefaComponent implements OnInit {
     this.service.deleteTask(this.tarefa.id);
     this.closeModalTask.emit(true);
   }
+  async updateTask(){
+    this.tarefa = await this.service.getOne("task", this.tarefa.id) 
+  }
 }

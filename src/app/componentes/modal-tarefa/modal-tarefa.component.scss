@@ -1,37 +1,37 @@
 .main {
-    @apply w-[50vw] h-full absolute bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex flex-col items-center
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-screen  fixed top-14 right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
 }
 
 .name-progress {
     @apply w-full min-h-[15%] flex flex-col justify-center ;
-}
+ }
 
-.close-btn {
-    @apply h-12 w-[95%] flex items-end cursor-pointer mt-2
-}
+ .close-btn {
+    @apply h-12 w-[95%] flex items-end cursor-pointer pt-2
+ }
 
-.icon-close {
+ .icon-close {
     @apply text-xl text-gray-400
 }
 
-.name-box {
+ .name-box {
     @apply w-[65%] h-[100%] flex items-center min-w-min mb-5
 }
 
 .foco-box {
-    @apply w-[35%] h-full flex justify-end
+    @apply  w-full  h-min flex justify-end
 }
 
 .foco {
-    @apply w-[60%] h-[60%] bg-primary rounded-lg flex justify-center items-center gap-3 text-primaryWhite cursor-pointer py-1
+    @apply  bg-primary rounded-lg px-2 md:px-3 flex justify-center items-center gap-3 text-primaryWhite cursor-pointer py-1
 }
 
 .foco-name-box {
-    @apply flex w-full h-[60%] items-center
+    @apply w-full h-[40%] flex items-center justify-between mb-3
 }
 
 .foco-on {
-    @apply w-[85%] h-16 mb-5 flex items-center pl-2 justify-between
+    @apply w-full h-16 mb-5 flex items-center pl-2 justify-between
 }
 
 .foco-timer {
@@ -39,11 +39,11 @@
 }
 
 .actions-timer {
-    @apply flex w-[50%] h-full items-center gap-4
+    @apply flex w-full justify-end   h-full items-center gap-4
 }
 
 .action {
-    @apply w-[30%] h-[50%] px-2 flex justify-center items-center rounded-lg text-primaryWhite font-bold gap-2 cursor-pointer
+    @apply  px-2 p-1 flex justify-center items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
 }
 
 .cancel {
@@ -63,11 +63,11 @@
 }
 
 .name {
-    @apply text-4xl text-primary font-bold ;
+    @apply md:text-4xl text-3xl text-primary font-bold ;
 }
 
 .progress-bar-box {
-    @apply w-full h-[40%] flex items-center gap-3 justify-between mb-3
+    @apply w-full h-[40%] flex items-center justify-between mb-3
 }
 
 .edit-button {
@@ -75,7 +75,7 @@
 }
 
 .remove-button {
-    @apply h-7 bg-red-500 rounded-md
+    @apply h-7 bg-red-500 rounded-md w-full
 }
 
 .progress-bar {
@@ -117,7 +117,7 @@
 }
 
 .add-icon {
-    @apply flex items-center mb-10 px-1 py-1 bg-secondary rounded-md w-[30%] justify-center
+    @apply flex items-center mb-10 px-1 py-1 bg-secondary rounded-md w-[70%] justify-center
 }
 
 .add-icon:hover {
@@ -125,7 +125,7 @@
 }
 
 .name-propertie {
-    @apply pl-3 text-lg text-primaryFontBlack
+    @apply pl-3 sm:text-lg text-sm text-primaryFontBlack
 }
 
 .add-propertie-text  {
@@ -181,11 +181,11 @@
 }
 
 .pages {
-    @apply w-full h-[7%] flex gap-6 justify-between border-b-2 mb-2 mt-7
+    @apply w-full h-[7%] flex gap-4 md:gap-6 justify-between border-b-2 mb-2 mt-7
 }
 
 .page-name {
-    @apply text-fontGray text-lg 
+    @apply text-fontGray md:text-lg text-sm 
 }
 
 .page-name:hover {
@@ -197,7 +197,7 @@
 }
 
 .components {
-    @apply w-full h-[90%] flex justify-center mt-5
+    @apply w-full h-[200px] sm:h-[260px] xl:h-[280px] 2xl:h-[300px] flex justify-center mt-5
 }
 
 .component {
@@ -209,7 +209,7 @@
 }
 
 .name-box {
-    @apply min-w-min h-10 flex ;
+    @apply w-full h-10 flex ;
 }
 
 .cancel-button {
@@ -227,5 +227,5 @@
 }
 
 .the-box {
-    @apply w-[80%] h-full
+    @apply w-[80%] h-full flex flex-col items-center
 }

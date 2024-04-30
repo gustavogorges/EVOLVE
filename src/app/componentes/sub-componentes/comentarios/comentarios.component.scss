@@ -1,18 +1,14 @@
-.main {
-    @apply w-full h-full flex justify-center
-}
-
-.main-card {
-    @apply  w-full max-h-[80%] rounded-t-xl 
-}
-
 .card {
-    @apply w-full pt-3 min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
+    @apply w-full pb-0   bg-white rounded-xl border-2  justify-between border-primaryWhite flex flex-col items-center gap-4  h-full w-full
 }
+
+
 
 .box-btn-add {
-    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+  @apply w-full h-min  py-2 px-3 border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
+
+
 
 .s-input input {
     display: none;
@@ -63,11 +59,11 @@
   }
 
   .btn-add-content {
-    @apply flex justify-center items-center gap-3
+    @apply flex justify-center items-center gap-3 
   }
 
   .btn-add-text {
-    @apply text-primary text-xl font-bold
+    @apply text-primary sm:text-xl text-base font-bold
   }
 
   .comment {
@@ -76,7 +72,7 @@
   }
 
   .profile-picture-box {
-    @apply w-full h-full flex justify-center items-center
+    @apply w-full h-full flex sm:justify-center sm:items-center
   }
 
   .profile-picture {
@@ -89,7 +85,7 @@
   }
 
   .commentor-name {
-    @apply text-xl text-primary font-bold
+    @apply xl:text-xl text-lg text-primary font-bold
   }
 
   .commentor-name-box {
