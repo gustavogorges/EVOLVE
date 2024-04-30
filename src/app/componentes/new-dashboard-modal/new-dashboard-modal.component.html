@@ -2,7 +2,7 @@
 
     <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="dashChoosed === -1 ? 'h-0':'h-[20%]'">
         <button (click)="createNewDash()" class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Criar</button>
-        <input [(ngModel)]="nome" class=" h-[50%] rotate-180 w-full px-2 outline-none" type="text" placeholder="Nome da dashboard">
+        <input [(ngModel)]="name" class=" h-[50%] rotate-180 w-full px-2 outline-none" type="text" placeholder="Nome da dashboard">
     </div>
 
     <div class="div-modal rotate-180" >

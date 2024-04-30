@@ -9,7 +9,7 @@
         }
 
         .box{
-            @apply p-8 flex flex-wrap justify-around gap-3;
+            @apply p-8 flex flex-wrap justify-around gap-3 mb-8;
 
             .squads{
                 @apply grid grid-cols-4 grid-rows-2 rounded-lg w-[10vw] h-[11vh] border-2 p-2 gap-1 cursor-pointer duration-100

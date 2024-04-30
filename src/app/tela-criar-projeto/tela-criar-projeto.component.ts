@@ -20,20 +20,24 @@ export class TelaCriarProjetoComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
   
-  async ngOnInit(){
+  ngOnInit(){
+    this.projeto = new Project
+
     this.activatedRoute.paramMap.subscribe( async params  => {
       const teamId = params.get('teamId');
       const teamid  = Number(teamId)
       this.team = await this.service.getOne("team", teamid) as Team
-      console.log(this.team);
       
       this.usuarios = this.team.participants || []
-      console.log(this.usuarios);
-    });
+      
+      this.projeto = new Project();
 
-    this.projeto = new Project
-    this.getStatusList()
-    this.randomColor()
+    // Chame getStatusList() aqui dentro
+      if (this.projeto) {
+        this.getStatusList();
+        this.randomColor();
+      }
+    });
   }
   
   messages: Message[] | undefined;
@@ -45,6 +49,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   priorityBol : boolean = false
   backGroundColorProject : string = ''
   team !: Team
+
   statusEnabled(){
     this.statusVisible = !this.statusVisible
   }
@@ -113,30 +118,36 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   
-  async salvarProjeto(teamId:number){
-    if(this.projeto.name != '' && this.date != null){
+  async salvarProjeto(teamId: number) {
+    if (this.projeto && this.projeto.name !== '' && this.date) {
       this.projeto.finalDate = this.dateFormat(this.date);
-      let postProject:any = this.projeto
-      let lista: Array<Pick<User, "id">> = new Array
-      this.projeto.members.forEach(element => {
-        lista.push({
-          "id" : element.id
-        })
+  
+      let postProject: any = this.projeto;
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          let lista: Array<Pick<User, "id">> = [];
+          this.projeto.members.forEach(element => {
+            lista.push({ "id": element.id });
+          });
+          postProject.members = lista;
+  
+          postProject.creator = { "id": 1 };
+          postProject.adimnistrator = { "id": 1 };
+          postProject.team = { "id": this.team.id };
+          postProject.imageColor = this.backGroundColorProject;
+          postProject.image = null;
+  
+          resolve();
+        });
       });
-      postProject.members = lista
-      postProject.creator = {
-        "id":1
-      }
-      postProject.team = this.team
-      postProject.imageColor = this.backGroundColorProject
-      postProject.image = null
-      console.log(postProject);
+
       postProject = await this.service.postProjeto(postProject);
-      if(this.formData != null){
-        console.log(await this.service.patchImage(postProject.id, this.formData));
+  
+      if (this.formData != null) {
+        await this.service.patchImage(postProject.id, this.formData);
       }
-      
-      this.route.navigate(['/tela-projeto', teamId])
+  
+      this.route.navigate(['/tela-projeto', teamId]);
     }
   }
 

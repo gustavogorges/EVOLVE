@@ -1,19 +1,25 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { indexOf } from 'lodash';
+import { DashBoardCharts } from 'src/model/DashBoardCharts';
+import { Project } from 'src/model/project';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-new-chart-modal',
   templateUrl: './new-chart-modal.component.html',
   styleUrls: ['./new-chart-modal.component.scss']
 })
-export class NewChartModalComponent implements OnChanges {
+export class NewChartModalComponent implements OnChanges, OnInit {
 
-  constructor() { }
+  constructor(private service : BackendEVOLVEService) { }
 
   @Input() newChartBool !: Boolean
   chartChoosed:number = -1
   @Input() charts: any[] = []
   @Input() dashboard: any
   @Output() closeNewChart : EventEmitter<any> = new EventEmitter<any>()
+  @Output() indexNewChart : EventEmitter<number> = new EventEmitter<number>()
+  @Input() project !: Project
 
   ngOnChanges(): void {
     if(!this.newChartBool){
@@ -22,16 +28,42 @@ export class NewChartModalComponent implements OnChanges {
     }
   }
 
-  createNewChart(){
-    console.log(this.dashboard);
+  ngOnInit() {
+    // console.log(this.dashboard);
+    
+    // this.dashboard.charts.sort((a: any, b: any) => a.chartIndex - b.chartIndex);
+
+    // this.dashboard.charts = this.dashboard.charts.map((elementDash: any) => {
+    //     const matchingChart = this.charts.find((elementChart: any) => {
+    //         return elementDash.label === elementChart.data.datasets[0].label;
+    //     });
+
+    //     if (matchingChart) {
+          
+    //       matchingChart.id = elementDash.id
+    //       console.log(elementDash.id);
+          
+    //       return matchingChart;
+                
+    //     }
+    // }).filter((element: any) => element);
+
+    // console.log(this.dashboard.charts);
+}
+
+  async createNewChart(){
     this.charts.forEach(element => {
       if(element.id === this.chartChoosed){
-        this.dashboard.charts.push(element)
+        this.project.charts.forEach(async (elementChart: DashBoardCharts) => {
+          console.log(elementChart.label, element.data.datasets[0].label);
+            if(elementChart.label === element.data.datasets[0].label){
+              this.dashboard.charts.push(element)
+              await this.service.setChartToDash(this.dashboard.id, this.project.id, elementChart)
+            }
+        });
       }
     });
-    if(this.dashboard.charts.length === this.dashboard.style.length){
-      this.closeNewChart.emit()
-    }
+    this.closeNewChart.emit()
   }
 
   chooseChart(index:number){

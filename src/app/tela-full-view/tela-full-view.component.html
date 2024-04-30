@@ -3,8 +3,8 @@
         <div class="cabecalho">
             <div class="foto-projeto"></div>
             <div class="texto">
-                <p class="titulo">Projeto Padrão</p>
-                <p class="descricao">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore. Lrem Ipsum is simply dummy text of the printing and typesetting industry. Lore</p>
+                <p class="titulo" *ngIf="projeto">{{projeto.name}}</p>
+                <p class="descricao" *ngIf="projeto">{{projeto.description}}</p>
             </div>
         </div>
         <div class="dashboard-pai overflow-hidden">
@@ -12,26 +12,19 @@
             <div class="newDashBoard">
                 <button #buttonNewDash type="button"  (click)="newDashVisible()" class="flex gap-2 items-center h-full"><i class="pi pi-plus" options="delay"></i>New Dashboard</button>
             </div>
-            <app-new-dashboard-modal  [newDashId]="dashboards.length" (newDash)="createNewDashBoard($event)" [newDashBool]="newDashVisibleBol" [ngClass]="!newDashVisibleBol?'invisible':'visible'" ></app-new-dashboard-modal></div>
-            <div  class="container" *ngFor="let dashboard of dashboards">
+            <app-new-dashboard-modal [project]="projeto" [dashboards]="dashboards" [newDashId]="dashboards.length" (newDash)="createNewDashBoard($event)" [newDashBool]="newDashVisibleBol" [ngClass]="!newDashVisibleBol?'invisible':'visible'" ></app-new-dashboard-modal></div>
+            <div  class="container" *ngFor="let dashboard of dashboards, index as index">
                 <div>
                     <div class="titulo-dashboard">
-                        <p>{{dashboard.nome}}</p>
+                        <p>{{dashboard.name}}</p>
                         <div class="flex gap-3 flex-row-reverse" #Options >
                             <button (click)="viewOptions()" class="dark:text-gray-300 bg-primaryGray"><i class="pi pi-ellipsis-v duration-500 text-primary dark:text-dark-primary" [ngClass]="!viewOptionsBol ? 'rotate-90':'rotate-0'"></i></button>
-                            <div class="flex gap-2 overflow-hidden duration-500 " [ngClass]="viewOptionsBol ? 'w-0':'w-full pr-2'">
-                                <div #newChartElement>
-                                    <button type="button" (click)="newChartVisible()" class="text-gray-800 dark:text-gray-300 bg-primaryGray"><i class="pi pi-plus text-primary dark:text-dark-primary" options="delay"></i> Adicionar novo gráfico</button>
-                                    <app-new-chart-modal style="z-index: 99999;" (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
-                                </div>
-                                <button type="button" (click)="viewEdit()" class="text-gray-800 dark:text-gray-300 bg-primaryGray mr-[0.5rem]"><i class="pi pi-pencil text-primary dark:text-dark-primary" options="delay"></i> Editar Dashboard</button>
-                                <button type="button" (click)="deleteDashboard(dashboard)" class="bg-red-600 text-secondaryWhite"><i class="pi pi-trash text-secondaryWhite" options="delay"></i> Deletar Dashboard</button>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="dashboard  flex" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event, dashboard)">
-                        <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.style, index as i" [ngClass]="squad">
-                            <button (click)="chartToTrash(dashboard,i)" [ngClass]="!viewEditBol ? 'w-0 h-0':'w-[3rem] h-[3rem]'" *ngIf="dashboard.charts[i]" class="trash"><i [ngClass]="!viewEditBol ? 'invisible':'visible'" class="pi pi-trash trachPi"></i></button>
+                        <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.styleDash, index as i" [ngClass]="squad">
+                            <button (click)="chartToTrash(dashboard, dashboard.charts[i])" [ngClass]="!viewEditBol ? 'w-0 h-0':'w-[3rem] h-[3rem]'" *ngIf="dashboard.charts[i]" class="trash"><i [ngClass]="!viewEditBol ? 'invisible':'visible'" class="pi pi-trash trachPi"></i></button>
                             <p-chart *ngIf="dashboard.charts[i]" [type]="dashboard.charts[i].type" [data]="dashboard.charts[i].data" [options]="dashboard.charts[i].options" width="100%" height="100%" ></p-chart>
                         </div>
                     </div>
@@ -63,15 +56,15 @@
         </div>
     </div>
 </div>
-<div class="div-menor">
+<div class="div-menor" >
     <div class="square">
         <div class="name">
             <p class="name-text">Membros</p>
         </div>
         <div *ngIf="projeto" class="membros">
             <div *ngFor="let member of projeto.members, index as index">
-                <div class="membro" *ngIf="index < blockMember()">
-                    <div><i [ngClass]="openMemberView != undefined && openMemberView === index ? 'rotate-90':''" (click)="openMember(index)" class="pi pi-ellipsis-v ponto cursor-pointer"></i></div>
+                <div class="membro cursor-pointer" *ngIf="index < blockMember()" (click)="openMember(index)">
+                    <div><i [ngClass]="openMemberView != undefined && openMemberView === index ? 'rotate-90':''" class="pi pi-ellipsis-v ponto cursor-pointer"></i></div>
                     <p class="name-user">{{member.name}}</p>
                 </div>
 
@@ -82,7 +75,7 @@
                             <div><i class="pi pi-envelope"></i></div>
                             <div><p class="truncate">{{member.email}}</p></div>
                         </div>
-                        <button class="px-2 p-1 bg-secondary rounded-lg flex gap-2"><i class="pi pi-user"></i>   <i class="pi pi-angle-double-right"></i></button>
+                        <button class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2"><i class="pi pi-user"></i>   <i class="pi pi-angle-double-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -91,11 +84,55 @@
             <button *ngIf="!unlockAllMembersView" (click)="unlockMembersView()" class="text-primary font-semibold dark:text-dark-primary">Ver todos</button>
             <button *ngIf="unlockAllMembersView" (click)="unlockMembersView()" class="text-primary font-semibold dark:text-dark-primary">Ver menos</button>
         </div>
-        <div class="name">
-            <p class="name-text">Status das Tarefas</p>
-        </div>
-        <div>
-
+        <div #statusClose>
+            <div class="name">
+                <p class="name-text">Status das Tarefas</p>
+            </div>
+            <div class="h-[17vh] w-full overflow-auto flex justify-center" *ngIf="projeto"  >
+                <div class="status-box" >
+                    <div class="status-adjust" *ngFor="let status of projeto.statusList">
+                        <div
+                         class="status cursor-pointer"
+                         [ngStyle]="{'background-color': status.backgroundColor}"
+                         >
+                            <p class="truncate px-4">{{status.name}}</p>
+                        </div>
+                        <i *ngIf="verifyStatusDefault(status)" class="pi " [ngClass]="!status.enabled ? 'pi-plus-circle':'pi-minus-circle'" (click)="enableStatus(status)"></i>
+                        <i *ngIf="!verifyStatusDefault(status)" class="pi pi-pencil" (click)="editStatus(status)"></i>
+                        <i *ngIf="!verifyStatusDefault(status)" class="pi pi-trash" (click)="deleteStatus(status)"></i>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box"  >
+                    <i class="pi pi-plus text-primary font-bold"></i>
+                    <p class=" text-fontGray"  >adicionar status</p>
+                </div>
+                <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status"  >
+                    <div class="nome-status-box">
+                        <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                            <input class="input-add-status"  type="text" placeholder="escreva o nome" [(ngModel)]="status.name">
+                            <div class="w-full flex justify-center items-center">
+                                <i class="pi pi-pencil text-primary font-bold" ></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cor-status-box">
+                        <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%;">
+                            <input class="input-add-status" type="text" value="{{status.backgroundColor.toUpperCase()}}"  placeholder="selecione uma cor">
+                            <div class="w-full flex justify-center items-center">
+                                <input type="color" class="w-7" [(ngModel)]="status.backgroundColor">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer" (click)="novoStatus()">
+                        <p class=" text-primaryWhite font-semibold" >confirmar</p>
+                    </div>
+                    <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
+                        <p class=" text-primaryWhite font-semibold">Editar Status</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="name">
             <p class="name-text pt-[8%]">Propriedades</p>

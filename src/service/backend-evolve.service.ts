@@ -21,6 +21,8 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
+import { Dashboard } from 'src/model/dashboard';
+import { DashBoardCharts } from 'src/model/DashBoardCharts';
 
 
 
@@ -29,6 +31,7 @@ import { Comment } from 'src/model/comment';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
+  
   URL : string = "http://localhost:8087/"
 
   constructor() { }
@@ -112,8 +115,8 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"task", tarefa)).data
   }
 
-  async postProjeto (projeto:Project){
-    return (await axios.post(this.URL+"project", projeto)).data
+  async postProjeto (project:Project){
+    return (await axios.post(this.URL+"project", project)).data
   }
 
   async putProjeto (projeto:Project){
@@ -188,7 +191,35 @@ export class BackendEVOLVEService {
   }
 
   async getCharts(idProject:number){
-    return (await (axios.patch(this.URL+"project/"+idProject+"/charts"))).data;
+    return (await (axios.patch(this.URL+idProject+"/dashboard/getCharts"))).data;
+  }
+
+  async postDashboard(dashboard:Dashboard, idProject:number){
+    return (await axios.post(this.URL+idProject+"/dashboard", dashboard)).data 
+  }
+
+  async getDashboards(idProject:number){
+    return (await (axios.get(this.URL+idProject+"/dashboard"))).data;
+  }
+
+  async deleteDashboard(idDashboard:number){
+    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard))).data;
+  }
+
+  async updateDashboard(dashboard:Dashboard, idDashboard:number, idProject:number){
+    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard, dashboard))).data;
+  }
+
+  async setChartToDash(idDashboard:number, idProject:number, chart:DashBoardCharts){
+    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard, chart))).data;
+  }
+
+  async updateChartList(idDashboard:number, idProject:number, charts:Array<DashBoardCharts>){
+    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard+"/updateChartList", charts))).data;
+  }
+
+  async deleteChart(idDashboard:number, idChart:number, idProject:number){
+    return (await (axios.delete(this.URL+idProject+"/dashboard/"+idDashboard+"/delete-chart/"+idChart))).data;
   }
 
 }
