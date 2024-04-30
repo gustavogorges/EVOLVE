@@ -53,11 +53,11 @@
 }
 
 .file-icon2 {
-  @apply text-2xl text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded-xl;
+  @apply lg:text-2xl text-lg text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded-xl;
 }
 
 .file-icon3 {
-  @apply text-2xl text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded;
+  @apply lg:text-2xl text-lg text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded;
 }
 
 .fileFor {

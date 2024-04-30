@@ -83,7 +83,7 @@ import { NewChartModalComponent } from './componentes/new-chart-modal/new-chart-
 
 import { DndModule } from 'ngx-drag-drop';
 import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { ImportantProjectComponent } from './important-project/important-project.component';
@@ -219,7 +219,9 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
     InputNumberModule
   ],
   
-  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,
+  DatePipe
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

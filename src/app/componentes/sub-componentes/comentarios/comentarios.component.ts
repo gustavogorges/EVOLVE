@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Comment } from 'src/model/comment';
@@ -56,6 +57,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   async addCommentValue() : Promise<void> {
+    const datePipe = new DatePipe('pt-BR')
     // Function to get hours and functions
     const date = new Date();
     const hours = date.getHours();
@@ -64,14 +66,19 @@ export class ComentariosComponent implements OnInit {
     const date2 = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
+     let formattedDate = datePipe.transform(date, 'dd/MM');
+     let da = ""+formattedDate
+     console.log(da);
+     
 
     let newComment : Comment = new Comment;
     newComment.value = this.comment.value;
     newComment.user = this.loggedUser;
     newComment.task = this.task;
+
     // find a way of getting this values
     newComment.timeHour = hours + ":" + minutes;
-    newComment.timeDayAndMonth = "0"+day + "/" +"0"+month;
+    newComment.timeDayAndMonth = da
 
     let postComment:any = newComment
     postComment.user = {"id":newComment.user.id}
@@ -89,9 +96,12 @@ export class ComentariosComponent implements OnInit {
     this.comments = [...this.comments, returnComment];
 
     this.booleanAddComment = false;
+    this.comment.value = ""
+
   }
   cancelar(){
     this.booleanAddComment = false 
+    this.comment.value = ""
   }
 
 }

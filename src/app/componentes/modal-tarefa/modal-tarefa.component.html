@@ -35,7 +35,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold hidden md:flex">iniciar foco</p>
+            <p class="font-bold hidden md:flex text-sm">iniciar foco</p>
           </div>
         </div>
       </div>
@@ -45,24 +45,34 @@
         </div>
         <div class="actions-timer">
           <div class="cancel action" (click)="finishFocus()">
-            <i class="pi pi-times" style="font-size: 1rem"></i>cancelar
+            <i class="pi pi-times" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
+              cancelar
+            </p>
           </div>
           <div class="pause action" (click)="stopTimer()">
-            <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
+            <i class="pi pi-pause" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
+              pausar
+            </p>
           </div>
           <div
             *ngIf="booleanPlayPause"
             (click)="startTimer()"
             class="stop action"
           >
-            <i class="pi pi-play" style="font-size: 1rem"></i>começar
+            <i class="pi pi-play" style="font-size: 1rem"></i>  
+            <p class="hidden sm:flex">
+              começar
+            </p>
           </div>
           <div
             *ngIf="!booleanPlayPause"
             class="stop action"
             (click)="stopTimer()"
           >
-            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>parar
+            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>
+            <p class="hidden sm:flex">
+              parar
+            </p>
           </div>
         </div>
       </div>
@@ -70,19 +80,19 @@
       <div class="progress-bar-box">
         <div class="progress-bar">
           <div
-            class="h-full bg-secondary rounded-md"
+            class="h-full bg-primary rounded-md"
             [ngStyle]="{ width: tarefa.progress + '%' }"
           ></div>
         </div>
         <!-- BOTÃO QUE DELETA A TAREFA -->
         <div
-          class="flex gap-5 h-full w-[21%] cursor-pointer"
+          class="flex gap-5 h-full w-max cursor-pointer"
           (click)="deleteTask()"
         >
-          <div class="remove-button flex w-full justify-center items-center">
+          <div class="remove-button flex  justify-center items-center p-2">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold hidden md:flex">excluir tarefa</p>
+              <p class="text-white font-bold hidden md:flex text-sm">excluir tarefa</p>
             </div>
           </div>
         </div>
@@ -375,6 +385,7 @@
           [tarefa]="tarefa"
           [listaSubtarefas]="tarefa.subtasks"
           class="component"
+          (customEvent)="updateTask()"
           *ngIf="page_task == 'sub-tarefas'"
         ></app-sub-tarefa>
         <app-comentarios

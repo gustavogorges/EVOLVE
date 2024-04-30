@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from 'src/model/task';
 import { Subtask } from 'src/model/subtask';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -27,6 +27,8 @@ export class SubTarefaComponent implements OnInit {
   subtarefa  = {
     nome: ''
   };
+  @Output()
+  @Output() customEvent = new EventEmitter<number>();
   
  
 
@@ -91,8 +93,9 @@ export class SubTarefaComponent implements OnInit {
         }
       })
 
-      await this.service.putTarefa(this.tarefa, this.loggedUser.id); 
-      
+     let task : Task =  await this.service.putTarefa(this.tarefa, this.loggedUser.id); 
+      this.customEvent.emit(task.progress)
+
       }
       cancelar(){
         this.booleanAddSubtarefa = false
