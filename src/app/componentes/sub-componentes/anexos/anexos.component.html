@@ -10,14 +10,15 @@
             <p class=" text-fontGray">arraste seu arquivo aqui para anexa-lo</p>
         </div>
         <div 
-        class="flex flex-col justify-start h-full w-full items-center overflow-y-auto"
+        class="flex flex-col justify-start h-full w-full items-center overflow-y-auto bah"
         *ngIf="task.files != null"
         >
             <div 
-            class="fileFor"
+            class="fileFor "
             *ngFor="let file of task.files; let index = index"
+            [ngClass]="task.files.length == index+1 && task.files.length > 4 ? 'border-0' : 'border-b-2'" 
             >
-            <a [download]="file.name" [href]="file.url" [type]="file.type">
+            <a [download]="file.name"  [href]="file.url" [type]="file.type">
             <i 
             class="pi pi-download file-icon2">
              </i>

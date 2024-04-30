@@ -6,23 +6,21 @@
     <div class="name-progress">
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
-          <p class="name" 
-          *ngIf="!booleanEditName"
-          >{{ tarefa.name }}
-          </p>
+          <p class="name" *ngIf="!booleanEditName">{{ tarefa.name }}</p>
           <i
-              *ngIf="!booleanEditName"
-              class="pi pi-pencil text-primary cursor-pointer rounded-md"
-              style="font-size: 1.3rem"
-              (click)="this.booleanEditName = true"
-            >
+            *ngIf="!booleanEditName"
+            class="pi pi-pencil text-primary cursor-pointer rounded-md"
+            style="font-size: 1.3rem"
+            (click)="this.booleanEditName = true"
+          >
           </i>
-          <span class="p-input-icon-right w-full h-full flex items-center"
-          *ngIf="booleanEditName"
+          <span
+            class="p-input-icon-right w-full h-full flex items-center"
+            *ngIf="booleanEditName"
           >
             <i
               class="pi pi-check md:p-2 text-lg p-1 bg-secondary cursor-pointer rounded-md"
-              style=" color: white;"
+              style="color: white"
               (click)="saveName()"
             ></i>
             <input
@@ -71,10 +69,16 @@
 
       <div class="progress-bar-box">
         <div class="progress-bar">
-          <div class=" h-full bg-secondary rounded-md" [ngStyle]="{ width: tarefa.progress + '%' }"></div>
+          <div
+            class="h-full bg-secondary rounded-md"
+            [ngStyle]="{ width: tarefa.progress + '%' }"
+          ></div>
         </div>
         <!-- BOTÃO QUE DELETA A TAREFA -->
-        <div class="flex gap-5 h-full w-[21%] cursor-pointer" (click)="deleteTask()">
+        <div
+          class="flex gap-5 h-full w-[21%] cursor-pointer"
+          (click)="deleteTask()"
+        >
           <div class="remove-button flex w-full justify-center items-center">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
@@ -293,7 +297,7 @@
     </div>
 
     <div class="description-box w-full self-start">
-      <div class="description-propertie ">
+      <div class="description-propertie">
         <div class="name-icon">
           <i
             *ngIf="!booleanDesc"
@@ -305,7 +309,7 @@
             class="icon-propertie pi pi-angle-up"
             (click)="openDesc()"
           ></i>
-          <p class="name-propertie ">descrição</p>
+          <p class="name-propertie">descrição</p>
         </div>
       </div>
       <div class="w-full">
@@ -365,7 +369,6 @@
         >
           anexos
         </p>
-        
       </div>
       <div class="components">
         <app-sub-tarefa

@@ -1,18 +1,40 @@
 .main {
-    @apply w-full max-h-[50%] flex justify-center
+    @apply w-full h-full flex justify-center
 }
 
 .card-box {
-    @apply w-full flex flex-col h-[340px]  overflow-y-scroll border-2 rounded-xl 
+    @apply w-full flex flex-col h-full  overflow-y-scroll border-2 rounded-xl pr-2
 }
 
 .card {
     @apply w-full h-fit grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 30% 70%;
 }
 
 .left {
     @apply w-full border-r-2
+}
+
+@media screen and (min-width: 1280px) {
+  .card {
+    @apply w-full h-fit grid;
+    grid-template-columns: 15% 85%;
+}
+
+.card-box {
+  @apply w-full flex flex-col h-full  overflow-y-scroll border-2 rounded-xl 
+}
+}
+
+@media screen and (min-width: 760px) {
+  .card {
+    @apply w-full h-fit grid;
+    grid-template-columns: 25% 75%;
+}
+
+.card-box {
+  @apply w-full flex flex-col h-full  overflow-y-scroll border-2 rounded-xl 
+}
 }
 
 ::-webkit-scrollbar {

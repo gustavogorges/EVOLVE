@@ -1,5 +1,5 @@
 .main {
-    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-full items-center fixed top-12 right-0 bg-white rounded-tl-sm rounded-bl-sm shadow-2xl overflow-y-scroll flex flex-col items-center
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-screen  fixed top-14 right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
 }
 
 .name-progress {
@@ -7,7 +7,7 @@
 }
 
 .close-btn {
-    @apply h-12 w-[95%] flex items-end cursor-pointer mt-2
+    @apply h-12 w-[95%] flex items-end cursor-pointer pt-2
 }
 
 .icon-close {
@@ -197,7 +197,7 @@
 }
 
 .components {
-    @apply w-full h-[90%] flex justify-center mt-5
+    @apply w-full h-[200px] sm:h-[260px] xl:h-[280px] 2xl:h-[340px] flex justify-center mt-5
 }
 
 .component {

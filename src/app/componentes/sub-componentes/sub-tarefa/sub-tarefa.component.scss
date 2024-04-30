@@ -1,21 +1,12 @@
-.main {
-  @apply w-full h-full flex justify-center
-}
 
-.main-card {
-  @apply  w-full max-h-[70%] rounded-t-xl
-}
 
-.card {
-  @apply w-full min-h-full bg-white rounded-t-xl border-t-2 border-x-2 max-h-[80%] overflow-y-auto
-}
 
 .tasks {
-@apply w-full h-full flex flex-col items-center sm:p-5 p-4 gap-3  
+@apply flex flex-col gap-4 rounded-xl  overflow-y-auto h-full border-2 flex-1 pt-3
 }
 
 .task {
-  @apply  w-full
+  @apply px-3  w-full
 }
 
 .main-task {
@@ -27,7 +18,7 @@
 }
 
 .box-btn-add {
-  @apply w-full h-min border-x-2 border-b-2 py-2 px-3 border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+  @apply w-full h-min  py-2 px-3 border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
 
 .s-input input {

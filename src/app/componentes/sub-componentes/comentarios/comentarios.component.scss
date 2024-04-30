@@ -1,18 +1,14 @@
-.main {
-    @apply w-full h-full flex justify-center max-h-[95%]
-}
-
-.main-card {
-    @apply  w-full max-h-[80%] rounded-t-xl flex flex-col
-}
-
 .card {
-    @apply w-full p-3 max-h-[80%] min-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
+    @apply w-full pb-0   bg-white rounded-xl border-2  justify-between border-primaryWhite flex flex-col items-center gap-4  h-full w-full
 }
+
+
 
 .box-btn-add {
-    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl py-2 px-3 flex justify-center items-center cursor-pointer
+  @apply w-full h-min  py-2 px-3 border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
 }
+
+
 
 .s-input input {
     display: none;
