@@ -136,8 +136,18 @@ async openTask(tarefa: Task): Promise<void> {
   indiceAtual: number = 0;
 
   mudarItem(novoIndice: number) {
-    if (novoIndice >= 0 && novoIndice < this.listaTarefas.length) {
+    console.log(novoIndice);
+
+    
+    
+    if (novoIndice >= 0 && novoIndice < this.loggedUser.teams.length) {
       this.indiceAtual = novoIndice;
+    }
+    if(novoIndice>=this.loggedUser.teams.length){
+      this.indiceAtual= 0 
+    }
+    if(novoIndice==-1){
+      this.indiceAtual= this.loggedUser.teams.length-1
     }
   }
 

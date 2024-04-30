@@ -21,7 +21,7 @@
                     <div class="sm:w-8 sm:h-8 w-6 h-6 rounded-full overflow-clip " [ngStyle]="{
                         'background-image':
                           member?.image != null
-                            ? 'url(data:image/jpeg;base64,' + member.image.data + ')'
+                            ? 'url(' + member.image.data + ')'
                             : member?.imageColor,
                         'background-size': 'cover',
                         'background-color': member?.imageColor
