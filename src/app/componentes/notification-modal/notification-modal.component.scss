@@ -1,5 +1,5 @@
 .main-box {
-    @apply max-h-[80%] w-full py-2 overflow-y-auto
+    @apply max-h-96 w-full py-2 overflow-y-auto
 }
 
 .clean-box {
@@ -23,11 +23,11 @@
 }
 
 .notifications-box {
-    @apply w-full overflow-y-auto flex flex-col items-stretch justify-start h-min bg-slate-100 px-4
+    @apply w-full flex flex-col items-stretch justify-start max-h-52 bg-slate-100 px-4
 }
 
 .notification-item {
-    @apply flex items-center justify-center gap-4 w-full py-2 
+    @apply flex items-center justify-center gap-4 w-full py-2 cursor-pointer
 } 
 
 .notification-item-user {
@@ -39,7 +39,7 @@
 }
 
 .notification-readed {
-    @apply w-[15%] h-full flex justify-end px-2 items-center
+    @apply w-[15%] h-full flex-col justify-end px-2 items-center
 }
 
 .notification-item-icon {

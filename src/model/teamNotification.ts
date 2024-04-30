@@ -4,11 +4,9 @@ import { User } from "./user";
 
 export class TeamNotification {
     id !: number;
-    user : User = new User;
-    task : Task = new Task;
-    project : Project = new Project;
+    notificatedUsers : Array<User> = new Array;
+    actionUser : User = new User;
     readed : boolean = false;
     value : string = "";
-    timeHour : string = "";
-    timeDayAndMonth : string = "";
+    dateTime : Date = new Date;
 }

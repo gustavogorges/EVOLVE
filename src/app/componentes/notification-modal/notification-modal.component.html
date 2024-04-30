@@ -7,27 +7,43 @@
                 <i 
                 class="pi pi-angle-down team-icon2" 
                 *ngIf="!team.booleanView"
-                (click)="test(team)"
+                (click)="openNotifications(team)"
                 >
                 </i>
                 <i 
                 class="pi pi-angle-up team-icon2" 
                 *ngIf="team.booleanView"
-                (click)="team.booleanView = !team.booleanView"
+                (click)="closeNotifications(team)"
                 >
                 </i>
             </div>
-            <div class="notifications-box" *ngIf="team.booleanView">
+            <div class="notifications-box" *ngIf="team.booleanView" 
+            [ngClass]="{
+                'overflow-y-auto': team.notifications.length > 3
+            }">
                 <div class="notification-item" *ngFor="let notification of team.notifications">
-                    <div class="notification-item-user">
-                        <p class="text-fontGray">G</p>
+                    <div 
+                    class="notification-item-user"
+                    [ngStyle]="{
+                        'background-image':
+                        notification.actionUser.image != null
+                            ? 'url(' + notification.actionUser.image.data + ')'
+                            : notification.actionUser.imageColor,
+                        'background-size': 'cover',
+                        'background-color': notification.actionUser.imageColor
+                      }"
+                    >
                     </div> 
                     <div class="notification-item-content">
-                        <p class="text-primaryFontBlack text-sm font-semibold">Gorges editou o relatório</p>
-                        <p class="text-primaryFontBlack text-xs font-semibold">3 horas atrás</p>
+                        <p class="text-primaryFontBlack text-sm font-semibold">{{notification.value}}</p>
                     </div>
                     <div class="notification-readed">
-                        <i class="pi pi-circle-fill notification-item-icon"></i>
+                        <div *ngIf="!notification.readed" class="w-full h-[50%] flex justify-end items-center">
+                            <i class="pi pi-circle-fill notification-item-icon"></i>
+                        </div>
+                        <div class="w-full h-[50%] flex justify-center items-start text-sm">
+                            <p>{{ notification.dateTime| date : "dd" }}/{{ notification.dateTime| date : "LL" }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

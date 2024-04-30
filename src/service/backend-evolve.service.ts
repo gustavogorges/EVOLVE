@@ -267,4 +267,8 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+"task/delete/task/file/"+taskId+"/"+fileId+"/"+userId)).data
   }
 
+  async patchReadedNotification(teamId:number, notificationId:number) {
+    return (await axios.patch(this.URL+"team/"+teamId+"/"+notificationId)).data
+  }
+
 }
