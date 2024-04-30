@@ -18,6 +18,16 @@ export class NotificationModalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    console.log(this.loggedUser.teams);
+  }
+
+  test(team : Team){
+    team.booleanView = !team.booleanView;
+    
+    console.log(this.loggedUser.teams.forEach(element => {
+      console.log(element);
+    }));
+    
   }
 
 

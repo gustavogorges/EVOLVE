@@ -3,11 +3,11 @@
         <div class="teams-box" *ngFor="let team of loggedUser.teams">
             <div class="h-16 w-full flex justify-between items-center px-4">
                 <i class="pi pi-users team-icon"></i>
-                <p class="text-primaryFontBlack text-lg font-semibold">Equipe CentroWEG</p>
+                <p class="text-primaryFontBlack text-lg font-semibold">{{team.name}}</p>
                 <i 
                 class="pi pi-angle-down team-icon2" 
                 *ngIf="!team.booleanView"
-                (click)="team.booleanView = !team.booleanView"
+                (click)="test(team)"
                 >
                 </i>
                 <i 
@@ -18,7 +18,7 @@
                 </i>
             </div>
             <div class="notifications-box" *ngIf="team.booleanView">
-                <div class="notification-item" >
+                <div class="notification-item" *ngFor="let notification of team.notifications">
                     <div class="notification-item-user">
                         <p class="text-fontGray">G</p>
                     </div> 
