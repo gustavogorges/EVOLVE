@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Team } from 'src/model/team';
+import { TeamNotification } from 'src/model/teamNotification';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -31,6 +32,24 @@ export class NotificationModalComponent implements OnInit {
       this.service.patchReadedNotification(team.id,notification.id);
     });
   }
+
+
+  cleanAllNotifications(){
+    this.service.cleanAllUserNotifications(this.loggedUser.id);
+  }
+
+//  verifyNotificatedList(team : Team):Array<TeamNotification>{
+//    console.log(team.notifications);
+//   
+//    team.notifications.forEach(notification => {
+//      if(notification.notificatedUsers.find(user => user.id == this.loggedUser.id) != null){
+//        console.log("ENTROU AQUI E TA CERTO");
+//        return team.notifications;
+//      } 
+//      return new Array<TeamNotification>(); 
+//    });
+//    return new Array<TeamNotification>();
+//  }
 
 
 }
