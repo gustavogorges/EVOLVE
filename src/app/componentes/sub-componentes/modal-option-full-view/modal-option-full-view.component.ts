@@ -9,26 +9,27 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./modal-option-full-view.component.scss']
 })
 export class ModalOptionFullViewComponent implements OnInit {
-  
-  viewOptionsBol: boolean = false;
-  viewEditBol: boolean = false;
-  newDashVisibleBol: boolean = false;
-  newChartBool: boolean = false;
 
   constructor(private service : BackendEVOLVEService) { }
-
+  viewEditBol:boolean = false
   @Input() charts : any[] = []
   @Input() dashboards : any[] = []
   @Input() projeto !: Project
   @Input() dashboard !: Dashboard
+  @Input() viewOptionsBol !: boolean
+  @Input() newChartBool: boolean = false
   @Output() deleteChart : EventEmitter<any> = new EventEmitter
-  ngOnInit(): void {
-  }
+  @Output() viewEditBolEmit : EventEmitter<any> = new EventEmitter
+  @Output() dashboardToedit : EventEmitter<any> = new EventEmitter
+  @Output() newChartElement : EventEmitter<any> = new EventEmitter
+  ngOnInit(): void {}
 
   viewOptions(){
-    this.viewOptionsBol = !this.viewOptionsBol
-    this.viewEditBol = false
+        this.viewOptionsBol = !this.viewOptionsBol
+        this.viewEditBolEmit.emit(false)
+        this.dashboardToedit.emit(undefined)
 
+        this.newChartBool = false
     }
 
     async deleteDashboard(){
@@ -36,36 +37,24 @@ export class ModalOptionFullViewComponent implements OnInit {
         this.dashboards.splice(this.dashboards.indexOf(this.dashboard), 1)
     }
 
-viewEdit(){
-    this.viewEditBol = !this.viewEditBol
-    this.newChartBool = false
-    this.newDashVisibleBol = false
-}
-
-newChartVisible(){
-  this.newChartBool = !this.newChartBool
-  this.newDashVisibleBol = false
-  this.viewEditBol = false
-}
-
-@ViewChild('Options') optionsMenu!: ElementRef;
-    @ViewChild('dashElement') dashElement!: ElementRef;
-    @ViewChild('statusClose') statusClose!:ElementRef
-    @ViewChild('newChartElement') newChartElement!: ElementRef;
-    @HostListener('click', ['$event'])
-    outsideClick(event: any) {
-        if (this.optionsMenu && !this.optionsMenu.nativeElement.contains(event.target) && !(event.target.tagName === "I")) {
-            this.viewOptionsBol = true;
-            this.viewEditBol = false;
+    viewEdit(){
+        this.viewEditBol = !this.viewEditBol
+        this.viewEditBolEmit.emit(this.viewEditBol)
+        if(this.viewEditBol){
+            this.dashboardToedit.emit(this.dashboard)
+        }else{
+            this.dashboardToedit.emit(undefined)
         }
-        
-        if (this.dashElement && !this.dashElement.nativeElement.contains(event.target)) {
-            this.newDashVisibleBol = false;
-        }
-
-        if (this.newChartElement && !this.newChartElement.nativeElement.contains(event.target)) {
-            this.newChartBool = false;
-        }
+        this.newChartBool = false
     }
 
+    newChartVisible(){
+        this.newChartBool = !this.newChartBool
+    }
+    
+    @ViewChild('newChartElement')  chartElement !: ElementRef
+    @HostListener('click', ['$event'])
+    outsideClick(event: any) {
+        this.newChartElement.emit(this.chartElement.nativeElement)
+    }
 }
