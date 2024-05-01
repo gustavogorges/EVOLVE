@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
@@ -112,7 +112,6 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -204,7 +203,6 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
     CheckboxModule,
     FormsModule,
     InputTextareaModule,
-    FormsModule,
     ToastModule,
     CalendarModule,
     ColorPickerModule,
@@ -216,7 +214,8 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
     DndModule,
     CommonModule,
 
-    InputNumberModule
+    InputNumberModule,
+    ReactiveFormsModule
   ],
   
   providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,

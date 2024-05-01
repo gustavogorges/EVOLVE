@@ -1,61 +1,129 @@
 <div class="main">
-    <div class="card-login">
-        <div class="left">
-            <div class="box-text-left">
-                <div class="welcome">
-                    <p class="main-text">Bem-vindo ao Evolve. Aqui a organização e eficiência se encontram para transformar sua forma de gerenciar tarefas e projetos. Abra as portas para uma nova era de produtividade.</p>
-                    <div class="login-topic-icon"><i class="pi pi-sitemap normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-calendar normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-history normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                </div>
-            </div>
-        </div>  
-        <div class="right">
-            <div class="box-text-right">
-                <div class="main-title">
-                    <h1>Cadastro</h1>
-                </div>
-                <div class="div-inputs">
-                    <div class="inputs-login">
-                        <div class="form__group field">
-                            <input [(ngModel)]="usuario.name" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Nome completo</label>
-                          </div>
-                          <div class="form__group field">
-                            <input [(ngModel)]="usuario.email" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Email</label>
-                          </div>
-                          <div class="form__group field">
-                            <input [(ngModel)]="usuario.password" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Senha</label>
-                          </div>
-                          <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Confirmar senha</label>
-                          </div>
-                    </div>
-                   
-                </div>
-                <div class="div-buttons">
-                    <div class="checkbox">
-                        <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Eu li e aceito os Termos</p>
-
-                    </div>
-                    <div class="checkbox">
-                        <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Receber notificações por e-mail</p>
-                        
-                    </div>
-                    <div class="div-login">
-                        <button pButton pRipple type="button" label="Cadastrar" class="p-button-rounded button-login" (click)="cadastrarUsuario()"></button>
-                    </div>
-                    <div class="div-google">
-                        <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>
-                    </div>
-                
-                </div>
-            </div>
+  <div class="card-login">
+    <div class="left">
+      <div class="box-text-left">
+        <div class="welcome">
+       
+          </div>
         </div>
+      </div>
     </div>
+    <div class="right">
+      <div class="box-text-right">
+        <div class="main-title">
+          <h1>Cadastro</h1>
+        </div>
+
+        <form
+          (ngSubmit)="submit()"
+          [formGroup]="userForm"
+          #formDir="ngForm"
+          class="p-10 flex flex-col gap-10"
+        >
+        <div class="flex flex-col gap-4">
+          <div class="form-group">
+            <label for="name" class="font-titulo font-medium flex gap-1"
+              >Nome
+              <p class="text-red-500">*</p></label
+            >
+            <input
+              type="text"
+              placeholder="Digite seu nome "
+              (keydown.enter)="moveFocus('email')"
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+              formControlName="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="name" class="font-titulo font-medium flex gap-1"
+              >Email
+              <p class="text-red-500">*</p>
+            </label>
+            <input
+              type="text"
+              placeholder="Digite seu email "
+              (keydown.enter)="moveFocus('password')"
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+              formControlName="email"
+            />
+            <div *ngIf="email?.errors?.['required'] && formDir.submitted">
+              <p>Campo é obrigatório.</p>
+            </div>
+            <div *ngIf="email?.errors?.['email'] && formDir.submitted">
+              <p>Email inválido.</p>
+            </div>
+            <div *ngIf="email?.errors?.['invalidEmail'] && formDir.submitted">
+              <p>Email deve conter '@' and '.'.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name" class="font-titulo font-medium flex gap-1"
+              >Senha
+              <p class="text-red-500">*</p></label
+            >
+            <input
+              type="text"
+              placeholder="Digite sua senha"
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+              formControlName="password"
+              (keydown.enter)="moveFocus('confirmationPassword')"
+            />
+            <div *ngIf="password?.errors?.['required'] && formDir.submitted">
+              <p>Campo obrigatório.</p>
+            </div>
+            <div
+              *ngIf="password?.errors?.['passwordLength'] && formDir.submitted"
+            >
+              <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
+            </div>
+            <div
+              *ngIf="password?.errors?.['passwordNoNumber'] && formDir.submitted"
+            >
+              <p>Senha deve conter pelo menos um número.</p>
+            </div>
+            <div
+              *ngIf="password?.errors?.['passwordNoSpecialCharacter']  && formDir.submitted"
+            >
+              <p>
+                Senha deve conter pelo menos um carácter especial (ex: @,-,!,$).
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" class="font-titulo font-medium flex gap-1"
+              >Confirme sua senha
+              <p class="text-red-500">*</p></label
+            >
+            <input
+              type="text"
+              placeholder="Confirme sua senha "
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+              formControlName="confirmationPassword"
+              (keydown.enter)="submit()"
+            />
+
+            <div
+              *ngIf="confirmationPassword?.errors?.['required'] && formDir.submitted"
+            >
+              <p>Campo obrigatório.</p>
+            </div>
+            <div
+              *ngIf="confirmationPassword?.errors?.['passwordMismatch']  && formDir.submitted"
+            >
+              <p>As senhas não conhecidem.</p>
+            </div>
+          </div>
+        </div>
+          
+          <div class="form-group px-5 py-3 rounded-xl bg-secondary">
+            <input
+              type="submit"
+              value="Cadastrar"
+              class="text-xl text-white font-titulo font-semibold"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
