@@ -140,7 +140,7 @@ export class BackendEVOLVEService {
   }
 
   async postUsuario (usuario:User){
-    return (await axios.post(this.URL+"user", usuario)).data
+    return (await axios.post(this.URL+"user", usuario)).status
   }
 
   async putUsuario (usuario:User|Pick<User, "id">){

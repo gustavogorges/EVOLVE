@@ -1,12 +1,15 @@
-<div class="main">
-  <div class="card-login">
-    <div class="left">
-      <div class="box-text-left">
-        <div class="welcome">
-       
-          </div>
-        </div>
-      </div>
+<div class="main relative">
+  <div class="card-login ">
+    <div class="bg-secondary w-1/2 h-full rounded-l-lg p-10 flex flex-col gap-4 overflow-clip">
+      <p class="text-white text-3xl font-titulo font-bold">evolve </p>
+      <p class="text-white text-xl font-hind-madurai">
+        Onde visão encontra execução. faça de cada tarefa um passo adiante em sua evolução.
+      </p>
+
+            <img src="assets/image 8.svg" class="w-full " alt="">
+
+
+
     </div>
     <div class="right">
       <div class="box-text-right">
@@ -29,7 +32,7 @@
             <input
               type="text"
               placeholder="Digite seu nome "
-              (keydown.enter)="moveFocus('email')"
+              (keydown.enter)="moveFocus('email'); $event.preventDefault()"
               class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
               formControlName="name"
             />
@@ -42,17 +45,16 @@
             <input
               type="text"
               placeholder="Digite seu email "
-              (keydown.enter)="moveFocus('password')"
-              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+              (keydown.enter)="moveFocus('password'); $event.preventDefault()"              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
               formControlName="email"
             />
-            <div *ngIf="email?.errors?.['required'] && formDir.submitted">
+            <div *ngIf="email?.errors?.['required'] && formDir.submitted" class="error-text">
               <p>Campo é obrigatório.</p>
             </div>
-            <div *ngIf="email?.errors?.['email'] && formDir.submitted">
+            <div *ngIf="email?.errors?.['email'] && formDir.submitted" class="error-text">
               <p>Email inválido.</p>
             </div>
-            <div *ngIf="email?.errors?.['invalidEmail'] && formDir.submitted">
+            <div *ngIf="email?.errors?.['invalidEmail'] && formDir.submitted" class="error-text">
               <p>Email deve conter '@' and '.'.</p>
             </div>
           </div>
@@ -66,23 +68,22 @@
               placeholder="Digite sua senha"
               class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
               formControlName="password"
-              (keydown.enter)="moveFocus('confirmationPassword')"
-            />
-            <div *ngIf="password?.errors?.['required'] && formDir.submitted">
+              (keydown.enter)="moveFocus('confirmationPassword'); $event.preventDefault()"            />
+            <div *ngIf="password?.errors?.['required'] && formDir.submitted" class="error-text">
               <p>Campo obrigatório.</p>
             </div>
             <div
-              *ngIf="password?.errors?.['passwordLength'] && formDir.submitted"
+              *ngIf="password?.errors?.['passwordLength'] && formDir.submitted "class="error-text"
             >
               <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
             </div>
             <div
-              *ngIf="password?.errors?.['passwordNoNumber'] && formDir.submitted"
+              *ngIf="password?.errors?.['passwordNoNumber'] && formDir.submitted" class="error-text"
             >
               <p>Senha deve conter pelo menos um número.</p>
             </div>
             <div
-              *ngIf="password?.errors?.['passwordNoSpecialCharacter']  && formDir.submitted"
+              *ngIf="password?.errors?.['passwordNoSpecialCharacter']  && formDir.submitted" class="error-text"
             >
               <p>
                 Senha deve conter pelo menos um carácter especial (ex: @,-,!,$).
@@ -99,16 +100,15 @@
               placeholder="Confirme sua senha "
               class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
               formControlName="confirmationPassword"
-              (keydown.enter)="submit()"
-            />
+              (keydown.enter)="submit(); $event.preventDefault()"            />
 
             <div
-              *ngIf="confirmationPassword?.errors?.['required'] && formDir.submitted"
+              *ngIf="confirmationPassword?.errors?.['required'] && formDir.submitted" class="error-text"
             >
               <p>Campo obrigatório.</p>
             </div>
             <div
-              *ngIf="confirmationPassword?.errors?.['passwordMismatch']  && formDir.submitted"
+              *ngIf="confirmationPassword?.errors?.['passwordMismatch']  && formDir.submitted" class="error-text"
             >
               <p>As senhas não conhecidem.</p>
             </div>
@@ -126,4 +126,17 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="showConfirmationMessage" class="bg-white flex flex-col items-end gap-0
+   font-hind-madurai text-primaryFontBlack bottom-32 right-10 absolute shadow-lg w-[350px] h-24 p-6 rounded-lg"v [ngClass]="status >= 200 && this.status < 300 ? 'bg-green-200 ' : 'bg-red-200' ">
+    
+    <i
+    class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite" style="font-size: 1rem;"
+    (click)="closeModal()"
+  ></i>
+    <p class="text-lg self-start   ">
+      {{message}}
+    </p> 
+  </div>
+  
 </div>

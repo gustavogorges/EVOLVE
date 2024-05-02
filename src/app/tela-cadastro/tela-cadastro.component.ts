@@ -1,6 +1,7 @@
 import { compileFactoryFunction } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -14,7 +15,7 @@ export class TelaCadastroComponent implements OnInit {
   usuario : User = new User();
   userForm !: FormGroup
 
-  constructor(private service : BackendEVOLVEService) { 
+  constructor(private service : BackendEVOLVEService, private router: Router) { 
     
   }
 
@@ -99,9 +100,41 @@ export class TelaCadastroComponent implements OnInit {
       nextInput.focus();
     }
   }
-  submit(){
+  get formControls() {
+    return this.userForm.controls;
+  }
+  showConfirmationMessage = false;
+  message  = "cadastro foiii" 
+  status = 0  
+  async submit(){
+    this.usuario.name = this.formControls['name'].value;
+    this.usuario.email = this.formControls['email'].value;
+    this.usuario.password = this.formControls['password'].value;
+    
+    this.usuario.imageColor = this.randomizeColor()
+    if(this.usuario.email !=null && this.usuario.name!=null && this.usuario.password!=null){
+      this.status  = await this.service.postUsuario(this.usuario)
+      if(this.status >= 200 && this.status < 300){
+        this.message = "sua conta foi cadastrada com sucesso"
+        this.showConfirmationMessage = true;
+  
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 2500);
+      }else{
+        this.message = "não foi possivel cadastrar sua conta"
+        this.showConfirmationMessage = true;
+  
+      }
 
+    }
+  
+
+    }
+    closeModal(){
+    this.showConfirmationMessage = false 
+    }
   }
 
 
-}
+
