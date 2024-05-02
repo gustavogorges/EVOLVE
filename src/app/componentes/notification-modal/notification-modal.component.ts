@@ -38,18 +38,21 @@ export class NotificationModalComponent implements OnInit {
     this.service.cleanAllUserNotifications(this.loggedUser.id);
   }
 
-//  verifyNotificatedList(team : Team):Array<TeamNotification>{
-//    console.log(team.notifications);
-//   
-//    team.notifications.forEach(notification => {
-//      if(notification.notificatedUsers.find(user => user.id == this.loggedUser.id) != null){
-//        console.log("ENTROU AQUI E TA CERTO");
-//        return team.notifications;
-//      } 
-//      return new Array<TeamNotification>(); 
-//    });
-//    return new Array<TeamNotification>();
-//  }
+  verifyNotificatedList(notifications : Array<TeamNotification>):Array<TeamNotification>{
+    let notificatedFilteredList = new Array<TeamNotification>();
+    notifications.forEach(notification => {
+      if(this.verifyIdOnNotificationList(notification)){
+        notificatedFilteredList.push(notification);
+      } 
+    });
+    if(notificatedFilteredList.length > 0) {
+      return notificatedFilteredList;
+    }
+    return new Array<TeamNotification>();
+  }
 
+  verifyIdOnNotificationList(notification : TeamNotification) : boolean {
+    return notification.notificatedUsers.some(user => user.id === this.loggedUser.id);
+  }
 
 }
