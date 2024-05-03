@@ -1,15 +1,59 @@
 <confirm-action-project-modal *ngIf="confirmationActionModalBol" class="fixed z-10 left-[5%] right-[5%] xl:right-0 top-1/3 xl:left-[37%]" (result)="setResponse($event)" [quest]="quest"></confirm-action-project-modal>
-<div class="div-pai">
+<div class="div-pai" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50':'blur-0'">
     <div class="div-maior">
         <div class="cabecalho">
-            <div class="foto-projeto"></div>
+            <div class="project-image hover-container relative w-fit pr-2">
+                <div class="image" *ngIf="projeto">
+                    <div *ngIf="preImage === '' && projeto.image === null" [ngStyle]="{'background-color': projeto.imageColor}" class="w-full h-full"></div>
+                    <img *ngIf="(preImage !== '')" [src]="preImage" alt="">
+                    <img *ngIf="(preImage === '') && (projeto.image !== null)" [src]="projeto.image.data" alt="">
+                </div>
+                <label [ngClass]="!nameEdit ? 'invisible':'visible'" class=" border-primary dark:border-secondary bottom-2 right-2 rounded-full p-2 bg-white dark:bg-back-grey w-12 h-12 absolute cursor-pointer">
+                    <div class="flex items-center justify-center w-full h-full">
+                        <i class="pi pi-camera cursor-pointer"></i>
+                    </div>
+                    <input
+                        [disabled]="!nameEdit"
+                        class="invisible w-full  cursor-pointer h-full absolute top-0 left-0"
+                        (change)="setImageProject($event)"
+                        type="file"
+                    />
+                </label>
+                <div class="icon-container" *ngIf="!nameEdit">
+                    <div (click)="editProjectFun()" class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center">
+                        <i class="pi pi-pencil"></i>
+                    </div>
+                </div>
+            </div>
             <div class="texto">
-                <input type="text" *ngIf="projeto" class="titulo bg-transparent outline-none"
-                    [(ngModel)]="projeto.name">
-                <p class="descricao" *ngIf="projeto">{{projeto.description}}</p>
+                <div class="hover-container relative w-fit pr-10" *ngIf="projeto && !nameEdit">
+                    <div type="text" class="titulo bg-transparent outline-none">{{projeto.name}}</div>
+                    <div class="icon-container" *ngIf="!nameEdit">
+                        <div (click)="editProjectFun()" class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center">
+                            <i class="pi pi-pencil"></i>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" maxlength="35" *ngIf="projeto && nameEdit" class="titulo bg-transparent outline-none w-full" [(ngModel)]="nameEdited">
+
+                <div class="hover-container relative w-fit pr-10" *ngIf="projeto && !nameEdit">
+                    <p class="descricao" *ngIf="projeto">{{projeto.description}}</p>
+                    <div class="icon-container" (click)="editProjectFun()">
+                        <div class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center">
+                            <i class="pi pi-pencil"></i>
+                        </div>
+                    </div>
+                </div>
+                <textarea *ngIf="projeto && nameEdit" class="descricao resize-none pr-10 break-all whitespace-pre-wrap bg-transparent outline-none w-full" [(ngModel)]="projeto.description"></textarea>
+
+
             </div>
         </div>
-        <div class="w-full h-[10vh] flex items-end gap-10 border-b-2 dark:border-fontGray">
+        <div class="w-full flex justify-end gap-5" *ngIf="nameEdit">
+            <button class="p-2 bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack w-[10rem] font-semibold  hover:scale-105 duration-150 rounded-lg" (click)="editProjectFun()">Cancelar</button>
+            <button class="p-2 bg-primary dark:bg-dark-primary dark:text-primaryFontBlack font-semibold w-[10rem] rounded-lg hover:scale-105 duration-150 " (click)="saveProject()">Salvar</button>
+        </div>
+        <div class="w-full h-[10vh] pt-10 flex items-end gap-10 border-b-2 dark:border-fontGray">
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Dashboards' ? 
             ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Dashboards')"> Dashboards </p>
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Membros' ? 
@@ -53,15 +97,15 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="miniPageView === 'Membros'" >
+        <div *ngIf="miniPageView === 'Membros' && projeto" >
             <div>
-                <input class="p-2 outline-none border-2 h-full w-full bg-primaryGray rounded-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <input class="p-2 outline-none border-2 h-full w-full bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
             </div>
             <div *ngIf="filteredNames().length === 0" class="membros">
-                <p class="text-sm text-fontGray w-fit">Nenhum membro encontrado</p>
+                <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">Nenhum membro encontrado</p>
             </div>
-            <div *ngIf="filteredNames().length > 0" class="pt-5">
-                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [quest]="quest" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
+            <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] w-full overflow-y-auto">
+                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
             </div>
         </div>
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
@@ -98,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-end mb-10">
                 <button *ngIf="!unlockAllMembersView" (click)="unlockMembersView()"
                     class="text-primary font-semibold dark:text-dark-primary">Ver todos</button>
                 <button *ngIf="unlockAllMembersView" (click)="unlockMembersView()"
@@ -110,8 +154,8 @@
                 </div>
                 <div class="h-[17vh] w-full overflow-auto flex justify-center" *ngIf="projeto">
                     <div class="status-box">
-                        <div class="status-adjust" *ngFor="let status of projeto.statusList">
-                            <div class="status cursor-pointer" [ngStyle]="{'background-color': status.backgroundColor}">
+                        <div class="status-adjust" *ngFor="let status of organizeStatus()">
+                            <div class="status cursor-pointer" [ngStyle]="{'background-color': status.backgroundColor, 'color': status.textColor}">
                                 <p class="truncate px-4">{{status.name}}</p>
                             </div>
                             <i *ngIf="verifyStatusDefault(status)" class="pi "
@@ -126,8 +170,8 @@
                 </div>
                 <div>
                     <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
-                        <i class="pi pi-plus text-primary font-bold"></i>
-                        <p class=" text-fontGray">adicionar status</p>
+                        <i class="pi pi-plus"></i>
+                        <p>Adicionar status</p>
                     </div>
                     <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
                         <div class="nome-status-box">
@@ -135,7 +179,7 @@
                                 <input class="input-add-status" type="text" placeholder="escreva o nome"
                                     [(ngModel)]="status.name">
                                 <div class="w-full flex justify-center items-center">
-                                    <i class="pi pi-pencil text-primary font-bold"></i>
+                                    <i class="pi pi-pencil text-primary dark:text-dark-primary font-bold"></i>
                                 </div>
                             </div>
                         </div>
@@ -150,16 +194,16 @@
                         </div>
                         <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer"
                             (click)="novoStatus()">
-                            <p class=" text-primaryWhite font-semibold">confirmar</p>
+                            <p class="font-semibold">confirmar</p>
                         </div>
                         <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
-                            <p class=" text-primaryWhite font-semibold">Editar Status</p>
+                            <p class="font-semibold">Editar Status</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="name">
-                <p class="name-text pt-[8%]">Propriedades</p>
+            <!-- <div class="name py-4">
+                <p class="name-text">Propriedades</p>
             </div>
             <div class="propriedades">
                 <div class="propriedade">
@@ -174,7 +218,44 @@
                     <i class="pi pi-pencil"></i>
                     <i class="pi pi-trash"></i>
                 </div>
-            </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+                <div class="propriedade">
+                    <i class="pi pi-dollar"></i>
+                    <p class="prop-name">orçamento</p>
+                    <i class="pi pi-pencil"></i>
+                    <i class="pi pi-trash"></i>
+                </div>
+
+            </div> -->
         </div>
     </div>
 <div *ngIf="confirmationActionModalBol" class="fixed w-screen h-screen top-0 left-0"></div>

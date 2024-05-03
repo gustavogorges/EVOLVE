@@ -1,5 +1,5 @@
 .div-pai{
-    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300 h-screen;
+    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300 h-full;
     grid-template-columns: 60% 20%;
 
     
@@ -14,12 +14,30 @@
                 @apply text-primary dark:text-dark-primary
             }
 
-            .foto-projeto{
-                @apply w-[7rem] h-[7rem] bg-yellow-500 rounded-full 
+            .project-image{
+                @apply  justify-center items-center relative grid grid-cols-3 grid-rows-2 justify-items-center;
+                grid-template-columns: 40% 40% 20%;
+                grid-template-rows: 50% 50%;
+    
+                .image{
+                    @apply sm:w-[11vw] sm:h-[11vw] xl:h-[7vw] xl:w-[7vw] w-[20vw] h-[20vw] rounded-full col-span-full row-span-full overflow-hidden;
+    
+                    img{
+                        @apply h-full w-full object-cover;
+                    }
+                }
+    
+                label{
+                    @apply w-[2vw] h-[2vw] col-start-2 row-start-2 rounded-full bg-[#E9EDF1] dark:bg-dark-secundary-gray flex justify-center items-center;
+    
+                    i{
+                        @apply text-xl text-primary dark:text-dark-primary
+                    }
+                }
             }
 
             .texto{
-
+                
                 .titulo{
                     @apply text-4xl font-semibold font-titulo text-primary dark:text-dark-primary
                 }
@@ -75,12 +93,12 @@
             @apply flex w-full justify-center h-[8vh];
 
             .top-b{
-                @apply w-[50%] bg-primaryGray rounded-xl text-xl text-primaryFontBlack
+                @apply w-[50%] bg-primaryGray dark:bg-dark-secundary-gray rounded-xl text-xl dark:text-primaryWhite text-primaryFontBlack duration-150 hover:scale-105
             }
         }
     }
     .div-menor{
-        @apply w-full h-full col-start-2 ;
+        @apply w-full col-start-2 ;
 
         .square{
             @apply p-[1.5%] overflow-auto bg-primaryGray dark:bg-gray-700 h-[80%] w-[20%] fixed shadow-md rounded-lg;
@@ -94,7 +112,7 @@
             }
 
             .membros{
-                @apply my-[2%] h-[20vh] overflow-auto;
+                @apply h-[24vh] overflow-auto;
 
                 .membro{
                     @apply grid grid-cols-2 items-center grid-rows-1 duration-200;
@@ -115,7 +133,7 @@
                 }
             }
             .propriedades{
-                @apply py-[7%] overflow-scroll;
+                @apply overflow-scroll h-[20vh];
 
                 .propriedade{
                     @apply grid grid-cols-4 items-center grid-rows-1;
@@ -132,6 +150,16 @@
                 }
             }
         }
+    }
+}
+
+.icon-container{
+    visibility: hidden;
+}
+
+.hover-container:hover {
+    .icon-container{
+        visibility: visible;
     }
 }
 
@@ -157,11 +185,11 @@
 }
 
 .add-box {
-    @apply w-full h-[15%] flex justify-center items-center gap-x-2 cursor-pointer mb-2
+    @apply w-full flex justify-center text-primaryWhite dark:text-primaryFontBlack items-center font-semibold h-10 gap-x-2 cursor-pointer mb-2 bg-secondary dark:bg-dark-secundary-green rounded-lg mt-5
 }
 
 .new-status {
-    @apply w-full h-28 grid grid-rows-3
+    @apply w-full h-28 grid grid-rows-3 mt-4
 }
 
 .cor-status-box {
@@ -173,13 +201,13 @@
 }
 
 .confirmar-status-box {
-    @apply bg-secondary flex justify-center items-center rounded-b-lg
+    @apply bg-secondary dark:bg-dark-secundary-green text-primaryWhite  dark:text-primaryFontBlack flex justify-center items-center rounded-b-lg
 }
 
 .edit-status-box{
-    @apply bg-primary flex justify-center items-center rounded-b-lg
+    @apply bg-primary dark:bg-dark-primary text-primaryWhite  dark:text-primaryFontBlack flex justify-center items-center rounded-b-lg
 }
 
 .input-add-status {
-    @apply bg-primaryWhite outline-none pl-3
+    @apply bg-transparent outline-none pl-3 rounded-lg h-8
 }

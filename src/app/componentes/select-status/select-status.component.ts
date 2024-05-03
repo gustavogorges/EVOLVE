@@ -42,6 +42,27 @@ export class SelectStatusComponent implements OnInit{
     this.newItem.emit(false);
   }
 
+  isContrastSufficient(textColor: string, backgroundColor: string, threshold: number = 500): boolean {
+    const intensity = (color: string) => {
+        const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        if (!rgb) return 0;
+        const r = parseInt(rgb[1], 16);
+        const g = parseInt(rgb[2], 16);
+        const b = parseInt(rgb[3], 16);
+        return r + g + b; // Soma dos componentes de cor
+    };
+
+    const textColorIntensity = intensity(textColor);
+    const backgroundColorIntensity = intensity(backgroundColor);
+    const contrast = Math.abs(textColorIntensity - backgroundColorIntensity);
+
+    console.log("Intensidade do texto:", textColorIntensity);
+    console.log("Intensidade do fundo:", backgroundColorIntensity);
+    console.log("Contraste:", contrast);
+
+    return contrast >= threshold;
+  }
+
   addStatus() {
     this.booleanAddStatus = !this.booleanAddStatus;
   }
@@ -51,12 +72,20 @@ export class SelectStatusComponent implements OnInit{
       if(this.status.backgroundColor === ''){
         this.status.backgroundColor = "#ff0000"
       }
-      this.status.backgroundColor.toUpperCase()
-      this.status.textColor = "#000000";
-      this.addNewStatus.emit(this.status)
+      this.status.backgroundColor.toUpperCase();
+      console.log(this.status.backgroundColor);
+      
+      console.log(this.isContrastSufficient('#000000', this.status.backgroundColor));
+      
+      if(!this.isContrastSufficient('#000000', this.status.backgroundColor)){
+        this.status.textColor = "#F4F4F4";
+      } else {
+        this.status.textColor = "#000000";
+      }
+      this.addNewStatus.emit(this.status);
       this.addStatus();
     }
-    this.status = new Status
+    this.status = new Status();
   }
 
   editStatus(status:Status){
@@ -68,6 +97,11 @@ export class SelectStatusComponent implements OnInit{
   async editStatusPut(){
     this.boolEditStatus = false
     this.booleanAddStatus = false
+    if(!this.isContrastSufficient('#000000', this.status.backgroundColor)){
+      this.status.textColor = "#F4F4F4";
+    } else {
+      this.status.textColor = "#000000";
+    }
     this.status = new Status
   }
 

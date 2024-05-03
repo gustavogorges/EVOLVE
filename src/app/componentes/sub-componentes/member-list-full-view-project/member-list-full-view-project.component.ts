@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -18,7 +18,7 @@ export class MemberListFullViewProjectComponent implements OnInit {
   @Input() user !: User
 
   @Input() confirmationAction !: Boolean | any
-  @Input() quest: any
+  @Output() quest: EventEmitter<string> = new EventEmitter<string>()
   listIdsFromRemove = new Array<Pick<User, "id">>
 
   @Input() project !: Project

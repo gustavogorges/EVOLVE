@@ -95,7 +95,7 @@ export class BackendEVOLVEService {
   }
  
   async deleteStatus(projetoId:number,status:Status) {
-    return (await axios.patch(this.URL+"project/delete/"+projetoId, status )).data
+    return (await axios.patch(this.URL+"project/"+projetoId+"/deleteStatus", status)).data
   }
 
   async patchProperty(taskProjectProperty:Property, taskId:number) {
@@ -132,8 +132,8 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL+"project", project)).data
   }
 
-  async putProjeto (projeto:Project){
-    return (await axios.put(this.URL+"project", projeto)).data
+  async putProjeto (project:Project){
+    return (await axios.put(this.URL+"project", project)).data
   }
 
   async postUsuario (usuario:User){

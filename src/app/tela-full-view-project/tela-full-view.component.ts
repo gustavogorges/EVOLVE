@@ -1,5 +1,6 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Route } from '@angular/router';
 import { Chart } from 'chart.js';
 import { map } from 'rxjs';
@@ -8,6 +9,8 @@ import { Dashboard } from 'src/model/dashboard';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { User } from 'src/model/user';
+import { cloneDeep } from 'lodash';
+
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-tela-full-view',
@@ -43,12 +46,57 @@ export class TelaFullViewComponent implements OnInit {
     response : any
     quest : any
     searchTerm : any = ''
-    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute){}
+    nameEdit : boolean = false
+    nameEdited : string = ''
+    descEdited : string = ''
+    preImage:SafeUrl | undefined = '';
+    imagemBlob!:Blob
+    formData : any = undefined
+
+    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer){}
 
     viewOptions(){
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBol = false
 
+    }
+
+    async setImageProject(event:any){
+        if(event.target.files && event.target.files[0]){
+          if(event.target.files[0].type === "image/jpeg" 
+          || event.target.files[0].type === "image/webp" 
+          || event.target.files[0].type === "image/png"){
+            this.imagemBlob = event.target.files[0]
+            const formData = new FormData();
+            formData.append('image', event.target.files[0]);
+            this.formData = formData
+            const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
+    
+            const imageUrl = URL.createObjectURL(blob);
+            this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+          }
+        }
+    }
+
+    editProjectFun(){
+        this.nameEdited = this.projeto.name
+        this.descEdited = this.projeto.description
+        this.nameEdit = !this.nameEdit
+    }
+
+    async saveProject(){
+        if(this.nameEdited != this.projeto.name || this.descEdited != this.projeto.description){
+            let projetoTemp:any = cloneDeep(this.projeto);
+            projetoTemp.name = this.nameEdited
+            projetoTemp.description = this.descEdited
+            projetoTemp.image = null
+            this.projeto = await this.service.putProjeto(projetoTemp)
+        }
+        if(this.formData != undefined){
+            await this.service.patchImage(this.projeto.id, this.formData)
+            this.formData = undefined
+        }
+        this.nameEdit = false
     }
 
     filteredNames() {
@@ -80,6 +128,16 @@ export class TelaFullViewComponent implements OnInit {
         
     }
 
+    getResponse(){
+        return this.response
+    }
+
+    setQuest(event:any){
+        this.quest = event
+        this.response = undefined
+        this.confirmationActionModalBol = true
+      }
+
     async ngOnInit() {
         
         this.route.paramMap.subscribe( async params  => {
@@ -88,7 +146,7 @@ export class TelaFullViewComponent implements OnInit {
             this.projeto = await this.service.getOne('project', id);
             this.dashboards = await this.service.getDashboards(this.projeto.id);
             console.log(this.projeto);
-            
+
             setTimeout(() => {
                 this.dashboards?.reverse()   
             });
@@ -118,8 +176,27 @@ export class TelaFullViewComponent implements OnInit {
       }
 
     async enableStatus(status:Status){
-    status.enabled = !status.enabled
+        status.enabled = !status.enabled
+        await this.postStatus(status)
     }
+
+    organizeStatus() {
+        const statusPadroes = ['não atribuido', 'concluido', 'pendente', 'em progresso'];
+        let statusPadraoPrioritario: any[] = [];
+        let outrosStatus: any[] = [];
+    
+        this.projeto.statusList.forEach(status => {
+            if (statusPadroes.includes(status.name)) {
+                statusPadraoPrioritario.push(status);
+            } else {
+                outrosStatus.push(status);
+            }
+        });
+    
+        return statusPadraoPrioritario.concat(outrosStatus);
+    }
+    
+    
 
     getCharts() {
         
@@ -169,23 +246,50 @@ export class TelaFullViewComponent implements OnInit {
         this.booleanAddStatus = true;
     }
     
+    isContrastSufficient(textColor: string, backgroundColor: string, threshold: number = 500): boolean {
+        const intensity = (color: string) => {
+            const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+            if (!rgb) return 0;
+            const r = parseInt(rgb[1], 16);
+            const g = parseInt(rgb[2], 16);
+            const b = parseInt(rgb[3], 16);
+            return r + g + b;
+        };
+    
+        const textColorIntensity = intensity(textColor);
+        const backgroundColorIntensity = intensity(backgroundColor);
+        const contrast = Math.abs(textColorIntensity - backgroundColorIntensity);
+    
+        return contrast >= threshold;
+    }
+    
     async novoStatus(): Promise<void> {
         if(this.status.name != ''){
             if(this.status.backgroundColor === ''){
             this.status.backgroundColor = "#ff0000"
             }
-            this.status.backgroundColor.toUpperCase()
-            this.status.textColor = "#000000";
+            this.status.backgroundColor.toUpperCase();
             
+            if(!this.isContrastSufficient('#000000', this.status.backgroundColor)){
+            this.status.textColor = "#F4F4F4";
+            } else {
+            this.status.textColor = "#000000";
+            }
+
+            this.projeto = await this.postStatus(this.status)
             this.addStatus();
         }
-        
-        this.status = new Status
+        this.status = new Status();
+    }
+
+    async postStatus(status:Status) {
+        return await this.service.updateStatusList(this.projeto.id, status)
     }
 
     async editStatusPut(){
         this.boolEditStatus = false
         this.booleanAddStatus = false
+        await this.postStatus(this.status)
         this.status = new Status
     }
 
@@ -272,8 +376,7 @@ export class TelaFullViewComponent implements OnInit {
     @ViewChild('statusClose') statusClose!:ElementRef
     @HostListener('click', ['$event'])
     outsideClick(event: any) {
-        console.log(this.dashElement.nativeElement);
-        
+
         if (this.dashElement && !this.dashElement.nativeElement.contains(event.target)) {
             this.newDashVisibleBol = false;
         }
@@ -281,6 +384,7 @@ export class TelaFullViewComponent implements OnInit {
         if (this.statusClose && event.target.contains(this.statusClose.nativeElement)) {
             this.boolEditStatus = false;
             this.booleanAddStatus = false;
+            this.status = new Status
         }
     }
 

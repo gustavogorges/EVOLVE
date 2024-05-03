@@ -19,7 +19,7 @@
                 />
             </label>
         </div>
-        <div class="project-name"><input [disabled]="!projeto.editOn" type="text" [(ngModel)]="projeto.name"></div>
+        <div class="project-name"><input [disabled]="!projeto.editOn" maxlength="35" type="text" [(ngModel)]="projeto.name"></div>
         <div class="project-desc"><textarea class="text-justify" maxlength="110" cols="30" rows="10" [disabled]="!projeto.editOn" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
             <p>Criador:</p>

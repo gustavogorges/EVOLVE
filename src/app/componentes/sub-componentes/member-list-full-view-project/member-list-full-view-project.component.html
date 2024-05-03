@@ -1,4 +1,4 @@
-<div class="w-full h-[10vh] rounded-lg grid grid-cols-4 grid-rows-2 px-3 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray dark:shadow-dark-primary-black" style="grid-template-columns: 10% 40% 10% 20% 20%;">
+<div class="w-full h-[10vh] rounded-lg grid grid-cols-4 grid-rows-2 px-3 my-4 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray dark:shadow-dark-primary-black" style="grid-template-columns: 10% 40% 10% 20% 20%;">
     <div class="w-full h-full row-span-full flex justify-center items-center">
         <div class="foto">
             <div *ngIf="verifyImage() && user" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>

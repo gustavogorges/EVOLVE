@@ -31,7 +31,7 @@
                         <label class="label" for="Nome do Projeto">Nome do Projeto:</label>
                         <label class="p-input-icon-right">
                             <i class="pi pi-pencil px-2 dark:text-dark-primary"></i>
-                            <input *ngIf="projeto" placeholder="Digite aqui" class="nome-input" type="text" pInputText [(ngModel)]="projeto.name" />
+                            <input *ngIf="projeto" placeholder="Digite aqui" maxlength="35" class="nome-input" type="text" pInputText [(ngModel)]="projeto.name" />
                         </label>
                     </div>
                     <div class="data-projeto bg-transparent">

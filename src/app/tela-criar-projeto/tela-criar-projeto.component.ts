@@ -54,6 +54,18 @@ export class TelaCriarProjetoComponent implements OnInit {
     this.statusVisible = !this.statusVisible
   }
 
+  isContrastSufficient(textColor: string, backgroundColor: string, threshold: number = 4.5): boolean {
+    const luminance = (color: string) => {
+        const rgb = color.substr(1); // Remover o '#' do início da string
+        const [r, g, b] = rgb.match(/.{2}/g)!.map(hex => parseInt(hex, 16) / 255); // Converter cada par de caracteres hexadecimais em um número e normalizar
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+
+    const contrastRatio = (luminance(textColor) + 0.05) / (luminance(backgroundColor) + 0.05);
+
+    return contrastRatio >= threshold;
+  }
+
   getStatusList(){
     this.projeto.statusList = [
       {
