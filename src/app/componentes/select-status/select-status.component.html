@@ -4,6 +4,7 @@
             <div
              class="status cursor-pointer"
              [ngStyle]="{'background-color': status.backgroundColor}"
+             (click)="salvarStatus(status)"
              >
                 <p class="truncate px-4">{{status.name}}</p>
             </div>
