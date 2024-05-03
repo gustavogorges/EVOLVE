@@ -107,6 +107,7 @@ export class TelaCadastroComponent implements OnInit {
   message  = "cadastro foiii" 
   status = 0  
   async submit(){
+    console.log("Eu entrei po, viaja não fi")
     this.usuario.name = this.formControls['name'].value;
     this.usuario.email = this.formControls['email'].value;
     this.usuario.password = this.formControls['password'].value;
