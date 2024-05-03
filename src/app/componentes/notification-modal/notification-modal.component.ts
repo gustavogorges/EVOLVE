@@ -31,6 +31,8 @@ export class NotificationModalComponent implements OnInit {
       notification.readed = true;
       this.service.patchReadedNotification(team.id,notification.id);
     });
+    console.log(team.notifications);
+    
   }
 
 

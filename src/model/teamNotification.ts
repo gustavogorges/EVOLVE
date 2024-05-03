@@ -9,4 +9,5 @@ export class TeamNotification {
     readed : boolean = false;
     value : string = "";
     dateTime : Date = new Date;
+    type : string = "";
 }
