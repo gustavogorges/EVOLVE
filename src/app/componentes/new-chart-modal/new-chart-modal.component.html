@@ -1,11 +1,11 @@
-<div class="modal -translate-y-8 translate-x-52 overflow-hidden" style="z-index: 9999999;" [ngClass]="!newChartBool ? 'h-0 w-0':'h-[46vh] w-[40vw]'">
+<div class="modal -translate-y-8 translate-x-52 overflow-hidden dark:bg-dark-secundary-gray" style="z-index: 9999999;" [ngClass]="!newChartBool ? 'h-0 w-0':'h-[46vh] w-[40vw]'">
 
     
     
     
     <ul class="rotate-180 w-full overflow-hidden duration-300" [ngClass]="labelChooseBol ? 'h-0':'h-full'">
         <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="labelChoosed === -1 ? 'h-0':'h-[20%]'">
-            <button (click)="chooseCharts()" class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
+            <button (click)="chooseCharts()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
         </div>
     
         <div class="div-modal rotate-180" >
@@ -23,7 +23,7 @@
     
     <div class="rotate-180 w-[40vw] overflow-hidden duration-300" [ngClass]="!labelChooseBol ? 'h-0':'h-full'">
         <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="chartChoosed === -1 ? 'h-0':'h-[20%]'">
-            <button (click)="createNewChart()" class="flex bg-secondary  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
+            <button (click)="createNewChart()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
         </div>
     
         <div class="div-modal rotate-180" >
@@ -38,7 +38,7 @@
             </div>
     
             <div class="box" [ngClass]="!newChartBool ? 'invisible ':'visible'">
-                <div class="squads " *ngFor="let squad of charts, index as i" (click)="chooseChart(squad.id)" [ngClass]="squad.style">
+        <div class="squads " *ngFor="let squad of charts, index as i" (click)="chooseChart(squad.id)" [ngClass]="squad.style">
                     <p-chart [type]="charts[i].type" [data]="charts[i].data" [options]="charts[i].options" width="100%" height="100%" ></p-chart>
                 </div>
             </div>

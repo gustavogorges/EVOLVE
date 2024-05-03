@@ -4,7 +4,7 @@
 
     
     .div-maior{
-        @apply w-full h-full col-start-1;
+        @apply w-full h-fit col-start-1;
 
         .cabecalho{
             @apply grid grid-cols-2 items-center gap-2;
@@ -25,7 +25,7 @@
                 }
 
                 .descricao{
-                    @apply pt-5 font-titulo break-words
+                    @apply pt-5 font-titulo break-all
                 }
             }
         }
@@ -33,14 +33,14 @@
         .dashboard-pai{
             
             .newDashBoard{
-                @apply bg-primaryGray h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150 w-fit p-2 px-4;
+                @apply bg-primaryGray dark:bg-dark-secundary-gray h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150 w-fit p-2 px-4;
 
                 i{
                     @apply text-primary dark:text-dark-primary
                 }
             }
 
-            @apply pt-20;
+            @apply pt-5;
 
             .container{
                 @apply py-[3%] flex flex-col;
@@ -69,50 +69,6 @@
                     }
                 }
 
-            }
-            .comentario-pai{
-                @apply w-full h-[50vh] bg-primaryGray p-[3%] dark:bg-gray-700 rounded-b-xl shadow-lg;
-                .fundo-comentario{
-                    @apply bg-secondaryWhite h-full dark:bg-gray-600 rounded-xl overflow-auto;
-                
-                    .comentarios{
-                        @apply w-full;
-    
-                        .comentario{
-                            @apply grid grid-cols-2 grid-rows-2 items-center h-[9vh] border-b-2
-                            border-gray-200
-                            dark:border-gray-500;
-                            grid-template-columns: 12% 80% 8%;
-    
-                            .foto-user{
-                                @apply col-start-1 col-end-2 row-span-full flex justify-center;
-    
-                                .foto{
-                                    @apply w-[4rem] h-[4rem] bg-yellow-500 rounded-full
-                                }
-                            }
-    
-                            .nome{
-                                @apply row-start-1 row-end-2 col-start-2 col-end-3 text-xl font-semibold
-                                text-primary
-                                dark:text-dark-primary;
-                            }
-    
-                            .comentario-text{
-                                @apply overflow-auto row-start-2 col-start-2 col-end-3 text-lg dark:text-primaryGray;
-
-                                p{
-                                    @apply text-justify
-                                }
-                            }
-
-                            .date{
-                                @apply text-gray-500
-                                        dark:text-gray-300;
-                            }
-                        }
-                    }
-                }
             }
         }
         .top{

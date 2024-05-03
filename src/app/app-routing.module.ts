@@ -9,7 +9,7 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
 
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
-import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { TelaFullViewComponent } from './tela-full-view-project/tela-full-view.component';
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 
 

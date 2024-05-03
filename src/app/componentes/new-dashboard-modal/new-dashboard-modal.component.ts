@@ -142,7 +142,11 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
 
       this.squads.forEach(element => {
         if(element.id === index){
-          element.style = "border-primary border-4"
+          if(localStorage.getItem('theme') === 'dark'){
+            element.style = "border-dark-primary"
+          }else{
+            element.style = "border-primary"
+          }
         }
       });
   }

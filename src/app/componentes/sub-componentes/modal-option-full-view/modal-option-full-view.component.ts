@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Dashboard } from 'src/model/dashboard';
 import { Project } from 'src/model/project';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -10,7 +10,8 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class ModalOptionFullViewComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService, private elementRef: ElementRef) { }
+    
   viewEditBol:boolean = false
   @Input() charts : any[] = []
   @Input() dashboards : any[] = []
@@ -22,15 +23,30 @@ export class ModalOptionFullViewComponent implements OnInit {
   @Output() viewEditBolEmit : EventEmitter<any> = new EventEmitter
   @Output() dashboardToedit : EventEmitter<any> = new EventEmitter
   @Output() newChartElement : EventEmitter<any> = new EventEmitter
-  ngOnInit(): void {}
+  
+  ngOnInit(): void {
+    document.body.addEventListener('click', this.onDocumentClick);
+  }
 
   viewOptions(){
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBolEmit.emit(false)
         this.dashboardToedit.emit(undefined)
-
         this.newChartBool = false
     }
+
+    ngOnDestroy(): void {
+        document.body.removeEventListener('click', this.onDocumentClick);
+    }
+
+    onDocumentClick = (event: MouseEvent) => {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.viewOptionsBol = true
+            this.viewEditBolEmit.emit(true)
+            this.dashboardToedit.emit(undefined)
+            this.newChartBool = false
+        }
+      };
 
     async deleteDashboard(){
         await this.service.deleteDashboard(this.dashboard.id)

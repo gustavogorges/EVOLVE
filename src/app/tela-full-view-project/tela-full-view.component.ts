@@ -7,6 +7,7 @@ import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { Dashboard } from 'src/model/dashboard';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-tela-full-view',
@@ -34,13 +35,33 @@ export class TelaFullViewComponent implements OnInit {
     chartstoDash : Array<DashBoardCharts> = new Array
     boolEditStatus: boolean = false;
     booleanAddStatus: boolean = false;
+    closeAllOptions: boolean = false
     dashboardEdit !: Dashboard
+    editProject : boolean = false
+    miniPageView : string = 'Membros'
+    confirmationActionModalBol : boolean = false
+    response : any
+    quest : any
+    searchTerm : any = ''
     constructor(private service : BackendEVOLVEService, private route : ActivatedRoute){}
 
     viewOptions(){
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBol = false
 
+    }
+
+    filteredNames() {
+        return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+    }
+
+    setResponse(event:any){
+        this.response = event
+        this.confirmationActionModalBol = false
+    }
+
+    setMiniPageView(value : string){
+        this.miniPageView = value
     }
 
     viewEdit(){
@@ -66,6 +87,7 @@ export class TelaFullViewComponent implements OnInit {
             const id  = Number(projectId)
             this.projeto = await this.service.getOne('project', id);
             this.dashboards = await this.service.getDashboards(this.projeto.id);
+            console.log(this.projeto);
             
             setTimeout(() => {
                 this.dashboards?.reverse()   
@@ -170,29 +192,33 @@ export class TelaFullViewComponent implements OnInit {
 
     getLabelsChart(chart : DashBoardCharts){
         let valueNames: string[][] = []
-        chart.labels.forEach(chartFor => {
-            valueNames.push(
-                [
-                    chartFor.label
-                ]
-            )
-        })
-
-        return valueNames
+        if(chart.labels != null){
+            chart.labels.forEach(chartFor => {
+                valueNames.push(
+                    [
+                        chartFor.label
+                    ]
+                )
+            })
+            return valueNames
+        }
+        return ['Nada encontrado']
     }
 
     getValuesChart(chart : DashBoardCharts){
         
         let valueLabels: number[][] = []
-        chart.labels.forEach(chartFor => {
-            valueLabels.push(
-                [
-                    chartFor.value
-                ]
-            )
-        })
-        
-        return valueLabels
+        if(chart.labels != null){
+            chart.labels.forEach(chart => {
+              valueLabels.push(
+                  [
+                      chart.value
+                  ]
+              )
+          })
+          return valueLabels
+        }
+        return [0]
     }
     
 
@@ -242,25 +268,14 @@ export class TelaFullViewComponent implements OnInit {
     }
 
 
-    @ViewChild('Options') optionsMenu!: ElementRef;
     @ViewChild('dashElement') dashElement!: ElementRef;
     @ViewChild('statusClose') statusClose!:ElementRef
-    @ViewChild('newChartElement') newChartElement!: ElementRef;
     @HostListener('click', ['$event'])
-    outsideClick(event: any, event2:any) {
-        console.log(event2);
-        
-        if (this.optionsMenu && !this.optionsMenu.nativeElement.contains(event.target)) {
-            this.viewOptionsBol = true;
-            this.viewEditBol = false;
-        }
+    outsideClick(event: any) {
+        console.log(this.dashElement.nativeElement);
         
         if (this.dashElement && !this.dashElement.nativeElement.contains(event.target)) {
             this.newDashVisibleBol = false;
-        }
-
-        if (this.newChartElement && !this.newChartElement.nativeElement.contains(event.target)) {
-            this.newChartBool = false;
         }
 
         if (this.statusClose && event.target.contains(this.statusClose.nativeElement)) {

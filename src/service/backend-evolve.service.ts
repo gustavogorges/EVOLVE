@@ -33,6 +33,7 @@ import { DashBoardCharts } from 'src/model/DashBoardCharts';
 export class BackendEVOLVEService {
   
   URL : string = "http://localhost:8087/"
+  project$: any;
 
   constructor() { }
 
@@ -69,8 +70,20 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
 
+  async getAllCommentsOfProject(projectId:number) {
+    return (await axios.get(this.URL+"project/comments/getAll/"+projectId)).data
+  }
+
   async patchNewComment(taskId:number, newComment:Comment) {
     return (await axios.patch(this.URL+"task/comments/patch/"+taskId,newComment)).data
+  }
+
+  async patchNewCommentProject(projectId:number, newComment:Comment, userId:number) {
+    return (await axios.patch(this.URL+"project/comments/patch/"+projectId+"/"+userId,newComment)).data
+  }
+
+  async deleteCommentProject(projectId:number, commentId:number, userId:number) {
+    return (await axios.delete(this.URL+"project/comments/delete/"+commentId+"/"+projectId+"/"+userId)).data
   }
 
   async deleteComment(taskId:number, commentId:number) {

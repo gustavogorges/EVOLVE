@@ -28,7 +28,8 @@ export class NewChartModalComponent implements OnChanges, OnInit {
   ngOnChanges(): void {
     if(!this.newChartBool){
       this.chooseChart(-1)
-      
+      this.chooseLabel(-1)
+      this.labelChooseBol = false
     }
   }
 
@@ -76,34 +77,35 @@ export class NewChartModalComponent implements OnChanges, OnInit {
 
   getLabelsChart(chart : DashBoardCharts){
     let valueNames: string[][] = []
-    chart.labels.forEach(chart => {
+    if(chart.labels != null){
+      chart.labels.forEach(chart => {
         valueNames.push(
             [
                 chart.label
             ]
         )
-    })
-
-    return valueNames
+      })
+      return valueNames
+    }
+    return ['Nada encontrado']
 }
 
 getValuesChart(chart : DashBoardCharts){
     console.log(chart);
     
     let valueLabels: number[][] = []
-    chart.labels.forEach(chart => {
-        valueLabels.push(
-            [
-                chart.value
-            ]
-        )
-    })
-    console.log(valueLabels);
-    
-    if(valueLabels != null){
-        return valueLabels
+
+    if(chart.labels != null){
+        chart.labels.forEach(chart => {
+          valueLabels.push(
+              [
+                  chart.value
+              ]
+          )
+      })
+      return valueLabels
     }
-    return null
+    return [0]
 }
 
   getLabelById(){
@@ -121,7 +123,7 @@ getValuesChart(chart : DashBoardCharts){
 
     this.charts.forEach(element => {
       if(element.id === index){
-        element.style = "border-primary border-4"
+        element.style = "border-primary"
       }
     });
   }
@@ -137,7 +139,7 @@ getValuesChart(chart : DashBoardCharts){
 
     this.labels.forEach(element => {
       if(element.id === index){
-        element.style = "border-primary border-2"
+        element.style = "border-primary"
       }
     });
   }

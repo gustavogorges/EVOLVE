@@ -4,9 +4,9 @@ import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
 import { File } from "./file";
-import { Chart } from "chart.js";
 import { DashBoardCharts } from "./DashBoardCharts";
 import { Team } from "./team";
+import { Comment } from 'src/model/comment';
 
 export class Project{
     id!: number;
@@ -23,6 +23,7 @@ export class Project{
     tasks: Array<Task> = new Array;
     adimnistrator: Array<User> = new Array;
     charts: Array<DashBoardCharts> = new Array;
+    comments:Array<Comment> = new Array;
     isVisible: boolean = false 
     team !: Team
     editOn: boolean = false

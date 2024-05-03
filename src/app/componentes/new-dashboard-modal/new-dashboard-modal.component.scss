@@ -1,11 +1,11 @@
 .modal{
-    @apply bg-primaryWhite shadow-lg absolute ml-[8vw] z-[9999] rounded-lg duration-200;
+    @apply bg-primaryWhite dark:bg-dark-secundary-gray shadow-lg absolute ml-[8vw] z-[9999] rounded-lg duration-200;
 
     .div-modal{
         @apply w-full h-[100%] overflow-auto pt-4;
 
         .title{
-            @apply text-xl text-primary font-semibold flex justify-center
+            @apply text-xl text-primary dark:text-dark-primary font-semibold flex justify-center
         }
 
         .box{
@@ -16,7 +16,7 @@
                 hover:scale-105;
                 
                 .squad{
-                    @apply bg-gray-300 rounded-lg;
+                    @apply bg-gray-300 dark:bg-gray-400 rounded-lg;
                 }
             }
         }
