@@ -103,7 +103,7 @@
     *ngIf="changePassword"
   >
     <div
-      class="w-[500px] h-[300px] bg-white p-7 rounded-xl shadow-lg flex flex-col relative"
+      class="w-[500px] h-max  bg-white p-7 rounded-xl shadow-lg flex flex-col relative"
     >
       <i
         class="absolute top-7 right-7 pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
@@ -128,9 +128,15 @@
             [(ngModel)]="changeEmail"
             type="text"
             placeholder="Digite seu email "
-            (keydown.enter)="moveFocus('password'); $event.preventDefault()"
+            (keydown.enter)="verifyEmail(); $event.preventDefault()"
             class="w-full placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
           />
+          <div
+            *ngIf="validEmail"
+            class="error-text"
+          >
+            <p>Email não encontrado</p>
+          </div>
         </div>
 
         <button
@@ -217,84 +223,82 @@
         (ngSubmit)="passwordReset()"
         [formGroup]="passwordForm"
         #formDir="ngForm">
-          <div class="form-group">
-            <label for="name" class="font-titulo font-medium flex gap-1"
-              >Senha
-              <p class="text-red-500">*</p></label
-            >
-            <input
-              type="password"
-              placeholder="Digite sua senha"
-              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
-              formControlName="password2"
-              (keydown.enter)="
-                moveFocus('confirmationPassword'); $event.preventDefault()
-              "
-            />
-            <div
-              *ngIf="formControls['password2'].errors?.['required'] && formDir.submitted"
-              class="error-text"
-            >
-              <p>Campo obrigatório.</p>
-            </div> 
-            <div
-              *ngIf="formControls['password2'].errors?.['passwordLength'] && formDir.submitted "
-              class="error-text"
-            >
-              <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
-            </div>
-            <div
-              *ngIf="formControls['password2'].errors?.['passwordNoNumber'] && formDir.submitted"
-              class="error-text"
-            >
-              <p>Senha deve conter pelo menos um número.</p>
-            </div>
-            <div
-              *ngIf="formControls['password2'].errors?.['passwordNoSpecialCharacter']  && formDir.submitted"
-              class="error-text"
-            >
-              <p>
-                Senha deve conter pelo menos um carácter especial (ex:
-                @,-,!,$).
-              </p>
-            </div>
-          </div>
-          <div class="form-group ">
-            <label for="password" class="font-titulo font-medium flex gap-1"
-              >Confirme sua senha
-              <p class="text-red-500">*</p></label
-            >
-            <input
-              type="password"
-              placeholder="Confirme sua senha "
-              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
-              formControlName="confirmationPassword"
-              (keydown.enter)="submit(); $event.preventDefault()"
-            />
-
-            <div
-              *ngIf="confirmationPassword?.errors?.['required'] && formDir.submitted"
-              class="error-text"
-            >
-              <p>Campo obrigatório.</p>
-            </div>
-            <div
-              *ngIf="confirmationPassword?.errors?.['passwordMismatch']  && formDir.submitted"
-              class="error-text"
-            >
-              <p>As senhas não conhecidem.</p>
-            </div>
-          </div>
-          <div  class="px-5 py-2 rounded-xl bg-primary text-lg flex  justify-center text-white font-titulo font-semibold"
+        <div class="form-group">
+          <label for="name" class="font-titulo font-medium flex gap-1"
+            >Senha
+            <p class="text-red-500">*</p></label
           >
-            <input
-              type="submit"
-              value="Cadastrar"
-
-              class="text-xl text-white font-titulo  font-semibold"
-            />
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+            formControlName="password"
+            (keydown.enter)="
+              moveFocus('confirmationPassword'); $event.preventDefault()
+            "
+          />
+          <div
+          *ngIf="passwordForm.get('password')?.errors?.['required'] && passwordForm.get('password')?.touched"
+            class="error-text"
+          >
+            <p>Campo obrigatório.</p>
+          </div>  
+          <div
+            *ngIf="passwordForm.get('password')?.errors?.['minLength'] && passwordForm.get('password')?.touched "
+            class="error-text"
+          >
+            <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
           </div>
-        </form>
+         
+          <div
+            *ngIf="passwordForm.get('password')?.errors?.['pattern']  && passwordForm.get('password')?.touched"
+            class="error-text"
+          >
+            <p>
+              Senha deve conter pelo menos um carácter especial (ex:
+              @,-,!,$).
+            </p>
+            <p>Senha deve conter pelo menos um número.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="font-titulo font-medium flex gap-1"
+            >Confirme sua senha
+            <p class="text-red-500">*</p></label
+          >
+          <input
+            type="password"
+            placeholder="Confirme sua senha "
+            class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+            formControlName="confirmationPassword"
+            (keydown.enter)="submit(); $event.preventDefault()"
+          />
+
+          <div
+            *ngIf="passwordForm.get('confirmationPassword')?.errors?.['required'] && passwordForm.get('confirmationPassword')?.touched"
+            class="error-text"
+          >
+            <p>Campo obrigatório.</p>
+          </div>
+          <div
+            *ngIf="passwordForm?.errors?.['passwordMismatch']  && passwordForm.get('confirmationPassword')?.touched "
+            class="error-text"
+          >
+            <p>As senhas não conhecidem.</p>
+          </div>
+        </div>
+
+
+      <button class="form-group px-5 py-2 rounded-xl bg-primary   disabled:opacity-50"     [disabled]="!passwordForm.valid">
+        <input
+          type="submit"
+          value="confirmar"
+          [disabled]="!passwordForm.valid"
+          class="text-lg text-white font-titulo font-semibold w-full "
+        />
+      </button>
+   
+    </form>
        
       </div>
     </div>
@@ -307,7 +311,7 @@
     <i
       class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
       style="font-size: 1rem"
-      (click)="closeModal()"
+      (click)="closeMessage()"
     ></i>
     <p class="text-lg self-start">
       {{ message }}

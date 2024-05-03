@@ -22,10 +22,10 @@ export class TelaCadastroComponent implements OnInit {
   ngOnInit(): void {
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email, this.emailValidator]),
-      password: new FormControl('', [Validators.required, this.passwordValidator]),
-      confirmationPassword: new FormControl('', [Validators.required, this.passwordMatchValidator])
-    } ); // Pass the validator function directly here
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6),Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*(),.?-_":{}|<>]).*$/)]),
+      confirmationPassword: new FormControl('', [Validators.required])
+    }, { validators: this.passwordMatchValidator });
   }
 
   get name() {
@@ -44,37 +44,14 @@ export class TelaCadastroComponent implements OnInit {
     return this.userForm.get("confirmationPassword");
   }
 
+  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password')?.value;
+    const confirmationPassword = control.get('confirmationPassword')?.value;
 
-
-
-  emailValidator(control: AbstractControl): ValidationErrors | null {
-    const email = control.value;
-    if (email && email.indexOf('@') === -1) {
-      return { 'invalidEmail': true };
+    if (password !== confirmationPassword) {
+      return { 'passwordMismatch': true };
     }
-    if (email && email.indexOf('.') === -1) {
-      return { 'invalidEmail': true };
-    }
-    return null;
-  }
 
-  passwordValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.value;
-    if (password && password.length < 6) {
-      console.log(1);
-      
-      return { 'passwordLength': true };
-    }
-    if (password && !/\d/.test(password)) {
-      console.log(2);
-
-      return { 'passwordNoNumber': true };
-    }
-    if (password && !/[!@#$%^&*(),.?-_":{}|<>]/.test(password)) {
-      console.log(3);
-
-      return { 'passwordNoSpecialCharacter': true };
-    }
     return null;
   }
   randomizeColor(){
@@ -84,16 +61,7 @@ export class TelaCadastroComponent implements OnInit {
     }
     return str.toUpperCase()
   }
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.parent?.get('password');
-    const confirmationPassword = control.parent?.get('confirmationPassword');
 
-    if (password && confirmationPassword && password.value !== confirmationPassword.value) {
-      return { 'passwordMismatch': true };
-    }
-
-    return null;
-  }
   moveFocus(fieldName: string): void {
     const nextInput = document.querySelector(`input[formControlName='${fieldName}']`) as HTMLInputElement;
     if (nextInput) {

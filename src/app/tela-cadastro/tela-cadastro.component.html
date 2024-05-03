@@ -50,23 +50,18 @@
                 formControlName="email"
               />
               <div
-                *ngIf="email?.errors?.['required'] && formDir.submitted"
-                class="error-text"
+              *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
+              class="error-text"
               >
                 <p>Campo é obrigatório.</p>
               </div>
               <div
-                *ngIf="email?.errors?.['email'] && formDir.submitted"
+                *ngIf="userForm.get('email')?.errors?.['email'] && userForm.get('email')?.touched"
                 class="error-text"
               >
                 <p>Email inválido.</p>
               </div>
-              <div
-                *ngIf="email?.errors?.['invalidEmail'] && formDir.submitted"
-                class="error-text"
-              >
-                <p>Email deve conter '@' and '.'.</p>
-              </div>
+           
             </div>
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
@@ -83,31 +78,27 @@
                 "
               />
               <div
-                *ngIf="password?.errors?.['required'] && formDir.submitted"
+              *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched"
                 class="error-text"
               >
                 <p>Campo obrigatório.</p>
               </div>  
               <div
-                *ngIf="password?.errors?.['passwordLength'] && formDir.submitted "
+                *ngIf="password?.errors?.['minLength'] && userForm.get('password')?.touched "
                 class="error-text"
               >
                 <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
               </div>
+             
               <div
-                *ngIf="password?.errors?.['passwordNoNumber'] && formDir.submitted"
-                class="error-text"
-              >
-                <p>Senha deve conter pelo menos um número.</p>
-              </div>
-              <div
-                *ngIf="password?.errors?.['passwordNoSpecialCharacter']  && formDir.submitted"
+                *ngIf="password?.errors?.['pattern']  && userForm.get('password')?.touched"
                 class="error-text"
               >
                 <p>
                   Senha deve conter pelo menos um carácter especial (ex:
                   @,-,!,$).
                 </p>
+                <p>Senha deve conter pelo menos um número.</p>
               </div>
             </div>
             <div class="form-group">
@@ -124,13 +115,13 @@
               />
 
               <div
-                *ngIf="confirmationPassword?.errors?.['required'] && formDir.submitted"
+                *ngIf="confirmationPassword?.errors?.['required'] && userForm.get('confirmationPassword')?.touched"
                 class="error-text"
               >
                 <p>Campo obrigatório.</p>
               </div>
               <div
-                *ngIf="confirmationPassword?.errors?.['passwordMismatch']  && formDir.submitted"
+                *ngIf="userForm?.errors?.['passwordMismatch']  && userForm.get('confirmationPassword')?.touched "
                 class="error-text"
               >
                 <p>As senhas não conhecidem.</p>
@@ -139,13 +130,14 @@
 
           </div>
 
-          <div class="form-group px-5 py-3 rounded-xl bg-secondary">
+          <button class="form-group px-5 py-3 rounded-xl bg-secondary   disabled:opacity-50"     [disabled]="!userForm.valid">
             <input
               type="submit"
               value="Cadastrar"
-              class="text-xl text-white font-titulo font-semibold"
+              [disabled]="!userForm.valid"
+              class="text-xl text-white font-titulo font-semibold w-full "
             />
-          </div>
+          </button>
           <div class="flex gap-1 text-base error-text">
             <p class="text-fontGray">Já possui uma conta?</p>
             <p class="underline" routerLink="">Login</p>
