@@ -221,13 +221,22 @@
                 (click)="editDataScheduling()"
                 class="date-end-text cursor-pointer"
               >
-                {{ tarefa.schedulingData }}
+                {{ tarefa.scheduledDate }}
               </p>
               <input
                 *ngIf="booleanCalendariosScheduling"
                 type="date"
                 [(ngModel)]="tarefa.schedulingData"
               />
+              <div
+                *ngIf="booleanCalendariosScheduling"
+                class="confirmation-buttons"
+                (click)="saveProperty2()"
+              >
+                <div class="btn confirm-btn">
+                  <i class="pi pi-check"></i>
+                </div>
+              </div>
             </div>
           </div>
         </article>

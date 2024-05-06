@@ -18,6 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';
  import html2canvas from 'html2canvas';
  import { HttpClient } from '@angular/common/http';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 interface OptionOrder {
   name: string;
@@ -43,12 +44,13 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible: boolean = false;
   filtroVisible: boolean = false;
   projeto!: Project;
+  loggedUser : User = new User();
 
 ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
   option: string | null = 'Cards';
   optionFilter: string = '';
 
-  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, 
+  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private cookies_service : CookiesService
  ) {}
 
   async atualizar(favoritado: boolean): Promise<void> { 
@@ -73,11 +75,9 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.projeto = await this.service.getOne('project', id);
       console.log(this.projeto);
       this.teste()
-
-     
     });
   
-  
+    this.loggedUser = await this.cookies_service.getLoggedUser();
    
 
   }
@@ -351,10 +351,16 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   }
 
 
-  openTaskEdit(tarefa:Task) {
+  async openTaskEdit(tarefa:Task) {
     let priorityTeste : PriorityRecord = new PriorityRecord();
     priorityTeste.name = "nenhuma";
     priorityTeste.backgroundColor = "#cccccc" 
+    this.tarefaNova.creator = this.loggedUser;
+    this.tarefaNova.project = this.projeto;
+    this.tarefaNova.currentStatus = this.projeto.statusList[0];
+    console.log(this.tarefaNova);
+    this.tarefaNova = await this.service.postTarefa(this.tarefaNova);
+    console.log(this.tarefaNova);
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
     console.log(this.tarefaSelecionada);

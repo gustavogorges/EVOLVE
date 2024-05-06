@@ -68,6 +68,10 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/property/associates/"+taskId+"/"+userId,associates)).data
   }
 
+  async removeAssociate(taskId:number, removedAssociate : number, userId:number) {
+    return (await axios.delete(this.URL+"task/property/associates/delete/"+taskId+"/"+userId+"/"+removedAssociate)).data
+  }
+
   async getAllCommentsOfTask(taskId:number) {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
@@ -278,6 +282,10 @@ export class BackendEVOLVEService {
 
   async updateTaskFinalDate(taskId:number, userId:number, newDate:Date) {
     return (await axios.put(this.URL+"task/update/finalDate/"+taskId+"/"+userId+"/calendar/"+newDate)).data
+  }
+
+  async updateTaskScheludeDate(taskId:number, userId:number, newDate:Date)  {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/scheludeDate/"+userId+"/calendar/"+newDate)).data
   }
 
   async deleteTask(taskId:number) {

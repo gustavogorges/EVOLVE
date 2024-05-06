@@ -122,7 +122,6 @@ export class ModalTarefaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    this.taskUnchanged = await this.service.getOne("task",this.tarefa.id);  
     
     this.listAssociates = this.tarefa.associates;
 
@@ -133,7 +132,6 @@ export class ModalTarefaComponent implements OnInit {
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
       this.booleanCalendarioFinalDate = true;
-      this.tarefa = this.tarefaNova;
       this.tarefa.currentStatus.name = "sem status";
       this.tarefa.priority.name = "NENHUMA"
       this.tarefa.priority.backgroundColor = "#cccccc"
@@ -147,7 +145,7 @@ export class ModalTarefaComponent implements OnInit {
   
 
   listAssociatesVerify() : boolean {
-    if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
+    if(this.tarefa.associates == null || this.tarefa.associates.length == 0) {
       if(this.booleanSelectAssociates == false) {
         return true;
       }
@@ -160,6 +158,13 @@ export class ModalTarefaComponent implements OnInit {
     
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
     this.booleanCalendarioFinalDate = false;
+  }
+
+  saveProperty2() : void {
+    console.log(this.tarefa.scheduledDate);
+    
+    this.service.updateTaskScheludeDate(this.tarefa.id,this.loggedUser.id,this.tarefa.scheduledDate)
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
   }
 
   async saveName() : Promise<void> {
@@ -204,12 +209,6 @@ export class ModalTarefaComponent implements OnInit {
       this.tarefa.name = nome.replace(/,/g, ' ');
     }
   }
-
-  edit() {
-    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
-    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling
-  }
-
   editStatus() {
       this.booleanStatus = !this.booleanStatus;
   }
