@@ -1,7 +1,7 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { map } from 'rxjs';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
@@ -53,7 +53,7 @@ export class TelaFullViewComponent implements OnInit {
     imagemBlob!:Blob
     formData : any = undefined
 
-    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer){}
+    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router){}
 
     viewOptions(){
         this.viewOptionsBol = !this.viewOptionsBol
@@ -90,6 +90,7 @@ export class TelaFullViewComponent implements OnInit {
             projetoTemp.name = this.nameEdited
             projetoTemp.description = this.descEdited
             projetoTemp.image = null
+            projetoTemp.members = []
             this.projeto = await this.service.putProjeto(projetoTemp)
         }
         if(this.formData != undefined){
@@ -196,6 +197,10 @@ export class TelaFullViewComponent implements OnInit {
         return statusPadraoPrioritario.concat(outrosStatus);
     }
     
+
+    goToPerfilMember(member:User){
+        this.router.navigateByUrl('/tela-perfil/'+member.id);
+    }
     
 
     getCharts() {

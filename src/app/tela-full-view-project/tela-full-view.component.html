@@ -110,7 +110,7 @@
         </div>
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
         <div class="top mb-10" *ngIf="miniPageView === 'Dashboards'">
-            <button class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> Voltar
+            <button *ngIf="dashboards.length != 0" class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> Voltar
                 para o topo</button>
         </div>
     </div>
@@ -136,7 +136,7 @@
                                     <p class="truncate text-sm">{{member.email}}</p>
                                 </div>
                             </div>
-                            <button class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2"><i
+                            <button (click)="goToPerfilMember(member)" class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2"><i
                                     class="pi pi-user"></i> <i class="pi pi-angle-double-right"></i></button>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                 <button *ngIf="unlockAllMembersView" (click)="unlockMembersView()"
                     class="text-primary font-semibold dark:text-dark-primary">Ver menos</button>
             </div>
-            <div #statusClose>
+            <div #statusClose class="h-fit">
                 <div class="name">
                     <p class="name-text">Status das Tarefas</p>
                 </div>

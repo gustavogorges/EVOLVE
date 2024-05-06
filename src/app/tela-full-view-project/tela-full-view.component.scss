@@ -96,11 +96,12 @@
             }
         }
     }
+
     .div-menor{
-        @apply w-full col-start-2 ;
+        @apply w-full;
 
         .square{
-            @apply p-[1.5%] overflow-auto bg-primaryGray dark:bg-gray-700 h-[80%] w-[20%] fixed shadow-md rounded-lg;
+            @apply p-[1.5%] overflow-auto bg-primaryGray dark:bg-gray-700 h-[80vh] w-[20%] fixed shadow-md rounded-lg;
 
             .name{
                 @apply px-2;
