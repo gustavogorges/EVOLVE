@@ -1,22 +1,22 @@
 .modal{
-    @apply bg-primaryWhite shadow-lg absolute ml-[8vw] z-[9999] rounded-lg duration-200;
+    @apply bg-primaryWhite dark:bg-dark-secundary-gray shadow-lg absolute ml-[8vw] z-[9999] rounded-lg duration-200;
 
     .div-modal{
         @apply w-full h-[100%] overflow-auto pt-4;
 
         .title{
-            @apply text-xl text-primary font-semibold flex justify-center
+            @apply text-xl text-primary dark:text-dark-primary font-semibold flex justify-center
         }
 
         .box{
-            @apply p-8 flex flex-wrap justify-around gap-3;
+            @apply p-8 flex flex-wrap justify-around gap-3 mb-8;
 
             .squads{
                 @apply grid grid-cols-4 grid-rows-2 rounded-lg w-[10vw] h-[11vh] border-2 p-2 gap-1 cursor-pointer duration-100
                 hover:scale-105;
                 
                 .squad{
-                    @apply bg-gray-300 rounded-lg;
+                    @apply bg-gray-300 dark:bg-gray-400 rounded-lg;
                 }
             }
         }

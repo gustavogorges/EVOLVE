@@ -1,8 +1,8 @@
 .component{
-    @apply flex mb-14 drop-shadow-2xl dark:shadow-secondaryWhite;;
+    @apply xl:flex mb-14 drop-shadow-2xl dark:shadow-secondaryWhite;;
 
     .project{
-        @apply grid grid-rows-6 grid-cols-3 w-[26vw] h-[56vh] bg-secondaryWhite dark:bg-dark-primary-black duration-300;
+        @apply grid grid-rows-6 grid-cols-3 2xl:w-[25.6vw] xl:h-[56vh] bg-secondaryWhite dark:bg-dark-primary-black duration-300;
         grid-template-rows: 30% 15% 25% 10% 9% 1% 10%;
         grid-template-columns: 28% 44% 28%;
 
@@ -12,7 +12,7 @@
             grid-template-rows: 50% 50%;
 
             .image{
-                @apply w-[7vw] h-[7vw] rounded-full bg-yellow-400 col-span-full row-span-full overflow-hidden;
+                @apply sm:w-[11vw] sm:h-[11vw] xl:h-[7vw] xl:w-[7vw] w-[20vw] h-[20vw] rounded-full col-span-full row-span-full overflow-hidden;
 
                 img{
                     @apply h-full w-full object-cover;
@@ -32,15 +32,15 @@
             @apply row-start-2 col-start-2 col-end-3 flex items-center ;
 
             input{
-                @apply w-full px-2 h-[6vh] rounded-lg text-clip text-2xl bg-transparent text-center outline-gray-300 dark:text-secondaryWhite; 
+                @apply w-full px-2 h-[6vh] rounded-lg text-clip text-sm lg:text-2xl bg-transparent text-center outline-gray-300 dark:text-secondaryWhite; 
             }
         }
 
         .project-desc{
-            @apply col-span-full px-[10%] row-start-3 row-end-4 flex justify-center items-center;
+            @apply col-span-full px-[10%] row-start-3 row-end-4 flex justify-center items-center py-2;
 
             textarea{
-                @apply h-full resize-none w-full bg-gray-100 rounded-lg outline-none shadow-inner p-4 px-5 truncate dark:bg-dark-primary-gray dark:text-secondaryWhite;
+                @apply h-full resize-none w-full whitespace-pre-wrap bg-gray-100 text-sm lg:text-lg rounded-lg outline-none shadow-inner p-4 px-5 truncate dark:bg-dark-primary-gray dark:text-secondaryWhite;
             }
         }
 
@@ -55,7 +55,7 @@
             @apply row-start-7 col-start-3 col-end-3 w-full h-full flex items-center gap-3;
 
             div{
-                @apply w-[2vw] h-[2vw] rounded-full flex justify-center items-center select-none
+                @apply xl:w-[2vw] xl:h-[2vw] w-[4vw] h-[4vw] rounded-full flex justify-center items-center select-none
             }
 
             p{
@@ -75,16 +75,17 @@
             @apply row-start-7 h-full w-full flex items-center px-[10%] col-span-full;
 
             p{
-                @apply text-primary text-xl dark:text-dark-primary;
+                @apply text-primary text-sm 2xl:text-xl dark:text-dark-primary;
             }
         }
     }
+
     
     .project-open{
-        @apply flex flex-col gap-[10%] py-[3%] h-[56vh] bg-gray-200 duration-300 overflow-hidden dark:bg-dark-primary-gray;
+        @apply xl:flex flex-col gap-[12%] pt-[2%] py-[1%] xl:h-[56vh] hidden bg-gray-200 duration-300 overflow-hidden dark:bg-dark-primary-gray relative;
 
         .project-open-infos{
-            @apply h-[70%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg overflow-y-hidden relative;
+            @apply h-[60%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg overflow-y-hidden relative;
 
             .tittle-infos{
                 @apply grid grid-cols-4 grid-rows-1 justify-items-center mb-2 px-2 z-50 bg-secondaryWhite dark:bg-dark-primary-black rounded-lg min-w-max;
@@ -95,13 +96,13 @@
             }
 
             .value-infos{
-                @apply h-[20vh] overflow-y-auto;
+                @apply h-[18vh] overflow-y-auto min-w-max;
 
                 .values{
                     @apply grid grid-cols-4 grid-rows-1 px-2 justify-items-center items-center mb-3 min-w-min;
 
                     .Nome{
-                        @apply truncate w-full text-center text-sm text-primary
+                        @apply truncate w-full text-center text-sm text-primary dark:text-dark-primary
                     }
     
                     .Progresso{
@@ -117,70 +118,211 @@
                     }
     
                     .Prazo{
-                        @apply text-primary
+                        @apply text-primary dark:text-dark-primary
                     }
     
                     p{
                         @apply font-semibold
                     }
                 }
-            }
-        }
-
-        .project-open-users{
-            @apply h-[40%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg grid grid-cols-3 justify-items-center items-center;
-            grid-template-columns: 10% 80% 10%;
-
-            span{
-                @apply text-2xl font-semibold cursor-pointer hover:scale-110 duration-100 dark:text-secondaryWhite
-            }
-
-            .users{
-                @apply flex gap-2 w-full overflow-x-auto;
-
-                .users-spam{
-                    @apply flex flex-col items-center gap-1;
-
-                    div{
-                        @apply w-[4.2vw] h-[4.2vw] rounded-full flex items-center justify-center font-bold text-4xl 
-                    }
-
-                    p{
-                        @apply text-sm truncate max-w-[5vw] dark:text-secondaryWhite
-                    }
+                
+                .noneTask{
+                    @apply h-[80%] w-full flex justify-center items-center text-xl text-fontGray whitespace-nowrap;
                 }
             }
         }
 
+        .project-open-users{
+            @apply h-[50%];
+            .users{
+                @apply h-[90%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-b-lg grid grid-cols-3 justify-items-center items-center;
+                grid-template-columns: 10% 80% 10%;
+
+                span{
+                    @apply text-2xl font-semibold cursor-pointer hover:scale-110 duration-100 dark:text-secondaryWhite
+                }
+
+                .users{
+                    @apply flex gap-2 w-full overflow-x-auto;
+
+                    .users-spam{
+                        @apply flex flex-col items-center gap-1 relative;
+
+                        div{
+                            @apply w-[4.2vw] h-[4.2vw] rounded-full flex items-center justify-center font-bold text-4xl 
+                        }
+
+                        p{
+                            @apply text-sm truncate max-w-[5vw] dark:text-secondaryWhite
+                        }
+                        
+                        .delete-member{
+                            @apply absolute right-0 rounded-full bg-red-600 flex justify-center items-center hover:scale-110 duration-150 overflow-hidden;
+                        }
+                    }
+
+                    .membros{
+                        @apply w-full h-full flex items-center justify-center;
+                    }
+                }
+
+            }
+        }
+
         .botoes{
-            @apply flex justify-between min-w-max;
+            @apply flex justify-between 2xl:min-w-max;
 
             button{
                 @apply duration-200;
             }
 
             .botao-cancelar{
-                @apply w-auto px-2 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105
+                @apply w-auto px-1 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105
             }
         
             .botao-salvar-projeto{
-                @apply w-auto px-3 h-10 bg-secondary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+                @apply w-auto 2xl:px-3 h-10 bg-secondary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
         
                 i{
-                    @apply px-1
+                    @apply px-1 text-sm
                 }
             }
 
             .botao-editar-projeto{
-                @apply w-auto px-3 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+                @apply w-auto px-1 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
         
                 i{
-                    @apply px-1
+                    @apply px-1 text-sm
                 }
             }
         
-            .botao-ir-para-tarefa{
-                @apply w-auto px-4 h-10 bg-secondary dark:bg-dark-secondary rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
+            .botao-ir-para-projeto{
+                @apply w-auto px-1 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm flex gap-1 items-center duration-200 text-primaryWhite dark:text-dark-primary-black
+            }
+        }
+    }
+
+    .project-open-sm{
+        @apply flex flex-col px-[2%] gap-[12%] xl:h-[56vh] xl:hidden bg-gray-200 duration-300 overflow-hidden dark:bg-dark-primary-gray relative;
+
+        .project-open-infos{
+            @apply h-[60%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg overflow-y-hidden relative;
+
+            .tittle-infos{
+                @apply grid grid-cols-4 grid-rows-1 justify-items-center mb-2 px-2 z-50 bg-secondaryWhite dark:bg-dark-primary-black rounded-lg min-w-max;
+
+                p{
+                    @apply text-fontGray text-lg font-medium
+                }
+            }
+
+            .value-infos{
+                @apply h-[18vh] overflow-y-auto min-w-max;
+
+                .values{
+                    @apply grid grid-cols-4 grid-rows-1 px-2 justify-items-center items-center mb-3 min-w-min;
+
+                    .Nome{
+                        @apply truncate w-full text-center text-sm text-primary dark:text-dark-primary
+                    }
+    
+                    .Progresso{
+                        @apply w-[90%] h-1/2 bg-gray-200 dark:bg-dark-secundary-gray rounded-full overflow-hidden;
+        
+                        .valor-progresso{
+                            @apply bg-primary dark:bg-dark-primary duration-700 h-full
+                        }
+                    }
+    
+                    .Status{
+                        @apply p-1 rounded-2xl px-2 text-sm z-50 max-w-full truncate
+                    }
+    
+                    .Prazo{
+                        @apply text-primary dark:text-dark-primary
+                    }
+    
+                    p{
+                        @apply font-semibold
+                    }
+                }
+
+                .noneTask{
+                    @apply h-[20%] w-full flex justify-center items-center text-xl text-fontGray whitespace-nowrap;
+                }
+            }
+        }
+
+        .project-open-users{
+            @apply h-[50%];
+            .users{
+                @apply h-[90%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-b-lg grid grid-cols-3 justify-items-center items-center;
+                grid-template-columns: 10% 80% 10%;
+
+                span{
+                    @apply text-2xl font-semibold cursor-pointer hover:scale-110 duration-100 dark:text-secondaryWhite
+                }
+
+                .users{
+                    @apply flex gap-6 w-full overflow-x-auto;
+
+                    .users-spam{
+                        @apply flex flex-col items-center gap-1 relative;
+
+                        div{
+                            @apply w-[12vw] h-[12vw] lg:w-[8vw] lg:h-[8vw] rounded-full flex items-center justify-center font-bold text-4xl 
+                        }
+
+                        p{
+                            @apply text-sm truncate max-w-[14vw] dark:text-secondaryWhite
+                        }
+                        
+                        .delete-member{
+                            @apply absolute right-0 rounded-full bg-red-600 flex justify-center items-center hover:scale-110 duration-150 overflow-hidden;
+                        }
+                    }
+
+                    .membros{
+                        @apply w-full h-full text-sm flex items-center justify-center;
+                    }
+                }
+
+            }
+        }
+
+        .botoes{
+            @apply flex justify-between 2xl:min-w-max;
+
+            button{
+                @apply duration-200;
+            }
+
+            .botao-cancelar{
+                @apply w-[30%] px-1 h-10 bg-red-600 dark:bg-red-400 rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105
+            }
+        
+            .botao-salvar-projeto{
+                @apply w-[30%] px-3 h-10 bg-secondary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+        
+                i{
+                    @apply px-1 text-sm
+                }
+            }
+
+            .botao-editar-projeto{
+                @apply w-[30%] px-1 h-10 bg-primary dark:bg-dark-primary rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+        
+                i{
+                    @apply text-sm
+                }
+            }
+
+            .botao-ir-para-projeto{
+                @apply w-[30%] px-1 h-10 bg-secondary dark:bg-dark-secundary-green rounded-lg font-bold text-sm text-primaryWhite dark:text-gray-900 duration-200 hover:scale-105;
+        
+                i{
+                    @apply text-sm
+                }
             }
         }
     }

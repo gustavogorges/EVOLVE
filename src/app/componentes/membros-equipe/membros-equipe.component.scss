@@ -1,12 +1,12 @@
 .div-membros{
-    @apply h-[12vh] w-full grid grid-cols-4 grid-rows-1 dark:text-white;
+    @apply h-[12vh] w-full grid grid-cols-4 grid-rows-1 ;
     grid-template-columns: 15% 45% 25% 15%;
 
     .foto{
         @apply col-start-1 col-end-2 flex items-center justify-center;
 
         .foto2{
-            @apply h-[5rem] w-[5rem] overflow-hidden rounded-full text-4xl flex justify-center items-center font-semibold
+            @apply h-[5rem] w-[5rem] overflow-hidden rounded-full text-4xl flex justify-center items-center font-semibold 
         }
 
         .fotoImagem{
@@ -18,7 +18,7 @@
         @apply col-start-2 col-end-3 w-full flex flex-col justify-center;
 
         .nome{
-            @apply w-full text-xl
+            @apply w-full text-xl dark:text-white
         }
 
         .email{

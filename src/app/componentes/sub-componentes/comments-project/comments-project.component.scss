@@ -1,0 +1,161 @@
+.comentario-pai{
+    @apply w-full h-[60vh] bg-primaryGray p-5 dark:bg-dark-primary-gray rounded-b-xl shadow-lg;
+    .fundo-comentario{
+        @apply bg-secondaryWhite h-[83%] dark:bg-dark-secundary-gray rounded-t-xl overflow-auto;
+    
+        .comentarios{
+            @apply w-full;
+
+            .comentario{
+                @apply grid grid-cols-2 grid-rows-2 items-center py-3 border-b-2
+                border-gray-200
+                dark:border-gray-500;
+                grid-template-columns: 12% 78% 10%;
+
+                .foto-user{
+                    @apply col-start-1 col-end-2 row-span-full flex justify-center;
+
+                    .foto{
+                        @apply col-start-1 col-end-2 flex items-center rounded-full border-2 justify-center;
+                
+                        .foto2{
+                            @apply h-[4rem] w-[4rem] overflow-hidden rounded-full text-3xl flex justify-center items-center font-semibold 
+                        }
+                
+                        .fotoImagem{
+                            @apply h-[4rem] w-[4rem] rounded-full object-cover
+                        }
+                    }
+                }
+
+                .nome{
+                    @apply row-start-1 row-end-2 col-start-2 col-end-3 text-xl font-semibold
+                    text-primary
+                    dark:text-dark-primary;
+                }
+
+                .comentario-text{
+                    @apply overflow-auto row-start-2 col-start-2 col-end-3 text-lg dark:text-primaryGray;
+
+                    p{
+                        @apply text-justify break-all
+                    }
+                }
+
+                .date{
+                    @apply text-gray-500 dark:text-gray-300 items-center px-1;
+                }
+            }
+        }
+    }
+}
+
+.main {
+    @apply w-full h-full flex justify-center
+}
+
+.main-card {
+    @apply  w-full max-h-[80%] rounded-t-xl 
+}
+
+.card {
+    @apply w-full pt-3 min-h-[40%] max-h-full bg-white rounded-t-xl border-t-2 border-x-2 border-primaryWhite flex flex-col items-center gap-4 overflow-y-auto
+}
+
+.box-btn-add {
+    @apply w-full h-[15%] border-x-2 border-b-2 border-primaryWhite border-t-2 rounded-b-xl flex justify-center items-center cursor-pointer
+}
+
+.s-input input {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+
+    
+    /* largura do scroll */
+   
+  }
+  
+  /* Define a cor do fundo do scroll */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Define a cor do thumb (a alça do scroll) */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background: #E5E5E5 
+    
+  }
+  
+  .s-input input + label:before {
+    content: "";
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+    border: solid 2px #6A7181;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-bottom: 3px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .s-input input:checked + label:before{
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9.54961 17.9996L3.84961 12.2996L5.27461 10.8746L9.54961 15.1496L18.7246 5.97461L20.1496 7.39961L9.54961 17.9996Z' fill='%23F8F8F8'/%3E%3C/svg%3E");
+    padding: 1px;
+    background-position: center;
+    background-color: #4C956C;
+    border: solid 2px #4C956C;
+  
+  
+  }
+
+  .btn-add-content {
+    @apply flex justify-center items-center gap-3
+  }
+
+  .btn-add-text {
+    @apply text-primary text-xl font-bold
+  }
+
+  .comment {
+    @apply w-full grid grid-cols-2 h-[30%] my-2;
+    grid-template-columns : 15% 85%;
+  }
+
+  .profile-picture-box {
+    @apply w-full h-full flex justify-center items-center
+  }
+
+  .profile-picture {
+    @apply w-12 h-12 rounded-full bg-purple-500
+  }
+
+  .comment-content {
+    @apply grid w-full h-full;
+    grid-template-rows: 40% 60%;
+  }
+
+  .commentor-name {
+    @apply text-xl text-primary font-bold
+  }
+
+  .commentor-name-box {
+    @apply flex items-end justify-between w-[95%]
+  }
+
+  .comment-date {
+     @apply text-fontGray text-sm
+  }
+
+  .comment-text-box {
+    @apply flex items-center justify-between w-[95%]
+  }
+
+  .comment-text {
+    @apply text-base 
+  }

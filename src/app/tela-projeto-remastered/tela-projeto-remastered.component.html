@@ -1,27 +1,32 @@
-<div class="screen">
-
+<confirm-action-project-modal *ngIf="confirmationActionModalBol" class="fixed z-10 left-[5%] right-[5%] xl:right-0 top-1/3 xl:left-[37%]" (result)="setResponse($event)" [quest]="quest"></confirm-action-project-modal>
+<div class="screen duration-150" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50':'blur-0'">
     <div class="tittle">
-        <h1>Equipe Padrão</h1>
-        <button (click)="goToCreateProject()"><i class="pi pi-plus"></i> Adicionar Projeto</button>
+        <p>{{team?.name}}</p>
+        <button (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> Adicionar Projeto</button>
     </div>
-
+    
     <div class="projects">
         <div *ngFor="let p of projects" #projectElement>
-
+            
             <app-projeto-remastered 
-
-                (salvarProjeto)="editFun($event)"
-                [projectOpen]="p.isVisible" 
-                [projeto]="p" 
-                (click)="openProject(p)" 
-                (noCloseProject)="noCloseProject(p)"
-                (deletar)="delete($event)"
-                [resetProject]="resetProject"
-                (editProject)="editProject($event, p)"
-                (resetProjectOff)="resetProjectOff()"
-                (MultipartFile)="saveImage($event)"
+            
+            (salvarProjeto)="editFun($event)"
+            [projectOpen]="p.isVisible" 
+            [projeto]="p" 
+            (click)="openProject(p)" 
+            (noCloseProject)="noCloseProject(p)"
+            (deletar)="delete($event)"
+            [resetProject]="resetProject"
+            (editProject)="editProject($event, p)"
+            (resetProjectOff)="resetProjectOff()"
+            (MultipartFile)="saveImage($event)"
+            (quest)="setQuest($event)"
+            [confirmationAction]="getResponse()"
+            (listFromRemove)="setListFromRemove($event)"
+            
             ></app-projeto-remastered>
-
+            
         </div>
     </div>
 </div>
+<div *ngIf="confirmationActionModalBol" class="fixed w-screen h-screen top-0 left-0"></div>

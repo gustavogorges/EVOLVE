@@ -3,7 +3,7 @@
         <div class="status-adjust" *ngFor="let status of projeto.statusList">
             <div
              class="status cursor-pointer"
-             [ngStyle]="{'background-color': status.backgroundColor}"
+             [ngStyle]="{'background-color': status.backgroundColor, 'color': status.textColor}"
              >
                 <p class="truncate px-4">{{status.name}}</p>
             </div>

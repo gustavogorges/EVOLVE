@@ -1,25 +1,47 @@
 .modal{
-    @apply bg-primaryWhite shadow-lg absolute mt-8 z-50 rounded-lg duration-200;
+    @apply bg-primaryWhite dark:bg-dark-secundary-gray shadow-lg absolute mt-3 z-50 rounded-lg duration-300;
 
     .div-modal{
         @apply w-full h-[100%] overflow-auto pt-4;
 
         .title{
-            @apply text-xl min-w-max text-primary font-semibold flex justify-center
+            @apply text-xl min-w-max text-primary dark:text-dark-primary font-semibold flex justify-center
         }
 
         .box{
-            @apply p-8 flex flex-wrap justify-around gap-3;
+            @apply p-8 flex flex-wrap justify-evenly;
 
             .squads{
-                @apply rounded-lg min-w-max w-[17vw] h-[17vh] border-2 gap-1 cursor-pointer duration-100
+                @apply rounded-lg w-[17vw] h-[17vh] border-2 gap-1 cursor-pointer duration-100
                 hover:scale-105;
                 
                 .squad{
-                    @apply min-w-max bg-gray-300 rounded-lg;
+                    @apply min-w-max bg-gray-300 dark:bg-dark-secundary-gray rounded-lg;
                 }
             }
         }
 
     }
+}
+
+.div-modal{
+    @apply w-full h-[100%] overflow-auto pt-2;
+
+    .title{
+        @apply text-xl min-w-max text-primary font-semibold flex justify-center
+    }
+
+    .box{
+        @apply p-8 flex flex-wrap gap-3 justify-evenly;
+
+        .squads{
+            @apply rounded-lg w-[17vw] h-[17vh] border-2 gap-1 cursor-pointer duration-100
+            hover:scale-105;
+            
+            .squad{
+                @apply min-w-max bg-gray-300 rounded-lg;
+            }
+        }
+    }
+
 }

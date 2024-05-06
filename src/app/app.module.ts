@@ -61,7 +61,7 @@ import { MessageBarComponent } from './componentes/message-bar/message-bar.compo
 
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
-import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { TelaFullViewComponent } from './tela-full-view-project/tela-full-view.component';
 import { ChartModule } from 'primeng/chart';
 import { ChartModalComponent } from './componentes/chart-modal/chart-modal.component';
 
@@ -106,7 +106,10 @@ import { ModalConfigComponent } from './componentes/modal-config/modal-config.co
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
 import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
-
+import { ConfirmActionProjectModalComponent } from './componentes/sub-componentes/confirm-action-project-modal/confirm-action-project-modal.component';
+import { ModalOptionFullViewComponent } from './componentes/sub-componentes/modal-option-full-view/modal-option-full-view.component';
+import { CommentsProjectComponent } from './componentes/sub-componentes/comments-project/comments-project.component';
+import { MemberListFullViewProjectComponent } from './componentes/sub-componentes/member-list-full-view-project/member-list-full-view-project.component';
 
 
 
@@ -187,8 +190,11 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
     TelaPerfilComponent,
     SelectAssociatesComponent,
     VlibrasComponent,
-    TelaReportsComponent
-
+    TelaReportsComponent,
+    ConfirmActionProjectModalComponent,
+    ModalOptionFullViewComponent,
+    CommentsProjectComponent,
+    MemberListFullViewProjectComponent
   ],
   
   imports: [
