@@ -11,6 +11,9 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import emailjs, { send } from '@emailjs/browser';
 import { getRtlScrollAxisType } from '@angular/cdk/platform';
+import { AuthService } from 'src/service/autService';
+import { CookieService } from 'ngx-cookie-service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tela-login',
@@ -22,7 +25,8 @@ export class TelaLoginComponent implements OnInit {
   userForm!: FormGroup;
   passwordForm!: FormGroup;
 
-  constructor(private router: Router, private service: BackendEVOLVEService) {}
+  constructor(private router: Router, private service: BackendEVOLVEService, private authService :AuthService,
+    private cookie : CookiesService) {}
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -60,8 +64,16 @@ export class TelaLoginComponent implements OnInit {
   get password() {
     return this.userForm.get('password');
   }
+  responseData : any 
   submit() {
-    // [disabled]="!passwordForm.valid"
+    this.authService.proceedLogin(this.userForm.value).subscribe(result => {
+      if(result!=null){
+        this.responseData = result;
+        this.cookie.setJWTtoken(this.responseData.jwtToken); 
+        this.router.navigate(["/tela-inicial "])
+
+      }
+    })
   }
   get formControls() {
     return this.passwordForm.controls;

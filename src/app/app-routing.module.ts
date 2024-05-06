@@ -13,12 +13,13 @@ import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
+import { AuthGuard } from './shared/auth.guard';
 
 
 const routes: Routes = [
   {
     path : "",
-    component : TelaLoginComponent
+    component : TelaLoginComponent,
   },
   {
     path : "tela-cadastro",
@@ -26,43 +27,52 @@ const routes: Routes = [
   }, 
   {
     path : "tela-inicial",
-    component : TelaInicialComponent
+    component : TelaInicialComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"tela-projeto",
-    component: TelaProjetoRemasteredComponent
+    component: TelaProjetoRemasteredComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"tela-tarefa/:projectId",
-    component: TelaTarefaComponent
+    component: TelaTarefaComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"criar-projeto",
-    component: TelaCriarProjetoComponent
+    component: TelaCriarProjetoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"tela-chat",
-    component: TelaChatComponent
+    component: TelaChatComponent,
+    canActivate: [AuthGuard]
   },
   {
 
     path:"equipe/criar",
-    component: TeamCreationScreenComponent
+    component: TeamCreationScreenComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:'view-project',
-    component: TelaFullViewComponent
+    component: TelaFullViewComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path:'reports',
-    component: TelaReportsComponent
+    component: TelaReportsComponent,
+    canActivate: [AuthGuard]
 
   },
   {
 
     path:"tela-perfil/:userId",
-    component: TelaPerfilComponent
+    component: TelaPerfilComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

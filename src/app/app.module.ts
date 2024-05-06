@@ -106,6 +106,7 @@ import { ModalConfigComponent } from './componentes/modal-config/modal-config.co
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
 import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -215,7 +216,8 @@ import { TelaReportsComponent } from './tela-reports/tela-reports.component';
     CommonModule,
 
     InputNumberModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   
   providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,
