@@ -15,6 +15,7 @@ export const theme = {
 
       'dark-primary': 'var(--main-dark-color)',
       'dark-secundary-gray': '#414651',
+      'dark-secundary-green': '#86C19F',
       'dark-primary-black': '#171717',
       'dark-theme-back': '#232323',
       'dark-secondary': 'var(--secondary-dark-color)',

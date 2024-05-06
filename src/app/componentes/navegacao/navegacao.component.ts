@@ -17,7 +17,7 @@ export class NavegacaoComponent implements OnInit {
     ) { }
   sideBar = false
   loggedUser !: User; 
-
+  notification = false 
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService
@@ -96,6 +96,7 @@ export class NavegacaoComponent implements OnInit {
     document.querySelector('.pi-moon')?.classList.add('pi-sun')
     document.querySelector('.pi-moon')?.classList.remove('pi-moon')
   }
+
   changeFont(){
     document.documentElement.style.setProperty('--font-size-base', ''+this.loggedUser.fontSize+'px');
     document.documentElement.style.setProperty('--font-size-sm', ''+(this.loggedUser.fontSize-2)+'px');
@@ -103,7 +104,10 @@ export class NavegacaoComponent implements OnInit {
     document.documentElement.style.setProperty('--font-size-xl', ''+(this.loggedUser.fontSize+4)+'px');
     document.documentElement.style.setProperty('--font-size-2xl', ''+(this.loggedUser.fontSize+8)+'px');
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.loggedUser.fontSize+14)+'px');
-  
+  }
+
+  openNotification(){
+    this.notification= !this.notification
   }
 
 }

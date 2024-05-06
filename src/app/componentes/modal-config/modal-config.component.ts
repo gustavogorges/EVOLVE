@@ -104,13 +104,17 @@ primaryColor = ""
 secondaryColor = ""
 
 changeColor(novaCor: string){
+  if(this.primaryColor && this.secondaryColor){
+    this.primaryColor = ''
+    this.secondaryColor = ''
+  }
   this.divSelecionada = !this.divSelecionada;
   console.log(3);
   console.log(this.primaryColor);
-  if(this.primaryColor =="#185E77"  ){
+  if(this.primaryColor == "#185E77"  ){
     this.primaryColor="";
    
-  }else if(this.secondaryColor=="#4C956C"){
+  }else if(this.secondaryColor == "#4C956C"){
     this.secondaryColor=""; 
 
   }
@@ -133,7 +137,9 @@ changeColor(novaCor: string){
     
     this.colorService.setSecondaryColor(novaCor)
 
-  }else if(this.primaryColor==novaCor){
+  }
+  
+  else if(this.primaryColor==novaCor){
     console.log(46);
 
     this.primaryColor="";
@@ -142,7 +148,8 @@ changeColor(novaCor: string){
 
     this.secondaryColor=""
   }
-  
+
+  this.checkDefaultColors()
 
 }
 primaryDarkColor = ""
@@ -150,6 +157,10 @@ secondaryDarkColor = ""
 divSelecionada: boolean = false;
 
 changeDarkColor(novaCor: string){
+  if(this.primaryDarkColor && this.secondaryDarkColor){
+    this.primaryDarkColor = ''
+    this.secondaryDarkColor = ''
+  }
   console.log(this.primaryColor);
   if(this.primaryDarkColor =="#67BFE0"  ){
     this.primaryDarkColor="";
@@ -191,7 +202,7 @@ checkDefaultColors(){
   console.log(this.defaultColors);
   
   
-  if(this.loggedUser.primaryColor=='#185E77'||this.loggedUser.secondaryColor=='#4C956C'||this.loggedUser.primaryDarkColor=='#67BFE0'||this.loggedUser.secondaryDarkColor=='#86C19F' ){
+  if((this.loggedUser.primaryColor=='#185E77'||this.loggedUser.secondaryColor=='#4C956C')&&(this.loggedUser.primaryDarkColor=='#67BFE0'||this.loggedUser.secondaryDarkColor=='#86C19F' )){
     console.log(1
     );
     

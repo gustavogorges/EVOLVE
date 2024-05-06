@@ -23,6 +23,8 @@ import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
 import { PriorityRecord } from 'src/model/PriorityRecord';
 import { Subtask } from 'src/model/subtask';
+import { Dashboard } from 'src/model/dashboard';
+import { DashBoardCharts } from 'src/model/DashBoardCharts';
 
 
 
@@ -31,7 +33,9 @@ import { Subtask } from 'src/model/subtask';
   providedIn: 'root'
 })
 export class BackendEVOLVEService {
+  
   URL : string = "http://localhost:8087/"
+  project$: any;
 
   constructor() { }
 
@@ -39,7 +43,7 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+caminho)).data
   }
   async getOne(caminho : string, id:number){
-    return (await axios.get(this.URL+caminho + "/"+id)).data
+    return (await axios.get(this.URL + caminho + "/" + id)).data
   }
   async getUser( email: string )  {
     return (await axios.get(this.URL+"user/login" + "/"+email)).data
@@ -49,6 +53,9 @@ export class BackendEVOLVEService {
   }
   async getProjectsByUserId( userId: number )  {
     return (await axios.get(this.URL+"project" + "/user/"+userId)).data
+  }
+  async getProjectsByTeamId( teamId: number, userId: number )  {
+    return (await axios.get(this.URL+"project" + "/team/"+teamId+"/"+userId)).data
   }
   async getTeamsByUserId( userId: number )  {
     return (await axios.get(this.URL+"team" + "/user/"+userId)).data
@@ -65,6 +72,7 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
 
+
   async patchNewComment(taskId:number, newComment:Comment, userId:number) {
     return (await axios.patch(this.URL+"task/comments/patch/"+taskId+"/"+userId,newComment)).data
   }
@@ -72,13 +80,26 @@ export class BackendEVOLVEService {
   async deleteComment(taskId:number, commentId:number, userId:number) {
     return (await axios.delete(this.URL+"task/comments/delete/"+commentId+"/"+taskId+"/"+userId)).data
   }
+  async getAllCommentsOfProject(projectId:number) {
+    return (await axios.get(this.URL+"project/comments/getAll/"+projectId)).data
+  }
+
+
+  async patchNewCommentProject(projectId:number, newComment:Comment, userId:number) {
+    return (await axios.patch(this.URL+"project/comments/patch/"+projectId+"/"+userId,newComment)).data
+  }
+
+  async deleteCommentProject(projectId:number, commentId:number, userId:number) {
+    return (await axios.delete(this.URL+"project/comments/delete/"+commentId+"/"+projectId+"/"+userId)).data
+  }
+
 
   async updateStatusList(projetoId:number,novoStatus:Status) {
     return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
   }
  
   async deleteStatus(projetoId:number,status:Status) {
-    return (await axios.patch(this.URL+"project/delete/"+projetoId, status )).data
+    return (await axios.patch(this.URL+"project/"+projetoId+"/deleteStatus", status)).data
   }
 
   async patchProperty(taskProjectProperty:Property, taskId:number, userId:number) {
@@ -131,12 +152,12 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"task/"+userId, tarefa)).data
   }
 
-  async postProjeto (projeto:Project){
-    return (await axios.post(this.URL+"project", projeto)).data
+  async postProjeto (project:Project){
+    return (await axios.post(this.URL+"project", project)).data
   }
 
-  async putProjeto (projeto:Project){
-    return (await axios.put(this.URL+"project", projeto)).data
+  async putProjeto (project:Project){
+    return (await axios.put(this.URL+"project", project)).data
   }
 
   async postUsuario (usuario:User){
@@ -219,6 +240,10 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
   }
 
+  async deleteUserFromProject(idProject:number, users:Array<Pick<User, "id">>){
+    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user", users)).data
+  }
+
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id:number) : Promise<Array<UserChat>> {
     let path:string = "userChat/user/"
@@ -238,7 +263,6 @@ export class BackendEVOLVEService {
   async patchImage(id:number, image:any){
     return (await (axios.patch(this.URL+"project/"+id+"/setImage", image))).data;
   }
-
 
   async deleteProperty(taskId:number, userId:number, propertyId:number) {
     return (await axios.delete(this.URL+"task/property/delete/"+taskId+"/"+userId+"/"+propertyId)).data
@@ -268,6 +292,47 @@ export class BackendEVOLVEService {
 
   async deleteTaskFile(taskId:number, fileId:number,userId:number) {
     return (await axios.delete(this.URL+"task/delete/task/file/"+taskId+"/"+fileId+"/"+userId)).data
+  }
+
+  async getCharts(idProject:number){
+    return (await (axios.patch(this.URL+idProject+"/dashboard/getCharts"))).data;
+  }
+
+  async postDashboard(dashboard:Dashboard, idProject:number){
+    return (await axios.post(this.URL+idProject+"/dashboard", dashboard)).data 
+  }
+
+  async getDashboards(idProject:number){
+    return (await (axios.get(this.URL+idProject+"/dashboard"))).data;
+  }
+
+  async deleteDashboard(idDashboard:number){
+    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard))).data;
+  }
+
+  async updateDashboard(dashboard:Dashboard, idDashboard:number, idProject:number){
+    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard, dashboard))).data;
+  }
+
+  async setChartToDash(idDashboard:number, idProject:number, chart:DashBoardCharts){
+    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard, chart))).data;
+  }
+
+  async updateChartList(idDashboard:number, idProject:number, charts:Array<DashBoardCharts>){
+    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard+"/updateChartList", charts))).data;
+  }
+
+  async deleteChart(idDashboard:number, idChart:number, idProject:number){
+    return (await (axios.delete(this.URL+idProject+"/dashboard/"+idDashboard+"/delete-chart/"+idChart))).data;
+  }
+
+
+  async patchReadedNotification(teamId:number, notificationId:number) {
+    return (await axios.patch(this.URL+"team/"+teamId+"/"+notificationId)).data
+  }
+
+  async cleanAllUserNotifications(userId:number) {
+    return (await axios.delete(this.URL+"team/clean/"+userId)).data
   }
 
 }

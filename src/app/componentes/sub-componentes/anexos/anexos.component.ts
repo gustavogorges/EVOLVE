@@ -46,9 +46,8 @@ export class AnexosComponent implements OnInit {
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: 'application/pdf' });
 
-    this.url = window.URL.createObjectURL(blob);
-    console.log(this.url);
-    
+    taskFile.url = window.URL.createObjectURL(blob);
+
   }
 
   removeTaskFile(file:TaskFile): void {

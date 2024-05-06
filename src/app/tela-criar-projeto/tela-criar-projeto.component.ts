@@ -1,11 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Team } from 'src/model/team';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -17,13 +18,26 @@ export class TelaCriarProjetoComponent implements OnInit {
   preImage: any;
   formData: any;
 
-  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer){}
+  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
   
-  async ngOnInit(){
+  ngOnInit(){
     this.projeto = new Project
-    this.usuarios = await this.service.getAllSomething('user') || []
-    this.getStatusList()
-    this.randomColor()
+
+    this.activatedRoute.paramMap.subscribe( async params  => {
+      const teamId = params.get('teamId');
+      const teamid  = Number(teamId)
+      this.team = await this.service.getOne("team", teamid) as Team
+      
+      this.usuarios = this.team.participants || []
+      
+      this.projeto = new Project();
+
+    // Chame getStatusList() aqui dentro
+      if (this.projeto) {
+        this.getStatusList();
+        this.randomColor();
+      }
+    });
   }
   
   messages: Message[] | undefined;
@@ -34,9 +48,22 @@ export class TelaCriarProjetoComponent implements OnInit {
   searchTerm : string = ''
   priorityBol : boolean = false
   backGroundColorProject : string = ''
+  team !: Team
 
   statusEnabled(){
     this.statusVisible = !this.statusVisible
+  }
+
+  isContrastSufficient(textColor: string, backgroundColor: string, threshold: number = 4.5): boolean {
+    const luminance = (color: string) => {
+        const rgb = color.substr(1); // Remover o '#' do início da string
+        const [r, g, b] = rgb.match(/.{2}/g)!.map(hex => parseInt(hex, 16) / 255); // Converter cada par de caracteres hexadecimais em um número e normalizar
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+
+    const contrastRatio = (luminance(textColor) + 0.05) / (luminance(backgroundColor) + 0.05);
+
+    return contrastRatio >= threshold;
   }
 
   getStatusList(){
@@ -103,26 +130,36 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   
-  async salvarProjeto(){
-    if(this.projeto.name != '' && this.date != null){
+  async salvarProjeto(teamId: number) {
+    if (this.projeto && this.projeto.name !== '' && this.date) {
       this.projeto.finalDate = this.dateFormat(this.date);
-      let postProject:any = this.projeto
-      let lista: Array<Pick<User, "id">> = new Array
-      this.projeto.members.forEach(element => {
-        lista.push({
-          "id" : element.id
-        })
+  
+      let postProject: any = this.projeto;
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          let lista: Array<Pick<User, "id">> = [];
+          this.projeto.members.forEach(element => {
+            lista.push({ "id": element.id });
+          });
+          postProject.members = lista;
+  
+          postProject.creator = { "id": 1 };
+          postProject.adimnistrator = { "id": 1 };
+          postProject.team = { "id": this.team.id };
+          postProject.imageColor = this.backGroundColorProject;
+          postProject.image = null;
+  
+          resolve();
+        });
       });
-      postProject.members = lista
-      postProject.creator = {
-        "id":1
-      }
+
       postProject = await this.service.postProjeto(postProject);
-      if(this.formData != null){
-        console.log(await this.service.patchImage(postProject.id, this.formData));
+  
+      if (this.formData != null) {
+        await this.service.patchImage(postProject.id, this.formData);
       }
-      
-      this.route.navigate(['/tela-projeto'])
+  
+      this.route.navigate(['/tela-projeto', teamId]);
     }
   }
 
@@ -143,12 +180,14 @@ export class TelaCriarProjetoComponent implements OnInit {
     }
   }
 
+  
+
   randomColor(){
     this.backGroundColorProject = '#' + Math.floor(Math.random()*16777215).toString(16);
   }
 
-   async cancelar(){
-      this.route.navigate(['/tela-projeto'])
+   async cancelar(teamId:number){
+      this.route.navigate(['/tela-projeto', teamId])
    }
 
    async createStatus(event:any){

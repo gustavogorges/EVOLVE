@@ -9,7 +9,7 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
 
 import { TeamCreationScreenComponent } from './team-creation-screen/team-creation-screen.component';
 
-import { TelaFullViewComponent } from './tela-full-view/tela-full-view.component';
+import { TelaFullViewComponent } from './tela-full-view-project/tela-full-view.component';
 import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-projeto-remastered.component';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
@@ -31,7 +31,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"tela-projeto",
+    path:"tela-projeto/:teamId",
     component: TelaProjetoRemasteredComponent,
     canActivate: [AuthGuard]
   },
@@ -41,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:"criar-projeto",
+    path:"criar-projeto/:teamId",
     component: TelaCriarProjetoComponent,
     canActivate: [AuthGuard]
   },
@@ -57,7 +57,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:'view-project',
+    path:'view-project/:projectId',
     component: TelaFullViewComponent,
     canActivate: [AuthGuard]
 

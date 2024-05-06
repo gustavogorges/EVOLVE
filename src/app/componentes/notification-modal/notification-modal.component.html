@@ -1,0 +1,63 @@
+<div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col justify-between " >
+    <div class="main-box">
+        <div class="teams-box" *ngFor="let team of loggedUser.teams">
+            <div class="h-16 w-full flex justify-between items-center px-4">
+                <i class="pi pi-users team-icon"></i>
+                <p class="text-primaryFontBlack text-lg font-semibold">{{team.name}}</p>
+                <i 
+                class="pi pi-angle-down team-icon2" 
+                *ngIf="!team.booleanView"
+                (click)="openNotifications(team)"
+                >
+                </i>
+                <i 
+                class="pi pi-angle-up team-icon2" 
+                *ngIf="team.booleanView"
+                (click)="closeNotifications(team)"
+                >
+                </i>
+            </div>
+            <div class="notifications-box" *ngIf="team.booleanView" 
+            [ngClass]="{
+                'overflow-y-auto': team.notifications.length > 3
+            }">
+                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(team.notifications)">
+                    <div 
+                    class="notification-item-user"
+                    *ngIf="notification.type == 'task'"
+                    >
+                    <i class="pi-check-square pi text-primary"></i>
+                    </div> 
+                    <div 
+                    class="notification-item-user"
+                    *ngIf="notification.type == 'project'"
+                    >
+                    <i class="pi-folder pi text-primary"></i>
+                    </div> 
+                    <div 
+                    class="notification-item-user"
+                    *ngIf="notification.type == 'team'"
+                    >
+                    <i class="pi-users pi text-primary"></i>
+                    </div> 
+                    <div class="notification-item-content">
+                        <p class="text-primaryFontBlack text-sm font-semibold">{{notification.value}}</p>
+                    </div>
+                    <div class="notification-readed">
+                        <div *ngIf="!notification.readed" class="w-full h-[50%] flex justify-end items-center">
+                            <i class="pi pi-circle-fill notification-item-icon"></i>
+                        </div>
+                        <div class="w-full h-[50%] flex justify-center items-start text-sm">
+                            <p>{{ notification.dateTime| date : "dd" }}/{{ notification.dateTime| date : "LL" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clean-box">
+        <div class="clean-button" (click)="cleanAllNotifications()">
+            <p class="text-base text-primaryWhite">limpar</p>
+        </div>
+    </div>
+</div>

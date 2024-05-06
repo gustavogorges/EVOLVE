@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/model/project';
+import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -12,8 +13,10 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class SideBarComponent implements OnInit {
 
+
+
   constructor(    private cookieService: CookiesService, private router: Router,  
-    private colorService: ColorService
+    private colorService: ColorService, private elementRef: ElementRef
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
@@ -23,6 +26,7 @@ config = false
     console.log(33);
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+    document.body.addEventListener('click', this.onDocumentClick);
     console.log(this.config);
     
   }
@@ -30,19 +34,41 @@ config = false
     this.sideBar.emit(false)
   }
 
+  @ViewChild('sidebar') sidebarConfig !: ElementRef
+  onDocumentClick = (event: MouseEvent) => {
+    console.log(this.elementRef.nativeElement.contains(this.sidebarConfig));
+    
+    if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
+        this.sideBar.emit(false)
+    }
+  };
+
   goTelaTarefa( project : Project){
       this.router.navigate(['/tela-tarefa/'+project.id]);
       this.closeSideBar()
 
   }
+
   openConfig(){
     this.config=true
-   // this.closeSideBar()
-    
   }
+
   closeConfig(){
     this.config=false
   }
+
+  goCreateProject(team:Team){
+    this.router.navigateByUrl('/criar-projeto/'+team.id);
+  }
+
+  goTelaProject(project: Project) {
+    this.router.navigateByUrl('/view-project/'+project.id);
+  }
+
+  goProjectsTeam(team:Team){
+    this.router.navigateByUrl('/tela-projeto/'+team.id);
+  }
+
   goTelaInicial(){
     this.router.navigateByUrl('/tela-inicial');
 
@@ -69,6 +95,10 @@ config = false
   }
   goProjetos(){
     this.router.navigate(["/tela-projeto"])
+  }
+
+  ngOnDestroy(): void {
+    document.body.removeEventListener('click', this.onDocumentClick);
   }
 
 }

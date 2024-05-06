@@ -1,8 +1,5 @@
 * {
-    @apply h-screen w-screen;
+    @apply h-screen w-screen max-w-full;
 
 }
-::-webkit-scrollbar{
-    @apply hidden;
-  
-}
+

@@ -1,4 +1,10 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, switchMap, take, takeUntil } from 'rxjs';
+import { DashBoardCharts } from 'src/model/DashBoardCharts';
+import { Dashboard } from 'src/model/dashboard';
+import { Project } from 'src/model/project';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
   selector: 'app-new-dashboard-modal',
@@ -7,16 +13,19 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, On
 })
 export class NewDashboardModalComponent implements OnInit, OnChanges {
 
-  constructor() { }
+  constructor(private service:BackendEVOLVEService) { }
 
   dashChoosed:number = -1
   squads: any[] = []
   @Input() newDashBool:Boolean = false
   @Output() newDash : EventEmitter<any> = new EventEmitter<any>()
   @Input() newDashId !: number
-  nome = "teste"
+  @Input() project !: Project
+  @Input() dashboards : any[] = []
+  name : string = ''
+  projectLoaded$ = new Subject<void>();
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.squads.push(
       {
         id:0,
@@ -73,10 +82,32 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
           " col-span-full row-span-full"
         ]
       },
-      
     )
-    this.dashChoosed = 3
-    this.createNewDash()
+  }
+
+  // async ngAfterViewInit() {
+  //   const project = await this.waitForProject();
+
+  //   if (project) {
+  //     this.dashboards.forEach((element: any) => {
+  //       this.newDash.emit(element)
+  //     });
+  //   } else {
+  //       console.error('Project not find');
+  //   }
+  // }
+  
+  async waitForProject(): Promise<Project> {
+    return new Promise<Project>((resolve) => {
+        const checkProject = () => {
+            if (this.project) {
+                resolve(this.project);
+            } else {
+                setTimeout(checkProject, 100);
+            }
+        };
+        checkProject();
+    });
   }
 
   ngOnChanges(): void {
@@ -85,22 +116,16 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
     }
   }
 
-  createNewDash(){
-    const dashBoard = {
-      id:this.newDashId,
-      nome:this.nome,
-      style:this.squads,
-      charts:[]
-    }
-    dashBoard.id = this.newDashId;
+  async createNewDash(){
+    let dashboard = new Dashboard
+    dashboard.name = this.name
     this.squads.forEach(element => {
       if(element.id === this.dashChoosed){
-        dashBoard.style = element.squad
+        dashboard.styleDash = element.squad
       }
     });
-
-    this.newDash.emit(dashBoard)
-    this.nome = ""
+    this.newDash.emit(await this.service.postDashboard(dashboard, this.project.id))
+    this.name = ""
     this.dashChoosed = -1
     this.chooseDash(-1)
   }
@@ -112,13 +137,16 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
           element.style = ""
         }
       });
-      
 
       this.dashChoosed = index
 
       this.squads.forEach(element => {
         if(element.id === index){
-          element.style = "border-primary border-4"
+          if(localStorage.getItem('theme') === 'dark'){
+            element.style = "border-dark-primary"
+          }else{
+            element.style = "border-primary"
+          }
         }
       });
   }

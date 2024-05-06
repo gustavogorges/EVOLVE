@@ -1,0 +1,213 @@
+.div-pai{
+    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300 h-fit;
+    grid-template-columns: 60% 20%;
+
+    
+    .div-maior{
+        @apply w-full h-fit col-start-1;
+
+        .cabecalho{
+            @apply grid grid-cols-2 items-center gap-2;
+            grid-template-columns: 13% 87%;
+            i{
+                @apply text-primary dark:text-dark-primary
+            }
+
+            .project-image{
+                @apply  justify-center items-center relative grid grid-cols-3 grid-rows-2 justify-items-center;
+                grid-template-columns: 40% 40% 20%;
+                grid-template-rows: 50% 50%;
+    
+                .image{
+                    @apply sm:w-[11vw] sm:h-[11vw] xl:h-[7vw] xl:w-[7vw] w-[20vw] h-[20vw] rounded-full col-span-full row-span-full overflow-hidden;
+    
+                    img{
+                        @apply h-full w-full object-cover;
+                    }
+                }
+    
+                label{
+                    @apply w-[2vw] h-[2vw] col-start-2 row-start-2 rounded-full bg-[#E9EDF1] dark:bg-dark-secundary-gray flex justify-center items-center;
+    
+                    i{
+                        @apply text-xl text-primary dark:text-dark-primary
+                    }
+                }
+            }
+
+            .texto{
+                
+                .titulo{
+                    @apply text-4xl font-semibold font-titulo text-primary dark:text-dark-primary
+                }
+
+                .descricao{
+                    @apply pt-5 font-titulo break-all
+                }
+            }
+        }
+
+        .dashboard-pai{
+            
+            .newDashBoard{
+                @apply bg-primaryGray dark:bg-dark-secundary-gray h-[5vh] flex justify-center rounded-lg hover:scale-105 duration-150 w-fit p-2 px-4;
+
+                i{
+                    @apply text-primary dark:text-dark-primary
+                }
+            }
+
+            @apply pt-5;
+
+            .container{
+                @apply py-[3%] flex flex-col;
+
+                .titulo-dashboard{
+                    @apply flex justify-between w-full items-center mb-3;
+    
+                    p{
+                        @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
+                    }
+                }
+    
+                .dashboard{
+                    @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
+
+                    .trash{
+                        @apply rounded-lg right-0 bg-red-600 absolute z-50 scale-105 duration-200 overflow-hidden;
+
+                        .trachPi{
+                            @apply text-secondaryWhite w-full h-full flex items-center justify-center duration-200 hover:scale-125;
+                        }
+                    }
+    
+                    .chart{
+                        @apply cursor-pointer duration-300 rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
+                    }
+                }
+
+            }
+        }
+        .top{
+            @apply flex w-full justify-center h-[8vh];
+
+            .top-b{
+                @apply w-[50%] bg-primaryGray dark:bg-dark-secundary-gray rounded-xl text-xl dark:text-primaryWhite text-primaryFontBlack duration-150 hover:scale-105
+            }
+        }
+    }
+
+    .div-menor{
+        @apply w-full;
+
+        .square{
+            @apply p-[1.5%] overflow-auto bg-primaryGray dark:bg-gray-700 h-[80vh] w-[20%] fixed shadow-md rounded-lg;
+
+            .name{
+                @apply px-2;
+
+                .name-text{
+                    @apply text-xl text-primary dark:text-dark-primary font-semibold
+                }
+            }
+
+            .membros{
+                @apply h-[24vh] overflow-auto;
+
+                .membro{
+                    @apply grid grid-cols-2 items-center grid-rows-1 duration-200;
+                    grid-template-columns: 10% 80%;
+                    grid-template-rows: 2.5rem;
+    
+                    .ponto{
+                        @apply col-start-1 col-end-2 dark:text-dark-secundary-green text-secondary duration-200
+                    }
+    
+                    .name-user{
+                        @apply col-start-2 dark:text-gray-100
+                    }
+                }
+
+                .member-infos-view{
+                    @apply w-full duration-200 overflow-hidden;
+                }
+            }
+            .propriedades{
+                @apply overflow-scroll h-[20vh];
+
+                .propriedade{
+                    @apply grid grid-cols-4 items-center grid-rows-1;
+                    grid-template-columns: 10% 70% 10% 10%;
+                    grid-template-rows: 2.5rem;
+
+                    .prop-name{
+                        @apply dark:text-gray-200
+                    }
+
+                    i{
+                        @apply text-primary dark:text-dark-primary
+                    }
+                }
+            }
+        }
+    }
+}
+
+.icon-container{
+    visibility: hidden;
+}
+
+.hover-container:hover {
+    .icon-container{
+        visibility: visible;
+    }
+}
+
+.main {
+    @apply w-64 bg-primaryWhite absolute rounded-lg shadow-lg flex flex-col items-center gap-2
+}
+
+.status {
+     @apply w-full h-full rounded-lg flex justify-center items-center cursor-pointer
+}
+
+.status-box {
+    @apply w-full flex items-center gap-2 flex-col px-1 py-2 max-h-[19vh] overflow-auto
+}
+
+.status-adjust{
+    @apply grid grid-cols-3 grid-rows-1 w-full items-center justify-items-center;
+    grid-template-columns: 80% 10% 10%;
+
+    i{
+        @apply text-primary dark:text-dark-primary cursor-pointer;
+    }
+}
+
+.add-box {
+    @apply w-full flex justify-center text-primaryWhite dark:text-primaryFontBlack items-center font-semibold h-10 gap-x-2 cursor-pointer mb-2 bg-secondary dark:bg-dark-secundary-green rounded-lg mt-5
+}
+
+.new-status {
+    @apply w-full h-28 grid grid-rows-3 mt-4
+}
+
+.cor-status-box {
+    @apply flex items-center w-full justify-between
+}
+
+.nome-status-box {
+    @apply flex items-center w-full justify-between border-b-2
+}
+
+.confirmar-status-box {
+    @apply bg-secondary dark:bg-dark-secundary-green text-primaryWhite  dark:text-primaryFontBlack flex justify-center items-center rounded-b-lg
+}
+
+.edit-status-box{
+    @apply bg-primary dark:bg-dark-primary text-primaryWhite  dark:text-primaryFontBlack flex justify-center items-center rounded-b-lg
+}
+
+.input-add-status {
+    @apply bg-transparent outline-none pl-3 rounded-lg h-8
+}
