@@ -17,7 +17,12 @@ export class CookiesService {
   chatListTypeField = "chatListType"
 
   constructor(private cookieService : CookieService, private service : BackendEVOLVEService) { }
-
+  setJWTtoken(token : any ) : void {
+    this.cookieService.set('token',token);
+  }
+  getJWTtoken() : any {
+    this.cookieService.get('token');
+  }
     setLoggedUserId(user : User|null) : void {
       this.cookieService.set('loggedUserId',JSON.stringify(user?.id));
     }

@@ -1,107 +1,319 @@
-<div class="main">
+<div class="main relative">
   <div class="card-login">
-    <div class="left">
-      <div class="box-text-left">
-        <div class="welcome">
-          <p class="main-text">
-            Bem-vindo ao Evolve. Aqui a organização e eficiência se encontram
-            para transformar sua forma de gerenciar tarefas e projetos. Abra as
-            portas para uma nova era de produtividade.
-          </p>
-          <div class="login-topic-icon">
-            <i class="pi pi-sitemap normal-white-font"></i>
-            <p class="normal-white-font">
-              Personalize fluxos de trabalho para se adequar à maneira como sua
-              equipe trabalha.
-            </p>
-          </div>
-          <div class="login-topic-icon">
-            <i class="pi pi-calendar normal-white-font"></i>
-            <p class="normal-white-font">
-              Personalize fluxos de trabalho para se adequar à maneira como sua
-              equipe trabalha.
-            </p>
-          </div>
-          <div class="login-topic-icon">
-            <i class="pi pi-history normal-white-font"></i>
-            <p class="normal-white-font">
-              Personalize fluxos de trabalho para se adequar à maneira como sua
-              equipe trabalha.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div
+      class="bg-primary w-1/2 h-full rounded-l-lg p-10 flex flex-col gap-4 overflow-clip"
+    >
+      <p class="text-white text-3xl font-titulo font-bold">evolve</p>
+      <p class="text-white text-xl font-hind-madurai">
+        Onde visão encontra execução. faça de cada tarefa um passo adiante em
+        sua evolução.
+      </p>
+
+      <img src="assets/image 8.svg" class="w-full" alt="" />
     </div>
     <div class="right">
-      <div class="box-text-right">
-        <div class="main-title">
-          <h1>Login</h1>
-        </div>
-        <div class="div-inputs">
-          <div class="inputs-login">
-            <div class="form__group field">
-              <input
-                [(ngModel)]="email"
-                type="input"
-                class="form__field"
-                placeholder="Name"
-                name="name"
-                id="name"
-                required
-              />
-              <label for="name" class="form__label">Email</label>
+      <div class="main-title">
+        <h1>Login</h1>
+      </div>
+
+      <form
+        (ngSubmit)="submit()"
+        [formGroup]="userForm"
+        #formBahGuria="ngForm"
+        class="p-10 flex flex-col gap-10"
+      >
+        <div class="flex flex-col gap-4">
+          <div class="form-group">
+            <label for="name" class="font-titulo font-medium flex gap-1"
+              >Email
+              <p class="text-red-500">*</p>
+            </label>
+            <input
+              type="text"
+              placeholder="Digite seu email "
+              (keydown.enter)="moveFocus('password'); $event.preventDefault()"
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+              formControlName="email"
+            />
+            <div
+              *ngIf="email?.errors?.['required'] && formBahGuria.submitted"
+              class="error-text"
+            >
+              <p>Campo é obrigatório.</p>
             </div>
-            <div class="form__group field">
-              <input
-                [(ngModel)]="senha"
-                type="input"
-                class="form__field"
-                placeholder="Name"
-                name="name"
-                id="name"
-                required
-              />
-              <label for="name" class="form__label">Senha</label>
+            <div
+              *ngIf="email?.errors?.['email'] && formBahGuria.submitted"
+              class="error-text"
+            >
+              <p>Email inválido.</p>
+            </div>
+            <div
+              *ngIf="email?.errors?.['invalidEmail'] && formBahGuria.submitted"
+              class="error-text"
+            >
+              <p>Email deve conter '@' and '.'.</p>
             </div>
           </div>
-          <div class="div-link">
-            <a href="#" class="link-senha">Esqueceu sua senha ?</a>
+          <div class="form-group">
+            <label for="name" class="font-titulo font-medium flex gap-1"
+              >Senha
+              <p class="text-red-500">*</p></label
+            >
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+              formControlName="password"
+              (keydown.enter)="
+                moveFocus('confirmationPassword'); $event.preventDefault()
+              "
+            />
+            <div
+              *ngIf="password?.errors?.['required'] && formBahGuria.submitted"
+              class="error-text"
+            >
+              <p>Campo obrigatório.</p>
+            </div>
           </div>
         </div>
-        <div class="div-buttons">
-          <div class="checkbox">
-            <p-checkbox name="groupname"></p-checkbox>
-            <p class="checkbox-text">Lembre-se de mim</p>
+        <button
+          class="error-text text-end cursor-pointer underline"
+          (click)="openChangePassword()"
+        >
+          esqueceu a senha?
+        </button>
+
+        <div class="form-group px-5 py-3 rounded-xl bg-primary">
+          <input
+            type="submit"
+            value="login"
+            class="text-xl text-white font-titulo font-semibold"
+          />
+        </div>
+      </form>
+      <div class="flex gap-1 text-base error-text">
+        <p class="text-fontGray">Não possui uma conta?</p>
+        <p class="underline" routerLink="tela-cadastro">Cadastre-se</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="fixed w-screen h-screen z-[99] modal top-1/2 left-1/2 flex items-center justify-center -translate-x-1/2 -translate-y-1/2"
+    *ngIf="changePassword"
+  >
+    <div
+      class="w-[500px] h-max  bg-white p-7 rounded-xl shadow-lg flex flex-col relative"
+    >
+      <i
+        class="absolute top-7 right-7 pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
+        style="font-size: 1rem"
+        (click)="closeModal()"
+      ></i>
+      <div class="w-full flex flex-col h-full gap-4" *ngIf="emailModal">
+        <div>
+          <h2 class="font-titulo text-lg font-bold">Redefinição de senha:</h2>
+          <p class="text-fontGray font-hind-madurai">
+            Informe o email da sua conta para enviarmos um código de
+            verificação:
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <label for="name" class="font-titulo font-medium flex gap-1"
+            >Email
+            <p class="text-red-500">*</p>
+          </label>
+          <input
+            [(ngModel)]="changeEmail"
+            type="text"
+            placeholder="Digite seu email "
+            (keydown.enter)="verifyEmail(); $event.preventDefault()"
+            class="w-full placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <div
+            *ngIf="validEmail"
+            class="error-text"
+          >
+            <p>Email não encontrado</p>
           </div>
-          <div class="div-login">
-            <button
-              (click)="login()"
-              pButton
-              pRipple
-              type="button"
-              label="Login"
-              class="p-button-rounded button-login"
-            ></button>
+        </div>
+
+        <button
+          (click)="verifyEmail()"
+          class="px-5 py-2 rounded-xl bg-primary text-lg text-white font-titulo font-semibold"
+        >
+          enviar
+        </button>
+      </div>
+      <div class="w-full flex flex-col h-full gap-5" *ngIf="codeModal">
+        <div>
+          <h2 class="font-titulo text-lg font-bold">
+            Informe o codigo enviado:
+          </h2>
+        </div>
+
+        <div class=" w-full flex justify-between ">
+          <input
+          #input1
+            [(ngModel)]="n1"
+            type="number"
+                (input)="moveFocusNumbers(input1, input2)"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <input
+          #input2
+            [(ngModel)]="n2"
+            type="number"
+                (input)="moveFocusNumbers(input2, input3)"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <input
+          #input3
+            [(ngModel)]="n3"
+            type="number"
+                (input)="moveFocusNumbers(input3, input4)"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <input
+          #input4
+            [(ngModel)]="n4"
+            type="number"
+                (input)="moveFocusNumbers(input4, input5)"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <input
+          #input5
+            [(ngModel)]="n5"
+            type="number"
+                (input)="moveFocusNumbers(input5, input6)"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+          <input
+          #input6
+            [(ngModel)]="n6"
+            type="number"
+
+            class="w-14 h-16 text-center   placeholder:font-hind-madurai placeholder:text-base text-xl outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+          />
+        </div>
+
+        <button
+          (click)="verifyCode()"
+          (keydown.enter)="verifyCode()"
+          class="px-5 py-2 rounded-xl bg-primary text-lg text-white font-titulo font-semibold"
+        >
+          enviar
+        </button>
+      </div>
+      <div class="w-full flex flex-col h-full gap-3" *ngIf="passwordModal">
+        <div>
+          <h2 class="font-titulo text-lg font-bold">
+            Defina nova senha: 
+          </h2>
+        </div>
+        <form
+        class="flex flex-col gap-4"
+        
+        (ngSubmit)="passwordReset()"
+        [formGroup]="passwordForm"
+        #formDir="ngForm">
+        <div class="form-group">
+          <label for="name" class="font-titulo font-medium flex gap-1"
+            >Senha
+            <p class="text-red-500">*</p></label
+          >
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+            formControlName="password"
+            (keydown.enter)="
+              moveFocus('confirmationPassword'); $event.preventDefault()
+            "
+          />
+          <div
+          *ngIf="passwordForm.get('password')?.errors?.['required'] && passwordForm.get('password')?.touched"
+            class="error-text"
+          >
+            <p>Campo obrigatório.</p>
+          </div>  
+          <div
+            *ngIf="passwordForm.get('password')?.errors?.['minLength'] && passwordForm.get('password')?.touched "
+            class="error-text"
+          >
+            <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
           </div>
-          <div class="div-google">
-            <button
-              pButton
-              pRipple
-              type="button"
-              label="Google"
-              class="p-button-rounded button-google"
-            ></button>
-          </div>
-          <div class="div-cadastro">
-            <p class="text-cadastro">
-              Não tem nenhuma conta ?
-              <a href="#" class="link-cadastro" routerLink="/tela-cadastro"
-                >Cadastre-se</a
-              >
+         
+          <div
+            *ngIf="passwordForm.get('password')?.errors?.['pattern']  && passwordForm.get('password')?.touched"
+            class="error-text"
+          >
+            <p>
+              Senha deve conter pelo menos um carácter especial (ex:
+              @,-,!,$).
             </p>
+            <p>Senha deve conter pelo menos um número.</p>
           </div>
         </div>
+        <div class="form-group">
+          <label for="password" class="font-titulo font-medium flex gap-1"
+            >Confirme sua senha
+            <p class="text-red-500">*</p></label
+          >
+          <input
+            type="password"
+            placeholder="Confirme sua senha "
+            class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+            formControlName="confirmationPassword"
+            (keydown.enter)="submit(); $event.preventDefault()"
+          />
+
+          <div
+            *ngIf="passwordForm.get('confirmationPassword')?.errors?.['required'] && passwordForm.get('confirmationPassword')?.touched"
+            class="error-text"
+          >
+            <p>Campo obrigatório.</p>
+          </div>
+          <div
+            *ngIf="passwordForm?.errors?.['passwordMismatch']  && passwordForm.get('confirmationPassword')?.touched "
+            class="error-text"
+          >
+            <p>As senhas não conhecidem.</p>
+          </div>
+        </div>
+
+
+      <button class="form-group px-5 py-2 rounded-xl bg-primary   disabled:opacity-50"     [disabled]="!passwordForm.valid">
+        <input
+          type="submit"
+          value="confirmar"
+          [disabled]="!passwordForm.valid"
+          class="text-lg text-white font-titulo font-semibold w-full "
+        />
+      </button>
+   
+    </form>
+       
       </div>
     </div>
   </div>
 </div>
+<div
+    *ngIf="showConfirmationMessage"
+    class="bg-green-200 flex flex-col items-end gap-0 font-hind-madurai text-primaryFontBlack bottom-32 right-10 absolute shadow-lg w-[350px] h-24 p-6 rounded-lg"
+  >
+    <i
+      class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
+      style="font-size: 1rem"
+      (click)="closeMessage()"
+    ></i>
+    <p class="text-lg self-start">
+      {{ message }}
+    </p>
+  </div>

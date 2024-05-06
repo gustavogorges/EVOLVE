@@ -23,8 +23,12 @@ export class SideBarComponent implements OnInit {
 loggedUser !: User
 config = false
   async ngOnInit(): Promise<void> {
+    console.log(33);
+    
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
+    console.log(this.config);
+    
   }
   closeSideBar(){
     this.sideBar.emit(false)
