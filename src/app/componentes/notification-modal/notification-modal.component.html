@@ -28,6 +28,18 @@
                     >
                     <i class="pi-check-square pi text-primary"></i>
                     </div> 
+                    <div 
+                    class="notification-item-user"
+                    *ngIf="notification.type == 'project'"
+                    >
+                    <i class="pi-folder pi text-primary"></i>
+                    </div> 
+                    <div 
+                    class="notification-item-user"
+                    *ngIf="notification.type == 'team'"
+                    >
+                    <i class="pi-users pi text-primary"></i>
+                    </div> 
                     <div class="notification-item-content">
                         <p class="text-primaryFontBlack text-sm font-semibold">{{notification.value}}</p>
                     </div>
