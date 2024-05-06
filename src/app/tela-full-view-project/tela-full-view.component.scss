@@ -9,7 +9,6 @@
         .cabecalho{
             @apply grid grid-cols-2 items-center gap-2;
             grid-template-columns: 13% 87%;
-
             i{
                 @apply text-primary dark:text-dark-primary
             }
