@@ -327,4 +327,12 @@ export class BackendEVOLVEService {
   }
 
 
+  async patchReadedNotification(teamId:number, notificationId:number) {
+    return (await axios.patch(this.URL+"team/"+teamId+"/"+notificationId)).data
+  }
+
+  async cleanAllUserNotifications(userId:number) {
+    return (await axios.delete(this.URL+"team/clean/"+userId)).data
+  }
+
 }

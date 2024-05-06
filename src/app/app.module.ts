@@ -104,12 +104,17 @@ import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
 
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
+
 import { VlibrasComponent } from './componentes/vlibras/vlibras.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 import { ConfirmActionProjectModalComponent } from './componentes/sub-componentes/confirm-action-project-modal/confirm-action-project-modal.component';
 import { ModalOptionFullViewComponent } from './componentes/sub-componentes/modal-option-full-view/modal-option-full-view.component';
 import { CommentsProjectComponent } from './componentes/sub-componentes/comments-project/comments-project.component';
 import { MemberListFullViewProjectComponent } from './componentes/sub-componentes/member-list-full-view-project/member-list-full-view-project.component';
+
+import { NotificationModalComponent } from './componentes/notification-modal/notification-modal.component';
+
+
 
 
 
@@ -194,7 +199,9 @@ import { MemberListFullViewProjectComponent } from './componentes/sub-componente
     ConfirmActionProjectModalComponent,
     ModalOptionFullViewComponent,
     CommentsProjectComponent,
-    MemberListFullViewProjectComponent
+    MemberListFullViewProjectComponent,
+    NotificationModalComponent
+
   ],
   
   imports: [
