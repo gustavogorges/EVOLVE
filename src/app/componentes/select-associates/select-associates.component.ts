@@ -55,6 +55,7 @@ export class SelectAssociatesComponent implements OnInit {
       if(elementFor.id == associate.id) {
         const index:number =  this.task.associates.indexOf(elementFor);
         this.task.associates.splice(index,1)
+        this.service.removeAssociate(this.task.id, elementFor.id, this.project.id);
       }
     });
   }

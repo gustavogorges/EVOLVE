@@ -68,6 +68,10 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/property/associates/"+taskId+"/"+userId,associates)).data
   }
 
+  async removeAssociate(taskId:number, removedAssociate : number, userId:number) {
+    return (await axios.delete(this.URL+"task/property/associates/delete/"+taskId+"/"+userId+"/"+removedAssociate)).data
+  }
+
   async getAllCommentsOfTask(taskId:number) {
     return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
   }
@@ -84,7 +88,7 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+"project/comments/getAll/"+projectId)).data
   }
 
-
+  
   async patchNewCommentProject(projectId:number, newComment:Comment, userId:number) {
     return (await axios.patch(this.URL+"project/comments/patch/"+projectId+"/"+userId,newComment)).data
   }
@@ -94,8 +98,8 @@ export class BackendEVOLVEService {
   }
 
 
-  async updateStatusList(projetoId:number,novoStatus:Status) {
-    return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
+  async updateStatusList(projetoId:number,actionsUserId:number, novoStatus:Status) {
+    return (await axios.patch(this.URL+"project/"+projetoId+"/"+actionsUserId, novoStatus )).data
   }
  
   async deleteStatus(projetoId:number,status:Status) {
@@ -280,6 +284,10 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL+"task/update/finalDate/"+taskId+"/"+userId+"/calendar/"+newDate)).data
   }
 
+  async updateTaskScheludeDate(taskId:number, userId:number, newDate:Date)  {
+    return (await axios.patch(this.URL+"task/update/"+taskId+"/scheludeDate/"+userId+"/calendar/"+newDate)).data
+  }
+
   async deleteTask(taskId:number) {
     return (await axios.delete(this.URL+"task/delete/"+taskId)).data
   }
@@ -298,16 +306,16 @@ export class BackendEVOLVEService {
     return (await (axios.patch(this.URL+idProject+"/dashboard/getCharts"))).data;
   }
 
-  async postDashboard(dashboard:Dashboard, idProject:number){
-    return (await axios.post(this.URL+idProject+"/dashboard", dashboard)).data 
+  async postDashboard(dashboard:Dashboard, idProject:number, actionUserId:number){
+    return (await axios.post(this.URL+idProject+"/dashboard/"+actionUserId, dashboard)).data 
   }
 
   async getDashboards(idProject:number){
     return (await (axios.get(this.URL+idProject+"/dashboard"))).data;
   }
 
-  async deleteDashboard(idDashboard:number){
-    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard))).data;
+  async deleteDashboard(idDashboard:number, idActionUser:number){
+    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser))).data;
   }
 
   async updateDashboard(dashboard:Dashboard, idDashboard:number, idProject:number){

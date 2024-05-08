@@ -12,6 +12,7 @@ import { User } from 'src/model/user';
 import { cloneDeep } from 'lodash';
 
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 @Component({
   selector: 'app-tela-full-view',
   templateUrl: './tela-full-view.component.html',
@@ -53,10 +54,12 @@ export class TelaFullViewComponent implements OnInit {
     imagemBlob!:Blob
     formData : any = undefined
     openModalAddMembers : boolean = false
+    loggedUser : User = new User;
 
-    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router){}
+    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service : CookiesService){}
 
     async ngOnInit() {
+        this.loggedUser = await this.cookies_service.getLoggedUser();
         this.route.paramMap.subscribe( async params  => {
             const projectId = params.get('projectId');
             const id  = Number(projectId)
@@ -168,7 +171,6 @@ export class TelaFullViewComponent implements OnInit {
         this.confirmationActionModalBol = true
       }
 
-    
 
     verifyStatusDefault(status:Status){
         if(status.name === 'não atribuido' ||
@@ -298,7 +300,7 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async postStatus(status:Status) {
-        return await this.service.updateStatusList(this.projeto.id, status)
+        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, status)
     }
 
     async editStatusPut(){
@@ -411,7 +413,7 @@ export class TelaFullViewComponent implements OnInit {
     
 
     async deleteDashboard(dashboard : Dashboard){
-        await this.service.deleteDashboard(dashboard.id)
+        await this.service.deleteDashboard(dashboard.id,this.loggedUser.id)
         this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
     }
 
