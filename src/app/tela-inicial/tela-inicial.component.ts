@@ -40,9 +40,7 @@ export class TelaInicialComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.data = this.location.getState();
     let userData: User = await this.data.user
-    if(userData){
-      this.cookieService.setLoggedUserId( userData)
-    }
+ 
 
   
 

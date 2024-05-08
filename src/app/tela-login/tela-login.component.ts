@@ -14,6 +14,7 @@ import { getRtlScrollAxisType } from '@angular/cdk/platform';
 import { AuthService } from 'src/service/autService';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { sortedUniq } from 'lodash';
 
 @Component({
   selector: 'app-tela-login',
@@ -30,7 +31,7 @@ export class TelaLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
     this.passwordForm = new FormGroup(
@@ -57,23 +58,35 @@ export class TelaLoginComponent implements OnInit {
 
     return null;
   }
-  get email() {
-    return this.userForm.get('email');
+  get username() {
+    return this.userForm.get('username');
   }
 
   get password() {
     return this.userForm.get('password');
   }
   responseData : any 
-  submit() {
-    this.authService.proceedLogin(this.userForm.value).subscribe(result => {
-      if(result!=null){
+ async submit() {
+    console.log(this.service.getOne("user", 1)
+    );
+    try {
+      const result = await this.authService.proceedLogin(this.userForm.value);
+      
+      if (result != null) {
         this.responseData = result;
-        this.cookie.setJWTtoken(this.responseData.jwtToken); 
-        this.router.navigate(["/tela-inicial "])
-
+        console.log(this.responseData);
+        
+        this.cookie.setLoggedUserId(this.responseData.data.id);
+        
+        this.router.navigate(['/tela-inicial']);
+      } else {
+        // Handle null result
       }
-    })
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle error
+    }
+  
   }
   get formControls() {
     return this.passwordForm.controls;

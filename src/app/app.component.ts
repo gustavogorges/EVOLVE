@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/model/user';
+import { AuthService } from 'src/service/autService';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
 
@@ -10,13 +11,16 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
-    private colorService : ColorService
+    private colorService : ColorService, private authService :AuthService
 
     ){}
   title = 'angularProject';
   loggedUser !: User; 
-
+  boo = false 
   async ngOnInit(): Promise<void> {
+    if(this.authService.isLoggedIn()){
+      this.boo = true
+    }
     this.loggedUser = await this.cookieService.getLoggedUser();
     
     if(this.loggedUser){

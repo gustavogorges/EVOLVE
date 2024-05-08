@@ -75,7 +75,6 @@ config = false
   }
   sliderValue = 16 
   logOut(){
-    this.cookieService.setLoggedUserId( null)
     this.closeSideBar()
     this.colorService.setPrimaryColor("#185e77")
     this.colorService.setSecondaryColor("#4C956C")

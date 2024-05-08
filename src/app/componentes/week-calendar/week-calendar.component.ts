@@ -29,7 +29,7 @@ export class WeekCalendarComponent implements OnInit{
   diasSemana: Date[] = [];
 
   async ngOnInit() {
-    this.taskList = await this.service.getTasksByUserId(1)
+    this.taskList = await this.service.getTasksByUserId(3)
     this.atualizarSemana();
   }
 
