@@ -88,7 +88,7 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL+"project/comments/getAll/"+projectId)).data
   }
 
-
+  
   async patchNewCommentProject(projectId:number, newComment:Comment, userId:number) {
     return (await axios.patch(this.URL+"project/comments/patch/"+projectId+"/"+userId,newComment)).data
   }
