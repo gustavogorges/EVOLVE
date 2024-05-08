@@ -306,8 +306,8 @@ export class BackendEVOLVEService {
     return (await (axios.patch(this.URL+idProject+"/dashboard/getCharts"))).data;
   }
 
-  async postDashboard(dashboard:Dashboard, idProject:number){
-    return (await axios.post(this.URL+idProject+"/dashboard", dashboard)).data 
+  async postDashboard(dashboard:Dashboard, idProject:number, actionUserId:number){
+    return (await axios.post(this.URL+idProject+"/dashboard/"+actionUserId, dashboard)).data 
   }
 
   async getDashboards(idProject:number){
