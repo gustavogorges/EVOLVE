@@ -1,0 +1,48 @@
+.div-membros{
+    @apply h-[12vh] w-full grid grid-cols-4 items-center justify-center grid-rows-1 ;
+    grid-template-columns: 20% 38% 25% 15%;
+
+    .foto{
+        @apply col-start-1 col-end-2 flex items-center w-[5rem] h-[5rem] justify-center;
+
+        .foto2{
+            @apply h-[80%] w-[80%] overflow-hidden rounded-full text-4xl flex justify-center items-center font-semibold 
+        }
+
+        .fotoImagem{
+            @apply h-[80%] w-[80%] rounded-full object-cover
+        }
+    }
+
+    .infos{
+        @apply col-start-2 col-end-3 w-full flex flex-col justify-center;
+
+        .nome{
+            @apply w-full text-xl dark:text-white
+        }
+
+        .email{
+            @apply w-full text-sm text-gray-500 dark:text-gray-400
+        }
+    }
+
+    .tipo{
+        @apply col-start-3 col-end-4 w-full flex justify-center items-center;
+
+        p{
+            @apply text-gray-500 text-lg dark:text-gray-400
+        }
+    }
+
+    .adicionar{
+        @apply col-start-4 col-end-5 flex justify-center items-center;
+
+        .fundo-icon{
+            @apply h-[3rem] w-[3rem] bg-primary dark:bg-dark-primary rounded-2xl flex justify-center items-center;
+
+            .pi{
+                @apply text-white dark:text-gray-900
+            }
+        }
+    }
+}

@@ -1,3 +1,11 @@
-button{
-    @apply px-6 rounded-lg min-w-max gap-2 h-[5vh] cursor-pointer  justify-center flex items-center hover:scale-105 duration-150;
+.titulo-dashboard{
+    @apply flex justify-between w-full items-center mb-3;
+    
+    .nameDash{
+        @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
+    }
+
+    button{
+        @apply px-6 rounded-lg min-w-max gap-2 h-[5vh] cursor-pointer  justify-center flex items-center hover:scale-105 duration-150;
+    }
 }

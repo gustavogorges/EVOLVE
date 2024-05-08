@@ -41,7 +41,7 @@ export class TelaFullViewComponent implements OnInit {
     closeAllOptions: boolean = false
     dashboardEdit !: Dashboard
     editProject : boolean = false
-    miniPageView : string = 'Dashboards'
+    miniPageView : string = 'Membros'
     confirmationActionModalBol : boolean = false
     response : any
     quest : any
@@ -52,13 +52,42 @@ export class TelaFullViewComponent implements OnInit {
     preImage:SafeUrl | undefined = '';
     imagemBlob!:Blob
     formData : any = undefined
+    openModalAddMembers : boolean = false
 
     constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router){}
+
+    async ngOnInit() {
+        this.route.paramMap.subscribe( async params  => {
+            const projectId = params.get('projectId');
+            const id  = Number(projectId)
+            this.projeto = await this.service.getOne('project', id);
+            this.dashboards = await this.service.getDashboards(this.projeto.id);
+            console.log(this.projeto);
+
+            setTimeout(() => {
+                this.dashboards?.reverse()   
+            });
+            setTimeout(() => {
+                this.chartsInitialize()   
+            });
+            setTimeout(() => {
+                this.getCharts()
+            })
+        });
+    }
 
     viewOptions(){
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBol = false
 
+    }
+
+    setModalOpenAddMembers(){
+        this.openModalAddMembers = !this.openModalAddMembers
+    }
+
+    setModalOpenAddMembersFalse(){
+        this.openModalAddMembers = false
     }
 
     async setImageProject(event:any){
@@ -139,26 +168,7 @@ export class TelaFullViewComponent implements OnInit {
         this.confirmationActionModalBol = true
       }
 
-    async ngOnInit() {
-        
-        this.route.paramMap.subscribe( async params  => {
-            const projectId = params.get('projectId');
-            const id  = Number(projectId)
-            this.projeto = await this.service.getOne('project', id);
-            this.dashboards = await this.service.getDashboards(this.projeto.id);
-            console.log(this.projeto);
-
-            setTimeout(() => {
-                this.dashboards?.reverse()   
-            });
-            setTimeout(() => {
-                this.chartsInitialize()   
-            });
-            setTimeout(() => {
-                this.getCharts()
-            })
-        });
-    }
+    
 
     verifyStatusDefault(status:Status){
         if(status.name === 'não atribuido' ||
@@ -379,11 +389,16 @@ export class TelaFullViewComponent implements OnInit {
 
     @ViewChild('dashElement') dashElement!: ElementRef;
     @ViewChild('statusClose') statusClose!:ElementRef
+    @ViewChild('addMember') addMember!:ElementRef
     @HostListener('click', ['$event'])
     outsideClick(event: any) {
 
         if (this.dashElement && !this.dashElement.nativeElement.contains(event.target)) {
             this.newDashVisibleBol = false;
+        }
+
+        if (this.addMember && !this.addMember.nativeElement.contains(event.target)) {
+            this.openModalAddMembers = false;
         }
 
         if (this.statusClose && event.target.contains(this.statusClose.nativeElement)) {

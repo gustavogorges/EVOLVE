@@ -45,3 +45,14 @@
 .notification-item-icon {
     @apply text-lg text-primary 
 }
+
+.icon {
+    @apply text-2xl text-primary dark:text-dark-primary cursor-pointer
+}
+
+.icon2{
+    @apply text-lg
+    md:text-xl
+    lg:text-2xl
+
+  }

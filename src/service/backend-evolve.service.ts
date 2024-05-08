@@ -335,4 +335,8 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL+"team/clean/"+userId)).data
   }
 
+  async updateDashboardName(idDashboard:number, idProject:number, dashboard:Dashboard){
+    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard))).data;
+  }
+
 }

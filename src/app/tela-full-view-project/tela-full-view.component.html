@@ -74,13 +74,11 @@
             </div>
             <div class="container" *ngFor="let dashboard of dashboards, index as index">
                 <div>
-                    <div class="titulo-dashboard">
-                        <p>{{dashboard.name}}</p>
-                        <app-modal-option-full-view (dashboardToedit)="setdashboardEdit($event)"
-                            [viewOptionsBol]="viewOptionsBol" [charts]="charts"
-                            (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard" [projeto]="projeto"
-                            [dashboards]="dashboards" class="w-fit h-fit"></app-modal-option-full-view>
-                    </div>
+                    <app-modal-option-full-view (dashboardToedit)="setdashboardEdit($event)"
+                        [viewOptionsBol]="viewOptionsBol" [charts]="charts"
+                        (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard" [projeto]="projeto"
+                        [dashboards]="dashboards" class="w-fit h-fit">
+                    </app-modal-option-full-view>
                     <div class="dashboard  flex" cdkDropList cdkDropListOrientation="horizontal"
                         (cdkDropListDropped)="drop($event, dashboard)">
                         <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.styleDash, index as i"
@@ -97,17 +95,21 @@
                 </div>
             </div>
         </div>
+
         <div *ngIf="miniPageView === 'Membros' && projeto" >
-            <div>
-                <input class="p-2 outline-none border-2 h-full w-full bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+            <div class="flex justify-between" #addMember>
+                <input class="p-2 outline-none border-2 h-full w-[75%] bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <button (click)="setModalOpenAddMembers()" class="w-[20%] bg-secondary dark:bg-dark-secondary dark:text-primaryFontBlack rounded-b-lg font-semibold duration-150 hover:scale-105">Adicionar um membro</button>
+                <app-add-member-to-project-modal (closeModalAddMember)="setModalOpenAddMembersFalse()" [modalOpen]="openModalAddMembers" [project]="projeto"></app-add-member-to-project-modal>
             </div>
             <div *ngIf="filteredNames().length === 0" class="membros">
                 <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">Nenhum membro encontrado</p>
             </div>
-            <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] w-full overflow-y-auto">
+            <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] overflow-y-auto">
                 <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
             </div>
         </div>
+
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
         <div class="top mb-10" *ngIf="miniPageView === 'Dashboards'">
             <button *ngIf="dashboards.length != 0" class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> Voltar

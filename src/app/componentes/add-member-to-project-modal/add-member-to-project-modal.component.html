@@ -1,0 +1,47 @@
+<div class="flex items-center absolute top-10 z-50 w-[30vw] overflow-hidden h-fit" *ngIf="project" [ngClass]="modalOpen ? 'opacity-100 duration-200':'opacity-0 w-0 invisible'">
+    <div class="w-14 h-[8vh] bg-primaryWhite dark:bg-dark-secundary-gray -rotate-90 -translate-y-[140%] 2xl:-translate-y-[145%] md:-translate-y-[125%]"
+        style="clip-path: polygon(100% 100%, 0% 100% , 0.00% 100.00%, 1.00% 99.91%, 2.00% 99.63%, 3.00% 99.18%, 4.00% 98.55%, 5.00% 97.73%, 6.00% 96.75%, 7.00% 95.59%, 8.00% 94.27%, 9.00% 92.79%, 10.00% 91.16%, 11.00% 89.38%, 12.00% 87.45%, 13.00% 85.40%, 14.00% 83.21%, 15.00% 80.92%, 16.00% 78.51%, 17.00% 76.01%, 18.00% 73.42%, 19.00% 70.75%, 20.00% 68.01%, 21.00% 65.22%, 22.00% 62.38%, 23.00% 59.51%, 24.00% 56.61%, 25.00% 53.70%, 26.00% 50.80%, 27.00% 47.90%, 28.00% 45.03%, 29.00% 42.19%, 30.00% 39.40%, 31.00% 36.66%, 32.00% 33.99%, 33.00% 31.40%, 34.00% 28.90%, 35.00% 26.49%, 36.00% 24.19%, 37.00% 22.01%, 38.00% 19.96%, 39.00% 18.03%, 40.00% 16.25%, 41.00% 14.61%, 42.00% 13.13%, 43.00% 11.81%, 44.00% 10.66%, 45.00% 9.67%, 46.00% 8.86%, 47.00% 8.23%, 48.00% 7.77%, 49.00% 7.50%, 50.00% 7.41%, 51.00% 7.50%, 52.00% 7.77%, 53.00% 8.23%, 54.00% 8.86%, 55.00% 9.67%, 56.00% 10.66%, 57.00% 11.81%, 58.00% 13.13%, 59.00% 14.61%, 60.00% 16.25%, 61.00% 18.03%, 62.00% 19.96%, 63.00% 22.01%, 64.00% 24.19%, 65.00% 26.49%, 66.00% 28.90%, 67.00% 31.40%, 68.00% 33.99%, 69.00% 36.66%, 70.00% 39.40%, 71.00% 42.19%, 72.00% 45.03%, 73.00% 47.90%, 74.00% 50.80%, 75.00% 53.70%, 76.00% 56.61%, 77.00% 59.51%, 78.00% 62.38%, 79.00% 65.22%, 80.00% 68.01%, 81.00% 70.75%, 82.00% 73.42%, 83.00% 76.01%, 84.00% 78.51%, 85.00% 80.92%, 86.00% 83.21%, 87.00% 85.40%, 88.00% 87.45%, 89.00% 89.38%, 90.00% 91.16%, 91.00% 92.79%, 92.00% 94.27%, 93.00% 95.59%, 94.00% 96.75%, 95.00% 97.73%, 96.00% 98.55%, 97.00% 99.18%, 98.00% 99.63%, 99.00% 99.91%, 100.00% 100.00%);">
+    </div>
+
+    <div class="w-[25vw] h-[80vh] top-10 right-[5%] rounded-xl bg-primaryWhite dark:bg-dark-secundary-gray shadow-xl p-5">
+        <div class="w-full h-full min-w-fit overflow-hidden">
+            <p class="font-semibold text-primary dark:text-dark-primary text-xl text-center mb-5 min-w-fit">Adicionar membros ao projeto</p>
+            <input class="px-2 outline-none h-10 w-full bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+            <div class="h-1 w-full bg-primary dark:bg-dark-primary rounded-lg"></div>
+
+            <div class="h-[63vh]  overflow-auto">
+                <div class="div-membros min-w-fit" *ngFor="let user of filteredNames()">
+                    <div class="foto">
+                        <div *ngIf="user && verifyImage(user)" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
+                        <img class="fotoImagem" *ngIf="!verifyImage(user)" src="{{user.image.data}}" alt="">
+                    </div>
+                    <div class="infos min-w-full">
+                        <div *ngIf="user" class="nome min-w-fit"><p>{{user.name}}</p></div>
+                        <div *ngIf="user" class="email min-w-fit"><p>{{user.email}}</p></div>
+                    </div>
+                    <button class="adicionar duration-150 hover:scale-105 min-w-fit" (click)="adicionar(user)">
+                        <div class="fundo-icon">
+                            <i class="pi" [ngClass]="!removeProjectMembersFromTeamParticipants(user) ? 'pi-check-circle':'pi-plus'"></i>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- <div *ngFor="let user of project.team.participants" class="w-full h-[10vh] rounded-lg grid grid-cols-4 grid-rows-2 px-3 my-4 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray dark:shadow-dark-primary-black" style="grid-template-columns: 10% 40% 10% 20% 20%;">
+                    <div class="w-full h-full row-span-full flex justify-center items-center">
+                        <div class="foto">
+                            <div *ngIf="verifyImage(user) && user" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
+                            <img class="fotoImagem" *ngIf="!verifyImage(user)" src="{{user.image.data}}" alt="">        
+                        </div>
+                    </div>
+                
+                    <p class="text-2xl font-semibold text-primary flex items-end dark:text-dark-primary">{{user.name}}</p>
+                    <p class="row-start-2 text-fontGray dark:text-gray-300">{{user.email}}</p>
+                
+                    <div class="flex row-span-full items-center justify-center" *ngIf="user.id != project.creator.id">
+                        <button class=" h-[2rem] w-[80%] bg-primary dark:bg-dark-primary text-secondaryWhite dark:text-primaryFontBlack rounded-full duration-200 hover:scale-105"><i class="pi pi-plus"></i></button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -113,6 +113,7 @@ import { CommentsProjectComponent } from './componentes/sub-componentes/comments
 import { MemberListFullViewProjectComponent } from './componentes/sub-componentes/member-list-full-view-project/member-list-full-view-project.component';
 
 import { NotificationModalComponent } from './componentes/notification-modal/notification-modal.component';
+import { AddMemberToProjectModalComponent } from './componentes/add-member-to-project-modal/add-member-to-project-modal.component';
 
 
 
@@ -200,7 +201,8 @@ import { NotificationModalComponent } from './componentes/notification-modal/not
     ModalOptionFullViewComponent,
     CommentsProjectComponent,
     MemberListFullViewProjectComponent,
-    NotificationModalComponent
+    NotificationModalComponent,
+    AddMemberToProjectModalComponent
 
   ],
   

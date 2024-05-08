@@ -22,10 +22,12 @@ export class SideBarComponent implements OnInit {
 @Output() sideBar = new EventEmitter<boolean>();
 loggedUser !: User
 config = false
+
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
   }
+
   closeSideBar(){
     this.sideBar.emit(false)
   }

@@ -50,12 +50,12 @@ export class MembrosEquipeComponent implements OnInit {
     }else{
       this.removeUser()
     }
+    this.moveCreatorToFirst()
   }
 
   addUser(){
     this.projeto.members.push(this.user)
     console.log(this.projeto);
-    
   }
 
 
@@ -66,5 +66,16 @@ export class MembrosEquipeComponent implements OnInit {
       }
     });
   }
+
+  moveCreatorToFirst() {
+    const creator = this.projeto.members.find(member => member.id === this.projeto.creator.id);
+    if (creator) {
+        const membersWithoutCreator = this.projeto.members.filter(member => member.id !== this.projeto.creator.id);
+        const updatedMembers = [creator, ...membersWithoutCreator];
+        return updatedMembers;
+    } else {
+        return this.projeto.members;
+    }
+}
 
 }

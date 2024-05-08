@@ -1,5 +1,5 @@
 import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
 import { filter, window } from 'rxjs';
 import { User } from 'src/model/user';
@@ -107,7 +107,7 @@ export class NavegacaoComponent implements OnInit {
   }
 
   openNotification(){
-    this.notification= !this.notification
+    this.notification= true
   }
 
 }
