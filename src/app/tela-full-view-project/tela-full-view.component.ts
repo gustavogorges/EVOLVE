@@ -41,7 +41,7 @@ export class TelaFullViewComponent implements OnInit {
     closeAllOptions: boolean = false
     dashboardEdit !: Dashboard
     editProject : boolean = false
-    miniPageView : string = 'Membros'
+    miniPageView : string = 'Dashboards'
     confirmationActionModalBol : boolean = false
     response : any
     quest : any
