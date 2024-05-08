@@ -1,13 +1,13 @@
 .main {
-    @apply h-screen w-screen flex justify-center items-center;
+    @apply h-screen w-screen flex justify-center items-start;
 }
 
 .card-login {
-    @apply h-3/4 w-2/3 flex drop-shadow-2xl;
+    @apply max-h-[85%] h-[80%] w-2/3 flex drop-shadow-2xl;
 }
 
 .left {
-    @apply bg-secondary h-full w-1/2 rounded-l-md flex justify-center items-center;
+    @apply bg-secondary h-full w-1/2 rounded-l-md flex flex-col p-10;
 }
 
 .welcome {
@@ -19,7 +19,7 @@
 }
 
 .right {
-    @apply bg-primaryWhite h-full w-1/2 rounded-r-md;
+    @apply bg-white h-full w-1/2 rounded-r-lg p-16 ;
 }
 
 .normal-white-font {
@@ -29,9 +29,12 @@
 .pi {
     @apply text-2xl
 }
+.error-text{
+    @apply text-sm font-hind-madurai text-primary 
+}
 
 .box-text-left {
-    @apply flex justify-center items-center w-4/5 h-full
+    @apply flex flex-col justify-center items-center w-4/5 h-full
 }
 
 
@@ -53,7 +56,7 @@
 }
 
 .main-title {
-    @apply pl-10 pt-10 text-4xl font-bold text-primaryFontBlack;
+    @apply text-4xl font-bold text-primaryFontBlack;
 }
 
 .login-topic-icon {
@@ -182,7 +185,7 @@ $gray: #185E77;
 }
 /* demo */
 body {
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'MontSerrat', sans-serif; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,3 +194,10 @@ body {
   font-size: 1.5rem;
   background-color:#222222;
 }
+.form-group {
+    @apply flex flex-col
+
+}
+
+
+

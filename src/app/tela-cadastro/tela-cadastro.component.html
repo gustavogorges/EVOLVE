@@ -1,61 +1,167 @@
-<div class="main">
-    <div class="card-login">
-        <div class="left">
-            <div class="box-text-left">
-                <div class="welcome">
-                    <p class="main-text">Bem-vindo ao Evolve. Aqui a organização e eficiência se encontram para transformar sua forma de gerenciar tarefas e projetos. Abra as portas para uma nova era de produtividade.</p>
-                    <div class="login-topic-icon"><i class="pi pi-sitemap normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-calendar normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                    <div class="login-topic-icon"><i class="pi pi-history normal-white-font" ></i><p class="normal-white-font">Personalize fluxos de trabalho para se adequar à maneira como sua equipe trabalha.</p></div>
-                </div>
-            </div>
-        </div>  
-        <div class="right">
-            <div class="box-text-right">
-                <div class="main-title">
-                    <h1>Cadastro</h1>
-                </div>
-                <div class="div-inputs">
-                    <div class="inputs-login">
-                        <div class="form__group field">
-                            <input [(ngModel)]="usuario.name" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Nome completo</label>
-                          </div>
-                          <div class="form__group field">
-                            <input [(ngModel)]="usuario.email" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Email</label>
-                          </div>
-                          <div class="form__group field">
-                            <input [(ngModel)]="usuario.password" type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Senha</label>
-                          </div>
-                          <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-                            <label for="name" class="form__label">Confirmar senha</label>
-                          </div>
-                    </div>
-                   
-                </div>
-                <div class="div-buttons">
-                    <div class="checkbox">
-                        <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Eu li e aceito os Termos</p>
+<div class="main relative">
+  <div class="card-login">
+    <div
+      class="bg-secondary w-1/2 h-full rounded-l-lg p-10 flex flex-col gap-4 overflow-clip"
+    >
+      <p class="text-white text-3xl font-titulo font-bold">evolve</p>
+      <p class="text-white text-xl font-hind-madurai">
+        Onde visão encontra execução. faça de cada tarefa um passo adiante em
+        sua evolução.
+      </p>
 
-                    </div>
-                    <div class="checkbox">
-                        <p-checkbox name="groupname"></p-checkbox>
-                        <p class="checkbox-text">Receber notificações por e-mail</p>
-                        
-                    </div>
-                    <div class="div-login">
-                        <button pButton pRipple type="button" label="Cadastrar" class="p-button-rounded button-login" (click)="cadastrarUsuario()"></button>
-                    </div>
-                    <div class="div-google">
-                        <button pButton pRipple type="button" label="Google" class="p-button-rounded button-google"></button>
-                    </div>
-                
-                </div>
-            </div>
-        </div>
+      <img src="assets/image 8.svg" class="w-full" alt="" />
     </div>
+    <div class="right">
+      <div class="box-text-right">
+        <div class="main-title">
+          <h1>Cadastro</h1>
+        </div>
+
+        <form
+          (ngSubmit)="submit()"
+          [formGroup]="userForm"
+          #formDir="ngForm"
+          class="p-10 flex flex-col gap-10"
+        >
+          <div class="flex flex-col gap-4">
+            <div class="form-group">
+              <label for="name" class="font-titulo font-medium flex gap-1"
+                >Nome
+                <p class="text-red-500">*</p></label
+              >
+              <input
+                type="text"
+                placeholder="Digite seu nome "
+                (keydown.enter)="moveFocus('email'); $event.preventDefault()"
+                class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+                formControlName="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="name" class="font-titulo font-medium flex gap-1"
+                >Email
+                <p class="text-red-500">*</p>
+              </label>
+              <input
+                type="text"
+                placeholder="Digite seu email "
+                (keydown.enter)="moveFocus('password'); $event.preventDefault()"
+                class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+                formControlName="email"
+              />
+              <div
+              *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
+              class="error-text"
+              >
+                <p>Campo é obrigatório.</p>
+              </div>
+              <div
+                *ngIf="userForm.get('email')?.errors?.['email'] && userForm.get('email')?.touched"
+                class="error-text"
+              >
+                <p>Email inválido.</p>
+              </div>
+           
+            </div>
+            <div class="form-group">
+              <label for="name" class="font-titulo font-medium flex gap-1"
+                >Senha
+                <p class="text-red-500">*</p></label
+              >
+              <input
+                type="password"
+                placeholder="Digite sua senha"
+                class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+                formControlName="password"
+                (keydown.enter)="
+                  moveFocus('confirmationPassword'); $event.preventDefault()
+                "
+              />
+              <div
+              *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched"
+                class="error-text"
+              >
+                <p>Campo obrigatório.</p>
+              </div>  
+              <div
+                *ngIf="password?.errors?.['minLength'] && userForm.get('password')?.touched "
+                class="error-text"
+              >
+                <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
+              </div>
+             
+              <div
+                *ngIf="password?.errors?.['pattern']  && userForm.get('password')?.touched"
+                class="error-text"
+              >
+                <p>
+                  Senha deve conter pelo menos um carácter especial (ex:
+                  @,-,!,$).
+                </p>
+                <p>Senha deve conter pelo menos um número.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="font-titulo font-medium flex gap-1"
+                >Confirme sua senha
+                <p class="text-red-500">*</p></label
+              >
+              <input
+                type="password"
+                placeholder="Confirme sua senha "
+                class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
+                formControlName="confirmationPassword"
+                (keydown.enter)="submit(); $event.preventDefault()"
+              />
+
+              <div
+                *ngIf="confirmationPassword?.errors?.['required'] && userForm.get('confirmationPassword')?.touched"
+                class="error-text"
+              >
+                <p>Campo obrigatório.</p>
+              </div>
+              <div
+                *ngIf="userForm?.errors?.['passwordMismatch']  && userForm.get('confirmationPassword')?.touched "
+                class="error-text"
+              >
+                <p>As senhas não conhecidem.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="form-group px-5 py-3 rounded-xl bg-secondary   disabled:opacity-50"     [disabled]="!userForm.valid">
+            <input
+              type="submit"
+              value="Cadastrar"
+              [disabled]="!userForm.valid"
+              class="text-xl text-white font-titulo font-semibold w-full "
+            />
+          </button>
+          <div class="flex gap-1 text-base error-text">
+            <p class="text-fontGray">Já possui uma conta?</p>
+            <p class="underline" routerLink="">Login</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+  <div
+    *ngIf="showConfirmationMessage"
+    class="bg-white flex flex-col items-end gap-0 font-hind-madurai text-primaryFontBlack bottom-32 right-10 absolute shadow-lg w-[350px] h-24 p-6 rounded-lg"
+    v
+    [ngClass]="
+      status >= 200 && this.status < 300 ? 'bg-green-200 ' : 'bg-red-200'
+    "
+  >
+    <i
+      class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
+      style="font-size: 1rem"
+      (click)="closeModal()"
+    ></i>
+    <p class="text-lg self-start">
+      {{ message }}
+    </p>
+  </div>

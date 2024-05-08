@@ -1,13 +1,18 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .main {
-    @apply h-full w-screen flex justify-center items-center overflow-hidden;
+    @apply h-screen w-screen flex justify-center items-start;
 }
 
 .card-login {
-    @apply h-3/4 w-2/3 flex drop-shadow-2xl;
+    @apply max-h-[85%] h-[80%] w-2/3 flex drop-shadow-2xl;
 }
 
 .left {
-    @apply bg-primary h-full w-1/2 rounded-l-md flex justify-center items-center;
+    @apply bg-secondary h-full w-1/2 rounded-l-md flex flex-col p-10;
 }
 
 .welcome {
@@ -19,7 +24,7 @@
 }
 
 .right {
-    @apply bg-primaryWhite h-full w-1/2 rounded-r-md;
+    @apply bg-white h-full w-1/2 rounded-r-lg p-16  flex flex-col justify-center;
 }
 
 .normal-white-font {
@@ -29,9 +34,12 @@
 .pi {
     @apply text-2xl
 }
+.error-text{
+    @apply  font-hind-madurai text-primary 
+}
 
 .box-text-left {
-    @apply flex justify-center items-center w-4/5 h-full
+    @apply flex flex-col justify-center items-center w-4/5 h-full
 }
 
 
@@ -41,11 +49,11 @@
 }
 
 .div-inputs {
-    @apply w-full h-2/6 flex justify-center flex-col  items-center
+    @apply w-full h-3/6 flex justify-center flex-col  items-center
 }
 
 .inputs-login {
-    @apply w-full h-4/5 flex flex-col gap-10 justify-center items-center
+    @apply w-full h-4/5 flex flex-col gap-2 justify-center items-center
 }
 
 .input {
@@ -53,7 +61,7 @@
 }
 
 .main-title {
-    @apply p-10  text-4xl font-bold text-primaryFontBlack;
+    @apply text-4xl font-bold text-primaryFontBlack;
 }
 
 .login-topic-icon {
@@ -69,7 +77,7 @@
 }
 
 .div-buttons {
-    @apply w-full h-3/6 flex flex-col items-center
+    @apply w-full h-2/6 flex flex-col items-center
 }
 
 .checkbox {
@@ -77,7 +85,7 @@
 }
 
 .checkbox-text {
-    @apply font-semibold text-lg
+    @apply font-semibold text-lg text-primaryFontBlack
 }
 
 .div-login {
@@ -85,7 +93,7 @@
 }
 
 .button-login {
-    @apply w-full bg-primary
+    @apply w-full bg-secondary
 }
 
 .button-login:hover {
@@ -182,7 +190,7 @@ $gray: #185E77;
 }
 /* demo */
 body {
-  font-family: 'Poppins', sans-serif; 
+  font-family: 'MontSerrat', sans-serif; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,3 +199,13 @@ body {
   font-size: 1.5rem;
   background-color:#222222;
 }
+.form-group {
+    @apply flex flex-col
+
+}
+.modal{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+

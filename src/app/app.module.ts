@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
@@ -116,6 +116,7 @@ import { NotificationModalComponent } from './componentes/notification-modal/not
 import { AddMemberToProjectModalComponent } from './componentes/add-member-to-project-modal/add-member-to-project-modal.component';
 
 
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -219,7 +220,6 @@ import { AddMemberToProjectModalComponent } from './componentes/add-member-to-pr
     CheckboxModule,
     FormsModule,
     InputTextareaModule,
-    FormsModule,
     ToastModule,
     CalendarModule,
     ColorPickerModule,
@@ -231,7 +231,9 @@ import { AddMemberToProjectModalComponent } from './componentes/add-member-to-pr
     DndModule,
     CommonModule,
 
-    InputNumberModule
+    InputNumberModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   
   providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,
