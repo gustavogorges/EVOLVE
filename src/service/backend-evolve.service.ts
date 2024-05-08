@@ -98,8 +98,8 @@ export class BackendEVOLVEService {
   }
 
 
-  async updateStatusList(projetoId:number,novoStatus:Status) {
-    return (await axios.patch(this.URL+"project/"+projetoId, novoStatus )).data
+  async updateStatusList(projetoId:number,actionsUserId:number, novoStatus:Status) {
+    return (await axios.patch(this.URL+"project/"+projetoId+"/"+actionsUserId, novoStatus )).data
   }
  
   async deleteStatus(projetoId:number,status:Status) {
@@ -314,8 +314,8 @@ export class BackendEVOLVEService {
     return (await (axios.get(this.URL+idProject+"/dashboard"))).data;
   }
 
-  async deleteDashboard(idDashboard:number){
-    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard))).data;
+  async deleteDashboard(idDashboard:number, idActionUser:number){
+    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser))).data;
   }
 
   async updateDashboard(dashboard:Dashboard, idDashboard:number, idProject:number){

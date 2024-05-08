@@ -1,7 +1,9 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Dashboard } from 'src/model/dashboard';
 import { Project } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-modal-option-full-view',
@@ -10,7 +12,8 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class ModalOptionFullViewComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService, private elementRef: ElementRef) { }
+  constructor(private service : BackendEVOLVEService, private elementRef: ElementRef,
+    private cookies_service : CookiesService) { }
     
   viewEditBol:boolean = false
   @Input() charts : any[] = []
@@ -23,9 +26,12 @@ export class ModalOptionFullViewComponent implements OnInit {
   @Output() viewEditBolEmit : EventEmitter<any> = new EventEmitter
   @Output() dashboardToedit : EventEmitter<any> = new EventEmitter
   @Output() newChartElement : EventEmitter<any> = new EventEmitter
+
+  loggedUser : User = new User;
   
-  ngOnInit(): void {
+  async ngOnInit(){
     document.body.addEventListener('click', this.onDocumentClick);
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
   viewOptions(){
@@ -49,7 +55,7 @@ export class ModalOptionFullViewComponent implements OnInit {
       };
 
     async deleteDashboard(){
-        await this.service.deleteDashboard(this.dashboard.id)
+        await this.service.deleteDashboard(this.dashboard.id,this.loggedUser.id)
         this.dashboards.splice(this.dashboards.indexOf(this.dashboard), 1)
     }
 

@@ -27,11 +27,11 @@
 }
 
 .notification-item {
-    @apply flex items-center justify-center gap-4 w-full py-2 cursor-pointer
+    @apply flex items-center justify-center gap-4 w-full py-2 cursor-pointer 
 } 
 
 .notification-item-user {
-    @apply w-12 h-12 flex items-center justify-center bg-slate-200 rounded-full 
+    @apply w-14 h-14 flex items-center justify-center bg-slate-200 rounded-full 
 }
 
 .notification-item-content {
