@@ -3,6 +3,36 @@
     <i class="pi pi-angle-double-right icon-close"></i>
   </div>
   <div class="the-box">
+    <div class="foco-on" *ngIf="booleanFoco">
+      <div class="foco-timer">
+        <div>{{ timerString }}</div>
+      </div>
+      <div class="actions-timer">
+        <div class="cancel action" (click)="finishFocus()">
+          <i class="pi pi-times" style="font-size: 1rem"></i>cancelar
+        </div>
+        <div
+          *ngIf="booleanPlayPause"
+          class="pause-return action"
+          (click)="startTimer()"
+        >
+          <i class="pi pi-play" style="font-size: 1rem"></i>começar
+        </div>
+        <div 
+        *ngIf="!booleanPlayPause"
+        class="pause-return action" 
+        (click)="stopTimer()"
+        >
+          <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
+        </div>
+        <div
+          class="stop action"
+          (click)="sendTimeFocus()"
+        >
+          <i class="pi pi-check-square" style="font-size: 1rem"></i>terminar
+        </div>
+      </div>
+    </div>
     <div class="name-progress">
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
@@ -35,44 +65,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold hidden md:flex text-sm">iniciar foco</p>
-          </div>
-        </div>
-      </div>
-      <div class="foco-on" *ngIf="booleanFoco">
-        <div class="foco-timer">
-          <div>{{ timerString }}</div>
-        </div>
-        <div class="actions-timer">
-          <div class="cancel action" (click)="finishFocus()">
-            <i class="pi pi-times" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
-              cancelar
-            </p>
-          </div>
-          <div class="pause action" (click)="stopTimer()">
-            <i class="pi pi-pause" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
-              pausar
-            </p>
-          </div>
-          <div
-            *ngIf="booleanPlayPause"
-            (click)="startTimer()"
-            class="stop action"
-          >
-            <i class="pi pi-play" style="font-size: 1rem"></i>  
-            <p class="hidden sm:flex">
-              começar
-            </p>
-          </div>
-          <div
-            *ngIf="!booleanPlayPause"
-            class="stop action"
-            (click)="stopTimer()"
-          >
-            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>
-            <p class="hidden sm:flex">
-              parar
-            </p>
+            <p class="font-bold">iniciar foco</p>
           </div>
         </div>
       </div>

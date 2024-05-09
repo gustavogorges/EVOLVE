@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
+import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/PriorityRecord';
@@ -100,6 +101,33 @@ export class ModalTarefaComponent implements OnInit {
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
+  }
+
+  async sendTimeFocus() : Promise<void> {
+    let userTask : UsuarioTarefa;
+    userTask = await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id);
+    if(userTask.userId == 0 || userTask.userId == null) {
+      userTask.userId = this.loggedUser.id;
+      userTask.taskId = this.tarefa.id;
+    }
+    if(userTask.workedSeconds + this.seconds >= 60) {
+      userTask.workedMinutes += 1;
+      userTask.workedSeconds = userTask.workedSeconds + this.seconds - 60;
+    } else {
+      userTask.workedSeconds += this.seconds;
+    }
+    if(userTask.workedMinutes + this.minutes >= 60) {
+      userTask.workedHours += 1;
+      userTask.workedMinutes = userTask.workedMinutes + this.minutes - 60;
+    } else {
+      userTask.workedMinutes += this.minutes;
+    }
+    userTask.workedHours += this.hours;
+    console.log(userTask);
+    console.log(this.seconds);
+    
+    this.service.updateUserWorkedTime(userTask);
+    this.finishFocus();
   }
 
   constructor(private service: BackendEVOLVEService,
@@ -309,6 +337,11 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   finishFocus() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.minutes = 0;
+    this.hours = 0;
+    this.timerString = "00:00"
     this.booleanFoco = false;
   }
 

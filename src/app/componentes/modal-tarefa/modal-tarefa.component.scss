@@ -1,5 +1,5 @@
 .main {
-    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-screen  fixed top-14 right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-screen fixed top-14 right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
 }
 
 .name-progress {
@@ -31,7 +31,7 @@
 }
 
 .foco-on {
-    @apply w-full h-16 mb-5 flex items-center pl-2 justify-between
+    @apply w-full h-16 mb-5 flex items-center justify-between
 }
 
 .foco-timer {
@@ -43,7 +43,7 @@
 }
 
 .action {
-    @apply  px-2 p-1 flex justify-center items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
+    @apply  px-2 p-1 flex justify-center bg-primary items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
 }
 
 .cancel {
@@ -227,5 +227,5 @@
 }
 
 .the-box {
-    @apply w-[80%] h-full flex flex-col items-center
+    @apply w-[80%] h-full flex flex-col items-center overflow-y-auto
 }

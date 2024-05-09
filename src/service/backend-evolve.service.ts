@@ -25,6 +25,7 @@ import { PriorityRecord } from 'src/model/PriorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
+import { UsuarioTarefa } from 'src/model/userTask';
 
 
 
@@ -349,6 +350,14 @@ export class BackendEVOLVEService {
 
   async updateNameDescProject(idProject:number, projectNameDescDTO:any){
     return (await (axios.patch(this.URL+"/project/"+idProject+"/altereteName", projectNameDescDTO))).data;
+  }
+
+  async getUserWorkedTime(userId:number, taskId:number){
+    return (await (axios.get(this.URL+"task/get/"+userId+"/"+taskId))).data;
+  }
+
+  async updateUserWorkedTime(userTaskUpdate : UsuarioTarefa){
+    return (await (axios.put(this.URL+"task/put/workedTime", userTaskUpdate))).data;
   }
 
 }
