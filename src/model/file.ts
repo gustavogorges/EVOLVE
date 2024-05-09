@@ -1,4 +1,4 @@
-export class TaskFile {
+export class File {
     id!:number
     name:string=""
     type:string = ""

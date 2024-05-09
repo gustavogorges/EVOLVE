@@ -18,7 +18,7 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
-import { PriorityRecord } from 'src/model/PriorityRecord';
+import { PriorityRecord } from 'src/model/priorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
@@ -31,7 +31,7 @@ export class BackendEVOLVEService {
   URL: string = 'http://localhost:8087/';
   project$: any;
 
-  constructor() {}
+  constructor() { }
 
   //#region Generics
 
@@ -41,7 +41,7 @@ export class BackendEVOLVEService {
 
   async getOne(caminho: string, id: number) {
     return (
-      await axios.get(this.URL + caminho + '/' + 3, {withCredentials:true})
+      await axios.get(this.URL + caminho + '/' + 3, { withCredentials: true })
     ).data;
   }
 
@@ -88,7 +88,7 @@ export class BackendEVOLVEService {
     formsData.append('password', password);
     return (
       await axios.patch(
-        this.URL + 'user/'+ userId + '/password', formsData
+        this.URL + 'user/' + userId + '/password', formsData
       )
     ).data;
   }
@@ -100,7 +100,7 @@ export class BackendEVOLVEService {
     formsData.append('primaryColor', primaryColor);
     return (
       await axios.patch(
-        this.URL + 'user/' + userId + '/primaryColor' ,
+        this.URL + 'user/' + userId + '/primaryColor',
         formsData
       )
     ).data;
@@ -113,7 +113,7 @@ export class BackendEVOLVEService {
     formsData.append('secondaryColor', secondaryColor);
     return (
       await axios.patch(
-        this.URL + 'user/' + userId +'/secondaryColor' ,
+        this.URL + 'user/' + userId + '/secondaryColor',
         formsData
       )
     ).data;
@@ -140,7 +140,7 @@ export class BackendEVOLVEService {
     formsData.append('secondaryColor', secondaryDarkColor);
     return (
       await axios.patch(
-        this.URL + 'user'  + userId + '/secondaryDarkColor',
+        this.URL + 'user' + userId + '/secondaryDarkColor',
         formsData
       )
     ).data;
@@ -175,20 +175,20 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + 'task/'+ taskId + '/property/associates/'+ userId,
+        this.URL + 'task/' + taskId + '/property/associates/' + userId,
         associates
       )
     ).data;
   }
 
   async getAllCommentsOfTask(taskId: number) {
-    return (await axios.get(this.URL + 'task/'+ taskId + '/comments/getAll' )).data;
+    return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll')).data;
   }
 
   async patchNewComment(taskId: number, newComment: Comment, userId: number) {
     return (
       await axios.patch(
-        this.URL + 'task/'+ taskId + 'comments/patch/user/' + userId,
+        this.URL + 'task/' + taskId + 'comments/patch/user/' + userId,
         newComment
       )
     ).data;
@@ -198,11 +198,11 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task/'+ taskId +
-          '/comments/delete/' +
-          commentId +
-          '/user/' +
-          userId
+        'task/' + taskId +
+        '/comments/delete/' +
+        commentId +
+        '/user/' +
+        userId
       )
     ).data;
   }
@@ -223,7 +223,7 @@ export class BackendEVOLVEService {
   async updateCurrentStatus(taskId: number, userId: number, newStatus: Status) {
     return (
       await axios.patch(
-        this.URL + 'task/'  + taskId +'/update'+ '/currentStatus/user/' + userId,
+        this.URL + 'task/' + taskId + '/update' + '/currentStatus/user/' + userId,
         newStatus
       )
     ).data;
@@ -236,7 +236,7 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + 'task/' + taskId  + '/user' + '/' + userId  +'/update'+ '/currentPriority',
+        this.URL + 'task/' + taskId + '/user' + '/' + userId + '/update' + '/currentPriority',
         newPriority
       )
     ).data;
@@ -251,11 +251,11 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-          'task' + '/' +
-          taskId +'/property/put/option/' +
-          userId +
-          '/' +
-          propertyId,
+        'task' + '/' +
+        taskId + '/property/put/option/' +
+        userId +
+        '/' +
+        propertyId,
         newOption
       )
     ).data;
@@ -270,14 +270,14 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task' + '/' +
-          taskId + 
-          '/property/delete/option/' +
-          userId +
-          '/' +
-          propertyId +
-          '/' +
-          optionId
+        'task' + '/' +
+        taskId +
+        '/property/delete/option/' +
+        userId +
+        '/' +
+        propertyId +
+        '/' +
+        optionId
       )
     ).data;
   }
@@ -295,12 +295,12 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task' + '/' +
-          taskId +
-          '/subtask/delete/' +
-          subtaskId +
-          '/' +
-          userId
+        'task' + '/' +
+        taskId +
+        '/subtask/delete/' +
+        subtaskId +
+        '/' +
+        userId
       )
     ).data;
   }
@@ -315,7 +315,7 @@ export class BackendEVOLVEService {
     ).data;
   } //not found in API
 
-  
+
   async putPropertyValue(
     propertyId: number,
     propertyValue: PropertyValue,
@@ -325,19 +325,19 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-          'task' +
-          '/' +
-          taskId + '/property/put/' +
-          propertyId +
-          '/' +
-          userId,
+        'task' +
+        '/' +
+        taskId + '/property/put/' +
+        propertyId +
+        '/' +
+        userId,
         propertyValue
       )
     ).data;
   }
 
-  async getAllPriorities(projectId:number) {
-    return (await axios.get(this.URL + 'task/'+projectId+'/priorities')).data;
+  async getAllPriorities(projectId: number) {
+    return (await axios.get(this.URL + 'task/' + projectId + '/priorities')).data;
   }
 
   async postTarefa(tarefa: Task) {
@@ -354,12 +354,12 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task/' + taskId +
-          '/' + 'property/delete/' +
+        'task/' + taskId +
+        '/' + 'property/delete/' +
 
-          userId +
-          '/' +
-          propertyId
+        userId +
+        '/' +
+        propertyId
       )
     ).data;
   }
@@ -381,12 +381,12 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL +
-          'task/update/' +
-          taskId +
-          '/currentOptions/' +
-          userId +
-          '/' +
-          propertyId,
+        'task/update/' +
+        taskId +
+        '/currentOptions/' +
+        userId +
+        '/' +
+        propertyId,
         newOptions
       )
     ).data;
@@ -396,12 +396,12 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-          'task/update/finalDate/' +
-          taskId +
-          '/' +
-          userId +
-          '/calendar/' +
-          newDate
+        'task/update/finalDate/' +
+        taskId +
+        '/' +
+        userId +
+        '/calendar/' +
+        newDate
       )
     ).data;
   }
@@ -425,12 +425,12 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task/delete/task/file/' +
-          taskId +
-          '/' +
-          fileId +
-          '/' +
-          userId
+        'task/delete/task/file/' +
+        taskId +
+        '/' +
+        fileId +
+        '/' +
+        userId
       )
     ).data;
   }
@@ -440,11 +440,11 @@ export class BackendEVOLVEService {
   //#region Project
 
   async getProjectsByUserId(userId: number) {
-    return (await axios.get(this.URL + 'project' + '/user/' + userId, {withCredentials:true})).data;
+    return (await axios.get(this.URL + 'project' + '/user/' + userId, { withCredentials: true })).data;
   }
   async getProjectsByTeamId(teamId: number) {
     return (
-      await axios.get(this.URL + 'project' + '/team/' + teamId,  {withCredentials:true})
+      await axios.get(this.URL + 'project' + '/team/' + teamId, { withCredentials: true })
     ).data;
   }
 
@@ -474,12 +474,12 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'project/comments/delete/' +
-          commentId +
-          '/' +
-          projectId +
-          '/' +
-          userId
+        'project/comments/delete/' +
+        commentId +
+        '/' +
+        projectId +
+        '/' +
+        userId
       )
     ).data;
   } //not found in projectController on API
@@ -526,9 +526,9 @@ export class BackendEVOLVEService {
   //#region Team
 
   async getTeamsByUserId(userId: number) {
-    return (await axios.get(this.URL + 'team' + '/user/' + userId, {withCredentials:true})).data;
+    return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
   }
-  
+
   async postEquipe(equipe: Team) {
     return (await axios.post(this.URL + 'team', equipe)).data;
   }
@@ -543,6 +543,41 @@ export class BackendEVOLVEService {
     ).data;
   }
 
+  async patchName(teamId: number, newName: String) {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/" + newName)
+    ).data;
+  }
+
+  async patchTeamImage(teamId: number, image: File) {
+    let formData: FormData = new FormData;
+    formData.append("image",image);
+    return(
+      await axios.patch(this.URL + "team/" + teamId + "/" + "image",formData)
+    ).data;
+  }
+
+  async patchTeamImageRemove(teamId:number){
+    return(
+      await axios.patch(this.URL + "/team" + teamId +"/image/remove")
+    ).data;
+  }
+
+  async patchTeamImageColor(teamId:number, newImageColor:string){
+    let formData: FormData = new FormData;
+    formData.append("imageColor",newImageColor);
+    return(
+      await axios.patch(this.URL + "team/" + teamId + "/imagecolor",formData)
+    ).data;
+  }
+
+  async patchTeamParticipants(teamId : number, participants : User[]){
+    return(
+      await axios.patch(this.URL + "team/" + teamId + "/participants",participants)
+    ).data;
+  }
+
+  // async patchTeamRoles(teamId:number, roles:Role[])
   async cleanAllUserNotifications(userId: number) {
     return (await axios.delete(this.URL + 'team/clean/' + userId)).data;
   }
@@ -559,11 +594,10 @@ export class BackendEVOLVEService {
     return (await axios.put(this.URL + 'userChat', chat)).data;
   }
 
-  
+
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id: number): Promise<Array<UserChat>> {
-    let path: string = 'userChat/user/';
-    return (await axios.get(this.URL + path + id)).data;
+    return (await axios.get(this.URL + "userChat/user/" + id)).data;
   }
 
   //#endregion userChat
@@ -571,8 +605,7 @@ export class BackendEVOLVEService {
   //#region teamChat
 
   async getTeamChatsByUserId(id: number): Promise<Array<TeamChat>> {
-    let path: String = 'teamChat/user/';
-    return (await axios.get(this.URL + path + id)).data;
+    return (await axios.get(this.URL + "teamChat/user/" + id)).data;
   }
 
   //#endregion teamChat
@@ -580,8 +613,7 @@ export class BackendEVOLVEService {
   //#region projectChat
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
-    let path: string = 'projectChat/user/';
-    return (await axios.get(this.URL + path + id)).data;
+    return (await axios.get(this.URL + "projectChat/user/" + id)).data;
   }
 
   //#endregion projectChat
@@ -677,11 +709,11 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          idProject +
-          '/dashboard/' +
-          idDashboard +
-          '/delete-chart/' +
-          idChart
+        idProject +
+        '/dashboard/' +
+        idDashboard +
+        '/delete-chart/' +
+        idChart
       )
     ).data;
   }

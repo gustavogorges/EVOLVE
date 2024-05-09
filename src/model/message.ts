@@ -4,11 +4,11 @@ import { User } from "./user";
 
 export class Message {
     id!:number;
+    attachments:Array<File> = new Array
     content:string = "";
     sender:User = new User;
     date:string = "";
-    messageStatus:MessageStatus = 0;
+    status:MessageStatus = 0;
     chat!:Chat
-    attachments:Array<File> = new Array
 
 }
