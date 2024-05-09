@@ -139,7 +139,8 @@ export class TarefaKanbanComponent  implements OnChanges{
      
       list.map((status : Status)=>{
         status.columnIndex=list.indexOf(status)
-        this.service.updateStatusList(this.project.id, status); 
+        this.project.statusList.push(status)
+        this.service.updateStatusList(this.project.id, this.project.statusList); 
         console.log("passei uma vez ein")
       })
       this.project.statusList = list

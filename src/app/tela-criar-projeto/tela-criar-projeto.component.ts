@@ -139,7 +139,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         setTimeout(() => {
           let lista: Array<Pick<User, "id">> = [];
           this.projeto.members.forEach(element => {
-            lista.push({ "id": element.id });
+            lista.push({ "id": element.user.id });
           });
           postProject.members = lista;
   
@@ -153,7 +153,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         });
       });
 
-      postProject = await this.service.postProjeto(postProject);
+      postProject = await this.service.postProjeto(postProject, postProject.team.id);
   
       if (this.formData != null) {
         await this.service.patchProjectImage(postProject.id, this.formData);

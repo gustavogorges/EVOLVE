@@ -48,7 +48,7 @@ export class MemberListFullViewProjectComponent implements OnInit {
         this.confirmationAction = undefined;
 
         if (confirmation) {
-          this.project.members.splice(this.project.members.indexOf(this.user), 1)
+          this.project.members.splice(this.project.members.indexOf(this.project.members.find(member => member.user.id == this.user.id)!), 1)
           listIdsFromRemove.push({
             "id": this.user.id
           })

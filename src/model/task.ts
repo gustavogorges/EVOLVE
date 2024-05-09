@@ -20,9 +20,8 @@ export class Task{
     lastTimeEdited : string="";
     scheduledDate: Date = new Date;
 
-    // schedulingData: string = ""; 
     description:string = "";
-    historic:Historic = new Historic;
+    historic:Historic[] = [];
     currentStatus: Status = new Status;
     priority:PriorityRecord = new PriorityRecord();
     comments:Array<Comment> = new Array;
@@ -37,5 +36,7 @@ export class Task{
   
     conclusionPercentage:number=0;
     isVisible: boolean = false;
+
+    schedulingData:string = "" //p que serve isso?
 
 }

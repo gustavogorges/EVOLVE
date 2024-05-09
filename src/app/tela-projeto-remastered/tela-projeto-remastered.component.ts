@@ -115,7 +115,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     setTimeout(() => {
       project.members.forEach(element => {
         listUsers.push({
-          "id" : element.id
+          "id" : element.user.id
         })
       });
       postProject.members = listUsers

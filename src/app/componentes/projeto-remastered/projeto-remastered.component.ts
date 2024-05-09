@@ -7,6 +7,7 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
+import { UserProject } from 'src/model/userProject';
 
 interface Tarefa{
   nome : string,
@@ -96,8 +97,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     return true
   }
 
-  filteredNames() {
-    return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  filteredNames():UserProject[] {
+    return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }
 
   async setImageProject(event:any){
@@ -193,7 +194,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
         this.confirmationAction = undefined;
 
         if (confirmation) {
-          this.projeto.members.splice(this.projeto.members.indexOf(user), 1)
+          this.projeto.members.splice(this.projeto.members.indexOf(this.projeto.members.find(member => member.userId == user.id)!), 1)
           this.listIdsFromRemove.push({
             "id" : user.id
           })

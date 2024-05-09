@@ -108,9 +108,9 @@
         <div *ngFor="let team of user?.teams">
           <p
             class="font-hind-madurai md:text-xl w-max sm:text-lg text-base text-fontGray dark:text-gray-300 cursor-pointer"
-            (click)="changeTeam(team)"
+            (click)="changeTeam(team.team)"
           >
-            {{ team.name }}
+            {{ team.team.name }}
           </p>
         </div>
       </div>

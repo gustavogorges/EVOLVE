@@ -1,27 +1,27 @@
 <div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col justify-between " >
     <div class="main-box">
-        <div class="teams-box" *ngFor="let team of loggedUser.teams">
+        <div class="teams-box" *ngFor="let userTeam of loggedUser.teams">
             <div class="h-16 w-full flex justify-between items-center px-4">
                 <i class="pi pi-users team-icon"></i>
-                <p class="text-primaryFontBlack text-lg font-semibold">{{team.name}}</p>
+                <p class="text-primaryFontBlack text-lg font-semibold">{{userTeam.team.name}}</p>
                 <i 
                 class="pi pi-angle-down team-icon2" 
-                *ngIf="!team.booleanView"
-                (click)="openNotifications(team)"
+                *ngIf="!userTeam.team.booleanView"
+                (click)="openNotifications(userTeam.team)"
                 >
                 </i>
                 <i 
                 class="pi pi-angle-up team-icon2" 
-                *ngIf="team.booleanView"
-                (click)="closeNotifications(team)"
+                *ngIf="userTeam.team.booleanView"
+                (click)="closeNotifications(userTeam.team)"
                 >
                 </i>
             </div>
-            <div class="notifications-box" *ngIf="team.booleanView" 
+            <div class="notifications-box" *ngIf="userTeam.team.booleanView" 
             [ngClass]="{
-                'overflow-y-auto': team.notifications.length > 3
+                'overflow-y-auto': userTeam.team.notifications.length > 3
             }">
-                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(team.notifications)">
+                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(userTeam.team.notifications)">
                     <div 
                     class="notification-item-user"
                     *ngIf="notification.type == 'task'"

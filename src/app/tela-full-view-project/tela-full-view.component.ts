@@ -101,7 +101,7 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     filteredNames() {
-        return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+        return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
     }
 
     setResponse(event:any){
@@ -240,7 +240,7 @@ export class TelaFullViewComponent implements OnInit {
 
     async deleteStatus(status:Status){
         if(this.projeto.id != null){
-          this.projeto = await this.service.deleteStatus(this.projeto.id, status)
+          this.projeto = await this.service.deleteStatus(this.projeto.id, status.id)
         }else{
           this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
         }
@@ -288,7 +288,8 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async postStatus(status:Status) {
-        return await this.service.updateStatusList(this.projeto.id, status)
+        this.projeto.statusList.push(status)
+        return await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
     }
 
     async editStatusPut(){

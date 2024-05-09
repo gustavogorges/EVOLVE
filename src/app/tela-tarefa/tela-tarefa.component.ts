@@ -11,7 +11,7 @@ import {
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
-import { PriorityRecord } from 'src/model/PriorityRecord'; 
+import { PriorityRecord } from 'src/model/priorityRecord'; 
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
 
@@ -322,7 +322,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       });
         this.projeto.members.map((s) => {
           
-          if (s.name == option.name) {
+          if (s.user.name == option.name) {
             console.log(option.name);
 
             this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));

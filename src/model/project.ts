@@ -27,7 +27,7 @@ export class Project {
     team : Team = new Team;
     chat !: Chat;
     creator!:User
-    adimnistrators:Array<User> = new Array
+    // adimnistrators:Array<User> = new Array
     members:Array<UserProject> = new Array;
     tasks: Array<Task> = new Array;
     defaultRole:Role = new Role;

@@ -24,6 +24,7 @@ import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { config } from 'rxjs';
 import { UserProject } from 'src/model/userProject';
+import { File } from 'src/model/file';
 
 @Injectable({
   providedIn: 'root',
@@ -355,14 +356,8 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-<<<<<<< HEAD
-        'task/' + taskId +
-        '/' + 'property/delete/' +
-=======
           'task/' + taskId +
           '/' + 'property/delete/user/' +
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
-
         userId +
         '/' +
         propertyId
@@ -387,21 +382,12 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL +
-<<<<<<< HEAD
-        'task/update/' +
-        taskId +
-        '/currentOptions/' +
-        userId +
-        '/' +
-        propertyId,
-=======
           'task/' + taskId + '/update' +
 
           '/currentOptions/uuser/' +
           userId +
           '/property/' +
           propertyId,
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
         newOptions
       )
     ).data;
@@ -411,21 +397,12 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-<<<<<<< HEAD
-        'task/update/finalDate/' +
-        taskId +
-        '/' +
-        userId +
-        '/calendar/' +
-        newDate
-=======
           'task/'+           taskId +
           '/' + 'update/finalDate/' +
 
           userId +
           '/calendar/' +
           newDate
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
       )
     ).data;
   }
@@ -434,7 +411,7 @@ export class BackendEVOLVEService {
     return (await axios.delete(this.URL + 'task/'+ taskId +'/delete' )).data;
   }
 
-  async patchTaskFile(taskId: number, userId: number, file: File) {
+  async patchTaskFile(taskId: number, userId: number, file: any) {
     let formData = new FormData();
     formData.append('file', file);
     return (
@@ -449,19 +426,10 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-<<<<<<< HEAD
-        'task/delete/task/file/' +
-        taskId +
-        '/' +
-        fileId +
-        '/' +
-        userId
-=======
           'task/'+ taskId + 'delete/file/' +
           fileId +
           '/' +
           userId
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
       )
     ).data;
   }
@@ -524,9 +492,11 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL + 'project/team/'+teamId, project)).data;
   }
 
-  // async putProjeto(project: Project) {
-  //   return (await axios.put(this.URL + 'project', project)).data;
-  // } //not found in api
+  async putProjeto(project: Project) {
+    //falta fazer aqui
+    await axios.patch(this.URL + 'project/', project.id + "/")
+    // return (await axios.put(this.URL + 'project', project)).data;
+  }
 
   async updateStatusList(projetoId: number, statusList: Array<Status>) {
     return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList))
@@ -552,7 +522,7 @@ export class BackendEVOLVEService {
   //   ).data;
   // } //nnot foound in API
 
-  async patchProjectImage(id: number, image: File) {
+  async patchProjectImage(id: number, image: any) {
     let formData = new FormData
     formData.append("image", image )
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData))
@@ -587,7 +557,7 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchTeamImage(teamId: number, image: File) {
+  async patchTeamImage(teamId: number, image: any) {
     let formData: FormData = new FormData;
     formData.append("image",image);
     return(

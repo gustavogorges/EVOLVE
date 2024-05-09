@@ -105,7 +105,7 @@
                 <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">Nenhum membro encontrado</p>
             </div>
             <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] w-full overflow-y-auto">
-                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
+                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user.user" ></app-member-list-full-view-project>
             </div>
         </div>
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
@@ -124,7 +124,7 @@
                     <div class="membro cursor-pointer" *ngIf="index < blockMember()" (click)="openMember(index)">
                         <div><i [ngClass]="openMemberView != undefined && openMemberView === index ? 'rotate-90':''"
                                 class="pi pi-ellipsis-v ponto cursor-pointer"></i></div>
-                        <p class="name-user">{{member.name}}</p>
+                        <p class="name-user">{{member.user.name}}</p>
                     </div>
 
                     <div [ngClass]="openMemberView != undefined && openMemberView === index ? 'h-[2vw]':'h-0'"
@@ -133,10 +133,10 @@
                             <div class="flex justify-center gap-2 text-primary dark:text-dark-primary">
                                 <div><i class="pi pi-envelope"></i></div>
                                 <div>
-                                    <p class="truncate text-sm">{{member.email}}</p>
+                                    <p class="truncate text-sm">{{member.user.email}}</p>
                                 </div>
                             </div>
-                            <button (click)="goToPerfilMember(member)" class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2"><i
+                            <button (click)="goToPerfilMember(member.user)" class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2"><i
                                     class="pi pi-user"></i> <i class="pi pi-angle-double-right"></i></button>
                         </div>
                     </div>

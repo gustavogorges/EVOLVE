@@ -66,12 +66,12 @@
                 <span><</span>
                 <div class="users" *ngIf="projeto">
                     <div class="users-spam" *ngFor="let p of filteredNames()">
-                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
-                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
-                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        <div *ngIf="verifyImg(p.user) && !p.user.image" class="user-image-chartAt" [ngStyle]="{'background': p.user.imageColor }" >{{p.user.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p.user)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
-                        <p>{{p.name}}</p>
-                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn || !verifyIsCreator(p) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                        <p>{{p.user.name}}</p>
+                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-xl font-hind-madurai text-fontGray text-center">Nenhum membro encontrado</p>
@@ -123,12 +123,12 @@
                 <span><</span>
                 <div class="users" *ngIf="projeto">
                     <div class="users-spam" *ngFor="let p of filteredNames()">
-                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
-                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
-                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        <div *ngIf="verifyImg(p.user) && !p.user.image" class="user-image-chartAt" [ngStyle]="{'background': p.user.imageColor }" >{{p.user.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p.user)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
-                        <p>{{p.name}}</p>
-                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn || !verifyIsCreator(p) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                        <p>{{p.user.name}}</p>
+                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-sm text-fontGray w-fit">Nenhum membro encontrado</p>

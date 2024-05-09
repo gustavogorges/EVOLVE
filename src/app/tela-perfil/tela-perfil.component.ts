@@ -51,7 +51,7 @@ export class TelaPerfilComponent implements OnInit {
       }
       await this.teste()
 
-      this.changeTeam(this.user?.teams[0]);
+      this.changeTeam(this.user?.teams[0].team);
 
     });
     
@@ -63,7 +63,7 @@ export class TelaPerfilComponent implements OnInit {
     
     let users: any = [];
     this.user.teams.forEach((team) => {
-      users = team.participants.filter(
+      users = team.team.participants.filter(
         (participant) =>
           participant.id != this.user.id && !users.includes(participant)
       );

@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import axios from 'axios';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
-import { Task } from 'src/model/task';
-import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -47,8 +44,8 @@ export class SelectCustomComponent implements OnInit {
 
      }
      if(option.name=="Associado"){
-      this.projeto.members.map((user :User)=>{
-        this.listOptions.push(user)
+      this.projeto.members.map(userProject => {
+        this.listOptions.push(userProject.user)
        })
   
       

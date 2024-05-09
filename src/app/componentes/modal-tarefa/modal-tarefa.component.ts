@@ -2,7 +2,8 @@ import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input,
 import { LogarithmicScale } from 'chart.js';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
-import { PriorityRecord } from 'src/model/PriorityRecord';
+import { PriorityRecord } from 'src/model/priorityRecord';
+// import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
 import { PropertyValue } from 'src/model/propriedade/propertyValue';
@@ -127,7 +128,7 @@ export class ModalTarefaComponent implements OnInit {
     this.listAssociates = this.tarefa.associates;
 
     
-    this.listPriorities = await this.service.getAllPriorities()
+    this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
     this.propertiesList = this.tarefa.properties;
 
     // this.verificaTamanhoString();
