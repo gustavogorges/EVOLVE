@@ -80,7 +80,6 @@ import { ProjetoRemasteredComponent } from './componentes/projeto-remastered/pro
 
 import { NewDashboardModalComponent } from './componentes/new-dashboard-modal/new-dashboard-modal.component';
 import { NewChartModalComponent } from './componentes/new-chart-modal/new-chart-modal.component';
-
 import { DndModule } from 'ngx-drag-drop';
 import { TaskCalendarComponent } from './componentes/task-calendar/task-calendar.component';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -118,6 +117,11 @@ import { AddMemberToProjectModalComponent } from './componentes/add-member-to-pr
 
 import { HttpClientModule } from '@angular/common/http';
 import { SearchComponentComponent } from './componentes/search-component/search-component.component';
+import { TelaLandingPageComponent } from './tela-landing-page/tela-landing-page.component';
+import { GreenDivLandingpageComponent } from './componentes/green-div-landingpage/green-div-landingpage.component';
+import { ScreenViewInterativeLandingPageComponent } from './componentes/screen-view-interative-landing-page/screen-view-interative-landing-page.component';
+import { LandingpageScreesSeparatorComponent } from './componentes/sub-componentes/landingpage-screes-separator/landingpage-screes-separator.component';
+import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carrosel/cards-carrosel.component';
 
 
 
@@ -205,8 +209,12 @@ import { SearchComponentComponent } from './componentes/search-component/search-
     MemberListFullViewProjectComponent,
     NotificationModalComponent,
     AddMemberToProjectModalComponent,
-    SearchComponentComponent
-
+    SearchComponentComponent,
+    TelaLandingPageComponent,
+    GreenDivLandingpageComponent,
+    ScreenViewInterativeLandingPageComponent,
+    LandingpageScreesSeparatorComponent,
+    CardsCarroselComponent
   ],
   
   imports: [

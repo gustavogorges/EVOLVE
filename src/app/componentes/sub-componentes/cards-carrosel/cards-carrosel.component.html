@@ -1,0 +1,38 @@
+<div class="cards w-full" >
+    <div>
+        <div class="flex justify-between px-2 items-center h-full">
+            <p class="text-primary font-semibold">Data final: 00/00</p>
+            <p class="p-1 px-2 rounded-lg h-fit font-hind-madurai" [style.background]="task.status.color">{{task.status.status}}</p>
+        </div>
+    </div>
+    <div class="bg-gray-300">
+        <div class="w-1/2 h-full bg-primary rounded-r-lg"></div>
+    </div>
+    <div class="px-2">
+        <p class="font-semibold text-primary text-lg my-1">Titulo da tarefa</p>
+        <div class="flex gap-2 items-center task">
+            <p-checkbox [(ngModel)]="checked1" [binary]="true" inputId="binary"></p-checkbox>
+
+            <p>Tarefa 1</p>
+        </div>
+        <div class="flex gap-2 items-center task">
+            <p-checkbox [(ngModel)]="checked2" [binary]="true" inputId="binary"></p-checkbox>
+
+            <p>Tarefa 2</p>
+        </div>
+        <div class="flex gap-2 items-center task">
+            <p-checkbox [(ngModel)]="checked3" [binary]="true" inputId="binary"></p-checkbox>
+            <p>Tarefa 3</p>
+        </div>
+    </div>
+    <div class="flex items-center px-5 pt-2 justify-between">
+        <img *ngIf="!favorite" src="../../../assets/estrelaNaoMarcada.svg" alt=""
+            style="width: 27px ; height: 20px" (click)="alterarTarefaFavoritado()" />
+        <img *ngIf="favorite" src="../../../assets/estrelaMarcada.svg" alt=""
+            style="width: 27px ; height: 20px" (click)="alterarTarefaFavoritado()" />
+        <div class="flex">
+            <div class="w-[20px] h-[20px] bg-secondary rounded-full"></div>
+            <div class="w-[20px] h-[20px] bg-gray-300 rounded-full -translate-x-1"></div>
+        </div>
+    </div>
+</div>

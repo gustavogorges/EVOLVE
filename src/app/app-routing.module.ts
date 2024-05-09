@@ -14,11 +14,16 @@ import { TelaProjetoRemasteredComponent } from './tela-projeto-remastered/tela-p
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { TelaReportsComponent } from './tela-reports/tela-reports.component';
 import { AuthGuard } from './shared/auth.guard';
+import { TelaLandingPageComponent } from './tela-landing-page/tela-landing-page.component';
 
 
 const routes: Routes = [
   {
     path : "",
+    component : TelaLandingPageComponent,
+  },
+  {
+    path : "login",
     component : TelaLoginComponent,
   },
   {
