@@ -23,6 +23,7 @@ import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { config } from 'rxjs';
+import { UserProject } from 'src/model/userProject';
 
 @Injectable({
   providedIn: 'root',
@@ -450,6 +451,11 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'project/comments/getAll/' + projectId))
       .data;
   } //not found in projectController on API
+
+  async patchMembers(projectId:number, members:UserProject[]){
+    return (await axios.patch(this.URL + 'project/'+projectId,members,  {withCredentials:true})
+    ).data;
+  }
 
   async patchNewCommentProject(
     projectId: number,

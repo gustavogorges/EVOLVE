@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/model/user';
 import { CookieService } from 'ngx-cookie-service';
 import axios, { AxiosResponse } from 'axios';
-import { sortedUniq } from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

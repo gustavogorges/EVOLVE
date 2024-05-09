@@ -15,9 +15,6 @@ import { PriorityRecord } from 'src/model/PriorityRecord';
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
 
-import * as jspdf from 'jspdf';
- import html2canvas from 'html2canvas';
- import { HttpClient } from '@angular/common/http';
 
 interface OptionOrder {
   name: string;

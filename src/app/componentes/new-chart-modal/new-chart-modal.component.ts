@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
-import { indexOf } from 'lodash';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { Project } from 'src/model/project';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';

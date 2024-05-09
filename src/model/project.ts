@@ -7,6 +7,7 @@ import { TaskFile } from "./file";
 import { DashBoardCharts } from "./DashBoardCharts";
 import { Team } from "./team";
 import { Comment } from 'src/model/comment';
+import { UserProject } from "./userProject";
 
 export class Project{
     id!: number;
@@ -14,10 +15,10 @@ export class Project{
     finalDate: string = "";
     description: string ="";
     imageColor:string="#000000"
-    image:TaskFile = new TaskFile
+    image?:File
     creator!:User
     adimnistrators:Array<User> = new Array
-    members:Array<User> = new Array;
+    members:Array<UserProject> = new Array;
     properties:Array<Property> = new Array;
     statusList : Array<Status> = new Array;
     tasks: Array<Task> = new Array;

@@ -56,7 +56,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       const getTeamId = params.get('teamId');
       this.teamId  = Number(getTeamId)
       this.team = await this.service.getOne("team", this.teamId)
-      this.projects = await this.service.getProjectsByTeamId(this.teamId, 1)
+      this.projects = await this.service.getProjectsByTeamId(this.teamId)
       console.log(this.projects);
     });
   }
@@ -123,15 +123,19 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     },);
 
     setTimeout(async () => {
-      await this.service.putProjeto(postProject)
-    
+
       if(this.listFromRemove.length != 0){
-        await this.service.deleteUserFromProject(project.id, this.listFromRemove)
+        project.members.filter(member => !this.listFromRemove.includes(member))
+        await this.service.patchMembers(project.id, project.members)
+        // await this.service.deleteUserFromProject(project.id, this.listFromRemove)
       }
 
       if(this.formData!=null){
         await this.createImageProject(project)
       } 
+
+      await this.service.putProjeto(postProject)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
+    
     });
 
     setTimeout(async () => {
@@ -146,7 +150,10 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   async createImageProject(p:Project){
-    return await this.service.patchProjectImage(p.id, this.formData)
+    if(p.image){
+      return await this.service.patchProjectImage(p.id, p.image)
+    }
+    // return await this.service.patchProjectImage(p.id, this.formData)
   }
 
   async saveImage(event:any){

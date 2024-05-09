@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
