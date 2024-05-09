@@ -24,7 +24,12 @@ import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { config } from 'rxjs';
 import { UserProject } from 'src/model/userProject';
+<<<<<<< HEAD
 import { File } from 'src/model/file';
+import { Role } from 'src/model/Role';
+=======
+import { Role } from 'src/model/Role';
+>>>>>>> 76397d15948b8c549f1e5eb1baee8a5c678b06c8
 
 @Injectable({
   providedIn: 'root',
@@ -403,12 +408,13 @@ export class BackendEVOLVEService {
           userId +
           '/calendar/' +
           newDate
+
       )
     ).data;
   }
 
   async deleteTask(taskId: number) {
-    return (await axios.delete(this.URL + 'task/'+ taskId +'/delete' )).data;
+    return (await axios.delete(this.URL + 'task/' + taskId + '/delete')).data;
   }
 
   async patchTaskFile(taskId: number, userId: number, file: any) {
@@ -416,7 +422,7 @@ export class BackendEVOLVEService {
     formData.append('file', file);
     return (
       await axios.patch(
-        this.URL + 'task/'+ taskId +'/patch/task/file/' + userId,
+        this.URL + 'task/' + taskId + '/patch/task/file/' + userId,
         formData
       )
     ).data;
@@ -424,13 +430,7 @@ export class BackendEVOLVEService {
 
   async deleteTaskFile(taskId: number, fileId: number, userId: number) {
     return (
-      await axios.delete(
-        this.URL +
-          'task/'+ taskId + 'delete/file/' +
-          fileId +
-          '/' +
-          userId
-      )
+      await axios.delete(this.URL + "task/"+taskId+"/delete/file/"+fileId+"/"+userId)
     ).data;
   }
 
@@ -451,11 +451,6 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'project/comments/getAll/' + projectId))
       .data;
   } //not found in projectController on API
-
-  async patchMembers(projectId:number, members:UserProject[]){
-    return (await axios.patch(this.URL + 'project/'+projectId,members,  {withCredentials:true})
-    ).data;
-  }
 
   async patchNewCommentProject(
     projectId: number,
@@ -488,8 +483,8 @@ export class BackendEVOLVEService {
     ).data;
   } //not found in projectController on API
 
-  async postProjeto(project: Project, teamId:number) {
-    return (await axios.post(this.URL + 'project/team/'+teamId, project)).data;
+  async postProjeto(project: Project, teamId: number) {
+    return (await axios.post(this.URL + 'project/team/' + teamId, project)).data;
   }
 
   async putProjeto(project: Project) {
@@ -510,25 +505,85 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  // async deleteUserFromProject(
-  //   idProject: number,
-  //   users: Array<Pick<User, 'id'>>
-  // ) {
-  //   return (
-  //     await axios.patch(
-  //       this.URL + 'project' + '/' + idProject + '/' + 'delete-user',
-  //       users
-  //     )
-  //   ).data;
-  // } //nnot foound in API
+  async patchProjectName(projectId: number, newName: string) {
+    let formData: FormData = new FormData;
+    formData.append("name", newName);
+    return (
+      await axios.patch(this.URL + "project/" + projectId + "/name", newName)
+    )
+  }
+
+  async patchProjectDescription(projectId: number, description: string) {
+    let formData: FormData = new FormData;
+    formData.append("description", description);
+    return (
+      await axios.patch(this.URL + "project/" + projectId + "description", description)
+    ).data;
+  }
 
   async patchProjectImage(id: number, image: any) {
     let formData = new FormData
-    formData.append("image", image )
+    formData.append("image", image)
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData))
       .data;
   }
 
+  async patchProjectImageRemove(projectId: number) {
+    return (
+      await axios.patch(this.URL + "project/" + projectId + "/image/remove")
+    ).data;
+  }
+
+  async patchProjecyImageColor(projecId: number, imageColor: string) {
+    let formData: FormData = new FormData;
+    formData.append("imageColor", imageColor);
+    return (
+      await axios.patch(this.URL + "project/" + projecId + "imageColor", imageColor)
+    ).data
+  }
+
+  async patchProjectFinalDate(projecId: number, finalDate: string) {
+    let formData: FormData = new FormData;
+    formData.append("finalDate", finalDate);
+    return (
+      await axios.patch(this.URL + "project/" + projecId + "/finalDate", finalDate)
+    ).data;
+  }
+
+  async patchProjectStatusList(projecId: number, statusList: Status[]) {
+    return (
+      await axios.patch(this.URL + "project/" + projecId + "/statusList", statusList)
+    ).data;
+  }
+
+  async patchProjectStatusListRemove(projecId: number, statusId: number) {
+    return (
+      await axios.patch(this.URL + "project/" + projecId + "/statusList/remove" + statusId)
+    ).data;
+  }
+
+  async patchProjectMembers(projectId: number, members: UserProject[]) {
+    return (await axios.patch(this.URL + 'project/' + projectId + "/members", members, { withCredentials: true })
+    ).data;
+  }
+
+  async patchProjectTasks(projectId: number, tasks: Task[]) {
+    return (
+      await axios.patch(this.URL + "project/" + projectId + "/tasks", tasks)
+    ).data
+  }
+
+  async patchProjectTasksRemove(projectId: number, taskId: number) {
+    return (
+      await axios.patch(this.URL + "project/" + projectId + "/task/remove/" + taskId)
+    ).data;
+  }
+
+  async patchDefaultRole(projecId: number, defaultRole: Role) {
+    return (
+      await axios.patch(this.URL + "project/" + projecId + "defaultRole", defaultRole)
+    )
+  }
   //#endregion project
 
   //#region Team
@@ -559,33 +614,44 @@ export class BackendEVOLVEService {
 
   async patchTeamImage(teamId: number, image: any) {
     let formData: FormData = new FormData;
-    formData.append("image",image);
-    return(
-      await axios.patch(this.URL + "team/" + teamId + "/" + "image",formData)
+    formData.append("image", image);
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/" + "image", formData)
     ).data;
   }
 
-  async patchTeamImageRemove(teamId:number){
-    return(
-      await axios.patch(this.URL + "/team" + teamId +"/image/remove")
+  async patchTeamImageRemove(teamId: number) {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/image/remove")
     ).data;
   }
 
-  async patchTeamImageColor(teamId:number, newImageColor:string){
+  async patchTeamImageColor(teamId: number, newImageColor: string) {
     let formData: FormData = new FormData;
-    formData.append("imageColor",newImageColor);
-    return(
-      await axios.patch(this.URL + "team/" + teamId + "/imagecolor",formData)
+    formData.append("imageColor", newImageColor);
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/imagecolor", formData)
     ).data;
   }
 
-  async patchTeamParticipants(teamId : number, participants : User[]){
-    return(
-      await axios.patch(this.URL + "team/" + teamId + "/participants",participants)
+  async patchTeamParticipants(teamId: number, participants: User[]) {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/participants", participants)
     ).data;
   }
 
-  // async patchTeamRoles(teamId:number, roles:Role[])
+  async patchTeamRoles(teamId: number, roles: Role[]) {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/roles", roles)
+    ).data;
+  }
+
+  async patchTeamDefaultRole(teamId: number, defaultRole: Role) {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/defaultRole", defaultRole)
+    ).data;
+  }
+
   async cleanAllUserNotifications(userId: number) {
     return (await axios.delete(this.URL + 'team/clean/' + userId)).data;
   }
