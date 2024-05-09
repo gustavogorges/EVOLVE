@@ -3,6 +3,7 @@ import { TeamChat } from "./teamChat";
 import { User } from "./user";
 import { File } from "./file";
 import { TeamNotification } from "./teamNotification";
+import { Role } from "./Role";
 
 export class Team {
     id!: number;

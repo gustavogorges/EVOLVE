@@ -125,7 +125,7 @@ export class SelectStatusComponent implements OnInit{
 
   async deleteStatus(status:Status){
     if(this.projeto.id != null){
-      this.projeto = await this.service.deleteStatus(this.projeto.id, status)
+      this.projeto = await this.service.deleteStatus(this.projeto.id, status.id)
     }else{
       this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
     }

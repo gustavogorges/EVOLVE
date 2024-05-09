@@ -1,9 +1,13 @@
-import { CardPermissions } from "./cardPermission";
-import { PropertiePermissions } from "./propertiePermission";
+import { Role } from "./Role";
+import { Team } from "./team";
+import { User } from "./user";
 
-export class UsuarioEquipe{
+export class UserTeam{
     userId: number = 0
     teamId : number = 0;
-    propertiesPermissions: PropertiePermissions = new PropertiePermissions;
-    cardsPermissions: CardPermissions = new CardPermissions;
+    team:Team = new Team;
+    user:User = new User;
+    role:Role = new Role
+    isManager:boolean = false;
+
 }

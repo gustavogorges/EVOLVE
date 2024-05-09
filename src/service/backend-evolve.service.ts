@@ -23,6 +23,7 @@ import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { config } from 'rxjs';
+import { UserProject } from 'src/model/userProject';
 
 @Injectable({
   providedIn: 'root',
@@ -354,8 +355,13 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
+<<<<<<< HEAD
         'task/' + taskId +
         '/' + 'property/delete/' +
+=======
+          'task/' + taskId +
+          '/' + 'property/delete/user/' +
+>>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
 
         userId +
         '/' +
@@ -367,7 +373,7 @@ export class BackendEVOLVEService {
   async updateTaskName(taskId: number, userId: number, newName: string) {
     return (
       await axios.patch(
-        this.URL + 'task/update/' + taskId + '/name/' + userId + '/' + newName
+        this.URL + 'task/' + taskId + '/update/user' + userId + + '/name/' + newName
       )
     ).data;
   }
@@ -381,12 +387,21 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL +
+<<<<<<< HEAD
         'task/update/' +
         taskId +
         '/currentOptions/' +
         userId +
         '/' +
         propertyId,
+=======
+          'task/' + taskId + '/update' +
+
+          '/currentOptions/uuser/' +
+          userId +
+          '/property/' +
+          propertyId,
+>>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
         newOptions
       )
     ).data;
@@ -396,18 +411,27 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
+<<<<<<< HEAD
         'task/update/finalDate/' +
         taskId +
         '/' +
         userId +
         '/calendar/' +
         newDate
+=======
+          'task/'+           taskId +
+          '/' + 'update/finalDate/' +
+
+          userId +
+          '/calendar/' +
+          newDate
+>>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
       )
     ).data;
   }
 
   async deleteTask(taskId: number) {
-    return (await axios.delete(this.URL + 'task/delete/' + taskId)).data;
+    return (await axios.delete(this.URL + 'task/'+ taskId +'/delete' )).data;
   }
 
   async patchTaskFile(taskId: number, userId: number, file: File) {
@@ -415,7 +439,7 @@ export class BackendEVOLVEService {
     formData.append('file', file);
     return (
       await axios.patch(
-        this.URL + 'task/patch/task/file/' + taskId + '/' + userId,
+        this.URL + 'task/'+ taskId +'/patch/task/file/' + userId,
         formData
       )
     ).data;
@@ -425,12 +449,19 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
+<<<<<<< HEAD
         'task/delete/task/file/' +
         taskId +
         '/' +
         fileId +
         '/' +
         userId
+=======
+          'task/'+ taskId + 'delete/file/' +
+          fileId +
+          '/' +
+          userId
+>>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
       )
     ).data;
   }
@@ -452,6 +483,11 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'project/comments/getAll/' + projectId))
       .data;
   } //not found in projectController on API
+
+  async patchMembers(projectId:number, members:UserProject[]){
+    return (await axios.patch(this.URL + 'project/'+projectId,members,  {withCredentials:true})
+    ).data;
+  }
 
   async patchNewCommentProject(
     projectId: number,
@@ -484,40 +520,42 @@ export class BackendEVOLVEService {
     ).data;
   } //not found in projectController on API
 
-  async postProjeto(project: Project) {
-    return (await axios.post(this.URL + 'project', project)).data;
+  async postProjeto(project: Project, teamId:number) {
+    return (await axios.post(this.URL + 'project/team/'+teamId, project)).data;
   }
 
-  async putProjeto(project: Project) {
-    return (await axios.put(this.URL + 'project', project)).data;
-  }
+  // async putProjeto(project: Project) {
+  //   return (await axios.put(this.URL + 'project', project)).data;
+  // } //not found in api
 
-  async updateStatusList(projetoId: number, novoStatus: Status) {
-    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", novoStatus))
+  async updateStatusList(projetoId: number, statusList: Array<Status>) {
+    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList))
       .data;
   }
 
   async deleteStatus(projetoId: number, statusId: number) {
     return (
       await axios.patch(
-        this.URL + 'project/' + projetoId + 'statusList/remove/' + statusId)
+        this.URL + 'project/' + projetoId + '/statusList/remove/' + statusId)
     ).data;
   }
 
-  async deleteUserFromProject(
-    idProject: number,
-    users: Array<Pick<User, 'id'>>
-  ) {
-    return (
-      await axios.patch(
-        this.URL + 'project' + '/' + idProject + '/' + 'delete-user',
-        users
-      )
-    ).data;
-  }
+  // async deleteUserFromProject(
+  //   idProject: number,
+  //   users: Array<Pick<User, 'id'>>
+  // ) {
+  //   return (
+  //     await axios.patch(
+  //       this.URL + 'project' + '/' + idProject + '/' + 'delete-user',
+  //       users
+  //     )
+  //   ).data;
+  // } //nnot foound in API
 
-  async patchImage(id: number, image: any) {
-    return (await axios.patch(this.URL + 'project/' + id + '/setImage', image))
+  async patchProjectImage(id: number, image: File) {
+    let formData = new FormData
+    formData.append("image", image )
+    return (await axios.patch(this.URL + 'project/' + id + '/image', formData))
       .data;
   }
 
