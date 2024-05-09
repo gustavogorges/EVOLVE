@@ -1,0 +1,49 @@
+
+.div-membros{
+    @apply h-[7vh] w-full grid grid-cols-4 grid-rows-1 rounded-lg items-center duration-150 hover:translate-x-1 cursor-pointer;
+    grid-template-columns: 12%;
+
+    .foto{
+        @apply col-start-1 col-end-2 flex items-center justify-center;
+
+        .foto2{
+            @apply h-[2rem] w-[2rem] overflow-hidden rounded-full text-lg text-black flex justify-center items-center font-semibold 
+        }
+
+        .fotoImagem{
+            @apply h-[2rem] w-[2rem] rounded-full object-cover
+        }
+    }
+
+    .infos{
+        @apply col-start-2 col-end-3 w-fit flex flex-col items-center;
+
+        .nome{
+            @apply w-full text-lg dark:text-white px-1
+        }
+
+        .email{
+            @apply w-full text-sm px-1 text-gray-500 dark:text-gray-400
+        }
+    }
+
+    .tipo{
+        @apply col-start-3 col-end-4 w-full flex justify-center items-center;
+
+        p{
+            @apply text-gray-500 text-lg dark:text-gray-400
+        }
+    }
+
+    .adicionar{
+        @apply col-start-4 col-end-5 flex justify-center items-center;
+
+        .fundo-icon{
+            @apply h-[3rem] w-[3rem] bg-primary dark:bg-dark-primary rounded-2xl flex justify-center items-center;
+
+            .pi{
+                @apply text-white dark:text-gray-900
+            }
+        }
+    }
+}

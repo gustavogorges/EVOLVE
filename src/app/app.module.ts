@@ -117,6 +117,7 @@ import { AddMemberToProjectModalComponent } from './componentes/add-member-to-pr
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponentComponent } from './componentes/search-component/search-component.component';
 
 
 
@@ -203,7 +204,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommentsProjectComponent,
     MemberListFullViewProjectComponent,
     NotificationModalComponent,
-    AddMemberToProjectModalComponent
+    AddMemberToProjectModalComponent,
+    SearchComponentComponent
 
   ],
   

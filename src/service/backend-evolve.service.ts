@@ -347,4 +347,8 @@ export class BackendEVOLVEService {
     return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard))).data;
   }
 
+  async updateNameDescProject(idProject:number, projectNameDescDTO:any){
+    return (await (axios.patch(this.URL+"/project/"+idProject+"/altereteName", projectNameDescDTO))).data;
+  }
+
 }
