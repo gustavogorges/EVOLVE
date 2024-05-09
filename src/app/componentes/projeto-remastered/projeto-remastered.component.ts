@@ -96,6 +96,15 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     return true
   }
 
+  alterarTarefaFavoritado(){
+    this.projeto.favorited = !this.projeto.favorited;
+    this.salvarTarefa()
+  }
+
+  async salvarTarefa(){
+    await this.service.putProjeto(this.projeto);
+  }
+
   filteredNames() {
     return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }

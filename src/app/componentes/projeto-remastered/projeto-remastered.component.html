@@ -32,6 +32,22 @@
         <div class="project-final-date"><p>data final: 
             <input #data [disabled]="!projeto.editOn" type="date" [(ngModel)]="projeto.finalDate" class="bg-transparent">
         </p></div>
+        <div class="absolute top-4 left-4" (click)="openAgain()">
+            <img
+            *ngIf="!projeto.favorited"
+            src="../../../assets/estrelaNaoMarcada.svg"
+            alt=""
+            style="width: 30px ; height: 30px"   
+            (click)="alterarTarefaFavoritado()"
+            />
+            <img
+            *ngIf="projeto.favorited"
+            src="../../../assets/estrelaMarcada.svg"
+            alt=""
+            style="width: 30px; height: 30px"   
+            (click)="alterarTarefaFavoritado()"
+            />
+        </div>
     </div>
     
     <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[30vw] 2xl:w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
