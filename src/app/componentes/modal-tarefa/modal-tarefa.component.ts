@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
+import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/PriorityRecord';
@@ -100,6 +101,14 @@ export class ModalTarefaComponent implements OnInit {
   updatePropertiesList() : void {
       this.propertiesList = this.tarefa.properties;
       this.booleanAddPropriedade = false;
+  }
+
+  async sendTimeFocus() : Promise<void> {
+    let userTask : UsuarioTarefa;
+    console.log(this.loggedUser)
+    console.log(this.tarefa)
+    // userTask = await this.service.getWorkedTime(this.loggedUser.id,this.tarefa.id);
+    // console.log(userTask)
   }
 
   constructor(private service: BackendEVOLVEService,
@@ -309,6 +318,11 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   finishFocus() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.minutes = 0;
+    this.hours = 0;
+    this.timerString = "00:00"
     this.booleanFoco = false;
   }
 

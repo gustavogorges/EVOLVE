@@ -43,7 +43,7 @@
 }
 
 .action {
-    @apply  px-2 p-1 flex justify-center items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
+    @apply  px-2 p-1 flex justify-center bg-primary items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
 }
 
 .cancel {
