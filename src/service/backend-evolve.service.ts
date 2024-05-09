@@ -355,7 +355,7 @@ export class BackendEVOLVEService {
       await axios.delete(
         this.URL +
           'task/' + taskId +
-          '/' + 'property/delete/' +
+          '/' + 'property/delete/user/' +
 
           userId +
           '/' +
@@ -367,7 +367,7 @@ export class BackendEVOLVEService {
   async updateTaskName(taskId: number, userId: number, newName: string) {
     return (
       await axios.patch(
-        this.URL + 'task/update/' + taskId + '/name/' + userId + '/' + newName
+        this.URL + 'task/' + taskId + '/update/user' + userId + + '/name/' + newName
       )
     ).data;
   }
@@ -381,11 +381,11 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL +
-          'task/update/' +
-          taskId +
-          '/currentOptions/' +
+          'task/' + taskId + '/update' +
+
+          '/currentOptions/uuser/' +
           userId +
-          '/' +
+          '/property/' +
           propertyId,
         newOptions
       )
@@ -396,9 +396,9 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-          'task/update/finalDate/' +
-          taskId +
-          '/' +
+          'task/'+           taskId +
+          '/' + 'update/finalDate/' +
+
           userId +
           '/calendar/' +
           newDate
@@ -407,7 +407,7 @@ export class BackendEVOLVEService {
   }
 
   async deleteTask(taskId: number) {
-    return (await axios.delete(this.URL + 'task/delete/' + taskId)).data;
+    return (await axios.delete(this.URL + 'task/'+ taskId +'/delete' )).data;
   }
 
   async patchTaskFile(taskId: number, userId: number, file: File) {
@@ -415,7 +415,7 @@ export class BackendEVOLVEService {
     formData.append('file', file);
     return (
       await axios.patch(
-        this.URL + 'task/patch/task/file/' + taskId + '/' + userId,
+        this.URL + 'task/'+ taskId +'/patch/task/file/' + userId,
         formData
       )
     ).data;
@@ -425,9 +425,7 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-          'task/delete/task/file/' +
-          taskId +
-          '/' +
+          'task/'+ taskId + 'delete/file/' +
           fileId +
           '/' +
           userId
@@ -484,40 +482,42 @@ export class BackendEVOLVEService {
     ).data;
   } //not found in projectController on API
 
-  async postProjeto(project: Project) {
-    return (await axios.post(this.URL + 'project', project)).data;
+  async postProjeto(project: Project, teamId:number) {
+    return (await axios.post(this.URL + 'project/team/'+teamId, project)).data;
   }
 
-  async putProjeto(project: Project) {
-    return (await axios.put(this.URL + 'project', project)).data;
-  }
+  // async putProjeto(project: Project) {
+  //   return (await axios.put(this.URL + 'project', project)).data;
+  // } //not found in api
 
-  async updateStatusList(projetoId: number, novoStatus: Status) {
-    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", novoStatus))
+  async updateStatusList(projetoId: number, statusList: Array<Status>) {
+    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList))
       .data;
   }
 
   async deleteStatus(projetoId: number, statusId: number) {
     return (
       await axios.patch(
-        this.URL + 'project/' + projetoId + 'statusList/remove/' + statusId)
+        this.URL + 'project/' + projetoId + '/statusList/remove/' + statusId)
     ).data;
   }
 
-  async deleteUserFromProject(
-    idProject: number,
-    users: Array<Pick<User, 'id'>>
-  ) {
-    return (
-      await axios.patch(
-        this.URL + 'project' + '/' + idProject + '/' + 'delete-user',
-        users
-      )
-    ).data;
-  }
+  // async deleteUserFromProject(
+  //   idProject: number,
+  //   users: Array<Pick<User, 'id'>>
+  // ) {
+  //   return (
+  //     await axios.patch(
+  //       this.URL + 'project' + '/' + idProject + '/' + 'delete-user',
+  //       users
+  //     )
+  //   ).data;
+  // } //nnot foound in API
 
-  async patchImage(id: number, image: any) {
-    return (await axios.patch(this.URL + 'project/' + id + '/setImage', image))
+  async patchProjectImage(id: number, image: File) {
+    let formData = new FormData
+    formData.append("image", image )
+    return (await axios.patch(this.URL + 'project/' + id + '/image', formData))
       .data;
   }
 

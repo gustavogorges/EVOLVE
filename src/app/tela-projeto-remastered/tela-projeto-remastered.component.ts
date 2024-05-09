@@ -146,7 +146,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   async createImageProject(p:Project){
-    return await this.service.patchImage(p.id, this.formData)
+    return await this.service.patchProjectImage(p.id, this.formData)
   }
 
   async saveImage(event:any){

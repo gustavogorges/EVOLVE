@@ -94,7 +94,7 @@ export class TelaFullViewComponent implements OnInit {
             this.projeto = await this.service.putProjeto(projetoTemp)
         }
         if(this.formData != undefined){
-            await this.service.patchImage(this.projeto.id, this.formData)
+            await this.service.patchProjectImage(this.projeto.id, this.formData)
             this.formData = undefined
         }
         this.nameEdit = false

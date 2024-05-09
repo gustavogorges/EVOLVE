@@ -156,7 +156,7 @@ export class TelaCriarProjetoComponent implements OnInit {
       postProject = await this.service.postProjeto(postProject);
   
       if (this.formData != null) {
-        await this.service.patchImage(postProject.id, this.formData);
+        await this.service.patchProjectImage(postProject.id, this.formData);
       }
   
       this.route.navigate(['/tela-projeto', teamId]);
