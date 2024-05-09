@@ -5,6 +5,7 @@ export class UsuarioTarefa{
     userId:number = 0;
     taskId:number = 0;
     user:User = new User;
-    task:Task = new Task;
-    workedHours:number = 0.0;
+    workedHours:number = 0;
+    workedMinutes:number = 0;
+    workedSeconds:number = 0;
 }

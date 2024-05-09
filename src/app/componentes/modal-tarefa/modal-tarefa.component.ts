@@ -105,10 +105,29 @@ export class ModalTarefaComponent implements OnInit {
 
   async sendTimeFocus() : Promise<void> {
     let userTask : UsuarioTarefa;
-    console.log(this.loggedUser)
-    console.log(this.tarefa)
-    // userTask = await this.service.getWorkedTime(this.loggedUser.id,this.tarefa.id);
-    // console.log(userTask)
+    userTask = await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id);
+    if(userTask.userId == 0 || userTask.userId == null) {
+      userTask.userId = this.loggedUser.id;
+      userTask.taskId = this.tarefa.id;
+    }
+    if(userTask.workedSeconds + this.seconds >= 60) {
+      userTask.workedMinutes += 1;
+      userTask.workedSeconds = userTask.workedSeconds + this.seconds - 60;
+    } else {
+      userTask.workedSeconds += this.seconds;
+    }
+    if(userTask.workedMinutes + this.minutes >= 60) {
+      userTask.workedHours += 1;
+      userTask.workedMinutes = userTask.workedMinutes + this.minutes - 60;
+    } else {
+      userTask.workedMinutes += this.minutes;
+    }
+    userTask.workedHours += this.hours;
+    console.log(userTask);
+    console.log(this.seconds);
+    
+    this.service.updateUserWorkedTime(userTask);
+    this.finishFocus();
   }
 
   constructor(private service: BackendEVOLVEService,
