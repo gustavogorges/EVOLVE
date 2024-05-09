@@ -356,14 +356,8 @@ export class BackendEVOLVEService {
     return (
       await axios.delete(
         this.URL +
-<<<<<<< HEAD
         'task/' + taskId +
-        '/' + 'property/delete/' +
-=======
-          'task/' + taskId +
-          '/' + 'property/delete/user/' +
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
-
+        '/' + 'property/delete/user/' +
         userId +
         '/' +
         propertyId
@@ -388,21 +382,12 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL +
-<<<<<<< HEAD
         'task/update/' +
         taskId +
         '/currentOptions/' +
         userId +
         '/' +
         propertyId,
-=======
-          'task/' + taskId + '/update' +
-
-          '/currentOptions/uuser/' +
-          userId +
-          '/property/' +
-          propertyId,
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
         newOptions
       )
     ).data;
@@ -412,21 +397,12 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL +
-<<<<<<< HEAD
         'task/update/finalDate/' +
         taskId +
         '/' +
         userId +
         '/calendar/' +
         newDate
-=======
-          'task/'+           taskId +
-          '/' + 'update/finalDate/' +
-
-          userId +
-          '/calendar/' +
-          newDate
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
       )
     ).data;
   }
@@ -448,22 +424,7 @@ export class BackendEVOLVEService {
 
   async deleteTaskFile(taskId: number, fileId: number, userId: number) {
     return (
-      await axios.delete(
-        this.URL +
-<<<<<<< HEAD
-        'task/delete/task/file/' +
-        taskId +
-        '/' +
-        fileId +
-        '/' +
-        userId
-=======
-          'task/'+ taskId + 'delete/file/' +
-          fileId +
-          '/' +
-          userId
->>>>>>> 70ed59ea5280bab986c97502857f0e273836b6f9
-      )
+      await axios.delete(this.URL + "task/"+taskId+"/delete/file/"+fileId+"/"+userId)
     ).data;
   }
 
