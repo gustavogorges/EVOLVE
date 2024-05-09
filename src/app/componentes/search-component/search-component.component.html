@@ -9,7 +9,7 @@
     />
 </label>
 
-<div class="w-full flex flex-col items-center rounded-b-lg overflow-auto bg-secondaryWhite shadow-xl max-h-[20vw] duration-200 dark:bg-dark-secundary-gray" [ngClass]="search != '' ? 'h-fit':'h-0'">
+<div class="w-full flex flex-col items-center rounded-b-lg overflow-auto bg-secondaryWhite shadow-xl max-h-[20vw] duration-200 dark:bg-dark-secundary-gray" [ngClass]="search != '' && open ? 'h-fit':'h-0'">
     <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="filterUsers().length > 0">
         <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
             <div class=" pr-2 w-fit h-full">
@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <div class="div-membros" *ngFor="let task of filterTasks()" (click)="openTask(task)">
+        <div class="div-membros" *ngFor="let task of filterTasks()" (click)="openTask($event, task)">
             <i class="foto pi pi-check-square text-secondary dark:text-dark-secondary"></i>
             <div class="col-start-2 col-end-3 w-full pr-4 flex items-center justify-between">
                 <div *ngIf="task" class="w-full text-lg dark:text-white px-1 pr-4"><p>{{task.name}}</p></div>

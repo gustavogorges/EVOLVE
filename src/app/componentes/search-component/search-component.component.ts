@@ -22,6 +22,7 @@ export class SearchComponentComponent implements OnInit {
   tasksList !: Task[]
   teamsList !: Team[]
   usersList !: User[]
+  open: boolean = false
   @Output() openTaskMdal : EventEmitter<Task> = new EventEmitter
 
   async ngOnInit(){
@@ -40,6 +41,9 @@ export class SearchComponentComponent implements OnInit {
     
     if (!this.elementRef.nativeElement.contains(event.target)) {
         this.search = ''
+        this.open = false
+    }else{
+      this.open = true
     }
   };
 
@@ -60,10 +64,15 @@ export class SearchComponentComponent implements OnInit {
 
   }
 
-  openTask( task : Task){
-    this.openTaskMdal.emit(task)
-    this.search = ''
-
+  openTask(event: MouseEvent, task : Task){
+    setTimeout(() => {
+      event.stopPropagation();
+      this.search = ''
+      this.open = false 
+    });
+    setTimeout(() => {
+      this.openTaskMdal.emit(task)
+    });
   }
 
   verifyImage(object:any){
@@ -77,23 +86,23 @@ export class SearchComponentComponent implements OnInit {
 
   filterProjects() {
     const searchText = this.search.toLowerCase();
-    return this.projectsList.filter(project =>
+    return searchText.toLowerCase().includes("pr") ? this.projectsList : this.projectsList.filter(project =>
       project.name.toLowerCase().includes(searchText)
-    ).slice(0, 4);
+    ).slice(0, 4)
   }
 
   filterTasks() {
     const searchText = this.search.toLowerCase();
-    return this.tasksList.filter(task =>
+    return searchText.toLowerCase().includes("ta") ? this.tasksList : this.tasksList.filter(task =>
       task.name.toLowerCase().includes(searchText)
-    ).slice(0, 4);
+    ).slice(0, 4)
   }
 
   filterTeams() {
     const searchText = this.search.toLowerCase();
-    return this.teamsList.filter(team =>
+    return searchText.toLowerCase().includes("eq") ? this.teamsList : this.teamsList.filter(team =>
       team.name.toLowerCase().includes(searchText)
-    ).slice(0, 4);
+    ).slice(0, 4)
   }
 
   filterUsers() {
