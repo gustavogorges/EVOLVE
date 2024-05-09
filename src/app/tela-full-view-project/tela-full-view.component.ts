@@ -120,7 +120,9 @@ export class TelaFullViewComponent implements OnInit {
             projetoTemp.description = this.descEdited
             projetoTemp.image = null
             projetoTemp.members = []
-            this.projeto = await this.service.putProjeto(projetoTemp)
+            let projeto = await this.service.putProjeto(projetoTemp)
+            this.projeto.name = projeto.name
+            this.projeto.description = projeto.description
         }
         if(this.formData != undefined){
             await this.service.patchImage(this.projeto.id, this.formData)

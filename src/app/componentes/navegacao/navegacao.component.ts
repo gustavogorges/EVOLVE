@@ -1,7 +1,9 @@
 import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
 import { filter, window } from 'rxjs';
+import { Project } from 'src/model/project';
+import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -13,11 +15,27 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor(private router: Router,     private cookieService: CookiesService,  private service: BackendEVOLVEService,
+  constructor(private router: Router, private cookieService: CookiesService,  private service: BackendEVOLVEService,
     ) { }
+
   sideBar = false
   loggedUser !: User; 
-  notification = false 
+  notification = false
+  booleanTask = false
+  task !: Task
+  projeto !: Project
+
+  closeTask(event: boolean) {
+    if (event) {
+      this.booleanTask = false;
+    }
+  }
+
+  openTaskModal(task:any){
+    this.task = task
+    this.projeto = task.project as Project
+    this.booleanTask = true
+  }
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService
@@ -109,5 +127,8 @@ export class NavegacaoComponent implements OnInit {
   openNotification(){
     this.notification= true
   }
+
+
+  
 
 }
