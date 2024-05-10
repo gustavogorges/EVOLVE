@@ -58,7 +58,7 @@ export class BackendEVOLVEService {
   }
 
   async postUsuario(usuario: User) {
-    return (await axios.post(this.URL + 'user', usuario)).data;
+    return (await axios.post(this.URL + 'user', usuario, {withCredentials: true}));
   }
 
   async patchUserEmail(userId: number, email: string): Promise<User> {

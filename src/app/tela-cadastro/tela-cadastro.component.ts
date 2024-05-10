@@ -73,7 +73,7 @@ export class TelaCadastroComponent implements OnInit {
   }
   showConfirmationMessage = false;
   message  = "cadastro foiii" 
-  status = 0  
+  status !: any
   async submit(){
     console.log("Eu entrei po, viaja não fi")
     this.usuario.name = this.formControls['name'].value;
@@ -83,13 +83,15 @@ export class TelaCadastroComponent implements OnInit {
     this.usuario.imageColor = this.randomizeColor()
     if(this.usuario.email !=null && this.usuario.name!=null && this.usuario.password!=null){
       this.status  = await this.service.postUsuario(this.usuario)
-      if(this.status >= 200 && this.status < 300){
+      console.log(this.status);
+      
+      if(this.status.status >= 200 && this.status.status < 300){
         this.message = "sua conta foi cadastrada com sucesso"
         this.showConfirmationMessage = true;
   
         setTimeout(() => {
           this.router.navigate(['/']);
-        }, 2500);
+        }, 1500);
       }else{
         this.message = "não foi possivel cadastrar sua conta"
         this.showConfirmationMessage = true;
