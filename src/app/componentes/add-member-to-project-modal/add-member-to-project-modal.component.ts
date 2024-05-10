@@ -3,6 +3,7 @@ import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-add-member-to-project-modal',
@@ -11,16 +12,18 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class AddMemberToProjectModalComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService, private cookies_service : CookiesService) { }
 
   @Input() project !: Project
   searchTerm = ''
   team !: Team
   @Input() modalOpen : boolean = false
   @Output() closeModalAddMember : EventEmitter<boolean> = new EventEmitter
+  loggedUser : User = new User;
 
   async ngOnInit() {
-    this.team = await this.service.getOne("team", this.project.team.id)
+    this.team = await this.service.getOne("team", this.project.team.id);
+    this.loggedUser = await this.cookies_service.getLoggedUser();
     console.log(this.team);
   }
 
@@ -52,7 +55,7 @@ export class AddMemberToProjectModalComponent implements OnInit {
         resolve();
       });
     });
-    let project = await this.service.putProjeto(postProject);
+    let project = await this.service.addUserToProject(this.project.id, user.id ,this.loggedUser.id);
     this.project.members = project.members
   }
 

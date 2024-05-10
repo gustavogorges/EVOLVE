@@ -262,9 +262,6 @@ export class ModalTarefaComponent implements OnInit {
   eventsSubject2: Subject<PropertyValue> = new Subject<PropertyValue>();
 
   async salvarTarefa() {
-    console.log(this.tarefa);
-    
-  
     if (this.tarefa.id != 0 && this.tarefa.id != null) {
       //this.service.putTarefa(this.tarefa,this.loggedUser.id);
 

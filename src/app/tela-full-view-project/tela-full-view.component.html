@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="w-full flex justify-end gap-5" *ngIf="nameEdit">
-            <button class="p-2 bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack w-[10rem] font-semibold  hover:scale-105 duration-150 rounded-lg" (click)="editProjectFun()">Cancelar</button>
-            <button class="p-2 bg-primary dark:bg-dark-primary dark:text-primaryFontBlack font-semibold w-[10rem] rounded-lg hover:scale-105 duration-150 " (click)="saveProject()">Salvar</button>
+            <button class="p-2 bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack text-primaryWhite w-[10rem] font-semibold  hover:scale-105 duration-150 rounded-lg" (click)="editProjectFun()">Cancelar</button>
+            <button class="p-2 bg-primary dark:bg-dark-primary dark:text-primaryFontBlack text-primaryWhite font-semibold w-[10rem] rounded-lg hover:scale-105 duration-150 " (click)="saveProject()">Salvar</button>
         </div>
         <div class="w-full h-[10vh] pt-10 flex items-end gap-10 border-b-2 dark:border-fontGray">
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Dashboards' ? 
@@ -99,7 +99,7 @@
         <div *ngIf="miniPageView === 'Membros' && projeto" >
             <div class="flex justify-between" #addMember>
                 <input class="p-2 outline-none border-2 h-full w-[75%] bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
-                <button (click)="setModalOpenAddMembers()" class="w-[20%] bg-secondary dark:bg-dark-secondary dark:text-primaryFontBlack rounded-b-lg font-semibold duration-150 hover:scale-105">Adicionar um membro</button>
+                <button (click)="setModalOpenAddMembers()" class="w-[20%] bg-secondary dark:bg-dark-secondary dark:text-primaryFontBlack text-secondaryWhite rounded-b-lg font-semibold duration-150 hover:scale-105">Adicionar um membro</button>
                 <app-add-member-to-project-modal (closeModalAddMember)="setModalOpenAddMembersFalse()" [modalOpen]="openModalAddMembers" [project]="projeto"></app-add-member-to-project-modal>
             </div>
             <div *ngIf="filteredNames().length === 0" class="membros">

@@ -16,7 +16,7 @@ export class Task{
     name : string = "";
     favorited: boolean = false;
 
-    finalDate!: Date ;
+    finalDate!: Date;
     creationDate: string ="";
 
     schedulingData: string = ""; 

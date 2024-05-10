@@ -7,6 +7,7 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 interface Tarefa{
   nome : string,
@@ -22,7 +23,7 @@ interface Tarefa{
 })
 export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
-  constructor(private route:Router, private service:BackendEVOLVEService, private sanitizer: DomSanitizer) { }
+  constructor(private route:Router, private service:BackendEVOLVEService, private sanitizer: DomSanitizer, private cookies_service : CookiesService) { }
 
   isVisibleSubscription !: Subscription
   tarefas : Tarefa[] = []
@@ -41,10 +42,13 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.projeto.editOn = false
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
+  
+  loggedUser : User = new User;
   date: string = ''
   progresso = 0
   md: any
@@ -56,7 +60,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   preImage:SafeUrl | undefined = '';
   projetoSave !: Project
   searchTerm : string = ''
-  listIdsFromRemove = new Array<Pick<User, "id">>
+  listIdsFromRemove = new Array<Pick<User, "id">>;
   
   @Input() resetProject : Boolean = false
   
@@ -102,7 +106,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async salvarTarefa(){
-    await this.service.putProjeto(this.projeto);
+    await this.service.putProjeto(this.projeto, this.loggedUser.id);
   }
 
   filteredNames() {

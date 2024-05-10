@@ -161,8 +161,8 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL+"project", project)).data
   }
 
-  async putProjeto (project:Project){
-    return (await axios.put(this.URL+"project", project)).data
+  async putProjeto (project:Project,actionUserId:number){
+    return (await axios.put(this.URL+"project/"+actionUserId, project)).data
   }
 
   async postUsuario (usuario:User){
@@ -245,8 +245,8 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"message" + "/" + messageId + "/" + newMessageStatus)).data
   }
 
-  async deleteUserFromProject(idProject:number, users:Array<Pick<User, "id">>){
-    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user", users)).data
+  async deleteUserFromProject(idProject:number, actionUserId:number, users:Array<Pick<User, "id">>){
+    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user/"+actionUserId, users)).data
   }
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
@@ -358,6 +358,10 @@ export class BackendEVOLVEService {
 
   async updateUserWorkedTime(userTaskUpdate : UsuarioTarefa){
     return (await (axios.put(this.URL+"task/put/workedTime", userTaskUpdate))).data;
+  }
+
+  async addUserToProject(idProject:number, userId:number, actionUserId:number){
+    return (await axios.patch(this.URL+"project/"+idProject+"/addUser/"+userId+"/"+actionUserId)).data
   }
 
 }
