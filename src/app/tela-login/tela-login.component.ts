@@ -156,7 +156,7 @@ export class TelaLoginComponent implements OnInit {
   validEmail = false 
   async verifyEmail() {
     console.log(this.changeEmail);
-    this.user = await this.service.getUser(this.changeEmail);
+    this.user = await this.service.getUserByEmail(this.changeEmail);
     if (this.user.id != null) {
       this.generateRandomNumbers();
       console.log(this.randomNumbers);

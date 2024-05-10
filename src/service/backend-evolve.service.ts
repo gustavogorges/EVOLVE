@@ -22,7 +22,6 @@ import { PriorityRecord } from 'src/model/priorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
-import { config } from 'rxjs';
 import { UserProject } from 'src/model/userProject';
 import { Role } from 'src/model/Role';
 
@@ -31,7 +30,6 @@ import { Role } from 'src/model/Role';
 })
 export class BackendEVOLVEService {
   URL: string = 'http://localhost:8087/';
-  project$: any;
 
   constructor() { }
 
@@ -55,17 +53,13 @@ export class BackendEVOLVEService {
 
   //#region User
 
-  async getUser(email: string) {
+  async getUserByEmail(email: string) {
     return (await axios.get(this.URL + 'user/login' + '/' + email)).data;
   }
 
   async postUsuario(usuario: User) {
     return (await axios.post(this.URL + 'user', usuario)).data;
   }
-
-  // async putUsuario(usuario: User | Pick<User, 'id'>) {
-  //   return (await axios.put(this.URL + 'user', usuario)).data;
-  // } //deprecated (use patches instead)
 
   async patchUserEmail(userId: number, email: string): Promise<User> {
     return (
@@ -142,7 +136,7 @@ export class BackendEVOLVEService {
     formsData.append('secondaryColor', secondaryDarkColor);
     return (
       await axios.patch(
-        this.URL + 'user' + userId + '/secondaryDarkColor',
+        this.URL + 'user/' + userId + '/secondaryDarkColor',
         formsData
       )
     ).data;
@@ -678,8 +672,8 @@ export class BackendEVOLVEService {
     (await axios.post(this.URL + 'userChat', chat)).data;
   }
 
-  async putUserChat(chat: UserChat) {
-    return (await axios.put(this.URL + 'userChat', chat)).data;
+  async putUserChat(chat: UserChat, userId:number) {
+    return (await axios.put(this.URL + `userChat/${chat.id}/user/${userId}`, chat)).data;
   }
 
 
