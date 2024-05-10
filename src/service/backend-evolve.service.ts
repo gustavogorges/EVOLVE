@@ -36,7 +36,7 @@ export class BackendEVOLVEService {
   //#region Generics
 
   async getAllSomething(caminho: string) {
-    return (await axios.get(this.URL + caminho)).data;
+    return (await axios.get(this.URL + caminho, {withCredentials: true})).data;
   }
 
   async getOne(caminho: string, id: number) {
@@ -46,7 +46,7 @@ export class BackendEVOLVEService {
   }
 
   async deleteById(caminho: string, id: number) {
-    return (await axios.delete(this.URL + caminho + '/' + id)).data;
+    return (await axios.delete(this.URL + caminho + '/' + id, {withCredentials: true})).data;
   }
 
   //#endregion Generics
@@ -54,7 +54,7 @@ export class BackendEVOLVEService {
   //#region User
 
   async getUserByEmail(email: string) {
-    return (await axios.get(this.URL + 'user/login' + '/' + email)).data;
+    return (await axios.get(this.URL + 'user/login' + '/' + email, {withCredentials: true})).data;
   }
 
   async postUsuario(usuario: User) {
@@ -63,12 +63,12 @@ export class BackendEVOLVEService {
 
   async patchUserEmail(userId: number, email: string): Promise<User> {
     return (
-      await axios.patch(`${this.URL}user/${userId}/email/${email}`)
+      await axios.patch(`${this.URL}user/${userId}/email/${email}`,{withCredentials: true})
     ).data;
   }
   async patchUserName(userId: number, name: string): Promise<User> {
     return (
-      await axios.patch(`${this.URL}user/${userId}/name/${name}`)
+      await axios.patch(`${this.URL}user/${userId}/name/${name}`,{withCredentials: true})
     ).data;
   }
   async patchUserTheme(userId: number, theme: string): Promise<User> {
@@ -84,7 +84,7 @@ export class BackendEVOLVEService {
     formsData.append('password', password);
     return (
       await axios.patch(
-        this.URL + 'user/' + userId + '/password', formsData
+        this.URL + 'user/' + userId + '/password', formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -97,7 +97,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'user/' + userId + '/primaryColor',
-        formsData
+        formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -110,7 +110,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'user/' + userId + '/secondaryColor',
-        formsData
+        formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -124,7 +124,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'user/' + userId + '/primaryDarkColor',
-        formsData
+        formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -137,19 +137,19 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'user/' + userId + '/secondaryDarkColor',
-        formsData
+        formsData, {withCredentials: true}
       )
     ).data;
   }
   async patchUserFontSize(userId: number, fontSize: number): Promise<User> {
     return (
       await axios.patch(
-        this.URL + 'user/' + userId + '/fontSize' + '/' + fontSize
+        this.URL + 'user/' + userId + '/fontSize' + '/' + fontSize, {withCredentials: true}
       )
     ).data;
   }
   async patchImageUser(id: number, image: any) {
-    return (await axios.patch(this.URL + 'user/' + id, image)).data;
+    return (await axios.patch(this.URL + 'user/' + id, image, {withCredentials: true})).data;
   }
 
   //#endregion User
@@ -172,20 +172,20 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/property/associates/' + userId,
-        associates
+        associates, {withCredentials: true}
       )
     ).data;
   }
 
   async getAllCommentsOfTask(taskId: number) {
-    return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll')).data;
+    return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
   }
 
   async patchNewComment(taskId: number, newComment: Comment, userId: number) {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + 'comments/patch/user/' + userId,
-        newComment
+        newComment, {withCredentials: true}
       )
     ).data;
   }
@@ -198,7 +198,7 @@ export class BackendEVOLVEService {
         '/comments/delete/' +
         commentId +
         '/user/' +
-        userId
+        userId, {withCredentials: true}
       )
     ).data;
   }
@@ -211,7 +211,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/property' + '/' + userId,
-        taskProjectProperty
+        taskProjectProperty, {withCredentials: true}
       )
     ).data;
   }
@@ -220,7 +220,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/update' + '/currentStatus/user/' + userId,
-        newStatus
+        newStatus, {withCredentials: true}
       )
     ).data;
   }
@@ -233,7 +233,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/user' + '/' + userId + '/update' + '/currentPriority',
-        newPriority
+        newPriority, {withCredentials: true}
       )
     ).data;
   }
@@ -252,7 +252,7 @@ export class BackendEVOLVEService {
         userId +
         '/' +
         propertyId,
-        newOption
+        newOption, {withCredentials: true}
       )
     ).data;
   }
@@ -273,7 +273,7 @@ export class BackendEVOLVEService {
         '/' +
         propertyId +
         '/' +
-        optionId
+        optionId, {withCredentials: true}
       )
     ).data;
   }
@@ -282,7 +282,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/subtask/' + userId,
-        subtask
+        subtask, {withCredentials: true}
       )
     ).data;
   }
@@ -296,7 +296,7 @@ export class BackendEVOLVEService {
         '/subtask/delete/' +
         subtaskId +
         '/' +
-        userId
+        userId, {withCredentials: true}
       )
     ).data;
   }
@@ -306,7 +306,7 @@ export class BackendEVOLVEService {
 
     return (
       await axios.patch(
-        this.URL + 'task/priority/patch/' + taskId + '/' + priority
+        this.URL + 'task/priority/patch/' + taskId + '/' + priority, {withCredentials: true}
       )
     ).data;
   } //not found in API
@@ -327,21 +327,21 @@ export class BackendEVOLVEService {
         propertyId +
         '/' +
         userId,
-        propertyValue
+        propertyValue, {withCredentials: true}
       )
     ).data;
   }
 
   async getAllPriorities(projectId: number) {
-    return (await axios.get(this.URL + 'task/' + projectId + '/priorities')).data;
+    return (await axios.get(this.URL + 'task/' + projectId + '/priorities', {withCredentials: true})).data;
   }
 
   async postTarefa(tarefa: Task) {
-    return (await axios.post(this.URL + 'task', tarefa)).data;
+    return (await axios.post(this.URL + 'task', tarefa, {withCredentials: true})).data;
   }
 
   async putTarefa(tarefa: Task, userId: number) {
-    return (await axios.put(this.URL + 'task/user/' + userId, tarefa)).data;
+    return (await axios.put(this.URL + 'task/user/' + userId, tarefa, {withCredentials: true})).data;
   }
 
   //parei aqui 08/05/2024
@@ -354,7 +354,7 @@ export class BackendEVOLVEService {
           '/' + 'property/delete/user/' +
         userId +
         '/' +
-        propertyId
+        propertyId, {withCredentials: true}
       )
     ).data;
   }
@@ -362,7 +362,7 @@ export class BackendEVOLVEService {
   async updateTaskName(taskId: number, userId: number, newName: string) {
     return (
       await axios.patch(
-        this.URL + 'task/' + taskId + '/update/user' + userId + + '/name/' + newName
+        this.URL + 'task/' + taskId + '/update/user' + userId + + '/name/' + newName, {withCredentials: true}
       )
     ).data;
   }
@@ -382,7 +382,7 @@ export class BackendEVOLVEService {
           userId +
           '/property/' +
           propertyId,
-        newOptions
+        newOptions, {withCredentials: true}
       )
     ).data;
   }
@@ -396,14 +396,14 @@ export class BackendEVOLVEService {
 
           userId +
           '/calendar/' +
-          newDate
+          newDate, {withCredentials: true}
 
       )
     ).data;
   }
 
   async deleteTask(taskId: number) {
-    return (await axios.delete(this.URL + 'task/' + taskId + '/delete')).data;
+    return (await axios.delete(this.URL + 'task/' + taskId + '/delete', {withCredentials: true})).data;
   }
 
   async patchTaskFile(taskId: number, userId: number, file: any) {
@@ -412,14 +412,14 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'task/' + taskId + '/patch/task/file/' + userId,
-        formData
+        formData, {withCredentials: true}
       )
     ).data;
   }
 
   async deleteTaskFile(taskId: number, fileId: number, userId: number) {
     return (
-      await axios.delete(this.URL + "task/"+taskId+"/delete/file/"+fileId+"/"+userId)
+      await axios.delete(this.URL + "task/"+taskId+"/delete/file/"+fileId+"/"+userId, {withCredentials: true})
     ).data;
   }
 
@@ -437,7 +437,7 @@ export class BackendEVOLVEService {
   }
 
   async getAllCommentsOfProject(projectId: number) {
-    return (await axios.get(this.URL + 'project/comments/getAll/' + projectId))
+    return (await axios.get(this.URL + 'project/comments/getAll/' + projectId, {withCredentials: true}))
       .data;
   } //not found in projectController on API
 
@@ -449,7 +449,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + 'project/comments/patch/' + projectId + '/' + userId,
-        newComment
+        newComment, {withCredentials: true}
       )
     ).data;
   } //not found in projectController on API
@@ -467,13 +467,13 @@ export class BackendEVOLVEService {
         '/' +
         projectId +
         '/' +
-        userId
+        userId, {withCredentials: true}
       )
     ).data;
   } //not found in projectController on API
 
   async postProjeto(project: Project, teamId: number) {
-    return (await axios.post(this.URL + 'project/team/' + teamId, project)).data;
+    return (await axios.post(this.URL + 'project/team/' + teamId, project, {withCredentials: true})).data;
   }
 
   async putProjeto(project: Project) {
@@ -502,14 +502,14 @@ export class BackendEVOLVEService {
   }
 
   async updateStatusList(projetoId: number, statusList: Array<Status>) {
-    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList))
+    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList, {withCredentials: true}))
       .data;
   }
 
   async deleteStatus(projetoId: number, statusId: number) {
     return (
       await axios.patch(
-        this.URL + 'project/' + projetoId + '/statusList/remove/' + statusId)
+        this.URL + 'project/' + projetoId + '/statusList/remove/' + statusId, {withCredentials: true})
     ).data;
   }
 
@@ -517,7 +517,7 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("name", newName);
     return (
-      await axios.patch(this.URL + "project/" + projectId + "/name", newName)
+      await axios.patch(this.URL + "project/" + projectId + "/name", newName, {withCredentials: true})
     )
   }
 
@@ -525,20 +525,20 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("description", description);
     return (
-      await axios.patch(this.URL + "project/" + projectId + "description", description)
+      await axios.patch(this.URL + "project/" + projectId + "description", description, {withCredentials: true})
     ).data;
   }
 
   async patchProjectImage(id: number, image: any) {
     let formData = new FormData
     formData.append("image", image)
-    return (await axios.patch(this.URL + 'project/' + id + '/image', formData))
+    return (await axios.patch(this.URL + 'project/' + id + '/image', formData, {withCredentials: true}))
       .data;
   }
 
   async patchProjectImageRemove(projectId: number) {
     return (
-      await axios.patch(this.URL + "project/" + projectId + "/image/remove")
+      await axios.patch(this.URL + "project/" + projectId + "/image/remove", {withCredentials: true})
     ).data;
   }
 
@@ -546,7 +546,7 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("imageColor", imageColor);
     return (
-      await axios.patch(this.URL + "project/" + projecId + "imageColor", imageColor)
+      await axios.patch(this.URL + "project/" + projecId + "imageColor", imageColor, {withCredentials: true})
     ).data
   }
 
@@ -554,19 +554,19 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (
-      await axios.patch(this.URL + "project/" + projecId + "/finalDate", finalDate)
+      await axios.patch(this.URL + "project/" + projecId + "/finalDate", finalDate, {withCredentials: true})
     ).data;
   }
 
   async patchProjectStatusList(projecId: number, statusList: Status[]) {
     return (
-      await axios.patch(this.URL + "project/" + projecId + "/statusList", statusList)
+      await axios.patch(this.URL + "project/" + projecId + "/statusList", statusList, {withCredentials: true})
     ).data;
   }
 
   async patchProjectStatusListRemove(projecId: number, statusId: number) {
     return (
-      await axios.patch(this.URL + "project/" + projecId + "/statusList/remove" + statusId)
+      await axios.patch(this.URL + "project/" + projecId + "/statusList/remove" + statusId, {withCredentials: true})
     ).data;
   }
 
@@ -577,19 +577,19 @@ export class BackendEVOLVEService {
 
   async patchProjectTasks(projectId: number, tasks: Task[]) {
     return (
-      await axios.patch(this.URL + "project/" + projectId + "/tasks", tasks)
+      await axios.patch(this.URL + "project/" + projectId + "/tasks", tasks, {withCredentials: true})
     ).data
   }
 
   async patchProjectTasksRemove(projectId: number, taskId: number) {
     return (
-      await axios.patch(this.URL + "project/" + projectId + "/task/remove/" + taskId)
+      await axios.patch(this.URL + "project/" + projectId + "/task/remove/" + taskId, {withCredentials: true})
     ).data;
   }
 
   async patchDefaultRole(projecId: number, defaultRole: Role) {
     return (
-      await axios.patch(this.URL + "project/" + projecId + "defaultRole", defaultRole)
+      await axios.patch(this.URL + "project/" + projecId + "defaultRole", defaultRole, {withCredentials: true})
     )
   }
   //#endregion project
@@ -601,22 +601,22 @@ export class BackendEVOLVEService {
   }
 
   async postEquipe(equipe: Team) {
-    return (await axios.post(this.URL + 'team', equipe)).data;
+    return (await axios.post(this.URL + 'team', equipe, {withCredentials: true})).data;
   }
 
   async putEquipe(equipe: Team) {
-    return (await axios.put(this.URL + 'team', equipe)).data;
+    return (await axios.put(this.URL + 'team', equipe, {withCredentials: true})).data;
   }
 
   async patchReadedNotification(teamId: number, notificationId: number) {
     return (
-      await axios.patch(this.URL + 'team/' + teamId + '/' + notificationId)
+      await axios.patch(this.URL + 'team/' + teamId + '/' + notificationId, {withCredentials: true})
     ).data;
   }
 
   async patchName(teamId: number, newName: String) {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/" + newName)
+      await axios.patch(this.URL + "team/" + teamId + "/" + newName, {withCredentials: true})
     ).data;
   }
 
@@ -624,13 +624,13 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("image", image);
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/" + "image", formData)
+      await axios.patch(this.URL + "team/" + teamId + "/" + "image", formData, {withCredentials: true})
     ).data;
   }
 
   async patchTeamImageRemove(teamId: number) {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/image/remove")
+      await axios.patch(this.URL + "team/" + teamId + "/image/remove", {withCredentials: true})
     ).data;
   }
 
@@ -638,30 +638,30 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("imageColor", newImageColor);
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/imagecolor", formData)
+      await axios.patch(this.URL + "team/" + teamId + "/imagecolor", formData, {withCredentials: true})
     ).data;
   }
 
   async patchTeamParticipants(teamId: number, participants: User[]) {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/participants", participants)
+      await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
     ).data;
   }
 
   async patchTeamRoles(teamId: number, roles: Role[]) {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/roles", roles)
+      await axios.patch(this.URL + "team/" + teamId + "/roles", roles, {withCredentials: true})
     ).data;
   }
 
   async patchTeamDefaultRole(teamId: number, defaultRole: Role) {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/defaultRole", defaultRole)
+      await axios.patch(this.URL + "team/" + teamId + "/defaultRole", defaultRole, {withCredentials: true})
     ).data;
   }
 
   async cleanAllUserNotifications(userId: number) {
-    return (await axios.delete(this.URL + 'team/clean/' + userId)).data;
+    return (await axios.delete(this.URL + 'team/clean/' + userId, {withCredentials: true})).data;
   }
 
   //#endregion Team
@@ -669,17 +669,17 @@ export class BackendEVOLVEService {
   //#region userChat
 
   async postUserChat(chat: UserChat) {
-    (await axios.post(this.URL + 'userChat', chat)).data;
+    (await axios.post(this.URL + 'userChat', chat, {withCredentials: true})).data;
   }
 
   async putUserChat(chat: UserChat, userId:number) {
-    return (await axios.put(this.URL + `userChat/${chat.id}/user/${userId}`, chat)).data;
+    return (await axios.put(this.URL + `userChat/${chat.id}/user/${userId}`, chat, {withCredentials: true})).data;
   }
 
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
   async getUserChatsByUserId(id: number): Promise<Array<UserChat>> {
-    return (await axios.get(this.URL + "userChat/user/" + id)).data;
+    return (await axios.get(this.URL + "userChat/user/" + id, {withCredentials: true})).data;
   }
 
   //#endregion userChat
@@ -687,7 +687,7 @@ export class BackendEVOLVEService {
   //#region teamChat
 
   async getTeamChatsByUserId(id: number): Promise<Array<TeamChat>> {
-    return (await axios.get(this.URL + "teamChat/user/" + id)).data;
+    return (await axios.get(this.URL + "teamChat/user/" + id, {withCredentials: true})).data;
   }
 
   //#endregion teamChat
@@ -695,7 +695,7 @@ export class BackendEVOLVEService {
   //#region projectChat
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
-    return (await axios.get(this.URL + "projectChat/user/" + id)).data;
+    return (await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data;
   }
 
   //#endregion projectChat
@@ -703,7 +703,7 @@ export class BackendEVOLVEService {
   //#region message
 
   async postMessage(message: MessageDTO): Promise<Message> {
-    return (await axios.post(this.URL + 'message', message)).data;
+    return (await axios.post(this.URL + 'message', message, {withCredentials: true})).data;
   }
 
   async putMessage(message: MessageDTO): Promise<Message> {
@@ -711,7 +711,7 @@ export class BackendEVOLVEService {
 
     console.log(message);
 
-    return (await axios.put(this.URL + 'message', message)).data;
+    return (await axios.put(this.URL + 'message', message, {withCredentials: true})).data;
   }
 
   async patchMessageStatus(
@@ -720,7 +720,7 @@ export class BackendEVOLVEService {
   ): Promise<Message> {
     return (
       await axios.patch(
-        this.URL + 'message' + '/' + messageId + '/' + newMessageStatus
+        this.URL + 'message' + '/' + messageId + '/' + newMessageStatus, {withCredentials: true}
       )
     ).data;
   }
@@ -730,21 +730,21 @@ export class BackendEVOLVEService {
   //#region dashboard
 
   async getCharts(idProject: number) {
-    return (await axios.patch(this.URL + idProject + '/dashboard/getCharts'))
+    return (await axios.patch(this.URL + idProject + '/dashboard/getCharts', {withCredentials: true}))
       .data;
   }
 
   async postDashboard(dashboard: Dashboard, idProject: number) {
-    return (await axios.post(this.URL + idProject + '/dashboard', dashboard))
+    return (await axios.post(this.URL + idProject + '/dashboard', dashboard, {withCredentials: true}))
       .data;
   }
 
   async getDashboards(idProject: number) {
-    return (await axios.get(this.URL + idProject + '/dashboard')).data;
+    return (await axios.get(this.URL + idProject + '/dashboard', {withCredentials: true})).data;
   }
 
   async deleteDashboard(idDashboard: number) {
-    return (await axios.delete(this.URL + 0 + '/dashboard/' + idDashboard))
+    return (await axios.delete(this.URL + 0 + '/dashboard/' + idDashboard, {withCredentials: true}))
       .data;
   }
 
@@ -756,7 +756,7 @@ export class BackendEVOLVEService {
     return (
       await axios.put(
         this.URL + idProject + '/dashboard/' + idDashboard,
-        dashboard
+        dashboard, {withCredentials: true}
       )
     ).data;
   }
@@ -769,7 +769,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + idProject + '/dashboard/' + idDashboard,
-        chart
+        chart, {withCredentials: true}
       )
     ).data;
   }
@@ -782,7 +782,7 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(
         this.URL + idProject + '/dashboard/' + idDashboard + '/updateChartList',
-        charts
+        charts, {withCredentials: true}
       )
     ).data;
   }
@@ -795,7 +795,7 @@ export class BackendEVOLVEService {
         '/dashboard/' +
         idDashboard +
         '/delete-chart/' +
-        idChart
+        idChart, {withCredentials: true}
       )
     ).data;
   }
