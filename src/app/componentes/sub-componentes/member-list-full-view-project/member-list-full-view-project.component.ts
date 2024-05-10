@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
+import { UserProject } from 'src/model/userProject';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
 @Component({
@@ -39,7 +40,7 @@ export class MemberListFullViewProjectComponent implements OnInit {
   }
 
   async removeMember() {
-    let listIdsFromRemove = []
+    let listIdsFromRemove:Array<any> = []
     if (this.user.id != this.project.creator.id) {
       this.quest.emit("Realmente deseja remover um membro?");
 
@@ -52,7 +53,11 @@ export class MemberListFullViewProjectComponent implements OnInit {
           listIdsFromRemove.push({
             "id": this.user.id
           })
-          await this.service.deleteUserFromProject(this.project.id, listIdsFromRemove)
+          for(let e of listIdsFromRemove){
+            
+          }
+          this.project.members.filter( (userProject) => !listIdsFromRemove.find(e=> e.id = userProject.userId))
+          await this.service.patchProjectMembers(this.project.id, this.project.members)
         }
 
       } catch (ignore) { }

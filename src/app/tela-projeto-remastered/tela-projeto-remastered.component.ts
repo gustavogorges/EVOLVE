@@ -126,7 +126,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
       if(this.listFromRemove.length != 0){
         project.members.filter(member => !this.listFromRemove.includes(member))
-        await this.service.patchMembers(project.id, project.members)
+        await this.service.patchProjectMembers(project.id, project.members)
         // await this.service.deleteUserFromProject(project.id, this.listFromRemove)
       }
 

@@ -24,12 +24,7 @@ import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { config } from 'rxjs';
 import { UserProject } from 'src/model/userProject';
-<<<<<<< HEAD
-import { File } from 'src/model/file';
 import { Role } from 'src/model/Role';
-=======
-import { Role } from 'src/model/Role';
->>>>>>> 76397d15948b8c549f1e5eb1baee8a5c678b06c8
 
 @Injectable({
   providedIn: 'root',
@@ -489,8 +484,27 @@ export class BackendEVOLVEService {
 
   async putProjeto(project: Project) {
     //falta fazer aqui
-    await axios.patch(this.URL + 'project/', project.id + "/")
-    // return (await axios.put(this.URL + 'project', project)).data;
+    this.patchProjectName(project.id, project.name); 
+  
+    this.patchProjectDescription(project.id, project.description);
+
+    this.patchProjectImage(project.id, project.image); 
+  
+    this.patchProjectImageRemove(project.id);
+  
+    this.patchProjecyImageColor(project.id, project.imageColor); 
+  
+    this.patchProjectFinalDate(project.id, project.finalDate);
+  
+    this.patchProjectStatusList(project.id, project.statusList); 
+  
+    this.patchProjectMembers(project.id, project.members); 
+  
+    this.patchProjectTasks(project.id, project.tasks);
+  
+    this.patchDefaultRole(project.id, project.defaultRole)
+
+    return await this.getOne("project", project.id)
   }
 
   async updateStatusList(projetoId: number, statusList: Array<Status>) {
