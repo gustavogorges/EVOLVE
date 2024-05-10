@@ -350,5 +350,11 @@ export class BackendEVOLVEService {
   async updateNameDescProject(idProject:number, projectNameDescDTO:any){
     return (await (axios.patch(this.URL+"/project/"+idProject+"/altereteName", projectNameDescDTO))).data;
   }
+  async patchTeamName(teamId:number, name:string):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("name",name)
+    return (await axios.patch(this.URL+path+teamId+"/name", formData)).data
+  }
 
 }

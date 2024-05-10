@@ -8,3 +8,9 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  .input-name {
+    @apply py-1 lg:px-3 px-1 w-[50%] border-0 h-min rounded-md font-titulo lg:text-4xl md:text-2xl text-sm sm:text-lg font-bold disabled:placeholder:text-primary text-primary dark:disabled:placeholder:text-white disabled:bg-transparent bg-slate-100 dark:disabled:bg-transparent dark:bg-dark-secundary-gray;
+  }
+  .user-picture {
+    @apply md:w-32 md:h-32 sm:w-28 sm:h-28 w-20 h-20  rounded-full overflow-clip;
+  }
