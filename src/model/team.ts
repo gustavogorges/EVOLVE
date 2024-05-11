@@ -3,6 +3,8 @@ import { TeamChat } from "./teamChat";
 import { User } from "./user";
 import { TaskFile } from "./file";
 import { TeamNotification } from "./teamNotification";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export class Team{
     id!:number;
@@ -15,4 +17,5 @@ export class Team{
     chat: TeamChat = new TeamChat;
     notifications : Array<TeamNotification> = new Array;
     booleanView:boolean = false;
+    code : String = 'tf';
 }

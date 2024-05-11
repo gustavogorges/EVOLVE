@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { LogarithmicScale } from 'chart.js';
+import { TEXT_ALIGN } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
-
+import {v4 as uuidv4} from 'uuid'; 
 @Component({
   selector: 'app-team-creation-screen',
   templateUrl: './team-creation-screen.component.html',
@@ -27,12 +29,29 @@ select = false
   constructor(
     private service:BackendEVOLVEService,
     private cookiesService:CookiesService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
 
     ) { }
-
+id ! :number
   async ngOnInit(): Promise<void> {
-    this.team = await this.service.getOne("team", 6);
+    console.log(1243);
+    
+    this.route.paramMap.subscribe( async params  => {
+      // Obtém o parâmetro do projeto da rota
+      const projectId = params.get('projectId');
+      this.id  = Number(projectId)
+    
+    });
+    if(this.team ==null){
+      this.disabledInfo = false
+      this.team = new Team
+      this.team.code = uuidv4()
+      this.team.name = "nome da sua equipe"
+    }else{
+      this.team = await this.service.getOne('team', this.id);
+
+    }
     console.log(this.team);
     
     
@@ -97,13 +116,24 @@ select = false
 
 
 
-  // setSearchUserModal(){
-  //   this.isSearchUserModalOpen = !this.isSearchUserModalOpen
-  // }
+  setSearchUserModal(){
+    this.isSearchUserModalOpen = !this.isSearchUserModalOpen
+  }
 
-  // addUsers(users:Array<User>){
-  //   users.forEach(user => this.teamParticipants.push(user))
-  //   this.isSearchUserModalOpen=false
-  // }
+  addUsers(users:Array<User>){
+    users.forEach(user =>{
+      if(!this.teamParticipants.includes(user)){
+        this.teamParticipants.push(user)
+      }
+    }
+    
+       )
+    console.log(this.teamParticipants);
+    
+    this.isSearchUserModalOpen=false
+  }
+  removeUser(indice : number){
+    this.teamParticipants.splice(indice, 1)
+  }
 
 }

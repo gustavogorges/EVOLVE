@@ -52,7 +52,7 @@ const routes: Routes = [
   },
   {
 
-    path:"equipe/criar",
+    path:"equipe/:teamId",
     component: TeamCreationScreenComponent,
    // canActivate: [AuthGuard]
   },
