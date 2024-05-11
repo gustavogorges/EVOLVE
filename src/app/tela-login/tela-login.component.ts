@@ -67,8 +67,7 @@ export class TelaLoginComponent implements OnInit {
   }
   responseData : any 
  async submit() {
-    console.log(this.service.getOne("user", 1)
-    );
+    // console.log(this.service.getOne("user", 1));
     try {
       const result = await this.authService.proceedLogin(this.userForm.value);
       

@@ -6,11 +6,11 @@
       <div
         [ngStyle]="{
           'background-image':
-            user?.image?.data != null
+            user.image.data != null
               ? 'url(' + user.image.data + ')'
-              : user?.imageColor,
+              : user.imageColor,
           'background-size': 'cover',
-          'background-color': user?.imageColor
+          'background-color': user.imageColor
         }"
         class="user-picture"
       >
@@ -34,7 +34,7 @@
           type="email"
           name=""
           id=""
-          [placeholder]="user?.name"
+          [placeholder]="user.name"
           [disabled]="disabledInfo"
           [(ngModel)]="name"
           class="input-name"
@@ -43,7 +43,7 @@
           type="email"
           name=""
           id=""
-          [placeholder]="user?.email"
+          [placeholder]="user.email"
           [disabled]="disabledInfo"
           [(ngModel)]="email"
           class="input-email"
@@ -105,7 +105,7 @@
     </div>
     <div class="flex flex-col gap-2 lg:w-[80%] self-center ">
       <div class="flex w-full md:gap-10 gap-5 overflow-x-auto border-b-2 dark:border-gray-500 ">
-        <div *ngFor="let team of user?.teams">
+        <div *ngFor="let team of user?.teamRoles">
           <p
             class="font-hind-madurai md:text-xl w-max sm:text-lg text-base text-fontGray dark:text-gray-300 cursor-pointer"
             (click)="changeTeam(team.team)"

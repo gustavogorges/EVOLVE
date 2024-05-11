@@ -58,7 +58,7 @@
        
           <app-equipe-recente-card
             (click)="goProjetos()"
-            [team]="loggedUser.teams[indiceAtual].team"
+            [team]="getCurrentTeam(indiceAtual)"
             class="w-full max-h-[200px]"
           ></app-equipe-recente-card>
           <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>

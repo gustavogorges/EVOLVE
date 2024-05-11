@@ -15,7 +15,7 @@ export class User {
     chats:Array<UserChat> = new Array
     createdTasks: Array<Task> = new Array;
     projectRoles:UserProject[] = []
-    teams: Array<UserTeam> = new Array;
+    teamRoles: Array<UserTeam> = new Array;
 
     theme: string = "light"; 
     primaryColor: string = "#185E77"; 

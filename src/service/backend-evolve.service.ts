@@ -41,7 +41,7 @@ export class BackendEVOLVEService {
 
   async getOne(caminho: string, id: number) {
     return (
-      await axios.get(this.URL + caminho + '/' + 3, { withCredentials: true })
+      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
     ).data;
   }
 
@@ -597,6 +597,7 @@ export class BackendEVOLVEService {
   //#region Team
 
   async getTeamsByUserId(userId: number) {
+    
     return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
   }
 

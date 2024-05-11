@@ -9,8 +9,9 @@ export class AuthService {
   constructor(private http: HttpClient, private cookies: CookieService) {}
   async proceedLogin(userlogin: any): Promise<AxiosResponse<User>> {
     try {
-
-      const response = await axios.post<User>('http://localhost:8087/auth/login', userlogin, { withCredentials: true });
+      console.log(userlogin);
+      
+      const response = await axios.post<User>('http://localhost:8087/auth/login', {email:userlogin.username, password:userlogin.password}, { withCredentials: true });
         // console.log(response);
         
       const jwtCookie = response.headers['set-cookie'];

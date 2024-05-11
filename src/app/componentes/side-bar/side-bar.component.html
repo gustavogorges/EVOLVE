@@ -50,7 +50,7 @@
           <!-- </div> -->
         <!-- </div> -->
       </div>
-      <div *ngFor="let team of loggedUser?.teams" class="flex flex-col gap-2">
+      <div *ngFor="let team of loggedUser?.teamRoles" class="flex flex-col gap-2">
         <div class="flex gap-1">
           <p class="title truncate">
             {{ team.team.name }}
@@ -89,7 +89,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="team.team.projects.length==0 " class="px-5">
+          <div *ngIf="team.team.projects?.length==0 " class="px-5">
             <div class="flex ">
               <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
                 Criar projeto
@@ -174,7 +174,7 @@
           <!-- </div> -->
         <!-- </div> -->
       </div>
-      <div *ngFor="let userTeam of loggedUser?.teams" class="flex flex-col gap-2">
+      <div *ngFor="let userTeam of loggedUser?.teamRoles" class="flex flex-col gap-2">
         <div class="flex gap-1 cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goProjectsTeam(userTeam.team)">
           <p class="title truncate">
             {{ userTeam.team.name }}
@@ -213,7 +213,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="userTeam.team.projects.length==0 " class="px-5">
+          <div *ngIf="userTeam.team.projects?.length==0 " class="px-5">
             <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goCreateProject(userTeam.team)">
               <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
                 Criar projeto
