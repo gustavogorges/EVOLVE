@@ -14,3 +14,26 @@
   .user-picture {
     @apply md:w-28 md:h-28 sm:w-28 sm:h-28 w-20 h-20  rounded-full overflow-clip;
   }
+  .project-image{
+    @apply  w-max relative;
+
+    .image{
+        @apply w-[30vw] h-[30vw] xl:w-[7vw] xl:h-[7vw] rounded-full col-span-full row-span-full overflow-hidden;
+
+        img{
+            @apply h-full w-full object-cover;
+        }
+    }
+
+    .input-image{
+        @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute sm:right-0 -bottom-10 right-[30vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;
+
+        i{
+            @apply text-xl text-primary dark:text-dark-primary
+        }
+    }
+
+    .alterateColor{
+        @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute -bottom-10 rounded-xl sm:left-0 left-[30vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;;
+    }
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LogarithmicScale } from 'chart.js';
 import { TEXT_ALIGN } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 import { Team } from 'src/model/team';
@@ -16,6 +16,7 @@ import {v4 as uuidv4} from 'uuid';
 export class TeamCreationScreenComponent implements OnInit {
 
   isSearchUserModalOpen:boolean=false
+  backGroundColorProject : String = ''
 
   @ViewChild("teamNameInput") teamNameInput!:any;
 
@@ -31,27 +32,43 @@ select = false
     private cookiesService:CookiesService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
+    private router: Router,
 
     ) { }
 id ! :number
+loggedUser !: User
   async ngOnInit(): Promise<void> {
     console.log(1243);
+   this.loggedUser =  await this.cookiesService.getLoggedUser();
     
     this.route.paramMap.subscribe( async params  => {
       // Obtém o parâmetro do projeto da rota
-      const projectId = params.get('projectId');
+      const projectId = params.get('teamId');
+      console.log(projectId);
+      
       this.id  = Number(projectId)
     
     });
-    if(this.team ==null){
+    console.log(this.id);
+
+    
+    if(this.id ==0){
       this.disabledInfo = false
       this.team = new Team
-      this.team.code = uuidv4()
       this.team.name = "nome da sua equipe"
+      this.randomColor()
+      this.disabledInfo = false
     }else{
       this.team = await this.service.getOne('team', this.id);
+      this.disabledInfo = true
+      this.backGroundColorProject = this.team.imageColor
+      this.team.participants.map((u)=>this.teamParticipants.push(u))
 
     }
+    this.team.code = uuidv4()
+
+    console.log(this.loggedUser);
+    
     console.log(this.team);
     
     
@@ -86,6 +103,10 @@ id ! :number
   options = ["Administrador", "Membro", "Visualizador"]
   openSelect(){
     this.select = !this.select
+  }
+
+  randomColor(){
+    this.backGroundColorProject = '#' + Math.floor(Math.random()*16777215).toString(16);
   }
 
   // async createNewTeam():Promise<Team>{
@@ -134,6 +155,43 @@ id ! :number
   }
   removeUser(indice : number){
     this.teamParticipants.splice(indice, 1)
+  }
+ async  salvar(){
+  this.team.name = this.name;
+    this.teamParticipants.map((u)=>{
+      this.team.participants.push(u); 
+    })
+    this.team.imageColor = this.backGroundColorProject
+
+  if(this.id==0){
+
+    
+    this.team.adimnistrator = await this.cookiesService.getLoggedUser();
+  console.log(this.team);
+  
+  
+    this.service.postEquipe(this.team);
+  }else{
+this.service.putEquipe(this.team); 
+  }
+  }
+  editar(){
+    this.disabledInfo = false;
+  }
+  leaveTeam(){
+    
+  }
+  removeTeam(){
+    this.service.deleteById("team",this.team.id);
+  }
+  cancelar(){
+    console.log(this.disabledInfo);
+     
+    this.disabledInfo = true;
+  
+    if(this.id ==0){
+      this.router.navigateByUrl('/tela-inicial');
+    }
   }
 
 }
