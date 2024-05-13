@@ -70,6 +70,11 @@ config = false
   goProjectsTeam(team:Team){
     this.router.navigateByUrl('/tela-projeto/'+team.id);
   }
+  goCreateTeam(){
+    this.sideBar.emit(false)
+    this.router.navigateByUrl('/equipe/'+0);
+  }
+
 
   goTelaInicial(){
     this.router.navigateByUrl('/tela-inicial');
