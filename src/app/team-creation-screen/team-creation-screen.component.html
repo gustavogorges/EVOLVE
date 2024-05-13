@@ -210,10 +210,10 @@ salvar      </button>
       <button (click)="editar()" class="py-2 px-7 bg-primary text-white font-bold font-titulo rounded-lg">
         editar
        </button>
-       <button (click)="leaveTeam()" *ngIf="team?.adimnistrator?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="leaveTeam()" *ngIf="team?.administrator?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
         sair da equipe
        </button>
-       <button (click)="removeTeam()" *ngIf="team?.adimnistrator?.id == loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="removeTeam()" *ngIf="team?.administrator?.id == loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
         excluir equipe
        </button>
     </div>

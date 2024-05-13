@@ -11,7 +11,7 @@ export class Team{
     name : string = "";
     image:TaskFile = new TaskFile;
     imageColor:String = "#000000"
-    adimnistrator : User = new User;
+    administrator : User = new User;
     projects: Array<Project> = new Array;
     participants: Array<User> = new Array;
     chat: TeamChat = new TeamChat;

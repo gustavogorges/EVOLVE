@@ -158,6 +158,7 @@ loggedUser !: User
   }
  async  salvar(){
   this.team.name = this.name;
+  this.team.participants.push(this.loggedUser)
     this.teamParticipants.map((u)=>{
       this.team.participants.push(u); 
     })
@@ -166,7 +167,7 @@ loggedUser !: User
   if(this.id==0){
 
     
-    this.team.adimnistrator = await this.cookiesService.getLoggedUser();
+    this.team.administrator = await this.cookiesService.getLoggedUser();
   console.log(this.team);
   
   
@@ -174,6 +175,7 @@ loggedUser !: User
   }else{
 this.service.putEquipe(this.team); 
   }
+  this.disabledInfo = true; 
   }
   editar(){
     this.disabledInfo = false;
@@ -183,6 +185,8 @@ this.service.putEquipe(this.team);
   }
   removeTeam(){
     this.service.deleteById("team",this.team.id);
+    this.router.navigateByUrl('/tela-inicial');
+
   }
   cancelar(){
     console.log(this.disabledInfo);

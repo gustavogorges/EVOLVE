@@ -173,6 +173,8 @@ export class BackendEVOLVEService {
   }
 
   async postEquipe (equipe:Team){
+    console.log(equipe);
+    
     return (await axios.post(this.URL+"team", equipe)).data
   }
 
