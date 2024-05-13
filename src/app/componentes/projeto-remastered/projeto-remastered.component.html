@@ -60,10 +60,10 @@
             </div>
             
             <div class="value-infos pb-5">
-                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks">
+                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks" (click)="openTask(t)">
                     <p class="Nome">{{t.name}}</p>
                     <div class="Progresso">
-                        <div class="valor-progresso"  [style.width.%]="t.conclusionPercentage" ></div>
+                        <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
                     <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>
@@ -117,10 +117,10 @@
             </div>
             
             <div class="value-infos pb-5">
-                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks">
+                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks" (click)="openTask(t)">
                     <p class="Nome">{{t.name}}</p>
                     <div class="Progresso">
-                        <div class="valor-progresso"  [style.width.%]="t.conclusionPercentage" ></div>
+                        <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
                     <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>

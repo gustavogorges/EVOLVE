@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/model/project';
+import { Task } from 'src/model/task';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -11,9 +12,9 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   styleUrls: ['./tela-projeto-remastered.component.scss']
 })
 export class TelaProjetoRemasteredComponent implements OnInit {
-
+  
   constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute) { }
-
+  booleanTask = false
   id!: number
   projects !: Project[]
   resetProject: Boolean = false
@@ -24,8 +25,24 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   listFromRemove = new Array
   teamId : number = 0
   team !: Team
+  task !: Task
+  project !: Project;
+
+
   ngOnInit(): void {
     this.getProjects()
+  }
+
+  closeTask(event: boolean) {
+    if (event) {
+      this.booleanTask = false;
+    }
+  }
+
+  openTaskModal(task:any){
+    this.task = task
+    this.project = task.project as Project
+    this.booleanTask = true
   }
 
   getResponse(){

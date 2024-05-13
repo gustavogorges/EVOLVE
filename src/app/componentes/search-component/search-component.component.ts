@@ -75,6 +75,13 @@ export class SearchComponentComponent implements OnInit {
     });
   }
 
+  verifyLenght(array:any[]){
+    if(array?.length > 0){
+      return true
+    }
+    return false
+  }
+
   verifyImage(object:any){
     if(object.image != null){
       if(object.image.data != null){
@@ -86,28 +93,28 @@ export class SearchComponentComponent implements OnInit {
 
   filterProjects() {
     const searchText = this.search.toLowerCase();
-    return searchText.toLowerCase().includes("pr") ? this.projectsList : this.projectsList.filter(project =>
+    return searchText.toLowerCase().includes("pr") ? this.projectsList : this.projectsList?.filter(project =>
       project.name.toLowerCase().includes(searchText)
     ).slice(0, 4)
   }
 
   filterTasks() {
     const searchText = this.search.toLowerCase();
-    return searchText.toLowerCase().includes("ta") ? this.tasksList : this.tasksList.filter(task =>
+    return searchText.toLowerCase().includes("ta") ? this.tasksList : this.tasksList?.filter(task =>
       task.name.toLowerCase().includes(searchText)
     ).slice(0, 4)
   }
 
   filterTeams() {
     const searchText = this.search.toLowerCase();
-    return searchText.toLowerCase().includes("eq") ? this.teamsList : this.teamsList.filter(team =>
+    return searchText.toLowerCase().includes("eq") ? this.teamsList : this.teamsList?.filter(team =>
       team.name.toLowerCase().includes(searchText)
     ).slice(0, 4)
   }
 
   filterUsers() {
     const searchText = this.search.toLowerCase();
-    return this.usersList.filter(user =>
+    return this.usersList?.filter(user =>
       user.name.toLowerCase().includes(searchText) ||
       user.email.toLowerCase().includes(searchText)
     ).slice(0, 4);

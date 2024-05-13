@@ -10,7 +10,7 @@
 </label>
 
 <div class="w-full flex flex-col items-center rounded-b-lg overflow-auto bg-secondaryWhite shadow-xl max-h-[20vw] duration-200 dark:bg-dark-secundary-gray" [ngClass]="search != '' && open ? 'h-fit':'h-0'">
-    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="filterUsers().length > 0">
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="usersList != [] && verifyLenght(filterUsers())">
         <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
             <div class=" pr-2 w-fit h-full">
                 <p class="text-xl dark:text-dark-secondary font-hind-madurai">Usuários</p>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="filterProjects().length > 0">
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="projectsList != [] && verifyLenght(filterProjects())" >
         <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
             <div class=" pr-2 w-fit h-full">
                 <p class="text-xl dark:text-dark-secondary font-hind-madurai">Projetos</p>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="filterTeams().length > 0">
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="verifyLenght(filterTeams()) && teamsList != []">
         <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
             <div class=" pr-2 w-fit h-full">
                 <p class="text-xl dark:text-dark-secondary font-hind-madurai">Equipes</p>
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="filterTasks().length > 0">
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="verifyLenght(filterTasks()) && tasksList != []">
         <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
             <div class=" pr-2 w-fit h-full">
                 <p class="text-xl dark:text-dark-secondary font-hind-madurai">Tarefas</p>
@@ -82,7 +82,8 @@
         </div>
     </div>
 
-    <div *ngIf="filterTasks().length === 0 && filterProjects().length === 0 && filterTeams().length === 0 && filterUsers().length === 0"
+    <div *ngIf="!verifyLenght(filterTasks()) && !verifyLenght(filterProjects()) && !verifyLenght(filterTeams()) && !verifyLenght(filterUsers())
+    && projectsList != [] && tasksList != [] && teamsList != [] && usersList != []"
     class="w-full flex justify-center items-center">
         <p class="text-fontGray text-lg font-hind-madurai font-semibold">Nada Encontrado</p>
     </div>
