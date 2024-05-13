@@ -7,6 +7,7 @@ import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { Project } from 'src/model/project';
 
 @Component({
   selector: 'app-select-propriedade',
@@ -37,6 +38,9 @@ export class SelectPropriedadeComponent implements OnInit {
   @Input()
   tarefa: Task = new Task();
 
+  @Input()
+  projectId !: number;
+
   @Output() 
   newItemEvent = new EventEmitter<Array<Property>>();
 
@@ -44,6 +48,7 @@ export class SelectPropriedadeComponent implements OnInit {
   
   elemento: Property = new Property();
   loggedUser: User = new User;
+  checkboxProperty: boolean = false;
 
   constructor(
     private service : BackendEVOLVEService,
@@ -51,7 +56,7 @@ export class SelectPropriedadeComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
+    this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user});
   }
 
   options: any[] = [
@@ -132,39 +137,59 @@ export class SelectPropriedadeComponent implements OnInit {
     this.selectOption.value = '';
   }
 
-  savePropertie() {
+  async savePropertie() {
     if(this.optionType == 'numero inteiro') {
-       this.newPropertie.propertyType = PropertyType.IntegerValue;
-        this.tarefa.properties.push(this.newPropertie);
-        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+       this.newPropertie.propertyType = PropertyType.IntegerValue
+       this.tarefa.properties.push(this.newPropertie);
+       if(this.checkboxProperty){
+        this.newPropertie.global = true;
+       }
+       this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       } else if(this.optionType == 'data') {
         this.newPropertie.propertyType = PropertyType.DataValue;
         this.tarefa.properties.push(this.newPropertie);
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
         this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'seleção múltipla') {
-        this.newPropertie.propertyType = PropertyType.MultiSelectValue;
+        this.newPropertie.propertyType = PropertyType.MultiSelectValue;   
         this.newPropertie.options = this.listOptions;
         this.tarefa.properties.push(this.newPropertie);
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'número double') {
-        this.newPropertie.propertyType = PropertyType.DoubleValue;
+        this.newPropertie.propertyType = PropertyType.DoubleValue;   
         this.tarefa.properties.push(this.newPropertie);
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'texto') {
         this.newPropertie.propertyType = PropertyType.TextValue;
         this.tarefa.properties.push(this.newPropertie);
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }  else if(this.optionType == 'associados') {
-        //Há de ser implementado ainda no enum, ou de algum outra forma
-        //this.newPropertie.propertyType = PropertyType;
         this.tarefa.properties.push(this.newPropertie); 
+        if(this.checkboxProperty){
+          this.newPropertie.global = true;
+         }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
       }
+      
     this.newItemEvent.emit()  
   }
 }
