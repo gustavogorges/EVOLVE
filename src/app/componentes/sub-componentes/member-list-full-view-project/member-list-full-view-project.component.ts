@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-member-list-full-view-project',
@@ -10,9 +11,14 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class MemberListFullViewProjectComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService,
+    private cookies_service : CookiesService
+  ) { }
 
-  ngOnInit(): void {
+  loggedUser : User = new User;
+
+  async ngOnInit() {
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
   @Input() user !: User
@@ -52,7 +58,7 @@ export class MemberListFullViewProjectComponent implements OnInit {
           listIdsFromRemove.push({
             "id": this.user.id
           })
-          await this.service.deleteUserFromProject(this.project.id, listIdsFromRemove)
+          await this.service.deleteUserFromProject(this.project.id,this.loggedUser.id,listIdsFromRemove)
         }
 
       } catch (ignore) { }

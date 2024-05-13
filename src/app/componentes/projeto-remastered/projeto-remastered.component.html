@@ -65,7 +65,7 @@
                     <div class="Progresso">
                         <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
-                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
+                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" [style.color]="t.currentStatus.textColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>
                 </div>
                 <div *ngIf="getTasksLength() === 0" class="noneTask">
@@ -122,7 +122,7 @@
                     <div class="Progresso">
                         <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
-                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
+                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" [style.color]="t.currentStatus.textColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>
                 </div>
                 <div *ngIf="getTasksLength() === 0" class="h-[50%] w-full flex justify-center items-center text-sm text-fontGray whitespace-nowrap">

@@ -210,7 +210,7 @@ import { SearchComponentComponent } from './componentes/search-component/search-
   ],
   
   imports: [
-    
+    HttpClientModule,
     MessageModule,
     MessagesModule,
     ChartModule,

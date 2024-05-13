@@ -99,10 +99,10 @@
                 @apply h-[18vh] overflow-y-auto min-w-max;
 
                 .values{
-                    @apply grid grid-cols-4 grid-rows-1 px-2 justify-items-center items-center mb-3 min-w-min;
-
+                    @apply grid grid-cols-4 grid-rows-1 px-2 gap-2 items-center mb-3 min-w-min;
+                    grid-template-columns: 24% 24% 24% 24%;
                     .Nome{
-                        @apply truncate w-[5vw] text-center text-sm text-primary dark:text-dark-primary
+                        @apply truncate w-full text-sm text-primary dark:text-dark-primary
                     }
     
                     .Progresso{
@@ -114,7 +114,7 @@
                     }
     
                     .Status{
-                        @apply p-1 rounded-2xl px-2 text-sm z-50 max-w-full truncate
+                        @apply p-1 rounded-2xl px-2 text-sm z-50 text-center truncate
                     }
     
                     .Prazo{
@@ -203,10 +203,10 @@
     }
 
     .project-open-sm{
-        @apply flex flex-col px-[2%] gap-[12%] xl:h-[56vh] xl:hidden bg-gray-200 duration-300 overflow-hidden dark:bg-dark-primary-gray relative;
+        @apply flex flex-col w-full gap-[12%] xl:h-[56vh] xl:hidden bg-gray-200 duration-300 overflow-hidden dark:bg-dark-primary-gray relative;
 
         .project-open-infos{
-            @apply h-[60%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg overflow-y-hidden relative;
+            @apply h-[100%] w-full bg-secondaryWhite dark:bg-dark-primary-black rounded-lg overflow-y-hidden relative;
 
             .tittle-infos{
                 @apply grid grid-cols-4 grid-rows-1 justify-items-center mb-2 px-2 z-50 bg-secondaryWhite dark:bg-dark-primary-black rounded-lg min-w-max;
@@ -217,13 +217,12 @@
             }
 
             .value-infos{
-                @apply h-[18vh] overflow-y-auto min-w-max;
+                @apply h-[20vh] overflow-y-auto min-w-max pb-10;
 
                 .values{
-                    @apply grid grid-cols-4 grid-rows-1 px-2 justify-items-center items-center mb-3 min-w-min;
-
+                    @apply grid grid-cols-4 grid-rows-1 px-2 gap-2 items-center mb-3 min-w-min;
                     .Nome{
-                        @apply truncate w-[15vw] text-center text-sm text-primary dark:text-dark-primary
+                        @apply truncate text-center text-sm text-primary dark:text-dark-primary
                     }
     
                     .Progresso{
@@ -235,7 +234,7 @@
                     }
     
                     .Status{
-                        @apply p-1 rounded-2xl px-2 text-sm z-50 max-w-full truncate
+                        @apply p-1 rounded-2xl px-2 text-sm z-50 max-w-full truncate text-center
                     }
     
                     .Prazo{

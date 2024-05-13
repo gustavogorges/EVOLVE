@@ -5,6 +5,7 @@ import { Task } from 'src/model/task';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tela-projeto-remastered',
@@ -13,8 +14,10 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class TelaProjetoRemasteredComponent implements OnInit {
   
-  constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute) { }
   booleanTask = false
+
+  constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute, private cookies_service : CookiesService) { }
+
   id!: number
   projects !: Project[]
   resetProject: Boolean = false
@@ -29,7 +32,9 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   project !: Project;
 
 
-  ngOnInit(): void {
+  loggedUser : User = new User;
+  async ngOnInit() {
+    this.loggedUser = await this.cookies_service.getLoggedUser();
     this.getProjects()
   }
 
@@ -140,10 +145,10 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     },);
 
     setTimeout(async () => {
-      await this.service.putProjeto(postProject)
+      await this.service.putProjeto(postProject, this.loggedUser.id)
     
       if(this.listFromRemove.length != 0){
-        await this.service.deleteUserFromProject(project.id, this.listFromRemove)
+        await this.service.deleteUserFromProject(project.id,this.loggedUser.id, this.listFromRemove)
       }
 
       if(this.formData!=null){

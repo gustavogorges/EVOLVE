@@ -13,7 +13,7 @@ export class AppComponent{
     private colorService : ColorService
 
     ){}
-  title = 'angularProject';
+  title = 'Evolve';
   loggedUser !: User; 
 
   async ngOnInit(): Promise<void> {

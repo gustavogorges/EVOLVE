@@ -123,7 +123,7 @@ export class TelaFullViewComponent implements OnInit {
             projetoTemp.description = this.descEdited
             projetoTemp.image = null
             projetoTemp.members = []
-            let projeto = await this.service.putProjeto(projetoTemp)
+            let projeto = await this.service.putProjeto(projetoTemp, this.loggedUser.id)
             this.projeto.name = projeto.name
             this.projeto.description = projeto.description
         }
