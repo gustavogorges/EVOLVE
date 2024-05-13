@@ -75,7 +75,7 @@
       class="propertie-add propertie-global border-t-2"
       [ngClass]="creatingOptionBoolean ? 'mt-2' : ''"
     >
-      <input type="checkbox" class="check" />
+      <input type="checkbox" class="check" [(ngModel)]="checkboxProperty" />
       <p class="text-primaryFontBlack">tornar propriedade global</p>
     </div>
     <div
