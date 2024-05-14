@@ -139,7 +139,7 @@
         </svg>
         
       <button class="font-titulo text-3xl text-primary dark:text-dark-primary font-semibold ">
-        Home
+        {{'Home' | translate}}
       </button>
     </div>
     <div class="flex flex-col gap-5 w-full justify-center">
@@ -149,7 +149,7 @@
           class="pi pi-cog self-center text-secondary dark:text-dark-secondary"
           style="width: 16px"></i>        
           <div class="flex gap-1 cursor-pointer duration-150 hover:scale-105 hover:pl-2">
-            <p class="title">Configurações</p>
+            <p class="title">{{'Configurações' | translate}}</p>
             <i
               class="pi pi-angle-right self-center text-fontGray dark:text-gray-300"
               style="width: 1.5rem"
@@ -194,7 +194,7 @@
               <div class="flex flex-col gap-1">
                 <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goTelaTarefa(project)">
                   <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300">
-                    Visualizar tarefas
+                    {{"Visualizar tarefas" | translate}}
                   </p>
                   <i
                     class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
@@ -203,7 +203,7 @@
                 </div>
                 <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goTelaProject(project)">
                   <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
-                    Pagina do projeto
+                    {{'Pagina do projeto' | translate}}
                   </p>
                   <i
                     class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
@@ -217,7 +217,7 @@
           <div *ngIf="team.projects.length==0 " class="px-5">
             <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goCreateProject(team)">
               <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300 ">
-                Criar projeto
+                {{'Criar projeto' | translate}}
               </p>
               <i
                 class="pi pi-angle-right self-center text-fontGray dark:text-gray-300 "
@@ -228,7 +228,7 @@
         </div>
       </div>
       <button class="w-full cursor-pointer duration-150 hover:scale-105 bg-secondary rounded-lg p-2 flex gap-2 items-center justify-center text-base text-white font-titulo font-semibold ">
-        criar equipe 
+        {{'criar equipe' | translate}} 
         <i class="pi pi-plus font-bold " ></i>
   
       </button>
@@ -236,7 +236,7 @@
     <div class="flex gap-3 items-end h-full" (click)="logOut()">
       <div class="flex gap-2 items-center cursor-pointer  duration-150 hover:scale-105">
         <p class="text-2xl font-semibold text-primary dark:text-dark-primary" >
-          logout
+          {{'sair' | translate}}
         </p>
         <i class="pi pi-sign-out icon2 text-primary dark:text-dark-primary 
         ">

@@ -14,7 +14,7 @@
   <div class="lg:w-[40%] h-full flex lg:pt-9">
   
     <div class="close-deliveries">
-      <p class=" text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary ">Entregas Próximas</p>
+      <p class=" text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary ">{{'Entregas Próximas' | translate}}</p>
       
       <div class="card-deliveries-box sm:h-[424px]">
         <div
@@ -34,11 +34,11 @@
           *ngIf="listaTarefas.length == 0"
           class="flex flex-col items-center justify-center text-center font-bold text-primary text-xl"
         >
-          <h1>Parece que você concluiu todas suas tarefas!</h1>
+          <h1>{{'Parece que você concluiu todas suas tarefas' | translate}}!</h1>
         </div>
       </div>
       <div class="flex flex-col gap-3">
-        <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">Projetos Favoritados</p>
+        <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">{{'Projetos Favoritados' | translate}}</p>
         <div></div>
         <div class="container ">
           <div *ngFor="let project of projectList; index as i">
@@ -50,7 +50,7 @@
   </div>
   <div class="w-full max-w-[845px]  flex flex-col gap-6 pt-9">
     <div class="flex flex-col gap-6 w-full sm:h-[280px]">
-      <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">Suas Equipes:</p>
+      <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">{{'Suas Equipes:' | translate}}</p>
       <div class="w-full flex justify-center">
       <div class="flex w-full relative  gap-3">
        

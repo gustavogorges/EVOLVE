@@ -3,7 +3,7 @@
         <div class="status-adjust" *ngFor="let status of projeto.statusList">
             <div
              class="status cursor-pointer"
-             [ngStyle]="{'background-color': status.backgroundColor}"
+             [ngStyle]="{'background-color': status.backgroundColor, 'color': status.textColor}"
              (click)="salvarStatus(status)"
              >
                 <p class="truncate px-4">{{status.name}}</p>
@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
         <i class="pi pi-plus text-primary font-bold"></i>
-        <p class=" text-fontGray">adicionar status</p>
+        <p class=" text-fontGray">{{'adicionar status' | translate}}</p>
     </div>
     <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
         <div class="nome-status-box">
@@ -35,10 +35,10 @@
             </div>
         </div>
         <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer" (click)="novoStatus()">
-            <p class=" text-primaryWhite font-semibold" >confirmar</p>
+            <p class=" text-primaryWhite font-semibold" >{{'confirmar' | translate}}</p>
         </div>
         <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
-            <p class=" text-primaryWhite font-semibold">Editar Status</p>
+            <p class=" text-primaryWhite font-semibold">{{'Editar Status' | translate}}</p>
         </div>
     </div>
 </div>

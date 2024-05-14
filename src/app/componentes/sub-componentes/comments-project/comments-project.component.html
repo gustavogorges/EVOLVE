@@ -20,11 +20,11 @@
           </div>
       </div>
       <div *ngIf="project.comments.length === 0" class="w-full h-full flex flex-col justify-center items-center">
-        <p class="text-fontGray text-2xl font-semibold">Nenhum comentário no projeto</p>
-        <p class="text-fontGray text-xl">Seja o primeiro a comentar 😁</p>
+        <p class="text-fontGray text-2xl font-semibold">{{'Nenhum comentário no projeto' | translate}}</p>
+        <p class="text-fontGray text-xl">{{'Seja o primeiro a comentar 😁' | translate}}</p>
       </div>
     </div>
-  <button [ngClass]="booleanAddComment ? 'h-0 border-0 hidden':'h-[6vh] border-2'" (click)="addCommentInput()" class="duration-200 overflow-hidden w-full z-10 rounded-b-lg bg-secondaryWhite text-primary font-semibold"><i class="pi pi-plus"></i> Adicionar comentário</button>
+  <button [ngClass]="booleanAddComment ? 'h-0 border-0 hidden':'h-[6vh] border-2'" (click)="addCommentInput()" class="duration-200 overflow-hidden w-full z-10 rounded-b-lg bg-secondaryWhite text-primary font-semibold"><i class="pi pi-plus"></i> {{'Adicionar comentário' | translate}}</button>
   <div [ngClass]="!booleanAddComment ? 'h-0 border-0 invisible':'h-min border-2 py-3 px-2 visible'" class="duration-200 box-comment-input min-h-fit  bg-secondaryWhite w-full flex overflow-hidden  justify-center items-center">
           <div class=" w-[65%] h-full flex items-center">
               <textarea
@@ -43,11 +43,11 @@
               (click)="addCommentValue()"
               (keydown.enter)="addCommentValue()"
               class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-primary flex justify-between gap-1 items-center rounded-lg">
-                  <p class="text-primaryWhite font-semibold text-sm">salvar comentário</p>
+                  <p class="text-primaryWhite font-semibold text-sm">{{'salvar comentário' | translate}}</p>
                   <i class="pi pi-check text-primaryWhite "></i>
               </div>
               <div (click)="cancelComment()" class="cursor-pointer w-[80%] h-[40%] px-2 py-1 bg-red-500 flex justify-between items-center rounded-lg">
-                  <p class="text-primaryWhite font-semibold text-sm">cancelar comentário</p>
+                  <p class="text-primaryWhite font-semibold text-sm">{{'cancelar comentário' | translate}}</p>
                   <i class="pi pi-trash  text-primaryWhite"></i>
               </div>
           </div>

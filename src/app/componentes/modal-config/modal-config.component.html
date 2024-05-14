@@ -5,7 +5,7 @@
     <h1
       class="md:text-2xl lg:text-3xl text-xl font-titulo text-secondary dark:text-dark-secondary font-semibold"
     >
-      Configurações
+      {{'Configurações' | translate}}
     </h1>
     <i
       class="pi pi-times self-center text-fontGray dark:text-primaryWhite"
@@ -16,7 +16,7 @@
     <div class="w-full">
       <div class="flex justify-between items-center w-full">
         <div>
-          <p class="font-titulo font-medium text-lg dark:text-white">Email:</p>
+          <p class="font-titulo font-medium text-lg dark:text-white">{{'Email:' | translate}}</p>
 
           <input
             type="email"
@@ -33,7 +33,7 @@
           class="md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
           (click)="editEmail()"
         >
-          editar
+          {{'editar' | translate}}
         </button>
         <div class="flex flex-col md:flex-row gap-2" *ngIf="!disabledEmail">
           <button
@@ -41,13 +41,13 @@
           class="md:px-7 px-4 font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
           (click)="putEmail()"
         >
-          confirmar
+          {{'confirmar' | translate}}
         </button>
         <button
           (click)="cancelEmail()"
           class="md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
         >
-          cancelar
+          {{'cancelar' | translate}}
         </button>
         </div>
       
@@ -56,7 +56,7 @@
     <div class="w-full">
       <div class="flex justify-between items-center w-full">
         <div>
-          <p class="font-titulo font-medium text-lg dark:text-white">Senha:</p>
+          <p class="font-titulo font-medium text-lg dark:text-white">{{'Senha:' | translate}}</p>
 
           <input
             type="password"
@@ -73,20 +73,20 @@
           *ngIf="disabledPassword"
           class="md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
         >
-          editar
+          {{'editar' | translate}}
         </button>
         <div class="flex gap-2" *ngIf="!disabledPassword">
           <button
             (click)="putPassword()"
             class="md:px-7 px-4  font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
           >
-            confirmar
+            {{'confirmar' | translate}}
           </button>
           <button
             (click)="cancelPassword()"
             class="md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
           >
-            cancelar
+            {{'cancelar' | translate}}
           </button>
         </div>
       </div>
@@ -108,12 +108,12 @@
       <div class="flex justify-between w-full">
         <div class="flex flex-col gap-2 w-full">
           <p class="font-titulo font-medium text-lg dark:text-white">
-            Cores do sistema:
+            {{'Cores do sistema:' | translate}}
           </p>
           <p
             class="font-titulo text-fontGray font-medium text-sm md:text-base dark:text-gray-300"
           >
-            cores atuais:
+            {{'cores atuais:' | translate}}
           </p>
           <div
             class="flex flex-col md:flex-row gap-3 justify-between md:items-end w-full"
@@ -129,7 +129,7 @@
               class="px-7 h-min py-1 bg-primary dark:bg-dark-primary text-white md:text-base text-sm font-titulo font-medium rounded-lg disabled:opacity-60"
               (click)="changeToDefault()"
             >
-              restaurar cores padrões
+              {{'restaurar cores padrões' | translate}}
             </button>
           </div>
         </div>
@@ -137,19 +137,19 @@
     </div>
     <div class="flex flex-col gap-2">
       <p class="font-titulo font-medium text-lg dark:text-white">
-        Altere as cores do sistema:
+        {{'Altere as cores do sistema:' | translate}}
       </p>
       <p
         class="font-titulo text-fontGray dark:text-gray-300 font-medium md:text-base text-xs"
       >
-        selecione duas cores para o modo claro e duas para o modo escuro:
+        {{'selecione duas cores para o modo claro e duas para o modo escuro:' | translate}}
       </p>
       <div class="flex flex-col xl:flex-row gap-2 justify-between">
         <div class="flex flex-col gap-2">
           <p
             class="font-titulo font-medium text-fontGray dark:text-gray-300 md:text-base text-sm"
           >
-            Modo claro:
+            {{'Modo claro:' | translate}}
           </p>
 
           <div class="flex gap-2">
@@ -293,7 +293,7 @@
           <p
             class="font-titulo font-medium text-fontGray dark:text-gray-300 md:text-base text-sm"
           >
-            Modo escuro:
+            {{'Modo escuro:' | translate}}
           </p>
 
           <div class="flex gap-2">
@@ -441,12 +441,12 @@
     <div class="flex justify-between items-center">
       <div class="flex flex-col gap-2 w-1/2">
         <p class="font-titulo font-medium text-lg dark:text-white">
-          Altere o tamanho da fonte:
+          {{'Altere o tamanho da fonte:' | translate}}
         </p>
         <p
           class="font-hind-madurai text-fontGray dark:text-gray-300 font-sm md:text-base text-xs"
         >
-        Personalize o tamanho da fonte para uma experiência de leitura ideal. Ajuste o tamanho da fonte para tornar o texto mais confortável e legível conforme suas preferências.
+        {{'Personalize o tamanho da fonte para uma experiência de leitura ideal. Ajuste o tamanho da fonte para tornar o texto mais confortável e legível conforme suas preferências.' | translate}}
         </p>
       </div>
       <input type="range" min="12" max="24" step="2"  [(ngModel)]="sliderValue" (ngModelChange)="changeFont() " value="12" class="range-slider" id="font-size-slider"> 

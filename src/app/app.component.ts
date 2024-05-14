@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/model/user';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -10,11 +11,22 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
-    private colorService : ColorService
+    private colorService : ColorService, private translateService : TranslateService
 
-    ){}
+    ){
+      if(localStorage.getItem('lang') === null){
+        localStorage.setItem('lang', 'en')
+      }
+      this.translateService.setDefaultLang('en')
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
+
   title = 'Evolve';
   loggedUser !: User; 
+
+  reload(){
+    window.location.reload()
+  }
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser();

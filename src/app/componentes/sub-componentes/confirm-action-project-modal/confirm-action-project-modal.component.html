@@ -6,8 +6,8 @@
         <p class="text-2xl font-semibold text-center font-hind-madurai px-10">{{quest}}</p>
     </div>
     <div class="flex justify-evenly w-full">
-        <button (click)="confirm()" class="p-2 bg-red-600 dark:bg-red-500 dark:text-primaryFontBlack rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">Confirmar</button>
-        <button (click)="cancel()" class="p-2 bg-secondary dark:text-primaryFontBlack dark:bg-dark-secundary-green rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">Cancelar</button>
+        <button (click)="confirm()" class="p-2 bg-red-600 dark:bg-red-500 dark:text-primaryFontBlack rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">{{'Confirmar' | translate}}</button>
+        <button (click)="cancel()" class="p-2 bg-secondary dark:text-primaryFontBlack dark:bg-dark-secundary-green rounded-lg text-lg font-semibold text-secondaryWhite xl:w-[6vw] hover:scale-105 duration-150">{{'Cancelar' | translate}}</button>
     </div>
-    <div class="flex justify-center items-end h-full row-start-4 text-fontGray"><p>Cancelamento automático em {{time}}</p></div>
+    <div class="flex justify-center items-end h-full row-start-4 text-fontGray"><p>{{'Cancelamento automático em' | translate}} {{time}}</p></div>
 </div>
