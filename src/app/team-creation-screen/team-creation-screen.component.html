@@ -189,6 +189,7 @@
                 </div>
               </div>
               <i
+              *ngIf="!disabledInfo"
               class="pi pi-trash text-red-500 font-bold"
               style="font-weight: 700"
               (click)="removeUser(indice)"

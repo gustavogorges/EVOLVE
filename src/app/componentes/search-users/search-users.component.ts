@@ -1,6 +1,7 @@
 import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-search-users',
@@ -17,7 +18,7 @@ export class SearchUsersComponent implements OnInit, OnChanges{
   @Output() usersToAdd:EventEmitter<Array<User>> = new EventEmitter
 
   
-  constructor(private service: BackendEVOLVEService) { }
+  constructor(private service: BackendEVOLVEService,private cokkie :CookiesService) { }
   ngOnChanges(changes: SimpleChanges): void {
     if ('search' in changes) {
       this.getUsers();
@@ -27,13 +28,13 @@ export class SearchUsersComponent implements OnInit, OnChanges{
 bah !:Array<User>
   async ngOnInit(): Promise<void> {
     console.log(this.addedUsers);
-    
+    let logged = await this.cokkie.getLoggedUser()
     this.users = await this.service.getAllSomething("user")
-   this.bah = this.users.filter(user => !this.addedUsers.includes(user))
+   this.bah = this.users.filter( user => !this.addedUsers.find(u => u.id == user.id) && logged.id !=user.id )
 
  
      
-     console.dir(this.bah);
+     console.log(this.bah);
      
      this.users = this.getUsers();
     

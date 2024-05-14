@@ -120,6 +120,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchComponentComponent } from './componentes/search-component/search-component.component';
 import { SearchUsersComponent } from './componentes/search-users/search-users.component';
 import { UserMembersComponent } from './componentes/user-members/user-members.component';
+import { MessageModalComponent } from './componentes/message-modal/message-modal.component';
 
 
 
@@ -209,7 +210,8 @@ import { UserMembersComponent } from './componentes/user-members/user-members.co
     AddMemberToProjectModalComponent,
     SearchComponentComponent,
     SearchUsersComponent,
-    UserMembersComponent
+    UserMembersComponent,
+    MessageModalComponent
 
   ],
   
