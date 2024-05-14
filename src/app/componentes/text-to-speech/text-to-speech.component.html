@@ -1,0 +1,4 @@
+<div (click)="callService()" class="fixed top-1/2 right-0 mr-2 cursor-pointer h-12 w-12 bg-primary rounded flex justify-center items-center">
+    <i class="pi pi-volume-up text-white" *ngIf="!canSpeak"></i>
+    <i class="pi pi-volume-off text-white" *ngIf="canSpeak"></i>
+</div>
