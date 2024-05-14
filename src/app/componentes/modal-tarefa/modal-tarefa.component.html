@@ -270,7 +270,6 @@
           </div>
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full min-w-[50%]"
           >
             <div *ngIf="indice % 2 == 0">
               <app-propriedade-tarefa
@@ -289,7 +288,6 @@
         <div class="flex flex-col h-full w-1/2">
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full w-[85%]"
           >
             <div *ngIf="indice % 2 != 0">
               <app-propriedade-tarefa
