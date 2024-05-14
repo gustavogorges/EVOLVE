@@ -51,7 +51,7 @@ export class TelaFullViewComponent implements OnInit {
     descEdited : string = ''
     preImage:SafeUrl | undefined = '';
     imagemBlob!:Blob
-    formData : any = undefined
+    formData : any = null
 
     constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router){}
 
@@ -62,18 +62,22 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async setImageProject(event:any){
+        console.log("setando image");
+        
         if(event.target.files && event.target.files[0]){
           if(event.target.files[0].type === "image/jpeg" 
           || event.target.files[0].type === "image/webp" 
           || event.target.files[0].type === "image/png"){
             this.imagemBlob = event.target.files[0]
-            const formData = new FormData();
-            formData.append('image', event.target.files[0]);
-            this.formData = formData
+            // const formData = new FormData();
+            // formData.append('image', event.target.files[0]);
+            this.formData = event.target.files[0]
             const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
     
             const imageUrl = URL.createObjectURL(blob);
             this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+            console.log("setei image");
+            
           }
         }
     }
@@ -85,18 +89,24 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async saveProject(){
-        if(this.nameEdited != this.projeto.name || this.descEdited != this.projeto.description){
-            let projetoTemp:any = cloneDeep(this.projeto);
-            projetoTemp.name = this.nameEdited
-            projetoTemp.description = this.descEdited
-            projetoTemp.image = null
-            projetoTemp.members = []
-            this.projeto = await this.service.putProjeto(projetoTemp)
+        if(this.descEdited != this.projeto.description){
+            this.projeto = 
+            await this.service.patchProjectDescription(this.projeto.id, this.projeto.description)
         }
-        if(this.formData != undefined){
+
+        
+        if(this.nameEdited != this.projeto.name ){
+            this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
+        }
+
+        if(this.formData){
+            console.log("this.formData");
+            console.log(this.formData);
+            
             await this.service.patchProjectImage(this.projeto.id, this.formData)
-            this.formData = undefined
+            // this.formData = null
         }
+
         this.nameEdit = false
     }
 
@@ -186,14 +196,14 @@ export class TelaFullViewComponent implements OnInit {
         let statusPadraoPrioritario: any[] = [];
         let outrosStatus: any[] = [];
     
-        this.projeto.statusList.forEach(status => {
+        this.projeto?.statusList?.forEach(status => {
             if (statusPadroes.includes(status.name)) {
                 statusPadraoPrioritario.push(status);
             } else {
                 outrosStatus.push(status);
             }
         });
-    
+        
         return statusPadraoPrioritario.concat(outrosStatus);
     }
     
@@ -240,7 +250,9 @@ export class TelaFullViewComponent implements OnInit {
 
     async deleteStatus(status:Status){
         if(this.projeto.id != null){
-          this.projeto = await this.service.deleteStatus(this.projeto.id, status.id)
+            this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
+            await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
+        //   this.projeto = await this.service.deleteStatus(this.projeto.id, status.id)
         }else{
           this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
         }
@@ -295,8 +307,10 @@ export class TelaFullViewComponent implements OnInit {
     async editStatusPut(){
         this.boolEditStatus = false
         this.booleanAddStatus = false
-        await this.postStatus(this.status)
+        let oldStatus = this.projeto.statusList.find(status => status.id == this.status.id)
+        oldStatus = this.status
         this.status = new Status
+        return await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
     }
 
 

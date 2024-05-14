@@ -62,20 +62,24 @@ export class BackendEVOLVEService {
   }
 
   async patchUserEmail(userId: number, email: string): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('email', email);
     return (
-      await axios.patch(`${this.URL}user/${userId}/email/${email}`, {withCredentials: true})
+      await axios.patch(`${this.URL}user/${userId}/email`, formsData, {withCredentials: true})
     ).data;
   }
   async patchUserName(userId: number, name: string): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('name', name);
     return (
-      await axios.patch(`${this.URL}user/${userId}/name/${name}`,{withCredentials: true})
+      await axios.patch(`${this.URL}user/${userId}/name`, formsData ,{withCredentials: true})
     ).data;
   }
   async patchUserTheme(userId: number, theme: string): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('theme', theme);
     return (
-      await axios.patch(this.URL + 'user/' + userId + '/theme' + '/' + theme, {
-        withCredentials: true,
-      })
+      await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
   }
 
@@ -517,28 +521,24 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchProjectName(projectId: number, newName: string) {
+  async patchProjectName(projectId: number, newName: string):Promise<Project> {
     let formData: FormData = new FormData;
     formData.append("name", newName);
-    console.log(formData);
     
     return (
       await axios.patch(this.URL + "project/" + projectId + "/name", formData, {withCredentials: true})
-    )
+    ).data
   }
 
-  async patchProjectDescription(projectId: number, description: string) {
+  async patchProjectDescription(projectId: number, description: string):Promise<Project> {
     let formData: FormData = new FormData;
     formData.append("description", description);
     //não tirar
-    console.log(description);
     console.log((
       await axios.patch(this.URL + "project/" + projectId + "/description", formData, {withCredentials: true})
     ).data);
     
-    // return (
-    //   await axios.patch(this.URL + "project/" + projectId + "/description", formData, {withCredentials: true})
-    // ).data;
+    return await this.getOne("project", projectId)
   }
 
   async patchProjectImage(id: number, image: any) {

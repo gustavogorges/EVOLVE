@@ -65,9 +65,10 @@ export class NavegacaoComponent implements OnInit {
     this.themeDark = !this.themeDark
     if(this.loggedUser){
       await this.service.patchUserTheme(this.loggedUser.id, this.loggedUser.theme);
-
     }
   }
+
+  
   async irParaPerfil(): Promise<void> {
     this.loggedUser = await this.cookieService
         .getLoggedUser()

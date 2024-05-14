@@ -1,6 +1,6 @@
 <div class="comentario-pai">
   <div class="fundo-comentario border-t-2 border-r-2 border-l-2">
-      <div class="comentarios" *ngIf="project.comments.length > 0">
+      <div class="comentarios" *ngIf="project?.comments?.length && project.comments.length > 0">
           <div class="comentario"  *ngFor="let comment of sortCommentsByTime(project.comments)">
               <div class="foto-user ">
                   <div class="foto">
@@ -19,7 +19,7 @@
               </div>
           </div>
       </div>
-      <div *ngIf="project.comments.length === 0" class="w-full h-full flex flex-col justify-center items-center">
+      <div *ngIf="project.comments?.length === 0" class="w-full h-full flex flex-col justify-center items-center">
         <p class="text-fontGray text-2xl font-semibold">Nenhum comentário no projeto</p>
         <p class="text-fontGray text-xl">Seja o primeiro a comentar 😁</p>
       </div>

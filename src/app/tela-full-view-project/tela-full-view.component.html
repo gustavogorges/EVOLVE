@@ -4,9 +4,9 @@
         <div class="cabecalho">
             <div class="project-image hover-container relative w-fit pr-2">
                 <div class="image" *ngIf="projeto">
-                    <div *ngIf="preImage === '' && projeto.image === null" [ngStyle]="{'background-color': projeto.imageColor}" class="w-full h-full"></div>
+                    <div *ngIf="preImage === '' && projeto?.image === null" [ngStyle]="{'background-color': projeto?.imageColor}" class="w-full h-full"></div>
                     <img *ngIf="(preImage !== '')" [src]="preImage" alt="">
-                    <img *ngIf="(preImage === '') && (projeto.image !== null)" [src]="projeto.image.data" alt="">
+                    <img *ngIf="(preImage === '') && (projeto?.image !== null)" [src]="projeto?.image?.data" alt="">
                 </div>
                 <label [ngClass]="!nameEdit ? 'invisible':'visible'" class=" border-primary dark:border-secondary bottom-2 right-2 rounded-full p-2 bg-white dark:bg-back-grey w-12 h-12 absolute cursor-pointer">
                     <div class="flex items-center justify-center w-full h-full">
