@@ -16,7 +16,9 @@ import { TextToSpeechService } from 'src/service/text-to-speech.service';
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
 
-    private colorService : ColorService, private translateService : TranslateService
+    private colorService : ColorService, private translateService : TranslateService,
+    private textToSpeechService: TextToSpeechService,
+    private authService : AuthService
 
     ){
       if(localStorage.getItem('lang') === null){
@@ -34,12 +36,7 @@ export class AppComponent{
   }
 
 
-    private colorService : ColorService,
-    private textToSpeechService: TextToSpeechService,
-    private authService : AuthService
-    ){}
-  title = 'angularProject';
-  loggedUser !: User; 
+    
   islogged = false
 
   async ngOnInit(): Promise<void> {
