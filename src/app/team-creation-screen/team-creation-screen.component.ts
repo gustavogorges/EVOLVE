@@ -189,18 +189,48 @@ loggedUser !: User
   editar(){
     this.disabledInfo = false;
   }
+  openModal = false 
+  title = ''
+  message = ''
   async leaveTeam(){
+    this.title = 'sair da equipe'
+  this.message = 'ao confirmar você perderá acesso a equipe'
+    this.openModal = true
+}
+  removeTeam(){
+    this.title = 'excluir a equipe'
+    this.message = 'ao confirmar a ação não poderá ser revertida'
+
+    this.openModal = true
+
+  }
+  async modal(boolean : boolean){
+    if(boolean == false){
+      this.openModal = false; 
+    }else{
+      console.log(this.title);
+      console.log(this.title == 'sair da equipe');
+      
+      
+      if(this.title =='excluir a equipe' ){
+        console.log(10);
+        
+        this.service.deleteById("team",this.team.id);
+   this.router.navigateByUrl('/tela-inicial');
+
+      }else if(this.title == 'sair da equipe'){
+        console.log(11);
+        
     this.loggedUser =  await this.cookiesService.getLoggedUser();
     const indexToRemove = this.team.participants.findIndex(user => user.id === this.loggedUser.id);
     if (indexToRemove !== -1) {
       this.team.participants.splice(indexToRemove, 1);
-  } 
+  }  
   this.service.patchTeamParticipants(this.team.id, this.team.participants); 
-  }
-  removeTeam(){
-    this.service.deleteById("team",this.team.id);
-    this.router.navigateByUrl('/tela-inicial');
+  this.router.navigateByUrl('/tela-inicial');
 
+      }
+    }
   }
   cancelar(){
     console.log(this.disabledInfo);

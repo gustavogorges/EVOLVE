@@ -1,10 +1,10 @@
 .main {
 
-    @apply bg-primaryNav dark:bg-dark-theme-back h-[8%]   w-full fixed border-b-2 dark:border-dark-secundary-gray
+    @apply bg-primaryNav dark:bg-dark-theme-back h-[8%]   w-full absolute border-b-2 dark:border-dark-secundary-gray
 
     
     ;
-    z-index: 9999;
+    z-index: 99;
 }
 
 .main-grid {
@@ -25,7 +25,7 @@
     }
     app-search-component{
     @apply    
-        placeholder:text-gray-400 placeholder:dark:text-white
+        placeholder:text-gray-400 placeholder:dark:text-white 
     
     }
 
