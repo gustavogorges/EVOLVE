@@ -63,7 +63,7 @@ export class BackendEVOLVEService {
 
   async patchUserEmail(userId: number, email: string): Promise<User> {
     return (
-      await axios.patch(`${this.URL}user/${userId}/email/${email}`,{withCredentials: true})
+      await axios.patch(`${this.URL}user/${userId}/email/${email}`, {withCredentials: true})
     ).data;
   }
   async patchUserName(userId: number, name: string): Promise<User> {
@@ -362,7 +362,7 @@ export class BackendEVOLVEService {
   async updateTaskName(taskId: number, userId: number, newName: string) {
     return (
       await axios.patch(
-        this.URL + 'task/' + taskId + '/update/user' + userId + + '/name/' + newName, {withCredentials: true}
+        this.URL + 'task/' + taskId + '/update/user/' + userId + + '/name/' + newName, {withCredentials: true}
       )
     ).data;
   }
@@ -431,6 +431,10 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'project' + '/user/' + userId, { withCredentials: true })).data;
   }
   async getProjectsByTeamId(teamId: number) {
+    console.log((
+      await axios.get(this.URL + 'project' + '/team/' + teamId, { withCredentials: true })
+    ).data);
+    
     return (
       await axios.get(this.URL + 'project' + '/team/' + teamId, { withCredentials: true })
     ).data;
@@ -482,21 +486,21 @@ export class BackendEVOLVEService {
   
     this.patchProjectDescription(project.id, project.description);
 
-    this.patchProjectImage(project.id, project.image); 
+    // this.patchProjectImage(project.id, project.image); 
   
-    this.patchProjectImageRemove(project.id);
+    // this.patchProjectImageRemove(project.id);
   
     this.patchProjecyImageColor(project.id, project.imageColor); 
   
-    this.patchProjectFinalDate(project.id, project.finalDate);
+    // this.patchProjectFinalDate(project.id, project.finalDate);
   
-    this.patchProjectStatusList(project.id, project.statusList); 
+    // this.patchProjectStatusList(project.id, project.statusList); 
   
-    this.patchProjectMembers(project.id, project.members); 
+    // this.patchProjectMembers(project.id, project.members); 
   
     this.patchProjectTasks(project.id, project.tasks);
   
-    this.patchDefaultRole(project.id, project.defaultRole)
+    // this.patchDefaultRole(project.id, project.defaultRole)
 
     return await this.getOne("project", project.id)
   }
@@ -516,17 +520,25 @@ export class BackendEVOLVEService {
   async patchProjectName(projectId: number, newName: string) {
     let formData: FormData = new FormData;
     formData.append("name", newName);
+    console.log(formData);
+    
     return (
-      await axios.patch(this.URL + "project/" + projectId + "/name", newName, {withCredentials: true})
+      await axios.patch(this.URL + "project/" + projectId + "/name", formData, {withCredentials: true})
     )
   }
 
   async patchProjectDescription(projectId: number, description: string) {
     let formData: FormData = new FormData;
     formData.append("description", description);
-    return (
-      await axios.patch(this.URL + "project/" + projectId + "description", description, {withCredentials: true})
-    ).data;
+    //não tirar
+    console.log(description);
+    console.log((
+      await axios.patch(this.URL + "project/" + projectId + "/description", formData, {withCredentials: true})
+    ).data);
+    
+    // return (
+    //   await axios.patch(this.URL + "project/" + projectId + "/description", formData, {withCredentials: true})
+    // ).data;
   }
 
   async patchProjectImage(id: number, image: any) {
@@ -546,7 +558,7 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("imageColor", imageColor);
     return (
-      await axios.patch(this.URL + "project/" + projecId + "imageColor", imageColor, {withCredentials: true})
+      await axios.patch(this.URL + "project/" + projecId + "/imageColor", formData, {withCredentials: true})
     ).data
   }
 
@@ -554,7 +566,7 @@ export class BackendEVOLVEService {
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (
-      await axios.patch(this.URL + "project/" + projecId + "/finalDate", finalDate, {withCredentials: true})
+      await axios.patch(this.URL + "project/" + projecId + "/finalDate", formData, {withCredentials: true})
     ).data;
   }
 
@@ -588,8 +600,10 @@ export class BackendEVOLVEService {
   }
 
   async patchDefaultRole(projecId: number, defaultRole: Role) {
+    console.log(defaultRole);
+    
     return (
-      await axios.patch(this.URL + "project/" + projecId + "defaultRole", defaultRole, {withCredentials: true})
+      await axios.patch(this.URL + "project/" + projecId + "/defaultRole", defaultRole, {withCredentials: true})
     )
   }
   //#endregion project

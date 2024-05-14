@@ -56,6 +56,9 @@ export class TelaInicialComponent implements OnInit {
     let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
    
     this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
+    console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
+    
+    
     this.userColors()
 
     projects.map((project: Project)=>{
@@ -74,7 +77,8 @@ export class TelaInicialComponent implements OnInit {
 
     }   
     this.changeFont()
-
+    console.log(this.loggedUser.teamRoles);
+    
   }
 
 

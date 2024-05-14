@@ -89,7 +89,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   verifyImg(user:User){
-    if(user.image != null){
+    if(user?.image != null){
       if(user.image.data != null){
         return false
       }
@@ -186,7 +186,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async removeMember(user:User) {
-    if(user.id != this.projeto.creator.id){
+    if(user?.id != this.getProjectCreator(this.projeto).id){
       this.quest.emit("Realmente deseja remover um membro?");
   
       try {
@@ -204,10 +204,17 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     }
   }
 
+
+  getProjectCreator(project:Project):User{
+    // console.log(project);
+    return project.members.find(userProject => userProject.manager)!.user
+  }
+  
+
   verifyIsCreator(p:User){
-    console.log(p.id, this.projeto.creator.id);
+    // console.log(p.id, this.getProjectCreator(this.projeto).id);
     
-    if(p.id != this.projeto.creator.id){
+    if(p.id != this.getProjectCreator(this.projeto).id){
       return true
     }
     return false

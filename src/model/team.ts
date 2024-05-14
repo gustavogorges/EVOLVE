@@ -4,6 +4,7 @@ import { User } from "./user";
 import { File } from "./file";
 import { TeamNotification } from "./teamNotification";
 import { Role } from "./Role";
+import { UserTeam } from "./userTeam";
 
 export class Team {
     id!: number;
@@ -13,7 +14,7 @@ export class Team {
 
     // adimnistrator : User = new User;
 
-    participants: Array<User> = new Array;
+    participants: Array<UserTeam> = new Array;
     projects: Array<Project> = new Array;
     chat: TeamChat = new TeamChat;
     personalWorkspace: boolean = false;

@@ -32,8 +32,6 @@ export class AuthService {
 
   isLoggedIn() {
     console.log(this.cookies.get('EV'));
-
-
     return  this.cookies.get('EV')!="" && this.cookies.get('EV')!=null;
   }
 }

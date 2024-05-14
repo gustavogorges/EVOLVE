@@ -63,9 +63,9 @@ export class TelaPerfilComponent implements OnInit {
     
     let users: any = [];
     this.user.teamRoles.forEach((team) => {
-      users = team.team.participants.filter(
+      users = team.team.participants?.filter(
         (participant) =>
-          participant.id != this.user.id && !users.includes(participant)
+          participant.userId != this.user.id && !users.includes(participant)
       );
     });
     this.teamUsers = users;

@@ -39,9 +39,13 @@ export class MemberListFullViewProjectComponent implements OnInit {
     return true
   }
 
+  getProjectCreator(project:Project):User{
+    return project.members.find(userProject => userProject.manager)!.user
+  }
+
   async removeMember() {
     let listIdsFromRemove:Array<any> = []
-    if (this.user.id != this.project.creator.id) {
+    if (this.user.id != this.getProjectCreator(this.project).id) {
       this.quest.emit("Realmente deseja remover um membro?");
 
       try {

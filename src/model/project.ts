@@ -26,7 +26,7 @@ export class Project {
     statusList: Array<Status> = new Array;
     team : Team = new Team;
     chat !: Chat;
-    creator!:User
+    // creator!:User
     // adimnistrators:Array<User> = new Array
     members:Array<UserProject> = new Array;
     tasks: Array<Task> = new Array;

@@ -91,7 +91,7 @@ export class TelaCadastroComponent implements OnInit {
   
         setTimeout(() => {
           this.router.navigate(['/']);
-        }, 1500);
+        }, 1000);
       }else{
         this.message = "não foi possivel cadastrar sua conta"
         this.showConfirmationMessage = true;

@@ -24,7 +24,8 @@ export class ProjectsInfoPerfilComponent implements OnInit, OnChanges {
     // Handle changes in input data
     console.log('Input data changed:', changes);
     if (changes['team'] || changes['user']) {
-      // Re-calculate total tasks or perform necessary actions
+      // console.log(this.team.projects);
+      
     }
   }
 

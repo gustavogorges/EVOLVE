@@ -110,15 +110,16 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
    async editFun(project:Project){
     let postProject:any = project
+    console.log(project)
     let listUsers : Array<Pick<User, "id">> = new Array
     
     setTimeout(() => {
-      project.members.forEach(element => {
-        listUsers.push({
-          "id" : element.user.id
-        })
-      });
-      postProject.members = listUsers
+      // project.members.forEach(element => {
+      //   listUsers.push({
+      //     "id" : element.user.id
+      //   })
+      // });
+      postProject.members = project.members
       postProject.image = null
     },);
 
@@ -134,7 +135,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
         await this.createImageProject(project)
       } 
 
-      await this.service.putProjeto(postProject)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
+      await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
     
     });
 

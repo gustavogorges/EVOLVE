@@ -8,5 +8,5 @@ export class UserProject{
     user!:User;
     project!:Project;
     role!:Role;
-    isManager:boolean = false;
+    manager:boolean = false;
 }

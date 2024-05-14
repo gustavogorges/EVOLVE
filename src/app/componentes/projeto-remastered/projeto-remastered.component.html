@@ -23,9 +23,9 @@
         <div class="project-desc"><textarea class="text-justify" maxlength="110" cols="30" rows="10" [disabled]="!projeto.editOn" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
             <p>Criador:</p>
-            <div *ngIf="verifyImg(projeto.creator) && projeto.creator" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
-            <div class="overflow-hidden object-center" *ngIf="!verifyImg(projeto.creator)">
-                <img *ngIf="!verifyImg(projeto.creator)" src="{{projeto.creator.image.data}}" alt="">
+            <div *ngIf="verifyImg(getProjectCreator(projeto)) && getProjectCreator(projeto)" [ngStyle]="{'background': getProjectCreator(projeto).imageColor }" >{{getProjectCreator(projeto).name.charAt(0).toUpperCase()}}</div>
+            <div class="overflow-hidden object-center" *ngIf="!verifyImg(getProjectCreator(projeto))">
+                <img *ngIf="!verifyImg(getProjectCreator(projeto))" src="{{getProjectCreator(projeto).image.data}}" alt="">
             </div>
         </div>
         <div class="project-progress"><div></div></div>
@@ -86,7 +86,7 @@
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
-            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
+            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
         </div>
     </div>
 
@@ -143,7 +143,7 @@
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
-            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(this.projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
+            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
         </div>
 
     </div>

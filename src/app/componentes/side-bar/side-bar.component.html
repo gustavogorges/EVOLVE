@@ -16,7 +16,7 @@
         </svg>
         
       <button class="font-titulo text-3xl text-primary dark:text-dark-primary  font-semibold ">
-        Home
+        Home oii
       </button>
     </div>
     <div class="flex flex-col gap-5 w-full justify-center">
@@ -53,12 +53,14 @@
       <div *ngFor="let team of loggedUser?.teamRoles" class="flex flex-col gap-2">
         <div class="flex gap-1">
           <p class="title truncate">
-            {{ team.team.name }}
+            {{ team.team.name }} oii
           </p>
         
         </div>
         <div  class="flex flex-col gap-5">
+          oo
           <div *ngFor="let project of team.team.projects">
+            oiii
             <div class="px-5 flex flex-col gap-1">
               <div class="flex gap-2">
                 <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">
@@ -177,12 +179,14 @@
       <div *ngFor="let userTeam of loggedUser?.teamRoles" class="flex flex-col gap-2">
         <div class="flex gap-1 cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goProjectsTeam(userTeam.team)">
           <p class="title truncate">
-            {{ userTeam.team.name }}
+            {{ userTeam.team.name }} 
           </p>
         
         </div>
         <div  class="flex flex-col gap-5">
+        
           <div *ngFor="let project of userTeam.team.projects">
+
             <div class="px-5 flex flex-col gap-1">
               <div class="flex gap-2 cursor-pointer duration-150 hover:scale-105 hover:pl-2">
                 <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">

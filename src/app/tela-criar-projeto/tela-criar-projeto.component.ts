@@ -7,6 +7,9 @@ import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Team } from 'src/model/team';
+import { UserProject } from 'src/model/userProject';
+import { CookieService } from 'ngx-cookie-service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -18,17 +21,20 @@ export class TelaCriarProjetoComponent implements OnInit {
   preImage: any;
   formData: any;
 
-  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
-  
+  constructor(private service : BackendEVOLVEService, private cookieService: CookiesService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
+
   ngOnInit(){
+
     this.projeto = new Project
 
     this.activatedRoute.paramMap.subscribe( async params  => {
       const teamId = params.get('teamId');
       const teamid  = Number(teamId)
+
+
       this.team = await this.service.getOne("team", teamid) as Team
       
-      this.usuarios = this.team.participants || []
+      this.usuarios = this.team.participants.map(userTeam => userTeam.user) || []
       
       this.projeto = new Project();
 
@@ -38,6 +44,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         this.randomColor();
       }
     });
+    
   }
   
   messages: Message[] | undefined;
@@ -118,7 +125,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   filteredNames() {
-    return this.usuarios.filter(element => element.email.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+    return this.usuarios.filter(element => element.email?.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }
 
   dateFormat(data: Date): string {
@@ -133,18 +140,20 @@ export class TelaCriarProjetoComponent implements OnInit {
   async salvarProjeto(teamId: number) {
     if (this.projeto && this.projeto.name !== '' && this.date) {
       this.projeto.finalDate = this.dateFormat(this.date);
+      let loggedUser:User = await this.cookieService.getLoggedUser()
   
       let postProject: any = this.projeto;
       await new Promise<void>((resolve) => {
         setTimeout(() => {
+
           let lista: Array<Pick<User, "id">> = [];
           this.projeto.members.forEach(element => {
             lista.push({ "id": element.user.id });
           });
           postProject.members = lista;
   
-          postProject.creator = { "id": 1 };
-          postProject.adimnistrator = { "id": 1 };
+          postProject.creator = { "id": loggedUser.id };
+          // postProject.adimnistrator = { "id": 1 };
           postProject.team = { "id": this.team.id };
           postProject.imageColor = this.backGroundColorProject;
           postProject.image = null;
