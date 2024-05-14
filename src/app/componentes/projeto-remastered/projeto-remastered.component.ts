@@ -7,6 +7,8 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
+import { Task } from 'src/model/task';
+
 import { CookiesService } from 'src/service/cookies-service.service';
 
 interface Tarefa{
@@ -86,6 +88,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   @Output() listFromRemove: EventEmitter<Array<Pick<User, "id">>> = new EventEmitter<Array<Pick<User, "id">>>()
 
+  @Output() openTaskModal: EventEmitter<Task> = new EventEmitter<Task>()
+
 
   openAgain(){
     this.noCloseProject.emit()
@@ -111,6 +115,10 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   filteredNames() {
     return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  }
+
+  openTask(task:Task){
+    this.openTaskModal.emit(task)
   }
 
   async setImageProject(event:any){

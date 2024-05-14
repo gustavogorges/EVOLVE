@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
-import { Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, NgZone, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { filter, window } from 'rxjs';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
@@ -16,7 +18,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
 export class NavegacaoComponent implements OnInit {
 
   constructor(private router: Router, private cookieService: CookiesService,  private service: BackendEVOLVEService,
-    ) { }
+    private translateService:TranslateService, private elementRef: ElementRef, private zone: NgZone) {}
 
   sideBar = false
   loggedUser !: User; 
@@ -24,6 +26,9 @@ export class NavegacaoComponent implements OnInit {
   booleanTask = false
   task !: Task
   projeto !: Project
+  openLangBol : boolean = false
+  lang = ''
+  @Output() reload : EventEmitter<any> = new EventEmitter
 
   closeTask(event: boolean) {
     if (event) {
@@ -38,6 +43,7 @@ export class NavegacaoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.lang = localStorage.getItem('lang') || 'en'
     this.loggedUser = await this.cookieService
     .getLoggedUser()
     .then((user) => {
@@ -54,6 +60,8 @@ export class NavegacaoComponent implements OnInit {
     }
    
     this.darkMode()
+    document.body.addEventListener('click', this.onDocumentClick);
+
   }
 
   themeDark = false
@@ -95,9 +103,19 @@ export class NavegacaoComponent implements OnInit {
     this.router.navigate(['/tela-perfil/'+this.loggedUser.id]);
 
     }
+
   goInitialPage(): void {
     this.router.navigateByUrl('/tela-inicial');
   }
+
+  @ViewChild('languages') languagesEvent !: ElementRef
+  @HostListener('click', ['$event'])
+  OutsideClick(event:Event){
+    if(!this.languagesEvent.nativeElement.contains(event.target)){
+      this.openLangBol = false
+    }
+  }
+
   openSideBar(){
     if(this.sideBar==true){
       this.sideBar=false
@@ -107,13 +125,28 @@ export class NavegacaoComponent implements OnInit {
     console.log(this.sideBar);
     
   }
+
   closeSideBar(bar : boolean){
     this.sideBar=false
   }
+
   teste(){
     document.querySelector('.pi-moon')?.classList.add('pi-sun')
     document.querySelector('.pi-moon')?.classList.remove('pi-moon')
   }
+
+  openLangueges(){
+    this.openLangBol = !this.openLangBol
+  }
+
+  setLang(lang:string){
+    localStorage.setItem('lang', lang)
+    this.translateService.use(lang)
+    this.lang = lang
+    this.openLangBol = false
+    this.reload.emit()
+  }
+
 
   changeFont(){
     document.documentElement.style.setProperty('--font-size-base', ''+this.loggedUser.fontSize+'px');
@@ -127,6 +160,15 @@ export class NavegacaoComponent implements OnInit {
   openNotification(){
     this.notification= true
   }
+
+  @ViewChild('sidebar') sidebarConfig !: ElementRef
+  onDocumentClick = (event: MouseEvent) => {
+    console.log(this.elementRef.nativeElement.contains(this.sidebarConfig));
+    
+    if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
+        this.openLangBol = false
+    }
+  };
 
 
   

@@ -71,44 +71,72 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   getStatusList(){
+    const lang = localStorage.getItem('lang') ?? 'en'; // Assume 'en' como padrão se o localStorage estiver vazio
+    const translations : any = {
+      "pendente": {
+        "en": "Pending",
+        "pt": "Pendente",
+        "es": "Pendiente",
+        "ch": "待定"
+      },
+      "em progresso": {
+        "en": "In Progress",
+        "pt": "Em Progresso",
+        "es": "En Progreso",
+        "ch": "进展中"
+      },
+      "concluido": {
+        "en": "Completed",
+        "pt": "Concluído",
+        "es": "Completado",
+        "ch": "已完成"
+      },
+      "não atribuido": {
+        "en": "Unassigned",
+        "pt": "Não Atribuído",
+        "es": "No Asignado",
+        "ch": "未分配"
+      }
+    };
+  
     this.projeto.statusList = [
       {
         id :  0,
-        name : "pendente",
+        name : translations["pendente"][lang],
         backgroundColor: "#7CD5F4",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  1,
-        name : "em progresso",
+        name : translations["em progresso"][lang],
         backgroundColor: "#FCEC62",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  2,
-        name : "concluido",
+        name : translations["concluido"][lang],
         backgroundColor: "#86C19F",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  3,
-        name : "não atribuido",
+        name : translations["não atribuido"][lang],
         backgroundColor: "#9CA3AE",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       }
-    ]
+    ];
   }
 
   @ViewChild('statusClose') statusClose!:ElementRef

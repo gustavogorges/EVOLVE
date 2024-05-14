@@ -44,7 +44,7 @@
                     class="w-full cursor-pointer"
                     (click)="editSubtarefa(sub)"
                   >
-                    <p class="text-primaryFontBlack">editar</p>
+                    <p class="text-primaryFontBlack">{{'editar' | translate}}</p>
                   </div>
                 </div>
                 <div class="w-full flex justify-center items-center gap-1 px-2">
@@ -53,7 +53,7 @@
                     class="w-full cursor-pointer"
                     (click)="removeSubtarefa(sub, i)"
                   >
-                    <p class="text-primaryFontBlack">remover</p>
+                    <p class="text-primaryFontBlack">{{'remover' | translate}}</p>
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
       class="btn-add-content"
     >
       <i class="pi pi-plus btn-add-text"></i>
-      <p class="btn-add-text">adicionar sub-tarefa</p>
+      <p class="btn-add-text">{{'adicionar sub-tarefa' | translate}}</p>
     </div>
   </div>
   <div
@@ -82,7 +82,7 @@
         type="text"
         class="w-full h-[80%] input-new-sub border-b-2 pb-2"
         [(ngModel)]="subtarefa.nome"
-        placeholder="Digite a sub-tarefa aqui ..."
+        placeholder="{{'Digite a sub-tarefa aqui ...' | translate}}"
       />
     </div>
     <div class="w-[20%] h-full flex justify-end items-center gap-3">

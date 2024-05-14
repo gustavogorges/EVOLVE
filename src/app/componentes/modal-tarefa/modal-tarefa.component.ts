@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
   templateUrl: './modal-tarefa.component.html',
   styleUrls: ['./modal-tarefa.component.scss'],
 })
-export class ModalTarefaComponent implements OnInit {
+export class ModalTarefaComponent implements OnInit, OnChanges {
   booleanDesc: boolean = false;
   page_task: string = 'sub-tarefas';
   nomeGrande: string = '';
@@ -132,6 +132,13 @@ export class ModalTarefaComponent implements OnInit {
 
   constructor(private service: BackendEVOLVEService,
     private cookies_service:CookiesService) {}
+
+  ngOnChanges(){
+    this.translatePriorities()
+    this.translateTaskPriority()
+    this.translateStatus()
+  }
+
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
   @Output() closeModalTask = new EventEmitter<boolean>();
@@ -155,7 +162,11 @@ export class ModalTarefaComponent implements OnInit {
 
     
     this.listPriorities = await this.service.getAllPriorities()
+    this.translatePriorities()
+    this.translateTaskPriority()
+    this.translateStatus()
     this.propertiesList = this.tarefa.properties;
+
     this.projeto.properties.forEach(propertyFor => {
       if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
         this.propertiesList.push(propertyFor);
@@ -172,6 +183,217 @@ export class ModalTarefaComponent implements OnInit {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
+    }
+  }
+
+  translateStatus() {
+    const lang = localStorage.getItem('lang');
+    if (lang === 'ch') {
+            if (this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pendiente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = '待定';
+            } else if (this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'en progreso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = '进展中';
+            } else if (this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = '已完成';
+            } else if (this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = '未分配';
+            }
+    } else if (lang === 'pt') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendiente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = 'pendente';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'en progreso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = 'em progresso';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = 'concluido';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = 'não atribuido';
+            }
+    } else if (lang === 'es') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = 'pendiente';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = 'en progreso';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = 'completado';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = 'Sin asignar';
+            }
+    } else if (lang === 'en') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pendiente') {
+                this.tarefa.currentStatus.name = 'pending';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'en progreso') {
+                this.tarefa.currentStatus.name = 'in progress';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado') {
+                this.tarefa.currentStatus.name = 'completed';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar') {
+                this.tarefa.currentStatus.name = 'Unassigned';
+            }
+    }
+}
+
+  translatePriorities(){
+    const lang = localStorage.getItem('lang');
+    if (lang === 'es') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NINGUNA';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'MUY BAJA';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'BAJA';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MEDIA';
+            break;
+          case 'ALTA':
+            prioridade.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENTE';
+            break;
+        }
+      });
+    } else if (lang === 'ch') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = '无';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = '非常低';
+            break;
+          case 'BAIXA':
+            prioridade.name = '低';
+            break;
+          case 'MEDIA':
+            prioridade.name = '中';
+            break;
+          case 'ALTA':
+            prioridade.name = '高';
+            break;
+          case 'URGENTE':
+            prioridade.name = '紧急';
+            break;
+        }
+      });
+    } else if (lang === 'en') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NONE';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'VERY LOW';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'LOW';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MEDIUM';
+            break;
+          case 'ALTA':
+            prioridade.name = 'HIGH';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENT';
+            break;
+        }
+      });
+    }
+    else if (lang === 'pt') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NENHUMA';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'MUITO BAIXA';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'BAIXA';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MÉDIA';
+            break;
+          case 'ALTA':
+            prioridade.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENTE';
+            break;
+        }
+      });
+    }
+  }
+
+  translateTaskPriority(){
+    const lang = localStorage.getItem('lang');
+    if (lang === 'es') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = 'NINGUNA';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = 'MUY BAJA';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = 'BAJA';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = 'MEDIA';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = 'URGENTE';
+            break;
+        }
+    } else if (lang === 'ch') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = '无';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = '非常低';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = '低';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = '中';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = '高';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = '紧急';
+            break;
+        }
+    } else if (lang === 'en') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = 'NONE';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = 'VERY LOW';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = 'LOW';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = 'MEDIUM';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = 'HIGH';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = 'URGENT';
+            break;
+        }
     }
   }
 

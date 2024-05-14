@@ -1,3 +1,5 @@
+
+import { TranslateService } from '@ngx-translate/core';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
@@ -13,6 +15,25 @@ import { TextToSpeechService } from 'src/service/text-to-speech.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
+
+    private colorService : ColorService, private translateService : TranslateService
+
+    ){
+      if(localStorage.getItem('lang') === null){
+        localStorage.setItem('lang', 'en')
+      }
+      this.translateService.setDefaultLang('en')
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
+
+  title = 'Evolve';
+  loggedUser !: User; 
+
+  reload(){
+    window.location.reload()
+  }
+
+
     private colorService : ColorService,
     private textToSpeechService: TextToSpeechService,
     private authService : AuthService
@@ -20,6 +41,7 @@ export class AppComponent{
   title = 'angularProject';
   loggedUser !: User; 
   islogged = false
+
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser();
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
