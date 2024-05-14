@@ -72,7 +72,7 @@ config = false
   }
   goCreateTeam(){
     this.sideBar.emit(false)
-    this.router.navigateByUrl('/equipe/'+0);
+    window.location.href = 'equipe/0'
   }
 
 

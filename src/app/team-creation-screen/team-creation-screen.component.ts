@@ -157,36 +157,80 @@ loggedUser !: User
     this.teamParticipants.splice(indice, 1)
   }
  async  salvar(){
-  this.team.name = this.name;
-  this.team.participants.push(this.loggedUser)
-    this.teamParticipants.map((u)=>{
-      this.team.participants.push(u); 
-    })
+  if(this.name != '' ){
+    this.team.name = this.name;
+  }
+    this.team.participants = this.teamParticipants
     this.team.imageColor = this.backGroundColorProject
+    console.log(this.team);
 
   if(this.id==0){
 
-    
+    this.team.participants.push(this.loggedUser)
     this.team.administrator = await this.cookiesService.getLoggedUser();
-  console.log(this.team);
   
   
-    this.service.postEquipe(this.team);
-  }else{
-this.service.putEquipe(this.team); 
+   this.team = await this.service.postEquipe(this.team);
+  }
+
+  else{
+    this.service.patchTeamName(this.team.id, this.team.name); 
+    this.service.patchTeamImageColor(this.team.id, (this.team.imageColor as string))
+    this.service.patchTeamParticipants(this.team.id, this.team.participants)
+//this.service.putEquipe(this.team); 
   }
   this.disabledInfo = true; 
+  let id = this.team.id
+  console.log(id);
+  
+  this.router.navigate(["/equipe/"+id])
+
   }
   editar(){
     this.disabledInfo = false;
   }
-  leaveTeam(){
-    
-  }
+  openModal = false 
+  title = ''
+  message = ''
+  async leaveTeam(){
+    this.title = 'sair da equipe'
+  this.message = 'ao confirmar você perderá acesso a equipe'
+    this.openModal = true
+}
   removeTeam(){
-    this.service.deleteById("team",this.team.id);
-    this.router.navigateByUrl('/tela-inicial');
+    this.title = 'excluir a equipe'
+    this.message = 'ao confirmar a ação não poderá ser revertida'
 
+    this.openModal = true
+
+  }
+  async modal(boolean : boolean){
+    if(boolean == false){
+      this.openModal = false; 
+    }else{
+      console.log(this.title);
+      console.log(this.title == 'sair da equipe');
+      
+      
+      if(this.title =='excluir a equipe' ){
+        console.log(10);
+        
+        this.service.deleteById("team",this.team.id);
+   this.router.navigateByUrl('/tela-inicial');
+
+      }else if(this.title == 'sair da equipe'){
+        console.log(11);
+        
+    this.loggedUser =  await this.cookiesService.getLoggedUser();
+    const indexToRemove = this.team.participants.findIndex(user => user.id === this.loggedUser.id);
+    if (indexToRemove !== -1) {
+      this.team.participants.splice(indexToRemove, 1);
+  }  
+  this.service.patchTeamParticipants(this.team.id, this.team.participants); 
+  this.router.navigateByUrl('/tela-inicial');
+
+      }
+    }
   }
   cancelar(){
     console.log(this.disabledInfo);
