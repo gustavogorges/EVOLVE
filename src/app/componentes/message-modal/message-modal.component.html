@@ -1,0 +1,21 @@
+<div     class="fixed w-screen h-screen z-[99] modal top-1/2 left-1/2 flex items-center justify-center  -translate-x-1/2 -translate-y-1/2">
+    <div
+      class="w-[500px] h-max  bg-white p-7 gap-7 rounded-xl shadow-lg flex flex-col relative"
+    >
+    <div>
+        <h2 class="font-titulo text-lg font-bold">Deseja {{title}}?</h2>
+        <p class="text-fontGray font-hind-madurai">
+{{message}}.
+        </p>
+    </div>
+   
+      <div class="flex w-full justify-between">
+      <button (click)="cancelar()" class="py-2 px-7 bg-primary text-white font-bold font-titulo rounded-lg">
+        cancelar
+       </button>
+       <button (click)="confirmar()" class="py-2 px-7 bg-secondary text-white font-bold font-titulo rounded-lg">
+        confirmar
+       </button>
+    </div>
+    </div>
+</div>

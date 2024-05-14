@@ -31,7 +31,6 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   task !: Task
   project !: Project;
 
-
   loggedUser : User = new User;
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();

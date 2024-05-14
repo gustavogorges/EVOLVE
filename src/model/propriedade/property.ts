@@ -11,14 +11,13 @@ export class Property {
 
     name : string = '';
 
-    project: Project = new Project; // just if it is a global property
-
     propertyValues : Array<PropertyValue> =  [];
 
     propertyType !: PropertyType ;
 
     options : Array<Option> = [];
     currentOptions : Array<Option> = [];
+    global : boolean = false; // if is a global property, will get the project by the task of it
 
     editable:boolean = false;
 

@@ -166,6 +166,13 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     this.translateTaskPriority()
     this.translateStatus()
     this.propertiesList = this.tarefa.properties;
+
+    this.projeto.properties.forEach(propertyFor => {
+      if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
+        this.propertiesList.push(propertyFor);
+      }
+    })
+
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
       this.booleanCalendarioFinalDate = true;

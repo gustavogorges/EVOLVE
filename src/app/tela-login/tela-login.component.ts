@@ -71,6 +71,7 @@ export class TelaLoginComponent implements OnInit {
     //     this.responseData = result;
     //     this.cookie.setJWTtoken(this.responseData.jwtToken); 
     //     this.router.navigate(["/tela-inicial "])
+    // this.authService.loggedInChanged.emit(true);
 
     //   }
     // })

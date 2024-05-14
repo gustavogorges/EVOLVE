@@ -8,3 +8,32 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  .input-name {
+    @apply py-1  px-1 w-full border-0 h-min rounded-md font-titulo xl:text-4xl lg:text-3xl md:text-2xl text-xl font-bold disabled:placeholder:text-primary text-primary dark:disabled:placeholder:text-white disabled:bg-transparent bg-slate-100 dark:disabled:bg-transparent dark:bg-dark-secundary-gray;
+  }
+  .user-picture {
+    @apply md:w-28 md:h-28 sm:w-28 sm:h-28 w-20 h-20  rounded-full overflow-clip;
+  }
+  .project-image{
+    @apply  w-max relative;
+
+    .image{
+        @apply lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-20 h-20 rounded-full col-span-full row-span-full overflow-hidden;
+
+        img{
+            @apply h-full w-full object-cover;
+        }
+    }
+
+    .input-image{
+        @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute sm:right-0 -bottom-10 right-[30vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;
+
+        i{
+            @apply text-xl text-primary dark:text-dark-primary
+        }
+    }
+
+    .alterateColor{
+        @apply xl:w-[2vw] xl:h-[2vw] w-[10vw] h-[10vw] absolute lg:-bottom-10 -bottom-6 rounded-xl lg:left-[30vw] left-[10vw] shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray flex justify-center items-center;;
+    }
+}

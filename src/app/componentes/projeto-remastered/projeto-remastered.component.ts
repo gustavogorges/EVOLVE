@@ -8,6 +8,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
 import { Task } from 'src/model/task';
+
 import { CookiesService } from 'src/service/cookies-service.service';
 
 interface Tarefa{

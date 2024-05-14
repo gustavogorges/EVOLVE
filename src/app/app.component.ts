@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
+import { AuthService } from 'src/service/autService';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { TextToSpeechService } from 'src/service/text-to-speech.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +15,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
+
     private colorService : ColorService, private translateService : TranslateService
 
     ){
@@ -28,9 +33,21 @@ export class AppComponent{
     window.location.reload()
   }
 
+
+    private colorService : ColorService,
+    private textToSpeechService: TextToSpeechService,
+    private authService : AuthService
+    ){}
+  title = 'angularProject';
+  loggedUser !: User; 
+  islogged = false
+
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser();
-    
+    this.authService.loggedInChanged.subscribe(isLoggedIn => {
+      this.islogged = isLoggedIn;
+    });
+   
     if(this.loggedUser){
       if(this.loggedUser.theme=="dark"){
         document.documentElement.classList.add('dark')
@@ -55,5 +72,18 @@ export class AppComponent{
      
     }
     
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseUp(event: MouseEvent) {
+    const selectedText = window.getSelection()!.toString().trim();
+    if (selectedText) {
+      console.log("entrou aqui");
+      console.log(this.textToSpeechService.canSpeak);
+      if (this.textToSpeechService.canSpeak) {
+        console.log("entrou aqui 2");
+        this.textToSpeechService.speak(selectedText);
+      }
+    }
   }
 }

@@ -174,6 +174,8 @@ export class BackendEVOLVEService {
   }
 
   async postEquipe (equipe:Team){
+    console.log(equipe);
+    
     return (await axios.post(this.URL+"team", equipe)).data
   }
 
@@ -350,6 +352,28 @@ export class BackendEVOLVEService {
 
   async updateNameDescProject(idProject:number, projectNameDescDTO:any){
     return (await (axios.patch(this.URL+"/project/"+idProject+"/altereteName", projectNameDescDTO))).data;
+  }
+  async patchTeamName(teamId:number, name:string):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("name",name)
+    return (await axios.patch(this.URL+path+teamId+"/name", formData)).data
+  }
+  async patchTeamParticipants(teamId:number, users:Array<User>):Promise<Team>{
+    let path:string = "team/"
+    return (await axios.patch(this.URL+path+teamId+"/participants", users)).data
+  }
+  async patchTeamImageColor(teamId:number, name:string):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("imageColor",name)
+    return (await axios.patch(this.URL+path+teamId+"/imageColor", formData)).data
+  }
+  async patchTeamImage(teamId:number, name:File):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("image",name)
+    return (await axios.patch(this.URL+path+teamId+"/image", formData)).data
   }
 
   async getUserWorkedTime(userId:number, taskId:number){
