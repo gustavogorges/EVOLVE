@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -13,60 +13,69 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces';
 @Component({
   selector: 'app-tela-reports',
   templateUrl: './tela-reports.component.html',
-  styleUrls: ['./tela-reports.component.scss']
+  styleUrls: ['./tela-reports.component.scss'],
 })
-export class TelaReportsComponent implements OnInit {
+export class TelaReportsComponent implements OnInit, OnChanges {
   loggedUser: User | null = null;
-  teamsWithReports: { team: Team, report: any[] }[] = [];
+  teamsWithReports!: { team: Team; report: any[] };
 
-  constructor(private cookieService: CookiesService, private backendService: BackendEVOLVEService) { }
+  constructor(
+    private cookieService: CookiesService,
+    private backendService: BackendEVOLVEService
+  ) {}
+  async ngOnChanges(changes: SimpleChanges): Promise<void>  {
+    console.log(this.team);
+    
+    const teamReportContent = [];
 
-  async ngOnInit(): Promise<void> {
-    // Obtém o usuário logado
-    this.loggedUser = await this.cookieService.getLoggedUser();
+    // Itera sobre cada projeto na equipe
+    for (const project of this.team.projects) {
+      const projectTasksContent = [];
 
-    if (this.loggedUser) {
-      // Itera sobre cada equipe do usuário
-      for (const team of this.loggedUser.teams) {
-        const teamReportContent = [];
+      // Itera sobre cada tarefa no projeto
+      for (const taskId of project.tasks) {
+        const task: Task = await this.backendService.getOne('task', taskId.id);
+        const associateNames: string = (task.associates as User[])
+          .map((associate) => associate.name)
+          .join(', ');
 
-        // Itera sobre cada projeto na equipe
-        for (const project of team.projects) {
-          const projectTasksContent = [];
-
-          // Itera sobre cada tarefa no projeto
-          for (const taskId of project.tasks) {
-            const task: Task = await this.backendService.getOne("task", taskId.id);
-            const associateNames: string = (task.associates as User[]).map(associate => associate.name).join(', ');
-
-            // Adiciona as informações da tarefa ao conteúdo da tabela
-            projectTasksContent.push([
-              { text: task.name, style: 'value' },
-              { text: associateNames, style: 'value' },
-              { text: task.currentStatus.name, style: 'value' },
-              { text: task.finalDate, style: 'value' }
-            ]);
-          }
-
-          // Adiciona o conteúdo das tarefas do projeto ao relatório da equipe
-          teamReportContent.push(
-            { text: `Projeto: ${project.name}`, style: 'header' },
-            {
-              table: {
-                widths: ['*', '*', '*', '*'],
-                body: [
-                  ['Nome da tarefa', 'Associados', 'Status Atual', 'Data Final'],
-                  ...projectTasksContent
-                ]
-              }
-            }
-          );
-        }
-
-        // Adiciona o relatório da equipe e suas respectivas sessões de projeto à lista
-        this.teamsWithReports.push({ team, report: teamReportContent });
+        // Adiciona as informações da tarefa ao conteúdo da tabela
+        projectTasksContent.push([
+          { text: task.name, style: 'value' },
+          { text: associateNames, style: 'value' },
+          { text: task.currentStatus.name, style: 'value' },
+          { text: task.finalDate, style: 'value' },
+        ]);
       }
+
+      // Adiciona o conteúdo das tarefas do projeto ao relatório da equipe
+      teamReportContent.push(
+        { text: `Projeto: ${project.name}`, style: 'header' },
+        {
+          table: {
+            widths: ['*', '*', '*', '*'],
+            body: [
+              ['Nome da tarefa', 'Associados', 'Status Atual', 'Data Final'],
+              ...projectTasksContent,
+            ],
+          },
+        }
+      );
+  
+
+      // Adiciona o relatório da equipe e suas respectivas sessões de projeto à lista
+      
     }
+    let team = this.team;
+    this.teamsWithReports = { team, report: teamReportContent };
+    console.log(this.teamsWithReports.report);
+  }
+  @Input()
+  team!: Team;
+  async ngOnInit(): Promise<void> {
+  
+    console.log(this.team);
+    
   }
 
   generatePdf(teamReport: any[]): void {
@@ -85,7 +94,7 @@ export class TelaReportsComponent implements OnInit {
           margin: [0, 5, 0, 10], // top, right, bottom, left
           color: '#333',
         },
-      }
+      },
     };
 
     pdfMake.createPdf(docDefinition).open();

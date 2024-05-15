@@ -63,6 +63,8 @@ export class TelaInicialComponent implements OnInit {
    
    this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
     this.userColors()
+    console.log(this.listaTarefas);
+    
  
    
 
@@ -163,10 +165,14 @@ async openTask(tarefa: Task): Promise<void> {
   }
   
   tarefaNova: Task = new Task();
-  closeTask(event: boolean) {
+  async closeTask(event: boolean) {
     if (event) {
       this.tarefaNova = new Task();
       this.booleanTask = false;
     }
+      this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
+      console.log(this.listaTarefas);
+      
+    
   }
 }

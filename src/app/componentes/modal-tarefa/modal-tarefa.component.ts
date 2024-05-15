@@ -355,8 +355,8 @@ export class ModalTarefaComponent implements OnInit {
     this.booleanAddPropriedade = false;
   }
 
-  deleteTask() {
-    this.service.deleteTask(this.tarefa.id);
+  async deleteTask() {
+  await  this.service.deleteTask(this.tarefa.id);
     this.closeModalTask.emit(true);
   }
   async updateTask(){
