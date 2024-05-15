@@ -32,22 +32,22 @@
               placeholder="{{'Digite seu email' | translate}} "
               (keydown.enter)="moveFocus('password'); $event.preventDefault()"
               class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
-              formControlName="email"
+              formControlName="username"
             />
             <div
-              *ngIf="email?.errors?.['required'] && formBahGuria.submitted"
+              *ngIf="username?.errors?.['required'] && formBahGuria.submitted"
               class="error-text"
             >
               <p>{{'Campo é obrigatório.' | translate}}</p>
             </div>
             <div
-              *ngIf="email?.errors?.['email'] && formBahGuria.submitted"
+              *ngIf="username?.errors?.['username'] && formBahGuria.submitted"
               class="error-text"
             >
               <p>{{'Email inválido.' | translate}}</p>
             </div>
             <div
-              *ngIf="email?.errors?.['invalidEmail'] && formBahGuria.submitted"
+              *ngIf="username?.errors?.['invalidEmail'] && formBahGuria.submitted"
               class="error-text"
             >
               <p>Email deve conter '@' and '.'.</p>

@@ -23,9 +23,9 @@
         <div class="project-desc"><textarea class="text-justify" maxlength="110" cols="30" rows="10" [disabled]="!projeto.editOn" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
             <p>{{'Criador:' | translate}}</p>
-            <div *ngIf="verifyImg(projeto.creator) && projeto.creator" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
-            <div class="overflow-hidden object-center" *ngIf="!verifyImg(projeto.creator)">
-                <img *ngIf="!verifyImg(projeto.creator)" src="{{projeto.creator.image.data}}" alt="">
+            <div *ngIf="verifyImg(getProjectCreator(projeto)) && getProjectCreator(projeto)" [ngStyle]="{'background': getProjectCreator(projeto).imageColor }" >{{getProjectCreator(projeto).name.charAt(0).toUpperCase()}}</div>
+            <div class="overflow-hidden object-center" *ngIf="!verifyImg(getProjectCreator(projeto))">
+                <img *ngIf="!verifyImg(getProjectCreator(projeto))" src="{{getProjectCreator(projeto).image.data}}" alt="">
             </div>
         </div>
         <div class="project-progress"><div></div></div>
@@ -83,12 +83,12 @@
                 <span><i class="pi pi-chevron-left font-semibold text-fontGray" style="font-size: 12px;"></i></span>
                 <div class="users" *ngIf="projeto">
                     <div class="users-spam" *ngFor="let p of filteredNames()">
-                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
-                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
-                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        <div *ngIf="verifyImg(p.user) && !p.user.image" class="user-image-chartAt" [ngStyle]="{'background': p.user.imageColor }" >{{p.user.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p.user)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
-                        <p>{{p.name}}</p>
-                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn || !verifyIsCreator(p) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                        <p>{{p.user.name}}</p>
+                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-xl font-hind-madurai text-fontGray text-center">{{'Nenhum membro encontrado' | translate}}</p>
@@ -99,11 +99,13 @@
         </div>
 
         <div class="botoes">
+
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >{{'Deletar Projeto' | translate}} <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
             <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+
         </div>
     </div>
 
@@ -140,12 +142,12 @@
                 <span><</span>
                 <div class="users" *ngIf="projeto">
                     <div class="users-spam" *ngFor="let p of filteredNames()">
-                        <div *ngIf="verifyImg(p) && !p.image" class="user-image-chartAt" [ngStyle]="{'background': p.imageColor }" >{{p.name.charAt(0).toUpperCase()}}</div>
-                        <div *ngIf="!verifyImg(p)" class="user-image-chartAt overflow-hidden object-center">
-                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p)" src="{{p.image.data}}" alt="">
+                        <div *ngIf="verifyImg(p.user) && !p.user.image" class="user-image-chartAt" [ngStyle]="{'background': p.user.imageColor }" >{{p.user.name.charAt(0).toUpperCase()}}</div>
+                        <div *ngIf="!verifyImg(p.user)" class="user-image-chartAt overflow-hidden object-center">
+                            <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
-                        <p>{{p.name}}</p>
-                        <button (click)="removeMember(p)" [ngClass]="!projeto.editOn || !verifyIsCreator(p) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
+                        <p>{{p.user.name}}</p>
+                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-sm text-fontGray w-fit">{{'Nenhum membro encontrado' | translate}}</p>
@@ -161,7 +163,8 @@
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
-            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+
         </div>
 
     </div>

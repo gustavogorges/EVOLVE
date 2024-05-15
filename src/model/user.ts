@@ -1,7 +1,8 @@
 import { UserChat } from "./userChat";
-import { Team } from "./team";
 import { Task } from "./task";
-import { TaskFile } from "./file";
+import { File } from "./file";
+import { UserProject } from "./userProject";
+import { UserTeam } from "./userTeam";
 
 export class User {
     [x: string]: any;
@@ -10,11 +11,12 @@ export class User {
     password: string = "";
     name : string = "";
     imageColor!:String 
-    image!:TaskFile
+    image!:File
     chats:Array<UserChat> = new Array
     createdTasks: Array<Task> = new Array;
-    managedTeams: Array<Team> = new Array;
-    teams: Array<Team> = new Array;
+    projectRoles:UserProject[] = []
+    teamRoles: Array<UserTeam> = new Array;
+
     theme: string = "light"; 
     primaryColor: string = "#185E77"; 
     secondaryColor: string = "#4C956C"; 

@@ -3,30 +3,36 @@ import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Task } from "./task";
 import { User } from "./user";
-import { TaskFile } from "./file";
+import { File } from "./file";
 import { DashBoardCharts } from "./DashBoardCharts";
 import { Team } from "./team";
 import { Comment } from 'src/model/comment';
+import { Chat } from "./chat";
+import { UserProject } from "./userProject";
+import { Role } from "./Role";
 
-export class Project{
+export class Project {
     id!: number;
     name: string = "";
+    description: string = "";
+    favorited: boolean = false
+    image: File = new File
+    imageColor: string = "#000000"
     finalDate: string = "";
-    description: string ="";
-    imageColor:string="#000000"
-    image:TaskFile = new TaskFile
-    creator!:User
-    adimnistrators:Array<User> = new Array
-    members:Array<User> = new Array;
-    properties:Array<Property> = new Array;
-    statusList : Array<Status> = new Array;
+    creationDate: string = "";
+    lastTimeEdited: string = "";
+    comments: Array<Comment> = new Array;
+    properties: Array<Property> = new Array;
+    statusList: Array<Status> = new Array;
+    team : Team = new Team;
+    chat !: Chat;
+    // creator!:User
+    // adimnistrators:Array<User> = new Array
+    members:Array<UserProject> = new Array;
     tasks: Array<Task> = new Array;
-    adimnistrator: Array<User> = new Array;
+    defaultRole:Role = new Role;
     charts: Array<DashBoardCharts> = new Array;
-    comments:Array<Comment> = new Array;
-    isVisible: boolean = false 
-    team !: Team
+    isVisible: boolean = false
     editOn: boolean = false
-    favorited : boolean =false 
 
 }

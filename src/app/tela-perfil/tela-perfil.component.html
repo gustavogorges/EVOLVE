@@ -7,7 +7,7 @@
         [ngStyle]="{
           'background-image':
             user?.image?.data != null
-              ? 'url(' + user.image.data + ')'
+              ? 'url(' + user?.image?.data + ')'
               : user?.imageColor,
           'background-size': 'cover',
           'background-color': user?.imageColor
@@ -93,10 +93,10 @@
     <div class=" flex flex-col h-full gap-5 xl:w-[30%] 2xl:w-1/3 order-1 xl:-order-1 " >
       <p class="title dark:text-dark-primary">{{'Membros de suas Equipes:' | translate}}</p>
       <div class="flex flex-col sm:flex-row sm:flex-wrap xl:flex-col xl:gap-5 gap-2 justify-between w-full">
-        <div *ngFor="let user1 of teamUsers" class="sm:w-[47%] w-full xl:w-full ">
+        <div *ngFor="let userTeam of teamUsers" class="sm:w-[47%] w-full xl:w-full ">
             <app-user-card-perfil
-              [user]="user1"
-              (click)="goToUser(user1)"
+              [user]="userTeam.user"
+              (click)="goToUser(userTeam.user)"
              
             ></app-user-card-perfil>
           </div>
@@ -105,12 +105,12 @@
     </div>
     <div class="flex flex-col gap-2 lg:w-[80%] self-center ">
       <div class="flex w-full md:gap-10 gap-5 overflow-x-auto border-b-2 dark:border-gray-500 ">
-        <div *ngFor="let team of user?.teams">
+        <div *ngFor="let team of user?.teamRoles">
           <p
             class="font-hind-madurai md:text-xl w-max sm:text-lg text-base text-fontGray dark:text-gray-300 cursor-pointer"
-            (click)="changeTeam(team)"
+            (click)="changeTeam(team.team)"
           >
-            {{ team.name }}
+            {{ team.team.name }}
           </p>
         </div>
       </div>

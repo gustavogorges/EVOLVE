@@ -46,7 +46,7 @@
             <div class="w-8 h-8 rounded-full overflow-clip " [ngStyle]="{
               'background-image':
                 user?.image != null
-                  ? 'url(' + user.image?.data + ')'
+                  ? 'url(' + user.image.data + ')'
                   : user?.imageColor,
               'background-size': 'cover',
               'background-color': user?.imageColor

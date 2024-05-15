@@ -5,7 +5,7 @@ import { User } from 'src/model/user';
 import { Team } from 'src/model/team';
 import { Project } from 'src/model/project';
 import { TeamChat } from 'src/model/teamChat';
-import { TaskFile } from 'src/model/file';
+import { File } from 'src/model/file';
 
 @Component({
   selector: 'app-contact',
@@ -19,7 +19,7 @@ export class ContactComponent implements OnInit {
 
 lastMessage:Message = new Message
 
-  image!:TaskFile
+  image!:File
   imageColor:String = ""
   name:String = ""
 

@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, SimpleChanges,ViewChild, ViewChildren } from '@angular/core';
+import { Logger } from 'html2canvas/dist/types/core/logger';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-week-calendar',
@@ -15,7 +18,7 @@ export class WeekCalendarComponent implements OnInit{
 
 
 
-  constructor(private service: BackendEVOLVEService, private elRef: ElementRef) { }
+  constructor(private service: BackendEVOLVEService,private cookieService:CookiesService, private elRef: ElementRef) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['taskList']) {
       this.updateCalendar();
@@ -23,13 +26,15 @@ export class WeekCalendarComponent implements OnInit{
   }
 
   taskList: Array<Task> = [];
-  @Input() project!: Project;
+  // @Input() project!: Project;
 
   semanaAtual: Date[] = [];
   diasSemana: Date[] = [];
+  looggedUser!:User
 
   async ngOnInit() {
-    this.taskList = await this.service.getTasksByUserId(1)
+    this.looggedUser = await this.cookieService.getLoggedUser()
+    this.taskList = await this.service.getTasksByUserId(this.looggedUser.id)
     this.atualizarSemana();
   }
 

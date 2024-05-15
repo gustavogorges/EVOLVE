@@ -1,5 +1,4 @@
 
-import { TranslateService } from '@ngx-translate/core';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
@@ -16,7 +15,8 @@ import { TextToSpeechService } from 'src/service/text-to-speech.service';
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
 
-    private colorService : ColorService, private translateService : TranslateService,
+    private colorService : ColorService, 
+    private translateService : TranslateService,
     private textToSpeechService: TextToSpeechService,
     private authService : AuthService
 
@@ -29,17 +29,20 @@ export class AppComponent{
     }
 
   title = 'Evolve';
-  loggedUser !: User; 
+  loggedUser !: User;
+
+  // boo = false
 
   reload(){
     window.location.reload()
   }
 
-
-    
   islogged = false
 
   async ngOnInit(): Promise<void> {
+    // if(this.authService.isLoggedIn()){
+    //   this.boo = true
+    // }
     this.loggedUser = await this.cookieService.getLoggedUser();
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
       this.islogged = isLoggedIn;

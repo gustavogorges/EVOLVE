@@ -10,29 +10,29 @@
             <div class="h-9 w-9 bg-fontGray rounded-full ml-2"
             [ngStyle]="{
                 'background-image':
-                associate.image != null
-                    ? 'url(' + associate.image.data + ')'
-                    : associate.imageColor,
+                associate.user.image != null
+                    ? 'url(' + associate.user.image.data + ')'
+                    : associate.user.imageColor,
                 'background-size': 'cover',
-                'background-color': associate.imageColor
+                'background-color': associate.user.imageColor
               }">
             </div>
              <p 
              class="w-[40%] ml-1 h-full flex justify-start "
              >
-             {{associate.name}}
+             {{associate.user.name}}
             </p>
             <div class="flex w-1/3 justify-end items-center">
                 <i 
-                *ngIf="!verifyIfAssociateExists(associate)"
+                *ngIf="!verifyIfAssociateExists(associate.user)"
                 class="pi pi-plus-circle text-primary font-bold p-1 hover:bg-slate-100 hover:rounded-md cursor-pointer" 
-                (click)="saveAssociate(associate)"
+                (click)="saveAssociate(associate.user)"
                 >
                 </i>
                 <i 
-                *ngIf="verifyIfAssociateExists(associate)"
+                *ngIf="verifyIfAssociateExists(associate.user)"
                 class="pi pi-minus-circle text-primary font-bold text-4xl p-1 hover:bg-slate-100 hover:rounded-md cursor-pointer" 
-                (click)="removeAssociate(associate)"
+                (click)="removeAssociate(associate.user)"
                 >
                 </i>
             </div>

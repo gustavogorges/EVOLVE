@@ -2,28 +2,30 @@
 
 <div class=" bg-white dark:bg-dark-primary-gray fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col duration-300 justify-between  overflow-hidden " [ngClass]="notification ? 'w-[400px] h-[480px] opacity-100':'w-0 h-0 opacity-0'">
     <div class="main-box min-w-fit">
-        <div class="teams-box" *ngFor="let team of loggedUser.teams">
+        <div class="teams-box" *ngFor="let userTeam of loggedUser.teamRoles">
+
             <div class="h-16 w-full flex justify-between items-center px-4">
                 <i class="pi pi-users team-icon"></i>
-                <p class="text-primaryFontBlack dark:text-white text-lg font-semibold font-titulo">{{team.name}}</p>
+
+                <p class="text-primaryFontBlack dark:text-white text-lg font-semibold font-titulo">{{userTeam.team.name}}</p>
                 <i 
                 class="pi pi-angle-down team-icon2" 
-                *ngIf="!team.booleanView"
-                (click)="openNotifications(team)"
+                *ngIf="!userTeam.team.booleanView"
+                (click)="openNotifications(userTeam.team)"
                 >
                 </i>
                 <i 
                 class="pi pi-angle-up team-icon2" 
-                *ngIf="team.booleanView"
-                (click)="closeNotifications(team)"
+                *ngIf="userTeam.team.booleanView"
+                (click)="closeNotifications(userTeam.team)"
                 >
                 </i>
             </div>
-            <div class="notifications-box" *ngIf="team.booleanView" 
+            <div class="notifications-box" *ngIf="userTeam.team.booleanView" 
             [ngClass]="{
-                'overflow-y-auto': team.notifications.length > 3
+                'overflow-y-auto': userTeam.team.notifications.length > 3
             }">
-                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(team.notifications)">
+                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(userTeam.team.notifications)">
                     <div 
                     class="notification-item-user"
                     *ngIf="notification.type == 'task'"

@@ -1,13 +1,13 @@
 <div class="flex justify-between items-center gap-4 w-full p-4 border-b-2">
 
-    <div *ngIf="!contact?.image?.data" class="h-16 aspect-square rounded-full " [ngStyle]="{ 'background-color': contact?.imageColor }">
+    <div *ngIf="!contact?.image?.data" class="h-16 aspect-square rounded-full " [ngStyle]="{ 'background-color': contact.imageColor }">
    
     </div>
     <img *ngIf="contact?.image?.data" src="{{contact.image.data}}" alt=""  class="h-16 w-16 rounded-full">
 
     <div class="flex flex-col gap-1 w-3/4">
         <div class="flex justify-between w-full">
-            <p class="truncate w-full ">{{contact?.name}}</p>
+            <p class="truncate w-full ">{{contact.name}}</p>
             <p *ngIf="lastMessage" class=" w-24 flex justify-center">
                 {{lastMessage.date | date : "dd"+"/"+"MM"}}
             </p>

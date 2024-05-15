@@ -1,14 +1,13 @@
 
 import { Historic } from "./historic";
-import { Priority } from "./priority";
-import { PriorityRecord } from "./PriorityRecord";
 import { Project } from "./project";
 import { Property } from "./propriedade/property";
 import { Status } from "./status";
 import { Subtask } from "./subtask";
 import { User } from "./user";
 import { Comment } from 'src/model/comment';
-import { TaskFile } from "./file";
+import { File } from "./file";
+import { PriorityRecord } from "./priorityRecord";
 
 
 export class Task{
@@ -18,28 +17,26 @@ export class Task{
 
     finalDate!: Date;
     creationDate: string ="";
+    lastTimeEdited : string="";
+    scheduledDate: Date = new Date;
 
-    schedulingData: string = ""; 
     description:string = "";
+    historic:Historic[] = [];
     currentStatus: Status = new Status;
-  
-    conclusionPercentage:number=0;
     priority:PriorityRecord = new PriorityRecord();
-
     comments:Array<Comment> = new Array;
-
-    historic:Array<Historic> = new Array;
-
     creator:User = new User;
     project:Project | Partial<Project> = new Project;
     properties:Array<Property> = new Array;
     subtasks: Array<Subtask> = new Array;
-    statusListIndex :number = -1;
-    files : Array<TaskFile> = new Array;
-
     associates:Array<User|Pick<User, "id">> = new Array;
-    isVisible: boolean = false;
-    scheduledDate: Date = new Date;
+    files : Array<File> = new Array;
+    statusListIndex :number = -1;
     progress: number = 0; 
-    
+  
+    conclusionPercentage:number=0;
+    isVisible: boolean = false;
+
+    schedulingData:string = "" //p que serve isso?
+
 }

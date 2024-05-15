@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
