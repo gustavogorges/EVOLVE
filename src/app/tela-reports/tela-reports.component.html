@@ -1,15 +1,4 @@
-<button mat-raised-button (click)="generatePdf()" id="donwloadpdf">
-  gerar relatorio 
-</button>
+ <button (click)="generatePdf(teamsWithReports.report)"class="py-2 xl:px-7 px-3 bg-secondary text-white text-sm lg:text-base font-bold font-titulo rounded-lg">Gerar PDF</button>
 
-<div #content id="content">
-  <div *ngIf="task!=undefined">
-    <app-historicos [task]="task"> </app-historicos>
-    <div class="h-[500px]  ">
-
-    </div>
-  </div>
-    
-    </div>
    
 

@@ -1,6 +1,6 @@
 <div class="w-screen h-screen flex  justify-center lg:pt-20 pt-0">
   <div class="flex xl:w-[80%] w-[90%] flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-evenly">
-    <div class="flex flex-col lg:gap-12 gap-5 h-min lg:w-[53%] w-full">
+    <div class="flex flex-col lg:gap-12 gap-5 h-min lg:w-[55%] w-full">
       <div class="flex md:gap-10 gap-3 items-center">
         <div class="project-image">
           <div class="image border-2 dark:border-dark-secundary-gray" [ngStyle]="{'background': backGroundColorProject }">
@@ -20,13 +20,13 @@
             [placeholder]="team?.name"
             [disabled]="disabledInfo"
             [(ngModel)]="name"
-            class="input-name text-primary"
+            class="input-name text-primary dark:text-dark-primary"
           />
           <div class="flex md:gap-3 gap-1 flex-col md:flex-row md:items-center  px-2 w-full">
-            <p class="font-titulo lg:text-sm md:text-xl xl:text-xl text-sm text-gray-500">Código da equipe:</p>
+            <p class="font-titulo lg:text-sm md:text-xl xl:text-xl text-sm text-gray-500 dark:text-primaryWhite">Código da equipe:</p>
             <div class="flex gap-1">
 
-              <p class="font-titulo xl:text-xl md:text-lg text-xs text-secondary font-medium">
+              <p class="font-titulo xl:text-xl md:text-lg text-xs text-secondary dark:text-dark-secundary-green font-medium">
                 {{ team?.code }}
               </p>
               <i class="pi pi-clone icon text-gray-500"></i>
@@ -37,59 +37,59 @@
       </div>
 
       <div class="flex flex-col gap-1">
-        <p class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary">
+        <p class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary dark:text-dark-primary">
           Niveis de acesso:
         </p>
 
         <div class="flex flex-wrap gap-6">
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">Criador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Criador</p>
               <i
-                class="pi pi-verified text-secondary font-bold"
+                class="pi pi-verified text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
-            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
               editar, controle dos participantes, criar projetos, e excluir a
               equipe.
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">
                 Administrador
               </p>
               <i
-                class="pi pi-shield text-secondary font-bold"
+                class="pi pi-shield text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
-            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
               editar, controle dos participantes, e criar projetos.
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurailg:text-2xl text-lg font-medium">Colaborador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Colaborador</p>
               <i
-                class="pi pi-wrench text-secondary font-bold"
+                class="pi pi-wrench text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
-            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
               visualizar e criar projetos.
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">Espectador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Espectador</p>
               <i
-                class="pi pi-eye text-secondary font-bold"
+                class="pi pi-eye text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
-            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
               apenas visualizar.
             </p>
           </div>
@@ -99,7 +99,7 @@
     <div class="lg:w-[36%] w-full flex flex-col gap-6">
       <div class="flex justify-between">
         <p
-          class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary"
+          class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary dark:text-dark-primary"
           *ngIf="!isSearchUserModalOpen"
         >
           Membros da equipe:
@@ -107,7 +107,7 @@
         <div class="flex w-max justify-end relative">
           <button
             *ngIf="!isSearchUserModalOpen && !disabledInfo"
-            class="bg-primary rounded-full lg:p-2 lg:w-12 lg:h-12 w-8 h-8 items-center"
+            class="bg-primary dark:bg-dark-primary rounded-full lg:p-2 lg:w-12 lg:h-12 w-8 h-8 items-center"
           >
             <i
               class="pi pi-plus text-white font-bold"
@@ -139,8 +139,8 @@
       </div>
 
       <div class="flex justify-between lg:px-20 px-10 border-[1px] border-x-0">
-        <p class="font-hind-madurai text-lg text-gray-500">Usuário</p>
-        <p class="font-hind-madurai text-lg text-gray-500">Atribuição</p>
+        <p class="font-hind-madurai text-lg text-gray-500 dark:text-gray-300">Usuário</p>
+        <p class="font-hind-madurai text-lg text-gray-500 dark:text-gray-300">Atribuição</p>
       </div>
 
       <div class="member-list flex flex-col w-full overflow-scroll gap-8 lg:h-[350px] h-[200px] max-h-[350px] overflow-y-auto">
@@ -180,7 +180,7 @@
                   >
                         <button
                       (click)="openSelect()"
-                      class="text-primary font-titulo font-medium text-sm lg:text-base"
+                      class="text-primary dark:text-dark-primary font-titulo font-medium text-sm lg:text-base"
                         >
                       membro
                         </button>
@@ -205,23 +205,24 @@
         </div>
       </div>
       
-    <div *ngIf="!disabledInfo" class="flex gap-10 self-end">
-      <button (click)="cancelar()" class="py-2 px-4 bg-primary text-white font-bold font-titulo rounded-lg">
+    <div *ngIf="!disabledInfo" class="flex xl:gap-10 gap-3 self-end">
+      <button (click)="cancelar()" class="py-2 px-4 bg-primary dark:bg-dark-primary text-white font-bold font-titulo rounded-lg">
         cancelar
        </button>
-      <button (click)="salvar()" class="py-2 px-6 bg-secondary   text-white font-bold font-titulo rounded-lg">
+      <button (click)="salvar()" class="py-2 px-6 bg-secondary dark:bg-dark-secundary-green   text-white font-bold font-titulo rounded-lg">
 salvar      </button>
     </div>
-    <div *ngIf="disabledInfo" class="flex gap-10 self-end">
-      <button (click)="editar()" class="py-2 px-7 bg-primary text-white font-bold font-titulo rounded-lg">
+    <div *ngIf="disabledInfo" class="flex xl:gap-10 gap-3 self-end">
+      <button (click)="editar()" class="py-2 lg:px-7 px-3  bg-primary dark:bg-dark-primary text-white font-bold text-sm lg:text-base  font-titulo rounded-lg">
         editar
        </button>
-       <button (click)="leaveTeam()" *ngIf="team?.administrator?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="leaveTeam()" *ngIf="team?.administrator?.id != loggedUser?.id" class="py-2 xl:px-7 px-3 bg-red-500 text-white text-sm lg:text-base font-bold font-titulo rounded-lg">
         sair da equipe
        </button>
-       <button (click)="removeTeam()" *ngIf="team?.administrator?.id == loggedUser?.id " class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="removeTeam()" *ngIf="team?.administrator?.id == loggedUser?.id " class="py-2 xl:px-7 px-3 bg-red-500 text-white text-sm lg:text-base  font-bold font-titulo rounded-lg">
         excluir equipe
        </button>
+       <app-tela-reports  [team]="team"> </app-tela-reports>
     </div>
     </div>
   </div>

@@ -289,11 +289,12 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     }
   }
 
-  closeTask(event: boolean) {
+ async closeTask(event: boolean) {
     if (event) {
       this.tarefaNova = new Task();
       this.booleanTask = false;
-    }
+      this.projeto = await this.service.getOne('project', this.projeto.id);
+      this.listaTarefas = this.projeto.tasks;    }
   }
 
   optionB(option: any) {
