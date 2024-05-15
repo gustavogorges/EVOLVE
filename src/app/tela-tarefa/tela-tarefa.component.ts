@@ -14,7 +14,10 @@ import { Status } from 'src/model/status';
 import { PriorityRecord } from 'src/model/priorityRecord'; 
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
-
+import * as jspdf from 'jspdf';
+ import html2canvas from 'html2canvas';
+ import { HttpClient } from '@angular/common/http';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 interface OptionOrder {
   name: string;
@@ -40,12 +43,13 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible: boolean = false;
   filtroVisible: boolean = false;
   projeto!: Project;
+  loggedUser : User = new User();
 
 ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
   option: string | null = 'Cards';
   optionFilter: string = '';
 
-  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, 
+  constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private cookies_service : CookiesService
  ) {}
 
   async atualizar(favoritado: boolean): Promise<void> { 
@@ -70,14 +74,59 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.projeto = await this.service.getOne('project', id);
       console.log(this.projeto);
       this.teste()
-
-     
     });
   
-  
+    this.loggedUser = await this.cookies_service.getLoggedUser();
    
-
+    this.listaTarefas.forEach(element => {
+      this.translateStatus(element)
+    });
   }
+
+  translateStatus(tarefa:Task) {
+    const lang = localStorage.getItem('lang');
+    if (lang === 'ch') {
+            if (tarefa.currentStatus.name === 'pendente' || tarefa.currentStatus.name === 'pendiente' || tarefa.currentStatus.name === 'pending') {
+                tarefa.currentStatus.name = '待定';
+            } else if (tarefa.currentStatus.name === 'em progresso' || tarefa.currentStatus.name === 'en progreso' || tarefa.currentStatus.name === 'in progress') {
+                tarefa.currentStatus.name = '进展中';
+            } else if (tarefa.currentStatus.name === 'concluido' || tarefa.currentStatus.name === 'completado' || tarefa.currentStatus.name === 'completed') {
+                tarefa.currentStatus.name = '已完成';
+            } else if (tarefa.currentStatus.name === 'não atribuido' || tarefa.currentStatus.name === 'Sin asignar' || tarefa.currentStatus.name === 'Unassigned') {
+                tarefa.currentStatus.name = '未分配';
+            }
+    } else if (lang === 'pt') {
+            if (tarefa.currentStatus.name === '待定' || tarefa.currentStatus.name === 'pendiente' || tarefa.currentStatus.name === 'pending') {
+                tarefa.currentStatus.name = 'pendente';
+            } else if (tarefa.currentStatus.name === '进展中' || tarefa.currentStatus.name === 'en progreso' || tarefa.currentStatus.name === 'in progress') {
+                tarefa.currentStatus.name = 'em progresso';
+            } else if (tarefa.currentStatus.name === '已完成' || tarefa.currentStatus.name === 'completado' || tarefa.currentStatus.name === 'completed') {
+                tarefa.currentStatus.name = 'concluido';
+            } else if (tarefa.currentStatus.name === '未分配' || tarefa.currentStatus.name === 'Sin asignar' || tarefa.currentStatus.name === 'Unassigned') {
+                tarefa.currentStatus.name = 'não atribuido';
+            }
+    } else if (lang === 'es') {
+            if (tarefa.currentStatus.name === '待定' || tarefa.currentStatus.name === 'pendente' || tarefa.currentStatus.name === 'pending') {
+                tarefa.currentStatus.name = 'pendiente';
+            } else if (tarefa.currentStatus.name === '进展中' || tarefa.currentStatus.name === 'em progresso' || tarefa.currentStatus.name === 'in progress') {
+                tarefa.currentStatus.name = 'en progreso';
+            } else if (tarefa.currentStatus.name === '已完成' || tarefa.currentStatus.name === 'concluido' || tarefa.currentStatus.name === 'completed') {
+                tarefa.currentStatus.name = 'completado';
+            } else if (tarefa.currentStatus.name === '未分配' || tarefa.currentStatus.name === 'não atribuido' || tarefa.currentStatus.name === 'Unassigned') {
+                tarefa.currentStatus.name = 'Sin asignar';
+            }
+    } else if (lang === 'en') {
+            if (tarefa.currentStatus.name === '待定' || tarefa.currentStatus.name === 'pendente' || tarefa.currentStatus.name === 'pendiente') {
+                tarefa.currentStatus.name = 'pending';
+            } else if (tarefa.currentStatus.name === '进展中' || tarefa.currentStatus.name === 'em progresso' || tarefa.currentStatus.name === 'en progreso') {
+                tarefa.currentStatus.name = 'in progress';
+            } else if (tarefa.currentStatus.name === '已完成' || tarefa.currentStatus.name === 'concluido' || tarefa.currentStatus.name === 'completado') {
+                tarefa.currentStatus.name = 'completed';
+            } else if (tarefa.currentStatus.name === '未分配' || tarefa.currentStatus.name === 'não atribuido' || tarefa.currentStatus.name === 'Sin asignar') {
+                tarefa.currentStatus.name = 'Unassigned';
+            }
+    }
+}
  
   teste(){
     console.log(this.projeto);
@@ -150,22 +199,82 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.filtroVisible = false;
 
     e.target.value = 'Visualização';
-   let op : OptionOrder ={
-    name: "Data final",
-    type: "date"
-   }
-   let op1 : OptionOrder ={
-    name: "Progresso",
-    type: "number"
-   }
-   let op2 : OptionOrder ={
-    name: "Prioridade",
-    type: "priority"
-   }
-   let op3 : OptionOrder ={
-    name: "Agendamento",
-    type: "date"
-   }
+    const lang = localStorage.getItem('lang');
+
+    let op: OptionOrder;
+    let op1: OptionOrder;
+    let op2: OptionOrder;
+    let op3: OptionOrder;
+    
+    if (lang === 'pt') {
+        op = {
+            name: 'Data final',
+            type: 'date'
+        };
+        op1 = {
+            name: 'Progresso',
+            type: 'number'
+        };
+        op2 = {
+            name: 'Prioridade',
+            type: 'priority'
+        };
+        op3 = {
+            name: 'Agendamento',
+            type: 'date'
+        };
+    } else if (lang === 'es') {
+        op = {
+            name: 'Fecha final',
+            type: 'date'
+        };
+        op1 = {
+            name: 'Progreso',
+            type: 'number'
+        };
+        op2 = {
+            name: 'Prioridad',
+            type: 'priority'
+        };
+        op3 = {
+            name: 'Programación',
+            type: 'date'
+        };
+    } else if (lang === 'ch') {
+        op = {
+            name: '最终日期',
+            type: 'date'
+        };
+        op1 = {
+            name: '进度',
+            type: 'number'
+        };
+        op2 = {
+            name: '优先级',
+            type: 'priority'
+        };
+        op3 = {
+            name: '日程安排',
+            type: 'date'
+        };
+    } else {
+        op = {
+            name: 'Due Date',
+            type: 'date'
+        };
+        op1 = {
+            name: 'Progress',
+            type: 'number'
+        };
+        op2 = {
+            name: 'Priority',
+            type: 'priority'
+        };
+        op3 = {
+            name: 'Schedule',
+            type: 'date'
+        };
+    }
    this.listOptions = [op, op1, op2, op3];
     this.listIcons = [
       PrimeIcons.CALENDAR,
@@ -192,11 +301,13 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.visualizacaoVisible = false;
 
     if (option.type == "date") {
-      if (option.name == "Data final") {
+      if (option.name == "Data final" || option.name == 'Due Date' || option.name == 'Fecha final'
+      || option.name == '最终日期'
+      ) {
         this.sortByDate(this.listaTarefas, 'finalDate');
         this.sortByDate(this.listaNova, 'finalDate');
       }
-      if (option.name == "Agendamento") {
+      if (option.name == "Agendamento" || option.name == "Schedule" || option.name == "日程安排" || option.name == "Programación") {
         this.sortByDate(this.listaTarefas, 'scheduledDate');
         this.sortByDate(this.listaNova, 'scheduledDate');
       }
@@ -267,22 +378,83 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     this.visualizacaoVisible = false;
     this.ordenacaoVisible = false;
     
-    let op : OptionOrder ={
-      name: "Status",
-      type: "status"
-     }
-     let op1 : OptionOrder ={
-      name: "Associado",
-      type: "associate"
-     }
-     let op2 : OptionOrder ={
-      name: "Prioridade",
-      type: "priority"
-     }
-     let op3 : OptionOrder ={
-      name: "Favorito",
-      type: "favorited"
-     }
+    const lang = localStorage.getItem('lang');
+
+// Define os objetos de opção com os nomes traduzidos de acordo com o idioma
+let op: OptionOrder;
+let op1: OptionOrder;
+let op2: OptionOrder;
+let op3: OptionOrder;
+
+if (lang === 'pt') {
+    op = {
+        name: 'Status',
+        type: 'status'
+    };
+    op1 = {
+        name: 'Associado',
+        type: 'associate'
+    };
+    op2 = {
+        name: 'Prioridade',
+        type: 'priority'
+    };
+    op3 = {
+        name: 'Favorito',
+        type: 'favorited'
+    };
+} else if (lang === 'es') {
+    op = {
+        name: 'Estado',
+        type: 'status'
+    };
+    op1 = {
+        name: 'Asociado',
+        type: 'associate'
+    };
+    op2 = {
+        name: 'Prioridad',
+        type: 'priority'
+    };
+    op3 = {
+        name: 'Favorito',
+        type: 'favorited'
+    };
+} else if (lang === 'ch') {
+    op = {
+        name: '状态',
+        type: 'status'
+    };
+    op1 = {
+        name: '关联',
+        type: 'associate'
+    };
+    op2 = {
+        name: '优先级',
+        type: 'priority'
+    };
+    op3 = {
+        name: '收藏',
+        type: 'favorited'
+    };
+} else {
+    op = {
+        name: 'Status',
+        type: 'status'
+    };
+    op1 = {
+        name: 'Associate',
+        type: 'associate'
+    };
+    op2 = {
+        name: 'Priority',
+        type: 'priority'
+    };
+    op3 = {
+        name: 'Favorite',
+        type: 'favorited'
+    };
+  }
      this.listOptions = [op, op1, op2, op3];
         this.listIcons = [
       PrimeIcons.SPINNER,
@@ -298,8 +470,14 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     }  }
 
   async optionC(option: any) {
-    if (option.name== 'Status' || option.name== 'Prioridade' || option.name== 'Associado' ) {
+    console.log(option);
+    
+    if (option.name== 'Status' || option.name== 'Prioridade' || option.name== 'Associado' || option.name== '状态' 
+    || option.name== 'Estado' || option.name== 'Prioridad' || option.name== 'Priority' || option.name== '优先级'
+    || option.name== 'Associate' || option.name== '关联' || option.name== 'Asociado') {
       this.optionFilter = '';
+      console.log(3);
+      
     } 
     else {      
       this.optionFilter = option.name ?? option;
@@ -321,6 +499,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
         }
       });
         this.projeto.members.map((s) => {
+          console.log(option);
           
           if (s.user.name == option.name) {
             console.log(option.name);
@@ -332,7 +511,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.sortLists();
     });
 
-    if (option.name == 'Favorito') {
+    if (option.name == 'Favorito' || option.name == 'Favorite' || option.name == '收藏') {
 
       this.listaTarefas = this.listaNova.filter((task)=> task.favorited )
       this.filtroVisible = false;
@@ -348,10 +527,16 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   }
 
 
-  openTaskEdit(tarefa:Task) {
+  async openTaskEdit(tarefa:Task) {
     let priorityTeste : PriorityRecord = new PriorityRecord();
     priorityTeste.name = "nenhuma";
     priorityTeste.backgroundColor = "#cccccc" 
+    this.tarefaNova.creator = this.loggedUser;
+    this.tarefaNova.project = this.projeto;
+    this.tarefaNova.currentStatus = this.projeto.statusList[0];
+    console.log(this.tarefaNova);
+    this.tarefaNova = await this.service.postTarefa(this.tarefaNova);
+    console.log(this.tarefaNova);
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
     console.log(this.tarefaSelecionada);

@@ -1,0 +1,20 @@
+<div class="flex flex-col w-full h-80 bg-primaryWhite items-center rounded-lg overflow-clip shadow-2xl">
+    <div class="search-bar-container  z-20 flex justify-center items-center relative w-full h-[15%] bg-[#f5f5f5] border-b-2  top-0">
+        <div class="search-bar  flex justify-end items-center w-[80%] h-[60%] bg-[#F0F0F0] rounded-xl px-4 gap-2 border-2  border-primary">
+            <input class="search-input bg-transparent w-full bg-[#F0F0F0] outline-none" type="text" [(ngModel)]="search" placeholder="Pesquise aqui...">
+            <i class="search-icon pi pi-search  text-primary"></i>
+        </div>
+    </div>
+    <p class="flex justify-center items-center bg-slate-200 w-full h-[10%]">{{selectedUsers.length}} usuarios selecionados</p>
+    <div class="user-list w-full h-[65%] overflow-scroll" >
+        <div class="w-full" *ngFor="let user of getSelectedUsers()">
+            <app-user-members *ngIf="matchSearch(user) || search.length==0" [user]="user" [isUserSelected]="true" (click)="unselectUser(user)"></app-user-members>
+        </div>
+        <div class="w-full" *ngFor="let user of getUsers()">
+            <app-user-members *ngIf="matchSearch(user)" [user]="user" (click)="selectUser(user)"></app-user-members>
+        </div>
+    </div>
+    <div class=" flex w-full justify-center items-center h-[10%]">
+        <button class="bg-primary w-full h-full text-primaryWhite " (click)="addUsers(selectedUsers)"> Adicionar usuario(s) </button>
+    </div>
+</div>

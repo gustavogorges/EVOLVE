@@ -1,10 +1,10 @@
 .main {
 
-    @apply bg-primaryNav dark:bg-dark-theme-back h-[8%]   w-full fixed border-b-2 dark:border-dark-secundary-gray
+    @apply bg-primaryNav dark:bg-dark-theme-back h-[8%]   w-full absolute border-b-2 dark:border-dark-secundary-gray
 
     
     ;
-    z-index: 9999;
+    z-index: 99;
 }
 
 .main-grid {
@@ -23,9 +23,9 @@
     label, input{
         @apply dark:bg-dark-primary-black  hidden sm:flex dark:border-dark-primary dark:text-white 
     }
-    .search-input{
+    app-search-component{
     @apply    
-        placeholder:text-gray-400 placeholder:dark:text-white
+        placeholder:text-gray-400 placeholder:dark:text-white 
     
     }
 
@@ -41,7 +41,7 @@
 
 }
 
-.search-input {
+app-search-component {
     @apply w-2/3 h-full outline-none ml-2
 }
 .icon {
@@ -52,7 +52,11 @@
    @apply text-[1rem]
 }
 
-.span-input {
+.gorgees{
+    @apply flex justify-end 
+}
+
+app-search-component {
     @apply w-2/3 h-1/2 bg-white  border-2 rounded-md 
 }
 

@@ -7,7 +7,13 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
+<<<<<<< HEAD
 import { UserProject } from 'src/model/userProject';
+=======
+import { Task } from 'src/model/task';
+
+import { CookiesService } from 'src/service/cookies-service.service';
+>>>>>>> dev
 
 interface Tarefa{
   nome : string,
@@ -23,7 +29,7 @@ interface Tarefa{
 })
 export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
-  constructor(private route:Router, private service:BackendEVOLVEService, private sanitizer: DomSanitizer) { }
+  constructor(private route:Router, private service:BackendEVOLVEService, private sanitizer: DomSanitizer, private cookies_service : CookiesService) { }
 
   isVisibleSubscription !: Subscription
   tarefas : Tarefa[] = []
@@ -42,10 +48,13 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.projeto.editOn = false
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
+  
+  loggedUser : User = new User;
   date: string = ''
   progresso = 0
   md: any
@@ -57,7 +66,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   preImage:SafeUrl | undefined = '';
   projetoSave !: Project
   searchTerm : string = ''
-  listIdsFromRemove = new Array<Pick<User, "id">>
+  listIdsFromRemove = new Array<Pick<User, "id">>;
   
   @Input() resetProject : Boolean = false
   
@@ -83,6 +92,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   @Output() listFromRemove: EventEmitter<Array<Pick<User, "id">>> = new EventEmitter<Array<Pick<User, "id">>>()
 
+  @Output() openTaskModal: EventEmitter<Task> = new EventEmitter<Task>()
+
 
   openAgain(){
     this.noCloseProject.emit()
@@ -97,8 +108,26 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     return true
   }
 
+<<<<<<< HEAD
   filteredNames():UserProject[] {
     return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+=======
+  alterarTarefaFavoritado(){
+    this.projeto.favorited = !this.projeto.favorited;
+    this.salvarTarefa()
+  }
+
+  async salvarTarefa(){
+    await this.service.putProjeto(this.projeto, this.loggedUser.id);
+  }
+
+  filteredNames() {
+    return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+>>>>>>> dev
+  }
+
+  openTask(task:Task){
+    this.openTaskModal.emit(task)
   }
 
   async setImageProject(event:any){

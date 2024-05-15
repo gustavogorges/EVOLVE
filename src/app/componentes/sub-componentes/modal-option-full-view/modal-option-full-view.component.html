@@ -1,12 +1,16 @@
-
-<div class="flex gap-3 flex-row-reverse min-w-fit pr-1.5 cursor-pointer " #Options >
-    <button (click)="viewOptions()" class="dark:text-gray-300 bg-primaryGray dark:bg-dark-secundary-gray"><i class="pi pi-ellipsis-v duration-500 text-primary dark:text-dark-primary" [ngClass]="!viewOptionsBol  ? 'rotate-90':'rotate-0'"></i></button>
-    <div class="flex gap-2 overflow-hidden duration-500 " [ngClass]="!viewOptionsBol ? 'w-full pr-2':'w-0'">
-        <div #newChartElement>
-            <button type="button" (click)="newChartVisible()" class="text-gray-800 dark:text-gray-300 dark:bg-dark-secundary-gray bg-primaryGray"><i class="pi pi-plus text-primary dark:text-dark-primary" options="delay"></i> Adicionar novo gráfico</button>
-            <app-new-chart-modal style="z-index: 99999;" [project]="projeto" (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
+<div class="titulo-dashboard w-full">
+    <p class="nameDash" *ngIf="!viewEditBol">{{dashboard.name}}</p>
+    <input #inputElement *ngIf="viewEditBol" type="text" class="nameDash bg-transparent outline-none border-none" maxlength="18" name="" id="" [(ngModel)]="nameDashEdited">
+    
+    <div class="flex gap-2 px-2 flex-row-reverse min-w-fit cursor-pointer " #Options >
+        <button (click)="viewOptions()" class="dark:text-gray-300 bg-primaryGray dark:bg-dark-secundary-gray"><i class="pi pi-ellipsis-v duration-500 text-primary dark:text-dark-primary" [ngClass]="!viewOptionsBol  ? 'rotate-90':'rotate-0'"></i></button>
+        <div class="flex gap-3 overflow-hidden duration-500 " [ngClass]="!viewOptionsBol ? 'w-full px-2':'w-0'">
+            <div #newChartElement>
+                <button type="button" (click)="newChartVisible()" class="text-gray-800 dark:text-gray-300 dark:bg-dark-secundary-gray bg-primaryGray"><i class="pi pi-plus text-primary dark:text-dark-primary" options="delay"></i> {{'Adicionar novo gráfico' | translate}}</button>
+                <app-new-chart-modal style="z-index: 99999;" [project]="projeto" (closeNewChart)="newChartVisible()" [dashboard]="dashboard" [newChartBool]="newChartBool" [charts]="charts" ></app-new-chart-modal>
+            </div>
+            <button type="button" (click)="viewEdit()" class="text-gray-800 dark:bg-dark-secundary-gray dark:text-gray-300 bg-primaryGray"><i class="pi pi-pencil text-primary dark:text-dark-primary" options="delay"></i> {{'Editar Dashboard' | translate}}</button>
+            <button type="button" (click)="deleteDashboard()" class="bg-red-600 text-secondaryWhite"><i class="pi pi-trash text-secondaryWhite" options="delay"></i> {{'Deletar Dashboard' | translate}}</button>
         </div>
-        <button type="button" (click)="viewEdit()" class="text-gray-800 dark:bg-dark-secundary-gray dark:text-gray-300 bg-primaryGray mr-[0.5rem]"><i class="pi pi-pencil text-primary dark:text-dark-primary" options="delay"></i> Editar Dashboard</button>
-        <button type="button" (click)="deleteDashboard()" class="bg-red-600 text-secondaryWhite"><i class="pi pi-trash text-secondaryWhite" options="delay"></i> Deletar Dashboard</button>
     </div>
 </div>

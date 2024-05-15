@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Team } from 'src/model/team';
 import { TeamNotification } from 'src/model/teamNotification';
 import { User } from 'src/model/user';
@@ -12,14 +12,27 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class NotificationModalComponent implements OnInit {
   loggedUser : User = new User;
-
+  notification = false
+  @Output() closeNotification : EventEmitter<boolean> = new EventEmitter
   constructor(private service : BackendEVOLVEService,
-    private cookies_service : CookiesService
+    private cookies_service : CookiesService, private elementRef: ElementRef
   ) { }
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    document.body.addEventListener('click', this.onDocumentClick);
+
   }
+
+  openNotification(){
+    this.notification = !this.notification
+  }
+
+  onDocumentClick = (event: any) => {
+    if (!this.elementRef.nativeElement.contains(event.target) && event.target.tagName != "I") {
+      this.notification = false
+    }
+  };
 
   openNotifications(team : Team){
     team.booleanView = true;

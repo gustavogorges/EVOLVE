@@ -1,12 +1,18 @@
+
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { User } from 'src/model/user';
 import { CookieService } from 'ngx-cookie-service';
 import axios, { AxiosResponse } from 'axios';
+import { EventEmitter, Injectable } from "@angular/core";
+import { CookiesService } from "./cookies-service.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+  loggedInChanged = new EventEmitter<boolean>();
+  
   constructor(private http: HttpClient, private cookies: CookieService) {}
+
   async proceedLogin(userlogin: any): Promise<AxiosResponse<User>> {
     try {
       console.log(userlogin);
@@ -26,6 +32,7 @@ export class AuthService {
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       throw error;
+
     }
   }
 

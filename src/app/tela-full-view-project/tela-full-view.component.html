@@ -44,29 +44,29 @@
                         </div>
                     </div>
                 </div>
-                <textarea *ngIf="projeto && nameEdit" class="descricao resize-none pr-10 break-all whitespace-pre-wrap bg-transparent outline-none w-full" [(ngModel)]="projeto.description"></textarea>
+                <textarea *ngIf="projeto && nameEdit" class="descricao resize-none pr-10 break-all whitespace-pre-wrap bg-transparent outline-none w-full" [(ngModel)]="descEdited"></textarea>
 
 
             </div>
         </div>
         <div class="w-full flex justify-end gap-5" *ngIf="nameEdit">
-            <button class="p-2 bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack w-[10rem] font-semibold  hover:scale-105 duration-150 rounded-lg" (click)="editProjectFun()">Cancelar</button>
-            <button class="p-2 bg-primary dark:bg-dark-primary dark:text-primaryFontBlack font-semibold w-[10rem] rounded-lg hover:scale-105 duration-150 " (click)="saveProject()">Salvar</button>
+            <button class="p-2 bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack text-primaryWhite w-[10rem] font-semibold  hover:scale-105 duration-150 rounded-lg" (click)="editProjectFun()">{{'Cancelar' | translate}}</button>
+            <button class="p-2 bg-primary dark:bg-dark-primary dark:text-primaryFontBlack text-primaryWhite font-semibold w-[10rem] rounded-lg hover:scale-105 duration-150 " (click)="saveProject()">{{'Salvar' | translate}}</button>
+
         </div>
         <div class="w-full h-[10vh] pt-10 flex items-end gap-10 border-b-2 dark:border-fontGray">
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Dashboards' ? 
-            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Dashboards')"> Dashboards </p>
+            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Dashboards')"> {{'Dashboards' | translate}} </p>
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Membros' ? 
-            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Membros')"> Membros </p>
+            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Membros')"> {{'Membros' | translate}} </p>
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Comentários' ? 
-            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Comentários')"> Comentários </p>
+            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Comentários')"> {{'Comentários' | translate}} </p>
         </div>
         <div class="dashboard-pai overflow-hidden" *ngIf="miniPageView === 'Dashboards'">
             <div #dashElement class="w-fit pl-1">
                 <div class="newDashBoard ">
                     <button #buttonNewDash type="button" (click)="newDashVisible()"
-                        class="flex gap-2 items-center h-full "><i class="pi pi-plus" options="delay"></i>New
-                        Dashboard</button>
+                        class="flex gap-2 items-center h-full "><i class="pi pi-plus" options="delay"></i>{{'Nova Dashboard' | translate}}</button>
                 </div>
                 <app-new-dashboard-modal [project]="projeto" [dashboards]="dashboards" [newDashId]="dashboards.length"
                     (newDash)="createNewDashBoard($event)" [newDashBool]="newDashVisibleBol"
@@ -74,13 +74,11 @@
             </div>
             <div class="container" *ngFor="let dashboard of dashboards, index as index">
                 <div>
-                    <div class="titulo-dashboard">
-                        <p>{{dashboard.name}}</p>
-                        <app-modal-option-full-view (dashboardToedit)="setdashboardEdit($event)"
-                            [viewOptionsBol]="viewOptionsBol" [charts]="charts"
-                            (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard" [projeto]="projeto"
-                            [dashboards]="dashboards" class="w-fit h-fit"></app-modal-option-full-view>
-                    </div>
+                    <app-modal-option-full-view (dashboardToedit)="setdashboardEdit($event)"
+                        [viewOptionsBol]="viewOptionsBol" [charts]="charts"
+                        (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard" [projeto]="projeto"
+                        [dashboards]="dashboards" class="w-fit h-fit">
+                    </app-modal-option-full-view>
                     <div class="dashboard  flex" cdkDropList cdkDropListOrientation="horizontal"
                         (cdkDropListDropped)="drop($event, dashboard)">
                         <div class="chart relative " cdkDrag *ngFor="let squad of dashboard.styleDash, index as i"
@@ -97,27 +95,36 @@
                 </div>
             </div>
         </div>
+
         <div *ngIf="miniPageView === 'Membros' && projeto" >
-            <div>
-                <input class="p-2 outline-none border-2 h-full w-full bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+            <div class="flex justify-between" #addMember>
+                <input class="p-2 outline-none border-2 h-full w-[75%] bg-primaryGray dark:bg-dark-secundary-gray rounded-b-lg" placeholder="{{'email ou nome do usuário' | translate}}" type="text" [(ngModel)]="searchTerm" pInputText />
+                <button (click)="setModalOpenAddMembers()" class="w-[20%] bg-secondary dark:bg-dark-secondary dark:text-primaryFontBlack text-secondaryWhite rounded-b-lg font-semibold duration-150 hover:scale-105">{{'Adicionar um membro' | translate}}</button>
+
+                <app-add-member-to-project-modal (closeModalAddMember)="setModalOpenAddMembersFalse()" [modalOpen]="openModalAddMembers" [project]="projeto"></app-add-member-to-project-modal>
             </div>
             <div *ngIf="filteredNames().length === 0" class="membros">
-                <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">Nenhum membro encontrado</p>
+                <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">{{'Nenhum membro encontrado' | translate}}</p>
             </div>
+<<<<<<< HEAD
             <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] w-full overflow-y-auto">
                 <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user.user" ></app-member-list-full-view-project>
+=======
+            <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] overflow-y-auto">
+                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
+>>>>>>> dev
             </div>
         </div>
+
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
         <div class="top mb-10" *ngIf="miniPageView === 'Dashboards'">
-            <button *ngIf="dashboards.length != 0" class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> Voltar
-                para o topo</button>
+            <button *ngIf="dashboards.length != 0" class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> {{'Voltar para o topo' | translate}}</button>
         </div>
     </div>
     <div class="div-menor">
         <div class="square">
             <div class="name">
-                <p class="name-text">Membros</p>
+                <p class="name-text">{{'Membros' | translate}}</p>
             </div>
             <div *ngIf="projeto" class="membros">
                 <div *ngFor="let member of projeto.members, index as index">
@@ -144,13 +151,13 @@
             </div>
             <div class="flex justify-end mb-10">
                 <button *ngIf="!unlockAllMembersView" (click)="unlockMembersView()"
-                    class="text-primary font-semibold dark:text-dark-primary">Ver todos</button>
+                    class="text-primary font-semibold dark:text-dark-primary">{{'Ver todos' | translate}}</button>
                 <button *ngIf="unlockAllMembersView" (click)="unlockMembersView()"
-                    class="text-primary font-semibold dark:text-dark-primary">Ver menos</button>
+                    class="text-primary font-semibold dark:text-dark-primary">{{'Ver menos' | translate}}</button>
             </div>
             <div #statusClose class="h-fit">
                 <div class="name">
-                    <p class="name-text">Status das Tarefas</p>
+                    <p class="name-text">{{'Status das Tarefas' | translate}}</p>
                 </div>
                 <div class="h-[17vh] w-full overflow-auto flex justify-center" *ngIf="projeto">
                     <div class="status-box">
@@ -171,7 +178,7 @@
                 <div>
                     <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
                         <i class="pi pi-plus"></i>
-                        <p>Adicionar status</p>
+                        <p>{{'Adicionar status' | translate}}</p>
                     </div>
                     <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
                         <div class="nome-status-box">
@@ -194,10 +201,10 @@
                         </div>
                         <div *ngIf="booleanAddStatus" class="confirmar-status-box cursor-pointer"
                             (click)="novoStatus()">
-                            <p class="font-semibold">confirmar</p>
+                            <p class="font-semibold">{{'confirmar' | translate}}</p>
                         </div>
                         <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
-                            <p class="font-semibold">Editar Status</p>
+                            <p class="font-semibold">{{'Editar Status' | translate}}</p>
                         </div>
                     </div>
                 </div>

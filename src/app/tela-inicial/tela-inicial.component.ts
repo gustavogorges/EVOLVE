@@ -156,8 +156,8 @@ async openTask(tarefa: Task): Promise<void> {
     this.router.navigate(['/tela-tarefa/'+projectId]);
 
   }
-  goProjetos(){
-    this.router.navigate(["/tela-projeto"])
+  goProjetos(temId : number){
+    this.router.navigate(["/equipe/"+temId])
   }
   
   tarefaNova: Task = new Task();

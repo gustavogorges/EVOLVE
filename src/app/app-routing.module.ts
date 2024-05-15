@@ -28,51 +28,51 @@ const routes: Routes = [
   {
     path : "tela-inicial",
     component : TelaInicialComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
   },
   {
     path:"tela-projeto/:teamId",
     component: TelaProjetoRemasteredComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
   },
   {
     path:"tela-tarefa/:projectId",
     component: TelaTarefaComponent,
-    canActivate: [AuthGuard]
+//canActivate: [AuthGuard]
   },
   {
     path:"criar-projeto/:teamId",
     component: TelaCriarProjetoComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
   },
   {
     path:"tela-chat",
     component: TelaChatComponent,
-    canActivate: [AuthGuard]
+   // canActivate: [AuthGuard]
   },
   {
 
-    path:"equipe/criar",
+    path:"equipe/:teamId",
     component: TeamCreationScreenComponent,
-    canActivate: [AuthGuard]
+   // canActivate: [AuthGuard]
   },
   {
     path:'view-project/:projectId',
     component: TelaFullViewComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
 
   },
   {
     path:'reports',
     component: TelaReportsComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
 
   },
   {
 
     path:"tela-perfil/:userId",
     component: TelaPerfilComponent,
-    canActivate: [AuthGuard]
+ //   canActivate: [AuthGuard]
   }
 ];
 

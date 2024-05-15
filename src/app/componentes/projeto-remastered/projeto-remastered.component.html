@@ -22,44 +22,67 @@
         <div class="project-name"><input [disabled]="!projeto.editOn" maxlength="35" type="text" [(ngModel)]="projeto.name"></div>
         <div class="project-desc"><textarea class="text-justify" maxlength="110" cols="30" rows="10" [disabled]="!projeto.editOn" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
+<<<<<<< HEAD
             <p>Criador:</p>
             <div *ngIf="verifyImg(getProjectCreator(projeto)) && getProjectCreator(projeto)" [ngStyle]="{'background': getProjectCreator(projeto).imageColor }" >{{getProjectCreator(projeto).name.charAt(0).toUpperCase()}}</div>
             <div class="overflow-hidden object-center" *ngIf="!verifyImg(getProjectCreator(projeto))">
                 <img *ngIf="!verifyImg(getProjectCreator(projeto))" src="{{getProjectCreator(projeto).image.data}}" alt="">
+=======
+            <p>{{'Criador:' | translate}}</p>
+            <div *ngIf="verifyImg(projeto.creator) && projeto.creator" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
+            <div class="overflow-hidden object-center" *ngIf="!verifyImg(projeto.creator)">
+                <img *ngIf="!verifyImg(projeto.creator)" src="{{projeto.creator.image.data}}" alt="">
+>>>>>>> dev
             </div>
         </div>
         <div class="project-progress"><div></div></div>
-        <div class="project-final-date"><p>data final: 
+        <div class="project-final-date"><p>{{'data final:' | translate}} 
             <input #data [disabled]="!projeto.editOn" type="date" [(ngModel)]="projeto.finalDate" class="bg-transparent">
         </p></div>
+        <div class="absolute top-4 left-4" (click)="openAgain()">
+            <img
+            *ngIf="!projeto.favorited"
+            src="../../../assets/estrelaNaoMarcada.svg"
+            alt=""
+            style="width: 30px ; height: 30px"   
+            (click)="alterarTarefaFavoritado()"
+            />
+            <img
+            *ngIf="projeto.favorited"
+            src="../../../assets/estrelaMarcada.svg"
+            alt=""
+            style="width: 30px; height: 30px"   
+            (click)="alterarTarefaFavoritado()"
+            />
+        </div>
     </div>
     
     <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[30vw] 2xl:w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
         <div class="project-open-infos">
             <div class="tittle-infos">
-                <p>Nome</p>
-                <p>Progresso</p>
-                <p>Status</p>
-                <p>Prazo</p>
+                <p>{{'Nome' | translate}}</p>
+                <p>{{'Progresso' | translate}}</p>
+                <p>{{'Status' | translate}}</p>
+                <p>{{'Prazo' | translate}}</p>
             </div>
             
             <div class="value-infos pb-5">
-                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks">
+                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks" (click)="openTask(t)">
                     <p class="Nome">{{t.name}}</p>
                     <div class="Progresso">
-                        <div class="valor-progresso"  [style.width.%]="t.conclusionPercentage" ></div>
+                        <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
-                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
+                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" [style.color]="t.currentStatus.textColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>
                 </div>
                 <div *ngIf="getTasksLength() === 0" class="noneTask">
-                    <p>Nenhuma tarefa criada</p>
+                    <p>{{'Nenhuma tarefa criada' | translate}}</p>
                 </div>
             </div>
         </div>
         <div class="project-open-users">
             <div class="bg-primaryGray dark:bg-dark-secundary-gray dark:text-secondaryWhite w-full h-[30%] flex justify-center items-center rounded-t-lg">
-                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="{{'email ou nome do usuário' | translate}}" type="text" [(ngModel)]="searchTerm" pInputText />
                 <i class="pi pi-search text-primary dark:text-dark-primary"></i>
             </div>
             <div class="users">
@@ -74,7 +97,7 @@
                         <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
-                        <p class="text-xl font-hind-madurai text-fontGray text-center">Nenhum membro encontrado</p>
+                        <p class="text-xl font-hind-madurai text-fontGray text-center">{{'Nenhum membro encontrado' | translate}}</p>
                     </div>
                 </div>
                 <span>></span>
@@ -82,11 +105,19 @@
         </div>
 
         <div class="botoes">
+<<<<<<< HEAD
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
             <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
+=======
+            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >{{'Deletar Projeto' | translate}} <i class="pi pi-trash"></i></button>
+            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
+            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
+            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
+            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+>>>>>>> dev
         </div>
     </div>
 
@@ -94,29 +125,29 @@
     
         <div class="project-open-infos">
             <div class="tittle-infos">
-                <p>Nome</p>
-                <p>Progresso</p>
-                <p>Status</p>
-                <p>Prazo</p>
+                <p>{{'Nome' | translate}}</p>
+                <p>{{'Progresso' | translate}}</p>
+                <p>{{'Status' | translate}}</p>
+                <p>{{'Prazo' | translate}}</p>
             </div>
             
             <div class="value-infos pb-5">
-                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks">
+                <div [ngClass]="getTasksLength() === 0 ? 'invisible':'visible'" class="values" *ngFor="let t of projeto.tasks" (click)="openTask(t)">
                     <p class="Nome">{{t.name}}</p>
                     <div class="Progresso">
-                        <div class="valor-progresso"  [style.width.%]="t.conclusionPercentage" ></div>
+                        <div class="valor-progresso"  [style.width.%]="t.progress" ></div>
                     </div>
-                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" >{{t.currentStatus.name}}</p>
+                    <p class="Status" [style.backgroundColor]="t.currentStatus.backgroundColor" [style.color]="t.currentStatus.textColor" >{{t.currentStatus.name}}</p>
                     <p class="Prazo">{{t.finalDate}}</p>
                 </div>
                 <div *ngIf="getTasksLength() === 0" class="h-[50%] w-full flex justify-center items-center text-sm text-fontGray whitespace-nowrap">
-                    <p>Nenhuma tarefa criada</p>
+                    <p>{{'Nenhuma tarefa criada' | translate}}</p>
                 </div>
             </div>
         </div>
         <div class="project-open-users">
             <div class="bg-primaryGray dark:bg-dark-secundary-gray dark:text-secondaryWhite w-full h-[30%] flex justify-center items-center rounded-t-lg">
-                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="email ou nome do usuário" type="text" [(ngModel)]="searchTerm" pInputText />
+                <input class="p-2 outline-none border-none h-full w-[90%] bg-transparent" placeholder="{{'email ou nome do usuário' | translate}}" type="text" [(ngModel)]="searchTerm" pInputText />
                 <i class="pi pi-search text-primary dark:text-dark-primary"></i>
             </div>
             <div class="users overflow-hidden">
@@ -131,7 +162,7 @@
                         <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
-                        <p class="text-sm text-fontGray w-fit">Nenhum membro encontrado</p>
+                        <p class="text-sm text-fontGray w-fit">{{'Nenhum membro encontrado' | translate}}</p>
                     </div>
                 </div>
                 <span>></span>
@@ -139,11 +170,19 @@
         </div>
 
         <div class="botoes">
+<<<<<<< HEAD
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
             <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
+=======
+            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >{{'Deletar Projeto' | translate}} <i class="pi pi-trash"></i></button>
+            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
+            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
+            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
+            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+>>>>>>> dev
         </div>
 
     </div>

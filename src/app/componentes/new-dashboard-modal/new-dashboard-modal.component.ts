@@ -4,7 +4,9 @@ import { Subject, switchMap, take, takeUntil } from 'rxjs';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { Dashboard } from 'src/model/dashboard';
 import { Project } from 'src/model/project';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-new-dashboard-modal',
@@ -13,7 +15,8 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class NewDashboardModalComponent implements OnInit, OnChanges {
 
-  constructor(private service:BackendEVOLVEService) { }
+  constructor(private service:BackendEVOLVEService,
+    private cookies_service:CookiesService  ) { }
 
   dashChoosed:number = -1
   squads: any[] = []
@@ -24,8 +27,10 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
   @Input() dashboards : any[] = []
   name : string = ''
   projectLoaded$ = new Subject<void>();
+  loggedUser : User = new User;
 
-  ngOnInit(){
+  async ngOnInit(){
+    this.loggedUser = await this.cookies_service.getLoggedUser();
     this.squads.push(
       {
         id:0,
@@ -124,7 +129,7 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
         dashboard.styleDash = element.squad
       }
     });
-    this.newDash.emit(await this.service.postDashboard(dashboard, this.project.id))
+    this.newDash.emit(await this.service.postDashboard(dashboard, this.project.id, this.loggedUser.id))
     this.name = ""
     this.dashChoosed = -1
     this.chooseDash(-1)
@@ -142,11 +147,7 @@ export class NewDashboardModalComponent implements OnInit, OnChanges {
 
       this.squads.forEach(element => {
         if(element.id === index){
-          if(localStorage.getItem('theme') === 'dark'){
-            element.style = "border-dark-primary"
-          }else{
-            element.style = "border-primary"
-          }
+          element.style = "border-primary"
         }
       });
   }

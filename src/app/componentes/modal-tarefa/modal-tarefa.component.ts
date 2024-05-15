@@ -1,5 +1,6 @@
-import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnInit, Output, SimpleChange } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
+import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
 import { PriorityRecord } from 'src/model/priorityRecord';
@@ -18,7 +19,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
   templateUrl: './modal-tarefa.component.html',
   styleUrls: ['./modal-tarefa.component.scss'],
 })
-export class ModalTarefaComponent implements OnInit {
+export class ModalTarefaComponent implements OnInit, OnChanges {
   booleanDesc: boolean = false;
   page_task: string = 'sub-tarefas';
   nomeGrande: string = '';
@@ -103,8 +104,42 @@ export class ModalTarefaComponent implements OnInit {
       this.booleanAddPropriedade = false;
   }
 
+  async sendTimeFocus() : Promise<void> {
+    let userTask : UsuarioTarefa;
+    userTask = await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id);
+    if(userTask.userId == 0 || userTask.userId == null) {
+      userTask.userId = this.loggedUser.id;
+      userTask.taskId = this.tarefa.id;
+    }
+    if(userTask.workedSeconds + this.seconds >= 60) {
+      userTask.workedMinutes += 1;
+      userTask.workedSeconds = userTask.workedSeconds + this.seconds - 60;
+    } else {
+      userTask.workedSeconds += this.seconds;
+    }
+    if(userTask.workedMinutes + this.minutes >= 60) {
+      userTask.workedHours += 1;
+      userTask.workedMinutes = userTask.workedMinutes + this.minutes - 60;
+    } else {
+      userTask.workedMinutes += this.minutes;
+    }
+    userTask.workedHours += this.hours;
+    console.log(userTask);
+    console.log(this.seconds);
+    
+    this.service.updateUserWorkedTime(userTask);
+    this.finishFocus();
+  }
+
   constructor(private service: BackendEVOLVEService,
     private cookies_service:CookiesService) {}
+
+  ngOnChanges(){
+    this.translatePriorities()
+    this.translateTaskPriority()
+    this.translateStatus()
+  }
+
   @Input() tarefa: Task = new Task();
   @Input() projeto: Project = new Project();
   @Output() closeModalTask = new EventEmitter<boolean>();
@@ -123,18 +158,32 @@ export class ModalTarefaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    this.taskUnchanged = await this.service.getOne("task",this.tarefa.id);  
     
     this.listAssociates = this.tarefa.associates;
 
     
+<<<<<<< HEAD
     this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
+=======
+    this.listPriorities = await this.service.getAllPriorities()
+    this.translatePriorities()
+    this.translateTaskPriority()
+    this.translateStatus()
+    setTimeout(() => {
+      this.projeto.properties.forEach(propertyFor => {
+        if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
+          this.propertiesList.push(propertyFor);
+        }
+      })
+    },10);
+>>>>>>> dev
     this.propertiesList = this.tarefa.properties;
+
+    
 
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
       this.booleanCalendarioFinalDate = true;
-      this.tarefa = this.tarefaNova;
       this.tarefa.currentStatus.name = "sem status";
       this.tarefa.priority.name = "NENHUMA"
       this.tarefa.priority.backgroundColor = "#cccccc"
@@ -145,10 +194,221 @@ export class ModalTarefaComponent implements OnInit {
     }
   }
 
+  translateStatus() {
+    const lang = localStorage.getItem('lang');
+    if (lang === 'ch') {
+            if (this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pendiente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = '待定';
+            } else if (this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'en progreso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = '进展中';
+            } else if (this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = '已完成';
+            } else if (this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = '未分配';
+            }
+    } else if (lang === 'pt') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendiente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = 'pendente';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'en progreso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = 'em progresso';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = 'concluido';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = 'não atribuido';
+            }
+    } else if (lang === 'es') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pending') {
+                this.tarefa.currentStatus.name = 'pendiente';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'in progress') {
+                this.tarefa.currentStatus.name = 'en progreso';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completed') {
+                this.tarefa.currentStatus.name = 'completado';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Unassigned') {
+                this.tarefa.currentStatus.name = 'Sin asignar';
+            }
+    } else if (lang === 'en') {
+            if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pendiente') {
+                this.tarefa.currentStatus.name = 'pending';
+            } else if (this.tarefa.currentStatus.name === '进展中' || this.tarefa.currentStatus.name === 'em progresso' || this.tarefa.currentStatus.name === 'en progreso') {
+                this.tarefa.currentStatus.name = 'in progress';
+            } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado') {
+                this.tarefa.currentStatus.name = 'completed';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar') {
+                this.tarefa.currentStatus.name = 'Unassigned';
+            }
+    }
+}
+
+  translatePriorities(){
+    const lang = localStorage.getItem('lang');
+    if (lang === 'es') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NINGUNA';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'MUY BAJA';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'BAJA';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MEDIA';
+            break;
+          case 'ALTA':
+            prioridade.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENTE';
+            break;
+        }
+      });
+    } else if (lang === 'ch') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = '无';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = '非常低';
+            break;
+          case 'BAIXA':
+            prioridade.name = '低';
+            break;
+          case 'MEDIA':
+            prioridade.name = '中';
+            break;
+          case 'ALTA':
+            prioridade.name = '高';
+            break;
+          case 'URGENTE':
+            prioridade.name = '紧急';
+            break;
+        }
+      });
+    } else if (lang === 'en') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NONE';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'VERY LOW';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'LOW';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MEDIUM';
+            break;
+          case 'ALTA':
+            prioridade.name = 'HIGH';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENT';
+            break;
+        }
+      });
+    }
+    else if (lang === 'pt') {
+      this.listPriorities.forEach(prioridade => {
+        switch (prioridade.name) {
+          case 'NENHUMA':
+            prioridade.name = 'NENHUMA';
+            break;
+          case 'MUITO_BAIXA':
+            prioridade.name = 'MUITO BAIXA';
+            break;
+          case 'BAIXA':
+            prioridade.name = 'BAIXA';
+            break;
+          case 'MEDIA':
+            prioridade.name = 'MÉDIA';
+            break;
+          case 'ALTA':
+            prioridade.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            prioridade.name = 'URGENTE';
+            break;
+        }
+      });
+    }
+  }
+
+  translateTaskPriority(){
+    const lang = localStorage.getItem('lang');
+    if (lang === 'es') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = 'NINGUNA';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = 'MUY BAJA';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = 'BAJA';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = 'MEDIA';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = 'ALTA';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = 'URGENTE';
+            break;
+        }
+    } else if (lang === 'ch') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = '无';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = '非常低';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = '低';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = '中';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = '高';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = '紧急';
+            break;
+        }
+    } else if (lang === 'en') {
+        switch (this.tarefa.priority.name) {
+          case 'NENHUMA':
+            this.tarefa.priority.name = 'NONE';
+            break;
+          case 'MUITO_BAIXA':
+            this.tarefa.priority.name = 'VERY LOW';
+            break;
+          case 'BAIXA':
+            this.tarefa.priority.name = 'LOW';
+            break;
+          case 'MEDIA':
+            this.tarefa.priority.name = 'MEDIUM';
+            break;
+          case 'ALTA':
+            this.tarefa.priority.name = 'HIGH';
+            break;
+          case 'URGENTE':
+            this.tarefa.priority.name = 'URGENT';
+            break;
+        }
+    }
+  }
+
   
 
   listAssociatesVerify() : boolean {
-    if(this.tarefa.associates == null || this.tarefa.associates == undefined) {
+    if(this.tarefa.associates == null || this.tarefa.associates.length == 0) {
       if(this.booleanSelectAssociates == false) {
         return true;
       }
@@ -161,6 +421,13 @@ export class ModalTarefaComponent implements OnInit {
     
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
     this.booleanCalendarioFinalDate = false;
+  }
+
+  saveProperty2() : void {
+    console.log(this.tarefa.scheduledDate);
+    
+    this.service.updateTaskScheludeDate(this.tarefa.id,this.loggedUser.id,this.tarefa.scheduledDate)
+    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
   }
 
   async saveName() : Promise<void> {
@@ -205,12 +472,6 @@ export class ModalTarefaComponent implements OnInit {
       this.tarefa.name = nome.replace(/,/g, ' ');
     }
   }
-
-  edit() {
-    this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
-    this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling
-  }
-
   editStatus() {
       this.booleanStatus = !this.booleanStatus;
   }
@@ -236,9 +497,6 @@ export class ModalTarefaComponent implements OnInit {
   eventsSubject2: Subject<PropertyValue> = new Subject<PropertyValue>();
 
   async salvarTarefa() {
-    console.log(this.tarefa);
-    
-  
     if (this.tarefa.id != 0 && this.tarefa.id != null) {
       //this.service.putTarefa(this.tarefa,this.loggedUser.id);
 
@@ -311,6 +569,11 @@ export class ModalTarefaComponent implements OnInit {
   }
 
   finishFocus() {
+    clearInterval(this.interval);
+    this.seconds = 0;
+    this.minutes = 0;
+    this.hours = 0;
+    this.timerString = "00:00"
     this.booleanFoco = false;
   }
 

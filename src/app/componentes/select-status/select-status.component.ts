@@ -36,6 +36,60 @@ export class SelectStatusComponent implements OnInit{
   ) { }
 
    ngOnInit(): void {
+    this.translateStatus()
+    }
+
+    translateStatus() {
+      const lang = localStorage.getItem('lang');
+      if (lang === 'ch') {
+          this.projeto.statusList.forEach((status) => {
+              if (status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending') {
+                  status.name = '待定';
+              } else if (status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress') {
+                  status.name = '进展中';
+              } else if (status.name === 'concluido' || status.name === 'completado' || status.name === 'completed') {
+                  status.name = '已完成';
+              } else if (status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                  status.name = '未分配';
+              }
+          });
+      } else if (lang === 'pt') {
+          this.projeto.statusList.forEach((status) => {
+              if (status.name === '待定' || status.name === 'pendiente' || status.name === 'pending') {
+                  status.name = 'pendente';
+              } else if (status.name === '进展中' || status.name === 'en progreso' || status.name === 'in progress') {
+                  status.name = 'em progresso';
+              } else if (status.name === '已完成' || status.name === 'completado' || status.name === 'completed') {
+                  status.name = 'concluido';
+              } else if (status.name === '未分配' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                  status.name = 'não atribuido';
+              }
+          });
+      } else if (lang === 'es') {
+          this.projeto.statusList.forEach((status) => {
+              if (status.name === '待定' || status.name === 'pendente' || status.name === 'pending') {
+                  status.name = 'pendiente';
+              } else if (status.name === '进展中' || status.name === 'em progresso' || status.name === 'in progress') {
+                  status.name = 'en progreso';
+              } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completed') {
+                  status.name = 'completado';
+              } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Unassigned') {
+                  status.name = 'Sin asignar';
+              }
+          });
+      } else if (lang === 'en') {
+          this.projeto.statusList.forEach((status) => {
+              if (status.name === '待定' || status.name === 'pendente' || status.name === 'pendiente') {
+                  status.name = 'pending';
+              } else if (status.name === '进展中' || status.name === 'em progresso' || status.name === 'en progreso') {
+                  status.name = 'in progress';
+              } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completado') {
+                  status.name = 'completed';
+              } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Sin asignar') {
+                  status.name = 'Unassigned';
+              }
+          });
+      }
   }
 
   salvarStatus(status:Status) {
@@ -110,12 +164,15 @@ export class SelectStatusComponent implements OnInit{
   }
 
   verifyStatusDefault(status:Status){
-    if(status.name === 'não atribuido' ||
-    status.name === 'concluido' ||
-    status.name === 'pendente' ||
-    status.name === 'em progresso'){
-      return true
-    }
+    if (
+      status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned' || status.name === '未分配' ||
+      status.name === 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成' ||
+      status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending' || status.name === '待定' ||
+      status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress' || status.name === '进展中'
+  ) {
+      return true;
+  }
+  
     return false
   }
 

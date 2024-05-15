@@ -7,8 +7,11 @@ import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Team } from 'src/model/team';
+<<<<<<< HEAD
 import { UserProject } from 'src/model/userProject';
 import { CookieService } from 'ngx-cookie-service';
+=======
+>>>>>>> dev
 import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
@@ -20,10 +23,18 @@ export class TelaCriarProjetoComponent implements OnInit {
   imagemBlob: any;
   preImage: any;
   formData: any;
+<<<<<<< HEAD
 
   constructor(private service : BackendEVOLVEService, private cookieService: CookiesService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
 
   ngOnInit(){
+=======
+  loggedUser !: User;
+  constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute, private cookieService: CookiesService){}
+  
+  async ngOnInit(){
+    this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+>>>>>>> dev
 
     this.projeto = new Project
 
@@ -33,6 +44,7 @@ export class TelaCriarProjetoComponent implements OnInit {
 
 
       this.team = await this.service.getOne("team", teamid) as Team
+      console.log(this.team);
       
       this.usuarios = this.team.participants.map(userTeam => userTeam.user) || []
       
@@ -74,44 +86,72 @@ export class TelaCriarProjetoComponent implements OnInit {
   }
 
   getStatusList(){
+    const lang = localStorage.getItem('lang') ?? 'en'; // Assume 'en' como padrão se o localStorage estiver vazio
+    const translations : any = {
+      "pendente": {
+        "en": "Pending",
+        "pt": "Pendente",
+        "es": "Pendiente",
+        "ch": "待定"
+      },
+      "em progresso": {
+        "en": "In Progress",
+        "pt": "Em Progresso",
+        "es": "En Progreso",
+        "ch": "进展中"
+      },
+      "concluido": {
+        "en": "Completed",
+        "pt": "Concluído",
+        "es": "Completado",
+        "ch": "已完成"
+      },
+      "não atribuido": {
+        "en": "Unassigned",
+        "pt": "Não Atribuído",
+        "es": "No Asignado",
+        "ch": "未分配"
+      }
+    };
+  
     this.projeto.statusList = [
       {
         id :  0,
-        name : "pendente",
+        name : translations["pendente"][lang],
         backgroundColor: "#7CD5F4",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  1,
-        name : "em progresso",
+        name : translations["em progresso"][lang],
         backgroundColor: "#FCEC62",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  2,
-        name : "concluido",
+        name : translations["concluido"][lang],
         backgroundColor: "#86C19F",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       },
       {
         id :  3,
-        name : "não atribuido",
+        name : translations["não atribuido"][lang],
         backgroundColor: "#9CA3AE",
         textColor: "#000000",
         enabled:  true,
         columnIndex :  0 
-
+  
       }
-    ]
+    ];
   }
 
   @ViewChild('statusClose') statusClose!:ElementRef
@@ -152,8 +192,13 @@ export class TelaCriarProjetoComponent implements OnInit {
           });
           postProject.members = lista;
   
+<<<<<<< HEAD
           postProject.creator = { "id": loggedUser.id };
           // postProject.adimnistrator = { "id": 1 };
+=======
+          postProject.creator = { "id": this.loggedUser.id };
+          postProject.adimnistrator = { "id": this.loggedUser.id };
+>>>>>>> dev
           postProject.team = { "id": this.team.id };
           postProject.imageColor = this.backGroundColorProject;
           postProject.image = null;
@@ -162,8 +207,13 @@ export class TelaCriarProjetoComponent implements OnInit {
         });
       });
 
+<<<<<<< HEAD
       postProject = await this.service.postProjeto(postProject, postProject.team.id);
   
+=======
+      postProject = await this.service.postProjeto(postProject);
+      
+>>>>>>> dev
       if (this.formData != null) {
         await this.service.patchProjectImage(postProject.id, this.formData);
       }

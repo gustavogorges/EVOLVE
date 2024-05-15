@@ -1,134 +1,230 @@
-<div class="main bg-primaryWhite w-full h-full flex justify-center">
+<div class="w-screen h-screen flex  justify-center lg:pt-20 pt-0">
+  <div class="flex xl:w-[80%] w-[90%] flex-col gap-10 lg:gap-0 lg:flex-row lg:justify-evenly">
+    <div class="flex flex-col lg:gap-12 gap-5 h-min lg:w-[53%] w-full">
+      <div class="flex md:gap-10 gap-3 items-center">
+        <div class="project-image">
+          <div class="image border-2 dark:border-dark-secundary-gray" [ngStyle]="{'background': backGroundColorProject }">
+          </div>
+          
+          <label  *ngIf="!disabledInfo" class="alterateColor" for="alterate color">
+              <div class="flex items-center justify-center w-full h-full cursor-pointer" (click)="randomColor()">
+                  <i class="pi pi-palette text-primary dark:text-dark-primary"></i>
+              </div>
+          </label>
+        </div>
+        <div>
+          <input
+            type="text"
+            name=""
+            id=""
+            [placeholder]="team?.name"
+            [disabled]="disabledInfo"
+            [(ngModel)]="name"
+            class="input-name text-primary"
+          />
+          <div class="flex md:gap-3 gap-1 flex-col md:flex-row md:items-center  px-2 w-full">
+            <p class="font-titulo lg:text-sm md:text-xl xl:text-xl text-sm text-gray-500">Código da equipe:</p>
+            <div class="flex gap-1">
 
-    <div class="container w-[80%] h-full bg-primaryWhite flex flex-col">
-
-        <div class="header  w-full max-h-[20%] min-h-[20%] flex justify-center gap-8 items-center bg-yellow-100">
-            <!-- <img src="" alt=""> -->
-            <div class="img-test w-32 h-32 rounded-full bg-purple-400"></div>
-
-            <div class="team-name flex justify-center items-center w-[30%] px-4 h-16  bg-secondaryWhite">
-                <input class="w-full h-full bg-secondaryWhite text-primary font-bold outline-none" type="text" placeholder="Nome da equipe" >
+              <p class="font-titulo xl:text-xl md:text-lg text-xs text-secondary font-medium">
+                {{ team?.code }}
+              </p>
+              <i class="pi pi-clone icon text-gray-500"></i>
             </div>
+          </div>
         </div>
 
-        <div class="adding-members flex flex-col justify-center items-center w-full max-h-[25%] min-h-[25%] bg-blue-100">
+      </div>
 
-            <div class="link-container w-full h-full flex items-center justify-center gap-4">
+      <div class="flex flex-col gap-1">
+        <p class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary">
+          Niveis de acesso:
+        </p>
 
-                <p class="text-[#6A7181]">Envie um link: </p>
-
-                <div class="link w-[70%] h-16 rounded-[10px] bg-secondaryWhite flex items-center" >
-
-                    <div class="w-[90%] max-w-[90%] h-full px-4 flex justify-start items-center">
-                        <p class="w-full max-w-full truncate">
-                            https://link2f4526d9a5d058720295dc854124cfbd89c0b624.com 
-                        </p>
-                    </div>
-
-                    <button class="bg-primary h-full w-[10%] text-primaryWhite rounded-[10px]">
-                        <p>
-                            Copiar
-                        </p>
-                    </button>
-
-                </div>
-
+        <div class="flex flex-wrap gap-6">
+          <div class="flex flex-col w-[45%]">
+            <div class="flex items-center justify-between">
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">Criador</p>
+              <i
+                class="pi pi-verified text-secondary font-bold"
+                style="font-weight: 700"
+              ></i>
             </div>
-
-            <div class="divisory w-full h-2 flex items-center justify-between">
-
-                <div class="w-[45%] h-1/2 bg-[#d9d9d9] rounded-[10px]"></div>
-
-                <div class="w-[10%] h-full flex justify-center items-center text-[#6A7181] ">
-                    <p>ou</p>
-                </div>
-
-
-                <div class="w-[45%] h-1/2 bg-[#d9d9d9] rounded-[10px]"></div>
-
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+              editar, controle dos participantes, criar projetos, e excluir a
+              equipe.
+            </p>
+          </div>
+          <div class="flex flex-col w-[45%]">
+            <div class="flex items-center justify-between">
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">
+                Administrador
+              </p>
+              <i
+                class="pi pi-shield text-secondary font-bold"
+                style="font-weight: 700"
+              ></i>
             </div>
-
-            <div class="w-full min-h-[40%] flex justify-center items-center">
-
-                <button class="flex justify-center items-center min-w-[20%] h-12 gap-8 bg-secondary text-primaryWhite rounded-[10px]">
-                    <div>
-                        <img src="../../assets/mais.svg" alt="">
-                    </div>
-                    <div>
-                        <p>
-                            Adicionar usuário
-                        </p>
-                    </div>
-                </button>
-
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+              editar, controle dos participantes, e criar projetos.
+            </p>
+          </div>
+          <div class="flex flex-col w-[45%]">
+            <div class="flex items-center justify-between">
+              <p class="font-hind-madurailg:text-2xl text-lg font-medium">Colaborador</p>
+              <i
+                class="pi pi-wrench text-secondary font-bold"
+                style="font-weight: 700"
+              ></i>
             </div>
-
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+              visualizar e criar projetos.
+            </p>
+          </div>
+          <div class="flex flex-col w-[45%]">
+            <div class="flex items-center justify-between">
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium">Espectador</p>
+              <i
+                class="pi pi-eye text-secondary font-bold"
+                style="font-weight: 700"
+              ></i>
+            </div>
+            <p class="font-hind-madurai md:text-base text-sm text-gray-500">
+              apenas visualizar.
+            </p>
+          </div>
         </div>
-
-        <div class="member-list-container flex flex-col w-full h-full  bg-primaryWhite">
-
-            <div class="w-full h-1 rounded-[0.625rem] bg-[#d9d9d9]"></div>
-
-            <div class="list-header flex  w-full h-8 bg-primaryWhite">
-
-                <div class="flex justify-center items-center w-1/2 h-full">
-                    <p>
-                        Membros
-                    </p>
-                </div>
-                <div class="flex justify-center items-center w-1/2 h-full">
-                    <p>
-                        Atribuição
-                    </p>
-                </div>
-            </div>
-
-            <div class="w-full h-1 rounded-[0.625rem] bg-[#d9d9d9]"></div>
-
-            <div class="member-list flex w-full h-full overflow-scroll pt-4" >
-
-                <div class="member-container w-1/2 max-h-full min-h-full bg-yellow-100">
-
-                    <div class="member flex justify-start items-center w-full h-1/3 bg-primaryWhite gap-8 px-8">
-                        <div class="min-w-[5rem] min-h-[5rem] bg-black rounded-full">
-                            <img src="" alt="">
-                        </div>
-                        <div class="max-w-full h-full flex flex-col items-start justify-center gap-2 truncate">
-                            <p class="truncate">
-                                Nome do usuario 
-                            </p>
-                            <p class="truncate text-[0.75rem]">
-                                Email do usuario 
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="atribuition-container w-1/2 max-h-full min-h-full bg-red-100">
-
-                    <div class="atribuition flex justify-center items-center min-w-full h-1/3 bg-blue-200">
-                        <p class="w-full flex justify-center items-center">
-                            Membro
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="cretion-confirmaton flex justify-between items-center w-full h-[30%] ">
-                <button class="w-40 h-12 bg-primary text-primaryWhite rounded-[0.625rem]">
-                    Cancelar
-                </button>
-                <button class="w-40 h-12 bg-secondary text-primaryWhite rounded-[0.625rem]">
-                    Salvar
-                </button>
-            </div>
-
-        </div>
-
-
+      </div>
     </div>
+    <div class="lg:w-[36%] w-full flex flex-col gap-6">
+      <div class="flex justify-between">
+        <p
+          class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary"
+          *ngIf="!isSearchUserModalOpen"
+        >
+          Membros da equipe:
+        </p>
+        <div class="flex w-max justify-end relative">
+          <button
+            *ngIf="!isSearchUserModalOpen && !disabledInfo"
+            class="bg-primary rounded-full lg:p-2 lg:w-12 lg:h-12 w-8 h-8 items-center"
+          >
+            <i
+              class="pi pi-plus text-white font-bold"
+              style="font-weight: 700"
+              (click)="setSearchUserModal()"
+            ></i>
+          </button>
 
+          <button
+            *ngIf="isSearchUserModalOpen"
+            class="bg-red-500 justify-self-end rounded-full lg:p-2 lg:w-12 lg:h-12 w-8 h-8"
+            (click)="setSearchUserModal()"
+          >
+            <i
+              class="pi pi-times text-white font-bold"
+              style="font-weight: 700"
+              (click)="setSearchUserModal()"
+            ></i>
+          </button>
+        </div>
+
+
+        <app-search-users
+          *ngIf="isSearchUserModalOpen"
+          class="absolute lg:w-[26%] w-full right-2 lg:right-[200px] z-50"
+          [addedUsers]="teamParticipants"
+          (usersToAdd)="addUsers($event)"
+        ></app-search-users>
+      </div>
+
+      <div class="flex justify-between lg:px-20 px-10 border-[1px] border-x-0">
+        <p class="font-hind-madurai text-lg text-gray-500">Usuário</p>
+        <p class="font-hind-madurai text-lg text-gray-500">Atribuição</p>
+      </div>
+
+      <div class="member-list flex flex-col w-full overflow-scroll gap-8 lg:h-[350px] h-[200px] max-h-[350px] overflow-y-auto">
+        <div
+          class="member flex items-center w-full lg:gap-[23%] gap-[15%]"
+          *ngFor="let user of teamParticipants; index as indice"
+        >
+          <div class="flex w-1/2 gap-6 justify-start items-center">
+            <div
+              class="lg:min-h-[64px] min-h-[50px] aspect-square rounded-full"
+              [ngStyle]="{ 'background-color': user.imageColor }"
+            >
+              <img
+                *ngIf="user.image?.data"
+                src="{{ user.image.data }}"
+                alt=""
+                class="h-16 aspect-square rounded-full"
+              />
+            </div>
+
+            <div
+              class="max-w-full flex flex-col items-start justify-center gap-1 truncate"
+            >
+              <p class="truncate font-titulo xl:text-xl text-base font-medium">
+                {{ user.name }}
+              </p>
+              <p class="truncate font-hind-madurai xl:text-xl text-base font-light">
+                {{ user.email }}
+              </p>
+            </div>
+          </div>
+          <div class="flex lg:gap-12 gap-6 items-center ">
+            <div class="flex flex-col justify-self-end" *ngIf="true">
+                <div class="atribuition-container">
+                  <div
+                    class="atribuition flex justify-center items-center min-w-full h-1/3"
+                  >
+                        <button
+                      (click)="openSelect()"
+                      class="text-primary font-titulo font-medium text-sm lg:text-base"
+                        >
+                      membro
+                        </button>
+                  </div>
+                  <app-select-custom
+                    *ngIf="select"
+                    [listOptions]="options"
+                    [listIcons]="IconsOptionsSelect"
+                    class="absolute"
+                  ></app-select-custom>
+                </div>
+              </div>
+              <i
+              *ngIf="!disabledInfo"
+              class="pi pi-trash text-red-500 font-bold"
+              style="font-weight: 700"
+              (click)="removeUser(indice)"
+            ></i>
+          </div>
+
+        
+        </div>
+      </div>
+      
+    <div *ngIf="!disabledInfo" class="flex gap-10 self-end">
+      <button (click)="cancelar()" class="py-2 px-4 bg-primary text-white font-bold font-titulo rounded-lg">
+        cancelar
+       </button>
+      <button (click)="salvar()" class="py-2 px-6 bg-secondary   text-white font-bold font-titulo rounded-lg">
+salvar      </button>
+    </div>
+    <div *ngIf="disabledInfo" class="flex gap-10 self-end">
+      <button (click)="editar()" class="py-2 px-7 bg-primary text-white font-bold font-titulo rounded-lg">
+        editar
+       </button>
+       <button (click)="leaveTeam()" *ngIf="team?.administrator?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+        sair da equipe
+       </button>
+       <button (click)="removeTeam()" *ngIf="team?.administrator?.id == loggedUser?.id " class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+        excluir equipe
+       </button>
+    </div>
+    </div>
+  </div>
+  <app-message-modal *ngIf="openModal" [title]="title" [message]="message" (modal)="modal($event)"></app-message-modal>
 </div>
+

@@ -1,8 +1,38 @@
-<div class="main">
+<div class="main z-50">
   <div class="close-btn" (click)="sendEventEmitter()">
     <i class="pi pi-angle-double-right icon-close"></i>
   </div>
   <div class="the-box">
+    <div class="foco-on" *ngIf="booleanFoco">
+      <div class="foco-timer">
+        <div>{{ timerString }}</div>
+      </div>
+      <div class="actions-timer">
+        <div class="cancel action" (click)="finishFocus()">
+          <i class="pi pi-times" style="font-size: 1rem"></i>{{'cancelar' | translate}}
+        </div>
+        <div
+          *ngIf="booleanPlayPause"
+          class="pause-return action"
+          (click)="startTimer()"
+        >
+          <i class="pi pi-play" style="font-size: 1rem"></i>{{'começar' | translate}}
+        </div>
+        <div 
+        *ngIf="!booleanPlayPause"
+        class="pause-return action" 
+        (click)="stopTimer()"
+        >
+          <i class="pi pi-pause" style="font-size: 1rem"></i>{{'pausar' | translate}}
+        </div>
+        <div
+          class="stop action"
+          (click)="sendTimeFocus()"
+        >
+          <i class="pi pi-check-square" style="font-size: 1rem"></i>{{'terminar' | translate}}
+        </div>
+      </div>
+    </div>
     <div class="name-progress">
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
@@ -35,44 +65,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold hidden md:flex text-sm">iniciar foco</p>
-          </div>
-        </div>
-      </div>
-      <div class="foco-on" *ngIf="booleanFoco">
-        <div class="foco-timer">
-          <div>{{ timerString }}</div>
-        </div>
-        <div class="actions-timer">
-          <div class="cancel action" (click)="finishFocus()">
-            <i class="pi pi-times" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
-              cancelar
-            </p>
-          </div>
-          <div class="pause action" (click)="stopTimer()">
-            <i class="pi pi-pause" style="font-size: 1rem"></i>  <p class="hidden sm:flex">
-              pausar
-            </p>
-          </div>
-          <div
-            *ngIf="booleanPlayPause"
-            (click)="startTimer()"
-            class="stop action"
-          >
-            <i class="pi pi-play" style="font-size: 1rem"></i>  
-            <p class="hidden sm:flex">
-              começar
-            </p>
-          </div>
-          <div
-            *ngIf="!booleanPlayPause"
-            class="stop action"
-            (click)="stopTimer()"
-          >
-            <i class="pi pi-stop-circle" style="font-size: 1rem"></i>
-            <p class="hidden sm:flex">
-              parar
-            </p>
+            <p class="font-bold">{{'iniciar foco' | translate}}</p>
           </div>
         </div>
       </div>
@@ -92,7 +85,7 @@
           <div class="remove-button flex  justify-center items-center p-2">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold hidden md:flex text-sm">excluir tarefa</p>
+              <p class="text-white font-bold hidden md:flex text-sm">{{'excluir tarefa' | translate}}</p>
             </div>
           </div>
         </div>
@@ -101,12 +94,13 @@
     <div class="add-icon self-start hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus" style="color: white"></i>
       <p class="add-propertie-text" style="color: white">
-        adicionar propriedade
+        {{'adicionar propriedade' | translate}}
       </p>
     </div>
     <app-select-propriedade
       *ngIf="booleanAddPropriedade"
       [tarefa]="tarefa"
+      [projectId]="projeto.id"
       (newItemEvent)="updatePropertiesList()"
     ></app-select-propriedade>
     <div
@@ -118,7 +112,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
-              <p class="name-propertie">data final:</p>
+              <p class="name-propertie">{{'data final:' | translate}}</p>
             </div>
             <div class="date-end">
               <p
@@ -147,7 +141,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-spinner"></i>
-              <p class="name-propertie">status:</p>
+              <p class="name-propertie">{{'status:' | translate}}</p>
             </div>
             <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
               <div
@@ -174,7 +168,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-users"></i>
-              <p class="name-propertie">associados:</p>
+              <p class="name-propertie">{{'associados:' | translate}}</p>
             </div>
             <div
               class="gap-1 responsible-icon-box hover:px-2 hover:py-1 hover:bg-slate-100 rounded-lg"
@@ -213,7 +207,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
-              <p class="name-propertie">agendamento:</p>
+              <p class="name-propertie">{{'agendamento:' | translate}}</p>
             </div>
             <div class="date-end">
               <p
@@ -221,13 +215,22 @@
                 (click)="editDataScheduling()"
                 class="date-end-text cursor-pointer"
               >
-                {{ tarefa.schedulingData }}
+                {{ tarefa.scheduledDate }}
               </p>
               <input
                 *ngIf="booleanCalendariosScheduling"
                 type="date"
                 [(ngModel)]="tarefa.schedulingData"
               />
+              <div
+                *ngIf="booleanCalendariosScheduling"
+                class="confirmation-buttons"
+                (click)="saveProperty2()"
+              >
+                <div class="btn confirm-btn">
+                  <i class="pi pi-check"></i>
+                </div>
+              </div>
             </div>
           </div>
         </article>
@@ -238,7 +241,7 @@
           <div class="propertie min-w-[40%]">
             <div class="name-icon">
               <i class="icon-propertie pi pi-exclamation-circle"></i>
-              <p class="name-propertie">prioridade:</p>
+              <p class="name-propertie">{{'prioridade:' | translate}}</p>
             </div>
             <div
               *ngIf="!booleanSelectPrioridade"
@@ -267,7 +270,6 @@
           </div>
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full min-w-[50%]"
           >
             <div *ngIf="indice % 2 == 0">
               <app-propriedade-tarefa
@@ -286,7 +288,6 @@
         <div class="flex flex-col h-full w-1/2">
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full w-[85%]"
           >
             <div *ngIf="indice % 2 != 0">
               <app-propriedade-tarefa
@@ -319,7 +320,7 @@
             class="icon-propertie pi pi-angle-up"
             (click)="openDesc()"
           ></i>
-          <p class="name-propertie">descrição</p>
+          <p class="name-propertie">{{'descrição' | translate}}</p>
         </div>
       </div>
       <div class="w-full">
@@ -346,7 +347,7 @@
           class="page-name"
           (click)="changePage('sub-tarefas')"
         >
-          sub-tarefas
+          {{'sub-tarefas' | translate}}
         </p>
         <p
           [ngClass]="
@@ -357,7 +358,7 @@
           class="page-name"
           (click)="changePage('comentarios')"
         >
-          comentários
+          {{'comentários' | translate}}
         </p>
         <p
           [ngClass]="
@@ -368,7 +369,7 @@
           class="page-name"
           (click)="changePage('historicos')"
         >
-          históricos
+          {{'históricos' | translate}}
         </p>
         <p
           [ngClass]="
@@ -377,7 +378,7 @@
           class="page-name"
           (click)="changePage('anexos')"
         >
-          anexos
+          {{'anexos' | translate}}
         </p>
       </div>
       <div class="components">

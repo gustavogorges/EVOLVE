@@ -1,0 +1,90 @@
+<label   class="p-input-icon-right w-full h-full px-2">
+    <i class="pi pi-search"></i>
+    <input 
+    class="search-input h-full bg-transparent w-full outline-none" 
+    type="text" 
+    pInputText 
+    placeholder="Search items, collections, account"
+    [(ngModel)]="search"
+    />
+</label>
+
+<div class="w-full flex flex-col items-center rounded-b-lg overflow-auto bg-secondaryWhite shadow-xl max-h-[20vw] duration-200 dark:bg-dark-secundary-gray" [ngClass]="search != '' && open ? 'h-fit':'h-0'">
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="usersList != [] && verifyLenght(filterUsers())">
+        <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
+            <div class=" pr-2 w-fit h-full">
+                <p class="text-xl dark:text-dark-secondary font-hind-madurai">Usuários</p>
+            </div>
+        </div>
+
+        <div class="div-membros" *ngFor="let user of filterUsers()" (click)="goUser(user)">
+            <div class="foto">
+                <div *ngIf="verifyImage(user) && user" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
+                <img class="fotoImagem" *ngIf="!verifyImage(user)" src="{{user.image.data}}" alt="">
+            </div>
+            <div class="infos">
+                <div *ngIf="user" class="nome"><p>{{user.name}}</p></div>
+                <div *ngIf="user" class="email"><p>{{user.email}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="projectsList != [] && verifyLenght(filterProjects())" >
+        <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
+            <div class=" pr-2 w-fit h-full">
+                <p class="text-xl dark:text-dark-secondary font-hind-madurai">Projetos</p>
+            </div>
+        </div>
+
+        <div class="div-membros" *ngFor="let project of filterProjects()" (click)="goProject(project)">
+            <div class="foto">
+                <div *ngIf="verifyImage(project) && project" class="foto2" [ngStyle]="{'background': project.imageColor }" >{{project.name.charAt(0).toUpperCase()}}</div>
+                <img class="fotoImagem" *ngIf="!verifyImage(project)" src="{{project.image.data}}" alt="">
+            </div>
+            <div class="infos">
+                <div *ngIf="project" class="nome"><p>{{project.name}}</p></div>
+                <div *ngIf="project" class="email truncate"><p>{{project.description}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="verifyLenght(filterTeams()) && teamsList != []">
+        <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
+            <div class=" pr-2 w-fit h-full">
+                <p class="text-xl dark:text-dark-secondary font-hind-madurai">Equipes</p>
+            </div>
+        </div>
+
+        <div class="div-membros" *ngFor="let team of filterTeams()" (click)="goTeam(team)">
+            <div class="foto">
+                <div *ngIf="verifyImage(team) && team" class="foto2" [ngStyle]="{'background': team.imageColor }" >{{team.name.charAt(0).toUpperCase()}}</div>
+                <img class="fotoImagem" *ngIf="!verifyImage(team)" src="{{team.image.data}}" alt="">
+            </div>
+            <div class="infos">
+                <div *ngIf="team" class="nome"><p>{{team.name}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full flex flex-col items-center border-t-2 px-2 mb-3" *ngIf="verifyLenght(filterTasks()) && tasksList != []">
+        <div class="h-[1vw] mb-3 px-2 w-full mt-2 rounded-lg flex items-center">
+            <div class=" pr-2 w-fit h-full">
+                <p class="text-xl dark:text-dark-secondary font-hind-madurai">Tarefas</p>
+            </div>
+        </div>
+
+        <div class="div-membros" *ngFor="let task of filterTasks()" (click)="openTask($event, task)">
+            <i class="foto pi pi-check-square text-secondary dark:text-dark-secondary"></i>
+            <div class="col-start-2 col-end-3 w-full pr-4 flex items-center justify-between">
+                <div *ngIf="task" class="w-full text-lg dark:text-white px-1 pr-4"><p>{{task.name}}</p></div>
+                <div class="w-[1rem] h-[1rem] rounded-full" [ngStyle]="{'background': task.currentStatus.backgroundColor}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!verifyLenght(filterTasks()) && !verifyLenght(filterProjects()) && !verifyLenght(filterTeams()) && !verifyLenght(filterUsers())
+    && projectsList != [] && tasksList != [] && teamsList != [] && usersList != []"
+    class="w-full flex justify-center items-center">
+        <p class="text-fontGray text-lg font-hind-madurai font-semibold">Nada Encontrado</p>
+    </div>
+</div>

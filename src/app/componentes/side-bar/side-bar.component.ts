@@ -22,6 +22,7 @@ export class SideBarComponent implements OnInit {
 @Output() sideBar = new EventEmitter<boolean>();
 loggedUser !: User
 config = false
+
   async ngOnInit(): Promise<void> {
     console.log(33);
     
@@ -30,6 +31,7 @@ config = false
     console.log(this.config);
     
   }
+
   closeSideBar(){
     this.sideBar.emit(false)
   }
@@ -68,6 +70,12 @@ config = false
   goProjectsTeam(team:Team){
     this.router.navigateByUrl('/tela-projeto/'+team.id);
   }
+  goCreateTeam(){
+    window.location.href = 'equipe/0'
+    this.sideBar.emit(false)
+
+  }
+
 
   goTelaInicial(){
     this.router.navigateByUrl('/tela-inicial');

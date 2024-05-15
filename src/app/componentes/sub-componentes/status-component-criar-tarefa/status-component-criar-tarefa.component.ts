@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
+import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-status-component-criar-tarefa',
@@ -10,9 +12,10 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class StatusComponentCriarTarefaComponent implements OnChanges {
 
-  constructor(private service:BackendEVOLVEService) { }
+  constructor(private service:BackendEVOLVEService, private cookies_service:CookiesService) { }
 
   status = new Status()
+  loggedUser : User = new User;
 
   @Input() projeto!:Project
   @Input() isVisible:Boolean = false
@@ -31,12 +34,13 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   }
 
   async criarStatus(){
+    this.loggedUser = await this.cookies_service.getLoggedUser();
     if(this.status.name != ''){
       if(this.status.backgroundColor === ''){
         this.status.backgroundColor = '#FF0000'
       }
       this.projeto.statusList.push(this.status as Status)
-      await this.service.putProjeto(this.projeto)
+      await this.service.putProjeto(this.projeto,this.loggedUser.id)
       this.EventEmitter()
       this.atualizaStatus()
       this.adicionar = true
@@ -102,8 +106,9 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   statusEditando:any
 
   async salvar(){
+    this.loggedUser = await this.cookies_service.getLoggedUser();
     this.projeto.statusList[this.projeto.statusList.indexOf(JSON.parse(this.statusEditando))] = this.status
-    await this.service.putProjeto(this.projeto)
+    await this.service.putProjeto(this.projeto, this.loggedUser.id)
     this.EventEmitter()
     this.atualizaStatus()
     this.editando = false

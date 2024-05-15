@@ -61,14 +61,6 @@
 
             .container{
                 @apply py-[3%] flex flex-col;
-
-                .titulo-dashboard{
-                    @apply flex justify-between w-full items-center mb-3;
-    
-                    p{
-                        @apply text-2xl font-semibold font-titulo text-primary dark:text-dark-primary
-                    }
-                }
     
                 .dashboard{
                     @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;

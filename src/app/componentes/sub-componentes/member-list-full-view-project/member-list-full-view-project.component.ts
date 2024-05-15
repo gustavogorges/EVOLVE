@@ -3,6 +3,7 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { UserProject } from 'src/model/userProject';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-member-list-full-view-project',
@@ -11,9 +12,14 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 })
 export class MemberListFullViewProjectComponent implements OnInit {
 
-  constructor(private service : BackendEVOLVEService) { }
+  constructor(private service : BackendEVOLVEService,
+    private cookies_service : CookiesService
+  ) { }
 
-  ngOnInit(): void {
+  loggedUser : User = new User;
+
+  async ngOnInit() {
+    this.loggedUser = await this.cookies_service.getLoggedUser();
   }
 
   @Input() user !: User
@@ -57,11 +63,15 @@ export class MemberListFullViewProjectComponent implements OnInit {
           listIdsFromRemove.push({
             "id": this.user.id
           })
+<<<<<<< HEAD
           for(let e of listIdsFromRemove){
             
           }
           this.project.members.filter( (userProject) => !listIdsFromRemove.find(e=> e.id = userProject.userId))
           await this.service.patchProjectMembers(this.project.id, this.project.members)
+=======
+          await this.service.deleteUserFromProject(this.project.id,this.loggedUser.id,listIdsFromRemove)
+>>>>>>> dev
         }
 
       } catch (ignore) { }

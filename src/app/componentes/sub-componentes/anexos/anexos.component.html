@@ -7,7 +7,7 @@
         *ngIf="task.files == null"
         >
             <i class="pi pi-file-import file-icon"></i>
-            <p class=" text-fontGray">arraste seu arquivo aqui para anexa-lo</p>
+            <p class=" text-fontGray">{{'arraste seu arquivo aqui para anexa-lo' | translate}}</p>
         </div>
         <div 
         class="flex flex-col justify-start h-full w-full items-center overflow-y-auto bah"
@@ -36,7 +36,7 @@
     <div class="box-btn-add">
         <div class="btn-add-content" (click)="fileUpload.click()">
             <i class="pi pi-plus btn-add-text"></i>
-            <p class="btn-add-text">adicionar anexo</p>
+            <p class="btn-add-text">{{'adicionar anexo' | translate}}</p>
         </div>
     </div>
 </div>
