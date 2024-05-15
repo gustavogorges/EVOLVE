@@ -111,7 +111,9 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async salvarTarefa(){
-    await this.service.putProjeto(this.projeto, this.loggedUser.id);
+    // await this.service.putProjeto(this.projeto, this.loggedUser.id);
+    await this.service.putProjeto(this.projeto);
+    //REVER
   }
 
   filteredNames():UserProject[] {
