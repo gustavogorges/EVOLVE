@@ -61,6 +61,7 @@ export class TelaInicialComponent implements OnInit {
     
     this.userColors()
 
+
     projects.map((project: Project)=>{
       if(project.favorited){
         this.projectList.push(project)
@@ -164,10 +165,14 @@ async openTask(tarefa: Task): Promise<void> {
   }
   
   tarefaNova: Task = new Task();
-  closeTask(event: boolean) {
+  async closeTask(event: boolean) {
     if (event) {
       this.tarefaNova = new Task();
       this.booleanTask = false;
     }
+      this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
+      console.log(this.listaTarefas);
+      
+    
   }
 }

@@ -7,7 +7,7 @@
 }
 
 .clean-button {
-    @apply h-8 w-24 bg-primary rounded-lg flex items-center justify-center cursor-pointer
+    @apply h-8 w-24 bg-primary dark:bg-dark-primary rounded-lg flex items-center justify-center cursor-pointer
 }
 
 .teams-box {
@@ -15,15 +15,15 @@
 }
 
 .team-icon {
-    @apply text-4xl text-primary
+    @apply text-4xl text-primary dark:text-dark-primary
 }
 
 .team-icon2 {
-    @apply text-3xl text-secondary cursor-pointer
+    @apply text-3xl text-secondary dark:text-dark-secundary-green cursor-pointer
 }
 
 .notifications-box {
-    @apply w-full flex flex-col items-stretch justify-start max-h-52 bg-slate-100 px-4
+    @apply w-full flex flex-col items-stretch justify-start max-h-52 bg-slate-100 dark:bg-dark-secundary-gray px-4
 }
 
 .notification-item {
@@ -31,7 +31,7 @@
 } 
 
 .notification-item-user {
-    @apply w-14 h-14 flex items-center justify-center bg-slate-200 rounded-full 
+    @apply w-14 h-14 flex items-center justify-center bg-slate-200 dark:bg-gray-500  rounded-full 
 }
 
 .notification-item-content {

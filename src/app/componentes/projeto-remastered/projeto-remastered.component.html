@@ -53,6 +53,7 @@
     <div class="project-open" [ngClass]="!projectOpen ? 'w-0':'w-[30vw] 2xl:w-[25vw] px-[2%] rounded-r-xl'" (click)="openAgain()">
         <div class="project-open-infos">
             <div class="tittle-infos">
+
                 <p>{{'Nome' | translate}}</p>
                 <p>{{'Progresso' | translate}}</p>
                 <p>{{'Status' | translate}}</p>
@@ -79,7 +80,7 @@
                 <i class="pi pi-search text-primary dark:text-dark-primary"></i>
             </div>
             <div class="users">
-                <span><</span>
+                <span><i class="pi pi-chevron-left font-semibold text-fontGray" style="font-size: 12px;"></i></span>
                 <div class="users" *ngIf="projeto">
                     <div class="users-spam" *ngFor="let p of filteredNames()">
                         <div *ngIf="verifyImg(p.user) && !p.user.image" class="user-image-chartAt" [ngStyle]="{'background': p.user.imageColor }" >{{p.user.name.charAt(0).toUpperCase()}}</div>
@@ -93,7 +94,7 @@
                         <p class="text-xl font-hind-madurai text-fontGray text-center">{{'Nenhum membro encontrado' | translate}}</p>
                     </div>
                 </div>
-                <span>></span>
+                <span><i class="pi pi-chevron-right font-semibold text-fontGray" style="font-size: 12px;"></i></span>
             </div>
         </div>
 
