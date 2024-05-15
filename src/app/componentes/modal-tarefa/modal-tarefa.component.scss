@@ -15,11 +15,11 @@
 }
 
  .name-box {
-    @apply w-[65%] h-[100%] flex items-center min-w-min mb-5
+    @apply w-[100%] h-[100%] flex min-w-min mb-5 justify-between
 }
 
 .foco-box {
-    @apply  w-full  h-min flex justify-end
+    @apply  w-[40%]  h-min flex justify-end
 }
 
 .foco {
@@ -59,11 +59,15 @@
 }
 
 .input-box {
-    @apply w-[80%] h-[100%] outline-none pb-2
+    @apply w-[80%] h-[100%] font-titulo text-primary font-bold outline-none placeholder:font-titulo placeholder:text-primary placeholder:font-semibold placeholder:opacity-60 placeholder:text-3xl
 }
 
 .name {
     @apply md:text-4xl text-3xl text-primary font-bold ;
+}
+
+.name-empty {
+    @apply text-2xl text-primary opacity-70 bg-slate-100 px-10 rounded-xl font-titulo
 }
 
 .progress-bar-box {
@@ -206,10 +210,6 @@
 
 .p-inputtext {
     @apply p-0
-}
-
-.name-box {
-    @apply w-full h-10 flex ;
 }
 
 .cancel-button {

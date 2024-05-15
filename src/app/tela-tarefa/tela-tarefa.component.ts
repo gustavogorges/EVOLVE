@@ -530,14 +530,13 @@ if (lang === 'pt') {
 
   async openTaskEdit(tarefa:Task) {
     let priorityTeste : PriorityRecord = new PriorityRecord();
-    priorityTeste.name = "nenhuma";
+    priorityTeste.name = "NENHUMA";
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.creator = this.loggedUser;
     this.tarefaNova.project = this.projeto;
+    console.log(this.tarefaNova.project.team);
     this.tarefaNova.currentStatus = this.projeto.statusList[0];
-    console.log(this.tarefaNova);
     this.tarefaNova = await this.service.postTarefa(this.tarefaNova);
-    console.log(this.tarefaNova);
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
     console.log(this.tarefaSelecionada);

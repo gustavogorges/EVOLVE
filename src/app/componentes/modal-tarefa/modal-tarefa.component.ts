@@ -104,8 +104,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   async sendTimeFocus() : Promise<void> {
-    let userTask : UsuarioTarefa;
+    let userTask : UsuarioTarefa = new UsuarioTarefa();
+    
     userTask = await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id);
+ 
     if(userTask.userId == 0 || userTask.userId == null) {
       userTask.userId = this.loggedUser.id;
       userTask.taskId = this.tarefa.id;
@@ -123,8 +125,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       userTask.workedMinutes += this.minutes;
     }
     userTask.workedHours += this.hours;
-    console.log(userTask);
-    console.log(this.seconds);
     
     this.service.updateUserWorkedTime(userTask);
     this.finishFocus();
@@ -162,9 +162,11 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
     
     this.listPriorities = await this.service.getAllPriorities()
-    this.translatePriorities()
-    this.translateTaskPriority()
-    this.translateStatus()
+    if(this.tarefa.name != '') {
+      this.translatePriorities()
+      this.translateTaskPriority()
+      this.translateStatus()
+    }
     setTimeout(() => {
       this.projeto.properties.forEach(propertyFor => {
         if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
@@ -178,7 +180,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
-      this.booleanCalendarioFinalDate = true;
       this.tarefa.currentStatus.name = "sem status";
       this.tarefa.priority.name = "NENHUMA"
       this.tarefa.priority.backgroundColor = "#cccccc"
