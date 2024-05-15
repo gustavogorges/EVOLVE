@@ -10,18 +10,18 @@
             <div class="h-1 w-full bg-primary dark:bg-dark-primary rounded-lg"></div>
 
             <div class="h-[63vh]  overflow-auto">
-                <div class="div-membros min-w-fit" *ngFor="let user of filteredNames()">
+                <div class="div-membros min-w-fit" *ngFor="let userTeam of filteredNames()">
                     <div class="foto">
-                        <div *ngIf="user && verifyImage(user)" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
-                        <img class="fotoImagem" *ngIf="!verifyImage(user)" src="{{user.image.data}}" alt="">
+                        <div *ngIf="userTeam?.user && verifyImage(userTeam.user)" class="foto2" [ngStyle]="{'background': userTeam?.user?.imageColor }" >{{userTeam?.user?.name?.charAt(0)?.toUpperCase()}}</div>
+                        <img class="fotoImagem" *ngIf="!verifyImage(userTeam.user)" src="{{userTeam?.user?.image?.data}}" alt="">
                     </div>
                     <div class="infos min-w-full">
-                        <div *ngIf="user" class="nome min-w-fit"><p>{{user.name}}</p></div>
-                        <div *ngIf="user" class="email min-w-fit"><p>{{user.email}}</p></div>
+                        <div *ngIf="userTeam?.user" class="nome min-w-fit"><p>{{userTeam?.user?.name}}</p></div>
+                        <div *ngIf="userTeam?.user" class="email min-w-fit"><p>{{userTeam?.user?.email}}</p></div>
                     </div>
-                    <button class="adicionar duration-150 hover:scale-105 min-w-fit" (click)="adicionar(user)">
+                    <button class="adicionar duration-150 hover:scale-105 min-w-fit" (click)="adicionar(userTeam.user)">
                         <div class="fundo-icon">
-                            <i class="pi" [ngClass]="!removeProjectMembersFromTeamParticipants(user) ? 'pi-check-circle':'pi-plus'"></i>
+                            <i class="pi" [ngClass]="!removeProjectMembersFromTeamParticipants(userTeam.user) ? 'pi-check-circle':'pi-plus'"></i>
                         </div>
                     </button>
                 </div>

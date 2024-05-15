@@ -40,7 +40,8 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
         this.status.backgroundColor = '#FF0000'
       }
       this.projeto.statusList.push(this.status as Status)
-      await this.service.putProjeto(this.projeto,this.loggedUser.id)
+      await this.service.putProjeto(this.projeto)
+      // await this.service.putProjeto(this.projeto,this.loggedUser.id)
       this.EventEmitter()
       this.atualizaStatus()
       this.adicionar = true
@@ -108,7 +109,8 @@ export class StatusComponentCriarTarefaComponent implements OnChanges {
   async salvar(){
     this.loggedUser = await this.cookies_service.getLoggedUser();
     this.projeto.statusList[this.projeto.statusList.indexOf(JSON.parse(this.statusEditando))] = this.status
-    await this.service.putProjeto(this.projeto, this.loggedUser.id)
+    await this.service.putProjeto(this.projeto)
+    // await this.service.putProjeto(this.projeto, this.loggedUser.id)
     this.EventEmitter()
     this.atualizaStatus()
     this.editando = false

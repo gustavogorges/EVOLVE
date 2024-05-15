@@ -1,5 +1,6 @@
 
 import { Component, HostListener, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
 import { AuthService } from 'src/service/autService';

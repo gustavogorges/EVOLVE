@@ -5,6 +5,7 @@ import { LogarithmicScale } from 'chart.js';
 import { TEXT_ALIGN } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
+import { UserTeam } from 'src/model/userTeam';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import {v4 as uuidv4} from 'uuid'; 
@@ -20,7 +21,7 @@ export class TeamCreationScreenComponent implements OnInit {
 
   @ViewChild("teamNameInput") teamNameInput!:any;
 
-  teamParticipants:Array<User> = new Array
+  teamParticipants:Array<UserTeam> = new Array
 
   team!:Team
   isEditingTeamName:boolean=false
@@ -73,6 +74,11 @@ loggedUser !: User
     
     
   }
+
+  getUsersFromTeam(userTeams:UserTeam[]):User[]{
+    return userTeams.map(userTeam => userTeam.user)
+  }
+
   IconsOptionsSelect: Array<string> =[];
 
   imagemBlob: any;
@@ -143,9 +149,15 @@ loggedUser !: User
 
   addUsers(users:Array<User>){
     users.forEach(user =>{
-      if(!this.teamParticipants.includes(user)){
-        this.teamParticipants.push(user)
-      }
+      let userTeam:UserTeam = new UserTeam
+      userTeam.user = user
+      userTeam.team = this.team
+      userTeam.userId = user.id
+      userTeam.teamId = this.team.id
+
+      // if(!this.teamParticipants.includes(user)){
+      //   this.teamParticipants.push(user)
+      // }
     }
     
        )
@@ -156,6 +168,11 @@ loggedUser !: User
   removeUser(indice : number){
     this.teamParticipants.splice(indice, 1)
   }
+
+  findTeamAdm(team:Team){
+    return team.participants.find(userTeam => userTeam.isManager)?.user!
+  }
+
  async  salvar(){
   if(this.name != '' ){
     this.team.name = this.name;
@@ -165,9 +182,15 @@ loggedUser !: User
     console.log(this.team);
 
   if(this.id==0){
+    let userTeam:UserTeam = new UserTeam
+    userTeam.isManager = true
+    userTeam.team = this.team
+    userTeam.user = this.loggedUser
+    userTeam.teamId = this.team.id
+    userTeam.userId = this.loggedUser.id
 
-    this.team.participants.push(this.loggedUser)
-    this.team.administrator = await this.cookiesService.getLoggedUser();
+    this.team.participants.push(userTeam)
+    
   
   
    this.team = await this.service.postEquipe(this.team);
@@ -222,7 +245,7 @@ loggedUser !: User
         console.log(11);
         
     this.loggedUser =  await this.cookiesService.getLoggedUser();
-    const indexToRemove = this.team.participants.findIndex(user => user.id === this.loggedUser.id);
+    const indexToRemove = this.team.participants.findIndex(userTeam => userTeam.userId === this.loggedUser.id);
     if (indexToRemove !== -1) {
       this.team.participants.splice(indexToRemove, 1);
   }  
