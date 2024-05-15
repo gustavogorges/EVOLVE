@@ -28,28 +28,28 @@
             <div class="inputs">
                 <div class="xl:flex justify-between">
                     <div class="nome-projeto">
-                        <label class="label" for="Nome do Projeto">Nome do Projeto:</label>
+                        <label class="label" for="Nome do Projeto">{{'Nome do Projeto:' | translate}}</label>
                         <label class="p-input-icon-right">
                             <i class="pi pi-pencil px-2 dark:text-dark-primary"></i>
                             <input *ngIf="projeto" placeholder="Digite aqui" maxlength="35" class="nome-input" type="text" pInputText [(ngModel)]="projeto.name" />
                         </label>
                     </div>
                     <div class="data-projeto bg-transparent">
-                        <label class="label" for="Nome do Projeto">data final:</label>
+                        <label class="label" for="Nome do Projeto">{{'data final:' | translate}}</label>
                         <p-calendar [ngClass]="verifyDarkTheme() ? 'block':'hidden'" styleClass="prime-data" [style]="{'height':'80%'}" [inputStyle]="{'background-color': 'rgb(54 54 54 / var(--tw-bg-opacity))', 'color': 'whitesmoke', 'border-style': 'none', 'outline': '2px solid transparent', 'outline-offset': '2px'}" placeholder="00/00/0000" [(ngModel)]="date"></p-calendar>
                         <p-calendar [ngClass]="!verifyDarkTheme() ? 'block':'hidden'" styleClass="prime-data" class="outline-none" [style]="{'height':'80%'}" placeholder="00/00/0000" [(ngModel)]="date"></p-calendar>  
                     </div>
                 </div>
             </div>
             <div class="descricao">
-                <label class="label" for="Descricao">Descrição</label>
+                <label class="label" for="Descricao">{{'Descrição' | translate}}</label>
                 <textarea maxlength="200" placeholder="Digite aqui" *ngIf="projeto" [(ngModel)]="projeto.description" ></textarea>
             </div>
 
 
             <div class="membro-components">
                 <div class="membro-equipe">
-                    <label class="label" for="Membro equipe">Pesquise um membro da sua equipe:</label>
+                    <label class="label" for="Membro equipe">{{'Pesquise um membro da sua equipe:' | translate}}</label>
                     <div *ngIf="statusVisible" class="absolute translate-y-20 translate-x-14 xl:translate-x-1" #statusClose >
                         <app-select-status
                         [projeto]="projeto"
@@ -65,17 +65,17 @@
                 </div>
             </div>
             <div *ngIf="filteredNames().length <= 0" class="membros w-full h-full flex items-center justify-center">
-                <p class="text-xl text-fontGray">Nenhum usuário encontrado</p>
+                <p class="text-xl text-fontGray">{{'Nenhum usuário encontrado' | translate}}</p>
             </div>
             <div class="status-priority">
-                <button class="add-status" (click)="statusEnabled()">Adicionar status</button>
+                <button class="add-status" (click)="statusEnabled()">{{'Adicionar status' | translate}}</button>
                 <div class="lembrete">
-                    <p>Os status criados serão adicionados a todas as tarefas</p>
+                    <p>{{'Os status criados serão adicionados a todas as tarefas' | translate}}</p>
                 </div>
             </div>
             <div class="botoes">
-                <button class="cancelar" (click)="cancelar(this.team.id)">Cancelar</button>
-                <button class="salvar" (click)="salvarProjeto(this.team.id)">Salvar</button>
+                <button class="cancelar" (click)="cancelar(this.team.id)">{{'Cancelar' | translate}}</button>
+                <button class="salvar" (click)="salvarProjeto(this.team.id)">{{'Salvar' | translate}}</button>
             </div>
         </div>
     </div>

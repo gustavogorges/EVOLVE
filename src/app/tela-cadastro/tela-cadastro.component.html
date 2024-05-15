@@ -5,8 +5,7 @@
     >
       <p class="text-white text-3xl font-titulo font-bold">evolve</p>
       <p class="text-white text-xl font-hind-madurai">
-        Onde visão encontra execução. faça de cada tarefa um passo adiante em
-        sua evolução.
+        {{'Onde visão encontra execução. faça de cada tarefa um passo adiante em sua evolução.' | translate}}
       </p>
 
       <img src="assets/image 8.svg" class="w-full" alt="" />
@@ -14,7 +13,7 @@
     <div class="right">
       <div class="box-text-right">
         <div class="main-title">
-          <h1>Cadastro</h1>
+          <h1>{{'Cadastro' | translate}}</h1>
         </div>
 
         <form
@@ -26,7 +25,7 @@
           <div class="flex flex-col gap-4">
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >Nome
+                >{{'Nome' | translate}}
                 <p class="text-red-500">*</p></label
               >
               <input
@@ -39,7 +38,7 @@
             </div>
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >Email
+                >{{'Email' | translate}}
                 <p class="text-red-500">*</p>
               </label>
               <input
@@ -53,24 +52,24 @@
               *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
               class="error-text"
               >
-                <p>Campo é obrigatório.</p>
+                <p>{{'Campo é obrigatório.' | translate}}</p>
               </div>
               <div
                 *ngIf="userForm.get('email')?.errors?.['email'] && userForm.get('email')?.touched"
                 class="error-text"
               >
-                <p>Email inválido.</p>
+                <p>{{'Email inválido.' | translate}}</p>
               </div>
            
             </div>
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >Senha
+                >{{'Senha' | translate}}
                 <p class="text-red-500">*</p></label
               >
               <input
                 type="password"
-                placeholder="Digite sua senha"
+                placeholder="{{'Digite sua senha' | translate}}"
                 class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
                 formControlName="password"
                 (keydown.enter)="
@@ -81,13 +80,13 @@
               *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched"
                 class="error-text"
               >
-                <p>Campo obrigatório.</p>
+                <p>{{'Campo obrigatório.' | translate}}</p>
               </div>  
               <div
                 *ngIf="password?.errors?.['minLength'] && userForm.get('password')?.touched "
                 class="error-text"
               >
-                <p>Senha deve ter tamanho de pelo menos 6 carácteres.</p>
+                <p>{{'Senha deve ter tamanho de pelo menos 6 carácteres.' | translate}}</p>
               </div>
              
               <div
@@ -95,20 +94,19 @@
                 class="error-text"
               >
                 <p>
-                  Senha deve conter pelo menos um carácter especial (ex:
-                  @,-,!,$).
+                  {{'Senha deve conter pelo menos um carácter especial (ex: @,-,!,$).' | translate}}
                 </p>
-                <p>Senha deve conter pelo menos um número.</p>
+                <p>{{'Senha deve conter pelo menos um número.' | translate}}</p>
               </div>
             </div>
             <div class="form-group">
               <label for="password" class="font-titulo font-medium flex gap-1"
-                >Confirme sua senha
+                >{{'Confirme sua senha' | translate}}
                 <p class="text-red-500">*</p></label
               >
               <input
                 type="password"
-                placeholder="Confirme sua senha "
+                placeholder="{{'Confirme sua senha' | translate}} "
                 class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
                 formControlName="confirmationPassword"
                 (keydown.enter)="submit(); $event.preventDefault()"
@@ -118,13 +116,13 @@
                 *ngIf="confirmationPassword?.errors?.['required'] && userForm.get('confirmationPassword')?.touched"
                 class="error-text"
               >
-                <p>Campo obrigatório.</p>
+                <p>{{'Campo obrigatório.' | translate}}</p>
               </div>
               <div
                 *ngIf="userForm?.errors?.['passwordMismatch']  && userForm.get('confirmationPassword')?.touched "
                 class="error-text"
               >
-                <p>As senhas não conhecidem.</p>
+                <p>{{'As senhas não conhecidem.' | translate}}</p>
               </div>
             </div>
 
@@ -139,8 +137,8 @@
             />
           </button>
           <div class="flex gap-1 text-base error-text">
-            <p class="text-fontGray">Já possui uma conta?</p>
-            <p class="underline" routerLink="">Login</p>
+            <p class="text-fontGray">{{'Já possui uma conta?' | translate}}</p>
+            <p class="underline" routerLink="">{{'Entrar' | translate}}</p>
           </div>
         </form>
       </div>

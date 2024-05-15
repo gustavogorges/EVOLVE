@@ -71,8 +71,9 @@ config = false
     this.router.navigateByUrl('/tela-projeto/'+team.id);
   }
   goCreateTeam(){
-    this.sideBar.emit(false)
     window.location.href = 'equipe/0'
+    this.sideBar.emit(false)
+
   }
 
 

@@ -5,11 +5,11 @@
     
     <ul class="rotate-180 w-full overflow-hidden duration-300" [ngClass]="labelChooseBol ? 'h-0':'h-full'">
         <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="labelChoosed === -1 ? 'h-0':'h-[20%]'">
-            <button (click)="chooseCharts()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
+            <button (click)="chooseCharts()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">{{'Adicionar' | translate}}</button>
         </div>
     
         <div class="div-modal rotate-180" >
-            <p class="title" >Escolha o valor que sera exibido no novo gráfico</p>
+            <p class="title" >{{'Escolha o valor que sera exibido no novo gráfico' | translate}}</p>
     
             <div class="box min-w-max" [ngClass]="!newChartBool ? 'invisible ':'visible'">
                 <div class=" border-2 p-2 w-[15vw] flex justify-center items-center rounded-lg duration-100 cursor-pointer" *ngFor="let squad of labels, index as i" (click)="chooseLabel(squad.id)" [ngClass]="squad.style">
@@ -23,11 +23,11 @@
     
     <div class="rotate-180 w-[40vw] overflow-hidden duration-300" [ngClass]="!labelChooseBol ? 'h-0':'h-full'">
         <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="chartChoosed === -1 ? 'h-0':'h-[20%]'">
-            <button (click)="createNewChart()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">Adicionar</button>
+            <button (click)="createNewChart()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">{{'Adicionar' | translate}}</button>
         </div>
     
         <div class="div-modal rotate-180" >
-            <p class="title" >Escolha o novo gráfico</p>
+            <p class="title" >{{'Escolha o novo gráfico' | translate}}</p>
     
             <div class="invisible">
                 <div class="grid">

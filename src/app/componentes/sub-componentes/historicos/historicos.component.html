@@ -10,11 +10,11 @@
         class="h-3 w-3 bg-secondary rounded-full absolute -right-1.5 top-[40%]"
       ></div>
     </div>
-    <div class="right w-[90%] flex justify-between items-center ml-5">
-      <p class="font-semibold text-xs sm:text-sm md:text-base">
+    <div class="right w-[90%] gap-2 flex justify-between items-center ml-5">
+      <p class="font-semibold w-[80%] text-xs sm:text-sm md:text-base">
         {{ historic.description }}
       </p>
-      <div class="flex items-center">
+      <div class="flex items-center w-[20%]">
         <p class="text-fontGray text-xs md:text-sm">
           {{ historic.dateTime | date : "shortTime" }}
         </p>

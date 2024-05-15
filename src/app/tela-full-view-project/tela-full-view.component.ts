@@ -1,4 +1,4 @@
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -14,64 +14,67 @@ import { cloneDeep } from 'lodash';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 @Component({
-  selector: 'app-tela-full-view',
-  templateUrl: './tela-full-view.component.html',
-  styleUrls: ['./tela-full-view.component.scss'],
+    selector: 'app-tela-full-view',
+    templateUrl: './tela-full-view.component.html',
+    styleUrls: ['./tela-full-view.component.scss'],
 })
 export class TelaFullViewComponent implements OnInit {
 
     projeto !: Project
-    basicData : any
+    basicData: any
     basicOptions !: any
-    options : any
-    data : any
-    status : Status = new Status();
+    options: any
+    data: any
+    status: Status = new Status();
     charts: any[] = []
     newDashVisibleBol: Boolean = false
     dashboards: any[] = []
     newChartBool: boolean = false
     viewOptionsBol: boolean = true
     viewEditBol: Boolean = false
-    openMemberView : number | undefined
+    openMemberView: number | undefined
     unlockAllMembersView = false;
-    statusNames:any[] = []
-    statusValues:any[] = []
-    chartstoDash : Array<DashBoardCharts> = new Array
+    statusNames: any[] = []
+    statusValues: any[] = []
+    chartstoDash: Array<DashBoardCharts> = new Array
     boolEditStatus: boolean = false;
     booleanAddStatus: boolean = false;
     closeAllOptions: boolean = false
     dashboardEdit !: Dashboard
-    editProject : boolean = false
-    miniPageView : string = 'Dashboards'
-    confirmationActionModalBol : boolean = false
-    response : any
-    quest : any
-    searchTerm : any = ''
-    nameEdit : boolean = false
-    nameEdited : string = ''
-    descEdited : string = ''
-    preImage:SafeUrl | undefined = '';
-    imagemBlob!:Blob
-    formData : any = undefined
-    openModalAddMembers : boolean = false
-    loggedUser : User = new User;
+    editProject: boolean = false
+    miniPageView: string = 'Dashboards'
+    confirmationActionModalBol: boolean = false
+    response: any
+    quest: any
+    searchTerm: any = ''
+    nameEdit: boolean = false
+    nameEdited: string = ''
+    descEdited: string = ''
+    preImage: SafeUrl | undefined = '';
+    imagemBlob!: Blob
+    formData: any = undefined
+    openModalAddMembers: boolean = false
+    loggedUser: User = new User;
 
-    constructor(private service : BackendEVOLVEService, private route : ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service : CookiesService){}
+    constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
     async ngOnInit() {
         this.loggedUser = await this.cookies_service.getLoggedUser();
-        this.route.paramMap.subscribe( async params  => {
+        this.route.paramMap.subscribe(async params => {
             const projectId = params.get('projectId');
-            const id  = Number(projectId)
+            const id = Number(projectId)
             this.projeto = await this.service.getOne('project', id);
             this.dashboards = await this.service.getDashboards(this.projeto.id);
             console.log(this.projeto);
 
             setTimeout(() => {
-                this.dashboards?.reverse()   
+                this.translateStatus()
             });
             setTimeout(() => {
-                this.chartsInitialize()   
+                this.dashboards?.reverse()
+            });
+            setTimeout(() => {
+                this.chartsInitialize()
             });
             setTimeout(() => {
                 this.getCharts()
@@ -79,46 +82,99 @@ export class TelaFullViewComponent implements OnInit {
         });
     }
 
-    viewOptions(){
+    viewOptions() {
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBol = false
 
     }
 
-    setModalOpenAddMembers(){
-        this.openModalAddMembers = !this.openModalAddMembers
-    }
-
-    setModalOpenAddMembersFalse(){
-        this.openModalAddMembers = false
-    }
-
-    async setImageProject(event:any){
-        if(event.target.files && event.target.files[0]){
-          if(event.target.files[0].type === "image/jpeg" 
-          || event.target.files[0].type === "image/webp" 
-          || event.target.files[0].type === "image/png"){
-            this.imagemBlob = event.target.files[0]
-            const formData = new FormData();
-            formData.append('image', event.target.files[0]);
-            this.formData = formData
-            const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
-    
-            const imageUrl = URL.createObjectURL(blob);
-            this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-          }
+    translateStatus() {
+        const lang = localStorage.getItem('lang');
+        if (lang === 'ch') {
+            this.projeto.statusList.forEach((status) => {
+                if (status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending') {
+                    status.name = '待定';
+                } else if (status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress') {
+                    status.name = '进展中';
+                } else if (status.name === 'concluido' || status.name === 'completado' || status.name === 'completed') {
+                    status.name = '已完成';
+                } else if (status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                    status.name = '未分配';
+                }
+            });
+        } else if (lang === 'pt') {
+            this.projeto.statusList.forEach((status) => {
+                if (status.name === '待定' || status.name === 'pendiente' || status.name === 'pending') {
+                    status.name = 'pendente';
+                } else if (status.name === '进展中' || status.name === 'en progreso' || status.name === 'in progress') {
+                    status.name = 'em progresso';
+                } else if (status.name === '已完成' || status.name === 'completado' || status.name === 'completed') {
+                    status.name = 'concluido';
+                } else if (status.name === '未分配' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                    status.name = 'não atribuido';
+                }
+            });
+        } else if (lang === 'es') {
+            this.projeto.statusList.forEach((status) => {
+                if (status.name === '待定' || status.name === 'pendente' || status.name === 'pending') {
+                    status.name = 'pendiente';
+                } else if (status.name === '进展中' || status.name === 'em progresso' || status.name === 'in progress') {
+                    status.name = 'en progreso';
+                } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completed') {
+                    status.name = 'completado';
+                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Unassigned') {
+                    status.name = 'Sin asignar';
+                }
+            });
+        } else if (lang === 'en') {
+            this.projeto.statusList.forEach((status) => {
+                if (status.name === '待定' || status.name === 'pendente' || status.name === 'pendiente') {
+                    status.name = 'pending';
+                } else if (status.name === '进展中' || status.name === 'em progresso' || status.name === 'en progreso') {
+                    status.name = 'in progress';
+                } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completado') {
+                    status.name = 'completed';
+                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Sin asignar') {
+                    status.name = 'Unassigned';
+                }
+            });
         }
     }
 
-    editProjectFun(){
+    setModalOpenAddMembers() {
+        this.openModalAddMembers = !this.openModalAddMembers
+    }
+
+    setModalOpenAddMembersFalse() {
+        this.openModalAddMembers = false
+    }
+
+    async setImageProject(event: any) {
+        if (event.target.files && event.target.files[0]) {
+            if (event.target.files[0].type === "image/jpeg"
+                || event.target.files[0].type === "image/webp"
+                || event.target.files[0].type === "image/png") {
+                this.imagemBlob = event.target.files[0]
+                const formData = new FormData();
+                formData.append('image', event.target.files[0]);
+                this.formData = formData
+                const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
+
+                const imageUrl = URL.createObjectURL(blob);
+                this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+            }
+        }
+    }
+
+    editProjectFun() {
         this.nameEdited = this.projeto.name
         this.descEdited = this.projeto.description
         this.nameEdit = !this.nameEdit
     }
 
-    async saveProject(){
-        if(this.nameEdited != this.projeto.name || this.descEdited != this.projeto.description){
-            let projetoTemp:any = cloneDeep(this.projeto);
+    async saveProject() {
+        if (this.nameEdited != this.projeto.name || this.descEdited != this.projeto.description) {
+            let projetoTemp: any = cloneDeep(this.projeto);
             projetoTemp.name = this.nameEdited
             projetoTemp.description = this.descEdited
             projetoTemp.image = null
@@ -127,7 +183,7 @@ export class TelaFullViewComponent implements OnInit {
             this.projeto.name = projeto.name
             this.projeto.description = projeto.description
         }
-        if(this.formData != undefined){
+        if (this.formData != undefined) {
             await this.service.patchImage(this.projeto.id, this.formData)
             this.formData = undefined
         }
@@ -138,59 +194,62 @@ export class TelaFullViewComponent implements OnInit {
         return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
     }
 
-    setResponse(event:any){
+    setResponse(event: any) {
         this.response = event
         this.confirmationActionModalBol = false
     }
 
-    setMiniPageView(value : string){
+    setMiniPageView(value: string) {
         this.miniPageView = value
     }
 
-    viewEdit(){
+    viewEdit() {
         this.viewEditBol = !this.viewEditBol
         this.newChartBool = false
         this.newDashVisibleBol = false
     }
 
-    async chartToTrash(dashboard:any, chart:any){
+    async chartToTrash(dashboard: any, chart: any) {
         await this.service.deleteChart(dashboard.id, chart.id, this.projeto.id)
         dashboard.charts.splice(dashboard.charts.indexOf(chart), 1)
     }
 
-    setdashboardEdit(event:any){
+    setdashboardEdit(event: any) {
         this.dashboardEdit = event
-        
+
     }
 
-    getResponse(){
+    getResponse() {
         return this.response
     }
 
-    setQuest(event:any){
+    setQuest(event: any) {
         this.quest = event
         this.response = undefined
         this.confirmationActionModalBol = true
-      }
-
-
-    verifyStatusDefault(status:Status){
-        if(status.name === 'não atribuido' ||
-        status.name === 'concluido' ||
-        status.name === 'pendente' ||
-        status.name === 'em progresso'){
-          return true
-        }
-        return false
     }
 
-    editStatus(status:Status){
+
+    verifyStatusDefault(status: Status) {
+        if (
+            status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned' || status.name === '未分配' ||
+            status.name === 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成' ||
+            status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending' || status.name === '待定' ||
+            status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress' || status.name === '进展中'
+        ) {
+            return true;
+        }else{
+            return false
+        }
+    }
+
+    editStatus(status: Status) {
         this.status = status
         this.boolEditStatus = true
         this.booleanAddStatus = false
-      }
+    }
 
-    async enableStatus(status:Status){
+    async enableStatus(status: Status) {
         status.enabled = !status.enabled
         await this.postStatus(status)
     }
@@ -199,7 +258,7 @@ export class TelaFullViewComponent implements OnInit {
         const statusPadroes = ['não atribuido', 'concluido', 'pendente', 'em progresso'];
         let statusPadraoPrioritario: any[] = [];
         let outrosStatus: any[] = [];
-    
+
         this.projeto.statusList.forEach(status => {
             if (statusPadroes.includes(status.name)) {
                 statusPadraoPrioritario.push(status);
@@ -207,64 +266,64 @@ export class TelaFullViewComponent implements OnInit {
                 outrosStatus.push(status);
             }
         });
-    
+
         return statusPadraoPrioritario.concat(outrosStatus);
     }
-    
 
-    goToPerfilMember(member:User){
-        this.router.navigateByUrl('/tela-perfil/'+member.id);
+
+    goToPerfilMember(member: User) {
+        this.router.navigateByUrl('/tela-perfil/' + member.id);
     }
-    
+
 
     getCharts() {
-        
+
         this.dashboards.forEach(dashboard => {
-            
+
             setTimeout(() => {
-                dashboard.charts.sort((a: any, b: any) => a.chartIndex - b.chartIndex);    
+                dashboard.charts.sort((a: any, b: any) => a.chartIndex - b.chartIndex);
             });
 
             let updatedCharts: any[] = [];
-    
+
             setTimeout(() => {
-                
+
                 dashboard.charts.forEach((chart: any) => {
                     let matchingChart = this.charts.find((c: any) => c.type === chart.type);
 
                     setTimeout(() => {
                         if (matchingChart) {
                             console.log(this.getValuesChart(chart));
-                            
-                            let updatedMatchingChart = { ...matchingChart, id: chart.id, data : {labels: this.getLabelsChart(chart), datasets : [ {label : chart.label, data: this.getValuesChart(chart),}]}};   
-                            
+
+                            let updatedMatchingChart = { ...matchingChart, id: chart.id, data: { labels: this.getLabelsChart(chart), datasets: [{ label: chart.label, data: this.getValuesChart(chart), }] } };
+
                             setTimeout(() => {
-                                updatedCharts.push(updatedMatchingChart);   
+                                updatedCharts.push(updatedMatchingChart);
                             });
-                        }   
+                        }
                     });
-                });   
+                });
             });
-            
+
             setTimeout(() => {
-                dashboard.charts = updatedCharts   
+                dashboard.charts = updatedCharts
             });
         });
     }
 
-    async deleteStatus(status:Status){
-        if(this.projeto.id != null){
-          this.projeto = await this.service.deleteStatus(this.projeto.id, status)
-        }else{
-          this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
+    async deleteStatus(status: Status) {
+        if (this.projeto.id != null) {
+            this.projeto = await this.service.deleteStatus(this.projeto.id, status)
+        } else {
+            this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
         }
     }
 
-    
+
     addStatus() {
         this.booleanAddStatus = true;
     }
-    
+
     isContrastSufficient(textColor: string, backgroundColor: string, threshold: number = 500): boolean {
         const intensity = (color: string) => {
             const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
@@ -274,25 +333,25 @@ export class TelaFullViewComponent implements OnInit {
             const b = parseInt(rgb[3], 16);
             return r + g + b;
         };
-    
+
         const textColorIntensity = intensity(textColor);
         const backgroundColorIntensity = intensity(backgroundColor);
         const contrast = Math.abs(textColorIntensity - backgroundColorIntensity);
-    
+
         return contrast >= threshold;
     }
-    
+
     async novoStatus(): Promise<void> {
-        if(this.status.name != ''){
-            if(this.status.backgroundColor === ''){
-            this.status.backgroundColor = "#ff0000"
+        if (this.status.name != '') {
+            if (this.status.backgroundColor === '') {
+                this.status.backgroundColor = "#ff0000"
             }
             this.status.backgroundColor.toUpperCase();
-            
-            if(!this.isContrastSufficient('#000000', this.status.backgroundColor)){
-            this.status.textColor = "#F4F4F4";
+
+            if (!this.isContrastSufficient('#000000', this.status.backgroundColor)) {
+                this.status.textColor = "#F4F4F4";
             } else {
-            this.status.textColor = "#000000";
+                this.status.textColor = "#000000";
             }
 
             this.projeto = await this.postStatus(this.status)
@@ -301,11 +360,11 @@ export class TelaFullViewComponent implements OnInit {
         this.status = new Status();
     }
 
-    async postStatus(status:Status) {
+    async postStatus(status: Status) {
         return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, status)
     }
 
-    async editStatusPut(){
+    async editStatusPut() {
         this.boolEditStatus = false
         this.booleanAddStatus = false
         await this.postStatus(this.status)
@@ -313,9 +372,9 @@ export class TelaFullViewComponent implements OnInit {
     }
 
 
-    getLabelsChart(chart : DashBoardCharts){
+    getLabelsChart(chart: DashBoardCharts) {
         let valueNames: string[][] = []
-        if(chart.labels != null){
+        if (chart.labels != null) {
             chart.labels.forEach(chartFor => {
                 valueNames.push(
                     [
@@ -328,63 +387,63 @@ export class TelaFullViewComponent implements OnInit {
         return ['Nada encontrado']
     }
 
-    getValuesChart(chart : DashBoardCharts){
-        
+    getValuesChart(chart: DashBoardCharts) {
+
         let valueLabels: number[][] = []
-        if(chart.labels != null){
+        if (chart.labels != null) {
             chart.labels.forEach(chart => {
-              valueLabels.push(
-                  [
-                      chart.value
-                  ]
-              )
-          })
-          return valueLabels
+                valueLabels.push(
+                    [
+                        chart.value
+                    ]
+                )
+            })
+            return valueLabels
         }
         return [0]
     }
-    
 
-    openMember(index:number){
-        if(this.openMemberView != undefined){
-            if(this.openMemberView === index){
+
+    openMember(index: number) {
+        if (this.openMemberView != undefined) {
+            if (this.openMemberView === index) {
                 this.closeMember()
-            }else{
+            } else {
                 this.openMemberView = index
             }
         }
-        else{
+        else {
             this.openMemberView = index
         }
     }
 
-    blockMember(){
-       if(!this.unlockAllMembersView){
-        return 4;
-       }else{
-        return 999999999;
-       }
+    blockMember() {
+        if (!this.unlockAllMembersView) {
+            return 4;
+        } else {
+            return 999999999;
+        }
     }
 
-    unlockMembersView(){
+    unlockMembersView() {
         this.unlockAllMembersView = !this.unlockAllMembersView
-     }
+    }
 
-    closeMember(){
+    closeMember() {
         this.openMemberView = undefined
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         localStorage.removeItem("project-view")
     }
-    
-    newDashVisible(){
+
+    newDashVisible() {
         this.newDashVisibleBol = !this.newDashVisibleBol
         this.newChartBool = false
         this.viewEditBol = false
     }
 
-    newChartVisible(){
+    newChartVisible() {
         this.newChartBool = !this.newChartBool
         this.newDashVisibleBol = false
         this.viewEditBol = false
@@ -392,8 +451,8 @@ export class TelaFullViewComponent implements OnInit {
 
 
     @ViewChild('dashElement') dashElement!: ElementRef;
-    @ViewChild('statusClose') statusClose!:ElementRef
-    @ViewChild('addMember') addMember!:ElementRef
+    @ViewChild('statusClose') statusClose!: ElementRef
+    @ViewChild('addMember') addMember!: ElementRef
     @HostListener('click', ['$event'])
     outsideClick(event: any) {
 
@@ -412,45 +471,45 @@ export class TelaFullViewComponent implements OnInit {
         }
     }
 
-    
 
-    async deleteDashboard(dashboard : Dashboard){
-        await this.service.deleteDashboard(dashboard.id,this.loggedUser.id)
+
+    async deleteDashboard(dashboard: Dashboard) {
+        await this.service.deleteDashboard(dashboard.id, this.loggedUser.id)
         this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
     }
 
 
-    createNewDashBoard(dash:any){
+    createNewDashBoard(dash: any) {
         this.dashboards.push(dash)
         this.newDashVisibleBol = false
         this.dashboards = this.dashboards.reverse()
     }
 
-    getIdStatusCharts():number{
-        let numForReturn : number = 0
+    getIdStatusCharts(): number {
+        let numForReturn: number = 0
         this.projeto.charts.forEach(element => {
-            if(element.label === "Status das tarefas"){
+            if (element.label === "Status das tarefas") {
                 numForReturn = element.id
             }
         });
         return numForReturn
     }
 
-    setViewEditBol(event:any){
+    setViewEditBol(event: any) {
         this.viewEditBol = event
     }
 
-    chartsInitialize(){
+    chartsInitialize() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        
+
         this.charts.push(
             {
                 id: 1,
                 type: 'bar',
-                data : {
+                data: {
                     labels: ['Q1', 'Q2', 'Q3', 'Q4'],
                     datasets: [
                         {
@@ -462,8 +521,8 @@ export class TelaFullViewComponent implements OnInit {
                         }
                     ]
                 },
-        
-                options : {
+
+                options: {
                     plugins: {
                         legend: {
                             labels: {
@@ -494,11 +553,11 @@ export class TelaFullViewComponent implements OnInit {
                     }
                 }
             },
-            
+
             {
                 id: 2,
                 type: 'doughnut',
-                data : {
+                data: {
                     labels: ['A', 'B', 'C'],
                     datasets: [
                         {
@@ -509,8 +568,8 @@ export class TelaFullViewComponent implements OnInit {
                         }
                     ]
                 },
-        
-                options : {
+
+                options: {
                     cutout: '60%',
                     plugins: {
                         legend: {
@@ -525,7 +584,7 @@ export class TelaFullViewComponent implements OnInit {
             {
                 id: 3,
                 type: 'pie',
-                data : {
+                data: {
                     labels: ['A', 'B', 'C'],
                     datasets: [
                         {
@@ -536,8 +595,8 @@ export class TelaFullViewComponent implements OnInit {
                         }
                     ]
                 },
-        
-                options : {
+
+                options: {
                     plugins: {
                         legend: {
                             labels: {
@@ -595,19 +654,19 @@ export class TelaFullViewComponent implements OnInit {
         })();
     }
 
-    async drop(event: CdkDragDrop<string[]>, dashboard:any) {
-        if(dashboard.charts.length >= 2){
+    async drop(event: CdkDragDrop<string[]>, dashboard: any) {
+        if (dashboard.charts.length >= 2) {
             this.newDashVisibleBol = false
             moveItemInArray(dashboard.charts, event.previousIndex, event.currentIndex);
         }
 
-        dashboard.charts.forEach((element: any, index:number) => {
+        dashboard.charts.forEach((element: any, index: number) => {
             element.chartIndex = dashboard.charts.indexOf(element)
         });
-        
+
         await this.service.updateChartList(dashboard.id, this.projeto.id, dashboard.charts)
-        
+
     }
-    
+
 
 }

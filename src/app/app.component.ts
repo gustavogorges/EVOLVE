@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+
+import { TranslateService } from '@ngx-translate/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
 import { AuthService } from 'src/service/autService';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { TextToSpeechService } from 'src/service/text-to-speech.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +15,30 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
-    private colorService : ColorService, private authService  : AuthService
 
-    ){}
-  title = 'angularProject';
+    private colorService : ColorService, private translateService : TranslateService,
+    private textToSpeechService: TextToSpeechService,
+    private authService : AuthService
+
+    ){
+      if(localStorage.getItem('lang') === null){
+        localStorage.setItem('lang', 'en')
+      }
+      this.translateService.setDefaultLang('en')
+      this.translateService.use(localStorage.getItem('lang') || 'en')
+    }
+
+  title = 'Evolve';
   loggedUser !: User; 
+
+  reload(){
+    window.location.reload()
+  }
+
+
+    
   islogged = false
+
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser();
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
@@ -47,5 +69,18 @@ export class AppComponent{
      
     }
     
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  onMouseUp(event: MouseEvent) {
+    const selectedText = window.getSelection()!.toString().trim();
+    if (selectedText) {
+      console.log("entrou aqui");
+      console.log(this.textToSpeechService.canSpeak);
+      if (this.textToSpeechService.canSpeak) {
+        console.log("entrou aqui 2");
+        this.textToSpeechService.speak(selectedText);
+      }
+    }
   }
 }

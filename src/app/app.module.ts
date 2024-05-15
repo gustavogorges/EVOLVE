@@ -116,14 +116,25 @@ import { NotificationModalComponent } from './componentes/notification-modal/not
 import { AddMemberToProjectModalComponent } from './componentes/add-member-to-project-modal/add-member-to-project-modal.component';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SearchComponentComponent } from './componentes/search-component/search-component.component';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { SearchUsersComponent } from './componentes/search-users/search-users.component';
 import { UserMembersComponent } from './componentes/user-members/user-members.component';
+
 import { MessageModalComponent } from './componentes/message-modal/message-modal.component';
 
+import { TextToSpeechComponent } from './componentes/text-to-speech/text-to-speech.component';
 
 
+
+
+export function HttpLoaderFactory(http:HttpClient){
+  return new TranslateHttpLoader(http);
+}
 
 
 
@@ -211,12 +222,22 @@ import { MessageModalComponent } from './componentes/message-modal/message-modal
     SearchComponentComponent,
     SearchUsersComponent,
     UserMembersComponent,
-    MessageModalComponent
+    MessageModalComponent,
+    TextToSpeechComponent
 
   ],
   
   imports: [
-    
+    HttpClientModule,
+    TranslateModule.forRoot(
+      {
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }
+    ),
     MessageModule,
     MessagesModule,
     ChartModule,
@@ -244,9 +265,7 @@ import { MessageModalComponent } from './componentes/message-modal/message-modal
     HttpClientModule
   ],
   
-  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,
-  DatePipe
-],
+  providers: [HttpClient, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

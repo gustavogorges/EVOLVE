@@ -20,15 +20,15 @@
             duration-200
             hover:text-lg">
                 <i class="pi pi-plus"></i>
-                <P>Adicionar Status</P>
+                <P>{{'Adicionar Status' | translate}}</P>
             </div>
             <div *ngIf="!adicionar" class="flex flex-col border-t-2 dark:border-gray-400 justify-center gap-1 items-center h-[9rem] text-gray-500 dark:text-primaryGray cursor-pointer">
-                <input type="text" [(ngModel)]="status.name" class="bg-transparent h-full w-full p-2 outline-none" placeholder="escreva o nome">
+                <input type="text" [(ngModel)]="status.name" class="bg-transparent h-full w-full p-2 outline-none" placeholder="{{'escreva o nome' | translate}}">
                 <div class="flex justify-between w-full border-t-2 dark:border-gray-400 p-2">
-                    <input class="bg-transparent" disabled="true" placeholder="selecione a cor" [ngModel]="status.backgroundColor.toUpperCase()" type="text"><p-colorPicker class="color" [(ngModel)]="status.backgroundColor"></p-colorPicker>
+                    <input class="bg-transparent" disabled="true" placeholder="{{'selecione a cor' | translate}}" [ngModel]="status.backgroundColor.toUpperCase()" type="text"><p-colorPicker class="color" [(ngModel)]="status.backgroundColor"></p-colorPicker>
                 </div>
-                <button *ngIf="!editando" (click)="criarStatus()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-secondary rounded-b-lg dark:bg-dark-secondary duration-200 hover:bg-green-500">Confirmar</button>
-                <button *ngIf="editando" (click)="salvar()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-primary rounded-b-lg dark:bg-dark-primary duration-200 hover:bg-blue-500">Salvar</button>
+                <button *ngIf="!editando" (click)="criarStatus()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-secondary rounded-b-lg dark:bg-dark-secondary duration-200 hover:bg-green-500">{{'Confirmar' | translate}}</button>
+                <button *ngIf="editando" (click)="salvar()" class="w-full h-full font-semibold text-primaryGray dark:text-gray-800 bg-primary rounded-b-lg dark:bg-dark-primary duration-200 hover:bg-blue-500">{{'Salvar' | translate}}</button>
             </div>
         </div>
     </div>

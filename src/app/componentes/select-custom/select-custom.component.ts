@@ -19,7 +19,7 @@ export class SelectCustomComponent implements OnInit {
   listIcons !: Array<string>
   @Input()
   projeto !: Project 
-
+  lang = ''
   ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
 
 
@@ -31,6 +31,7 @@ export class SelectCustomComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.projeto = await this.service.getOne("project",this.projeto.id)
+    this.lang = localStorage.getItem('lang') || 'en'
   }
 
   saveOption(option:any) {
@@ -38,7 +39,7 @@ export class SelectCustomComponent implements OnInit {
     this.listIcons=[]
 
     this.newItem.emit(option);
-    if(option.name=="Status"){
+    if(option.name=="Status" || option.name=="Estado" || option.name=="状态"){
       this.projeto.statusList.map((status :Status)=>{
         this.listOptions.push(status)
        })
@@ -46,7 +47,7 @@ export class SelectCustomComponent implements OnInit {
       
 
      }
-     if(option.name=="Associado"){
+     if(option.name=="Associado" || option.name== 'Associate' || option.name== '关联' || option.name== 'Asociado'){
       this.projeto.members.map((user :User)=>{
         this.listOptions.push(user)
        })
@@ -54,7 +55,7 @@ export class SelectCustomComponent implements OnInit {
       
 
      }
-     if(option.name=="Prioridade"){
+     if(option.name=="Prioridade" || option.name=="Priority" || option.name=="优先级" || option.name=="Prioridad"){
       this.ordemPrioridades.map((s)=>{
         console.log(s)
         this.listOptions.push(s)

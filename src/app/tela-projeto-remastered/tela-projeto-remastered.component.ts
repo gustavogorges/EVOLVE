@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/model/project';
+import { Task } from 'src/model/task';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -12,6 +13,8 @@ import { CookiesService } from 'src/service/cookies-service.service';
   styleUrls: ['./tela-projeto-remastered.component.scss']
 })
 export class TelaProjetoRemasteredComponent implements OnInit {
+  
+  booleanTask = false
 
   constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute, private cookies_service : CookiesService) { }
 
@@ -25,10 +28,25 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   listFromRemove = new Array
   teamId : number = 0
   team !: Team
+  task !: Task
+  project !: Project;
+
   loggedUser : User = new User;
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
     this.getProjects()
+  }
+
+  closeTask(event: boolean) {
+    if (event) {
+      this.booleanTask = false;
+    }
+  }
+
+  openTaskModal(task:any){
+    this.task = task
+    this.project = task.project as Project
+    this.booleanTask = true
   }
 
   getResponse(){

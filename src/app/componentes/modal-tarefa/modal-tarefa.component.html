@@ -9,27 +9,27 @@
       </div>
       <div class="actions-timer">
         <div class="cancel action" (click)="finishFocus()">
-          <i class="pi pi-times" style="font-size: 1rem"></i>cancelar
+          <i class="pi pi-times" style="font-size: 1rem"></i>{{'cancelar' | translate}}
         </div>
         <div
           *ngIf="booleanPlayPause"
           class="pause-return action"
           (click)="startTimer()"
         >
-          <i class="pi pi-play" style="font-size: 1rem"></i>começar
+          <i class="pi pi-play" style="font-size: 1rem"></i>{{'começar' | translate}}
         </div>
         <div 
         *ngIf="!booleanPlayPause"
         class="pause-return action" 
         (click)="stopTimer()"
         >
-          <i class="pi pi-pause" style="font-size: 1rem"></i>pausar
+          <i class="pi pi-pause" style="font-size: 1rem"></i>{{'pausar' | translate}}
         </div>
         <div
           class="stop action"
           (click)="sendTimeFocus()"
         >
-          <i class="pi pi-check-square" style="font-size: 1rem"></i>terminar
+          <i class="pi pi-check-square" style="font-size: 1rem"></i>{{'terminar' | translate}}
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
         <div class="foco-box">
           <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold">iniciar foco</p>
+            <p class="font-bold">{{'iniciar foco' | translate}}</p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
           <div class="remove-button flex  justify-center items-center p-2">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold hidden md:flex text-sm">excluir tarefa</p>
+              <p class="text-white font-bold hidden md:flex text-sm">{{'excluir tarefa' | translate}}</p>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
     <div class="add-icon self-start hover" (click)="addPropertie()">
       <i class="icon-propertie pi pi-plus" style="color: white"></i>
       <p class="add-propertie-text" style="color: white">
-        adicionar propriedade
+        {{'adicionar propriedade' | translate}}
       </p>
     </div>
     <app-select-propriedade
@@ -112,7 +112,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
-              <p class="name-propertie">data final:</p>
+              <p class="name-propertie">{{'data final:' | translate}}</p>
             </div>
             <div class="date-end">
               <p
@@ -141,7 +141,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-spinner"></i>
-              <p class="name-propertie">status:</p>
+              <p class="name-propertie">{{'status:' | translate}}</p>
             </div>
             <div *ngIf="!booleanStatus" class="status-icon-box cursor-pointer">
               <div
@@ -168,7 +168,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-users"></i>
-              <p class="name-propertie">associados:</p>
+              <p class="name-propertie">{{'associados:' | translate}}</p>
             </div>
             <div
               class="gap-1 responsible-icon-box hover:px-2 hover:py-1 hover:bg-slate-100 rounded-lg"
@@ -207,7 +207,7 @@
           <div class="propertie">
             <div class="name-icon">
               <i class="icon-propertie pi pi-calendar"></i>
-              <p class="name-propertie">agendamento:</p>
+              <p class="name-propertie">{{'agendamento:' | translate}}</p>
             </div>
             <div class="date-end">
               <p
@@ -241,7 +241,7 @@
           <div class="propertie min-w-[40%]">
             <div class="name-icon">
               <i class="icon-propertie pi pi-exclamation-circle"></i>
-              <p class="name-propertie">prioridade:</p>
+              <p class="name-propertie">{{'prioridade:' | translate}}</p>
             </div>
             <div
               *ngIf="!booleanSelectPrioridade"
@@ -270,7 +270,6 @@
           </div>
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full min-w-[50%]"
           >
             <div *ngIf="indice % 2 == 0">
               <app-propriedade-tarefa
@@ -289,7 +288,6 @@
         <div class="flex flex-col h-full w-1/2">
           <div
             *ngFor="let property of propertiesList; index as indice"
-            class="h-full w-[85%]"
           >
             <div *ngIf="indice % 2 != 0">
               <app-propriedade-tarefa
@@ -322,7 +320,7 @@
             class="icon-propertie pi pi-angle-up"
             (click)="openDesc()"
           ></i>
-          <p class="name-propertie">descrição</p>
+          <p class="name-propertie">{{'descrição' | translate}}</p>
         </div>
       </div>
       <div class="w-full">
@@ -349,7 +347,7 @@
           class="page-name"
           (click)="changePage('sub-tarefas')"
         >
-          sub-tarefas
+          {{'sub-tarefas' | translate}}
         </p>
         <p
           [ngClass]="
@@ -360,7 +358,7 @@
           class="page-name"
           (click)="changePage('comentarios')"
         >
-          comentários
+          {{'comentários' | translate}}
         </p>
         <p
           [ngClass]="
@@ -371,7 +369,7 @@
           class="page-name"
           (click)="changePage('historicos')"
         >
-          históricos
+          {{'históricos' | translate}}
         </p>
         <p
           [ngClass]="
@@ -380,7 +378,7 @@
           class="page-name"
           (click)="changePage('anexos')"
         >
-          anexos
+          {{'anexos' | translate}}
         </p>
       </div>
       <div class="components">

@@ -27,7 +27,7 @@
           <button (click)="changeVisualizacao($event)" class="select-button">
             <i class="pi pi-eye icon icon2" ></i>
             <p class="text-select">
-              Visualização
+              {{'Visualização' | translate}}
             </p>
           </button>
           <div *ngIf="visualizacaoVisible" class="selections absolute z-10">
@@ -44,7 +44,7 @@
           <button (click)="changeOrdenacao($event)" class="select-button">
             <i class="pi pi-sort-alt icon icon2 " ></i>
             <p class="text-select">
-              Ordenação
+              {{'Ordenação' | translate}}
             </p>          </button>
           <div *ngIf="ordenacaoVisible" class="selections absolute z-10">
             <app-select-custom
@@ -59,7 +59,7 @@
           <button (click)="changeFiltro($event)" class="select-button">
             <i class="pi pi-filter icon icon2" ></i>
             <p class="text-select">
-              Filtro
+              {{'Filtro' | translate}}
             </p>
           </button>
           <div *ngIf="filtroVisible" class="selections absolute z-10">
