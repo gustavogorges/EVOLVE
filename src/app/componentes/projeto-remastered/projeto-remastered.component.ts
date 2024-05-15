@@ -7,6 +7,7 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
+import { UserProject } from 'src/model/userProject';
 import { Task } from 'src/model/task';
 
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -96,7 +97,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   verifyImg(user:User){
-    if(user.image != null){
+    if(user?.image != null){
       if(user.image.data != null){
         return false
       }
@@ -110,11 +111,13 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async salvarTarefa(){
-    await this.service.putProjeto(this.projeto, this.loggedUser.id);
+    // await this.service.putProjeto(this.projeto, this.loggedUser.id);
+    await this.service.putProjeto(this.projeto);
+    //REVER
   }
 
-  filteredNames() {
-    return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  filteredNames():UserProject[] {
+    return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }
 
   openTask(task:Task){
@@ -206,7 +209,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   }
 
   async removeMember(user:User) {
-    if(user.id != this.projeto.creator.id){
+    if(user?.id != this.getProjectCreator(this.projeto).id){
       this.quest.emit("Realmente deseja remover um membro?");
   
       try {
@@ -214,7 +217,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
         this.confirmationAction = undefined;
 
         if (confirmation) {
-          this.projeto.members.splice(this.projeto.members.indexOf(user), 1)
+          this.projeto.members.splice(this.projeto.members.indexOf(this.projeto.members.find(member => member.userId == user.id)!), 1)
           this.listIdsFromRemove.push({
             "id" : user.id
           })
@@ -224,10 +227,17 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     }
   }
 
+
+  getProjectCreator(project:Project):User{
+    // console.log(project);
+    return project.members.find(userProject => userProject.manager)!.user
+  }
+  
+
   verifyIsCreator(p:User){
-    console.log(p.id, this.projeto.creator.id);
+    // console.log(p.id, this.getProjectCreator(this.projeto).id);
     
-    if(p.id != this.projeto.creator.id){
+    if(p.id != this.getProjectCreator(this.projeto).id){
       return true
     }
     return false

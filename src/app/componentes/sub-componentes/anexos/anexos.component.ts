@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-import { TaskFile } from 'src/model/file';
+import { File } from 'src/model/file';
 
 @Component({
   selector: 'app-anexos',
@@ -32,12 +32,12 @@ export class AnexosComponent implements OnInit {
  
     if (file) {
       this.task = await this.service.patchTaskFile(this.task.id,this.loggedUser.id,file);
-      const taskFile : TaskFile = this.task.files[this.task.files.length - 1];
+      const taskFile : File = this.task.files[this.task.files.length - 1];
       this.setUrl(taskFile);
     }
   }
 
-  setUrl(taskFile : TaskFile): void {
+  setUrl(taskFile : File): void {
     const byteCharacters = atob(taskFile.data);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
@@ -50,7 +50,7 @@ export class AnexosComponent implements OnInit {
 
   }
 
-  removeTaskFile(file:TaskFile): void {
+  removeTaskFile(file:File): void {
     this.task.files = this.task.files.filter(f => f.id !== file.id);
     console.log(file);
     this.service.deleteTaskFile(this.task.id,file.id,this.loggedUser.id);

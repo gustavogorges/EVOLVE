@@ -1,7 +1,7 @@
 export enum MessageStatus{
 
     AWAITING,
-    SENT,
     RECEIVED,
+    SENT,
     VISUALIZED
 }

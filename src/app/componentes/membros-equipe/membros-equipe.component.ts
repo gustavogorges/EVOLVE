@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TaskFile } from 'src/model/file';
+import { File } from 'src/model/file';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
+import { UserProject } from 'src/model/userProject';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 @Component({
   selector: 'app-membros-equipe',
@@ -54,15 +55,21 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   addUser(){
-    this.projeto.members.push(this.user)
+    let userProject = new UserProject
+    userProject.project = this.projeto
+    userProject.user = this.user
+    userProject.projectId = this.projeto.id
+    userProject.userId = this.user.id
+    userProject.role = this.projeto.defaultRole
+    this.projeto.members.push(userProject)
     console.log(this.projeto);
   }
 
 
   removeUser(){
-    this.projeto.members.forEach(element => {
+    this.projeto.members.map(member => member.user).forEach(element => {
       if(element.id === this.user.id){
-        this.projeto.members.splice(this.projeto.members.indexOf(element), 1)
+        this.projeto.members.splice(this.projeto.members.indexOf(this.projeto.members.find(member => member.userId == element.id)!), 1)
       }
     });
   }

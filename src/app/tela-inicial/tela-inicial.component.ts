@@ -40,58 +40,48 @@ export class TelaInicialComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.data = this.location.getState();
     let userData: User = await this.data.user
-    if(userData){
-      this.cookieService.setLoggedUserId( userData)
-    }
-
-  
-
-    
+ 
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
-     this.listaTarefas.sort((a,b)=>{
-          if (a.finalDate < b.finalDate) {
-            return -1; // 'a' vem antes de 'b'
-          } else if (a.finalDate > b.finalDate) {
-            return 1; // 'b' vem antes de 'a'
-          } else {
-            return 0; // datas são iguais
-          }
-        })
-   let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
+    this.listaTarefas.sort((a,b)=>{
+      if (a.finalDate < b.finalDate) {
+        return -1; // 'a' vem antes de 'b'
+      } else if (a.finalDate > b.finalDate) {
+        return 1; // 'b' vem antes de 'a'
+      } else {
+        return 0; // datas são iguais
+      }
+    })
+    let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
    
-   this.loggedUser.teams = await this.service.getTeamsByUserId(this.loggedUser.id)
-    this.userColors()
- 
-   
-
-   projects.map((project: Project)=>{
-    if(project.favorited){
-      this.projectList.push(project)
-      
-    }
-   })
-   if(this.loggedUser.theme=="dark"){
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('theme','dark')
-  }else{
-    document.documentElement.classList.remove('dark')
-    document.querySelector('.pi-sun')?.classList.add('pi-moon')
-    document.querySelector('.pi-sun')?.classList.remove('pi-sun')
-    localStorage.setItem('theme','light')
-
-  }   
-  this.changeFont()
-  
-
-   
-     
-      
-
+    this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
+    console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
     
+    
+    this.userColors()
 
+    projects.map((project: Project)=>{
+      if(project.favorited){
+        this.projectList.push(project)
+      }
+    })
+    if(this.loggedUser.theme=="dark"){
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme','dark')
+    }else{
+      document.documentElement.classList.remove('dark')
+      document.querySelector('.pi-sun')?.classList.add('pi-moon')
+      document.querySelector('.pi-sun')?.classList.remove('pi-sun')
+      localStorage.setItem('theme','light')
+
+    }   
+    this.changeFont()
+    console.log(this.loggedUser.teamRoles);
+    
   }
+
+
   changeFont(){
     document.documentElement.style.setProperty('--font-size-base', ''+this.loggedUser.fontSize+'px');
     document.documentElement.style.setProperty('--font-size-sm', ''+(this.loggedUser.fontSize-2)+'px');
@@ -140,26 +130,37 @@ async openTask(tarefa: Task): Promise<void> {
 
     
     
-    if (novoIndice >= 0 && novoIndice < this.loggedUser.teams.length) {
+    if (novoIndice >= 0 && novoIndice < this.loggedUser.teamRoles.length) {
       this.indiceAtual = novoIndice;
     }
-    if(novoIndice>=this.loggedUser.teams.length){
+    if(novoIndice>=this.loggedUser.teamRoles.length){
       this.indiceAtual= 0 
     }
     if(novoIndice==-1){
-      this.indiceAtual= this.loggedUser.teams.length-1
+      this.indiceAtual= this.loggedUser.teamRoles.length-1
     }
   }
 
+  getCurrentTeam(indiceAtual:number):Team{
+    if(this.loggedUser.teamRoles.length - 1 >= indiceAtual) {
+      return this.loggedUser.teamRoles[indiceAtual].team 
+    }
+    return new Team();
+
+  }
+
   goToPerfilPage(){
+    console.log("NOT IMPLEMENTED");
     
   }
+
   goTasks(projectId : number){
     this.router.navigate(['/tela-tarefa/'+projectId]);
 
   }
-  goProjetos(temId : number){
-    this.router.navigate(["/equipe/"+temId])
+  goProjetos(){
+    let teamId:number = this.getCurrentTeam(this.indiceAtual).id
+    this.router.navigate(["/equipe/"+teamId])
   }
   
   tarefaNova: Task = new Task();

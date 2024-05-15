@@ -57,8 +57,8 @@
         <button class="absolute top-1/2 -translate-y-1/2 -left-5 pi pi-chevron-left text-[#aaa]" (click)="mudarItem(indiceAtual - 1)"></button>
        
           <app-equipe-recente-card
-            (click)="goProjetos(loggedUser.teams[indiceAtual].id)"
-            [team]="loggedUser.teams[indiceAtual]"
+            (click)="goProjetos()"
+            [team]="getCurrentTeam(indiceAtual)"
             class="w-full max-h-[200px]"
           ></app-equipe-recente-card>
           <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>
@@ -67,7 +67,7 @@
     </div>
     </div>
     <div class="flex flex-col w-full gap-6 ">
-     
+      Calendario era pata aq meu
       <app-week-calendar class="w-full"></app-week-calendar>
     </div>
   </div>

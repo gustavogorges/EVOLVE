@@ -23,8 +23,11 @@ export class CookiesService {
   getJWTtoken() : any {
     this.cookieService.get('token');
   }
-    setLoggedUserId(user : User|null) : void {
-      this.cookieService.set('loggedUserId',JSON.stringify(user?.id));
+    setLoggedUserId(id : number) : void {
+      this.cookieService.set('loggedUserId',JSON.stringify(id));
+    }
+   getLoggedUserId()  {
+      return this.cookieService.get('loggedUserId');
     }
 
      async getLoggedUser() : Promise<User> {

@@ -11,10 +11,9 @@ import {
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
-import { PriorityRecord } from 'src/model/PriorityRecord'; 
+import { PriorityRecord } from 'src/model/priorityRecord'; 
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
-
 import * as jspdf from 'jspdf';
  import html2canvas from 'html2canvas';
  import { HttpClient } from '@angular/common/http';
@@ -502,7 +501,7 @@ if (lang === 'pt') {
         this.projeto.members.map((s) => {
           console.log(option);
           
-          if (s.name == option.name) {
+          if (s.user.name == option.name) {
             console.log(option.name);
 
             this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));

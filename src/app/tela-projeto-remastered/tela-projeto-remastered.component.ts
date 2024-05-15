@@ -77,7 +77,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       const getTeamId = params.get('teamId');
       this.teamId  = Number(getTeamId)
       this.team = await this.service.getOne("team", this.teamId)
-      this.projects = await this.service.getProjectsByTeamId(this.teamId, 1)
+      this.projects = await this.service.getProjectsByTeamId(this.teamId)
       console.log(this.projects);
     });
   }
@@ -131,28 +131,33 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
    async editFun(project:Project){
     let postProject:any = project
+    console.log(project)
     let listUsers : Array<Pick<User, "id">> = new Array
     
     setTimeout(() => {
-      project.members.forEach(element => {
-        listUsers.push({
-          "id" : element.id
-        })
-      });
-      postProject.members = listUsers
+      // project.members.forEach(element => {
+      //   listUsers.push({
+      //     "id" : element.user.id
+      //   })
+      // });
+      postProject.members = project.members
       postProject.image = null
     },);
 
     setTimeout(async () => {
-      await this.service.putProjeto(postProject, this.loggedUser.id)
-    
+
       if(this.listFromRemove.length != 0){
-        await this.service.deleteUserFromProject(project.id,this.loggedUser.id, this.listFromRemove)
+        project.members.filter(member => !this.listFromRemove.includes(member))
+        await this.service.patchProjectMembers(project.id, project.members)
+        // await this.service.deleteUserFromProject(project.id, this.listFromRemove)
       }
 
       if(this.formData!=null){
         await this.createImageProject(project)
       } 
+
+      await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
+    
     });
 
     setTimeout(async () => {
@@ -167,7 +172,10 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   }
 
   async createImageProject(p:Project){
-    return await this.service.patchImage(p.id, this.formData)
+    if(p.image){
+      return await this.service.patchProjectImage(p.id, p.image)
+    }
+    // return await this.service.patchProjectImage(p.id, this.formData)
   }
 
   async saveImage(event:any){
