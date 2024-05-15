@@ -3,12 +3,8 @@ import { PriorityRecord } from 'src/model/priorityRecord';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
-<<<<<<< HEAD
 // import { PriorityRecord } from 'src/model/priorityRecord';
-=======
-import { PriorityRecord } from 'src/model/PriorityRecord';
 import { cloneDeep } from 'lodash';
->>>>>>> dev
 
 @Component({
   selector: 'app-select-prioridade',

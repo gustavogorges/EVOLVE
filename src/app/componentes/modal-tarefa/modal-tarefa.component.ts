@@ -161,11 +161,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     
     this.listAssociates = this.tarefa.associates;
 
-    
-<<<<<<< HEAD
     this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
-=======
-    this.listPriorities = await this.service.getAllPriorities()
+    // this.listPriorities = await this.service.getAllPriorities()
+
     this.translatePriorities()
     this.translateTaskPriority()
     this.translateStatus()
@@ -176,7 +174,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
         }
       })
     },10);
->>>>>>> dev
     this.propertiesList = this.tarefa.properties;
 
     

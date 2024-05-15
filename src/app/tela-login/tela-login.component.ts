@@ -66,7 +66,7 @@ export class TelaLoginComponent implements OnInit {
     return this.userForm.get('password');
   }
   responseData : any 
-<<<<<<< HEAD
+
  async submit() {
     // console.log(this.service.getOne("user", 1));
     try {
@@ -87,25 +87,9 @@ export class TelaLoginComponent implements OnInit {
       // Handle error
     }
   
-=======
-  async submit() {
-    // this.authService.proceedLogin(this.userForm.value).subscribe(result => {
-    //   if(result!=null){
-    //     this.responseData = result;
-    //     this.cookie.setJWTtoken(this.responseData.jwtToken); 
-    //     this.router.navigate(["/tela-inicial "])
-    // this.authService.loggedInChanged.emit(true);
 
-    //   }
-    // })
-    let email1 =  this.userForm?.get(['email'])?.value
-    
-    this.usuario = await this.service.getUser(email1);
-    if (this.usuario) {
-      this.router.navigate(['/tela-inicial'], { state: { user: this.usuario } });
->>>>>>> dev
   }
-}
+
   get formControls() {
     return this.passwordForm.controls;
   }

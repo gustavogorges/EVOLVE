@@ -7,13 +7,10 @@ import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { cloneDeep } from 'lodash';
-<<<<<<< HEAD
 import { UserProject } from 'src/model/userProject';
-=======
 import { Task } from 'src/model/task';
 
 import { CookiesService } from 'src/service/cookies-service.service';
->>>>>>> dev
 
 interface Tarefa{
   nome : string,
@@ -108,10 +105,6 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     return true
   }
 
-<<<<<<< HEAD
-  filteredNames():UserProject[] {
-    return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
-=======
   alterarTarefaFavoritado(){
     this.projeto.favorited = !this.projeto.favorited;
     this.salvarTarefa()
@@ -121,9 +114,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     await this.service.putProjeto(this.projeto, this.loggedUser.id);
   }
 
-  filteredNames() {
-    return this.projeto?.members?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
->>>>>>> dev
+  filteredNames():UserProject[] {
+    return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
   }
 
   openTask(task:Task){

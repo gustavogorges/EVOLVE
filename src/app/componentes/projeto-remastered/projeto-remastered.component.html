@@ -22,17 +22,10 @@
         <div class="project-name"><input [disabled]="!projeto.editOn" maxlength="35" type="text" [(ngModel)]="projeto.name"></div>
         <div class="project-desc"><textarea class="text-justify" maxlength="110" cols="30" rows="10" [disabled]="!projeto.editOn" [(ngModel)]="projeto.description"></textarea></div>
         <div class="project-user-response">
-<<<<<<< HEAD
-            <p>Criador:</p>
+            <p>{{'Criador:' | translate}}</p>
             <div *ngIf="verifyImg(getProjectCreator(projeto)) && getProjectCreator(projeto)" [ngStyle]="{'background': getProjectCreator(projeto).imageColor }" >{{getProjectCreator(projeto).name.charAt(0).toUpperCase()}}</div>
             <div class="overflow-hidden object-center" *ngIf="!verifyImg(getProjectCreator(projeto))">
                 <img *ngIf="!verifyImg(getProjectCreator(projeto))" src="{{getProjectCreator(projeto).image.data}}" alt="">
-=======
-            <p>{{'Criador:' | translate}}</p>
-            <div *ngIf="verifyImg(projeto.creator) && projeto.creator" [ngStyle]="{'background': projeto.creator.imageColor }" >{{projeto.creator.name.charAt(0).toUpperCase()}}</div>
-            <div class="overflow-hidden object-center" *ngIf="!verifyImg(projeto.creator)">
-                <img *ngIf="!verifyImg(projeto.creator)" src="{{projeto.creator.image.data}}" alt="">
->>>>>>> dev
             </div>
         </div>
         <div class="project-progress"><div></div></div>
@@ -105,19 +98,13 @@
         </div>
 
         <div class="botoes">
-<<<<<<< HEAD
-            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
-            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
-            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
-            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
-            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
-=======
+
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >{{'Deletar Projeto' | translate}} <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
             <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
->>>>>>> dev
+
         </div>
     </div>
 
@@ -170,19 +157,13 @@
         </div>
 
         <div class="botoes">
-<<<<<<< HEAD
-            <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >Deletar Projeto <i class="pi pi-trash"></i></button>
-            <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >Cancelar Edição <i class="pi pi-times"></i></button>
-            <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">Editar Projeto <i class="pi pi-pencil"></i> </button>
-            <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">Salvar Edição <i class="pi pi-save"></i> </button>
-            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">Ir para projeto <i class="pi pi-angle-double-right"></i></button>
-=======
+
             <button *ngIf="!projeto.editOn" class="botao-cancelar" (click)="deletarProjeto(projeto.id)" >{{'Deletar Projeto' | translate}} <i class="pi pi-trash"></i></button>
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
-            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
->>>>>>> dev
+            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+
         </div>
 
     </div>

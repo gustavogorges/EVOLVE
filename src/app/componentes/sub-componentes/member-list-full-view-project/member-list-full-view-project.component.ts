@@ -63,15 +63,11 @@ export class MemberListFullViewProjectComponent implements OnInit {
           listIdsFromRemove.push({
             "id": this.user.id
           })
-<<<<<<< HEAD
-          for(let e of listIdsFromRemove){
-            
-          }
+
           this.project.members.filter( (userProject) => !listIdsFromRemove.find(e=> e.id = userProject.userId))
           await this.service.patchProjectMembers(this.project.id, this.project.members)
-=======
-          await this.service.deleteUserFromProject(this.project.id,this.loggedUser.id,listIdsFromRemove)
->>>>>>> dev
+          // await this.service.deleteUserFromProject(this.project.id,this.loggedUser.id,listIdsFromRemove)
+
         }
 
       } catch (ignore) { }

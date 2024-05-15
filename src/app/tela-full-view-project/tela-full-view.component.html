@@ -106,13 +106,9 @@
             <div *ngIf="filteredNames().length === 0" class="membros">
                 <p class=" text-fontGray text-3xl font-semibold p-10 w-fit">{{'Nenhum membro encontrado' | translate}}</p>
             </div>
-<<<<<<< HEAD
+
             <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] w-full overflow-y-auto">
-                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user.user" ></app-member-list-full-view-project>
-=======
-            <div *ngIf="filteredNames().length > 0" class="mt-5 h-[50vh] overflow-y-auto">
-                <app-member-list-full-view-project *ngFor="let user of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="user" ></app-member-list-full-view-project>
->>>>>>> dev
+                <app-member-list-full-view-project *ngFor="let userProject of filteredNames()" [confirmationAction]="getResponse()" (quest)="setQuest($event)" [project]="projeto" [user]="userProject.user" ></app-member-list-full-view-project>
             </div>
         </div>
 

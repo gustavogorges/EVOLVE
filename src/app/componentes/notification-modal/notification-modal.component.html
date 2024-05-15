@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-<div class="w-[400px] h-[480px] bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col justify-between " >
-    <div class="main-box">
-        <div class="teams-box" *ngFor="let userTeam of loggedUser.teamRoles">
-=======
 <i class="icon pi pi-bell icon2 pt-1" (click)="openNotification()"></i>
 
 <div class=" bg-white fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col duration-300 justify-between  overflow-hidden " [ngClass]="notification ? 'w-[400px] h-[480px] opacity-100':'w-0 h-0 opacity-0'">
     <div class="main-box min-w-fit">
-        <div class="teams-box" *ngFor="let team of loggedUser.teams">
->>>>>>> dev
+        <div class="teams-box" *ngFor="let userTeam of loggedUser.teamRoles">
+
             <div class="h-16 w-full flex justify-between items-center px-4">
                 <i class="pi pi-users team-icon"></i>
                 <p class="text-primaryFontBlack text-lg font-semibold">{{userTeam.team.name}}</p>

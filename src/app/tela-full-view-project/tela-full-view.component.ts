@@ -13,6 +13,7 @@ import { cloneDeep } from 'lodash';
 
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { UserProject } from 'src/model/userProject';
 @Component({
     selector: 'app-tela-full-view',
     templateUrl: './tela-full-view.component.html',
@@ -41,20 +42,7 @@ export class TelaFullViewComponent implements OnInit {
     booleanAddStatus: boolean = false;
     closeAllOptions: boolean = false
     dashboardEdit !: Dashboard
-<<<<<<< HEAD
-    editProject : boolean = false
-    miniPageView : string = 'Dashboards'
-    confirmationActionModalBol : boolean = false
-    response : any
-    quest : any
-    searchTerm : any = ''
-    nameEdit : boolean = false
-    nameEdited : string = ''
-    descEdited : string = ''
-    preImage:SafeUrl | undefined = '';
-    imagemBlob!:Blob
-    formData : any = null
-=======
+
     editProject: boolean = false
     miniPageView: string = 'Dashboards'
     confirmationActionModalBol: boolean = false
@@ -66,10 +54,9 @@ export class TelaFullViewComponent implements OnInit {
     descEdited: string = ''
     preImage: SafeUrl | undefined = '';
     imagemBlob!: Blob
-    formData: any = undefined
+    formData : any = null
     openModalAddMembers: boolean = false
     loggedUser: User = new User;
->>>>>>> dev
 
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
@@ -103,10 +90,7 @@ export class TelaFullViewComponent implements OnInit {
 
     }
 
-<<<<<<< HEAD
     async setImageProject(event:any){
-        console.log("setando image");
-        
         if(event.target.files && event.target.files[0]){
           if(event.target.files[0].type === "image/jpeg" 
           || event.target.files[0].type === "image/webp" 
@@ -119,10 +103,10 @@ export class TelaFullViewComponent implements OnInit {
     
             const imageUrl = URL.createObjectURL(blob);
             this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-            console.log("setei image");
-            
           }
-=======
+        }
+    }
+
     translateStatus() {
         const lang = localStorage.getItem('lang');
         if (lang === 'ch') {
@@ -173,7 +157,6 @@ export class TelaFullViewComponent implements OnInit {
                     status.name = 'Unassigned';
                 }
             });
->>>>>>> dev
         }
     }
 
@@ -185,22 +168,7 @@ export class TelaFullViewComponent implements OnInit {
         this.openModalAddMembers = false
     }
 
-    async setImageProject(event: any) {
-        if (event.target.files && event.target.files[0]) {
-            if (event.target.files[0].type === "image/jpeg"
-                || event.target.files[0].type === "image/webp"
-                || event.target.files[0].type === "image/png") {
-                this.imagemBlob = event.target.files[0]
-                const formData = new FormData();
-                formData.append('image', event.target.files[0]);
-                this.formData = formData
-                const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
 
-                const imageUrl = URL.createObjectURL(blob);
-                this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-            }
-        }
-    }
 
     editProjectFun() {
         this.nameEdited = this.projeto.name
@@ -208,7 +176,6 @@ export class TelaFullViewComponent implements OnInit {
         this.nameEdit = !this.nameEdit
     }
 
-<<<<<<< HEAD
     async saveProject(){
         if(this.descEdited != this.projeto.description){
             this.projeto = 
@@ -218,28 +185,9 @@ export class TelaFullViewComponent implements OnInit {
         
         if(this.nameEdited != this.projeto.name ){
             this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
-=======
-    async saveProject() {
-        if (this.nameEdited != this.projeto.name || this.descEdited != this.projeto.description) {
-            let projetoTemp: any = cloneDeep(this.projeto);
-            projetoTemp.name = this.nameEdited
-            projetoTemp.description = this.descEdited
-            projetoTemp.image = null
-            projetoTemp.members = []
-            let projeto = await this.service.putProjeto(projetoTemp, this.loggedUser.id)
-            this.projeto.name = projeto.name
-            this.projeto.description = projeto.description
-        }
-        if (this.formData != undefined) {
-            await this.service.patchImage(this.projeto.id, this.formData)
-            this.formData = undefined
->>>>>>> dev
         }
 
-        if(this.formData){
-            console.log("this.formData");
-            console.log(this.formData);
-            
+        if(this.formData){         
             await this.service.patchProjectImage(this.projeto.id, this.formData)
             // this.formData = null
         }
@@ -315,24 +263,15 @@ export class TelaFullViewComponent implements OnInit {
         const statusPadroes = ['não atribuido', 'concluido', 'pendente', 'em progresso'];
         let statusPadraoPrioritario: any[] = [];
         let outrosStatus: any[] = [];
-<<<<<<< HEAD
     
         this.projeto?.statusList?.forEach(status => {
-=======
-
-        this.projeto.statusList.forEach(status => {
->>>>>>> dev
             if (statusPadroes.includes(status.name)) {
                 statusPadraoPrioritario.push(status);
             } else {
                 outrosStatus.push(status);
             }
         });
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> dev
         return statusPadraoPrioritario.concat(outrosStatus);
     }
 
@@ -377,21 +316,13 @@ export class TelaFullViewComponent implements OnInit {
         });
     }
 
-<<<<<<< HEAD
     async deleteStatus(status:Status){
         if(this.projeto.id != null){
             this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
-            await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
+            await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
         //   this.projeto = await this.service.deleteStatus(this.projeto.id, status.id)
         }else{
           this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
-=======
-    async deleteStatus(status: Status) {
-        if (this.projeto.id != null) {
-            this.projeto = await this.service.deleteStatus(this.projeto.id, status)
-        } else {
-            this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
->>>>>>> dev
         }
     }
 
@@ -436,14 +367,9 @@ export class TelaFullViewComponent implements OnInit {
         this.status = new Status();
     }
 
-<<<<<<< HEAD
     async postStatus(status:Status) {
         this.projeto.statusList.push(status)
-        return await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
-=======
-    async postStatus(status: Status) {
-        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, status)
->>>>>>> dev
+        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
     async editStatusPut() {
@@ -452,7 +378,7 @@ export class TelaFullViewComponent implements OnInit {
         let oldStatus = this.projeto.statusList.find(status => status.id == this.status.id)
         oldStatus = this.status
         this.status = new Status
-        return await this.service.updateStatusList(this.projeto.id, this.projeto.statusList)
+        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
 

@@ -150,14 +150,17 @@ async openTask(tarefa: Task): Promise<void> {
   }
 
   goToPerfilPage(){
+    console.log("NOT IMPLEMENTED");
     
   }
+
   goTasks(projectId : number){
     this.router.navigate(['/tela-tarefa/'+projectId]);
 
   }
-  goProjetos(temId : number){
-    this.router.navigate(["/equipe/"+temId])
+  goProjetos(){
+    let teamId:number = this.getCurrentTeam(this.indiceAtual).id
+    this.router.navigate(["/equipe/"+teamId])
   }
   
   tarefaNova: Task = new Task();

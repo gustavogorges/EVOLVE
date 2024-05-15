@@ -22,15 +22,10 @@ import { PriorityRecord } from 'src/model/priorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
-<<<<<<< HEAD
 import { UserProject } from 'src/model/userProject';
 import { Role } from 'src/model/Role';
-=======
 import { UsuarioTarefa } from 'src/model/userTask';
 
-
-
->>>>>>> dev
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +34,221 @@ export class BackendEVOLVEService {
   URL: string = 'http://localhost:8087/';
 
   constructor() { }
+
+  // async putUsuario (usuario:User|Pick<User, "id">){
+  //   return (await axios.put(this.URL+"user", usuario)).data
+  // }
+
+  async cleanAllUserNotifications(userId: number) {
+    return (await axios.delete(this.URL + 'team/clean/' + userId, {withCredentials: true})).data; //talvez passar qual o id do team
+  }
+
+  async updateTaskScheludeDate(taskId:number, userId:number, newDate:Date)  {
+    return (await axios.patch(this.URL+"task/"+taskId+"/update/scheludeDate/"+userId+"/calendar/"+newDate)).data
+  }
+
+
+
+
+  async patchTeamImageColor(teamId:number, newImageColor:string):Promise<Team>{
+    let path:string = "team/"
+    let formData:FormData = new FormData
+    formData.append("imageColor",newImageColor)
+    return (await axios.patch(this.URL+path+teamId+"/imageColor", formData, {withCredentials: true})).data
+  }
+
+  async patchTeamImage(teamId: number, image: any) {
+    let formData: FormData = new FormData;
+    formData.append("image", image);
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/" + "image", formData, {withCredentials: true})
+    ).data;
+  }
+
+  async updateDashboard(
+    dashboard: Dashboard,
+    idDashboard: number,
+    idProject: number
+  ) {
+    return (
+      await axios.put(
+        this.URL + "project/" + idProject + '/dashboard/' + idDashboard,
+        dashboard, {withCredentials: true}
+      )
+    ).data;
+  }
+
+  async updateChartList(
+    idDashboard: number,
+    idProject: number,
+    charts: Array<DashBoardCharts>
+  ) {
+    return (
+      await axios.patch(
+        this.URL + "project/" + idProject + '/dashboard/' + idDashboard + '/updateChartList',
+        charts, {withCredentials: true}
+      )
+    ).data;
+  }
+
+  async deleteDashboard(idDashboard:number, idActionUser:number){
+    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser, {withCredentials: true}))).data;
+  }
+
+  async setChartToDash(
+    idDashboard: number,
+    idProject: number,
+    chart: DashBoardCharts
+  ) {
+    return (
+      await axios.patch(
+        this.URL + "project/" + idProject + '/dashboard/' + idDashboard,
+        chart, {withCredentials: true}
+      )
+    ).data;
+  }
+
+  async deleteChart(idDashboard: number, idChart: number, idProject: number) {
+    return (
+      await axios.delete(
+        this.URL +
+        "project/" +
+        idProject +
+        '/dashboard/' +
+        idDashboard +
+        '/delete-chart/' +
+        idChart, {withCredentials: true}
+      )
+    ).data;
+  }
+
+  async patchTeamParticipants(teamId: number, participants: User[]):Promise<Team> {
+    return (
+      await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
+    ).data;
+  }
+
+  async patchReadedNotification(teamId: number, notificationId: number) {
+    return (
+      await axios.patch(this.URL + 'team/' + teamId + '/' + notificationId, {withCredentials: true})
+    ).data;
+  }
+
+  async deleteTask(taskId: number) {
+    return (await axios.delete(this.URL + 'task/' + taskId + '/delete', {withCredentials: true})).data;
+  }
+
+  async postDashboard(dashboard: Dashboard, idProject: number, actionUserId:number) {
+    return (await axios.post(this.URL + "project/" + idProject +"/dashboard/"+actionUserId, dashboard, {withCredentials: true}))
+      .data;
+  }
+
+  async putMessage(message: MessageDTO): Promise<Message> {
+    console.log('fazendo update na service');
+    console.log(message);
+    return (await axios.put(this.URL + 'message', message, {withCredentials: true})).data;
+  }
+
+
+  async putUserChat(chat: UserChat, userId:number) {
+    return (await axios.put(this.URL + `userChat/${chat.id}/user/${userId}`, chat, {withCredentials: true})).data;
+  }
+
+  async putEquipe(equipe: Team) {
+    return (await axios.put(this.URL + 'team', equipe, {withCredentials: true})).data;
+  }
+
+
+
+
+
+
+
+  async deleteUserFromProject(idProject:number, actionUserId:number, users:Array<Pick<User, "id">>){
+    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user/"+actionUserId, users)).data
+  }
+
+  async removeAssociate(taskId:number, removedAssociate : number, userId:number) {
+    return (await axios.delete(this.URL+"task/property/associates/delete/"+taskId+"/"+userId+"/"+removedAssociate)).data
+  }
+
+  async getAllCommentsOfTask(taskId: number) {
+    return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
+  }
+
+  async patchNewCommentProject(
+    projectId: number,
+    newComment: Comment,
+    userId: number
+  ) {
+    return (
+      await axios.patch(
+        this.URL + 'project/comments/patch/' + projectId + '/' + userId,
+        newComment, {withCredentials: true}
+      )
+    ).data;
+  } 
+
+  async postEquipe(equipe: Team) {
+    return (await axios.post(this.URL + 'team', equipe, {withCredentials: true})).data;
+  }
+
+
+
+
+  async patchUserSecondaryColor(
+    userId: number,
+    secondaryColor: string
+  ): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('secondaryColor', secondaryColor);
+    return (
+      await axios.patch(
+        this.URL + 'user/' + userId + '/secondaryColor',
+        formsData, {withCredentials: true}
+      )
+    ).data;
+  }
+
+
+  async patchUserSecondaryDarkColor(
+    userId: number,
+    secondaryDarkColor: string
+  ): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('secondaryColor', secondaryDarkColor);
+    return (
+      await axios.patch(
+        this.URL + 'user/' + userId + '/secondaryDarkColor',
+        formsData, {withCredentials: true}
+      )
+    ).data;
+  }
+
+
+
+
+  async postUserChat(chat: UserChat) {
+    (await axios.post(this.URL + 'userChat', chat, {withCredentials: true})).data;
+  }
+
+  async postMessage(message: MessageDTO): Promise<Message> {
+    return (await axios.post(this.URL + 'message', message, {withCredentials: true})).data;
+  }
+
+  async postProjeto(project: Project, teamId: number) {
+    return (await axios.post(this.URL + 'project/team/' + teamId, project, {withCredentials: true})).data;
+  }
+
+  async updateStatusList(projetoId: number, actionsUserId:number, statusList: Array<Status>) {
+    return (await axios.patch(this.URL + 'project/' + projetoId +"/"+ actionsUserId + "/statusList", statusList, {withCredentials: true}))
+      .data;
+  }
+
+
+
+
+
 
   //#region Generics
 
@@ -52,17 +262,8 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-<<<<<<< HEAD
   async deleteById(caminho: string, id: number) {
     return (await axios.delete(this.URL + caminho + '/' + id, {withCredentials: true})).data;
-=======
-  async removeAssociate(taskId:number, removedAssociate : number, userId:number) {
-    return (await axios.delete(this.URL+"task/property/associates/delete/"+taskId+"/"+userId+"/"+removedAssociate)).data
-  }
-
-  async getAllCommentsOfTask(taskId:number) {
-    return (await axios.get(this.URL+"task/comments/getAll/"+taskId)).data
->>>>>>> dev
   }
 
   //#endregion Generics
@@ -77,7 +278,6 @@ export class BackendEVOLVEService {
     return (await axios.post(this.URL + 'user', usuario, {withCredentials: true}));
   }
 
-<<<<<<< HEAD
   async patchUserEmail(userId: number, email: string): Promise<User> {
     let formsData = new FormData();
     formsData.append('email', email);
@@ -98,11 +298,6 @@ export class BackendEVOLVEService {
     return (
       await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
-=======
-  
-  async patchNewCommentProject(projectId:number, newComment:Comment, userId:number) {
-    return (await axios.patch(this.URL+"project/comments/patch/"+projectId+"/"+userId,newComment)).data
->>>>>>> dev
   }
 
   async patchUserPassword(userId: number, password: string): Promise<User> {
@@ -114,6 +309,7 @@ export class BackendEVOLVEService {
       )
     ).data;
   }
+
   async patchUserPrimaryColor(
     userId: number,
     primaryColor: string
@@ -127,21 +323,7 @@ export class BackendEVOLVEService {
       )
     ).data;
   }
-  async patchUserSecondaryColor(
-    userId: number,
-    secondaryColor: string
-  ): Promise<User> {
-    let formsData = new FormData();
-    formsData.append('secondaryColor', secondaryColor);
-    return (
-      await axios.patch(
-        this.URL + 'user/' + userId + '/secondaryColor',
-        formsData, {withCredentials: true}
-      )
-    ).data;
-  }
 
-<<<<<<< HEAD
   async patchUserPrimaryDarkColor(
     userId: number,
     primaryDarkColor: string
@@ -154,25 +336,10 @@ export class BackendEVOLVEService {
         formsData, {withCredentials: true}
       )
     ).data;
-=======
+  }
 
-  async updateStatusList(projetoId:number,actionsUserId:number, novoStatus:Status) {
-    return (await axios.patch(this.URL+"project/"+projetoId+"/"+actionsUserId, novoStatus )).data
->>>>>>> dev
-  }
-  async patchUserSecondaryDarkColor(
-    userId: number,
-    secondaryDarkColor: string
-  ): Promise<User> {
-    let formsData = new FormData();
-    formsData.append('secondaryColor', secondaryDarkColor);
-    return (
-      await axios.patch(
-        this.URL + 'user/' + userId + '/secondaryDarkColor',
-        formsData, {withCredentials: true}
-      )
-    ).data;
-  }
+
+
   async patchUserFontSize(userId: number, fontSize: number): Promise<User> {
     return (
       await axios.patch(
@@ -180,9 +347,11 @@ export class BackendEVOLVEService {
       )
     ).data;
   }
+
   async patchImageUser(id: number, image: any) {
     return (await axios.patch(this.URL + 'user/' + id, image, {withCredentials: true})).data;
   }
+
 
   //#endregion User
 
@@ -207,10 +376,6 @@ export class BackendEVOLVEService {
         associates, {withCredentials: true}
       )
     ).data;
-  }
-
-  async getAllCommentsOfTask(taskId: number) {
-    return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
   }
 
   async patchNewComment(taskId: number, newComment: Comment, userId: number) {
@@ -434,9 +599,6 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async deleteTask(taskId: number) {
-    return (await axios.delete(this.URL + 'task/' + taskId + '/delete', {withCredentials: true})).data;
-  }
 
   async patchTaskFile(taskId: number, userId: number, file: any) {
     let formData = new FormData();
@@ -477,19 +639,6 @@ export class BackendEVOLVEService {
       .data;
   } //not found in projectController on API
 
-  async patchNewCommentProject(
-    projectId: number,
-    newComment: Comment,
-    userId: number
-  ) {
-    return (
-      await axios.patch(
-        this.URL + 'project/comments/patch/' + projectId + '/' + userId,
-        newComment, {withCredentials: true}
-      )
-    ).data;
-  } //not found in projectController on API
-
   async deleteCommentProject(
     projectId: number,
     commentId: number,
@@ -508,9 +657,10 @@ export class BackendEVOLVEService {
     ).data;
   } //not found in projectController on API
 
-  async postProjeto(project: Project, teamId: number) {
-    return (await axios.post(this.URL + 'project/team/' + teamId, project, {withCredentials: true})).data;
-  }
+
+  // async putProjeto (project:Project,actionUserId:number){
+  //   return (await axios.put(this.URL+"project/"+actionUserId, project)).data
+  // }
 
   async putProjeto(project: Project) {
     //falta fazer aqui
@@ -537,10 +687,7 @@ export class BackendEVOLVEService {
     return await this.getOne("project", project.id)
   }
 
-  async updateStatusList(projetoId: number, statusList: Array<Status>) {
-    return (await axios.patch(this.URL + 'project/' + projetoId + "/statusList", statusList, {withCredentials: true}))
-      .data;
-  }
+
 
   async deleteStatus(projetoId: number, statusId: number) {
     return (
@@ -549,97 +696,19 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-<<<<<<< HEAD
+
   async patchProjectName(projectId: number, newName: string):Promise<Project> {
     let formData: FormData = new FormData;
     formData.append("name", newName);
-=======
-  async postProjeto (project:Project){
-    return (await axios.post(this.URL+"project", project)).data
-  }
-
-  async putProjeto (project:Project,actionUserId:number){
-    return (await axios.put(this.URL+"project/"+actionUserId, project)).data
-  }
-
-  async postUsuario (usuario:User){
-    return (await axios.post(this.URL+"user", usuario)).status
-  }
-
-  async putUsuario (usuario:User|Pick<User, "id">){
-    return (await axios.put(this.URL+"user", usuario)).data
-  }
-
-  async postEquipe (equipe:Team){
-    console.log(equipe);
-    
-    return (await axios.post(this.URL+"team", equipe)).data
-  }
-
-  async putEquipe (equipe:Team){
-    return (await axios.put(this.URL+"team", equipe)).data
-  }
-
-  async patchUserEmail(userId:number, email:string):Promise<User>{
-    return (await axios.patch(this.URL+"user"+"/email/"+userId+"/"+email )).data
-  }
-  async patchUserName(userId:number, name:string):Promise<User>{
-    return (await axios.patch(this.URL+"user"+"/name/"+userId+"/"+name )).data
-  }
-  async patchUserTheme(userId:number, theme:string):Promise<User>{
-    return (await axios.patch(this.URL+"user"+"/theme/"+userId+"/"+theme )).data
-  }
-  async patchUserPassword(userId:number, password:string):Promise<User>{
-    return (await axios.patch(this.URL+"user"+"/password/"+userId+"/"+password )).data
-  }
-  async patchUserPrimaryColor(userId:number, primaryColor:string):Promise<User>{
-    let formsData = new FormData()
-    formsData.append("primaryColor",primaryColor)    
-    return (await axios.patch(this.URL+"user"+"/primaryColor/"+userId,formsData )).data
-  }
-  async patchUserSecondaryColor(userId:number, secondaryColor:string):Promise<User>{
-    let formsData = new FormData()
-    formsData.append("secondaryColor",secondaryColor)    
-    return (await axios.patch(this.URL+"user"+"/secondaryColor/"+userId,formsData )).data
-  }
-  async patchUserPrimaryDarkColor(userId:number, primaryDarkColor:string):Promise<User>{
-    let formsData = new FormData()
-    formsData.append("primaryColor",primaryDarkColor)    
-    return (await axios.patch(this.URL+"user"+"/primaryDarkColor/"+userId,formsData )).data
-  }
-  async patchUserSecondaryDarkColor(userId:number, secondaryDarkColor:string):Promise<User>{
-    let formsData = new FormData()
-    formsData.append("secondaryColor",secondaryDarkColor)    
-    return (await axios.patch(this.URL+"user"+"/secondaryDarkColor/"+userId,formsData )).data
-  }
-  async patchUserFontSize(userId:number, fontSize:number):Promise<User>{
-    return (await axios.patch(this.URL+"user"+"/fontSize/"+userId+"/"+fontSize )).data
-  }
-  async patchImageUser(id:number, image:any){
-    return (await (axios.patch(this.URL+"user/"+id, image))).data;
-  }
-
-  async postUserChat (chat:UserChat){
-    (await axios.post(this.URL+"userChat", chat)).data 
-  }
-
-  async putUserChat (chat:UserChat){
-    return (await axios.put(this.URL+"userChat", chat)).data
-  }
-
-
-  async postMessage (message:MessageDTO): Promise<Message>{
-    return (await axios.post(this.URL+"message", message)).data 
-  }
-
-  async putMessage (message:MessageDTO): Promise<Message>{
-    console.log("fazendo update na service");
->>>>>>> dev
-    
     return (
       await axios.patch(this.URL + "project/" + projectId + "/name", formData, {withCredentials: true})
     ).data
   }
+
+
+
+    
+
 
   async patchProjectDescription(projectId: number, description: string):Promise<Project> {
     let formData: FormData = new FormData;
@@ -659,16 +728,13 @@ export class BackendEVOLVEService {
       .data;
   }
 
-<<<<<<< HEAD
   async patchProjectImageRemove(projectId: number) {
     return (
       await axios.patch(this.URL + "project/" + projectId + "/image/remove", {withCredentials: true})
     ).data;
-=======
-  async deleteUserFromProject(idProject:number, actionUserId:number, users:Array<Pick<User, "id">>){
-    return (await axios.patch(this.URL+"project" + "/" + idProject + "/" + "delete-user/"+actionUserId, users)).data
->>>>>>> dev
   }
+
+
 
   async patchProjecyImageColor(projecId: number, imageColor: string) {
     let formData: FormData = new FormData;
@@ -731,33 +797,12 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
   }
 
-  async postEquipe(equipe: Team) {
-    return (await axios.post(this.URL + 'team', equipe, {withCredentials: true})).data;
-  }
-
-  async putEquipe(equipe: Team) {
-    return (await axios.put(this.URL + 'team', equipe, {withCredentials: true})).data;
-  }
-
-  async patchReadedNotification(teamId: number, notificationId: number) {
-    return (
-      await axios.patch(this.URL + 'team/' + teamId + '/' + notificationId, {withCredentials: true})
-    ).data;
-  }
-
   async patchName(teamId: number, newName: String) {
     return (
       await axios.patch(this.URL + "team/" + teamId + "/" + newName, {withCredentials: true})
     ).data;
   }
 
-  async patchTeamImage(teamId: number, image: any) {
-    let formData: FormData = new FormData;
-    formData.append("image", image);
-    return (
-      await axios.patch(this.URL + "team/" + teamId + "/" + "image", formData, {withCredentials: true})
-    ).data;
-  }
 
   async patchTeamImageRemove(teamId: number) {
     return (
@@ -765,19 +810,7 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchTeamImageColor(teamId: number, newImageColor: string) {
-    let formData: FormData = new FormData;
-    formData.append("imageColor", newImageColor);
-    return (
-      await axios.patch(this.URL + "team/" + teamId + "/imagecolor", formData, {withCredentials: true})
-    ).data;
-  }
 
-  async patchTeamParticipants(teamId: number, participants: User[]) {
-    return (
-      await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
-    ).data;
-  }
 
   async patchTeamRoles(teamId: number, roles: Role[]) {
     return (
@@ -791,21 +824,11 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async cleanAllUserNotifications(userId: number) {
-    return (await axios.delete(this.URL + 'team/clean/' + userId, {withCredentials: true})).data;
-  }
-
   //#endregion Team
 
   //#region userChat
 
-  async postUserChat(chat: UserChat) {
-    (await axios.post(this.URL + 'userChat', chat, {withCredentials: true})).data;
-  }
 
-  async putUserChat(chat: UserChat, userId:number) {
-    return (await axios.put(this.URL + `userChat/${chat.id}/user/${userId}`, chat, {withCredentials: true})).data;
-  }
 
 
   //retirar quando tiver websocket ou quando aprender a pegar atributos que possuem jsonIgnore sem dar stackOverflow
@@ -833,17 +856,7 @@ export class BackendEVOLVEService {
 
   //#region message
 
-  async postMessage(message: MessageDTO): Promise<Message> {
-    return (await axios.post(this.URL + 'message', message, {withCredentials: true})).data;
-  }
 
-  async putMessage(message: MessageDTO): Promise<Message> {
-    console.log('fazendo update na service');
-
-    console.log(message);
-
-    return (await axios.put(this.URL + 'message', message, {withCredentials: true})).data;
-  }
 
   async patchMessageStatus(
     messageId: number,
@@ -861,123 +874,15 @@ export class BackendEVOLVEService {
   //#region dashboard
 
   async getCharts(idProject: number) {
-    return (await axios.patch(this.URL + idProject + '/dashboard/getCharts', {withCredentials: true}))
+    return (await axios.patch(this.URL + "project/" + idProject + '/dashboard/getCharts', {withCredentials: true}))
       .data;
   }
 
-  async postDashboard(dashboard: Dashboard, idProject: number) {
-    return (await axios.post(this.URL + idProject + '/dashboard', dashboard, {withCredentials: true}))
-      .data;
-  }
-
-<<<<<<< HEAD
   async getDashboards(idProject: number) {
-    return (await axios.get(this.URL + idProject + '/dashboard', {withCredentials: true})).data;
-=======
-  async updateTaskScheludeDate(taskId:number, userId:number, newDate:Date)  {
-    return (await axios.patch(this.URL+"task/update/"+taskId+"/scheludeDate/"+userId+"/calendar/"+newDate)).data
-  }
-
-  async deleteTask(taskId:number) {
-    return (await axios.delete(this.URL+"task/delete/"+taskId)).data
->>>>>>> dev
-  }
-
-  async deleteDashboard(idDashboard: number) {
-    return (await axios.delete(this.URL + 0 + '/dashboard/' + idDashboard, {withCredentials: true}))
-      .data;
-  }
-
-  async updateDashboard(
-    dashboard: Dashboard,
-    idDashboard: number,
-    idProject: number
-  ) {
-    return (
-      await axios.put(
-        this.URL + idProject + '/dashboard/' + idDashboard,
-        dashboard, {withCredentials: true}
-      )
-    ).data;
-  }
-
-  async setChartToDash(
-    idDashboard: number,
-    idProject: number,
-    chart: DashBoardCharts
-  ) {
-    return (
-      await axios.patch(
-        this.URL + idProject + '/dashboard/' + idDashboard,
-        chart, {withCredentials: true}
-      )
-    ).data;
-  }
-
-<<<<<<< HEAD
-  async updateChartList(
-    idDashboard: number,
-    idProject: number,
-    charts: Array<DashBoardCharts>
-  ) {
-    return (
-      await axios.patch(
-        this.URL + idProject + '/dashboard/' + idDashboard + '/updateChartList',
-        charts, {withCredentials: true}
-      )
-    ).data;
-=======
-  async postDashboard(dashboard:Dashboard, idProject:number, actionUserId:number){
-    return (await axios.post(this.URL+idProject+"/dashboard/"+actionUserId, dashboard)).data 
->>>>>>> dev
-  }
-
-  async deleteChart(idDashboard: number, idChart: number, idProject: number) {
-    return (
-      await axios.delete(
-        this.URL +
-        idProject +
-        '/dashboard/' +
-        idDashboard +
-        '/delete-chart/' +
-        idChart, {withCredentials: true}
-      )
-    ).data;
-  }
-
-<<<<<<< HEAD
-  //#endregion dashboard
-
-}
-=======
-  async deleteDashboard(idDashboard:number, idActionUser:number){
-    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser))).data;
-  }
-
-  async updateDashboard(dashboard:Dashboard, idDashboard:number, idProject:number){
-    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard, dashboard))).data;
-  }
-
-  async setChartToDash(idDashboard:number, idProject:number, chart:DashBoardCharts){
-    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard, chart))).data;
-  }
-
-  async updateChartList(idDashboard:number, idProject:number, charts:Array<DashBoardCharts>){
-    return (await (axios.patch(this.URL+idProject+"/dashboard/"+idDashboard+"/updateChartList", charts))).data;
-  }
-
-  async deleteChart(idDashboard:number, idChart:number, idProject:number){
-    return (await (axios.delete(this.URL+idProject+"/dashboard/"+idDashboard+"/delete-chart/"+idChart))).data;
+    return (await axios.get(this.URL + "project/" + idProject + '/dashboard', {withCredentials: true})).data;
   }
 
 
-  async patchReadedNotification(teamId:number, notificationId:number) {
-    return (await axios.patch(this.URL+"team/"+teamId+"/"+notificationId)).data
-  }
-
-  async cleanAllUserNotifications(userId:number) {
-    return (await axios.delete(this.URL+"team/clean/"+userId)).data
-  }
 
   async updateDashboardName(idDashboard:number, idProject:number, dashboard:Dashboard){
     return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard))).data;
@@ -992,22 +897,6 @@ export class BackendEVOLVEService {
     formData.append("name",name)
     return (await axios.patch(this.URL+path+teamId+"/name", formData)).data
   }
-  async patchTeamParticipants(teamId:number, users:Array<User>):Promise<Team>{
-    let path:string = "team/"
-    return (await axios.patch(this.URL+path+teamId+"/participants", users)).data
-  }
-  async patchTeamImageColor(teamId:number, name:string):Promise<Team>{
-    let path:string = "team/"
-    let formData:FormData = new FormData
-    formData.append("imageColor",name)
-    return (await axios.patch(this.URL+path+teamId+"/imageColor", formData)).data
-  }
-  async patchTeamImage(teamId:number, name:File):Promise<Team>{
-    let path:string = "team/"
-    let formData:FormData = new FormData
-    formData.append("image",name)
-    return (await axios.patch(this.URL+path+teamId+"/image", formData)).data
-  }
 
   async getUserWorkedTime(userId:number, taskId:number){
     return (await (axios.get(this.URL+"task/get/"+userId+"/"+taskId))).data;
@@ -1021,5 +910,5 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"project/"+idProject+"/addUser/"+userId+"/"+actionUserId)).data
   }
 
+    //#endregion dashboard
 }
->>>>>>> dev

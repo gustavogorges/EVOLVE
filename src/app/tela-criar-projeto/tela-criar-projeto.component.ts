@@ -7,11 +7,8 @@ import { Message } from 'primeng/api';
 import { Status } from 'src/model/status';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Team } from 'src/model/team';
-<<<<<<< HEAD
 import { UserProject } from 'src/model/userProject';
 import { CookieService } from 'ngx-cookie-service';
-=======
->>>>>>> dev
 import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
@@ -23,18 +20,12 @@ export class TelaCriarProjetoComponent implements OnInit {
   imagemBlob: any;
   preImage: any;
   formData: any;
-<<<<<<< HEAD
 
-  constructor(private service : BackendEVOLVEService, private cookieService: CookiesService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute){}
-
-  ngOnInit(){
-=======
   loggedUser !: User;
   constructor(private service : BackendEVOLVEService, private route: Router, private sanitizer: DomSanitizer,private activatedRoute: ActivatedRoute, private cookieService: CookiesService){}
   
   async ngOnInit(){
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
->>>>>>> dev
 
     this.projeto = new Project
 
@@ -192,13 +183,8 @@ export class TelaCriarProjetoComponent implements OnInit {
           });
           postProject.members = lista;
   
-<<<<<<< HEAD
           postProject.creator = { "id": loggedUser.id };
           // postProject.adimnistrator = { "id": 1 };
-=======
-          postProject.creator = { "id": this.loggedUser.id };
-          postProject.adimnistrator = { "id": this.loggedUser.id };
->>>>>>> dev
           postProject.team = { "id": this.team.id };
           postProject.imageColor = this.backGroundColorProject;
           postProject.image = null;
@@ -207,13 +193,8 @@ export class TelaCriarProjetoComponent implements OnInit {
         });
       });
 
-<<<<<<< HEAD
       postProject = await this.service.postProjeto(postProject, postProject.team.id);
   
-=======
-      postProject = await this.service.postProjeto(postProject);
-      
->>>>>>> dev
       if (this.formData != null) {
         await this.service.patchProjectImage(postProject.id, this.formData);
       }
