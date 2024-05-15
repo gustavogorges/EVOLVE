@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
+import { UserProject } from 'src/model/userProject';
+import { UserTeam } from 'src/model/userTeam';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 
@@ -29,7 +31,7 @@ export class AddMemberToProjectModalComponent implements OnInit {
 
 
   removeProjectMembersFromTeamParticipants(user: User): boolean {
-    const isUserInProjectMembers = this.project.members.some(member => member.id === user.id);
+    const isUserInProjectMembers = this.project.members.some(userProject => userProject.userId === user.id);
 
     return !isUserInProjectMembers;
   }
@@ -41,34 +43,47 @@ export class AddMemberToProjectModalComponent implements OnInit {
   }
 
   async addUser(user:User){
-    this.project.members.push(user)
-    
-    let postProject:any = this.project
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        let lista: Array<Pick<User, "id">> = [];
-        this.project.members.forEach(element => {
-          lista.push({ "id": element.id });
-        });
-        postProject.members = lista;
-        postProject.image = null;
-        resolve();
-      });
-    });
-    let project = await this.service.addUserToProject(this.project.id, user.id ,this.loggedUser.id);
+    let userProject: UserProject = new UserProject
+    userProject.user = user
+    userProject.project = this.project
+    userProject.userId = user.id
+    userProject.projectId = this.project.id
+
+    this.project.members.push(userProject)
+    let project:Project = await this.service.patchProjectMembers(this.project.id, this.project.members)
     this.project.members = project.members
+    
+    // let postProject:any = this.project
+    // await new Promise<void>((resolve) => {
+    //   setTimeout(() => {
+    //     let lista: Array<Pick<User, "id">> = [];
+    //     this.project.members.forEach(element => {
+    //       lista.push({ "id": element.id });
+    //     });
+    //     postProject.members = lista;
+    //     postProject.image = null;
+    //     resolve();
+    //   });
+    // });
+
+    // let project = await this.service.addUserToProject(this.project.id, user.id ,this.loggedUser.id);
+    // this.project.members = project.members
   }
 
-  filteredNames() {
+  filteredNames():UserTeam[] {
     this.moveCreatorToFirst()
-    return this.team?.participants?.filter(element => element?.email?.toLowerCase()?.startsWith(this.searchTerm?.toLowerCase()) || element.name?.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+    return this.team?.participants?.filter(element => element?.user?.email?.toLowerCase()?.startsWith(this.searchTerm?.toLowerCase()) || element?.user?.name?.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+  }
+
+  findProjectCreator(project:Project):User{
+    return project.members.find(userProject => userProject.manager)?.user!
   }
 
   moveCreatorToFirst() {
-    const creator = this.project.members.find(member => member.id === this.project.creator.id);
+    const creator = this.project.members.find(userProject => userProject.userId === this.findProjectCreator(this.project).id);
 
     if (creator) {
-        const membersWithoutCreator = this.project.members.filter(member => member.id !== this.project.creator.id);
+        const membersWithoutCreator = this.project.members.filter(userProject => userProject.userId !== this.findProjectCreator(this.project).id);
         const updatedMembers = [creator, ...membersWithoutCreator];
         return updatedMembers;
     } else {

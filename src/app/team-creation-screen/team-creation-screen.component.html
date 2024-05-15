@@ -133,7 +133,7 @@
         <app-search-users
           *ngIf="isSearchUserModalOpen"
           class="absolute lg:w-[26%] w-full right-2 lg:right-[200px] z-50"
-          [addedUsers]="teamParticipants"
+          [addedUsers]="getUsersFromTeam(teamParticipants)"
           (usersToAdd)="addUsers($event)"
         ></app-search-users>
       </div>
@@ -146,16 +146,16 @@
       <div class="member-list flex flex-col w-full overflow-scroll gap-8 lg:h-[350px] h-[200px] max-h-[350px] overflow-y-auto">
         <div
           class="member flex items-center w-full lg:gap-[23%] gap-[15%]"
-          *ngFor="let user of teamParticipants; index as indice"
+          *ngFor="let userTeam of teamParticipants; index as indice"
         >
           <div class="flex w-1/2 gap-6 justify-start items-center">
             <div
               class="lg:min-h-[64px] min-h-[50px] aspect-square rounded-full"
-              [ngStyle]="{ 'background-color': user.imageColor }"
+              [ngStyle]="{ 'background-color': userTeam?.user?.imageColor }"
             >
               <img
-                *ngIf="user.image?.data"
-                src="{{ user.image.data }}"
+                *ngIf="userTeam?.user?.image?.data"
+                src="{{ userTeam?.user?.image?.data }}"
                 alt=""
                 class="h-16 aspect-square rounded-full"
               />
@@ -165,10 +165,10 @@
               class="max-w-full flex flex-col items-start justify-center gap-1 truncate"
             >
               <p class="truncate font-titulo xl:text-xl text-base font-medium">
-                {{ user.name }}
+                {{ userTeam?.user?.name }}
               </p>
               <p class="truncate font-hind-madurai xl:text-xl text-base font-light">
-                {{ user.email }}
+                {{ userTeam?.user?.email }}
               </p>
             </div>
           </div>
@@ -216,10 +216,10 @@ salvar      </button>
       <button (click)="editar()" class="py-2 px-7 bg-primary text-white font-bold font-titulo rounded-lg">
         editar
        </button>
-       <button (click)="leaveTeam()" *ngIf="team?.administrator?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="leaveTeam()" *ngIf="findTeamAdm(team)?.id != loggedUser?.id" class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
         sair da equipe
        </button>
-       <button (click)="removeTeam()" *ngIf="team?.administrator?.id == loggedUser?.id " class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
+       <button (click)="removeTeam()" *ngIf="findTeamAdm(team)?.id == loggedUser?.id " class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
         excluir equipe
        </button>
     </div>

@@ -74,10 +74,14 @@ export class MembrosEquipeComponent implements OnInit {
     });
   }
 
+  findProjectCreator(project:Project):User{
+    return project.members.find(userProject => userProject.manager)?.user!
+  }
+
   moveCreatorToFirst() {
-    const creator = this.projeto.members.find(member => member.id === this.projeto.creator.id);
+    const creator = this.projeto.members.find(userProject => userProject.userId === this.findProjectCreator(this.projeto).id);
     if (creator) {
-        const membersWithoutCreator = this.projeto.members.filter(member => member.id !== this.projeto.creator.id);
+        const membersWithoutCreator = this.projeto.members.filter(userProject => userProject.userId !== this.findProjectCreator(this.projeto).id);
         const updatedMembers = [creator, ...membersWithoutCreator];
         return updatedMembers;
     } else {

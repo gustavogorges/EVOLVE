@@ -25,6 +25,7 @@ import { DashBoardCharts } from 'src/model/DashBoardCharts';
 import { UserProject } from 'src/model/userProject';
 import { Role } from 'src/model/Role';
 import { UsuarioTarefa } from 'src/model/userTask';
+import { UserTeam } from 'src/model/userTeam';
 
 
 @Injectable({
@@ -122,7 +123,7 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchTeamParticipants(teamId: number, participants: User[]):Promise<Team> {
+  async patchTeamParticipants(teamId: number, participants: UserTeam[]):Promise<Team> {
     return (
       await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
     ).data;
@@ -906,9 +907,9 @@ export class BackendEVOLVEService {
     return (await (axios.put(this.URL+"task/put/workedTime", userTaskUpdate))).data;
   }
 
-  async addUserToProject(idProject:number, userId:number, actionUserId:number){
-    return (await axios.patch(this.URL+"project/"+idProject+"/addUser/"+userId+"/"+actionUserId)).data
-  }
+  // async addUserToProject(idProject:number, userId:number, actionUserId:number){
+  //   return (await axios.patch(this.URL+"project/"+idProject+"/addUser/"+userId+"/"+actionUserId)).data
+  // }
 
     //#endregion dashboard
 }
