@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { Component, OnInit } from '@angular/core';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { Team } from 'src/model/team';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { Content, TDocumentDefinitions } from 'pdfmake/interfaces';
-import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -15,89 +15,79 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   templateUrl: './tela-reports.component.html',
   styleUrls: ['./tela-reports.component.scss']
 })
-export class TelaReportsComponent implements OnInit{
-  task !:Task
-  loggedUser: User = new User;
+export class TelaReportsComponent implements OnInit {
+  loggedUser: User | null = null;
+  teamsWithReports: { team: Team, report: any[] }[] = [];
 
-  constructor(     private cookieService: CookiesService, private service : BackendEVOLVEService
-    ) { }
+  constructor(private cookieService: CookiesService, private backendService: BackendEVOLVEService) { }
 
   async ngOnInit(): Promise<void> {
-    this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
-    this.task = this.loggedUser.createdTasks[0]
-    this.task = await this.service.getOne("task", this.task.id); 
+    // Obtém o usuário logado
+    this.loggedUser = await this.cookieService.getLoggedUser();
 
-    console.log(this.task);
-    
+    if (this.loggedUser) {
+      // Itera sobre cada equipe do usuário
+      for (const team of this.loggedUser.teams) {
+        const teamReportContent = [];
 
+        // Itera sobre cada projeto na equipe
+        for (const project of team.projects) {
+          const projectTasksContent = [];
+
+          // Itera sobre cada tarefa no projeto
+          for (const taskId of project.tasks) {
+            const task: Task = await this.backendService.getOne("task", taskId.id);
+            const associateNames: string = (task.associates as User[]).map(associate => associate.name).join(', ');
+
+            // Adiciona as informações da tarefa ao conteúdo da tabela
+            projectTasksContent.push([
+              { text: task.name, style: 'value' },
+              { text: associateNames, style: 'value' },
+              { text: task.currentStatus.name, style: 'value' },
+              { text: task.finalDate, style: 'value' }
+            ]);
+          }
+
+          // Adiciona o conteúdo das tarefas do projeto ao relatório da equipe
+          teamReportContent.push(
+            { text: `Projeto: ${project.name}`, style: 'header' },
+            {
+              table: {
+                widths: ['*', '*', '*', '*'],
+                body: [
+                  ['Nome da tarefa', 'Associados', 'Status Atual', 'Data Final'],
+                  ...projectTasksContent
+                ]
+              }
+            }
+          );
+        }
+
+        // Adiciona o relatório da equipe e suas respectivas sessões de projeto à lista
+        this.teamsWithReports.push({ team, report: teamReportContent });
+      }
+    }
   }
 
-  name = 'Angular';
-  @ViewChild('content', { 'static': true }) content!:ElementRef;
- 
-  //  generarPDF() {
- 
-  //    const div = document.getElementById('content');
-  //    const options = {
-  //      background: 'white',
-  //      scale: 1
-  //    };
-  //    if(div!=null){
-  //     html2canvas(div, options).then((canvas) => {
- 
-  //       var img = canvas.toDataURL("image/PNG");
-  //       let doc = new jsPDF('l', 'mm', 'a4' , false);
-  
-  //       // Add image Canvas to PDF
-  //       const bufferX = 15;
-  //       const bufferY = 15;
-  //       const imgProps = (<any>doc).getImageProperties(img);
-  //       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-  //       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-  //       console.log(pdfHeight);
-        
-  //       doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
-  
-  //       return doc;
-  //     }).then((doc) => {
-  //       doc.save('postres.pdf');  
-  //     });
-  //    }
-    
-  //  }
-  generatePdf(): void {
-    const historicContent: Content [] = [];
-
-    this.task.historic.forEach((item, index) => {
-      historicContent.push(
-        { text: `Histórico da tarefa: ${this.task.name}`, style: 'header' },
-        { text: `Data: ${item.dateTime}`, margin: [0, 10, 0, 0] }, // Ajuste as margens conforme necessário
-        { text: `Descrição: ${item.description}` }
-      );
-
-      // Adiciona quebra de página após cada item, exceto o último
-      if (index < this.task.historic.length - 1) {
-        historicContent.push({ text: '', pageBreak: 'after' });
-      }
-    });
-
+  generatePdf(teamReport: any[]): void {
     const docDefinition: TDocumentDefinitions = {
-      content: historicContent,
+      content: teamReport,
       styles: {
         header: {
           fontSize: 18,
           bold: true,
+          margin: [0, 0, 0, 20], // top, right, bottom, left
           alignment: 'center',
-          margin: [0, 0, 0, 20] // top, right, bottom, left
-        }
+          color: '#333',
+        },
+        value: {
+          fontSize: 12,
+          margin: [0, 5, 0, 10], // top, right, bottom, left
+          color: '#333',
+        },
       }
     };
 
     pdfMake.createPdf(docDefinition).open();
   }
 }
-
-
-
-  
-
