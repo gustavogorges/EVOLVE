@@ -19,7 +19,6 @@ export class Task{
     finalDate!: Date;
     creationDate: string ="";
 
-    schedulingData: string = ""; 
     description:string = "";
     currentStatus: Status = new Status;
   
