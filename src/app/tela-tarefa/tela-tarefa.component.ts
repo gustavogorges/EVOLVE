@@ -536,7 +536,7 @@ if (lang === 'pt') {
     this.tarefaNova.project = this.projeto;
     this.tarefaNova.currentStatus = this.projeto.statusList[0];
     console.log(this.tarefaNova);
-    this.tarefaNova = await this.service.postTarefa(this.tarefaNova);
+    this.tarefaNova = await this.service.postTarefa(this.tarefaNova,this.projeto.id);
     console.log(this.tarefaNova);
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;

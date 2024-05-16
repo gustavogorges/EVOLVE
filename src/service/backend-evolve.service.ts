@@ -170,7 +170,9 @@ export class BackendEVOLVEService {
   }
 
   async removeAssociate(taskId:number, removedAssociate : number, userId:number) {
-    return (await axios.delete(this.URL+"task/property/associates/delete/"+taskId+"/"+userId+"/"+removedAssociate)).data
+    let formsData:FormData = new FormData();
+    formsData.append("removedAssociateId", removedAssociate.toString())
+    return (await axios.patch(this.URL+"task/"+taskId+"/property/associates/delete/"+userId, formsData, {withCredentials: true})).data
   }
 
   async getAllCommentsOfTask(taskId: number) {
@@ -540,8 +542,8 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'task/' + projectId + '/priorities', {withCredentials: true})).data;
   }
 
-  async postTarefa(tarefa: Task) {
-    return (await axios.post(this.URL + 'task', tarefa, {withCredentials: true})).data;
+  async postTarefa(tarefa: Task, projectId: number) {
+    return (await axios.post(this.URL + 'task/project/'+projectId, tarefa, {withCredentials: true})).data;
   }
 
   async putTarefa(tarefa: Task, userId: number) {
@@ -564,9 +566,11 @@ export class BackendEVOLVEService {
   }
 
   async updateTaskName(taskId: number, userId: number, newName: string) {
+    let formsData:FormData = new FormData();
+    formsData.append('name', newName);
     return (
       await axios.patch(
-        this.URL + 'task/' + taskId + '/update/user/' + userId + + '/name/' + newName, {withCredentials: true}
+        this.URL + 'task/' + taskId + '/update/user/' + userId + '/name', formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -592,15 +596,16 @@ export class BackendEVOLVEService {
   }
 
   async updateTaskFinalDate(taskId: number, userId: number, newDate: Date) {
+    let formsData = new FormData();
+    formsData.append('newFinalDate', newDate.toString());
     return (
-      await axios.put(
+      await axios.patch(
         this.URL +
           'task/'+           taskId +
           '/' + 'update/finalDate/' +
 
           userId +
-          '/calendar/' +
-          newDate, {withCredentials: true}
+          '/calendar', formsData, {withCredentials: true}
 
       )
     ).data;
@@ -696,10 +701,10 @@ export class BackendEVOLVEService {
 
 
 
-  async deleteStatus(projetoId: number, statusId: number) {
+  async deleteStatus(projetoId: number, status: Status) {
     return (
       await axios.patch(
-        this.URL + 'project/' + projetoId + '/statusList/remove/' + statusId, {withCredentials: true})
+        this.URL + 'project/' + projetoId + '/deleteStatus',status, {withCredentials: true})
     ).data;
   }
 

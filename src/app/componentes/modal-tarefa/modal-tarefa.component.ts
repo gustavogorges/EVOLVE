@@ -239,7 +239,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   translatePriorities(){
     const lang = localStorage.getItem('lang');
     if (lang === 'es') {
-      this.listPriorities.forEach(prioridade => {
+      this.listPriorities?.forEach(prioridade => {
         switch (prioridade.name) {
           case 'NENHUMA':
             prioridade.name = 'NINGUNA';
@@ -262,7 +262,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
         }
       });
     } else if (lang === 'ch') {
-      this.listPriorities.forEach(prioridade => {
+      this.listPriorities?.forEach(prioridade => {
         switch (prioridade.name) {
           case 'NENHUMA':
             prioridade.name = '无';
@@ -285,7 +285,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
         }
       });
     } else if (lang === 'en') {
-      this.listPriorities.forEach(prioridade => {
+      this.listPriorities?.forEach(prioridade => {
         switch (prioridade.name) {
           case 'NENHUMA':
             prioridade.name = 'NONE';
@@ -309,7 +309,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       });
     }
     else if (lang === 'pt') {
-      this.listPriorities.forEach(prioridade => {
+      this.listPriorities?.forEach(prioridade => {
         switch (prioridade.name) {
           case 'NENHUMA':
             prioridade.name = 'NENHUMA';
@@ -526,7 +526,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
       this.tarefa.creator.id = this.loggedUser.id; 
-      this.service.postTarefa(this.tarefa);
+      this.service.postTarefa(this.tarefa, this.projeto.id);
     }
 
     this.verifyBooleans();
