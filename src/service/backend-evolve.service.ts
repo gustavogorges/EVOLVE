@@ -258,6 +258,10 @@ export class BackendEVOLVEService {
   }
 
   async getOne(caminho: string, id: number) {
+    console.log((
+      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
+    ).data);
+    
     return (
       await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
     ).data;
@@ -342,9 +346,11 @@ export class BackendEVOLVEService {
 
 
   async patchUserFontSize(userId: number, fontSize: number): Promise<User> {
+    let formsData = new FormData();
+    formsData.append('fontSize', fontSize.toString());
     return (
       await axios.patch(
-        this.URL + 'user/' + userId + '/fontSize' + '/' + fontSize, {withCredentials: true}
+        this.URL + 'user/' + userId + '/fontSize', formsData, {withCredentials: true}
       )
     ).data;
   }
@@ -794,6 +800,7 @@ export class BackendEVOLVEService {
   //#region Team
 
   async getTeamsByUserId(userId: number) {
+    console.log((await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data);
     
     return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
   }

@@ -41,10 +41,9 @@ export class AppComponent{
   islogged = false
 
   async ngOnInit(): Promise<void> {
-    // if(this.authService.isLoggedIn()){
-    //   this.boo = true
-    // }
-    this.loggedUser = await this.cookieService.getLoggedUser();
+    if(this.authService.isLoggedIn()){
+      this.loggedUser = await this.cookieService.getLoggedUser();
+    }
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
       this.islogged = isLoggedIn;
     });

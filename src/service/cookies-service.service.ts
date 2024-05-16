@@ -31,6 +31,8 @@ export class CookiesService {
     }
 
      async getLoggedUser() : Promise<User> {
+      console.log(await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId'))));
+      
       return await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId')))
     }
 

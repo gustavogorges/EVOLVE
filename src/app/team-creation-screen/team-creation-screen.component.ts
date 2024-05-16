@@ -151,13 +151,13 @@ loggedUser !: User
     users.forEach(user =>{
       let userTeam:UserTeam = new UserTeam
       userTeam.user = user
-      userTeam.team = this.team
+      // userTeam.team = this.team
       userTeam.userId = user.id
       userTeam.teamId = this.team.id
 
-      // if(!this.teamParticipants.includes(user)){
-      //   this.teamParticipants.push(user)
-      // }
+      if(!this.teamParticipants.map(userTeamD => userTeamD.user).includes(user)){
+        this.teamParticipants.push(userTeam)
+      }
     }
     
        )
@@ -170,7 +170,7 @@ loggedUser !: User
   }
 
   findTeamAdm(team:Team){
-    return team.participants.find(userTeam => userTeam.isManager)?.user!
+    return team?.participants?.find(userTeam => userTeam.isManager)?.user!
   }
 
  async  salvar(){
@@ -178,13 +178,14 @@ loggedUser !: User
     this.team.name = this.name;
   }
     this.team.participants = this.teamParticipants
+    
     this.team.imageColor = this.backGroundColorProject
     console.log(this.team);
 
   if(this.id==0){
     let userTeam:UserTeam = new UserTeam
     userTeam.isManager = true
-    userTeam.team = this.team
+    // userTeam.team = this.team
     userTeam.user = this.loggedUser
     userTeam.teamId = this.team.id
     userTeam.userId = this.loggedUser.id
@@ -209,6 +210,10 @@ loggedUser !: User
   this.router.navigate(["/equipe/"+id])
 
   }
+
+
+
+
   editar(){
     this.disabledInfo = false;
   }

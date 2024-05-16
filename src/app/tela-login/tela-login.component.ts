@@ -78,6 +78,7 @@ export class TelaLoginComponent implements OnInit {
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
         
+        
         this.router.navigate(['/tela-inicial']);
       } else {
         // Handle null result

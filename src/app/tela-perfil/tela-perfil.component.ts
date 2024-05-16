@@ -58,12 +58,12 @@ export class TelaPerfilComponent implements OnInit {
 
   }
   async teste() {
-    this.user.teamRoles = await this.service.getTeamsByUserId(this.user?.id);
+    // this.user.teamRoles = await this.service.getTeamsByUserId(this.user?.id);
     console.log(this.user.teamRoles);
     
     let users: any = [];
     this.user.teamRoles.forEach((team) => {
-      users = team.team.participants?.filter(
+      users = team.team?.participants?.filter(
         (participant) =>
           participant.userId != this.user.id && !users.includes(participant)
       );

@@ -101,14 +101,14 @@ export class SearchComponentComponent implements OnInit {
   filterTasks() {
     const searchText = this.search.toLowerCase();
     return searchText.toLowerCase().includes("ta") ? this.tasksList : this.tasksList?.filter(task =>
-      task.name.toLowerCase().includes(searchText)
+      task?.name?.toLowerCase().includes(searchText)
     ).slice(0, 4)
   }
 
   filterTeams() {
     const searchText = this.search.toLowerCase();
     return searchText.toLowerCase().includes("eq") ? this.teamsList : this.teamsList?.filter(team =>
-      team.name.toLowerCase().includes(searchText)
+      team?.name?.toLowerCase().includes(searchText)
     ).slice(0, 4)
   }
 

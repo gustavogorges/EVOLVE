@@ -30,10 +30,11 @@ bah !:Array<User>
     console.log(this.addedUsers);
     let logged = await this.cokkie.getLoggedUser()
     this.users = await this.service.getAllSomething("user")
+    console.log("BAHHHH FURIZADINHANN")
    this.bah = this.users.filter( user => !this.addedUsers.find(u => u.id == user.id) && logged.id !=user.id )
+   console.log("BAHHHH rPAZIADINHAANNN")
 
  
-     
      console.log(this.bah);
      
      this.users = this.getUsers();
@@ -51,7 +52,7 @@ bah !:Array<User>
     console.log(this.bah  );
     console.log(this.search);
     
-    this.users = this.bah.filter((user) => this.matchSearch(user) && !this.isUserSelected(user));
+    this.users = this.bah?.filter((user) => this.matchSearch(user) && !this.isUserSelected(user));
     console.log(this.users);
    
     return this.users;

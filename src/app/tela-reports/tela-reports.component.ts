@@ -1,5 +1,12 @@
-
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+  Input,
+} from '@angular/core';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -24,49 +31,53 @@ export class TelaReportsComponent implements OnInit, OnChanges {
     private cookieService: CookiesService,
     private backendService: BackendEVOLVEService
   ) {}
-  async ngOnChanges(changes: SimpleChanges): Promise<void>  {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     console.log(this.team);
-    
+
     const teamReportContent = [];
 
     // Itera sobre cada projeto na equipe
-    for (const project of this.team.projects) {
-      const projectTasksContent = [];
+    if (this.team?.projects) {
+      for (const project of this.team.projects) {
+        const projectTasksContent = [];
 
-      // Itera sobre cada tarefa no projeto
-      for (const taskId of project.tasks) {
-        const task: Task = await this.backendService.getOne('task', taskId.id);
-        const associateNames: string = (task.associates as User[])
-          .map((associate) => associate.name)
-          .join(', ');
+        // Itera sobre cada tarefa no projeto
+        for (const taskId of project.tasks) {
+          const task: Task = await this.backendService.getOne(
+            'task',
+            taskId.id
+          );
+          const associateNames: string = (task.associates as User[])
+            .map((associate) => associate.name)
+            .join(', ');
 
-        // Adiciona as informações da tarefa ao conteúdo da tabela
-        projectTasksContent.push([
-          { text: task.name, style: 'value' },
-          { text: associateNames, style: 'value' },
-          { text: task.currentStatus.name, style: 'value' },
-          { text: task.finalDate, style: 'value' },
-        ]);
-      }
-
-      // Adiciona o conteúdo das tarefas do projeto ao relatório da equipe
-      teamReportContent.push(
-        { text: `Projeto: ${project.name}`, style: 'header' },
-        {
-          table: {
-            widths: ['*', '*', '*', '*'],
-            body: [
-              ['Nome da tarefa', 'Associados', 'Status Atual', 'Data Final'],
-              ...projectTasksContent,
-            ],
-          },
+          // Adiciona as informações da tarefa ao conteúdo da tabela
+          projectTasksContent.push([
+            { text: task.name, style: 'value' },
+            { text: associateNames, style: 'value' },
+            { text: task.currentStatus.name, style: 'value' },
+            { text: task.finalDate, style: 'value' },
+          ]);
         }
-      );
-  
 
-      // Adiciona o relatório da equipe e suas respectivas sessões de projeto à lista
-      
+        // Adiciona o conteúdo das tarefas do projeto ao relatório da equipe
+        teamReportContent.push(
+          { text: `Projeto: ${project.name}`, style: 'header' },
+          {
+            table: {
+              widths: ['*', '*', '*', '*'],
+              body: [
+                ['Nome da tarefa', 'Associados', 'Status Atual', 'Data Final'],
+                ...projectTasksContent,
+              ],
+            },
+          }
+        );
+
+        // Adiciona o relatório da equipe e suas respectivas sessões de projeto à lista
+      }
     }
+
     let team = this.team;
     this.teamsWithReports = { team, report: teamReportContent };
     console.log(this.teamsWithReports.report);
@@ -74,9 +85,7 @@ export class TelaReportsComponent implements OnInit, OnChanges {
   @Input()
   team!: Team;
   async ngOnInit(): Promise<void> {
-  
     console.log(this.team);
-    
   }
 
   generatePdf(teamReport: any[]): void {

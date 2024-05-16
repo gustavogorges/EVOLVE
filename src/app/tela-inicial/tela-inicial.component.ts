@@ -43,6 +43,8 @@ export class TelaInicialComponent implements OnInit {
  
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
+    console.log(this.loggedUser);
+    
     this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
     this.listaTarefas.sort((a,b)=>{
       if (a.finalDate < b.finalDate) {
@@ -55,8 +57,8 @@ export class TelaInicialComponent implements OnInit {
     })
     let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
    
-    this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
-    console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
+    // this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
+    // console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
     
     
     this.userColors()
@@ -144,8 +146,17 @@ async openTask(tarefa: Task): Promise<void> {
 
   getCurrentTeam(indiceAtual:number):Team{
     if(this.loggedUser.teamRoles.length - 1 >= indiceAtual) {
-      return this.loggedUser.teamRoles[indiceAtual].team 
+      console.log("time certo uhuuuul");
+      console.log(indiceAtual);
+      console.log(this.loggedUser.teamRoles);
+      
+      
+      console.log(this.loggedUser.teamRoles[indiceAtual].team );
+      
+      return this.loggedUser.teamRoles[indiceAtual].team
     }
+    console.log("time errado :(");
+    
     return new Team();
 
   }
