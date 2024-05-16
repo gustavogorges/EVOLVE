@@ -10,6 +10,7 @@ import { Team } from 'src/model/team';
 import { UserProject } from 'src/model/userProject';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { LogarithmicScale } from 'chart.js';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -34,7 +35,7 @@ export class TelaCriarProjetoComponent implements OnInit {
       const teamid  = Number(teamId)
 
 
-      this.team = await this.service.getOne("team", teamid) as Team
+      this.team = this.loggedUser.teamRoles.find(team => team.team.id === teamid)?.team as Team;
       console.log(this.team);
       
       this.usuarios = this.team.participants.map(userTeam => userTeam.user) || []
@@ -116,7 +117,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   
       },
       {
-        id :  1,
+        id :  0,
         name : translations["em progresso"][lang],
         backgroundColor: "#FCEC62",
         textColor: "#000000",
@@ -125,7 +126,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   
       },
       {
-        id :  2,
+        id :  0,
         name : translations["concluido"][lang],
         backgroundColor: "#86C19F",
         textColor: "#000000",
@@ -134,7 +135,7 @@ export class TelaCriarProjetoComponent implements OnInit {
   
       },
       {
-        id :  3,
+        id :  0,
         name : translations["não atribuido"][lang],
         backgroundColor: "#9CA3AE",
         textColor: "#000000",
@@ -174,12 +175,13 @@ export class TelaCriarProjetoComponent implements OnInit {
       let loggedUser:User = await this.cookieService.getLoggedUser()
   
       let postProject: any = this.projeto;
+      
       await new Promise<void>((resolve) => {
         setTimeout(() => {
 
           let lista: Array<Pick<User, "id">> = [];
           this.projeto.members.forEach(element => {
-            lista.push({ "id": element.user.id });
+            lista.push({ "id": element?.user?.id });
           });
           postProject.members = lista;
   
@@ -188,11 +190,13 @@ export class TelaCriarProjetoComponent implements OnInit {
           postProject.team = { "id": this.team.id };
           postProject.imageColor = this.backGroundColorProject;
           postProject.image = null;
+          postProject.statusList = this.projeto.statusList;
   
           resolve();
         });
       });
-
+      console.log(postProject);
+      
       postProject = await this.service.postProjeto(postProject, postProject.team.id);
   
       if (this.formData != null) {

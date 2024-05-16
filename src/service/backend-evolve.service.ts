@@ -184,7 +184,7 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + 'project/comments/patch/' + projectId + '/' + userId,
+        this.URL + 'project/'+ projectId +'/comments/patch/'+ userId,
         newComment, {withCredentials: true}
       )
     ).data;

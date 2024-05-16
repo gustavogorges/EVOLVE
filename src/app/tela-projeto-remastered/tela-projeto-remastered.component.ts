@@ -76,7 +76,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe( async params  => {
       const getTeamId = params.get('teamId');
       this.teamId  = Number(getTeamId)
-      this.team = await this.service.getOne("team", this.teamId)
+      this.team = this.loggedUser.teamRoles.find(team => team.team.id === this.teamId)?.team as Team;
       this.projects = await this.service.getProjectsByTeamId(this.teamId)
       console.log(this.projects);
     });

@@ -60,7 +60,7 @@ loggedUser !: User
       this.randomColor()
       this.disabledInfo = false
     }else{
-      this.team = await this.service.getOne('team', this.id);
+      this.team = this.loggedUser.teamRoles.find(team => team.teamId === this.id)?.team!;
       this.disabledInfo = true
       this.backGroundColorProject = this.team.imageColor
       this.team.participants.map((u)=>this.teamParticipants.push(u))
