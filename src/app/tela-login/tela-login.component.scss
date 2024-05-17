@@ -8,7 +8,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .card-login {
-    @apply max-h-[85%] h-[80%] w-2/3 flex drop-shadow-2xl;
+    @apply lg:max-h-[85%] max-h-full lg:h-[80%] h-full lg:w-[90%] xl:w-2/3 w-full flex  md:drop-shadow-2xl;
 }
 
 .left {
@@ -24,7 +24,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .right {
-    @apply bg-white h-full w-1/2 rounded-r-lg p-16  flex flex-col justify-center;
+    @apply md:bg-white h-[600px] md:h-full lg:w-2/3 xl:w-1/2 w-full rounded-r-lg md:p-20 lg:p-10 p-3  flex flex-col justify-center;
 }
 
 .normal-white-font {
