@@ -5,7 +5,10 @@
     >
       <p class="text-white text-3xl font-titulo font-bold">evolve</p>
       <p class="text-white text-xl font-hind-madurai">
-        {{'Onde visão encontra execução. faça de cada tarefa um passo adiante em sua evolução.' | translate}}
+        {{
+          "Onde visão encontra execução. faça de cada tarefa um passo adiante em sua evolução."
+            | translate
+        }}
       </p>
 
       <img src="assets/image 8.svg" class="w-full" alt="" />
@@ -13,7 +16,7 @@
     <div class="right">
       <div class="box-text-right">
         <div class="main-title">
-          <h1>{{'Cadastro' | translate}}</h1>
+          <h1>{{ "Cadastro" | translate }}</h1>
         </div>
 
         <form
@@ -25,7 +28,7 @@
           <div class="flex flex-col gap-4">
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >{{'Nome' | translate}}
+                >{{ "Nome" | translate }}
                 <p class="text-red-500">*</p></label
               >
               <input
@@ -38,7 +41,7 @@
             </div>
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >{{'Email' | translate}}
+                >{{ "Email" | translate }}
                 <p class="text-red-500">*</p>
               </label>
               <input
@@ -49,27 +52,26 @@
                 formControlName="email"
               />
               <div
-              *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
-              class="error-text"
+                *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched"
+                class="error-text"
               >
-                <p>{{'Campo é obrigatório.' | translate}}</p>
+                <p>{{ "Campo é obrigatório." | translate }}</p>
               </div>
               <div
                 *ngIf="userForm.get('email')?.errors?.['email'] && userForm.get('email')?.touched"
                 class="error-text"
               >
-                <p>{{'Email inválido.' | translate}}</p>
+                <p>{{ "Email inválido." | translate }}</p>
               </div>
-           
             </div>
             <div class="form-group">
               <label for="name" class="font-titulo font-medium flex gap-1"
-                >{{'Senha' | translate}}
+                >{{ "Senha" | translate }}
                 <p class="text-red-500">*</p></label
               >
               <input
                 type="password"
-                placeholder="{{'Digite sua senha' | translate}}"
+                placeholder="{{ 'Digite sua senha' | translate }}"
                 class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
                 formControlName="password"
                 (keydown.enter)="
@@ -77,36 +79,46 @@
                 "
               />
               <div
-              *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched"
+                *ngIf="userForm.get('password')?.errors?.['required'] && userForm.get('password')?.touched"
                 class="error-text"
               >
-                <p>{{'Campo obrigatório.' | translate}}</p>
-              </div>  
+                <p>{{ "Campo obrigatório." | translate }}</p>
+              </div>
               <div
                 *ngIf="password?.errors?.['minLength'] && userForm.get('password')?.touched "
                 class="error-text"
               >
-                <p>{{'Senha deve ter tamanho de pelo menos 6 carácteres.' | translate}}</p>
+                <p>
+                  {{
+                    "Senha deve ter tamanho de pelo menos 6 carácteres."
+                      | translate
+                  }}
+                </p>
               </div>
-             
+
               <div
                 *ngIf="password?.errors?.['pattern']  && userForm.get('password')?.touched"
                 class="error-text"
               >
                 <p>
-                  {{'Senha deve conter pelo menos um carácter especial (ex: @,-,!,$).' | translate}}
+                  {{
+                    "Senha deve conter pelo menos um carácter especial (ex: @,-,!,$)."
+                      | translate
+                  }}
                 </p>
-                <p>{{'Senha deve conter pelo menos um número.' | translate}}</p>
+                <p>
+                  {{ "Senha deve conter pelo menos um número." | translate }}
+                </p>
               </div>
             </div>
             <div class="form-group">
               <label for="password" class="font-titulo font-medium flex gap-1"
-                >{{'Confirme sua senha' | translate}}
+                >{{ "Confirme sua senha" | translate }}
                 <p class="text-red-500">*</p></label
               >
               <input
                 type="password"
-                placeholder="{{'Confirme sua senha' | translate}} "
+                placeholder="{{ 'Confirme sua senha' | translate }} "
                 class="placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-secondary"
                 formControlName="confirmationPassword"
                 (keydown.enter)="submit(); $event.preventDefault()"
@@ -116,29 +128,58 @@
                 *ngIf="confirmationPassword?.errors?.['required'] && userForm.get('confirmationPassword')?.touched"
                 class="error-text"
               >
-                <p>{{'Campo obrigatório.' | translate}}</p>
+                <p>{{ "Campo obrigatório." | translate }}</p>
               </div>
               <div
                 *ngIf="userForm?.errors?.['passwordMismatch']  && userForm.get('confirmationPassword')?.touched "
                 class="error-text"
               >
-                <p>{{'As senhas não conhecidem.' | translate}}</p>
+                <p>{{ "As senhas não conhecidem." | translate }}</p>
               </div>
             </div>
-
+          </div>
+          <div class="w-full flex flex-col gap-5 items-center">
+            <button
+              class="form-group w-full px-5 py-3 rounded-xl bg-secondary disabled:opacity-50"
+              [disabled]="!userForm.valid"
+            >
+              <input
+                type="submit"
+                value="Cadastrar"
+                [disabled]="!userForm.valid"
+                class="text-xl text-white font-titulo font-semibold w-full"
+              />
+            </button>
+            <div
+              id="g_id_onload"
+              data-client_id="1005893304579-cvbbrt18bh42fi7e27cahhso6h8gar14.apps.googleusercontent.com"
+              data-context="signup"
+              data-ux_mode="popup"
+              data-auto_select="true"
+              data-itp_support="true"
+              data-auto_prompt="false"
+              data-callback="handleCredentialResponse2"
+            ></div>
+            <div
+              class="g_id_signin"
+              data-type="standard"
+              data-shape="rectangular"
+              data-theme="outline"
+              data-text="signin_with"
+              data-size="large"
+              data-logo_alignment="center"
+              data-width="1000"
+              data-logo_alignment="center"
+            ></div>
           </div>
 
-          <button class="form-group px-5 py-3 rounded-xl bg-secondary   disabled:opacity-50"     [disabled]="!userForm.valid">
-            <input
-              type="submit"
-              value="Cadastrar"
-              [disabled]="!userForm.valid"
-              class="text-xl text-white font-titulo font-semibold w-full "
-            />
-          </button>
           <div class="flex gap-1 text-base error-text">
-            <p class="text-fontGray">{{'Já possui uma conta?' | translate}}</p>
-            <p class="underline" routerLink="">{{'Entrar' | translate}}</p>
+            <p class="text-fontGray">
+              {{ "Já possui uma conta?" | translate }}
+            </p>
+            <p class="underline" (click)="GoLogin()">
+              {{ "Entrar" | translate }}
+            </p>
           </div>
         </form>
       </div>
@@ -146,20 +187,20 @@
   </div>
 </div>
 
-  <div
-    *ngIf="showConfirmationMessage"
-    class="bg-white flex flex-col items-end gap-0 font-hind-madurai text-primaryFontBlack bottom-32 right-10 absolute shadow-lg w-[350px] h-24 p-6 rounded-lg"
-    v
-    [ngClass]="
-      status >= 200 && this.status < 300 ? 'bg-green-200 ' : 'bg-red-200'
-    "
-  >
-    <i
-      class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
-      style="font-size: 1rem"
-      (click)="closeModal()"
-    ></i>
-    <p class="text-lg self-start">
-      {{ message }}
-    </p>
-  </div>
+<div
+  *ngIf="showConfirmationMessage"
+  class="bg-white flex flex-col items-end gap-0 font-hind-madurai text-primaryFontBlack bottom-32 right-10 absolute shadow-lg w-[350px] h-24 p-6 rounded-lg"
+  v
+  [ngClass]="
+    status >= 200 && this.status < 300 ? 'bg-green-200 ' : 'bg-red-200'
+  "
+>
+  <i
+    class="pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
+    style="font-size: 1rem"
+    (click)="closeModal()"
+  ></i>
+  <p class="text-lg self-start">
+    {{ message }}
+  </p>
+</div>

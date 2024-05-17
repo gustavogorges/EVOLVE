@@ -15,6 +15,7 @@ import { AuthService } from 'src/service/autService';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { sortedUniq } from 'lodash';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tela-login',
@@ -29,7 +30,28 @@ export class TelaLoginComponent implements OnInit {
   constructor(private router: Router, private service: BackendEVOLVEService, private authService :AuthService,
     private cookie : CookiesService) {}
 
+
   ngOnInit(): void {
+    
+    window.addEventListener('userLoggedIn', async (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const userData = customEvent.detail;  
+      console.log(userData);
+      const result= await this.authService.loginGoogle(userData)
+      if (result != null) {
+        this.responseData = result;
+        console.log(this.responseData);
+        
+        this.cookie.setLoggedUserId(this.responseData.data.id);
+        
+        
+        this.router.navigate(['/tela-inicial']);
+      }
+      
+      });
+ 
+    
+
     this.userForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -45,6 +67,9 @@ export class TelaLoginComponent implements OnInit {
       },
       { validators: this.passwordMatchValidator }
     );
+  }
+  goCadastro(){
+    window.location.href = "tela-cadastro"
   }
   passwordMatchValidator(
     control: AbstractControl
