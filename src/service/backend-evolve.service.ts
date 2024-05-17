@@ -26,6 +26,7 @@ import { UserProject } from 'src/model/userProject';
 import { Role } from 'src/model/Role';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { UserTeam } from 'src/model/userTeam';
+import { TeamNotification } from 'src/model/teamNotification';
 
 
 @Injectable({
@@ -882,6 +883,10 @@ export class BackendEVOLVEService {
         this.URL + 'message' + '/' + messageId + '/' + newMessageStatus, {withCredentials: true}
       )
     ).data;
+  }
+
+  async getAllNotifications(teamId:number):Promise<Array<TeamNotification>> {
+    return (await axios.get(this.URL + 'team/' + teamId + '/notifications', {withCredentials: true})).data;
   }
 
   //#endregion message

@@ -25,7 +25,7 @@
             [ngClass]="{
                 'overflow-y-auto': userTeam.team.notifications.length > 3
             }">
-                <div class="notification-item" *ngFor="let notification of verifyNotificatedList(userTeam.team.notifications)">
+                <div class="notification-item" *ngFor="let notification of userTeam.team.notifications">
                     <div 
                     class="notification-item-user"
                     *ngIf="notification.type == 'task'"

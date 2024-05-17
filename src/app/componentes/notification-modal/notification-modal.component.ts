@@ -22,8 +22,14 @@ export class NotificationModalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    for(let teamRole of this.loggedUser.teamRoles){
+      teamRole.team.notifications = await this.verifyNotificatedList(teamRole.team);
+    }
+    console.log(this.loggedUser);
+    
     document.body.addEventListener('click', this.onDocumentClick);
-
+    console.log();
+    
   }
 
   openNotification(){
@@ -36,7 +42,8 @@ export class NotificationModalComponent implements OnInit {
     }
   };
 
-  openNotifications(team : Team){
+  async openNotifications(team : Team){
+    console.log(await this.service.getAllNotifications(team.id));
     team.booleanView = true;
   }
 
@@ -55,8 +62,9 @@ export class NotificationModalComponent implements OnInit {
     this.service.cleanAllUserNotifications(this.loggedUser.id);
   }
 
-  verifyNotificatedList(notifications : Array<TeamNotification>):Array<TeamNotification>{
+   async verifyNotificatedList(team : Team):Promise<Array<TeamNotification>>{
     
+    let notifications : Array<TeamNotification> = await this.service.getAllNotifications(team.id);
     let notificatedFilteredList = new Array<TeamNotification>();
     notifications?.forEach(notification => {
       if(this.verifyIdOnNotificationList(notification)){
