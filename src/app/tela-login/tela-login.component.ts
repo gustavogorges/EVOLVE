@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -27,12 +27,18 @@ export class TelaLoginComponent implements OnInit {
   userForm!: FormGroup;
   passwordForm!: FormGroup;
 
-  constructor(private router: Router, private service: BackendEVOLVEService, private authService :AuthService,
+  @Output() login : EventEmitter<any> = new EventEmitter
+
+  constructor(private router: Router,private coockiesService:CookiesService, private service: BackendEVOLVEService, private authService :AuthService,
     private cookie : CookiesService) {}
 
 
   ngOnInit(): void {
-    
+    setTimeout(() => {
+      const event = new CustomEvent('logout');
+      window.dispatchEvent(event);
+    }, 100);
+    // this.coockiesService.setLoggedUserId(0)
     window.addEventListener('userLoggedIn', async (event: Event) => {
       const customEvent = event as CustomEvent;
       const userData = customEvent.detail;  
@@ -43,9 +49,14 @@ export class TelaLoginComponent implements OnInit {
         console.log(this.responseData);
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
+        setTimeout(() => {
+          const event = new CustomEvent('login');
+          window.dispatchEvent(event);
+        }, 100);
+        this.login.emit()
         
         
-        this.router.navigate(['/tela-inicial']);
+       this.router.navigate(['/tela-inicial']);
       }
       
       });
@@ -102,6 +113,11 @@ export class TelaLoginComponent implements OnInit {
         console.log(this.responseData);
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
+        setTimeout(() => {
+          const event = new CustomEvent('login');
+          window.dispatchEvent(event);
+        }, 100);
+        this.login.emit()
         
         
         this.router.navigate(['/tela-inicial']);

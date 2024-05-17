@@ -20,11 +20,16 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      const event = new CustomEvent('logout');
+      window.dispatchEvent(event);
+    }, 100);
     window.addEventListener('registration', async (event: Event) => {
+      
       const customEvent = event as CustomEvent;
       const userData = customEvent.detail;  
       console.log(userData);
-      this.create(userData);
+      await this.create(userData);
       
       });
     this.userForm = new FormGroup({
@@ -115,10 +120,14 @@ export class TelaCadastroComponent implements OnInit {
 
     }
     async create(userData : any){
+      console.log("TESTEEEEE");
+      
       this.usuario.email = userData.email
       this.usuario.name = userData.name
       this.usuario.image = userData.picture
       this.usuario.password = ''
+      console.log(this.usuario);
+      
       this.status  = await this.service.postUsuario(this.usuario)
       console.log(this.status);
       
