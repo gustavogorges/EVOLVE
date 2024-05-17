@@ -45,7 +45,9 @@ export class BackendEVOLVEService {
   }
 
   async updateTaskScheludeDate(taskId:number, userId:number, newDate:Date)  {
-    return (await axios.patch(this.URL+"task/"+taskId+"/update/scheludeDate/"+userId+"/calendar/"+newDate)).data
+    let formData = new FormData();
+    formData.append("newDate", newDate.toString());
+    return (await axios.patch(this.URL+"task/"+taskId+"/update/scheludeDate/"+userId+"/calendar",formData, {withCredentials: true})).data
   }
 
 
@@ -390,7 +392,7 @@ export class BackendEVOLVEService {
   async patchNewComment(taskId: number, newComment: Comment, userId: number) {
     return (
       await axios.patch(
-        this.URL + 'task/' + taskId + 'comments/patch/user/' + userId,
+        this.URL + 'task/' + taskId + '/comments/patch/user/' + userId,
         newComment, {withCredentials: true}
       )
     ).data;
@@ -525,7 +527,7 @@ export class BackendEVOLVEService {
     taskId: number
   ) {
     return (
-      await axios.put(
+      await axios.patch(
         this.URL +
         'task' +
         '/' +
@@ -586,7 +588,7 @@ export class BackendEVOLVEService {
         this.URL +
           'task/' + taskId + '/update' +
 
-          '/currentOptions/uuser/' +
+          '/currentOptions/user/' +
           userId +
           '/property/' +
           propertyId,
@@ -912,11 +914,11 @@ export class BackendEVOLVEService {
   }
 
   async getUserWorkedTime(userId:number, taskId:number){
-    return (await (axios.get(this.URL+"task/get/"+userId+"/"+taskId))).data;
+    return (await (axios.get(this.URL+"task/"+taskId+"/get/"+userId, {withCredentials: true})));
   }
 
-  async updateUserWorkedTime(userTaskUpdate : UsuarioTarefa){
-    return (await (axios.put(this.URL+"task/put/workedTime", userTaskUpdate))).data;
+  async updateUserWorkedTime(userTaskUpdate : UsuarioTarefa, taskId:number){
+    return (await (axios.patch(this.URL+"task/"+taskId+"/put/workedTime", userTaskUpdate, {withCredentials: true}))).data;
   }
 
   // async addUserToProject(idProject:number, userId:number, actionUserId:number){

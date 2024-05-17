@@ -130,16 +130,16 @@ export class SelectStatusComponent implements OnInit{
         this.status.backgroundColor = "#ff0000"
       }
       this.status.backgroundColor.toUpperCase();
-      console.log(this.status.backgroundColor);
-      
-      console.log(this.isContrastSufficient('#000000', this.status.backgroundColor));
       
       if(!this.isContrastSufficient('#000000', this.status.backgroundColor)){
         this.status.textColor = "#F4F4F4";
       } else {
         this.status.textColor = "#000000";
       }
-      this.addNewStatus.emit(this.status);
+      this.projeto.statusList.push(this.status);
+      if(this.projeto.id != 0 && this.projeto.id != null){ 
+        this.projeto = await this.service.updateStatusList(this.projeto.id,this.loggedUser.id,this.projeto.statusList);
+      }
       this.addStatus();
     }
     this.status = new Status();
@@ -159,6 +159,10 @@ export class SelectStatusComponent implements OnInit{
       this.status.textColor = "#F4F4F4";
     } else {
       this.status.textColor = "#000000";
+    }
+    this.projeto.statusList.forEach(status => {status.id === this.status.id ? status = this.status : status})
+    if(this.projeto.id != 0 && this.projeto.id != null){ 
+      this.projeto = await this.service.updateStatusList(this.projeto.id,this.loggedUser.id,this.projeto.statusList);
     }
     this.status = new Status
   }

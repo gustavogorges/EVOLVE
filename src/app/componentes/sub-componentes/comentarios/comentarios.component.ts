@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Comment } from 'src/model/comment';
+import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
@@ -75,6 +76,7 @@ export class ComentariosComponent implements OnInit {
     newComment.value = this.comment.value;
     newComment.user = this.loggedUser;
     newComment.task = this.task;
+    newComment.project = this.task.project as Project;
 
     // find a way of getting this values
     newComment.timeHour = hours + ":" + minutes;
