@@ -20,6 +20,13 @@ export class TelaCadastroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.addEventListener('registration', async (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const userData = customEvent.detail;  
+      console.log(userData);
+      this.create(userData);
+      
+      });
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -42,6 +49,9 @@ export class TelaCadastroComponent implements OnInit {
 
   get confirmationPassword() {
     return this.userForm.get("confirmationPassword");
+  }
+  GoLogin(){
+    window.location.href = "/"
   }
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -74,6 +84,7 @@ export class TelaCadastroComponent implements OnInit {
   showConfirmationMessage = false;
   message  = "cadastro foiii" 
   status !: any
+
   async submit(){
     console.log("Eu entrei po, viaja não fi")
     this.usuario.name = this.formControls['name'].value;
@@ -90,7 +101,8 @@ export class TelaCadastroComponent implements OnInit {
         this.showConfirmationMessage = true;
   
         setTimeout(() => {
-          this.router.navigate(['/']);
+          window.location.href = "/"
+          
         }, 1000);
       }else{
         this.message = "não foi possivel cadastrar sua conta"
@@ -101,6 +113,27 @@ export class TelaCadastroComponent implements OnInit {
     }
   
 
+    }
+    async create(userData : any){
+      this.usuario.email = userData.email
+      this.usuario.name = userData.name
+      this.usuario.image = userData.picture
+      this.usuario.password = ''
+      this.status  = await this.service.postUsuario(this.usuario)
+      console.log(this.status);
+      
+      if(this.status.status >= 200 && this.status.status < 300){
+        this.message = "sua conta foi cadastrada com sucesso"
+        this.showConfirmationMessage = true;
+  
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 1000);
+      }else{
+        this.message = "não foi possivel cadastrar sua conta"
+        this.showConfirmationMessage = true;
+  
+      }
     }
     closeModal(){
     this.showConfirmationMessage = false 

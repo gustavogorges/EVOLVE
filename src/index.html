@@ -2,12 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AngularProject</title>
+  <title>evolve</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/logoSimples.svg">
+  <script src="https://accounts.google.com/gsi/client" async></script>
+
 </head>
 <body class="bg-secondaryWhite dark:bg-dark-theme-back ">
   <app-root></app-root>
+
 </body>
 </html>
+<script>
+  function decodeJWTToken(token){
+    return JSON.parse(atob(token.split(".")[1]))
+  }
+  function handleCredentialResponse(response){
+    const responsePayload = decodeJWTToken(response.credential);
+    localStorage.setItem("loggedUser", JSON.stringify(responsePayload))
+    setTimeout(() => {
+      const event = new CustomEvent('userLoggedIn', { detail: responsePayload });
+      window.dispatchEvent(event);
+    }, 100);
+  }
+  function handleCredentialResponse2(response){
+    const responsePayload = decodeJWTToken(response.credential);
+    setTimeout(() => {
+      const event = new CustomEvent('registration', { detail: responsePayload });
+      window.dispatchEvent(event);
+    }, 100);
+  }
+</script>

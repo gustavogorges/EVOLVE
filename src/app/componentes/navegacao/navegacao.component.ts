@@ -29,6 +29,8 @@ export class NavegacaoComponent implements OnInit {
   openLangBol : boolean = false
   lang = ''
   @Output() reload : EventEmitter<any> = new EventEmitter
+  @Output() exist : EventEmitter<any> = new EventEmitter
+
 
   closeTask(event: boolean) {
     if (event) {
@@ -44,6 +46,12 @@ export class NavegacaoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.lang = localStorage.getItem('lang') || 'en'
+    console.log(this.cookieService.getLoggedUserId());
+    
+    if(this.cookieService.getLoggedUserId()==''){
+      this.exist.emit()
+        
+    }
     this.loggedUser = await this.cookieService
     .getLoggedUser()
     .then((user) => {
