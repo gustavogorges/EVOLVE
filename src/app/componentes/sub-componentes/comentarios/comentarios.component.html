@@ -77,12 +77,20 @@
     </div>
     <div
       class="box-btn-add"
-      *ngIf="!booleanAddComment"
+      *ngIf="!booleanAddComment && !verifyApprovament()"
       (click)="addCommentInput()"
     >
       <div class="btn-add-content">
         <i class="pi pi-plus btn-add-text"></i>
         <p class="btn-add-text">{{'adicionar comentário' | translate}}</p>
+      </div>
+    </div>
+    <div
+      class="box-btn-add"
+      *ngIf="!booleanAddComment && verifyApprovament()"
+    >
+      <div class="btn-add-content"> 
+        <p class="btn-add-text-2">{{'você não pode mais adicionar comentários' | translate}}</p>
       </div>
     </div>
   </div>

@@ -74,6 +74,13 @@ export class SubTarefaComponent implements OnInit {
     this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
   }
 
+  verifyApprovament() :boolean {
+    if(this.tarefa.concluded == true || this.tarefa.currentStatus.name == "Concluído"){
+      return true
+    }
+   return false;
+  }
+
   confirmEdit(subtarefa : Subtask) {
     console.log(this.listaSubtarefas)
     subtarefa.name = this.newNameEdit;
