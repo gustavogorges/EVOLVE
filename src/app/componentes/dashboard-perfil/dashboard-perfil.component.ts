@@ -6,6 +6,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/chart';
+import { CookiesService } from 'src/service/cookies-service.service';
 
 @Component({
   selector: 'app-dashboard-perfil',
@@ -14,7 +15,9 @@ import { UIChart } from 'primeng/chart';
 })
 export class DashboardPerfilComponent implements OnInit, OnChanges {
 
-  constructor(private service: BackendEVOLVEService) { }
+  constructor(private service: BackendEVOLVEService,
+    private cookies_service : CookiesService
+  ) { }
   @Input()
   project!: Project
   @Input()
@@ -23,6 +26,10 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
   stackedOptions: any;
   totalTask : number =0
   listaTasks!: Array<any>
+  horasTotais : string = "0"
+  minutosTotais : string = "00";
+  loggedUser:User = new User;
+
   @ViewChild('chart') chart!: UIChart;
 
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
@@ -40,14 +47,14 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     if(changes['listaTasks']){
       this.dashboard()
       console.log(this.listaTasks);
-      
 
     }
   }
 
-   ngOnInit(): void {
+   async ngOnInit() {
     this.listaTasks =[]
-    
+    this.loggedUser = await this.cookies_service.getLoggedUser();
+    console.log(this.service.getAllWorkedTime(this.loggedUser.id));
   }
   setData(project: Project): any {
     console.log(this.listaTasks);
