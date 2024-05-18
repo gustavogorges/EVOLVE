@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { image } from 'html2canvas/dist/types/css/types/image';
+import { File } from 'src/model/file';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
 import { Team } from 'src/model/team';
@@ -153,7 +155,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       }
 
       if(this.formData!=null){
-        await this.createImageProject(project)
+        return await this.service.patchProjectImage(project.id, this.formData)
       } 
 
       await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
@@ -169,13 +171,6 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       postProject.members = project.members
       postProject.editOn = false
     })
-  }
-
-  async createImageProject(p:Project){
-    if(p.image){
-      return await this.service.patchProjectImage(p.id, p.image)
-    }
-    // return await this.service.patchProjectImage(p.id, this.formData)
   }
 
   async saveImage(event:any){

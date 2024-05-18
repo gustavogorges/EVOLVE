@@ -38,6 +38,11 @@ export class TelaInicialComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    setTimeout(() => {
+      const event = new CustomEvent('login');
+      window.dispatchEvent(event);
+    }, 100);
+
     this.data = this.location.getState();
     let userData: User = await this.data.user
  

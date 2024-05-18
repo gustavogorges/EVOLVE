@@ -360,7 +360,7 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchImageUser(id: number, image: any) {
+  async patchImageUser(id: number, image: FormData) {
     return (await axios.patch(this.URL + 'user/' + id, image, {withCredentials: true})).data;
   }
 
@@ -736,9 +736,9 @@ export class BackendEVOLVEService {
     return await this.getOne("project", projectId)
   }
 
-  async patchProjectImage(id: number, image: any) {
-    let formData = new FormData
-    formData.append("image", image)
+  async patchProjectImage(id: number, formData: FormData) {
+    // let formData = new FormData
+    // formData.append("image", image)
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData, {withCredentials: true}))
       .data;
   }

@@ -61,7 +61,7 @@ export class TarefaKanbanComponent  implements OnChanges{
   }
   statusListOrdenation(){
   
-    this.statusList = this.project.statusList.sort(this.compareStatus)
+    this.statusList = this.project?.statusList.sort(this.compareStatus)
     this.taskList = this.taskList.sort(this.compareTask)
   }
   compareStatus(a: Status, b : Status){

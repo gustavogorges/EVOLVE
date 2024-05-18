@@ -8,6 +8,6 @@ export class UserTeam{
     team:Team = new Team;
     user:User = new User;
     role:Role = new Role
-    isManager:boolean = false;
+    manager:boolean = false;
 
 }

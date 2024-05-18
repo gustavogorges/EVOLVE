@@ -62,6 +62,10 @@ export class AppComponent{
     })
 
     if(this.authService.isLoggedIn()){
+      this.islogged = true
+    }
+
+    if(this.authService.isLoggedIn()){
       this.loggedUser = await this.cookieService.getLoggedUser();
     }
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
