@@ -39,18 +39,15 @@ export class TeamCreationScreenComponent implements OnInit {
   id !: number
   loggedUser !: User
   async ngOnInit(): Promise<void> {
-    console.log(1243);
     this.loggedUser = await this.cookiesService.getLoggedUser();
 
     this.route.paramMap.subscribe(async params => {
       // Obtém o parâmetro do projeto da rota
       const projectId = params.get('teamId');
-      console.log(projectId);
 
       this.id = Number(projectId)
 
     });
-    console.log(this.id);
 
 
     if (this.id == 0) {
@@ -58,6 +55,7 @@ export class TeamCreationScreenComponent implements OnInit {
       this.team = new Team
       this.team.name = "nome da sua equipe"
       this.randomColor()
+      this.team.code = uuidv4()
       this.disabledInfo = false
     } else {
       this.team = this.loggedUser.teamRoles.find(team => team.teamId === this.id)?.team!;
@@ -66,13 +64,7 @@ export class TeamCreationScreenComponent implements OnInit {
       this.team.participants.map((u) => this.teamParticipants.push(u))
 
     }
-    this.team.code = uuidv4()
-
-    console.log(this.loggedUser);
-
     console.log(this.team);
-
-
   }
 
   getUsersFromTeam(userTeams: UserTeam[]): User[] {
@@ -117,34 +109,6 @@ export class TeamCreationScreenComponent implements OnInit {
   randomColor() {
     this.backGroundColorProject = '#' + Math.floor(Math.random() * 16777215).toString(16);
   }
-
-  // async createNewTeam():Promise<Team>{
-  //   let team = new Team
-  //   team.adimnistrator = await this.cookiesService.getLoggedUser()
-  //   return await this.service.postEquipe(team)
-  // }
-
-
-  // editTeamName(){
-  //   this.isEditingTeamName = true
-  //   this.teamNameInput.nativeElement.disabled = false
-  //   console.log(this.teamNameInput);
-  //   this.teamNameInput.nativeElement.focus()
-  // }
-
-  // async saveTeamName():Promise<void>{
-  //   this.isEditingTeamName = false
-  //   this.team = await this.service.patchTeamName(this.team.id, this.team.name)
-  //   this.teamNameInput.nativeElement.disabled = true
-  // }
-
-  // cancelEditingTeamName(){
-  //   this.isEditingTeamName = false
-  //   this.teamNameInput.nativeElement.disabled = true
-  // }
-
-
-
 
   setSearchUserModal() {
     this.isSearchUserModalOpen = !this.isSearchUserModalOpen
@@ -230,10 +194,6 @@ export class TeamCreationScreenComponent implements OnInit {
     this.router.navigate(["/equipe/" + id])
 
   }
-
-
-
-
   editar() {
     this.disabledInfo = false;
   }

@@ -128,7 +128,7 @@ export class BackendEVOLVEService {
 
   async patchTeamParticipants(teamId: number, participants: UserTeam[]):Promise<Team> {
     return (
-      await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
+      await axios.patch(this.URL + "team/participants/" + teamId , participants, {withCredentials: true})
     ).data;
   }
 
@@ -811,6 +811,10 @@ export class BackendEVOLVEService {
     console.log((await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data);
     
     return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
+  }
+  async getTeamsByCode(code: String) {
+    
+    return (await axios.get(this.URL + 'team/code/'+ code, { withCredentials: true })).data;
   }
 
   async patchName(teamId: number, newName: String) {
