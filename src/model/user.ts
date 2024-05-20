@@ -23,5 +23,7 @@ export class User {
     primaryDarkColor: string = "#67BFE0"; 
     secondaryDarkColor: string = "#86C19F"; 
     fontSize : number =16; 
+
+    socialLogin:boolean = false
  
 }

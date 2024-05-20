@@ -58,8 +58,9 @@ export class NotificationModalComponent implements OnInit {
   }
 
 
-  cleanAllNotifications(){
+ async cleanAllNotifications(){
     this.service.cleanAllUserNotifications(this.loggedUser.id);
+    this.loggedUser = await this.cookies_service.getLoggedUser()
   }
 
    async verifyNotificatedList(team : Team):Promise<Array<TeamNotification>>{

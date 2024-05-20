@@ -106,9 +106,12 @@ export class TeamCreationScreenComponent implements OnInit {
     }
   }
   permission(){
-    return( hasPermission(this.loggedUser.id, this.team, 'EDIT_TEAM_INFO' )
-  );
     
+      return( hasPermission(this.loggedUser?.id, this.team, 'EDIT_TEAM_INFO' )
+      );
+        
+
+   
   }
 
   userId = 0

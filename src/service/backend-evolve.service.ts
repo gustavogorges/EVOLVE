@@ -27,6 +27,7 @@ import { Role } from 'src/model/Role';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { UserTeam } from 'src/model/userTeam';
 import { TeamNotification } from 'src/model/teamNotification';
+import { File } from 'src/model/file';
 
 
 @Injectable({
@@ -313,6 +314,15 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
   }
+
+  async patchUserImageFromLink(userId: number, image: File): Promise<User> {
+    // let formsData = new FormData();
+    // formsData.append('theme', theme);
+    return (
+      await axios.patch(this.URL + 'user/' + userId + '/image/link' , image, {withCredentials: true})
+    ).data;
+  }
+
 
   async patchUserPassword(userId: number, password: string): Promise<User> {
     let formsData = new FormData();
