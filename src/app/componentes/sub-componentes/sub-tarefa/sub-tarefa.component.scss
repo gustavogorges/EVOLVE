@@ -13,6 +13,10 @@
 @apply w-full flex justify-between
 }
 
+.btn-add-text-2 {
+  @apply text-fontGray sm:text-xl text-base font-bold
+}
+
 .task-label {
   @apply sm:text-lg text-sm font-semibold
 }

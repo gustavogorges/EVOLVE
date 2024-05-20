@@ -33,6 +33,7 @@ export class Task{
     files : Array<File> = new Array;
     statusListIndex :number = -1;
     progress: number = 0; 
+    concluded : boolean = false;
   
     conclusionPercentage:number=0;
     isVisible: boolean = false;

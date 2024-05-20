@@ -51,8 +51,11 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/"+taskId+"/update/scheludeDate/"+userId+"/calendar",formData, {withCredentials: true})).data
   }
 
-
-
+  async setTaskConcluded(taskId:number) {
+    let formData = new FormData();
+    formData.append("taskId", taskId.toString());
+    return (await axios.patch(this.URL+"task/setConcluded",formData, {withCredentials: true})).data
+  }
 
   async patchTeamImageColor(teamId:number, newImageColor:string):Promise<Team>{
     let path:string = "team/"
@@ -184,6 +187,10 @@ export class BackendEVOLVEService {
 
   async getAllCommentsOfTask(taskId: number) {
     return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
+  }
+
+  async getAllWorkedTime(userId:number, projectId:number) {
+    return (await axios.get(this.URL + 'project/' + projectId + '/workedTime/' + userId, {withCredentials: true})).data;
   }
 
   async patchNewCommentProject(

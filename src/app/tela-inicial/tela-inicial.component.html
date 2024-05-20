@@ -19,11 +19,11 @@
       
       <div class="card-deliveries-box sm:h-[424px]">
         <div           *ngIf="listaTarefas.length != 0"
-        class="w-full"
+        class="w-full h-full gap-5 flex flex-col"
         >
           <div
             *ngFor="let tarefa of listaTarefas; index as i"
-            class="w-full gap-3 flex flex-col items-center "
+            class="w-full gap-5 flex flex-col items-stretch "
           >
   
             <app-entrega-prox
