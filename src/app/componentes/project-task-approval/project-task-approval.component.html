@@ -6,7 +6,9 @@
     </div>
     <div class="list-item-task" *ngFor="let task of verifyConcludedTasks()">
         <app-entrega-prox [favoritedAble]="false" [tarefa]="task" class="w-[80%]"></app-entrega-prox>
-        <div class="w-[20%] h-24 flex items-center justify-center gap-4">
+        <div
+        *ngIf="hasPermission == true"
+        class="w-[20%] h-24 flex items-center justify-center gap-4">
             <div 
             (click)="taskSetConcluded(task)"
             class="h-[40%] w-[20%] flex items-center rounded-xl justify-center bg-primary cursor-pointer"

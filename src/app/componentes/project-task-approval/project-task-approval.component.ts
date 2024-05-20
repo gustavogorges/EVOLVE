@@ -5,6 +5,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { hasPermissionProject } from 'src/app/shared/check-permissions';
 
 @Component({
   selector: 'app-project-task-approval',
@@ -18,10 +19,11 @@ export class ProjectTaskApprovalComponent implements OnInit {
   ) { }
 
   loggedUser:User = new User;
+  hasPermission : boolean = false;
 
   async ngOnInit() {
-    console.log(this.project.tasks);
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    this.verifyPermission();
   }
 
   @Input()
@@ -49,6 +51,12 @@ export class ProjectTaskApprovalComponent implements OnInit {
         this.service.updateCurrentStatus(task.id,this.loggedUser.id,status);
       }
     });
+  }
+
+  verifyPermission(){
+    console.log(this.loggedUser.id);
+    hasPermissionProject(this.loggedUser.id,this.project,"MANAGE_MEMBERS") ? this.hasPermission = true : this.hasPermission = false;
+    console.log(this.hasPermission);
   }
   
 
