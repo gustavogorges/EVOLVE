@@ -40,14 +40,38 @@ export class AppComponent{
 
   islogged = false
 
+  // a(){
+  //   if(this.cookieService.getLoggedUserId() && this.cookieService.getLoggedUserId()!="0"){
+  //     this.islogged = true
+  //   } else {
+  //     console.log(this.cookieService.getLoggedUserId());
+      
+  //     this.islogged = false
+  //   }
+  //   this.a()
+  // }
+
   async ngOnInit(): Promise<void> {
+
+    window.addEventListener('login', async (event: Event) => { 
+      this.islogged = true
+    })
+
+    window.addEventListener('logout', async (event: Event) => { 
+      this.islogged = false
+    })
+
+    if(this.authService.isLoggedIn()){
+      this.islogged = true
+    }
+
     if(this.authService.isLoggedIn()){
       this.loggedUser = await this.cookieService.getLoggedUser();
     }
     this.authService.loggedInChanged.subscribe(isLoggedIn => {
       this.islogged = isLoggedIn;
     });
-   
+  //  this.a()
     if(this.loggedUser){
       if(this.loggedUser.theme=="dark"){
         document.documentElement.classList.add('dark')
@@ -72,6 +96,12 @@ export class AppComponent{
      
     }
     
+  }
+
+  updateStatus(){
+    console.log("Entrei na funcao");
+    
+    this.islogged = true
   }
 
   @HostListener('document:mouseup', ['$event'])

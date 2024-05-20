@@ -38,6 +38,11 @@ export class TelaInicialComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    setTimeout(() => {
+      const event = new CustomEvent('login');
+      window.dispatchEvent(event);
+    }, 100);
+
     this.data = this.location.getState();
     let userData: User = await this.data.user
  
@@ -80,7 +85,6 @@ export class TelaInicialComponent implements OnInit {
 
     }   
     this.changeFont()
-    console.log(this.loggedUser.teamRoles);
     
   }
 
@@ -96,7 +100,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   userColors(){
-    console.log(this.loggedUser);
     
     if(this.loggedUser.primaryColor || this.loggedUser.secondaryColor){
       this.colorService.setPrimaryColor(this.loggedUser.primaryColor)
@@ -129,7 +132,6 @@ async openTask(tarefa: Task): Promise<void> {
   indiceAtual: number = 0;
 
   mudarItem(novoIndice: number) {
-    console.log(novoIndice);
 
     
     
@@ -146,23 +148,17 @@ async openTask(tarefa: Task): Promise<void> {
 
   getCurrentTeam(indiceAtual:number):Team{
     if(this.loggedUser.teamRoles.length - 1 >= indiceAtual) {
-      console.log("time certo uhuuuul");
-      console.log(indiceAtual);
-      console.log(this.loggedUser.teamRoles);
       
       
-      console.log(this.loggedUser.teamRoles[indiceAtual].team );
       
       return this.loggedUser.teamRoles[indiceAtual].team
     }
-    console.log("time errado :(");
     
     return new Team();
 
   }
 
   goToPerfilPage(){
-    console.log("NOT IMPLEMENTED");
     
   }
 
@@ -182,7 +178,6 @@ async openTask(tarefa: Task): Promise<void> {
       this.booleanTask = false;
     }
       this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
-      console.log(this.listaTarefas);
       
     
   }

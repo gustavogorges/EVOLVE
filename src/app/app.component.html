@@ -1,14 +1,14 @@
 
 <body class="w-screen h-screen relative  bg-secondaryWhite dark:bg-dark-theme-back ">
 
-    <app-navegacao (reload)="reload()"></app-navegacao>
+    <app-navegacao *ngIf="islogged" (reload)="reload()" ></app-navegacao>
     
     <div class="sm:pt-[15%] md:pt-[10%] pt-[20%] lg:pt-[8%] xl:pt-[4%] bacalhau ">
         <app-vlibras class=""
         ></app-vlibras>
         <app-text-to-speech>
         </app-text-to-speech>
-        <router-outlet></router-outlet>
+        <router-outlet (login)="updateStatus()"></router-outlet>
 
     </div>
 

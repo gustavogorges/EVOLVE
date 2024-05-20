@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -15,6 +15,7 @@ import { AuthService } from 'src/service/autService';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { sortedUniq } from 'lodash';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tela-login',
@@ -26,10 +27,42 @@ export class TelaLoginComponent implements OnInit {
   userForm!: FormGroup;
   passwordForm!: FormGroup;
 
-  constructor(private router: Router, private service: BackendEVOLVEService, private authService :AuthService,
+  @Output() login : EventEmitter<any> = new EventEmitter
+
+  constructor(private router: Router,private coockiesService:CookiesService, private service: BackendEVOLVEService, private authService :AuthService,
     private cookie : CookiesService) {}
 
+
   ngOnInit(): void {
+    setTimeout(() => {
+      const event = new CustomEvent('logout');
+      window.dispatchEvent(event);
+    }, 100);
+    // this.coockiesService.setLoggedUserId(0)
+    window.addEventListener('userLoggedIn', async (event: Event) => {
+      const customEvent = event as CustomEvent;
+      const userData = customEvent.detail;  
+      console.log(userData);
+      const result= await this.authService.loginGoogle(userData)
+      if (result != null) {
+        this.responseData = result;
+        console.log(this.responseData);
+        
+        this.cookie.setLoggedUserId(this.responseData.data.id);
+        setTimeout(() => {
+          const event = new CustomEvent('login');
+          window.dispatchEvent(event);
+        }, 100);
+        this.login.emit()
+        
+        
+       this.router.navigate(['/tela-inicial']);
+      }
+      
+      });
+ 
+    
+
     this.userForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -45,6 +78,9 @@ export class TelaLoginComponent implements OnInit {
       },
       { validators: this.passwordMatchValidator }
     );
+  }
+  goCadastro(){
+    window.location.href = "tela-cadastro"
   }
   passwordMatchValidator(
     control: AbstractControl
@@ -77,6 +113,11 @@ export class TelaLoginComponent implements OnInit {
         console.log(this.responseData);
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
+        setTimeout(() => {
+          const event = new CustomEvent('login');
+          window.dispatchEvent(event);
+        }, 100);
+        this.login.emit()
         
         
         this.router.navigate(['/tela-inicial']);

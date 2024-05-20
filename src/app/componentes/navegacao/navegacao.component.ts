@@ -29,6 +29,8 @@ export class NavegacaoComponent implements OnInit {
   openLangBol : boolean = false
   lang = ''
   @Output() reload : EventEmitter<any> = new EventEmitter
+  @Output() exist : EventEmitter<any> = new EventEmitter
+
 
   closeTask(event: boolean) {
     if (event) {
@@ -44,11 +46,20 @@ export class NavegacaoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.lang = localStorage.getItem('lang') || 'en'
+    console.log(this.cookieService.getLoggedUserId());
+    console.log(this.router.getCurrentNavigation());
+    console.log(this.router);
+    
+    if(this.cookieService.getLoggedUserId()==''){
+      this.exist.emit()
+    }
+
     this.loggedUser = await this.cookieService
     .getLoggedUser()
     .then((user) => {
       return user;
     });
+
     if(this.loggedUser){
       this.changeFont()
 
@@ -88,8 +99,9 @@ export class NavegacaoComponent implements OnInit {
     
 
     }
+
     this.themeDark = !this.themeDark
-    if(this.loggedUser){
+    if(this.loggedUser ){
       await this.service.patchUserTheme(this.loggedUser.id, this.loggedUser.theme);
     }
   }

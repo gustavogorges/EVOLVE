@@ -36,7 +36,8 @@ export class ModalConfigComponent implements OnInit {
     this.theme=this.loggedUser.theme
     this.checkDefaultColors();
     this.sliderValue = this.loggedUser.fontSize
-
+    console.log(23);
+    
  
   }
   

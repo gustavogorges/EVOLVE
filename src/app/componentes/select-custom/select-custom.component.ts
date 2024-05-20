@@ -20,7 +20,7 @@ export class SelectCustomComponent implements OnInit {
   ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
 
 
-  @Output() newItem = new EventEmitter<any>();
+  @Output() newItem = new EventEmitter<string>();
 
 
   constructor(private service: BackendEVOLVEService
