@@ -39,7 +39,7 @@ export class ProjectTaskApprovalComponent implements OnInit {
 
   async taskSetConcluded(task: Task){
     task.concluded = true;
-    this.service.taskSetConcluded(task.id);
+    this.service.setTaskConcluded(task.id);
   }
 
   taskChangeStatus(task : Task) {
