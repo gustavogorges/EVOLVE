@@ -11,6 +11,10 @@
   @apply w-full h-min  py-2 px-3 border-t-2  rounded-b-xl flex justify-center items-center cursor-pointer;
 }
 
+.btn-add-text-2 {
+  @apply text-fontGray sm:text-xl text-base font-bold
+}
+
 .s-input input {
   display: none;
 }

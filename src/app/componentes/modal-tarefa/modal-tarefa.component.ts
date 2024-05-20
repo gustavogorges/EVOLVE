@@ -20,6 +20,9 @@ import { CookiesService } from 'src/service/cookies-service.service';
   styleUrls: ['./modal-tarefa.component.scss'],
 })
 export class ModalTarefaComponent implements OnInit, OnChanges {
+
+  modalFelipeGorges = false;
+
   booleanDesc: boolean = false;
   page_task: string = 'sub-tarefas';
   nomeGrande: string = '';
@@ -57,6 +60,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   hours : number = 0
   hoursString : string = ' ';
 
+
+  alternateModalAviso(){
+    this.modalFelipeGorges = !this.modalFelipeGorges
+  }
 
   startTimer() {
     this.booleanPlayPause = false;
@@ -97,6 +104,13 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   stopTimer() {
     this.booleanPlayPause = true;
     clearInterval(this.interval);
+  }
+
+  verifyAprovament() : boolean {
+    if(this.tarefa.currentStatus.name == 'Concluído' && this.tarefa.concluded == false) {
+      return true;
+    }
+    return false;
   }
 
   updatePropertiesList() : void {
@@ -198,6 +212,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.statusAntigo = this.tarefa.currentStatus;
       this.descricaoAntiga = this.tarefa.description;
       this.nomeAntigo = this.tarefa.name;
+    }
+
+    if(this.tarefa.currentStatus.name == "Concluído") {
+      this.modalFelipeGorges = true;
     }
   }
 

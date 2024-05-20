@@ -61,6 +61,8 @@
             ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Membros')"> {{'Membros' | translate}} </p>
             <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Comentários' ? 
             ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Comentários')"> {{'Comentários' | translate}} </p>
+            <p class="cursor-pointer text-lg text-fontGray font-semibold hover:scale-105 duration-200  " [ngClass]="miniPageView === 'Em Aprovação' ? 
+            ' scale-105 text-primary dark:text-dark-primary' : ''" (click)="setMiniPageView('Em Aprovação')"> {{'Em Aprovação' | translate}} </p>
         </div>
         <div class="dashboard-pai overflow-hidden" *ngIf="miniPageView === 'Dashboards'">
             <div #dashElement class="w-fit pl-1">
@@ -115,6 +117,10 @@
         <app-comments-project *ngIf="miniPageView === 'Comentários'" [project]="projeto"></app-comments-project>
         <div class="top mb-10" *ngIf="miniPageView === 'Dashboards'">
             <button *ngIf="dashboards.length != 0" class="top-b" (click)="gotoTop()"> <i class="pi pi-arrow-up text-2xl font-bold px-2"></i> {{'Voltar para o topo' | translate}}</button>
+        </div>
+
+        <div *ngIf="miniPageView === 'Em Aprovação' && projeto" >
+            <app-project-task-approval [project]="projeto"></app-project-task-approval>
         </div>
     </div>
     <div class="div-menor">

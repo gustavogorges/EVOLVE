@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!booleanAddSubtarefa" class="box-btn-add">
+  <div *ngIf="!booleanAddSubtarefa && !verifyApprovament()" class="box-btn-add">
     <div
       *ngIf="!booleanAddSubtarefa"
       (click)="booleanSubtarefa()"
@@ -71,6 +71,14 @@
     >
       <i class="pi pi-plus btn-add-text"></i>
       <p class="btn-add-text">{{'adicionar sub-tarefa' | translate}}</p>
+    </div>
+  </div>
+  <div *ngIf="!booleanAddSubtarefa && verifyApprovament()" class="box-btn-add">
+    <div
+      *ngIf="!booleanAddSubtarefa "
+      class="btn-add-content"
+    >
+      <p class="btn-add-text-2">{{'você não pode mais adicionar sub-tarefas' | translate}}</p>
     </div>
   </div>
   <div

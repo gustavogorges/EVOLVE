@@ -37,6 +37,13 @@ export class AnexosComponent implements OnInit {
     }
   }
 
+  verifyApprovament() :boolean {
+    if(this.task.concluded == true || this.task.currentStatus.name == "Concluído"){
+      return true
+    }
+   return false;
+  }
+
   setUrl(taskFile : File): void {
     const byteCharacters = atob(taskFile.data);
     const byteNumbers = new Array(byteCharacters.length);

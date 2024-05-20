@@ -1,5 +1,26 @@
-<div class="main z-50">
-  <div class="close-btn" (click)="sendEventEmitter()">
+<div *ngIf="modalFelipeGorges && verifyAprovament()" class="w-[20vw] left-[35%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite absolute">
+  <div class="w-full flex justify-center items-center flex-col gap-2">
+    <h2 class="font-titulo text-lg font-bold">Tarefa em aprovação  </h2>
+    <p class="text-fontGray font-hind-madurai">
+    Você não pode editar essa tarefa, pois ela está em aprovação.
+    </p>  </div>
+  <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
+</div>
+
+<div *ngIf="modalFelipeGorges && tarefa.concluded" class="w-[20vw] left-[35%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite absolute">
+  <div class="w-full flex justify-center items-center flex-col gap-2">
+    <h2 class="font-titulo text-lg font-bold">Tarefa finalizada  </h2>
+    <p class="text-fontGray font-hind-madurai">
+    Está tarefa ja foi aprovada e não pode mais ser editada.
+    </p>  </div>
+  <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
+</div>
+
+<div class="main z-50" [ngClass]="modalFelipeGorges ? 'brightness-50':''">
+  <div *ngIf="modalFelipeGorges || tarefa.concluded || verifyAprovament()" class="h-[45%] w-full z-40 absolute ">
+
+  </div>
+  <div class="close-btn z-50" (click)="sendEventEmitter()">
     <i class="pi pi-angle-double-right icon-close"></i>
   </div>
   <div class="the-box">
@@ -323,6 +344,8 @@
       <!-- DEVERIA ESTAR FUNCIONANDO DESCOMENTADO, MAS POR ALGUM MOTIVO O SELECT DE PROPRIEDADES NÃO FUNCIONA -->
     </div>
 
+    
+
     <div class="description-box w-full self-start">
       <div class="description-propertie">
         <div class="name-icon">
@@ -352,6 +375,7 @@
         ></textarea>
       </div>
     </div>
+
     <div class="tabs" [ngClass]="booleanDesc ? 'mt-10' : 'w-0 h-0'">
       <div class="pages">
         <p
