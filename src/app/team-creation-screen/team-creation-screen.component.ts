@@ -182,8 +182,8 @@ export class TeamCreationScreenComponent implements OnInit {
       for(let userTeam of participantsPatch){
         userTeam.user = {"id": userTeam.user.id}
       }
-      this.service.patchTeamName(this.team.id, this.team.name);
-      this.service.patchTeamImageColor(this.team.id, (this.team.imageColor as string))
+     await this.service.patchTeamName(this.team.id, this.team.name);
+     await this.service.patchTeamImageColor(this.team.id, (this.team.imageColor as string))
       this.team = await this.service.patchTeamParticipants(this.team.id, participantsPatch)
       //this.service.putEquipe(this.team); 
     }

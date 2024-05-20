@@ -30,6 +30,11 @@ class="fixed w-screen h-screen z-[99] modal top-1/2 left-1/2 flex items-center j
       "Não sabe o código? toda equipe possui um, peça para um membro o código da equipe que deseja participar, ou para que seja adicionado na equipe."
         | translate
     }}</p>
+      <p  *ngIf="invalidCode" class="text-red-500 text-xs font-hind-madurai">
+        {{
+          "Equipe não encontrada."
+            | translate
+        }}</p>
 
 </div>
 </div>

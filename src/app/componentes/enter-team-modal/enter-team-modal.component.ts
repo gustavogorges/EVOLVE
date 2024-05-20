@@ -21,12 +21,20 @@ export class EnterTeamModalComponent implements OnInit {
     
   }
 team !: Team
+invalidCode = false
   async verifyCode(){
     
     console.log(this.code);
-    this.team = await this.service.getTeamsByCode(this.code)
-    console.log(this.team);
-    this.enterTeam()
+  let teamResponse = await this.service.getTeamsByCode(this.code);
+
+    // Verificando o status e os dados da resposta
+    if (teamResponse.status === 200) {
+      this.team = teamResponse.data;
+      this.enterTeam()
+    } else {
+      this.invalidCode  = true
+      console.error('Erro na requisição:', teamResponse.status);
+    }
     
   }
 
@@ -36,10 +44,9 @@ team !: Team
     userTeam.teamId = this.team.id;
     userTeam.user = this.loggedUser
     userTeam.userId = this.loggedUser.id;
-    this.team.participants.push(userTeam);
+    userTeam.team = this.team
 
-    console.log(this.team.participants);
-    await this.service.patchTeamParticipants(this.team.id, this.team.participants);
-    
+    await this.service.patchTeamParticipantByCode(this.team.id, userTeam);
+    window.location.href = "equipe/"+this.team.id
   }
 }
