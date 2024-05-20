@@ -47,7 +47,7 @@ export class SubTarefaComponent implements OnInit {
     const subtarefaNova = new Subtask()
     subtarefaNova.name= this.subtarefa.nome
     
-    this.tarefa.subtasks.push(subtarefaNova);
+    this.tarefa?.subtasks?.push(subtarefaNova);
     this.tarefa = await this.service.patchSubtask(subtarefaNova,this.tarefa.id, this.loggedUser.id);
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
