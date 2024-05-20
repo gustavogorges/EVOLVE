@@ -121,7 +121,7 @@ export class BackendEVOLVEService {
         '/dashboard/' +
         idDashboard +
         '/delete-chart/' +
-        idChart, {withCredentials: true}
+        idChart, {withCredentials: true}  
       )
     ).data;
   }
@@ -131,7 +131,11 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
     ).data;
   }
-
+  async patchTeamParticipantByCode(teamId: number, participant: UserTeam):Promise<Team> {
+    return (
+      await axios.put(this.URL + "team/code/" + teamId +"/participant" , participant, {withCredentials: true})
+    ).data;
+  }
   async patchReadedNotification(teamId: number, notificationId: number) {
     return (
       await axios.patch(this.URL + 'team/' + teamId + '/' + notificationId, {withCredentials: true})
@@ -784,7 +788,7 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async patchProjectTasks(projectId: number, tasks: Task[]) {
+  async patchProjectTasks(projectId: number, tasks: Task[]) { 
     return (
       await axios.patch(this.URL + "project/" + projectId + "/tasks", tasks, {withCredentials: true})
     ).data
@@ -812,6 +816,19 @@ export class BackendEVOLVEService {
     
     return (await axios.get(this.URL + 'team/user/' + userId, { withCredentials: true })).data;
   }
+  async getTeamsByCode(code: String) {
+    try {
+      const response = await axios.get(this.URL + 'team/code/' + code, { withCredentials: true });
+      return {
+        data: response.data,
+        status: response.status
+      };
+    } catch (error) {
+      return{
+        status : 404
+      }
+  }
+}
 
   async patchName(teamId: number, newName: String) {
     return (
@@ -915,7 +932,7 @@ export class BackendEVOLVEService {
     let path:string = "team/"
     let formData:FormData = new FormData
     formData.append("name",name)
-    return (await axios.patch(this.URL+path+teamId+"/name", formData)).data
+    return (await axios.patch(this.URL+path+teamId+"/name", formData,  {withCredentials: true})).data
   }
 
   async getUserWorkedTime(userId:number, taskId:number){
