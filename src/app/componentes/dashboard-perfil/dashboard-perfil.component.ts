@@ -7,6 +7,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/chart';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { UsuarioTarefa } from 'src/model/userTask';
 
 @Component({
   selector: 'app-dashboard-perfil',
@@ -26,7 +27,7 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
   stackedOptions: any;
   totalTask : number =0
   listaTasks!: Array<any>
-  horasTotais : string = "0"
+  horasTotais : string = "00"
   minutosTotais : string = "00";
   loggedUser:User = new User;
 
@@ -51,10 +52,12 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     }
   }
 
+  userAllWorkedTimeProject: Array<UsuarioTarefa> = []
+
    async ngOnInit() {
     this.listaTasks =[]
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    console.log(this.service.getAllWorkedTime(this.loggedUser.id, this.project.id)); 
+    this.calculateWorkedTimeOnProject();
   }
   setData(project: Project): any {
     console.log(this.listaTasks);
@@ -151,8 +154,23 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
                
         }
        })
-    
+  }
 
+  async calculateWorkedTimeOnProject() {
+    this.userAllWorkedTimeProject = await this.service.getAllWorkedTime(this.loggedUser.id, this.project.id); 
+    console.log(this.userAllWorkedTimeProject);
+    this.userAllWorkedTimeProject.forEach((userTask) => {
+      this.horasTotais = (parseInt(this.horasTotais) + userTask.workedHours).toString();
+      this.minutosTotais = (parseInt(this.minutosTotais) + userTask.workedMinutes).toString();
+    });
+    if(parseInt(this.horasTotais) < 10){
+      this.horasTotais = "0" + this.horasTotais;
+    }
+    if(parseInt(this.minutosTotais) < 10){
+      this.minutosTotais = "0" + this.minutosTotais;
+    }
+    console.log(this.horasTotais);
+    console.log(this.minutosTotais);
 
   }
 
