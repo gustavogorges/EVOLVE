@@ -59,7 +59,7 @@
           </div>
         </div>
         <div *ngIf="userTeam.team.projects?.length == 0" class="px-5">
-          <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goCreateProject(userTeam.team)">
+          <div *ngIf="hasPermission(userTeam.team)" class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goCreateProject(userTeam.team)">
             <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300">
               {{ 'Criar projeto' | translate }}
             </p>

@@ -8,6 +8,7 @@ import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { hasPermission } from '../shared/check-permissions';
 
 @Component({
   selector: 'app-tela-projeto-remastered',
@@ -45,6 +46,9 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     }
   }
 
+  hasPermission(team : Team){
+   return  hasPermission(this.loggedUser.id, team, "CREATE_PROJECT")
+  }
   openTaskModal(task:any){
     this.task = task
     this.project = task.project as Project
