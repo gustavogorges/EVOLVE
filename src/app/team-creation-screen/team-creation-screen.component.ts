@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LogarithmicScale } from 'chart.js';
@@ -9,6 +10,8 @@ import { UserTeam } from 'src/model/userTeam';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { v4 as uuidv4 } from 'uuid';
+import { hasPermission } from '../shared/check-permissions';
+import { Permission } from 'src/model/permission.';
 @Component({
   selector: 'app-team-creation-screen',
   templateUrl: './team-creation-screen.component.html',
@@ -22,6 +25,8 @@ export class TeamCreationScreenComponent implements OnInit {
   @ViewChild("teamNameInput") teamNameInput!: any;
 
   teamParticipants: Array<UserTeam> = new Array
+  options2 = ['Criador',"Administrador", "Colaborador", "Espectador"]
+  options = ["Administrador", "Colaborador", "Espectador"]
 
   team!: Team
   isEditingTeamName: boolean = false
@@ -71,7 +76,7 @@ export class TeamCreationScreenComponent implements OnInit {
     return userTeams.map(userTeam => userTeam.user)
   }
 
-  IconsOptionsSelect: Array<string> = [];
+  IconsOptionsSelect = ['pi pi-shield', 'pi pi-wrench', 'pi pi-eye'];
 
   imagemBlob: any;
   preImage: any;
@@ -100,10 +105,25 @@ export class TeamCreationScreenComponent implements OnInit {
       }
     }
   }
+  permission(){
+    return( hasPermission(this.loggedUser.id, this.team, 'EDIT_TEAM_INFO' )
+  );
+    
+  }
 
-  options = ["Administrador", "Membro", "Visualizador"]
-  openSelect() {
+  userId = 0
+    openSelect(id : number) {
+      this.userId= id
     this.select = !this.select
+  }
+  choosenRole(option : string   , userTeam :UserTeam){  
+    console.log(option);
+    let index  = this.options2.indexOf(option)
+    userTeam.role.id = index+1;
+    console.log(index+1);
+    
+    console.log(userTeam);
+    
   }
 
   randomColor() {

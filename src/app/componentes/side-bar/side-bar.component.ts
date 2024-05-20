@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
+import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permissions';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
@@ -41,7 +42,10 @@ config = false
     if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
         this.sideBar.emit(false)
     }
-  };
+  }
+  hasPermission(team: Team){
+   return hasPermission(this.loggedUser.id, team, 'CREATE_PROJECT' );
+  }
 
   goTelaTarefa( project : Project){
       this.router.navigate(['/tela-tarefa/'+project.id]);
