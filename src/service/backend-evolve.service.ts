@@ -132,9 +132,11 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
     ).data;
   }
-  async patchTeamParticipantByCode(teamId: number, participant: UserTeam):Promise<Team> {
+  async patchTeamParticipantByCode(teamId: number, userId: number):Promise<Team> {
+    let formData: FormData = new FormData()
+    formData.append("userId", userId.toString())
     return (
-      await axios.put(this.URL + "team/code/" + teamId +"/participant" , participant, {withCredentials: true})
+      await axios.put(this.URL + "team/code/" + teamId +"/participant", formData , {withCredentials: true})
     ).data;
   }
   async patchReadedNotification(teamId: number, notificationId: number) {

@@ -46,7 +46,7 @@ invalidCode = false
     userTeam.userId = this.loggedUser.id;
     userTeam.team = this.team
 
-    await this.service.patchTeamParticipantByCode(this.team.id, userTeam);
+    await this.service.patchTeamParticipantByCode(this.team.id, userTeam.userId);
     window.location.href = "equipe/"+this.team.id
   }
 }
