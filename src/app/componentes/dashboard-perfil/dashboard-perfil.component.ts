@@ -54,7 +54,7 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
    async ngOnInit() {
     this.listaTasks =[]
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    console.log(this.service.getAllWorkedTime(this.loggedUser.id));
+    console.log(this.service.getAllWorkedTime(this.loggedUser.id, this.project.id)); 
   }
   setData(project: Project): any {
     console.log(this.listaTasks);

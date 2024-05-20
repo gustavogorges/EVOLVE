@@ -182,6 +182,10 @@ export class BackendEVOLVEService {
     return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
   }
 
+  async getAllWorkedTime(userId:number, projectId:number) {
+    return (await axios.get(this.URL + 'project/' + projectId + '/workedTime/' + userId, {withCredentials: true})).data;
+  }
+
   async patchNewCommentProject(
     projectId: number,
     newComment: Comment,
