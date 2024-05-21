@@ -58,7 +58,7 @@ export class ProjectTaskApprovalComponent implements OnInit {
 
   verifyPermission(){
     console.log(this.loggedUser.id);
-    hasPermissionProject(this.loggedUser.id,this.project,"PROJECT_CREATOR") ? this.hasPermission = true : this.hasPermission = false;
+    hasPermissionProject(this.loggedUser.id,this.project,"MANAGE_MEMBERS") ? this.hasPermission = true : this.hasPermission = false;
     console.log(this.hasPermission);
   }
 
