@@ -73,6 +73,10 @@ export class BackendEVOLVEService {
     ).data;
   }
 
+  async setUserProjectRole(projectId:number, userProject:UserProject) {
+    return (await axios.patch(this.URL + "project/" + projectId + "/setRole", userProject, {withCredentials: true})).data;
+  }
+
   async updateDashboard(
     dashboard: Dashboard,
     idDashboard: number,
@@ -277,9 +281,9 @@ export class BackendEVOLVEService {
   }
 
   async getOne(caminho: string, id: number) {
-    console.log((
-      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
-    ).data);
+    //console.log((
+    //  await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
+    //).data);
     
     return (
       await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })

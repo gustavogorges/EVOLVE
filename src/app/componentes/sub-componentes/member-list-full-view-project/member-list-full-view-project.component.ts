@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LogarithmicScale } from 'chart.js';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { UserProject } from 'src/model/userProject';
@@ -23,9 +24,28 @@ export class MemberListFullViewProjectComponent implements OnInit {
   options2 = ['Criador',"Administrador", "Colaborador", "Espectador"];
   IconsOptionsSelect = ['pi pi-shield', 'pi pi-wrench', 'pi pi-eye'];
   userProject !: UserProject;
+  loggedUserProject !: UserProject;
+  hasPermission : boolean = false;
 
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    this.userProject = this.project.members.find(userProject => userProject.user.id == this.user.id)!;
+    this.loggedUserProject = this.project.members.find(userProject => userProject.user.id == this.loggedUser.id)!;
+    if(this.loggedUserProject.role.name != "PROJECT_COLABORATOR" && this.loggedUserProject.role.name != "PROJECT_VIEWER"){
+      this.hasPermission = true;
+    }
+    if(this.userProject.role.name == "PROJECT_COLABORATOR"){
+      this.user.currentRole = "Colabarador"
+    }
+    if(this.userProject.role.name == "PROJECT_CREATOR"){
+      this.user.currentRole = "Criador"
+    }
+    if(this.userProject.role.name == "PROJECT_ADM"){
+      this.user.currentRole = "Administrador"
+    }
+    if(this.userProject.role.name == "PROJECT_VIEWER"){
+      this.user.currentRole = "Espectador"
+    }
   }
 
   @Input() user !: User
@@ -52,13 +72,21 @@ export class MemberListFullViewProjectComponent implements OnInit {
   }
 
   choosenRole(option : string   , userProjectReceived :UserProject){  
-    console.log(option);
-    let index  = this.options2.indexOf(option)
-    userProjectReceived.role.id = index+1;
-    console.log(index+1);
     
+    if(option == "Administrador"){
+      userProjectReceived.role.name = "PROJECT_ADM"
+      this.user.currentRole = "Administrador"
+    }
+    if(option == "Colaborador"){
+      userProjectReceived.role.name = "PROJECT_COLABORATOR"
+      this.user.currentRole = "Colaborador"
+    }
+    if(option == "Espectador"){
+      userProjectReceived.role.name = "PROJECT_VIEWER"
+      this.user.currentRole = "Espectador"
+    }
     console.log(userProjectReceived);
-    
+    this.service.setUserProjectRole(this.project.id,userProjectReceived);
   }
 
   getProjectCreator(project:Project):User{
