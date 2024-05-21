@@ -1,21 +1,74 @@
-<div class="w-full h-[10vh] rounded-lg grid grid-cols-4 grid-rows-2 px-3 my-4 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray dark:shadow-dark-primary-black" style="grid-template-columns: 10% 40% 10% 20% 20%;">
-    <div class="w-full h-full row-span-full flex justify-center items-center">
-        <div class="foto">
-            <div *ngIf="verifyImage() && user" class="foto2" [ngStyle]="{'background': user.imageColor }" >{{user.name.charAt(0).toUpperCase()}}</div>
-            <img class="fotoImagem" *ngIf="!verifyImage()" src="{{user.image.data}}" alt="">        
-        </div>
+<div
+  class="w-full h-[10vh] rounded-lg grid grid-cols-4 grid-rows-2 px-3 my-4 shadow-lg bg-secondaryWhite dark:bg-dark-secundary-gray dark:shadow-dark-primary-black"
+  style="grid-template-columns: 10% 40% 10% 20% 20%"
+>
+  <div class="w-full h-full row-span-full flex justify-center items-center">
+    <div class="foto">
+      <div
+        *ngIf="verifyImage() && user"
+        class="foto2"
+        [ngStyle]="{ background: user.imageColor }"
+      >
+        {{ user.name.charAt(0).toUpperCase() }}
+      </div>
+      <img
+        class="fotoImagem"
+        *ngIf="!verifyImage()"
+        src="{{ user.image.data }}"
+        alt=""
+      />
     </div>
+  </div>
 
-    <p class="text-2xl font-semibold text-primary flex items-end dark:text-dark-primary">{{user.name}}</p>
-    <p class="row-start-2 text-fontGray dark:text-gray-300">{{user.email}}</p>
+  <p
+    class="text-2xl font-semibold text-primary flex items-end dark:text-dark-primary"
+  >
+    {{ user.name }}
+  </p>
+  <p class="row-start-2 text-fontGray dark:text-gray-300">{{ user.email }}</p>
 
-    <p class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300" *ngIf="user.id === getProjectCreator(project).id">{{'Criador' | translate}}</p>
-    <p class="row-span-full text-fontGray flex justify-center  items-center dark:text-gray-300" *ngIf="user.id != getProjectCreator(project).id">{{'Adiministrador' | translate}}</p>
+  <p
+    class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
+    
+  >
+    {{ userProject.role.name }}
+  </p>
+  <!-- <p
+    class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
+    *ngIf="user.id != getProjectCreator(project).id"
+  >
+    {{ "Adiministrador" | translate }}
+  </p> -->
 
-    <div class="flex row-span-full items-center justify-center" *ngIf="user.id != getProjectCreator(project).id">
-        <button class=" h-[2rem] w-[80%] bg-primary dark:bg-dark-primary text-secondaryWhite dark:text-primaryFontBlack rounded-full duration-200 hover:scale-105">{{'Alterar permições' | translate}}</button>
-    </div>
-    <div class="flex row-span-full items-center justify-center" *ngIf="user.id != getProjectCreator(project).id">
-        <button class=" h-[2rem]  w-[80%] bg-red-600 rounded-full text-secondaryWhite duration-200 hover:scale-105" (click)="removeMember()">{{'Remover membro' | translate}}</button>
-    </div>
+  <div
+    class="flex row-span-full items-center justify-center"
+    *ngIf="user.id != getProjectCreator(project).id"
+    (click)="selectPermissions = !selectPermissions"
+  >
+    <button
+      class="h-[2rem] w-[80%] bg-primary dark:bg-dark-primary text-secondaryWhite dark:text-primaryFontBlack rounded-full duration-200 hover:scale-105"
+    >
+      {{ "Alterar permições" | translate }}
+    </button>
+  </div>
+  <app-select-custom
+    *ngIf="
+        selectPermissions
+    "
+    [listOptions]="options"
+    [listIcons]="IconsOptionsSelect"
+    (newItem)="choosenRole($event, userProject)"
+    class="absolute left-[45%] top-[65%]"
+  ></app-select-custom>
+  <div
+    class="flex row-span-full items-center justify-center"
+    *ngIf="user.id != getProjectCreator(project).id"
+  >
+    <button
+      class="h-[2rem] w-[80%] bg-red-600 rounded-full text-secondaryWhite duration-200 hover:scale-105"
+      (click)="removeMember()"
+    >
+      {{ "Remover membro" | translate }}
+    </button>
+  </div>
 </div>

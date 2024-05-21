@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { User } from 'src/model/user';
 import { UserProject } from 'src/model/userProject';
+import { UserTeam } from 'src/model/userTeam';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 
@@ -17,6 +18,11 @@ export class MemberListFullViewProjectComponent implements OnInit {
   ) { }
 
   loggedUser : User = new User;
+  selectPermissions : boolean = false;
+  options = ["Administrador", "Colaborador", "Espectador"];
+  options2 = ['Criador',"Administrador", "Colaborador", "Espectador"];
+  IconsOptionsSelect = ['pi pi-shield', 'pi pi-wrench', 'pi pi-eye'];
+  userProject !: UserProject;
 
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
@@ -43,6 +49,16 @@ export class MemberListFullViewProjectComponent implements OnInit {
       }
     }
     return true
+  }
+
+  choosenRole(option : string   , userProjectReceived :UserProject){  
+    console.log(option);
+    let index  = this.options2.indexOf(option)
+    userProjectReceived.role.id = index+1;
+    console.log(index+1);
+    
+    console.log(userProjectReceived);
+    
   }
 
   getProjectCreator(project:Project):User{
