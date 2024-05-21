@@ -122,11 +122,10 @@ import { GreenDivLandingpageComponent } from './componentes/green-div-landingpag
 import { ScreenViewInterativeLandingPageComponent } from './componentes/screen-view-interative-landing-page/screen-view-interative-landing-page.component';
 import { LandingpageScreesSeparatorComponent } from './componentes/sub-componentes/landingpage-screes-separator/landingpage-screes-separator.component';
 import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carrosel/cards-carrosel.component';
+import { CardListLandingPageComponentComponent } from './componentes/sub-componentes/card-list-landing-page-component/card-list-landing-page-component.component';
+import { CalendarLandingPageComponentComponent } from './componentes/sub-componentes/calendar-landing-page-component/calendar-landing-page-component.component';
 
-
-
-
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -214,11 +213,12 @@ import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carr
     GreenDivLandingpageComponent,
     ScreenViewInterativeLandingPageComponent,
     LandingpageScreesSeparatorComponent,
-    CardsCarroselComponent
+    CardsCarroselComponent,
+    CardListLandingPageComponentComponent,
+    CalendarLandingPageComponentComponent
   ],
   
   imports: [
-    
     MessageModule,
     MessagesModule,
     ChartModule,
@@ -243,10 +243,11 @@ import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carr
 
     InputNumberModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   
-  providers: [{provide: LOCALE_ID, useValue: 'pt-br' } ,
+  providers: [{provide: LOCALE_ID, useValue: 'pt-br'} ,
   DatePipe
 ],
   bootstrap: [AppComponent]

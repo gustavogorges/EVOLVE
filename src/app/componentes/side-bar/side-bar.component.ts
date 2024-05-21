@@ -51,6 +51,18 @@ config = false
 
   }
 
+  isNotLandingPage(){
+
+      if(this.getRotaAtual() === '/'){
+        return false;
+      }
+      return true;
+  }
+
+  getRotaAtual(){
+    return this.router.url;
+  }
+
   openConfig(){
     this.config=true
   }

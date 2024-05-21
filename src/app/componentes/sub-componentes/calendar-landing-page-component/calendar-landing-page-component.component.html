@@ -1,0 +1,83 @@
+<div class="flex justify-center gap-5 pt-5">
+    <div class="w-[15vw] h-[48vh] bg-primary dark:bg-dark-primary p-4 rounded-lg">
+        <p *ngIf="dayWeek != ''" class="text-xl text-secondaryWhite dark:text-dark-primary-black font-semibold text-center">{{dayWeek}}: {{date}}</p>
+        <div *ngFor="let task of tasks" class="w-full mb-2 h-[10vh] bg-secondaryWhite dark:bg-dark-secundary-gray rounded-lg">
+            <div class="flex items-center">
+                <div class="w-[3vw] flex justify-center h-full">
+                    <div class="w-[1vw] h-[1vw] rounded-full bg-yellow-400"></div>
+                </div>
+                <div class="py-4 font-semibold text-primary dark:text-dark-primary">
+                    <p class="mb-3">{{task}}</p>
+                    <p>{{date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center gap-4">
+        <div class="flex flex-col items-center gap-2">
+            <p class="dark:text-primaryWhite">Segunda</p>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative cursor-pointer" (click)="setData($event)"><p class="absolute bottom-2 right-2">01</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative cursor-pointer" (click)="setData($event)"><p class="absolute bottom-2 right-2">08</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative cursor-pointer" (click)="setData($event)"><p class="absolute bottom-2 right-2">15</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg p-2 relative cursor-pointer" (click)="setData($event)"><p class="absolute bottom-2 right-2">22</p>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-lime-400 px-2 mb-2 cursor-pointer top-2">Tarefa 7</ul>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-indigo-500 px-2 cursor-pointer top-2">Tarefa 8</ul></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Terça</p>
+    
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">02</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer p-2 relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">09</p><ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-green-300 px-2 top-2  cursor-pointer">Tarefa 1</ul></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative"(click)="setData($event)"><p class="absolute bottom-2 right-2">16</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative"(click)="setData($event)"><p class="absolute bottom-2 right-2">23</p></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Quarta</p>
+    
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">03</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">10</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">17</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">24</p></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Quinta</p>
+    
+            <div class="w-[5vw] h-[5vw] cursor-pointer bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative"(click)="setData($event)"><p class="absolute bottom-2 right-2">04</p></div>
+            <div class="w-[5vw] h-[5vw] cursor-pointer bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative"(click)="setData($event)"><p class="absolute bottom-2 right-2">11</p></div>
+            <div class="w-[5vw] h-[5vw] cursor-pointer bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg p-2 relative"(click)="setData($event)"><p class="absolute bottom-2 right-2">18</p>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-orange-300 mb-2 cursor-pointer px-2 top-2">Tarefa 2</ul>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-yellow-300 px-2 cursor-pointer top-2">Tarefa 3</ul>
+            </div>
+            <div class="w-[5vw] h-[5vw] cursor-pointer bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg relative"><p class="absolute bottom-2 right-2">25</p></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Sexta</p>
+    
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">05</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">12</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">19</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">26</p></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Sábado</p>
+    
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg  cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">06</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg  cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">13</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg p-2 cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">20</p>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-purple-300 px-2 cursor-pointer top-2">Tarefa 6</ul>
+            </div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg  cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">27</p></div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <p class="dark:text-primaryWhite">Domingo</p>
+    
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">07</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">14</p></div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg p-2 cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">21</p>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-pink-300 px-2 mb-2 cursor-pointer top-2">Tarefa 4</ul>
+                <ul class="dark:text-dark-primary-black w-full rounded-lg h-6 bg-blue-300 px-2 cursor-pointer top-2">Tarefa 5</ul>
+            </div>
+            <div class="w-[5vw] h-[5vw] bg-gray-200 dark:bg-dark-secundary-gray dark:text-primaryWhite rounded-lg cursor-pointer relative" (click)="setData($event)"><p class="absolute bottom-2 right-2">28</p></div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 .cards{
-    @apply w-[15vw] h-[21vh] rounded-lg shadow-lg bg-secondaryWhite;
+    @apply w-[15vw] h-[21vh] rounded-lg shadow-lg bg-secondaryWhite dark:bg-dark-primary-black ;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 20% 2% 58% 20%;
@@ -8,7 +8,7 @@
         @apply px-4;
 
         p{
-            @apply text-fontGray mb-1
+            @apply text-fontGray mb-1 dark:text-gray-200
         }
     }
 

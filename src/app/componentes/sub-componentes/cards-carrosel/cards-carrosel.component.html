@@ -1,15 +1,15 @@
 <div class="cards w-full" >
     <div>
         <div class="flex justify-between px-2 items-center h-full">
-            <p class="text-primary font-semibold">Data final: 00/00</p>
+            <p class="text-primary dark:text-dark-primary font-semibold">Data final: 00/00</p>
             <p class="p-1 px-2 rounded-lg h-fit font-hind-madurai" [style.background]="task.status.color">{{task.status.status}}</p>
         </div>
     </div>
     <div class="bg-gray-300">
-        <div class="w-1/2 h-full bg-primary rounded-r-lg"></div>
+        <div class="w-1/2 h-full bg-primary dark:bg-dark-primary rounded-r-lg"></div>
     </div>
     <div class="px-2">
-        <p class="font-semibold text-primary text-lg my-1">Titulo da tarefa</p>
+        <p class="font-semibold text-primary  dark:text-dark-primary text-lg my-1">Titulo da tarefa</p>
         <div class="flex gap-2 items-center task">
             <p-checkbox [(ngModel)]="checked1" [binary]="true" inputId="binary"></p-checkbox>
 

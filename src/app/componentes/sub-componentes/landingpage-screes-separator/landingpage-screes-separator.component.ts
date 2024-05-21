@@ -1,5 +1,5 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-landingpage-screes-separator',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landingpage-screes-separator.component.scss']
 })
 export class LandingpageScreesSeparatorComponent implements OnInit {
+
+  @Input() slide : number = 0
 
   status : any[] = [
     {

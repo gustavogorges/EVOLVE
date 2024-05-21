@@ -1,6 +1,6 @@
 import { getHtmlTagDefinition, HtmlTagDefinition } from '@angular/compiler';
 import { Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
 import { filter, window } from 'rxjs';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
@@ -15,7 +15,7 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor(private router: Router, private cookieService: CookiesService,  private service: BackendEVOLVEService,
+  constructor(private router: Router,private activatedRoute : ActivatedRoute , private cookieService: CookiesService,  private service: BackendEVOLVEService,
     ) { }
 
   sideBar = false
@@ -54,6 +54,18 @@ export class NavegacaoComponent implements OnInit {
     }
    
     this.darkMode()
+  }
+
+  isNotLandingPage(){
+
+    if(this.getRotaAtual() === '/'){
+      return false;
+    }
+    return true;
+  }
+
+  getRotaAtual(){
+    return this.router.url;
   }
 
   themeDark = false

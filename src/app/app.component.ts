@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
@@ -13,6 +14,7 @@ export class AppComponent{
     private colorService : ColorService
 
     ){}
+
   title = 'angularProject';
   loggedUser !: User; 
 
