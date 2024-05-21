@@ -83,7 +83,7 @@ export class ComentariosComponent implements OnInit {
     newComment.value = this.comment.value;
     newComment.user = this.loggedUser;
     newComment.task = this.task;
-    newComment.project = this.task.project as Project;
+    
 
     // find a way of getting this values
     newComment.timeHour = hours + ":" + minutes;
@@ -91,11 +91,9 @@ export class ComentariosComponent implements OnInit {
 
     let postComment:any = newComment
     postComment.user = {"id":newComment.user.id}
-    console.log(postComment);
     
 
    let returnComment: any = await   this.service.patchNewComment(postComment.task.id,postComment,this.loggedUser.id);
-    console.log(returnComment);
     
     const taskUpdated : Task = await this.service.getOne("task",postComment.task.id);
     

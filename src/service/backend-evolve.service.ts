@@ -481,7 +481,7 @@ export class BackendEVOLVEService {
     propertyId: number
   ) {
     return (
-      await axios.put(
+      await axios.patch(
         this.URL +
         'task' + '/' +
         taskId + '/property/put/option/' +
@@ -677,7 +677,7 @@ export class BackendEVOLVEService {
   }
 
   async getAllCommentsOfProject(projectId: number) {
-    return (await axios.get(this.URL + 'project/comments/getAll/' + projectId, {withCredentials: true}))
+    return (await axios.get(this.URL + 'project/' + projectId +'/comments/getAll', {withCredentials: true}))
       .data;
   } //not found in projectController on API
 

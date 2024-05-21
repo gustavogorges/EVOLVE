@@ -33,7 +33,7 @@ export class CommentsProjectComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    // this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user});
+     this.loggedUser = await this.cookies_service.getLoggedUser();
 
   }
 
@@ -46,7 +46,7 @@ export class CommentsProjectComponent implements OnInit {
   }
 
   async deleteComment(comment : Comment) {
-    this.comments = await this.service.deleteCommentProject(this.project.id,comment.id, 1);
+    this.comments = await this.service.deleteCommentProject(this.project.id,comment.id, this.loggedUser.id);
   }
 
   addCommentInput() : void {
@@ -93,10 +93,10 @@ export class CommentsProjectComponent implements OnInit {
       newComment.timeDayAndMonth = "0"+day + "/" +"0"+month;
 
       let postComment:any = newComment
-      postComment.user = {"id":1}
+      postComment.user = {"id":this.loggedUser.id}
       console.log(postComment);
       
-      await this.service.patchNewCommentProject(this.project.id, postComment, 1)
+      await this.service.patchNewCommentProject(this.project.id, postComment, this.loggedUser.id)
       let listComments = await this.service.getAllCommentsOfProject(this.project.id)
       this.project.comments = this.sortCommentsByTime(listComments)
 
