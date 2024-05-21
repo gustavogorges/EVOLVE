@@ -1,5 +1,5 @@
 .card {
-    @apply w-full pb-0   bg-white rounded-xl border-2  justify-between border-primaryWhite flex flex-col items-center gap-4  h-full w-full
+    @apply w-full pb-0   bg-white rounded-xl dark:bg-dark-primary-black border-2  justify-between border-primaryWhite flex flex-col items-center gap-4  h-full w-full
 }
 
 
@@ -63,7 +63,7 @@
   }
 
   .btn-add-text {
-    @apply text-primary sm:text-xl text-base font-bold
+    @apply text-primary dark:text-dark-primary sm:text-xl text-base font-bold
   }
 
   .btn-add-text-2 {
@@ -89,7 +89,7 @@
   }
 
   .commentor-name {
-    @apply xl:text-xl text-lg text-primary font-bold
+    @apply xl:text-xl text-lg text-primary dark:text-dark-primary font-bold
   }
 
   .commentor-name-box {
@@ -97,7 +97,7 @@
   }
 
   .comment-date {
-     @apply text-fontGray text-sm
+     @apply text-fontGray dark:text-primaryWhite text-sm
   }
 
   .comment-text-box {
@@ -105,5 +105,5 @@
   }
 
   .comment-text {
-    @apply text-base 
+    @apply text-base  dark:text-white
   }

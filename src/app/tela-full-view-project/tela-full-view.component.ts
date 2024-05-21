@@ -58,17 +58,28 @@ export class TelaFullViewComponent implements OnInit {
     formData : any = null
     openModalAddMembers: boolean = false
     loggedUser: User = new User;
+    userProject !: UserProject;
+    hasPermission : boolean = false;
 
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
     async ngOnInit() {
+        console.log("ENTROU NO ONINIT");
+        
         this.loggedUser = await this.cookies_service.getLoggedUser();
         this.route.paramMap.subscribe(async params => {
             const projectId = params.get('projectId');
             const id = Number(projectId)
             this.projeto = await this.service.getOne('project', id);
             this.dashboards = await this.service.getDashboards(this.projeto.id);
-            console.log(this.projeto);
+            this.userProject = this.projeto.members.find(element => element.user.id == this.loggedUser.id) as UserProject;
+            
+            if(this.userProject.role.name != "PROJECT_VIEWER" &&
+                this.userProject.role.name != "PROJECT_COLABORATOR"
+            ) {
+                
+                this.hasPermission = true;
+            }
 
             setTimeout(() => {
                 this.translateStatus()
@@ -90,6 +101,8 @@ export class TelaFullViewComponent implements OnInit {
         this.viewEditBol = false
 
     }
+
+
 
     tarefaSelecionada : Task = new Task();
     booleanTask : boolean = false;

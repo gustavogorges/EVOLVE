@@ -2,7 +2,7 @@
   <div class="card" *ngFor="let historic of task.historic">
     <div class="left relative h-16 w-full">
       <div class="flex justify-center items-center h h-full">
-        <p class="text-fontGray text-xs md:text-sm">
+        <p class="text-fontGray font-hind-madurai dark:text-gray-200 text-xs md:text-sm">
           {{ historic.dateTime | date : "shortDate" }}
         </p>
       </div>
@@ -11,11 +11,11 @@
       ></div>
     </div>
     <div class="right w-[90%] gap-2 flex justify-between items-center ml-5">
-      <p class="font-semibold w-[80%] text-xs sm:text-sm md:text-base">
+      <p class="font-semibold w-[80%] text-xs sm:text-sm md:text-base font-hind-madurai dark:text-gray-200">
         {{ historic.description }}
       </p>
       <div class="flex justify-center items-center w-[20%]">
-        <p class="text-fontGray text-xs md:text-sm">
+        <p class="text-fontGray font-hind-madurai dark:text-white text-xs md:text-sm">
           {{ historic.dateTime | date : "shortTime" }}
         </p>
       </div>

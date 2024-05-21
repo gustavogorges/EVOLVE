@@ -14,11 +14,11 @@
 }
 
 .btn-add-text-2 {
-  @apply text-fontGray sm:text-xl text-base font-bold
+  @apply text-fontGray dark:text-white sm:text-xl text-base font-bold
 }
 
 .task-label {
-  @apply sm:text-lg text-sm font-semibold
+  @apply sm:text-lg text-sm font-semibold dark:text-white
 }
 
 .box-btn-add {
@@ -57,11 +57,11 @@
 }
 
 .btn-add-text {
-  @apply text-primary sm:text-xl text-base font-bold
+  @apply text-primary dark:text-dark-primary sm:text-xl text-base font-bold
 }
 
 .input-new-sub {
-  @apply outline-none ml-3
+  @apply outline-none ml-3 dark:bg-dark-secundary-gray dark:text-white p-3 rounded-sm placeholder:dark:text-white
 }
 
 .modal-subtarefa {
@@ -85,7 +85,7 @@
 }
 
 .btn-confirm {
-  @apply py-2 px-2 bg-secondary flex items-center justify-center rounded-lg font-bold;
+  @apply py-2 px-2 bg-secondary dark:bg-dark-secundary-green flex items-center justify-center rounded-lg font-bold;
 }
 
 .pi {

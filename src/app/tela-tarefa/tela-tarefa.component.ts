@@ -18,6 +18,7 @@ import * as jspdf from 'jspdf';
  import html2canvas from 'html2canvas';
  import { HttpClient } from '@angular/common/http';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { UserProject } from 'src/model/userProject';
 
 interface OptionOrder {
   name: string;
@@ -43,6 +44,8 @@ export class TelaTarefaComponent implements OnInit {
   ordenacaoVisible: boolean = false;
   filtroVisible: boolean = false;
   projeto!: Project;
+  userProject !: UserProject;
+  hasPermission : boolean = false;
   loggedUser : User = new User();
 
 ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA'];
@@ -77,7 +80,10 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     });
   
     this.loggedUser = await this.cookies_service.getLoggedUser();
-   
+    this.userProject = this.projeto.members.find((userProject) => userProject.user.id == this.loggedUser.id) as UserProject;
+    if(this.userProject.role.name != "PROJECT_VIEWER") {
+      this.hasPermission = true;
+    }
     this.listaTarefas.forEach(element => {
       this.translateStatus(element)
     });

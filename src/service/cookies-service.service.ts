@@ -18,7 +18,7 @@ export class CookiesService {
 
   constructor(private cookieService : CookieService, private service : BackendEVOLVEService) { }
   setJWTtoken(token : any ) : void {
-    this.cookieService.set('token',token);
+    this.cookieService.set('EV',token);
   }
   getJWTtoken() : any {
     this.cookieService.get('token');
@@ -31,7 +31,7 @@ export class CookiesService {
     }
 
      async getLoggedUser() : Promise<User> {
-      console.log(await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId'))));
+      //console.log(await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId'))));
       
       return await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId')))
     }

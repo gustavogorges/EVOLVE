@@ -3,7 +3,7 @@
   font-family: "Montserrat", sans-serif;
 }
 .title {
-  @apply text-2xl font-bold text-primary;
+  @apply text-2xl font-bold text-primary dark:text-dark-primary;
   font-family: "Montserrat", sans-serif;
 }
 .input-image {

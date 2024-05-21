@@ -29,20 +29,14 @@
 
   <p
     class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
-    *ngIf="user.id === getProjectCreator(project).id"
   >
-    {{ "Criador" | translate }}
+    {{user.currentRole}}
   </p>
-  <p
-    class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
-    *ngIf="user.id != getProjectCreator(project).id"
-  >
-    {{ "Adiministrador" | translate }}
-  </p>
+
 
   <div
     class="flex row-span-full items-center justify-center"
-    *ngIf="user.id != getProjectCreator(project).id"
+    *ngIf="user.id != getProjectCreator(project).id && hasPermission"
     (click)="selectPermissions = !selectPermissions"
   >
     <button
@@ -50,19 +44,20 @@
     >
       {{ "Alterar permições" | translate }}
     </button>
-  </div>
-  <app-select-custom
+    <app-select-custom
     *ngIf="
         selectPermissions
     "
     [listOptions]="options"
     [listIcons]="IconsOptionsSelect"
+    [projeto]="project"
     (newItem)="choosenRole($event, userProject)"
-    class="absolute left-[45%] top-[65%]"
+    class="absolute mt-44"
   ></app-select-custom>
+  </div>
   <div
     class="flex row-span-full items-center justify-center"
-    *ngIf="user.id != getProjectCreator(project).id"
+    *ngIf="user.id != getProjectCreator(project).id && hasPermission"
   >
     <button
       class="h-[2rem] w-[80%] bg-red-600 rounded-full text-secondaryWhite duration-200 hover:scale-105"

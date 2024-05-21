@@ -1,5 +1,5 @@
 .main {
-  @apply w-full pb-0   bg-white rounded-xl border-2  justify-between border-primaryWhite flex flex-col items-center gap-0 h-full
+  @apply w-full pb-0   bg-white dark:bg-dark-primary-black rounded-xl border-2  justify-between border-primaryWhite flex flex-col items-center gap-0 h-full
 }
 
 
@@ -12,7 +12,7 @@
 }
 
 .btn-add-text-2 {
-  @apply text-fontGray sm:text-xl text-base font-bold
+  @apply text-fontGray dark:text-gray-300 sm:text-xl text-base font-bold
 }
 
 .s-input input {
@@ -45,7 +45,7 @@
 }
 
 .btn-add-text {
-  @apply text-primary sm:text-xl text-base font-bold;
+  @apply text-primary dark:text-dark-primary sm:text-xl text-base font-bold;
 }
 
 .content {
@@ -57,11 +57,11 @@
 }
 
 .file-icon2 {
-  @apply lg:text-2xl text-lg text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded-xl;
+  @apply lg:text-2xl text-lg text-secondary dark:text-dark-secundary-green cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded-xl;
 }
 
 .file-icon3 {
-  @apply lg:text-2xl text-lg text-secondary cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded;
+  @apply lg:text-2xl text-lg text-secondary dark:text-dark-secundary-green cursor-pointer hover:px-2 hover:py-1 hover:bg-slate-100 rounded;
 }
 
 .fileFor {
