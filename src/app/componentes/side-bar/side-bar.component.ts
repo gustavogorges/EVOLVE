@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permissions';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
@@ -102,6 +103,7 @@ config = false
     document.documentElement.style.setProperty('--font-size-2xl', ''+(this.sliderValue+8)+'px');
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
   
+    this.cookieService.deleteAll()
     this.router.navigate(['/']);
 
 

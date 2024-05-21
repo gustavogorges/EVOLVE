@@ -36,6 +36,10 @@ export class CookiesService {
       return await this.service.getOne('user',JSON.parse(this.cookieService.get('loggedUserId')))
     }
 
+    deleteAll():void{
+      this.cookieService.deleteAll()
+    }
+
     set(fieldName:string, content:any):void{
       this.cookieService.set(fieldName,JSON.stringify(content));
     }
