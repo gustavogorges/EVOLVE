@@ -105,9 +105,9 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     return true
   }
 
-  alterarTarefaFavoritado(){
+  async alterarTarefaFavoritado(){
     this.projeto.favorited = !this.projeto.favorited;
-    this.salvarTarefa()
+    this.projeto = await this.service.patchProjectFavorited(this.projeto.id, this.projeto.favorited)
   }
 
   async salvarTarefa(){
