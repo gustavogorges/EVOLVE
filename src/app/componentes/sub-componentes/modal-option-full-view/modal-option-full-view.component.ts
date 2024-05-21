@@ -67,7 +67,7 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
   };
 
   async deleteDashboard(){
-    await this.service.deleteDashboard(this.dashboard.id, this.loggedUser.id)
+    await this.service.deleteDashboard(this.projeto.id, this.dashboard.id, this.loggedUser.id)
     this.dashboards.splice(this.dashboards.indexOf(this.dashboard), 1)
   }
 

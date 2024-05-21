@@ -209,7 +209,7 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     filteredNames() {
-        return this.projeto?.members?.filter(element => element?.user?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+        return this.projeto?.members?.filter(element => element?.user?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element?.user?.name?.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
     }
 
     setResponse(event: any) {
@@ -497,7 +497,7 @@ export class TelaFullViewComponent implements OnInit {
 
 
     async deleteDashboard(dashboard: Dashboard) {
-        await this.service.deleteDashboard(dashboard.id, this.loggedUser.id)
+        await this.service.deleteDashboard(this.projeto.id, dashboard.id, this.loggedUser.id)
         this.dashboards.splice(this.dashboards.indexOf(dashboard), 1)
     }
 

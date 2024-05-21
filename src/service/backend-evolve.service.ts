@@ -98,8 +98,8 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async deleteDashboard(idDashboard:number, idActionUser:number){
-    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser, {withCredentials: true}))).data;
+  async deleteDashboard(projectId:number, idDashboard:number, idActionUser:number){
+    return (await (axios.delete(this.URL+"project/"+projectId+"/dashboard/"+idDashboard+"/"+idActionUser, {withCredentials: true}))).data;
   }
 
   async setChartToDash(
@@ -109,7 +109,7 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + "project/" + idProject + '/dashboard/' + idDashboard,
+        this.URL + "project/" + idProject + '/dashboard/delete/' + idDashboard,
         chart, {withCredentials: true}
       )
     ).data;
@@ -150,7 +150,7 @@ export class BackendEVOLVEService {
   }
 
   async postDashboard(dashboard: Dashboard, idProject: number, actionUserId:number) {
-    return (await axios.post(this.URL + "project/" + idProject +"/dashboard/"+actionUserId, dashboard, {withCredentials: true}))
+    return (await axios.patch(this.URL + "project/" + idProject +"/dashboard/create/"+actionUserId, dashboard, {withCredentials: true}))
       .data;
   }
 
