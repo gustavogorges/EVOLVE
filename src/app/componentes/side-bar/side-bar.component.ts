@@ -18,7 +18,7 @@ export class SideBarComponent implements OnInit {
 
 
   constructor(    private cookieService: CookiesService, private router: Router,  
-    private colorService: ColorService, private elementRef: ElementRef
+    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
@@ -104,6 +104,7 @@ config = false
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
   
     this.cookieService.deleteAll()
+    this.a.deleteAll()
     this.router.navigate(['/']);
 
 
