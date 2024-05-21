@@ -1,5 +1,5 @@
 .main {
-    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] h-screen fixed top-[4.5rem] right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] max-h-[100%] h-[95%]  fixed top-[4.5rem] right-0 bg-white rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
 }
 
 .name-progress {
@@ -7,7 +7,7 @@
  }
 
  .close-btn {
-    @apply h-12 w-[95%] flex items-end cursor-pointer pt-2 mb-10
+    @apply h-12 w-[95%] flex items-end cursor-pointer pt-2 
  }
 
  .icon-close {
@@ -23,7 +23,7 @@
 }
 
 .foco {
-    @apply  bg-primary rounded-lg px-2 md:px-3 flex justify-center items-center gap-3 text-primaryWhite cursor-pointer py-1
+    @apply  bg-primary rounded-lg px-2 md:px-4 py-1.5 flex justify-center items-center gap-3 text-primaryWhite cursor-pointer font-titulo
 }
 
 .foco-name-box {
@@ -35,7 +35,7 @@
 }
 
 .foco-timer {
-    @apply text-4xl text-black font-bold w-[35%] h-full flex items-center
+    @apply text-4xl text-black font-titulo font-bold w-[35%] h-full flex items-center
 }
 
 .actions-timer {
@@ -43,7 +43,7 @@
 }
 
 .action {
-    @apply  px-2 p-1 flex justify-center bg-primary items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
+    @apply  px-2 p-1 flex justify-center bg-primary font-titulo items-center rounded-lg text-primaryWhite font-bold md:text-base text-sm  gap-2 cursor-pointer
 }
 
 .cancel {
@@ -63,7 +63,7 @@
 }
 
 .name {
-    @apply md:text-4xl text-3xl text-primary font-bold ;
+    @apply md:text-4xl text-3xl text-primary font-bold font-titulo ;
 }
 
 .name-empty {
@@ -109,11 +109,11 @@
 }
 
 .btn {
-    @apply h-6 w-[65%] rounded text-white flex items-center justify-center cursor-pointer
+    @apply h-6 w-[65%] rounded text-white font-titulo flex items-center justify-center cursor-pointer
 }
 
 .date-end {
-    @apply flex justify-center ml-2 hover:bg-slate-100  gap-1 rounded-lg cursor-pointer text-slate-500
+    @apply flex justify-center ml-2 hover:bg-slate-100  gap-1 rounded-lg cursor-pointer text-slate-500 font-hind-madurai
 }
 
 .name-icon {
@@ -129,11 +129,11 @@
 }
 
 .name-propertie {
-    @apply pl-3 sm:text-lg text-sm text-primaryFontBlack
+    @apply pl-3 sm:text-lg text-sm text-primaryFontBlack font-hind-madurai
 }
 
 .add-propertie-text  {
-    @apply text-base pl-3
+    @apply text-base pl-3 font-titulo
 }
 
 .icon-propertie {
@@ -141,7 +141,7 @@
 }
 
 .date-end-text {
-    @apply text-lg 
+    @apply text-lg font-hind-madurai
 }
 
 .responsible-propertie {
@@ -189,7 +189,7 @@
 }
 
 .page-name {
-    @apply text-fontGray md:text-lg text-sm 
+    @apply text-fontGray md:text-base text-sm font-titulo
 }
 
 .page-name:hover {

@@ -88,9 +88,9 @@
           </div>
         </div>
         <div class="foco-box">
-          <div class="foco" (click)="startFocus()" *ngIf="!booleanFoco">
+          <div class="foco " (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold">{{'iniciar foco' | translate}}</p>
+            <p class="font-bold text-sm">{{'iniciar foco' | translate}}</p>
           </div>
         </div>
       </div>
@@ -107,10 +107,10 @@
           class="flex gap-5 h-full w-max cursor-pointer"
           (click)="deleteTask()"
         >
-          <div class="remove-button flex  justify-center items-center p-2">
+          <div class="remove-button flex  justify-center items-center px-2 py-4">
             <div class="flex w-full justify-center items-center gap-2">
               <i class="text-white pi pi-trash" style="font-size: 1.3rem"></i>
-              <p class="text-white font-bold hidden md:flex text-sm">{{'excluir tarefa' | translate}}</p>
+              <p class="text-white font-bold hidden md:flex text-sm font-titulo">{{'excluir tarefa' | translate}}</p>
             </div>
           </div>
         </div>
@@ -168,6 +168,8 @@
                 </div>
               </div>
             </div>
+            <img (click)="submitToGoogleCalendar()" class="mx-2 m-1" src="assets/g-calendar.svg" alt="" width="24px" height="24px">
+
           </div>
           <div class="propertie">
             <div class="name-icon">

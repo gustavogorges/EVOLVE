@@ -13,6 +13,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { NgIf } from '@angular/common';
 declare var createGoogleEvent  : any;
 
 
@@ -442,19 +443,29 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
     return false;
   }
+  submitToGoogleCalendar(){
+    if(this.tarefa.finalDate){
+      const startTime = new Date(this.tarefa.finalDate) .toISOString().slice(0, 18);
+      const endTime = new Date(this.tarefa.finalDate) .toISOString().slice(0, 18) ;
+      const eventDetails = {
+        email: this.loggedUser.email,
+        startTime: startTime,
+        endTime: endTime,
+        taskName : this.tarefa.name,
+        description: "projeto:"+this.projeto.name+" status da tarefa:"+this.tarefa.currentStatus.name
+  
+      };
+      createGoogleEvent(eventDetails)
+
+    }
+ 
+  }
 
   saveProperty() : void {
     console.log(this.tarefa.finalDate);
     
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
-    // const startTime = new Date().toISOString().slice(0, 18) + '-07:00';
-    // const endTime = new Date(this.tarefa.finalDate) .toISOString().slice(0, 18) + '-07:00';;
-    // const eventDetails = {
-    //   email: this.loggedUser.email,
-    //   startTime: startTime,
-    //   endTime: endTime,
-    // };
-    // createGoogleEvent(eventDetails)
+   
     this.booleanCalendarioFinalDate = false;
   }
 

@@ -101,7 +101,7 @@ config = false
     document.documentElement.style.setProperty('--font-size-xl', ''+(this.sliderValue+4)+'px');
     document.documentElement.style.setProperty('--font-size-2xl', ''+(this.sliderValue+8)+'px');
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
-  
+    
     this.router.navigate(['/']);
 
 
