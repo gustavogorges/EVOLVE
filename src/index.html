@@ -6,8 +6,17 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/logoSimples.svg">
-  <script src="https://accounts.google.com/gsi/client" async></script>
-
+  <script src="https://accounts.google.com/gsi/client" async onload="gisLoaded()"></script>
+  <script
+      async
+      defer
+      src="https://apis.google.com/js/api.js"
+      onload="gapiLoaded()"
+    ></script>
+    <script
+    type="text/javascript"
+    src="./assets/googleEvent.js"
+  ></script>
 </head>
 <body class="bg-secondaryWhite dark:bg-dark-theme-back ">
   <app-root></app-root>

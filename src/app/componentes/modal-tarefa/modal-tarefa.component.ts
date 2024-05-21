@@ -13,6 +13,8 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+declare var createGoogleEvent  : any;
+
 
 @Component({
   selector: 'app-modal-tarefa',
@@ -445,6 +447,14 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     console.log(this.tarefa.finalDate);
     
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
+    // const startTime = new Date().toISOString().slice(0, 18) + '-07:00';
+    // const endTime = new Date(this.tarefa.finalDate) .toISOString().slice(0, 18) + '-07:00';;
+    // const eventDetails = {
+    //   email: this.loggedUser.email,
+    //   startTime: startTime,
+    //   endTime: endTime,
+    // };
+    // createGoogleEvent(eventDetails)
     this.booleanCalendarioFinalDate = false;
   }
 
@@ -555,6 +565,8 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.tarefa.project.id = 1;
       this.tarefa.creator.id = this.loggedUser.id; 
       this.service.postTarefa(this.tarefa, this.projeto.id);
+
+  
     }
 
     this.verifyBooleans();
