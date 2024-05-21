@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Status } from 'src/model/status';
 import { Task } from 'src/model/task';
@@ -20,6 +20,9 @@ export class ProjectTaskApprovalComponent implements OnInit {
 
   loggedUser:User = new User;
   hasPermission : boolean = false;
+  @Output()
+  eventEmitter : EventEmitter<Task> = new EventEmitter<Task>();
+  
 
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
@@ -55,8 +58,12 @@ export class ProjectTaskApprovalComponent implements OnInit {
 
   verifyPermission(){
     console.log(this.loggedUser.id);
-    hasPermissionProject(this.loggedUser.id,this.project,"MANAGE_MEMBERS") ? this.hasPermission = true : this.hasPermission = false;
+    hasPermissionProject(this.loggedUser.id,this.project,"PROJECT_CREATOR") ? this.hasPermission = true : this.hasPermission = false;
     console.log(this.hasPermission);
+  }
+
+  sendEmitter(task: Task){
+    this.eventEmitter.emit(task);
   }
   
 

@@ -65,7 +65,8 @@ export class MemberListFullViewProjectComponent implements OnInit {
           })
 
           this.project.members.filter( (userProject) => !listIdsFromRemove.find(e=> e.id = userProject.userId))
-          await this.service.patchProjectMembers(this.project.id, this.project.members)
+          console.log(this.project.members);
+          await this.service.patchProjectRemoveMember(this.project.id, this.user.id)
           // await this.service.deleteUserFromProject(this.project.id,this.loggedUser.id,listIdsFromRemove)
 
         }

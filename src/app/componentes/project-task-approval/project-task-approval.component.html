@@ -5,7 +5,13 @@
         </p>
     </div>
     <div class="list-item-task" *ngFor="let task of verifyConcludedTasks()">
-        <app-entrega-prox [favoritedAble]="false" [tarefa]="task" class="w-[80%]"></app-entrega-prox>
+        <app-entrega-prox 
+        [favoritedAble]="false" 
+        [tarefa]="task" 
+        class="w-[80%]"
+        (click)="sendEmitter(task)"
+        >
+    </app-entrega-prox>
         <div
         *ngIf="hasPermission == true"
         class="w-[20%] h-24 flex items-center justify-center gap-4">

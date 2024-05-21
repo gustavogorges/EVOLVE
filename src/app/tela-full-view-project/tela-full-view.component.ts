@@ -14,6 +14,7 @@ import { cloneDeep } from 'lodash';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { UserProject } from 'src/model/userProject';
+import { Task } from 'src/model/task';
 @Component({
     selector: 'app-tela-full-view',
     templateUrl: './tela-full-view.component.html',
@@ -88,6 +89,18 @@ export class TelaFullViewComponent implements OnInit {
         this.viewOptionsBol = !this.viewOptionsBol
         this.viewEditBol = false
 
+    }
+
+    tarefaSelecionada : Task = new Task();
+    booleanTask : boolean = false;
+
+    setTaskOfModal(task : Task) {
+        this.tarefaSelecionada = task;
+        this.booleanTask = true;
+    }
+
+    closeTask(test : boolean) {
+        this.booleanTask = false;
     }
 
     async setImageProject(event:any){
@@ -196,7 +209,7 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     filteredNames() {
-        return this.projeto?.members?.filter(element => element?.user.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+        return this.projeto?.members?.filter(element => element?.user?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element.user.name.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
     }
 
     setResponse(event: any) {

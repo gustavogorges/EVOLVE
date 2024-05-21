@@ -1,4 +1,13 @@
 <confirm-action-project-modal *ngIf="confirmationActionModalBol" class="fixed z-10 left-[5%] right-[5%] xl:right-0 top-1/3 xl:left-[37%]" (result)="setResponse($event)" [quest]="quest"></confirm-action-project-modal>
+
+<app-modal-tarefa
+    class="tarefa"
+    *ngIf="booleanTask"
+    [tarefa]="tarefaSelecionada"
+    [projeto]="projeto"
+    (closeModalTask)="closeTask($event)"
+></app-modal-tarefa>
+
 <div class="div-pai" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50':'blur-0'">
     <div class="div-maior">
         <div class="cabecalho">
@@ -120,7 +129,7 @@
         </div>
 
         <div *ngIf="miniPageView === 'Em Aprovação' && projeto" >
-            <app-project-task-approval [project]="projeto"></app-project-task-approval>
+            <app-project-task-approval [project]="projeto" (eventEmitter)="setTaskOfModal($event)"></app-project-task-approval>
         </div>
     </div>
     <div class="div-menor">

@@ -747,6 +747,17 @@ export class BackendEVOLVEService {
     return await this.getOne("project", projectId)
   }
 
+  async patchProjectRemoveMember(projectId: number, userId: number):Promise<Project> {
+    let formData: FormData = new FormData;
+    formData.append("userId", userId.toString());
+    //não tirar
+    console.log((
+      await axios.patch(this.URL + "project/" + projectId + "/delete/member", formData, {withCredentials: true})
+    ).data);
+    
+    return await this.getOne("project", projectId)
+  }
+
   async patchProjectImage(id: number, formData: FormData) {
     // let formData = new FormData
     // formData.append("image", image)

@@ -45,11 +45,13 @@ export class AddMemberToProjectModalComponent implements OnInit {
   async addUser(user:User){
     let userProject: UserProject = new UserProject
     userProject.user = user
-    userProject.project = this.project
+    //userProject.project = this.project
     userProject.userId = user.id
     userProject.projectId = this.project.id
 
     this.project.members.push(userProject)
+    console.log(this.project.members);
+    
     let project:Project = await this.service.patchProjectMembers(this.project.id, this.project.members)
     this.project.members = project.members
     
