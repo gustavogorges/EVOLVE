@@ -413,7 +413,7 @@
         </div>
         <div>
           <div
-            *ngIf="!booleanAddStatus && !boolEditStatus"
+            *ngIf="!booleanAddStatus && !boolEditStatus && hasPermission"
             (click)="addStatus()"
             class="add-box"
           >

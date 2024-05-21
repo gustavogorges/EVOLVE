@@ -30,10 +30,13 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   isVisibleSubscription !: Subscription
   tarefas : Tarefa[] = []
+  hasPermission : boolean = false;
+  loggedUser : User = new User;
+  loggedUserProject !: UserProject;
   
   @Input() projeto!:Project;
   
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges) {
     if (changes['resetProject'] && changes['resetProject'].currentValue && !this.projeto.editOn) {
       this.cancelEdit();
     }
@@ -48,10 +51,13 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   async ngOnInit() {
     this.projeto.editOn = false
     this.loggedUser = await this.cookies_service.getLoggedUser();
+    this.loggedUserProject = this.projeto.members.find(userProject => userProject.user.id == this.loggedUser.id)!;
+
+    if(this.loggedUserProject.role.name != "PROJECT_COLABORATOR" && this.loggedUserProject.role.name != "PROJECT_VIEWER" && this.loggedUserProject.role.name != "PROJECT_ADM"){
+      this.hasPermission = true;
+    }
   }
 
-  
-  loggedUser : User = new User;
   date: string = ''
   progresso = 0
   md: any
