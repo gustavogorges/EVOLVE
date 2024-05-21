@@ -155,14 +155,13 @@ export class TelaLoginComponent implements OnInit {
     console.log('foi');
     this.router.navigate(['/tela-cadastro']);
   }
-  usuario_name = 'deborah';
 
   sendEmail() {
-    emailjs.init('XHV0l72FOJjWsJv8e');
-    let respose = emailjs.send('service_7u4di7t', 'template_m75iojj', {
+    emailjs.init('g6vzn0F8lz-YtFi-C');
+    let respose = emailjs.send("service_yxnowjg","template_mj6rtvu", {
       from_name: 'Evolve',
-      from_email: 'elomattge@gmail.com',
-      to_name: this.usuario_name,
+      from_email: this.user.email,
+      to_name: this.user.name,
       code:
         '' +
         this.randomNumbers[0] +

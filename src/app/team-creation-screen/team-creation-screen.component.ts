@@ -106,9 +106,12 @@ export class TeamCreationScreenComponent implements OnInit {
     }
   }
   permission(){
-    return( hasPermission(this.loggedUser.id, this.team, 'EDIT_TEAM_INFO' )
-  );
     
+      return( hasPermission(this.loggedUser?.id, this.team, 'EDIT_TEAM_INFO' )
+      );
+        
+
+   
   }
 
   userId = 0
@@ -202,9 +205,14 @@ export class TeamCreationScreenComponent implements OnInit {
       for(let userTeam of participantsPatch){
         userTeam.user = {"id": userTeam.user.id}
       }
+
      await this.service.patchTeamName(this.team.id, this.team.name);
      await this.service.patchTeamImageColor(this.team.id, (this.team.imageColor as string))
       this.team = await this.service.patchTeamParticipants(this.team.id, participantsPatch)
+
+      console.log(this.team.participants);
+      
+      this.teamParticipants = this.team.participants
       //this.service.putEquipe(this.team); 
     }
     this.disabledInfo = true;

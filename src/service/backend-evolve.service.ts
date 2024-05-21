@@ -27,6 +27,7 @@ import { Role } from 'src/model/Role';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { UserTeam } from 'src/model/userTeam';
 import { TeamNotification } from 'src/model/teamNotification';
+import { File } from 'src/model/file';
 
 
 @Injectable({
@@ -134,9 +135,11 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + "team/" + teamId + "/participants", participants, {withCredentials: true})
     ).data;
   }
-  async patchTeamParticipantByCode(teamId: number, participant: UserTeam):Promise<Team> {
+  async patchTeamParticipantByCode(teamId: number, userId: number):Promise<Team> {
+    let formData: FormData = new FormData()
+    formData.append("userId", userId.toString())
     return (
-      await axios.put(this.URL + "team/code/" + teamId +"/participant" , participant, {withCredentials: true})
+      await axios.put(this.URL + "team/code/" + teamId +"/participant", formData , {withCredentials: true})
     ).data;
   }
   async patchReadedNotification(teamId: number, notificationId: number) {
@@ -320,6 +323,15 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
   }
+
+  async patchUserImageFromLink(userId: number, image: File): Promise<User> {
+    // let formsData = new FormData();
+    // formsData.append('theme', theme);
+    return (
+      await axios.patch(this.URL + 'user/' + userId + '/image/link' , image, {withCredentials: true})
+    ).data;
+  }
+
 
   async patchUserPassword(userId: number, password: string): Promise<User> {
     let formsData = new FormData();

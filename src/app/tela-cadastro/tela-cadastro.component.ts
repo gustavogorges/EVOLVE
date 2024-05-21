@@ -2,6 +2,7 @@ import { compileFactoryFunction } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { File } from 'src/model/file';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 
@@ -121,15 +122,22 @@ export class TelaCadastroComponent implements OnInit {
     }
     async create(userData : any){
       console.log("TESTEEEEE");
+      console.log(userData.picture);
+      
       
       this.usuario.email = userData.email
       this.usuario.name = userData.name
-      this.usuario.image = userData.picture
+      // this.usuario.image.data = userData.picture
       this.usuario.password = ''
+      this.usuario.socialLogin = true
       console.log(this.usuario);
       
       this.status  = await this.service.postUsuario(this.usuario)
       console.log(this.status);
+
+      let file:File = new File()
+      file.data = userData.picture
+      await this.service.patchUserImageFromLink(this.status.data.id, file)
       
       if(this.status.status >= 200 && this.status.status < 300){
         this.message = "sua conta foi cadastrada com sucesso"
