@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permissions';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
@@ -17,7 +18,7 @@ export class SideBarComponent implements OnInit {
 
 
   constructor(    private cookieService: CookiesService, private router: Router,  
-    private colorService: ColorService, private elementRef: ElementRef
+    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
@@ -101,10 +102,11 @@ config = false
     document.documentElement.style.setProperty('--font-size-xl', ''+(this.sliderValue+4)+'px');
     document.documentElement.style.setProperty('--font-size-2xl', ''+(this.sliderValue+8)+'px');
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
-    
+
+    this.cookieService.deleteAll()
+    this.a.deleteAll()
+
     this.router.navigate(['/']);
-
-
 
   }
   goProjetos(){

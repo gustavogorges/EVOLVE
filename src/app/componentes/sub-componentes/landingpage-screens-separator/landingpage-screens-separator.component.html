@@ -1,0 +1,165 @@
+<div *ngIf="slide === 0" class="w-full h-full flex flex-wrap gap-5 justify-center relative" >
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4 font-titulo">{{'Projeto Padrão'| translate}}</p>
+            <button class="bg-secondary dark:bg-dark-secondary p-2 px-4 w-full rounded-lg duration-200 text-primaryWhite dark:text-dark-theme-back font-semibold hover:scale-105"><i class="pi pi-plus"></i> {{'Adicionar Tarefa' | translate}}</button>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">{{'Visualização' | translate}}</p>
+            <p class="cursor-pointer hover:scale-105 duration-200" >{{'Ordenação' | translate}}</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer ">{{'Filtro' | translate}}</p>
+                <i class="pi pi-filter text-secondary"></i>
+            </div>
+        </div>
+    </div>
+    <div class="flex">
+        <div *ngFor="let item of status" class="w-full flex flex-wrap justify-center">
+            <div *ngFor="let item of item.tasks, index as index">
+                <app-cards-carrosel *ngIf="index < 2" [task]="item" (favorited)="alterarTarefaFavoritado($event)"></app-cards-carrosel>
+            </div>
+        </div>
+    </div>
+    <div class="absolute left-0 top-28 -translate-x-72">
+        <p class="descritive-text font-titulo w-[12vw]">{{'Tudo o que você precisa em um só lugar. Suas tarefas possuem todas as funcionalidades que você precisa, configuradas exatamente do jeito que você definir!' | translate}}</p>
+    </div>
+    <div class="absolute left-0 bottom-48 -translate-x-36 rotate-45">
+        <svg width="206" height="142" viewBox="0 0 206 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.3963 109.076L15.3949 112.949L16.3963 109.076ZM1.05353 108.03C-0.0677452 106.127 0.566323 103.675 2.46975 102.554L33.4879 84.2813C35.3913 83.1601 37.8433 83.7941 38.9646 85.6975C40.0859 87.601 39.4518 90.053 37.5484 91.1742L9.9767 107.416L26.2187 134.988C27.3399 136.891 26.7059 139.343 24.8025 140.465C22.899 141.586 20.447 140.952 19.3257 139.048L1.05353 108.03ZM15.3949 112.949L3.49858 109.873L5.50141 102.127L17.3977 105.204L15.3949 112.949ZM205.697 2.20495C183.335 85.0364 98.4595 134.428 15.3949 112.949L17.3977 105.204C96.2169 125.585 176.754 78.7177 197.973 0.119842L205.697 2.20495Z" fill="#185E77"/>
+        </svg>            
+    </div>
+
+    <div class="absolute right-0 -translate-y-12 translate-x-72">
+        <p class="descritive-text font-titulo w-[12vw]">{{'Filtre e ordene conforme suas necessidades, aproveitando diversas visualizações que se adaptam ao seu dia a dia.' | translate}} </p>
+    </div>
+    <div class="absolute right-0 top-16 -rotate-6 translate-x-28">
+        <svg width="163" height="67" viewBox="0 0 263 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M225.594 33.408L223.43 30.0436L225.594 33.408ZM261.984 13.3697C262.453 11.2109 261.084 9.08067 258.925 8.61169L223.745 0.96906C221.587 0.500073 219.456 1.86992 218.987 4.0287C218.518 6.18748 219.888 8.31771 222.047 8.78671L253.318 15.5801L246.524 46.8507C246.055 49.0095 247.425 51.1397 249.584 51.6087C251.743 52.0777 253.873 50.7079 254.342 48.5491L261.984 13.3697ZM227.757 36.7724L260.239 15.8849L255.912 9.15609L223.43 30.0436L227.757 36.7724ZM0.248375 15.4237C62.1253 74.0701 156.05 82.8838 227.757 36.7724L223.43 30.0436C154.822 74.1625 64.955 65.7297 5.75163 9.61731L0.248375 15.4237Z" fill="#4C956C"/>
+        </svg>                     
+    </div>
+</div>
+
+<div *ngIf="slide === 1" class="w-full h-full relative">
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4 font-titulo">{{'Projeto Padrão' | translate}}</p>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">{{'Visualização' | translate}}</p>
+            <p class="cursor-pointer hover:scale-105 duration-200">{{'Ordenação' | translate}}</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer">{{'Filtro' | translate}}</p>
+                <i class="pi pi-filter text-secondary"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="w-fit h-full flex justify-center gap-5">
+        <div class="w-full h-full" *ngFor="let column of status" cdkDropList [cdkDropListData]="column.tasks">
+            <div class="w-full flex justify-end my-1">
+                <p class="w-[5vw] text-center font-hind-madurai rounded-lg" [style.background]="column.color">{{ column.status }}</p>
+            </div>
+            <div class="w-[20vw] h-[75%] rounded-lg bg-gray-100 dark:bg-dark-primary-gray overflow-hidden">
+                <button class="w-full px-4 h-10 text-fontGray dark:text-gray-200 font-semibold text-lg border-b-2 border-gray-300 hover:scale-105 duration-100">
+                    <i class="pi pi-plus text-secondary"></i> {{'Adicionar Tarefa' | translate}}
+                </button>
+                <div class="py-2 h-[90%] flex flex-col items-center gap-5 overflow-y-scroll" cdkDropList [cdkDropListData]="column.tasks" (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let item of column.tasks" cdkDrag>
+                        <app-cards-carrosel [task]="item" (favorited)="alterarTarefaFavoritado($event)"></app-cards-carrosel>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute right-0 top-16 -translate-y-12 translate-x-64">
+        <p class="descritive-text w-[10vw]">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="absolute right-0 top-32 -rotate-6 translate-x-20">
+        <svg width="163" height="67" viewBox="0 0 263 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M225.594 33.408L223.43 30.0436L225.594 33.408ZM261.984 13.3697C262.453 11.2109 261.084 9.08067 258.925 8.61169L223.745 0.96906C221.587 0.500073 219.456 1.86992 218.987 4.0287C218.518 6.18748 219.888 8.31771 222.047 8.78671L253.318 15.5801L246.524 46.8507C246.055 49.0095 247.425 51.1397 249.584 51.6087C251.743 52.0777 253.873 50.7079 254.342 48.5491L261.984 13.3697ZM227.757 36.7724L260.239 15.8849L255.912 9.15609L223.43 30.0436L227.757 36.7724ZM0.248375 15.4237C62.1253 74.0701 156.05 82.8838 227.757 36.7724L223.43 30.0436C154.822 74.1625 64.955 65.7297 5.75163 9.61731L0.248375 15.4237Z" fill="#4C956C"/>
+        </svg>                     
+    </div>
+
+    <div class="absolute left-0 top-32 -translate-x-64">
+        <p class="descritive-text w-[10vw]">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="absolute left-0 bottom-48 -translate-x-40 rotate-45">
+        <svg width="206" height="142" viewBox="0 0 206 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.3963 109.076L15.3949 112.949L16.3963 109.076ZM1.05353 108.03C-0.0677452 106.127 0.566323 103.675 2.46975 102.554L33.4879 84.2813C35.3913 83.1601 37.8433 83.7941 38.9646 85.6975C40.0859 87.601 39.4518 90.053 37.5484 91.1742L9.9767 107.416L26.2187 134.988C27.3399 136.891 26.7059 139.343 24.8025 140.465C22.899 141.586 20.447 140.952 19.3257 139.048L1.05353 108.03ZM15.3949 112.949L3.49858 109.873L5.50141 102.127L17.3977 105.204L15.3949 112.949ZM205.697 2.20495C183.335 85.0364 98.4595 134.428 15.3949 112.949L17.3977 105.204C96.2169 125.585 176.754 78.7177 197.973 0.119842L205.697 2.20495Z" fill="#185E77"/>
+        </svg>            
+    </div>
+</div>
+
+<div *ngIf="slide === 2" class="w-full h-full relative">
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4 font-titulo">{{'Projeto Padrão' | translate}}</p>
+            <button class="bg-secondary dark:bg-dark-secondary p-2 px-4 w-full rounded-lg duration-200 text-primaryWhite dark:text-dark-primary-black font-semibold hover:scale-105"><i class="pi pi-plus"></i> {{'Adicionar Tarefa' | translate}}</button>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">{{'Visualização' | translate}}</p>
+            <p class="cursor-pointer hover:scale-105 duration-200" >{{'Ordenação' | translate}}</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer ">{{'Filtro' | translate}}</p>
+                <i class="pi pi-filter text-secondary"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center pt-8 w-full">
+        <div class="flex gap-14 mb-4 dark:text-primaryWhite">
+            <p>{{'status' | translate}}</p>
+            <p>{{'progresso' | translate}}</p>
+            <p>{{'data-final' | translate}}</p>
+            <p>{{'associados' | translate}}</p>
+            <p>{{'prioridade' | translate}}</p>
+            <p>{{'agendado para:' | translate}}</p>
+        </div>
+        <app-card-list-landing-page-component class="w-full"></app-card-list-landing-page-component>
+        <app-card-list-landing-page-component class="w-full"></app-card-list-landing-page-component>
+    </div>
+    <div class="absolute right-0 top-32 -translate-y-12 translate-x-64">
+        <p class="descritive-text w-[10vw]">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="absolute right-0 top-52 -rotate-6 translate-x-20">
+        <svg width="263" height="67" viewBox="0 0 263 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M225.594 33.408L223.43 30.0436L225.594 33.408ZM261.984 13.3697C262.453 11.2109 261.084 9.08067 258.925 8.61169L223.745 0.96906C221.587 0.500073 219.456 1.86992 218.987 4.0287C218.518 6.18748 219.888 8.31771 222.047 8.78671L253.318 15.5801L246.524 46.8507C246.055 49.0095 247.425 51.1397 249.584 51.6087C251.743 52.0777 253.873 50.7079 254.342 48.5491L261.984 13.3697ZM227.757 36.7724L260.239 15.8849L255.912 9.15609L223.43 30.0436L227.757 36.7724ZM0.248375 15.4237C62.1253 74.0701 156.05 82.8838 227.757 36.7724L223.43 30.0436C154.822 74.1625 64.955 65.7297 5.75163 9.61731L0.248375 15.4237Z" fill="#4C956C"/>
+        </svg>                     
+    </div>
+</div>
+
+<div *ngIf="slide === 3" class="relative">
+    <div class="h-[20%] w-full flex justify-between items-center">
+        <div class="max-w-fit">
+            <p class="text-3xl font-bold text-primary dark:text-dark-primary mb-4 font-titulo">{{'Projeto Padrão' | translate}}</p>
+            <button class="bg-secondary dark:text-dark-primary-black dark:bg-dark-secondary p-2 px-4 w-full rounded-lg duration-200 text-primaryWhite font-semibold hover:scale-105"><i class="pi pi-plus"></i> {{'Adicionar Tarefa' | translate}}</button>
+        </div>
+        <div class="flex gap-6 text-xl items-center text-fontGray font-semibold">
+            <p class="cursor-pointer hover:scale-105 duration-200">{{'Visualização' | translate}}</p>
+            <p class="cursor-pointer hover:scale-105 duration-200" >{{'Ordenação' | translate}}</p>
+            <div class="hover:scale-105 duration-200 flex gap-1 items-center">
+                <p class="cursor-pointer ">{{'Filtro' | translate}}</p>
+                <i class="pi pi-filter text-secondary"></i>
+            </div>
+        </div>
+    </div>
+
+    <app-calendar-landing-page-component></app-calendar-landing-page-component>
+    <div class="absolute left-0 top-32 -translate-x-64">
+        <p class="descritive-text w-[10vw]">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="absolute left-0 bottom-48 -translate-x-36 rotate-45">
+        <svg width="206" height="142" viewBox="0 0 206 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.3963 109.076L15.3949 112.949L16.3963 109.076ZM1.05353 108.03C-0.0677452 106.127 0.566323 103.675 2.46975 102.554L33.4879 84.2813C35.3913 83.1601 37.8433 83.7941 38.9646 85.6975C40.0859 87.601 39.4518 90.053 37.5484 91.1742L9.9767 107.416L26.2187 134.988C27.3399 136.891 26.7059 139.343 24.8025 140.465C22.899 141.586 20.447 140.952 19.3257 139.048L1.05353 108.03ZM15.3949 112.949L3.49858 109.873L5.50141 102.127L17.3977 105.204L15.3949 112.949ZM205.697 2.20495C183.335 85.0364 98.4595 134.428 15.3949 112.949L17.3977 105.204C96.2169 125.585 176.754 78.7177 197.973 0.119842L205.697 2.20495Z" fill="#185E77"/>
+        </svg>            
+    </div>
+    <div class="absolute right-0 bottom-44 -translate-y-12 translate-x-72">
+        <p class="descritive-text w-[10vw]">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="absolute right-0 bottom-32 -rotate-6 translate-x-40">
+        <svg width="263" height="67" viewBox="0 0 263 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M225.594 33.408L223.43 30.0436L225.594 33.408ZM261.984 13.3697C262.453 11.2109 261.084 9.08067 258.925 8.61169L223.745 0.96906C221.587 0.500073 219.456 1.86992 218.987 4.0287C218.518 6.18748 219.888 8.31771 222.047 8.78671L253.318 15.5801L246.524 46.8507C246.055 49.0095 247.425 51.1397 249.584 51.6087C251.743 52.0777 253.873 50.7079 254.342 48.5491L261.984 13.3697ZM227.757 36.7724L260.239 15.8849L255.912 9.15609L223.43 30.0436L227.757 36.7724ZM0.248375 15.4237C62.1253 74.0701 156.05 82.8838 227.757 36.7724L223.43 30.0436C154.822 74.1625 64.955 65.7297 5.75163 9.61731L0.248375 15.4237Z" fill="#4C956C"/>
+        </svg>                     
+    </div>
+</div>

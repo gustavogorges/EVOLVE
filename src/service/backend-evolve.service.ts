@@ -18,7 +18,7 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
-import { PriorityRecord } from 'src/model/priorityRecord';
+import { PriorityRecord } from 'src/model/PriorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
@@ -110,7 +110,7 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + "project/" + idProject + '/dashboard/delete/' + idDashboard,
+        this.URL + "project/" + idProject + '/dashboard/' + idDashboard,
         chart, {withCredentials: true}
       )
     ).data;
@@ -248,8 +248,8 @@ export class BackendEVOLVEService {
 
 
 
-  async postUserChat(chat: UserChat) {
-    (await axios.post(this.URL + 'userChat', chat, {withCredentials: true})).data;
+  async postUserChat(chat: UserChat):Promise<UserChat> {
+    return (await axios.post(this.URL + 'userChat', chat, {withCredentials: true})).data;
   }
 
   async postMessage(message: MessageDTO): Promise<Message> {
@@ -573,7 +573,7 @@ export class BackendEVOLVEService {
   }
 
   async putTarefa(tarefa: Task, userId: number) {
-    return (await axios.put(this.URL + 'task/user/' + userId, tarefa, {withCredentials: true})).data;
+    return (await axios.put(this.URL + 'task/'+tarefa.id + '/user/' + userId, tarefa, {withCredentials: true})).data;
   }
 
   //parei aqui 08/05/2024
@@ -725,6 +725,15 @@ export class BackendEVOLVEService {
     return await this.getOne("project", project.id)
   }
 
+  
+  async patchProjectFavorited(projectId: number, favorited: boolean) {
+    let formData = new FormData
+    formData.append("favorited", JSON.stringify(favorited))
+    return (
+      await axios.patch(
+        this.URL + 'project/' + projectId + '/favorited', formData, {withCredentials: true})
+    ).data;
+  }
 
 
   async deleteStatus(projetoId: number, status: Status) {

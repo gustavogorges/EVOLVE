@@ -82,6 +82,11 @@ export class TelaLoginComponent implements OnInit {
   goCadastro(){
     window.location.href = "tela-cadastro"
   }
+
+  ngOnDestroy(){
+    window.location.reload()
+  }
+  
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {

@@ -1,0 +1,66 @@
+<div class="relative flex mb-5 justify-center">
+    <div class="absolute left-16 top-[30%]">
+        <p class="text-primary dark:text-dark-primary text-lg font-bold">{{'Tarefa' | translate}}</p>
+    </div>
+
+    
+    <div class="w-[75%] h-[4vw] bg-primaryWhite dark:bg-dark-primary-black  shadow-lg rounded-lg grid grid-cols-8 grid-rows-1 items-center justify-items-center" style="grid-template-columns: 10% 8.5% 15% 12% 15% 13% 18% 9%;">
+        <div></div>
+        <div class="w-[1.5vw] h-[1.5vw] rounded-full bg-orange-600"></div>
+        <div class="w-[90%] overflow-hidden h-[1vw] rounded-lg bg-gray-200">
+            <div class="w-[60%] h-full bg-primary dark:bg-dark-primary"></div>
+        </div>
+        <div>
+            <p class="text-primary dark:text-dark-primary font-semibold">{{'20/10' | translate}}</p>
+        </div>
+        <div class="flex relative">
+            <div class="w-[1.5vw] -translate-x-2 absolute h-[1.5vw] rounded-full bg-green-600"></div>
+            <div class="w-[1.5vw] translate-x-3 h-[1.5vw] rounded-full bg-primary dark:bg-dark-primary"></div>
+        </div>
+        <div class="w-[90%] overflow-hidden h-[1.5vw] rounded-lg bg-yellow-400">
+            <p class="text-center">{{'média' | translate}}</p>
+        </div>
+        <div>
+            <p class="text-primary dark:text-dark-primary font-semibold">{{'22/10' | translate}}</p>
+        </div>
+        <div class="flex items-center px-5 pt-2 justify-between">
+            <img *ngIf="!favorite" src="../../../assets/estrelaNaoMarcada.svg" alt=""
+                style="width: 32px ; height: 25px" (click)="alterarTarefaFavoritado()" />
+            <img *ngIf="favorite" src="../../../assets/estrelaMarcada.svg" alt=""
+                style="width: 32px ; height: 25px" (click)="alterarTarefaFavoritado()" />
+        </div>
+    </div>
+</div>
+
+<div class="relative mb-5 flex justify-center">
+    <div class="absolute left-16 top-[30%]">
+        <p class="text-primary dark:text-dark-primary text-lg font-bold">{{'Tarefa' | translate}}</p>
+    </div>
+
+    
+    <div class="w-[75%] h-[4vw] bg-primaryWhite dark:bg-dark-primary-black  shadow-lg rounded-lg grid grid-cols-8 grid-rows-1 items-center justify-items-center" style="grid-template-columns: 10% 8.5% 15% 12% 15% 13% 18% 9%;">
+        <div></div>
+        <div class="w-[1.5vw] h-[1.5vw] rounded-full bg-green-300"></div>
+        <div class="w-[90%] overflow-hidden h-[1vw] rounded-lg bg-gray-200">
+            <div class="w-[30%] h-full bg-primary dark:bg-dark-primary"></div>
+        </div>
+        <div>
+            <p class="text-primary dark:text-dark-primary font-semibold">{{'12/11' | translate}}</p>
+        </div>
+        <div class="flex relative">
+            <div class="w-[1.5vw] h-[1.5vw] rounded-full bg-purple-300"></div>
+        </div>
+        <div class="w-[90%] overflow-hidden h-[1.5vw] rounded-lg bg-red-500">
+            <p class="text-center">{{'urgente' | translate}}</p>
+        </div>
+        <div>
+            <p class="text-primary dark:text-dark-primary font-semibold">{{'02/04' | translate}}</p>
+        </div>
+        <div class="flex items-center px-5 pt-2 justify-between">
+            <img *ngIf="!favorite2" src="../../../assets/estrelaNaoMarcada.svg" alt=""
+                style="width: 32px ; height: 25px" (click)="alterarTarefaFavoritado2()" />
+            <img *ngIf="favorite2" src="../../../assets/estrelaMarcada.svg" alt=""
+                style="width: 32px ; height: 25px" (click)="alterarTarefaFavoritado2()" />
+        </div>
+    </div>
+</div>

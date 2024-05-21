@@ -18,14 +18,14 @@ export class AuthGuard implements CanActivate {
       console.log(state.url);
       
       // Se estiver logado e tentar acessar a página de login ou de cadastro, redireciona para a página inicial
-      if ((state.url == '/tela-cadastro') || state.url==('/')) {
+      if ((state.url == '/tela-cadastro') || state.url==('/login')) {
         this.router.navigate(['/tela-inicial']);
         return false; // Retorna falso para bloquear a navegação para as páginas de login e cadastro
       }
     } else {
       // Se não estiver logado e tentar acessar outras páginas além de login e cadastro, redireciona para a página de login
-      if (state.url!='/tela-cadastro' && state.url!='/') {
-        this.router.navigate(['/']);
+      if (state.url!='/tela-cadastro' && state.url!='/login') {
+        this.router.navigate(['/login']);
         return false; // Retorna falso para bloquear a navegação para outras páginas além de login e cadastro
       }
     }

@@ -7,7 +7,7 @@ import { Subtask } from "./subtask";
 import { User } from "./user";
 import { Comment } from 'src/model/comment';
 import { File } from "./file";
-import { PriorityRecord } from "./priorityRecord";
+import { PriorityRecord } from "./PriorityRecord";
 
 
 export class Task{

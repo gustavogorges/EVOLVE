@@ -1,5 +1,6 @@
 
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { sortedUniq } from 'lodash';
 import { User } from 'src/model/user';
@@ -15,7 +16,7 @@ import { TextToSpeechService } from 'src/service/text-to-speech.service';
 })
 export class AppComponent{
   constructor(    private cookieService: CookiesService, 
-
+    private router : Router,
     private colorService : ColorService, 
     private translateService : TranslateService,
     private textToSpeechService: TextToSpeechService,
@@ -65,6 +66,10 @@ export class AppComponent{
       this.islogged = true
     }
 
+    if(!this.isNotLandingPage()){
+      this.islogged = true
+    }
+
     if(this.authService.isLoggedIn()){
       this.loggedUser = await this.cookieService.getLoggedUser();
     }
@@ -96,6 +101,18 @@ export class AppComponent{
      
     }
     
+  }
+
+  isNotLandingPage(){
+
+    if(this.getRotaAtual() === '/'){
+      return false;
+    }
+    return true;
+  }
+
+  getRotaAtual(){
+    return this.router.url;
   }
 
   updateStatus(){

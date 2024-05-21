@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { formToJSON } from 'axios';
+import { UserChat } from 'src/model/userChat';
+import { Chat } from 'src/model/chat';
 
 @Component({
   selector: 'app-tela-perfil',
@@ -112,7 +114,18 @@ export class TelaPerfilComponent implements OnInit {
   
     window.open(gmailLink, '_blank');
   }
-  goToChat(){
+  async goToChat(){
+    let foundChat:UserChat = this.loggedUser.chats.find(chat => chat.users.find(user => user.id == this.user.id))!
+    this.cookieService.set(this.cookieService.chatListTypeField, "users")
+    if(foundChat  != (null||undefined)){
+      this.cookieService.set("lastChatId", foundChat.id)
+    } else {
+      let userchat: any = new UserChat
+      userchat.users = [{"id": this.loggedUser.id},{"id":this.user.id}]
+      let chat: Chat = await this.service.postUserChat(userchat)
+      this.cookieService.set("lastChatId", chat.id)
+    }
+    console.log(foundChat);
     this.router.navigate(['/tela-chat']);
 
   }
