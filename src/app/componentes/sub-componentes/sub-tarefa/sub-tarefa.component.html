@@ -30,7 +30,7 @@
         <div class="w-[20%] gap-2" *ngIf="!sub.editable">
           <div class="w-full">
             <div class="flex justify-end cursor-pointer">
-              <i class="pi pi-ellipsis-v" (click)="openModalSubtarefa(sub)"></i>
+              <i class="pi pi-ellipsis-v dark:text-white" (click)="openModalSubtarefa(sub)"></i>
             </div>
           </div>
           <div class="w-[20%] pr-7 pt-1 absolute flex flex-col items-end">
@@ -96,7 +96,7 @@
     <div class="w-[20%] h-full flex justify-end items-center gap-3">
       <i
         (click)="adicionarSubtarefa()"
-        class="cursor-pointer pi pi-check p-2 bg-secondary text-primaryWhite rounded-lg"
+        class="cursor-pointer pi pi-check p-2 bg-secondary dark:bg-dark-secundary-green text-primaryWhite rounded-lg"
       ></i>
       <i
         (click)="cancelar()"

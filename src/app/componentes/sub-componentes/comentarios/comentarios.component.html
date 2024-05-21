@@ -31,7 +31,7 @@
               {{ comment.value }}
             </p>
             <i
-              class="pi pi-trash p-2 hover:bg-slate-100 rounded-full cursor-pointer text-primary"
+              class="pi pi-trash p-2 hover:bg-slate-100 rounded-full cursor-pointer text-primary dark:text-dark-primary"
               *ngIf="verifyCommentOwner(comment)"
               (click)="deleteComment(comment)"
             ></i>
@@ -57,7 +57,7 @@
       <div class="w-[15%] h-full flex flex-col items-end gap-2">
         <div
           (click)="addCommentValue()"
-          class="cursor-pointer w-full h-[40%] px-2 py-1 bg-primary flex justify-center gap-2 items-center rounded-lg"
+          class="cursor-pointer w-full h-[40%] px-2 py-1 bg-primary dark:bg-dark-primary flex justify-center gap-2 items-center rounded-lg"
         >
           <p class="text-primaryWhite font-semibold text-sm hidden sm:flex">
             {{'salvar' | translate}}

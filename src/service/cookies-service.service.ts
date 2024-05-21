@@ -18,7 +18,7 @@ export class CookiesService {
 
   constructor(private cookieService : CookieService, private service : BackendEVOLVEService) { }
   setJWTtoken(token : any ) : void {
-    this.cookieService.set('token',token);
+    this.cookieService.set('EV',token);
   }
   getJWTtoken() : any {
     this.cookieService.get('token');
