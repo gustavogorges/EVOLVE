@@ -250,7 +250,7 @@ export class TelaFullViewComponent implements OnInit {
 
     verifyStatusDefault(status: Status) {
         if (
-            status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned' || status.name === '未分配' ||
+            status.name === 'não atribuido' || status.name === 'no asignado' || status.name === 'unassigned' || status.name === '未分配' ||
             status.name === 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成' ||
             status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending' || status.name === '待定' ||
             status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress' || status.name === '进展中'
