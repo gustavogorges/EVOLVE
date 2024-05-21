@@ -52,8 +52,11 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/"+taskId+"/update/scheludeDate/"+userId+"/calendar",formData, {withCredentials: true})).data
   }
 
-
-
+  async setTaskConcluded(taskId:number) {
+    let formData = new FormData();
+    formData.append("taskId", taskId.toString());
+    return (await axios.patch(this.URL+"task/setConcluded",formData, {withCredentials: true})).data
+  }
 
   async patchTeamImageColor(teamId:number, newImageColor:string):Promise<Team>{
     let path:string = "team/"
@@ -96,8 +99,8 @@ export class BackendEVOLVEService {
     ).data;
   }
 
-  async deleteDashboard(idDashboard:number, idActionUser:number){
-    return (await (axios.delete(this.URL+0+"/dashboard/"+idDashboard+"/"+idActionUser, {withCredentials: true}))).data;
+  async deleteDashboard(projectId:number, idDashboard:number, idActionUser:number){
+    return (await (axios.delete(this.URL+"project/"+projectId+"/dashboard/"+idDashboard+"/"+idActionUser, {withCredentials: true}))).data;
   }
 
   async setChartToDash(
@@ -107,7 +110,7 @@ export class BackendEVOLVEService {
   ) {
     return (
       await axios.patch(
-        this.URL + "project/" + idProject + '/dashboard/' + idDashboard,
+        this.URL + "project/" + idProject + '/dashboard/delete/' + idDashboard,
         chart, {withCredentials: true}
       )
     ).data;
@@ -150,7 +153,7 @@ export class BackendEVOLVEService {
   }
 
   async postDashboard(dashboard: Dashboard, idProject: number, actionUserId:number) {
-    return (await axios.post(this.URL + "project/" + idProject +"/dashboard/"+actionUserId, dashboard, {withCredentials: true}))
+    return (await axios.patch(this.URL + "project/" + idProject +"/dashboard/create/"+actionUserId, dashboard, {withCredentials: true}))
       .data;
   }
 
@@ -187,6 +190,10 @@ export class BackendEVOLVEService {
 
   async getAllCommentsOfTask(taskId: number) {
     return (await axios.get(this.URL + 'task/' + taskId + '/comments/getAll', {withCredentials: true})).data;
+  }
+
+  async getAllWorkedTime(userId:number, projectId:number) {
+    return (await axios.get(this.URL + 'project/' + projectId + '/workedTime/' + userId, {withCredentials: true})).data;
   }
 
   async patchNewCommentProject(
@@ -747,6 +754,17 @@ export class BackendEVOLVEService {
     //não tirar
     console.log((
       await axios.patch(this.URL + "project/" + projectId + "/description", formData, {withCredentials: true})
+    ).data);
+    
+    return await this.getOne("project", projectId)
+  }
+
+  async patchProjectRemoveMember(projectId: number, userId: number):Promise<Project> {
+    let formData: FormData = new FormData;
+    formData.append("userId", userId.toString());
+    //não tirar
+    console.log((
+      await axios.patch(this.URL + "project/" + projectId + "/delete/member", formData, {withCredentials: true})
     ).data);
     
     return await this.getOne("project", projectId)

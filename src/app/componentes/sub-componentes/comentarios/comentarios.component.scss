@@ -66,6 +66,10 @@
     @apply text-primary sm:text-xl text-base font-bold
   }
 
+  .btn-add-text-2 {
+    @apply text-fontGray sm:text-xl text-base font-bold
+  }
+
   .comment {
     @apply w-full grid grid-cols-2 h-[30%] my-2;
     grid-template-columns : 15% 85%;

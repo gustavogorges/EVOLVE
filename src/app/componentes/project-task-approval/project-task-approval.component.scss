@@ -1,0 +1,11 @@
+.div-pai{
+    @apply w-full max-h-[56vh] bg-primaryGray p-5 dark:bg-dark-primary-gray rounded-b-xl shadow-lg flex flex-col gap-5 overflow-y-auto;
+}
+
+.list-item-task {
+    @apply w-full min-h-fit flex items-center justify-between
+}
+
+.icon {
+    font-size: 1.2rem;
+}

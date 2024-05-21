@@ -10,7 +10,7 @@ export function hasPermission(userId : number, team : Team, permission : any): b
         if(userTeam.userId == userId){
             
             userTeam.role.permissions.forEach(u=> {
-                
+
                 
                 if(u==permission){
                     console.log(88888);
@@ -28,15 +28,13 @@ export function hasPermission(userId : number, team : Team, permission : any): b
 export function hasPermissionProject(userId : number, project : Project, permission : any): boolean{
     let boolean = false
     
-    project.members.map((userProject)=>{
+    
+    project?.members.map((userProject)=>{
+        
+        
         if(userProject.userId == userId){
-            console.log(userProject.role);
             
             userProject.role.permissions.forEach(u=> {
-                console.log(u);
-                
-                console.log(permission);
-                
                 if(u==permission){
                     boolean= true;
                 }

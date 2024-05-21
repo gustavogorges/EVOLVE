@@ -1,0 +1,32 @@
+<div class="div-pai">
+    <div>
+        <p class="text-xl text-fontGray">
+            Aqui, usuários com a permissão necessária podem aprovar ou reprovar tarefas concluídas. Certifique-se de aprovar corretamente, pois uma vez aprovadas, as tarefas não poderão mais ser editadas. 
+        </p>
+    </div>
+    <div class="list-item-task" *ngFor="let task of verifyConcludedTasks()">
+        <app-entrega-prox 
+        [favoritedAble]="false" 
+        [tarefa]="task" 
+        class="w-[80%]"
+        (click)="sendEmitter(task)"
+        >
+    </app-entrega-prox>
+        <div
+        *ngIf="hasPermission == true"
+        class="w-[20%] h-24 flex items-center justify-center gap-4">
+            <div 
+            (click)="taskSetConcluded(task)"
+            class="h-[40%] w-[20%] flex items-center rounded-xl justify-center bg-primary cursor-pointer"
+            >
+                <i class="pi pi-check text-secondaryWhite icon"></i>
+            </div>
+            <div 
+            (click)="taskChangeStatus(task)"
+            class="h-[40%] w-[20%] flex items-center rounded-xl justify-center bg-red-600 cursor-pointer"
+            >
+                <i class="pi pi-times icon text-secondaryWhite"></i>
+            </div>
+        </div>
+    </div>
+</div>

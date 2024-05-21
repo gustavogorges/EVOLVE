@@ -53,6 +53,13 @@ export class ComentariosComponent implements OnInit {
     
    }
 
+   verifyApprovament() :boolean {
+    if(this.task.concluded == true || this.task.currentStatus.name == "Concluído"){
+      return true
+    }
+   return false;
+  }
+
   addCommentInput() : void {
     this.booleanAddComment = true;
   }

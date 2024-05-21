@@ -128,7 +128,11 @@ import { UserMembersComponent } from './componentes/user-members/user-members.co
 import { MessageModalComponent } from './componentes/message-modal/message-modal.component';
 
 import { TextToSpeechComponent } from './componentes/text-to-speech/text-to-speech.component';
+
+import { ProjectTaskApprovalComponent } from './componentes/project-task-approval/project-task-approval.component';
+
 import { EnterTeamModalComponent } from './componentes/enter-team-modal/enter-team-modal.component';
+
 
 
 
@@ -167,7 +171,7 @@ export function HttpLoaderFactory(http:HttpClient){
     TarefaCardListaComponent,
     SelectCustomComponent,
     SelectStatusComponent,
-
+    ProjectTaskApprovalComponent,
     // RecentTeamsComponent,
     EquipesRecentesComponent,
 

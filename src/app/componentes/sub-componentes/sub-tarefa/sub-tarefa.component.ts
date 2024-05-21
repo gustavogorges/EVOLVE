@@ -47,7 +47,7 @@ export class SubTarefaComponent implements OnInit {
     const subtarefaNova = new Subtask()
     subtarefaNova.name= this.subtarefa.nome
     
-    this.tarefa.subtasks.push(subtarefaNova);
+    this.tarefa?.subtasks?.push(subtarefaNova);
     this.tarefa = await this.service.patchSubtask(subtarefaNova,this.tarefa.id, this.loggedUser.id);
     this.subtarefa.nome = ''
     this.booleanSubtarefa();
@@ -72,6 +72,13 @@ export class SubTarefaComponent implements OnInit {
       console.log(this.loggedUser);
       
     this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
+  }
+
+  verifyApprovament() :boolean {
+    if(this.tarefa.concluded == true || this.tarefa.currentStatus.name == "Concluído"){
+      return true
+    }
+   return false;
   }
 
   confirmEdit(subtarefa : Subtask) {
