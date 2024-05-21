@@ -38,14 +38,14 @@
      
         <div
           *ngIf="listaTarefas.length == 0"
- class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">
+ class="text-lg  md:text-2xl text-secondary font-titulo dark:text-dark-secondary">
           
   
-          <h1 class="flex flex-col items-center justify-center text-center font-bold text-primary text-xl"> {{'Parece que não há tarefas atribuidas a você!' | translate}}!</h1>
+          <h1 class="flex flex-col items-center justify-center text-center  text-fontGray text-lg font-hind-madurai"> {{'Parece que não há tarefas atribuidas a você!' | translate}}</h1>
         </div>
       </div>
       <div class="flex flex-col gap-3">
-        <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">{{'Projetos Favoritados' | translate}}</p>
+        <p class="text-lg font-bold md:text-2xl text-secondary font-titulo dark:text-dark-secondary">{{'Projetos Favoritados' | translate}}:</p>
         <div></div>
         <div class="container " *ngIf="projectList.length!=0">
           <div *ngFor="let project of projectList; index as i">

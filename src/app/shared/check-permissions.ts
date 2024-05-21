@@ -5,12 +5,12 @@ import { UserTeam } from "src/model/userTeam";
 
 export function hasPermission(userId : number, team : Team, permission : any): boolean{
     let boolean = false
-    console.log(team);
     
-    team.participants.map((userTeam)=>{
+    team?.participants.map((userTeam)=>{
         if(userTeam.userId == userId){
             
             userTeam.role.permissions.forEach(u=> {
+
                 
                 if(u==permission){
                     console.log(88888);
