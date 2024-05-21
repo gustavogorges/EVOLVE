@@ -29,16 +29,16 @@
 
   <p
     class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
-    
+    *ngIf="user.id === getProjectCreator(project).id"
   >
-    {{ userProject.role.name }}
+    {{ "Criador" | translate }}
   </p>
-  <!-- <p
+  <p
     class="row-span-full text-fontGray flex justify-center items-center dark:text-gray-300"
     *ngIf="user.id != getProjectCreator(project).id"
   >
     {{ "Adiministrador" | translate }}
-  </p> -->
+  </p>
 
   <div
     class="flex row-span-full items-center justify-center"
