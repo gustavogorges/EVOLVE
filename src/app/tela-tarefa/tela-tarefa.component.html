@@ -17,9 +17,13 @@
       <div class="button-name-box">
         <h1 class="project-name">{{projeto?.name}}</h1>
         <app-botao-add-tarefa
-          class="w-[100%]"
+          class="w-[100%] cursor-pointer"
           (click)="openTaskEdit(tarefaNova)"
-          *ngIf="!(option == 'Kanban')"
+          *ngIf="!(option == 'Kanban') && hasPermission"
+        ></app-botao-add-tarefa>
+        <app-botao-add-tarefa
+          class="w-[100%] opacity-75 cursor-none"
+          *ngIf="!(option == 'Kanban') && !hasPermission"
         ></app-botao-add-tarefa>
       </div>
       <div class="box-selections">

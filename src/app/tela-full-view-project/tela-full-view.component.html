@@ -47,7 +47,7 @@
             type="file"
           />
         </label>
-        <div class="icon-container" *ngIf="!nameEdit">
+        <div class="icon-container" *ngIf="!nameEdit && hasPermission">
           <div
             (click)="editProjectFun()"
             class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center"
@@ -64,7 +64,7 @@
           <div type="text" class="titulo bg-transparent outline-none">
             {{ projeto.name }}
           </div>
-          <div class="icon-container" *ngIf="!nameEdit">
+          <div class="icon-container" *ngIf="!nameEdit && hasPermission">
             <div
               (click)="editProjectFun()"
               class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center"
@@ -86,7 +86,7 @@
           *ngIf="projeto && !nameEdit"
         >
           <p class="descricao" *ngIf="projeto">{{ projeto.description }}</p>
-          <div class="icon-container" (click)="editProjectFun()">
+          <div class="icon-container" *ngIf="hasPermission" (click)="editProjectFun()">
             <div
               class="w-[2rem] h-[2rem] rounded-full absolute top-0 right-0 bg-primaryWhite dark:bg-dark-secundary-gray flex justify-center items-center"
             >
