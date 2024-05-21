@@ -130,7 +130,7 @@ export class TelaFullViewComponent implements OnInit {
                     status.name = '进展中';
                 } else if (status.name === 'concluido' || status.name === 'completado' || status.name === 'completed') {
                     status.name = '已完成';
-                } else if (status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                } else if (status.name === 'não atribuido' || status.name === 'no asignado' || status.name === 'unassigned') {
                     status.name = '未分配';
                 }
             });
@@ -142,7 +142,7 @@ export class TelaFullViewComponent implements OnInit {
                     status.name = 'em progresso';
                 } else if (status.name === '已完成' || status.name === 'completado' || status.name === 'completed') {
                     status.name = 'concluido';
-                } else if (status.name === '未分配' || status.name === 'Sin asignar' || status.name === 'Unassigned') {
+                } else if (status.name === '未分配' || status.name === 'no asignado' || status.name === 'unassigned') {
                     status.name = 'não atribuido';
                 }
             });
@@ -154,8 +154,8 @@ export class TelaFullViewComponent implements OnInit {
                     status.name = 'en progreso';
                 } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completed') {
                     status.name = 'completado';
-                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Unassigned') {
-                    status.name = 'Sin asignar';
+                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'unassigned') {
+                    status.name = 'no asignado';
                 }
             });
         } else if (lang === 'en') {
@@ -166,8 +166,8 @@ export class TelaFullViewComponent implements OnInit {
                     status.name = 'in progress';
                 } else if (status.name === '已完成' || status.name === 'concluido' || status.name === 'completado') {
                     status.name = 'completed';
-                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'Sin asignar') {
-                    status.name = 'Unassigned';
+                } else if (status.name === '未分配' || status.name === 'não atribuido' || status.name === 'no asignado') {
+                    status.name = 'unassigned';
                 }
             });
         }

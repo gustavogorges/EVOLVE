@@ -81,27 +81,27 @@ export class TelaCriarProjetoComponent implements OnInit {
     const lang = localStorage.getItem('lang') ?? 'en'; // Assume 'en' como padrão se o localStorage estiver vazio
     const translations : any = {
       "pendente": {
-        "en": "Pending",
-        "pt": "Pendente",
-        "es": "Pendiente",
+        "en": "pending",
+        "pt": "pendente",
+        "es": "pendiente",
         "ch": "待定"
       },
       "em progresso": {
-        "en": "In Progress",
-        "pt": "Em Progresso",
-        "es": "En Progreso",
+        "en": "in progress",
+        "pt": "em progresso",
+        "es": "en progreso",
         "ch": "进展中"
       },
       "concluido": {
-        "en": "Completed",
-        "pt": "Concluído",
-        "es": "Completado",
+        "en": "completed",
+        "pt": "concluido",
+        "es": "completado",
         "ch": "已完成"
       },
       "não atribuido": {
-        "en": "Unassigned",
-        "pt": "Não Atribuído",
-        "es": "No Asignado",
+        "en": "unassigned",
+        "pt": "não atribuido",
+        "es": "no asignado",
         "ch": "未分配"
       }
     };

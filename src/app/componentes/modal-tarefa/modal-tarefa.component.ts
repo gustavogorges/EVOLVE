@@ -3,7 +3,7 @@ import { LogarithmicScale } from 'chart.js';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
-import { PriorityRecord } from 'src/model/priorityRecord';
+import { PriorityRecord } from 'src/model/PriorityRecord';
 // import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
