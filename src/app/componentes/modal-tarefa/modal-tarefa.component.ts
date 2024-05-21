@@ -185,7 +185,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     
     this.listAssociates = this.tarefa.associates;
 
-
     this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
     // this.listPriorities = await this.service.getAllPriorities()
 

@@ -80,10 +80,12 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     });
   
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    this.userProject = this.projeto.members.find((userProject) => userProject.user.id == this.loggedUser.id) as UserProject;
-    if(this.userProject.role.name != "PROJECT_VIEWER") {
+    this.userProject = this.projeto?.members.find((userProject) => userProject.user.id == this.loggedUser.id) as UserProject;
+    setTimeout(() => {
+    if(this.userProject?.role.name != "PROJECT_VIEWER") {
       this.hasPermission = true;
     }
+    }, 100);
     this.listaTarefas.forEach(element => {
       this.translateStatus(element)
     });
