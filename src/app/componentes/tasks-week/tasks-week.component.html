@@ -13,7 +13,7 @@
     <div *ngFor="let task of tasks" (click)="openTask(task)" class="flex gap-4">
       <div
         *ngIf="isSameDay(task.finalDate)"
-        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center text-sm md:text-base"
+        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center font-hind-madurai text-sm md:text-base"
         [ngStyle]="{
           'background-color': task.currentStatus.backgroundColor,
           color: task.currentStatus.textColor
@@ -23,7 +23,7 @@
       </div>
       <div
         *ngIf="isSameDay(task.scheduledDate)"
-        class="md:p-1 rounded-lg xl:w-36 w-20 text-center border-2 border-dashed text-sm md:text-base"
+        class="md:p-1 rounded-lg xl:w-36 w-20 text-center font-hind-madurai dark:text-white border-2 border-dashed text-sm md:text-base"
         [ngStyle]="{
           'border-color': task.currentStatus.backgroundColor
         }"

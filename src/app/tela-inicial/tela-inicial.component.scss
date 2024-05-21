@@ -70,11 +70,11 @@
 }
 
 .container {
-  @apply 2xl:w-[660px] xl:w-[500px] md:w-[480px] lg:w-[350px] w-full max-h-[248px] overflow-y-auto;
+  @apply 2xl:w-full xl:w-[480px] md:w-full lg:w-[350px] w-full max-h-[248px] overflow-y-auto;
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(310px, 1fr)
+    minmax(280px, 1fr)
   ); /* Define a largura mínima e a fração de espaço disponível */
   gap: 10px;
 

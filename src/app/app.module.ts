@@ -285,7 +285,7 @@ export function HttpLoaderFactory(http:HttpClient){
     HttpClientModule
   ],
   
-  providers: [HttpClient, DatePipe],
+  providers: [HttpClient, DatePipe,  { provide: LOCALE_ID, useValue: 'pt-BR' },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

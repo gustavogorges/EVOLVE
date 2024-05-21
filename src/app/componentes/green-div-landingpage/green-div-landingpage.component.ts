@@ -14,7 +14,7 @@ export class GreenDivLandingpageComponent implements OnInit {
   }
 
   goToLogin(){
-    this.router.navigate(['/login']);
+    window.location.href = "/login"
   }
 
 }
