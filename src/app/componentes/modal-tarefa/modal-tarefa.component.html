@@ -1,12 +1,12 @@
 
 <div class="main z-50">
-  <div [ngClass]="modalFelipeGorges ? 'shadow-2xl':''" *ngIf="modalFelipeGorges && verifyAprovament()" class="w-[20vw] left-[30%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite absolute">
+  <div [ngClass]="modalFelipeGorges ? 'shadow-2xl':''" *ngIf="modalFelipeGorges && verifyAprovament()" class="w-[20vw] left-[30%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite dark:bg-dark-secundary-gray absolute">
     <div class="w-full  flex justify-center items-center flex-col gap-2">
-      <h2 class="font-titulo text-lg font-bold">Tarefa em aprovação  </h2>
-      <p class="text-fontGray font-hind-madurai">
+      <h2 class="font-titulo text-lg font-bold dark:text-white">Tarefa em aprovação  </h2>
+      <p class="text-fontGray font-hind-madurai dark:text-primaryWhite">
       Você não pode editar essa tarefa, pois ela está em aprovação.
       </p>  </div>
-    <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
+    <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary dark:bg-dark-secundary-green rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
   </div>
   
   <div [ngClass]="modalFelipeGorges ? 'shadow-2xl':''" *ngIf="modalFelipeGorges && tarefa.concluded" class="w-[20vw] left-[35%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite absolute">
@@ -61,7 +61,7 @@
           <p (click)="booleanEditName=true" class="name-empty" *ngIf="!booleanEditName && tarefa.name == ''">Digite o nome da tarefa aqui</p>
           <i
             *ngIf="!booleanEditName"
-            class="pi pi-pencil text-primary cursor-pointer rounded-md"
+            class="pi pi-pencil text-primary dark:text-dark-primary cursor-pointer rounded-md"
             style="font-size: 1.3rem"
             (click)="this.booleanEditName = true"
           >
@@ -98,7 +98,7 @@
       <div class="progress-bar-box">
         <div class="progress-bar">
           <div
-            class="h-full bg-primary rounded-md"
+            class="h-full bg-primary dark:bg-dark-primary rounded-md"
             [ngStyle]="{ width: tarefa.progress + '%' }"
           ></div>
         </div>
