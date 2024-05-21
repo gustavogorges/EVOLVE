@@ -110,7 +110,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   verifyAprovament() : boolean {
-    if(this.tarefa.currentStatus.name == 'Concluído' && this.tarefa.concluded == false) {
+    if((this.tarefa.currentStatus.name == 'concluido' || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') && this.tarefa.concluded == false) {
       return true;
     }
     return false;
@@ -217,7 +217,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.nomeAntigo = this.tarefa.name;
     }
 
-    if(this.tarefa.currentStatus.name == "Concluído") {
+    if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
       this.modalFelipeGorges = true;
     }
   }

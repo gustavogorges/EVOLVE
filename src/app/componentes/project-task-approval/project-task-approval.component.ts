@@ -35,7 +35,7 @@ export class ProjectTaskApprovalComponent implements OnInit {
   verifyConcludedTasks() : Array<Task>{
     let concludedTasks : Array<Task> = new Array<Task>();
     this.project.tasks.forEach(task => {
-      if(task.currentStatus.name == "Concluído" && task.concluded == false){
+      if((task.currentStatus.name == "concluido" || task.currentStatus.name === '已完成' || task.currentStatus.name === 'completado' || task.currentStatus.name === 'completed') && task.concluded == false){
         concludedTasks.push(task);
       }
     });
@@ -49,7 +49,7 @@ export class ProjectTaskApprovalComponent implements OnInit {
 
   taskChangeStatus(task : Task) {
     this.project.statusList.forEach(status => {
-      if(status.name == "Em Progresso"){
+      if(status.name == "em progresso" || status.name === '进展中' || status.name === 'en progreso' || status.name === 'in progress'){
         task.currentStatus = status;
         this.service.updateCurrentStatus(task.id,this.loggedUser.id,status);
       }
