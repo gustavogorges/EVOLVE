@@ -75,6 +75,18 @@ export class NavegacaoComponent implements OnInit {
 
   }
 
+  isNotLandingPage(){
+
+    if(this.getRotaAtual() === '/'){
+      return false;
+    }
+    return true;
+  }
+
+  getRotaAtual(){
+    return this.router.url;
+  }
+
   themeDark = false
 
   async darkMode(){

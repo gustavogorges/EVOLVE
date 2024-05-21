@@ -132,6 +132,13 @@ import { TextToSpeechComponent } from './componentes/text-to-speech/text-to-spee
 import { ProjectTaskApprovalComponent } from './componentes/project-task-approval/project-task-approval.component';
 
 import { EnterTeamModalComponent } from './componentes/enter-team-modal/enter-team-modal.component';
+import { TelaLandingPageComponent } from './tela-landing-page/tela-landing-page.component';
+import { ScreenViewInterativeLandingPageComponent } from './componentes/screen-view-interative-landing-page/screen-view-interative-landing-page.component';
+import { LandingpageScreensSeparatorComponent } from './componentes/sub-componentes/landingpage-screens-separator/landingpage-screens-separator.component';
+import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carrosel/cards-carrosel.component';
+import { CardListLandingPageComponentComponent } from './componentes/sub-componentes/card-list-landing-page-component/card-list-landing-page-component.component';
+import { CalendarLandingPageComponentComponent } from './componentes/sub-componentes/calendar-landing-page-component/calendar-landing-page-component.component';
+import { GreenDivLandingpageComponent } from './componentes/green-div-landingpage/green-div-landingpage.component';
 
 
 
@@ -229,7 +236,14 @@ export function HttpLoaderFactory(http:HttpClient){
     UserMembersComponent,
     MessageModalComponent,
     TextToSpeechComponent,
-    EnterTeamModalComponent
+    EnterTeamModalComponent,
+    TelaLandingPageComponent,
+    ScreenViewInterativeLandingPageComponent,
+    LandingpageScreensSeparatorComponent,
+    CardsCarroselComponent,
+    CardListLandingPageComponentComponent,
+    CalendarLandingPageComponentComponent,
+    GreenDivLandingpageComponent
 
   ],
   
