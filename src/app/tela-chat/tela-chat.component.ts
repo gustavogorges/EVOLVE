@@ -70,12 +70,12 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
   async setChatListType(type:string):Promise<void>{
     this.chatType = type
     this.chatList = await this.getChatType(type)
+    
   }
 
   async getChatType(type:string){
     switch (type){
-      case this.chatTypeProjects : 
-      return await this.service.getProjectChatsByUserId(this.loggedUser.id)
+      case this.chatTypeProjects : return await this.service.getProjectChatsByUserId(this.loggedUser.id)
       case this.chatTypeTeams : return await this.service.getTeamChatsByUserId(this.loggedUser.id)
       default : return await this.service.getUserChatsByUserId(this.loggedUser.id)
     }
@@ -83,15 +83,15 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
 
   getContactName(chat:Chat){
     switch(this.chatType){
-      case this.chatTypeTeams : return (chat as TeamChat).team.name.toLowerCase();
-      case this.chatTypeProjects : return (chat as ProjectChat).project.name.toLowerCase();
+      case this.chatTypeTeams : return (chat as TeamChat).team?.name?.toLowerCase();
+      case this.chatTypeProjects : return (chat as ProjectChat).project?.name?.toLowerCase();
       default : return this.getContact(chat, this.loggedUser).name.toLowerCase();
     }
   }
 
   checkSearch(chat:Chat):Boolean{
     let contactName = this.getContactName(chat);
-    return contactName.includes(this.search.toLowerCase())
+    return contactName?.includes(this.search.toLowerCase())
   }
 
   //rever para que atualize nos chats de projetos e equipes quando todos verem (caiu em desuso)
@@ -115,8 +115,7 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
 
   getContact(chat:Chat, user: User):User|Team|Project {
     switch(this.chatType){
-      case this.chatTypeTeams :console.log("opa");
-       return (chat as TeamChat).team
+      case this.chatTypeTeams : return (chat as TeamChat).team
       case this.chatTypeProjects : return (chat as ProjectChat).project
       default : return this.getContactFromUserChat(chat, user)
     }

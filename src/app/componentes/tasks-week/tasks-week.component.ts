@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Project } from 'src/model/project';
 import { Task } from 'src/model/task';
@@ -81,13 +82,13 @@ export class TasksWeekComponent implements OnInit {
   tarefaNova: Task = new Task();
   projeto :Project = new Project()
 async openTask(tarefa: Task): Promise<void> {
+    let projetoId : number = tarefa.project.id!; 
+    this.tarefaSelecionada = await this.service.getOne("task", tarefa.id);
+    this.projeto = await this.service.getOne("project",projetoId)
+    console.log(this.tarefaSelecionada.project);
+    console.log(this.tarefaSelecionada);
     this.booleanTask = true;
-
-    this.tarefaSelecionada = tarefa;
-    if(this.tarefaSelecionada.project.id!=undefined){
-       this.projeto = await this.service.getOne("projeto", this.tarefaSelecionada.project.id)
-
-    }
+    
   }
     closeTask(event: boolean) {
       if (event) {

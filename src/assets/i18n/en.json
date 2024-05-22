@@ -253,6 +253,8 @@
     "Cards": "Cards",
     "Kanban": "Kanban",
     "Listas": "Lists",
-    "Calendario": "Calendar"
+    "Calendario": "Calendar",
+    "Em Aprovação":"In approval",
+    "editar perfil":"Edit Profile"
   
 }

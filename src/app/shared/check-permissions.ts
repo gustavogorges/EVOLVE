@@ -11,10 +11,7 @@ export function hasPermission(userId : number, team : Team, permission : any): b
             
             userTeam.role.permissions.forEach(u=> {
 
-                
                 if(u==permission){
-                    console.log(88888);
-                    
                     boolean= true;
                 }
             })

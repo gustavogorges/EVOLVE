@@ -1,12 +1,12 @@
-<div class="2xl:w-[310px] xl:w-[215px] lg:w-full  md:w-[210px] lg:h-[124px] h-max w-full bg-white dark:bg-dark-primary-black p-4  rounded-lg flex flex-col gap-2">
+<div class="2xl:w-full xl:w-full lg:w-full  md:w-full lg:h-[124px] h-max w-full bg-white dark:bg-dark-primary-black p-4  rounded-lg flex flex-col gap-2">
   <div class="flex gap-4 items-center">
     <div class="md:w-14 md:h-14 h-12 w-12 overflow-clip rounded-full" [ngStyle]="{'background-color': project.imageColor}"></div>
-    <div class="text">
+    <div class="text truncate 2xl:w-[200px] xl:w-[100px] lg:w-[200px] md:w-[150px]">
       {{ project.name }}
     </div>
   </div>
   <div class="flex justify-between">
-    <p class="date-text">
+    <p class="date-text" >
       {{'data final:' | translate}} {{ project.finalDate | date : "dd" + "/" + "MM" }}
     </p>
     <div class="star">

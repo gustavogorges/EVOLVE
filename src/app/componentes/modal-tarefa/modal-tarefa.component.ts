@@ -110,7 +110,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   verifyAprovament() : boolean {
-    if(this.tarefa.currentStatus.name == 'Concluído' && this.tarefa.concluded == false) {
+    if((this.tarefa.currentStatus.name == 'concluido' || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') && this.tarefa.concluded == false) {
       return true;
     }
     return false;
@@ -181,10 +181,13 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
+    console.log(this.tarefa);
+    console.log(this.projeto);
+    
+    
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
     
     this.listAssociates = this.tarefa.associates;
-
 
     this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
     // this.listPriorities = await this.service.getAllPriorities()
@@ -196,7 +199,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
 
     setTimeout(() => {
-      this.projeto.properties.forEach(propertyFor => {
+      this.projeto?.properties?.forEach(propertyFor => {
         if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
           this.propertiesList.push(propertyFor);
         }
@@ -217,7 +220,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.nomeAntigo = this.tarefa.name;
     }
 
-    if(this.tarefa.currentStatus.name == "Concluído") {
+    if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
       this.modalFelipeGorges = true;
     }
   }
@@ -459,6 +462,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
     }
  
+  }
+  async saveDescription():Promise<void>{
+    this.tarefa = await this.service.patchTaskDescription(this.tarefa.id, this.loggedUser.id, this.tarefa.description)
   }
 
   saveProperty() : void {

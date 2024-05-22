@@ -57,7 +57,7 @@ export class TelaCadastroComponent implements OnInit {
     return this.userForm.get("confirmationPassword");
   }
   GoLogin(){
-    window.location.href = "/"
+    window.location.href = "/login"
   }
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -107,7 +107,7 @@ export class TelaCadastroComponent implements OnInit {
         this.showConfirmationMessage = true;
   
         setTimeout(() => {
-          window.location.href = "/"
+          window.location.href = "/login"
           
         }, 1000);
       }else{
@@ -144,7 +144,7 @@ export class TelaCadastroComponent implements OnInit {
         this.showConfirmationMessage = true;
   
         setTimeout(() => {
-          window.location.href = "/"
+          window.location.href = "/login"
         }, 1000);
       }else{
         this.message = "não foi possivel cadastrar sua conta"

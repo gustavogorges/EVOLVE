@@ -67,9 +67,7 @@ export class SubTarefaComponent implements OnInit {
   }
 
   async removeSubtarefa(subtarefa : Subtask, i : number) {
-      // this.tarefa.subtasks.splice(i,1)
-      this.tarefa.subtasks.filter(subtask => subtask.id != subtarefa.id)
-      console.log(this.loggedUser);
+      this.tarefa.subtasks.map(subtask => subtask.id != subtarefa.id)
       
     this.tarefa = await this.service.deleteSubtask(subtarefa.id, this.tarefa.id, this.loggedUser.id);
   }

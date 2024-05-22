@@ -35,7 +35,7 @@ export class SelectAssociatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.project.members);
+    console.log(this.project);
   }
 
   saveAssociate(associate:User) { 
@@ -51,7 +51,7 @@ export class SelectAssociatesComponent implements OnInit {
 
 
   removeAssociate(associate:User) {
-    this.task.associates.forEach(elementFor => {
+    this.task?.associates?.forEach(elementFor => {
       if(elementFor.id == associate.id) {
         const index:number =  this.task.associates.indexOf(elementFor);
         this.task.associates.splice(index,1)
