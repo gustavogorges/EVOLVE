@@ -11,8 +11,8 @@
         <div class="div-modal rotate-180" >
             <p class="title" >{{'Escolha o valor que sera exibido no novo gráfico' | translate}}</p>
     
-            <div class="box min-w-max" [ngClass]="!newChartBool ? 'invisible ':'visible'">
-                <div class=" border-2 p-2 xl:w-[15vw] flex justify-center items-center rounded-lg duration-100 cursor-pointer" *ngFor="let squad of labels, index as i" (click)="chooseLabel(squad.id)" [ngClass]="squad.style">
+            <div class="box" [ngClass]="!newChartBool ? 'invisible ':'visible'">
+                <div class=" border-2 p-2 xl:w-[15vw] flex justify-center flex-wrap items-center rounded-lg duration-100 cursor-pointer" *ngFor="let squad of labels, index as i" (click)="chooseLabel(squad.id)" [ngClass]="squad.style">
                     <p>{{squad.value}}</p>
                 </div>
             </div>
