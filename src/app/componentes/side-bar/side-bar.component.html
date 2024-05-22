@@ -38,7 +38,7 @@
         <div *ngFor="let project of userTeam.team.projects">
           <div class="px-5 flex flex-col gap-1">
             <div class="flex gap-2 select-none">
-              <p class="font-titulo text-lg font-medium text-[#414651] dark:text-primaryWhite">
+              <p class="font-titulo text-lg truncate font-medium text-[#414651] dark:text-primaryWhite">
                 {{ project.name }}
               </p>
             </div>
@@ -68,11 +68,11 @@
         </div>
       </div>
     </div>
-    <button (click)="goCreateTeam()" class="w-full cursor-pointer duration-150 hover:scale-105 bg-secondary rounded-lg p-2 flex gap-2 items-center justify-center text-base text-white font-titulo font-semibold">
+    <button (click)="goCreateTeam()" class="w-full cursor-pointer duration-150 hover:scale-105 bg-secondary dark:bg-dark-secundary-green rounded-lg p-2 flex gap-2 items-center justify-center text-base text-white font-titulo font-semibold">
       {{  'criar equipe' | translate }}
       <i class="pi pi-plus font-bold"></i>
     </button>
-    <button (click)="openEnterTeam()" class="w-full cursor-pointer duration-150 hover:scale-105 bg-primary rounded-lg p-2 flex gap-2 items-center justify-center text-sm text-white font-titulo font-semibold">
+    <button (click)="openEnterTeam()" class="w-full cursor-pointer duration-150 hover:scale-105 bg-primary dark:bg-dark-primary rounded-lg p-2 flex gap-2 items-center justify-center text-sm text-white font-titulo font-semibold">
       {{  'Entrar em uma equipe' | translate }}
       <i class="pi pi-users font-bold"></i>
 

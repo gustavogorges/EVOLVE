@@ -21,13 +21,11 @@ export class EquipeRecenteComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['team']) {
-      console.log(this.team);
       
       
     }  }
     getUserStyles(user: any): any {
       let styles: any = {};
-      console.log(user);
       
       if(user.image!=null){
         styles['background'] = user.image.data;
