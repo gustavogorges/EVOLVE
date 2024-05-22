@@ -324,7 +324,7 @@
                 class="pi pi-ellipsis-v ponto cursor-pointer"
               ></i>
             </div>
-            <p class="name-user">{{ member.user.name }}</p>
+            <p class="name-user">{{ member.user?.name }}</p>
           </div>
 
           <div
@@ -341,7 +341,7 @@
               >
                 <div><i class="pi pi-envelope"></i></div>
                 <div>
-                  <p class="truncate text-sm">{{ member.user.email }}</p>
+                  <p class="truncate text-sm">{{ member.user?.email }}</p>
                 </div>
               </div>
               <button

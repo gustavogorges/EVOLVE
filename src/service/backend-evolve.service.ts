@@ -925,6 +925,9 @@ export class BackendEVOLVEService {
   //#region projectChat
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
+    console.log((await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data);
+    console.log("ME OLHEEEEE");
+    
     return (await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data;
   }
 
