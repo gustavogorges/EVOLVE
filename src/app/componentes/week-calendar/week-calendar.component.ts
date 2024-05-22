@@ -130,17 +130,8 @@ export class WeekCalendarComponent implements OnInit {
     if (typeof date === 'string') {
       const parsedDate = new Date(date);
       return new Date(parsedDate.getUTCFullYear(), parsedDate.getUTCMonth(), parsedDate.getUTCDate(), parsedDate.getUTCHours(), parsedDate.getUTCMinutes(), parsedDate.getUTCSeconds());
-
     
     }
-
     return date;
-
-
-    
-
-   })
-   return tasks; 
-
   }
 }
