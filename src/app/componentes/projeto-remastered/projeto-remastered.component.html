@@ -5,7 +5,7 @@
             <div class="image" *ngIf="projeto">
                 <div *ngIf="preImage === '' && projeto.image === null" [ngStyle]="{'background-color': projeto.imageColor}" class="w-full h-full"></div>
                 <img *ngIf="(preImage !== '')" [src]="preImage" alt="">
-                <img *ngIf="(preImage === '') && (projeto.image !== null)" [src]="projeto.image.data" alt="">
+                <img *ngIf="(preImage === '') && (projeto.image != null)" [src]="projeto.image?.data" alt="">
             </div>
             <label [ngClass]="!projeto.editOn ? 'invisible':'visible'" class=" border-primary dark:border-secondary bottom-3 right-10 rounded-full p-2 bg-white dark:bg-back-grey w-12 h-12 absolute cursor-pointer">
                 <div class="flex items-center justify-center w-full h-full">
@@ -88,7 +88,6 @@
                             <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
                         <p>{{p.user.name}}</p>
-                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[1.2vw] h-[1.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-xl font-hind-madurai text-fontGray text-center">{{'Nenhum membro encontrado' | translate}}</p>
@@ -147,7 +146,6 @@
                             <img class="fotoImagem" class="" *ngIf="!verifyImg(p.user)" src="{{p.user.image.data}}" alt="">
                         </div>
                         <p>{{p.user.name}}</p>
-                        <button (click)="removeMember(p.user)" [ngClass]="!projeto.editOn || !verifyIsCreator(p.user) ? 'w-0 h-0':' w-[5.2vw] h-[5.2vw]'" class="delete-member"><i class="pi pi-times font-semibold text-secondaryWhite" style="font-size: 12px;"></i></button>
                     </div>
                     <div *ngIf="filteredNames().length <= 0" class="membros">
                         <p class="text-sm text-fontGray w-fit">{{'Nenhum membro encontrado' | translate}}</p>

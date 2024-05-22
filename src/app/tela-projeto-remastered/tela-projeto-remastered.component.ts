@@ -137,44 +137,31 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
    async editFun(project:Project){
     let postProject:any = project
-    console.log(project)
-    let listUsers : Array<Pick<User, "id">> = new Array
-    
+    let imageSave:any
     setTimeout(() => {
-      // project.members.forEach(element => {
-      //   listUsers.push({
-      //     "id" : element.user.id
-      //   })
-      // });
       postProject.members = project.members
+      if(this.formData === null && project.image != null){
+        imageSave = project.image
+      }
       postProject.image = null
     },);
 
     setTimeout(async () => {
 
-      if(this.listFromRemove.length != 0){
-        project.members.filter(member => !this.listFromRemove.includes(member))
-        await this.service.patchProjectMembers(project.id, project.members)
-        // await this.service.deleteUserFromProject(project.id, this.listFromRemove)
-      }
-
       if(this.formData!=null){
-        return await this.service.patchProjectImage(project.id, this.formData)
+        await this.service.patchProjectImage(project.id, this.formData)
       } 
-
-      await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
     
     });
 
     setTimeout(async () => {
-      project = await this.service.getOne("project", project.id)
-    })
-
-    setTimeout(() => {
-      postProject.image = project.image
-      postProject.members = project.members
-      postProject.editOn = false
-    })
+      setTimeout(async () => {
+        await this.service.putProjeto(project);
+      })
+      setTimeout(() => {
+        window.location.reload()
+      });
+    });
   }
 
   async saveImage(event:any){

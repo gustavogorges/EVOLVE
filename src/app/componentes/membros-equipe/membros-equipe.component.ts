@@ -55,13 +55,15 @@ export class MembrosEquipeComponent implements OnInit {
   }
 
   addUser(){
-    let userProject = new UserProject
-    userProject.project = this.projeto
-    userProject.user = this.user
-    userProject.projectId = this.projeto.id
-    userProject.userId = this.user.id
-    userProject.role = this.projeto.defaultRole
-    this.projeto.members.push(userProject)
+    let userProject:any = new UserProject
+    setTimeout(() => {
+      userProject.project = this.projeto.id
+      userProject.user = this.user.id
+      userProject.projectId = this.projeto.id
+      userProject.userId = this.user.id
+      userProject.role = this.projeto.defaultRole
+      this.projeto.members.push(userProject)
+    });
     console.log(this.projeto);
   }
 

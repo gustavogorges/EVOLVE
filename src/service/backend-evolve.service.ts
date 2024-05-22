@@ -717,16 +717,16 @@ export class BackendEVOLVEService {
 
   async putProjeto(project: Project) {
     //falta fazer aqui
-    this.patchProjectName(project.id, project.name); 
+    await this.patchProjectName(project.id, project.name); 
 
     console.log("vou fazer patch da descricao hein");
-    this.patchProjectDescription(project.id, project.description);
+    await this.patchProjectDescription(project.id, project.description);
 
     // this.patchProjectImage(project.id, project.image); 
   
     // this.patchProjectImageRemove(project.id);
   
-    this.patchProjecyImageColor(project.id, project.imageColor); 
+    await this.patchProjecyImageColor(project.id, project.imageColor); 
   
     // this.patchProjectFinalDate(project.id, project.finalDate);
   
@@ -734,7 +734,7 @@ export class BackendEVOLVEService {
   
     // this.patchProjectMembers(project.id, project.members); 
   
-    this.patchProjectTasks(project.id, project.tasks);
+    await this.patchProjectTasks(project.id, project.tasks);
   
     // this.patchDefaultRole(project.id, project.defaultRole)
 

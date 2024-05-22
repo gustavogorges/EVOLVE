@@ -11,6 +11,7 @@ import { UserProject } from 'src/model/userProject';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { LogarithmicScale } from 'chart.js';
+import { Role } from 'src/model/Role';
 
 @Component({
   selector: 'app-tela-criar-projeto',
@@ -178,13 +179,6 @@ export class TelaCriarProjetoComponent implements OnInit {
       
       await new Promise<void>((resolve) => {
         setTimeout(() => {
-
-          let lista: Array<Pick<User, "id">> = [];
-          this.projeto.members.forEach(element => {
-            lista.push({ "id": element?.user?.id });
-          });
-          postProject.members = lista;
-  
           postProject.creator = { "id": loggedUser.id };
           // postProject.adimnistrator = { "id": 1 };
           postProject.team = { "id": this.team.id };
@@ -198,12 +192,40 @@ export class TelaCriarProjetoComponent implements OnInit {
       console.log(postProject);
       
       postProject = await this.service.postProjeto(postProject, postProject.team.id);
+
+      setTimeout(async () => {
+        if(postProject.id != null){
+          console.log(postProject.id);
+          
+          let lista: Array<any> = [];
+            setTimeout(() => {
+              this.projeto.members.forEach(element => {
+                lista.push(
+                  {
+                    "userId" : element.userId,
+                    "projectId" : postProject.id,
+                    "role" : element.role,
+                    "user" : element.userId,
+                    "project" : postProject.id,
+                    "manager" : false
+                  }
+                );
+              });
+            });
+            setTimeout(async () => {
+              await this.service.patchProjectMembers(postProject.id, lista)
+            });
+        }
   
-      if (this.formData != null) {
-        await this.service.patchProjectImage(postProject.id, this.formData);
-      }
-  
-      this.route.navigate(['/tela-projeto', teamId]);
+    
+        if (this.formData != null) {
+          await this.service.patchProjectImage(postProject.id, this.formData);
+        }
+    
+        setTimeout(() => {
+          this.route.navigate(['/tela-projeto', teamId]);
+        });
+      });
     }
   }
 
