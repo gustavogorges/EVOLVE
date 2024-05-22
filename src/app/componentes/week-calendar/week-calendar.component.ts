@@ -115,6 +115,8 @@ export class WeekCalendarComponent implements OnInit{
 
    
    this.taskList.map((task)=>{
+    let oldFinalDate = task.finalDate;
+    let oldScheduledDate = task.scheduledDate;
     task.finalDate = new Date(task.finalDate)
     task.scheduledDate = new Date(task.scheduledDate)
     
@@ -127,6 +129,8 @@ export class WeekCalendarComponent implements OnInit{
   date.getDate() === task.scheduledDate.getDate()){
       tasks.push(task)
     }
+
+    
 
    })
    return tasks; 

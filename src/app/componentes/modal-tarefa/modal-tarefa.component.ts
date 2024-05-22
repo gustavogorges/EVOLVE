@@ -181,6 +181,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
+    console.log(this.tarefa);
+    console.log(this.projeto);
+    
+    
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
     
     this.listAssociates = this.tarefa.associates;
@@ -195,7 +199,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
 
     setTimeout(() => {
-      this.projeto.properties.forEach(propertyFor => {
+      this.projeto?.properties?.forEach(propertyFor => {
         if(!this.propertiesList.find(property => property.id == propertyFor.id)) {
           this.propertiesList.push(propertyFor);
         }
