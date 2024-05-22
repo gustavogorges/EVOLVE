@@ -716,27 +716,16 @@ export class BackendEVOLVEService {
   // }
 
   async putProjeto(project: Project) {
-    //falta fazer aqui
-    this.patchProjectName(project.id, project.name); 
+    
+    await this.patchProjectName(project.id, project.name); 
 
-    console.log("vou fazer patch da descricao hein");
-    this.patchProjectDescription(project.id, project.description);
+    await this.patchProjectDescription(project.id, project.description);
+  
+    await this.patchProjecyImageColor(project.id, project.imageColor); 
+  
+    await this.patchProjectTasks(project.id, project.tasks);
 
-    // this.patchProjectImage(project.id, project.image); 
-  
-    // this.patchProjectImageRemove(project.id);
-  
-    this.patchProjecyImageColor(project.id, project.imageColor); 
-  
-    // this.patchProjectFinalDate(project.id, project.finalDate);
-  
-    // this.patchProjectStatusList(project.id, project.statusList); 
-  
-    // this.patchProjectMembers(project.id, project.members); 
-  
-    this.patchProjectTasks(project.id, project.tasks);
-  
-    // this.patchDefaultRole(project.id, project.defaultRole)
+    if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
 
     return await this.getOne("project", project.id)
   }
@@ -819,6 +808,8 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectFinalDate(projecId: number, finalDate: string) {
+    console.log(finalDate);
+    
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (

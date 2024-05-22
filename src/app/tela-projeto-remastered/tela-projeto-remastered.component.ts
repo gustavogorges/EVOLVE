@@ -153,16 +153,16 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     setTimeout(async () => {
 
       if(this.listFromRemove.length != 0){
-        project.members.filter(member => !this.listFromRemove.includes(member))
-        await this.service.patchProjectMembers(project.id, project.members)
-        // await this.service.deleteUserFromProject(project.id, this.listFromRemove)
+        for(let removeMember of this.listFromRemove){
+          await this.service.patchProjectRemoveMember(project.id, removeMember.id)
+        }
       }
 
       if(this.formData!=null){
-        return await this.service.patchProjectImage(project.id, this.formData)
+        await this.service.patchProjectImage(project.id, this.formData)
       } 
 
-      await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
+      return await this.service.putProjeto(project)  //não se é usado mais o put (talvez criar um metoo put que faca todos os patches dentro dele)
     
     });
 
