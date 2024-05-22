@@ -1,4 +1,4 @@
-<div class="modal -translate-y-8 translate-x-52 overflow-hidden dark:bg-dark-secundary-gray" style="z-index: 9999999;" [ngClass]="!newChartBool ? 'h-0 w-0':'h-[46vh] w-[40vw]'">
+<div class="modal -translate-y-8 xl:translate-x-52 overflow-hidden dark:bg-dark-secundary-gray" style="z-index: 9999999;" [ngClass]="!newChartBool ? 'h-0 w-0':'h-[46vh] xl:w-[40vw]'">
 
     
     
@@ -12,7 +12,7 @@
             <p class="title" >{{'Escolha o valor que sera exibido no novo gráfico' | translate}}</p>
     
             <div class="box min-w-max" [ngClass]="!newChartBool ? 'invisible ':'visible'">
-                <div class=" border-2 p-2 w-[15vw] flex justify-center items-center rounded-lg duration-100 cursor-pointer" *ngFor="let squad of labels, index as i" (click)="chooseLabel(squad.id)" [ngClass]="squad.style">
+                <div class=" border-2 p-2 xl:w-[15vw] flex justify-center items-center rounded-lg duration-100 cursor-pointer" *ngFor="let squad of labels, index as i" (click)="chooseLabel(squad.id)" [ngClass]="squad.style">
                     <p>{{squad.value}}</p>
                 </div>
             </div>
@@ -21,7 +21,7 @@
     </ul>
     
     
-    <div class="rotate-180 w-[40vw] overflow-hidden duration-300" [ngClass]="!labelChooseBol ? 'h-0':'h-full'">
+    <div class="rotate-180 xl:w-[40vw] overflow-hidden duration-300" [ngClass]="!labelChooseBol ? 'h-0':'h-full'">
         <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="chartChoosed === -1 ? 'h-0':'h-[20%]'">
             <button (click)="createNewChart()" class="flex bg-secondary dark:bg-dark-secundary-green dark:text-primaryFontBlack  h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">{{'Adicionar' | translate}}</button>
         </div>
@@ -30,7 +30,7 @@
             <p class="title" >{{'Escolha o novo gráfico' | translate}}</p>
     
             <div class="invisible">
-                <div class="grid">
+                <div class="flex xl:grid">
                     <div class="col-start-2 col-end-5 row-start-2"></div>
                     <div class="col-start-2 col-end-5"></div>
                     <div class="col-span-full row-span-full"></div>

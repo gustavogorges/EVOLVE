@@ -1,4 +1,4 @@
-<ul class="modal rotate-180" [ngClass]="!newDashBool ? 'h-0 w-0':'h-[40vh] w-[30vw]'">
+<ul class="modal rotate-180" [ngClass]="!newDashBool ? 'h-0 w-0':'h-[40vh] w-[22rem] xl:w-[30vw]'">
 
     <div class="w-full overflow-hidden rounded-t-lg duration-300 absolute z-50" [ngClass]="dashChoosed === -1 ? 'h-0':'h-[20%]'">
         <button (click)="createNewDash()" class="flex bg-secondary dark:text-primaryFontBlack dark:bg-dark-secundary-green h-[50%] justify-center  w-full items-center hover:scale-105 duration-100 text-lg font-semibold text-primaryWhite rotate-180">{{'Criar' | translate}}</button>
