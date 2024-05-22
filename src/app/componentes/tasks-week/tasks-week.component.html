@@ -11,9 +11,12 @@
 <div class="flex gap-2 items-center justify-center" #scrollContainer>
   <div class="flex md:gap-4 gap-1 bg-white dark:bg-dark-primary-black items-center p-2 h-12 md:h-max">
     <div *ngFor="let task of tasks" (click)="openTask(task)" class="flex gap-4">
+      
       <div
+
+
         *ngIf="isSameDay(task.finalDate)"
-        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center font-hind-madurai text-sm md:text-base"
+        class="xl:p-1 md:p-0.5 rounded-lg xl:w-36 md:w-28 w-20 text-center font-hin text-sm md:text-base"
         [ngStyle]="{
           'background-color': task.currentStatus.backgroundColor,
           color: task.currentStatus.textColor

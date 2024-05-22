@@ -3,13 +3,13 @@
 }
 
 .message-input{
-    @apply  flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite rounded-[0.75rem] px-4  ;
+    @apply  flex items-center justify-start w-[60%] h-3/4 bg-primaryWhite dark:bg-dark-secundary-gray rounded-[0.75rem] px-4  ;
 }
 
 .send-icon-container{
-    @apply flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem] ;
+    @apply flex justify-center items-center bg-primaryWhite dark:bg-dark-theme-back w-11 h-3/4 rounded-[0.75rem] ;
 }
 
 .annex-icon-container{
-    @apply flex justify-center items-center bg-primaryWhite w-11 h-3/4 rounded-[0.75rem] ;
+    @apply flex justify-center items-center bg-primaryWhite dark:bg-dark-theme-back w-11 h-3/4 rounded-[0.75rem] ;
 }

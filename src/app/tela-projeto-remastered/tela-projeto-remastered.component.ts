@@ -150,17 +150,14 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
       if(this.formData!=null){
         await this.service.patchProjectImage(project.id, this.formData)
-      } 
-    
+      }
     });
 
     setTimeout(async () => {
       setTimeout(async () => {
         await this.service.putProjeto(project);
-      })
-      setTimeout(() => {
         window.location.reload()
-      });
+      })
     });
   }
 

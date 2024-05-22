@@ -18,11 +18,12 @@
       <div class="blue-progress" [ngStyle]="{ width: tarefaAtual.progress + '%' }"></div>
     </div>
     <div class="finalDate-box">
-      <p class="finalDate">
+      <p class="finalDate" *ngIf="tarefaAtual.finalDate">
         {{ tarefaAtual.finalDate | date : "dd" }}/{{
         tarefaAtual.finalDate | date : "LL"
         }} 
       </p>
+      <p class="font-titulo  lg:text-base text-sm dark:text-gray-500 text-gray-400" *ngIf="tarefaAtual.finalDate ==null">dd/mm</p>
     </div>
 <div class="flex gap-2 justify-end w-0 md:w-20 lg:w-28">
   <div *ngFor="let user of arrayForce; index as i" class=" w-20 md:w-max  gap-2 items-end hidden md:flex">
@@ -49,11 +50,13 @@
         </div>
       </div>
       <div class="finalDate-box hidden lg:flex">
-        <p class=" scheduleDate">
+        <p class=" scheduleDate" *ngIf="tarefaAtual.scheduledDate">
           {{ tarefaAtual.scheduledDate | date : "dd" }}/{{
           tarefaAtual.scheduledDate | date : "LL"
           }}
         </p>
+        <p class="font-titulo  lg:text-base text-sm text-sm  dark:text-gray-500 text-gray-400" *ngIf="tarefaAtual.scheduledDate ==null">dd/mm</p>
+
       </div>
       <div class="star-box">
         <img [src]="caminhoEstrela" (click)="favoritar()" alt="" class="cursor-pointer w-4 lg:w-6"  />

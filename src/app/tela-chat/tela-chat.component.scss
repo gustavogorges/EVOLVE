@@ -3,15 +3,15 @@
 }
 
 .main{
-  @apply flex items-center w-[80%]  h-[80%] rounded-[1rem] overflow-clip;
+  @apply flex items-center w-[80%]  h-[80%] rounded-[1rem] overflow-clip dark:bg-dark-primary-black ; 
 }
 
 .contacts-container{
-  @apply flex flex-col bg-[#f5f5f5] w-[30%] h-full;
+  @apply flex flex-col bg-[#f5f5f5] dark:bg-dark-primary-gray w-[30%] h-full;
 }
 
 .contacts-nav{
-  @apply w-full z-10 py-5 bg-secondary flex justify-center text-primaryWhite font-bold;
+  @apply w-full z-10 py-5 bg-secondary flex justify-center text-primaryWhite font-titulo dark:bg-dark-secundary-green font-bold;
   -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -22,23 +22,23 @@
 }
 
 .contacts-list-container{
-  @apply  w-full h-full bg-[#f5f5f5]   overflow-y-scroll ;
+  @apply  w-full h-full bg-[#f5f5f5] dark:bg-dark-theme-back  overflow-y-scroll ;
 }
 
 .search-bar-container{
-  @apply z-20 flex justify-center items-center relative w-full h-[10%] bg-[#f5f5f5] border-b-2  top-0;
+  @apply z-20 flex justify-center items-center relative w-full h-[10%] bg-[#f5f5f5] dark:bg-dark-theme-back border-b-2 dark:border-gray-500  top-0;
 }
 
 .search-bar{
-  @apply flex justify-end items-center w-[80%] h-[60%] bg-[#F0F0F0] rounded-xl px-4 gap-2 border-2  border-primary;
+  @apply flex justify-end items-center w-[80%] h-[60%] bg-[#F0F0F0] dark:bg-dark-secundary-gray rounded-xl px-4 gap-2 border-2  border-primary dark:border-dark-primary;
 }
 
 .search-input{
-  @apply w-full bg-[#F0F0F0] outline-none ;
+  @apply w-full bg-[#F0F0F0] outline-none dark:bg-dark-secundary-gray  ;
 }
 
 .search-icon{
-  @apply text-primary ;
+  @apply text-primary dark:text-dark-primary ;
 }
 
 .contacts-list{
@@ -51,7 +51,7 @@
 }
 
 .chat-header{
-  @apply w-full min-h-[4rem] h-16 bg-primary flex items-center gap-4 px-8 ;
+  @apply w-full min-h-[4rem] h-16 bg-primary dark:bg-dark-primary  flex items-center gap-4 px-8 ;
 }
 
 .chat-header-img-container{
@@ -63,7 +63,7 @@
 }
 
 .chat-name{
-  @apply font-bold text-primaryWhite  flex w-full truncate ;
+  @apply font-bold text-primaryWhite  font-titulo  flex w-full truncate ;
 }
 
 .chat-config-icon{
@@ -71,7 +71,7 @@
 }
 
 .messages-container{
-  @apply w-full h-full pt-4 overflow-scroll px-16 flex flex-col gap-4 ;
+  @apply w-full h-full pt-4 overflow-scroll px-16 flex flex-col gap-4 dark:bg-dark-primary-black  ;
 }
 
 .message-box{
