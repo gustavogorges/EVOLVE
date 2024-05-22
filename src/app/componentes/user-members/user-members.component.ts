@@ -18,7 +18,7 @@ export class UserMembersComponent implements OnInit {
   async ngOnInit(): Promise<void> {  }
 
   getBackgroundColor(){
-    return this.isUserSelected ? "bg-slate-200" : "bg-primaryWhite"
+    return this.isUserSelected ? "bg-slate-200 dark:bg-dark-secundary-gray " : "bg-primaryWhite dark:bg-dark-primary-black"
   }
 
 }

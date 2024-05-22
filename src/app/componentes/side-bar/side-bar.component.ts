@@ -76,7 +76,7 @@ config = false
   }
 
   goProjectsTeam(team:Team){
-    this.router.navigateByUrl('/tela-projeto/'+team.id);
+    window.location.href = '/equipe/'+team.id
   }
   goCreateTeam(){
     window.location.href = 'equipe/0'
