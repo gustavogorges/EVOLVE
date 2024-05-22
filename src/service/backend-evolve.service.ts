@@ -18,7 +18,7 @@ import { ProjectChat } from 'src/model/projectChat';
 
 import { Option } from 'src/model/propriedade/option';
 import { Comment } from 'src/model/comment';
-import { PriorityRecord } from 'src/model/PriorityRecord';
+import { PriorityRecord } from 'src/model/priorityRecord';
 import { Subtask } from 'src/model/subtask';
 import { Dashboard } from 'src/model/dashboard';
 import { DashBoardCharts } from 'src/model/DashBoardCharts';
@@ -88,7 +88,7 @@ export class BackendEVOLVEService {
         dashboard, {withCredentials: true}
       )
     ).data;
-  }
+  }  //não é usado?
 
   async updateChartList(
     idDashboard: number,
@@ -426,6 +426,17 @@ export class BackendEVOLVEService {
     ).data;
   }
 
+  async patchTaskDescription(taskId:number, actionUserId:number, description:string){
+    let formData = new FormData()
+    formData.append("description", description)
+    return (
+      await axios.patch(
+        this.URL + 'task/' + taskId + '/description/' + actionUserId,
+        formData, {withCredentials: true}
+      )
+    ).data;
+  }
+
   async deleteComment(taskId: number, commentId: number, userId: number) {
     return (
       await axios.delete(
@@ -481,7 +492,7 @@ export class BackendEVOLVEService {
     propertyId: number
   ) {
     return (
-      await axios.put(
+      await axios.patch(
         this.URL +
         'task' + '/' +
         taskId + '/property/put/option/' +
@@ -677,7 +688,7 @@ export class BackendEVOLVEService {
   }
 
   async getAllCommentsOfProject(projectId: number) {
-    return (await axios.get(this.URL + 'project/comments/getAll/' + projectId, {withCredentials: true}))
+    return (await axios.get(this.URL + 'project/' + projectId +'/comments/getAll', {withCredentials: true}))
       .data;
   } //not found in projectController on API
 
@@ -707,7 +718,8 @@ export class BackendEVOLVEService {
   async putProjeto(project: Project) {
     //falta fazer aqui
     this.patchProjectName(project.id, project.name); 
-  
+
+    console.log("vou fazer patch da descricao hein");
     this.patchProjectDescription(project.id, project.description);
 
     // this.patchProjectImage(project.id, project.image); 
@@ -925,6 +937,9 @@ export class BackendEVOLVEService {
   //#region projectChat
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
+    console.log((await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data);
+    console.log("ME OLHEEEEE");
+    
     return (await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data;
   }
 
@@ -965,7 +980,7 @@ export class BackendEVOLVEService {
 
 
   async updateDashboardName(idDashboard:number, idProject:number, dashboard:Dashboard){
-    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard))).data;
+    return (await (axios.put(this.URL+"project/"+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard, {withCredentials: true}))).data;
   }
 
   async updateNameDescProject(idProject:number, projectNameDescDTO:any){

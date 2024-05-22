@@ -72,14 +72,17 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
   }
 
   viewEdit(){
-    this.nameDashEdited = this.dashboard.name
-    this.viewEditBol = !this.viewEditBol
     this.viewEditBolEmit.emit(this.viewEditBol)
     if(this.viewEditBol){
+      this.dashboard.name = this.nameDashEdited
+      this.service.updateDashboardName(this.dashboard.id, this.projeto.id, this.dashboard)
       this.dashboardToedit.emit(this.dashboard)
     } else {
+      this.nameDashEdited = this.dashboard.name
       this.dashboardToedit.emit(undefined)
     }
+    this.viewEditBol = !this.viewEditBol
+
     this.newChartBool = false
   }
 

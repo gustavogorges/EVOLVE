@@ -83,15 +83,16 @@ export class TasksWeekComponent implements OnInit {
   booleanTask: boolean = false;
   tarefaSelecionada: Task = new Task();
   tarefaNova: Task = new Task();
-  projeto: Project = new Project();
+  projeto :Project = new Project()
+async openTask(tarefa: Task): Promise<void> {
 
-  async openTask(tarefa: Task): Promise<void> {
     let projetoId : number = tarefa.project.id!; 
     this.tarefaSelecionada = await this.service.getOne("task", tarefa.id);
     this.projeto = await this.service.getOne("project",projetoId)
     console.log(this.tarefaSelecionada.project);
     console.log(this.tarefaSelecionada);
     this.booleanTask = true;
+
   }
 
   closeTask(event: boolean) {
@@ -99,5 +100,7 @@ export class TasksWeekComponent implements OnInit {
       this.tarefaNova = new Task();
       this.booleanTask = false;
     }
+
+
   }
 }

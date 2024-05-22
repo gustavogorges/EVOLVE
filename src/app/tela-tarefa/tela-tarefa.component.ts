@@ -11,7 +11,7 @@ import {
 import { Task } from 'src/model/task';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { Status } from 'src/model/status';
-import { PriorityRecord } from 'src/model/PriorityRecord'; 
+import { PriorityRecord } from 'src/model/priorityRecord'; 
 import { User } from 'src/model/user';
 import { ActivatedRoute } from '@angular/router';
 import * as jspdf from 'jspdf';
@@ -80,10 +80,12 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     });
   
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    this.userProject = this.projeto.members.find((userProject) => userProject.user.id == this.loggedUser.id) as UserProject;
-    if(this.userProject.role.name != "PROJECT_VIEWER") {
+    this.userProject = this.projeto?.members.find((userProject) => userProject.user.id == this.loggedUser.id) as UserProject;
+    setTimeout(() => {
+    if(this.userProject?.role.name != "PROJECT_VIEWER") {
       this.hasPermission = true;
     }
+    }, 100);
     this.listaTarefas.forEach(element => {
       this.translateStatus(element)
     });

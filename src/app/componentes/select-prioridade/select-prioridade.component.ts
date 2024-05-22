@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PriorityRecord } from 'src/model/PriorityRecord';
+import { PriorityRecord } from 'src/model/priorityRecord';
 import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';

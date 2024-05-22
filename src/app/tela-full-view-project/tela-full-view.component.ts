@@ -60,8 +60,12 @@ export class TelaFullViewComponent implements OnInit {
     loggedUser: User = new User;
     userProject !: UserProject;
     hasPermission : boolean = false;
-
+    openSmMoreViewBoolean = true
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
+
+    openSmMoreView(){
+        this.openSmMoreViewBoolean = !this.openSmMoreViewBoolean
+    }
 
     async ngOnInit() {
         console.log("ENTROU NO ONINIT");
@@ -222,7 +226,32 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     filteredNames() {
+        this.moveCreatorToTop(this.projeto.members)
         return this.projeto?.members?.filter(element => element?.user?.email?.toLowerCase()?.startsWith(this.searchTerm.toLowerCase()) || element?.user?.name?.toLowerCase().startsWith(this.searchTerm.toLowerCase()));
+    }
+
+    moveCreatorToTop(members: any[]): any[] {
+        const translations:any = {
+            en: 'Creator',
+            es: 'Creador',
+            ch: '创建者',
+            pt: 'Criador'
+        };
+    
+        // Obtém a linguagem do LocalStorage
+        const lang = localStorage.getItem('lang') || 'pt'; // Por padrão, use 'pt' se não houver linguagem definida
+    
+        const creatorRole = translations[lang];
+    
+        const creatorIndex = members.findIndex(member => member.user.currentRole === creatorRole);
+    
+        if (creatorIndex !== -1) {
+            const creatorMember = members.splice(creatorIndex, 1)[0];
+            
+            members.unshift(creatorMember);
+        }
+    
+        return members;
     }
 
     setResponse(event: any) {
@@ -247,7 +276,6 @@ export class TelaFullViewComponent implements OnInit {
 
     setdashboardEdit(event: any) {
         this.dashboardEdit = event
-
     }
 
     getResponse() {
@@ -263,7 +291,7 @@ export class TelaFullViewComponent implements OnInit {
 
     verifyStatusDefault(status: Status) {
         if (
-            status.name === 'não atribuido' || status.name === 'Sin asignar' || status.name === 'Unassigned' || status.name === '未分配' ||
+            status.name === 'não atribuido' || status.name === 'no asignado' || status.name === 'unassigned' || status.name === '未分配' ||
             status.name === 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成' ||
             status.name === 'pendente' || status.name === 'pendiente' || status.name === 'pending' || status.name === '待定' ||
             status.name === 'em progresso' || status.name === 'en progreso' || status.name === 'in progress' || status.name === '进展中'

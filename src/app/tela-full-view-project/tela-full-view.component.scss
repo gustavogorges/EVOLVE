@@ -4,7 +4,7 @@
 
 
 .div-pai{
-    @apply grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300 h-fit;
+    @apply xl:grid grid-cols-2 grid-rows-1 gap-[5%] justify-center p-5 pt-14 text-gray-800 dark:text-gray-300 h-fit;
     grid-template-columns: 60% 20%;
 
     
@@ -68,7 +68,7 @@
                 @apply py-[3%] flex flex-col;
     
                 .dashboard{
-                    @apply w-full h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
+                    @apply w-full h-[30vh] xl:h-[60vh] bg-primaryGray dark:bg-gray-700 p-4 rounded-t-xl gap-1 xl:gap-5 shadow-lg grid grid-cols-4 grid-rows-2;
 
                     .trash{
                         @apply rounded-lg right-0 bg-red-600 absolute z-50 scale-105 duration-200 overflow-hidden;
@@ -79,7 +79,7 @@
                     }
     
                     .chart{
-                        @apply cursor-pointer duration-300 rounded-lg overflow-auto border-2 min-w-[10rem] max-w-full min-h-[10rem] max-h-full dark:bg-gray-300;
+                        @apply cursor-pointer duration-300 rounded-lg overflow-auto border-2 xl:min-w-[10rem] max-w-full xl:min-h-[10rem] max-h-full dark:bg-gray-300;
                     }
                 }
 
@@ -95,10 +95,10 @@
     }
 
     .div-menor{
-        @apply w-full;
+        @apply fixed top-0 pt-8 xl:pt-0 xl:relative xl:w-full;
 
         .square{
-            @apply p-[1.5%] overflow-auto bg-primaryGray dark:bg-gray-700 h-[80vh] w-[20%] fixed shadow-md rounded-lg;
+            @apply p-[1.5%] w-[20rem] overflow-auto bg-primaryGray dark:bg-gray-700 xl:h-[80vh] xl:w-[20%] fixed shadow-md rounded-lg;
 
             .name{
                 @apply px-2;

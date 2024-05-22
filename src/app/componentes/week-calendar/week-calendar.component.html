@@ -15,16 +15,31 @@
       ></button>
     </div>
   </div>
-  <div>
-    <div class="days-row flex flex-col gap-6 items-center">
-      <ng-container *ngFor="let dia of diasSemana; let i = index">
-        <div class="flex w-full md:h-12 h-20 items-center md:bg-white dark:bg-dark-primary-black rounded-md grelative shadow-sm flex-col md:flex-row gap-2">
-          <div
-            class="xl:max-w-[160px] xl:w-full sm:w-1/4 w-full h-full text-center bg-secondary dark:bg-dark-secondary md:rounded-lg rounded-md flex md:flex-col flex-row gap-3 md:gap-1 justify-center items-center p-1"
-            [ngClass]="{ todayText: isToday(dia) }"
-          >
-            <p class="text-p">{{ dia | date : "EEEE" }}</p>
-            <p class="text-p text-gray-50">{{ dia | date : "dd/MM" }}</p>
+
+    <div>
+      <div class="days-row flex flex-col gap-6 items-center">
+        <ng-container *ngFor="let dia of diasSemana; let i = index">
+        
+         
+          <div class="flex w-full md:h-12 h-20 items-center  md:bg-white dark:bg-dark-primary-black rounded-md grelative shadow-sm flex-col md:flex-row  gap-2">
+            
+            <div
+              class="xl:max-w-[160px]  xl:w-full sm:w-1/4 w-full  h-full text-center    bg-secondary dark:bg-dark-secondary md:rounded-lg rounded-md flex md:flex-col flex-row gap-3 md:gap-1 justify-center items-center p-1"
+              [ngClass]="{ todayText: isToday(dia) }"
+            >
+              <p class="text-p">{{ dia | date : "EEEE" }}</p>
+              <p class="text-p text-gray-50">
+                {{ dia | date : "dd" }}/{{ dia | date : "mm" }}
+              </p>
+            </div>
+            <div
+              class="flex w-full items-center  bg-white dark:bg-dark-primary-black rounded-md overflow-hidden scroll-container"
+            
+            >
+           
+        <app-tasks-week [taskList]="filterTasksDay(dia)" class="" [day]=dia></app-tasks-week>
+              
+            </div>
           </div>
           <div class="flex w-full items-center bg-white dark:bg-dark-primary-black rounded-md overflow-hidden scroll-container">
             <app-tasks-week [taskList]="filterTasksDay(dia)" class="" [day]="dia"></app-tasks-week>

@@ -106,7 +106,7 @@ config = false
     this.cookieService.deleteAll()
     this.a.deleteAll()
 
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
 
   }
   goProjetos(){

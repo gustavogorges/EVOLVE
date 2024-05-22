@@ -29,21 +29,21 @@ export class MemberListFullViewProjectComponent implements OnInit {
 
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    this.userProject = this.project.members.find(userProject => userProject.user.id == this.user.id)!;
-    this.loggedUserProject = this.project.members.find(userProject => userProject.user.id == this.loggedUser.id)!;
+    this.userProject = this.project.members.find(userProject => userProject.user?.id == this.user?.id)!;
+    this.loggedUserProject = this.project.members.find(userProject => userProject.user?.id == this.loggedUser?.id)!;
     if(this.loggedUserProject.role.name != "PROJECT_COLABORATOR" && this.loggedUserProject.role.name != "PROJECT_VIEWER"){
       this.hasPermission = true;
     }
-    if(this.userProject.role.name == "PROJECT_COLABORATOR"){
+    if(this.userProject?.role?.name == "PROJECT_COLABORATOR"){
       this.user.currentRole = "Colabarador"
     }
-    if(this.userProject.role.name == "PROJECT_CREATOR"){
+    if(this.userProject?.role?.name == "PROJECT_CREATOR"){
       this.user.currentRole = "Criador"
     }
-    if(this.userProject.role.name == "PROJECT_ADM"){
+    if(this.userProject?.role?.name == "PROJECT_ADM"){
       this.user.currentRole = "Administrador"
     }
-    if(this.userProject.role.name == "PROJECT_VIEWER"){
+    if(this.userProject?.role?.name == "PROJECT_VIEWER"){
       this.user.currentRole = "Espectador"
     }
   }
