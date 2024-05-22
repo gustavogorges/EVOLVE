@@ -7,7 +7,7 @@
             @apply w-full;
 
             .comentario{
-                @apply grid grid-cols-2 grid-rows-2 items-center py-3 border-b-2
+                @apply grid grid-cols-2 grid-rows-2 items-center xl:py-3 border-b-2
                 border-gray-200
                 dark:border-gray-500;
                 grid-template-columns: 12% 78% 10%;
@@ -19,23 +19,23 @@
                         @apply col-start-1 col-end-2 flex items-center rounded-full border-2 justify-center;
                 
                         .foto2{
-                            @apply h-[4rem] w-[4rem] overflow-hidden rounded-full text-3xl flex justify-center items-center font-semibold 
+                            @apply xl:h-[4rem] h-[2rem] w-[2rem] xl:w-[4rem] overflow-hidden rounded-full text-3xl flex justify-center items-center font-semibold 
                         }
                 
                         .fotoImagem{
-                            @apply h-[4rem] w-[4rem] rounded-full object-cover
+                            @apply xl:h-[4rem] h-[2rem] w-[2rem] xl:w-[4rem] rounded-full object-cover
                         }
                     }
                 }
 
                 .nome{
-                    @apply row-start-1 row-end-2 col-start-2 col-end-3 text-xl font-semibold
+                    @apply row-start-1 row-end-2 col-start-2 col-end-3 xl:text-xl font-semibold
                     text-primary
                     dark:text-dark-primary;
                 }
 
                 .comentario-text{
-                    @apply overflow-auto row-start-2 col-start-2 col-end-3 text-lg dark:text-primaryGray;
+                    @apply overflow-auto row-start-2 col-start-2 col-end-3 text-sm xl:text-lg dark:text-primaryGray;
 
                     p{
                         @apply text-justify break-all
@@ -43,7 +43,7 @@
                 }
 
                 .date{
-                    @apply text-gray-500 dark:text-gray-300 items-center px-1;
+                    @apply text-gray-500 dark:text-gray-300 items-center -translate-x-10 xl:-translate-x-0 px-1;
                 }
             }
         }

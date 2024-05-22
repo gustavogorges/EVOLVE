@@ -1,16 +1,17 @@
-<div class="main">
+<div class="main dark:bg-dark-primary-black">
 
-    <div class="message-input">
-        <input class="w-full bg-primaryWhite outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
+    <div class="message-input ">
+        <input class="w-full bg-primaryWhite dark:bg-dark-secundary-gray outline-none" placeholder="Escreva aqui ..." type="text" [(ngModel)]="newMessage.content">
     </div>
 
-    <div class="send-icon-container" (click)="sendMessage()">
-        <img src="../../assets/sendButton.svg" alt="" class="">
+    <div class="send-icon-container " (click)="sendMessage()">
+        <i class="pi pi-send text-secondary dark:text-dark-secundary-green " style="font-size: 1.2rem;"></i>
     </div>
 
     <div class="annex-icon-container relative">
-        <input type="file" class="opacity-0 absolute w-full z-10 bg-black top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2" [(ngModel)]="newMessage.attachments">
-        <img src="../../assets/clip.svg" alt="">
+        <input type="file" class="opacity-0 absolute w-full z-10  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2" [(ngModel)]="newMessage.attachments">
+        <i class="pi pi-paperclip text-secondary dark:text-dark-secundary-green " style="font-size: 1.2rem;"></i>
+
     </div>
 
 </div>

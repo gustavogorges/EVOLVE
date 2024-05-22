@@ -3,7 +3,7 @@ import { LogarithmicScale } from 'chart.js';
 import { UsuarioTarefa } from 'src/model/userTask';
 import { Subject } from 'rxjs';
 import { Priority } from 'src/model/priority';
-import { PriorityRecord } from 'src/model/PriorityRecord';
+import { PriorityRecord } from 'src/model/priorityRecord';
 // import { PriorityRecord } from 'src/model/priorityRecord';
 import { Project } from 'src/model/project';
 import { Property } from 'src/model/propriedade/property';
@@ -234,7 +234,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
                 this.tarefa.currentStatus.name = '进展中';
             } else if (this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
                 this.tarefa.currentStatus.name = '已完成';
-            } else if (this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+            } else if (this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'no asignado' || this.tarefa.currentStatus.name === 'unassigned') {
                 this.tarefa.currentStatus.name = '未分配';
             }
     } else if (lang === 'pt') {
@@ -244,7 +244,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
                 this.tarefa.currentStatus.name = 'em progresso';
             } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
                 this.tarefa.currentStatus.name = 'concluido';
-            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'Sin asignar' || this.tarefa.currentStatus.name === 'Unassigned') {
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'no asignado' || this.tarefa.currentStatus.name === 'unassigned') {
                 this.tarefa.currentStatus.name = 'não atribuido';
             }
     } else if (lang === 'es') {
@@ -254,8 +254,8 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
                 this.tarefa.currentStatus.name = 'en progreso';
             } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completed') {
                 this.tarefa.currentStatus.name = 'completado';
-            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Unassigned') {
-                this.tarefa.currentStatus.name = 'Sin asignar';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'unassigned') {
+                this.tarefa.currentStatus.name = 'no asignado';
             }
     } else if (lang === 'en') {
             if (this.tarefa.currentStatus.name === '待定' || this.tarefa.currentStatus.name === 'pendente' || this.tarefa.currentStatus.name === 'pendiente') {
@@ -264,8 +264,8 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
                 this.tarefa.currentStatus.name = 'in progress';
             } else if (this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'concluido' || this.tarefa.currentStatus.name === 'completado') {
                 this.tarefa.currentStatus.name = 'completed';
-            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'Sin asignar') {
-                this.tarefa.currentStatus.name = 'Unassigned';
+            } else if (this.tarefa.currentStatus.name === '未分配' || this.tarefa.currentStatus.name === 'não atribuido' || this.tarefa.currentStatus.name === 'no asignado') {
+                this.tarefa.currentStatus.name = 'unassigned';
             }
     }
 }

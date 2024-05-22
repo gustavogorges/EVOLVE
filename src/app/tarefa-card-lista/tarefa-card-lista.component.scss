@@ -1,4 +1,4 @@
-.main{
+  .main{
   @apply w-[80%] lg:w-[90%] flex h-[40px] lg:h-[60px] items-center gap-[5%] justify-center  px-2  lg:p-2    bg-[#FFFFFF] dark:bg-dark-primary-black rounded-lg   ;
   
 }
@@ -24,14 +24,14 @@
 
   }
   .finalDate-box{
-    @apply w-max
+    @apply w-[4%]
   }
   .finalDate {
-    @apply xl:text-xl lg:text-lg text-sm text-primary dark:text-dark-primary font-hind-madurai;
+    @apply font-titulo  lg:text-base text-sm text-primary dark:text-dark-primary ;
   
   }
   .scheduleDate{
-    @apply text-black dark:text-secondaryWhite lg:text-lg xl:text-xl text-sm  font-hind-madurai
+    @apply text-black dark:text-secondaryWhite font-titulo  lg:text-base text-sm text-sm
   }
   .status-box{
     @apply  flex  w-max xl:w-20 ; 

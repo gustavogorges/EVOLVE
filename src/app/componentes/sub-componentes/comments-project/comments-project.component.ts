@@ -90,7 +90,7 @@ export class CommentsProjectComponent implements OnInit {
       newComment.user = this.loggedUser;
       // find a way of getting this values
       newComment.timeHour = hours + ":" + minutes;
-      newComment.timeDayAndMonth = "0"+day + "/" +"0"+month;
+      newComment.timeDayAndMonth = day + "/" +"0"+month;
 
       let postComment:any = newComment
       postComment.user = {"id":this.loggedUser.id}
