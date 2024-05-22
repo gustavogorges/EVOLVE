@@ -463,6 +463,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
  
   }
+  async saveDescription():Promise<void>{
+    this.tarefa = await this.service.patchTaskDescription(this.tarefa.id, this.loggedUser.id, this.tarefa.description)
+  }
 
   saveProperty() : void {
     console.log(this.tarefa.finalDate);

@@ -426,6 +426,17 @@ export class BackendEVOLVEService {
     ).data;
   }
 
+  async patchTaskDescription(taskId:number, actionUserId:number, description:string){
+    let formData = new FormData()
+    formData.append("description", description)
+    return (
+      await axios.patch(
+        this.URL + 'task/' + taskId + '/description/' + actionUserId,
+        formData, {withCredentials: true}
+      )
+    ).data;
+  }
+
   async deleteComment(taskId: number, commentId: number, userId: number) {
     return (
       await axios.delete(
