@@ -88,7 +88,7 @@ export class BackendEVOLVEService {
         dashboard, {withCredentials: true}
       )
     ).data;
-  }
+  }  //não é usado?
 
   async updateChartList(
     idDashboard: number,
@@ -979,7 +979,7 @@ export class BackendEVOLVEService {
 
 
   async updateDashboardName(idDashboard:number, idProject:number, dashboard:Dashboard){
-    return (await (axios.put(this.URL+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard))).data;
+    return (await (axios.put(this.URL+"project/"+idProject+"/dashboard/"+idDashboard+"/updateName", dashboard, {withCredentials: true}))).data;
   }
 
   async updateNameDescProject(idProject:number, projectNameDescDTO:any){

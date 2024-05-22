@@ -247,7 +247,6 @@ export class TelaFullViewComponent implements OnInit {
 
     setdashboardEdit(event: any) {
         this.dashboardEdit = event
-
     }
 
     getResponse() {
