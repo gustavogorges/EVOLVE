@@ -23,9 +23,9 @@ export class NotasComponent implements OnInit {
     this.content = this.task.notes;
   }
 
-  saveContent() {
+  onChange(){
     this.task.notes = this.content;
-    this.service.setTaskNotes(this.task.id,this.task.notes);
+    this.service.setTaskNotes(this.task.id, this.content);
   }
 
   public Editor = ClassicEditor;

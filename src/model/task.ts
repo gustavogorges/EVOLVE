@@ -34,6 +34,7 @@ export class Task{
     statusListIndex :number = -1;
     progress: number = 0; 
     concluded : boolean = false;
+    notes : string = "";
   
     conclusionPercentage:number=0;
     isVisible: boolean = false;

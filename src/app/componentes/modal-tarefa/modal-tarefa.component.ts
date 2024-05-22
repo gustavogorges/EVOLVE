@@ -512,10 +512,8 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.page_task = 'historicos';
     } else if (name_page == 'anexos') {
       this.page_task = 'anexos';
-    } else if (name_page == 'automacao') {
-      this.page_task = 'automacao';
-    } else if (name_page == 'integracao') {
-      this.page_task = 'integracao';
+    } else if (name_page == 'notas') {
+      this.page_task = 'notas';
     }
   }
 

@@ -58,6 +58,12 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL+"task/setConcluded",formData, {withCredentials: true})).data
   }
 
+  async setTaskNotes(taskId:number, notes:string) {
+    let formData = new FormData();
+    formData.append("notes", notes);
+    return (await axios.patch(this.URL+"task/"+taskId+"/notes",formData, {withCredentials: true})).data
+  }
+
   async patchTeamImageColor(teamId:number, newImageColor:string):Promise<Team>{
     let path:string = "team/"
     let formData:FormData = new FormData
