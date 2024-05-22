@@ -718,7 +718,8 @@ export class BackendEVOLVEService {
   async putProjeto(project: Project) {
     //falta fazer aqui
     this.patchProjectName(project.id, project.name); 
-  
+
+    console.log("vou fazer patch da descricao hein");
     this.patchProjectDescription(project.id, project.description);
 
     // this.patchProjectImage(project.id, project.image); 

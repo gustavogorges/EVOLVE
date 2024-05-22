@@ -56,7 +56,7 @@
         *ngIf="logged"
         class="button-secondary"
       >
-        {{ config_cancel }}
+        {{ config_cancel | translate}}
         <i class="pi pi-cog icon"  *ngIf="disabledInfo"></i>
       </button>
 
@@ -65,7 +65,7 @@
         *ngIf="!logged"
         class="button-secondary"
       >
-        iniciar chat
+        {{"Iniciar Chat" | translate}}
         <i class="pi pi-cog icon" ></i>
       </button>
       <button
@@ -73,7 +73,7 @@
         *ngIf="logged"
         class="button-primary"
       >
-        {{ edit_confirm }}
+        {{ edit_confirm | translate}}
         <i
           class="pi pi-user-edit icon"
           *ngIf="disabledInfo"
