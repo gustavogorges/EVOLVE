@@ -219,13 +219,8 @@
             <div class="flex justify-between h-full items-center px-2">
               <div class="flex justify-center gap-2 text-primary dark:text-dark-primary">
                 <div><i class="pi pi-envelope"></i></div>
-<<<<<<< HEAD
                 <div class="w-[80%]">
                   <p class="truncate text-sm">{{ member.user.email }}</p>
-=======
-                <div>
-                  <p class="truncate text-sm">{{ member.user?.email }}</p>
->>>>>>> 325bd59b28f94ac8f0b2ec93c9c92dda62bf3d83
                 </div>
               </div>
               <button (click)="goToPerfilMember(member.user)"
@@ -269,15 +264,11 @@
           </div>
         </div>
         <div>
-<<<<<<< HEAD
-          <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">
-=======
           <div
             *ngIf="!booleanAddStatus && !boolEditStatus && hasPermission"
             (click)="addStatus()"
             class="add-box"
           >
->>>>>>> 325bd59b28f94ac8f0b2ec93c9c92dda62bf3d83
             <i class="pi pi-plus"></i>
             <p>{{ "Adicionar status" | translate }}</p>
           </div>
