@@ -3,7 +3,7 @@
 }
 
 .propertie-value {
-    @apply  hover:bg-slate-100 items-center px-2 rounded-lg cursor-pointer text-slate-500
+    @apply  hover:bg-slate-100 items-center px-2 rounded-lg cursor-pointer text-slate-500 max-w-lg
 }
 
 .propertie-value-no {

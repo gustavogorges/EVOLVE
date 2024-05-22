@@ -126,7 +126,7 @@
       *ngIf="booleanAddPropriedade"
       [tarefa]="tarefa"
       [projectId]="projeto.id"
-      (newItemEvent)="updatePropertiesList()"
+      (newItemEvent)="updatePropertiesList($event)"
     ></app-select-propriedade>
     <div
       class="task-properties-box"
@@ -319,6 +319,7 @@
                 [events]="eventsSubject.asObservable()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
+                (deleteEmitter)="propertiesList = $event.properties"
               ></app-propriedade-tarefa>
             </div>
           </div>
@@ -337,6 +338,7 @@
                 [events]="eventsSubject.asObservable()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
+                (deleteEmitter)="propertiesList = $event.properties"
               ></app-propriedade-tarefa>
             </div>
           </div>

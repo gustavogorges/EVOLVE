@@ -25,6 +25,8 @@ export class PropriedadeTarefaComponent implements OnInit {
   
   @Input()
   task : Task = new Task();
+  @Output()
+  deleteEmitter : EventEmitter<Task> = new EventEmitter<Task>();
 
   constructor(private service : BackendEVOLVEService) { }
 
@@ -190,6 +192,7 @@ export class PropriedadeTarefaComponent implements OnInit {
   }
 
   saveProperty(property:Property) : void {
+    let oldId : number = 0;
 
 
      if(property.propertyValues[property.propertyValues.length] != undefined) {
@@ -200,11 +203,16 @@ export class PropriedadeTarefaComponent implements OnInit {
    
      this.newPropertyObject.value = this.newPropertyValue;
      this.newPropertyObject.property = this.property;
+
+     if(this.propertyValue != undefined) {
+       let oldId = this.propertyValue.id;
+     }
         
      this.propertyValue = this.newPropertyObject;
 
      this.propertyTest = property;
      
+     this.propertyValueObject.id = oldId;
      this.propertyValueObject.property = this.propertyTest;
      this.propertyValueObject.value = this.newPropertyObject;
      this.propertyValueObject.value.propertyType = property.propertyType.toString();
@@ -229,6 +237,7 @@ export class PropriedadeTarefaComponent implements OnInit {
 
   async deleteProperty(property:Property) {
     this.task = await this.service.deleteProperty(this.task.id,this.loggedUser.id,property.id);
+    this.deleteEmitter.emit(this.task);
   }
 
   oldValueFunction() {
