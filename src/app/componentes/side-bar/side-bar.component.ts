@@ -111,7 +111,9 @@ projects:Project[]=[]
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
 
     this.cookieService.deleteAll()
-    this.a.deleteAll()
+    setTimeout(async () =>{
+      this.a.deleteAll()
+     }, 50)
 
     this.router.navigate(['/login']);
 
