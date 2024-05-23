@@ -3,6 +3,7 @@ import { Task } from "./task";
 import { File } from "./file";
 import { UserProject } from "./userProject";
 import { UserTeam } from "./userTeam";
+import { NotificationsConfig } from "./notificationsConfig";
 
 export class User {
     [x: string]: any;
@@ -22,9 +23,10 @@ export class User {
     secondaryColor: string = "#4C956C"; 
     primaryDarkColor: string = "#67BFE0"; 
     secondaryDarkColor: string = "#86C19F"; 
-    fontSize : number =16; 
+    fontSize : number = 16; 
     currentRole : string = '';
 
     socialLogin:boolean = false
+    notificationsConfig:NotificationsConfig = new NotificationsConfig
  
 }
