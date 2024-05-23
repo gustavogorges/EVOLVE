@@ -1,40 +1,62 @@
-<confirm-action-project-modal *ngIf="confirmationActionModalBol" class="fixed z-10 left-[5%] right-[5%] xl:right-0 top-1/3 xl:left-[37%]" (result)="setResponse($event)" [quest]="quest"></confirm-action-project-modal>
+<confirm-action-project-modal
+  *ngIf="confirmationActionModalBol"
+  class="fixed z-10 left-[5%] right-[5%] xl:right-0 top-1/3 xl:left-[37%]"
+  (result)="setResponse($event)"
+  [quest]="quest"
+></confirm-action-project-modal>
 <app-modal-tarefa
-    class="tarefa"
-    *ngIf="booleanTask"
-    [tarefa]="task"
-    [projeto]="project"
-    (closeModalTask)="closeTask($event)"
-  ></app-modal-tarefa>
-<div class="screen duration-150" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50':'blur-0'">
-    <div class="tittle">
-        <p>{{team?.name}}</p>
-        <button class="disabled:opacity-70" *ngIf="hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
-    
+  class="tarefa"
+  *ngIf="booleanTask"
+  [tarefa]="task"
+  [projeto]="project"
+  (closeModalTask)="closeTask($event)"
+></app-modal-tarefa>
+<div
+  class="screen"
+  [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50' : 'blur-0'"
+>
+  <!--<div  joyrideStep="step4" title="Criar Projeto" text="Clique para criar um projeto.">
+        <p>puta é sua mãe</p>
+    </div>-->
+
+  <div class="tittle">
+    <p>{{ name }}</p>
+
+    <div
+      joyrideStep="step4"
+      title="Criar Projeto"
+      text="Clique para criar um projeto."
+      class="w-max h-max"
+    >
+      <button class="disabled:opacity-70"  [disabled]="!hasPermission(team)" (click)="goToCreateProject(this.teamId)">
+        <i class="pi pi-plus"></i> {{ "Adicionar Projeto" | translate }}
+      </button>
+
     </div>
-    
-    <div class="projects">
-        <div *ngFor="let p of projects" #projectElement>
-            
-            <app-projeto-remastered 
-            
-            (salvarProjeto)="editFun($event)"
-            [projectOpen]="p.isVisible" 
-            [projeto]="p" 
-            (click)="openProject(p)" 
-            (noCloseProject)="noCloseProject(p)"
-            (deletar)="delete($event)"
-            [resetProject]="resetProject"
-            (editProject)="editProject($event, p)"
-            (resetProjectOff)="resetProjectOff()"
-            (MultipartFile)="saveImage($event)"
-            (quest)="setQuest($event)"
-            [confirmationAction]="getResponse()"
-            (listFromRemove)="setListFromRemove($event)"
-            (openTaskModal)="openTaskModal($event)"
-            ></app-projeto-remastered>
-            
-        </div>
+  </div>
+
+  <div class="projects">
+    <div *ngFor="let p of projects" #projectElement>
+      <app-projeto-remastered
+        (salvarProjeto)="editFun($event)"
+        [projectOpen]="p.isVisible"
+        [projeto]="p"
+        (click)="openProject(p)"
+        (noCloseProject)="noCloseProject(p)"
+        (deletar)="delete($event)"
+        [resetProject]="resetProject"
+        (editProject)="editProject($event, p)"
+        (resetProjectOff)="resetProjectOff()"
+        (MultipartFile)="saveImage($event)"
+        (quest)="setQuest($event)"
+        [confirmationAction]="getResponse()"
+        (listFromRemove)="setListFromRemove($event)"
+        (openTaskModal)="openTaskModal($event)"
+      ></app-projeto-remastered>
     </div>
+  </div>
 </div>
-<div *ngIf="confirmationActionModalBol" class="fixed w-screen h-screen top-0 left-0"></div>
+<div
+  *ngIf="confirmationActionModalBol"
+  class="fixed w-screen h-screen top-0 left-0"
+></div>
