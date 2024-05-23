@@ -310,7 +310,7 @@ export class TelaFullViewComponent implements OnInit {
 
     async enableStatus(status: Status) {
         status.enabled = !status.enabled
-        await this.postStatus(status)
+        this.projeto = await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
     organizeStatus() {
@@ -429,10 +429,8 @@ export class TelaFullViewComponent implements OnInit {
     async editStatusPut() {
         this.boolEditStatus = false
         this.booleanAddStatus = false
-        let oldStatus = this.projeto.statusList.find(status => status.id == this.status.id)
-        oldStatus = this.status
         this.status = new Status
-        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
+        await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
 
