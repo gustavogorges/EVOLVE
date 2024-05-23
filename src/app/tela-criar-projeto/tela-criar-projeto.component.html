@@ -3,8 +3,8 @@
         
         <p>{{team?.name}}</p>
     </div>
-    <div class="flex justify-center">
-        <div class="separa-component">
+    <div class="flex justify-center" >
+        <div  joyrideStep="step5" title="Informações do Projeto" text="Preencha as informações necessárias para criar um projeto."  class="separa-component">
             <div *ngIf="backGroundColorProject" class="project-image">
                 <div class="image border-2 dark:border-dark-secundary-gray" [ngStyle]="{'background': backGroundColorProject }">
                     <img *ngIf="preImage" [src]="preImage" alt="">
@@ -75,7 +75,7 @@
             </div>
             <div class="botoes">
                 <button class="cancelar" (click)="cancelar(this.team.id)">{{'Cancelar' | translate}}</button>
-                <button class="salvar" (click)="salvarProjeto(this.team.id)">{{'Salvar' | translate}}</button>
+                <button  joyrideStep="step6" title="Salvar Projeto" text="Clique aqui para salvar o projeto." class="salvar" (click)="salvarProjeto(this.team.id)">{{'Salvar' | translate}}</button>
             </div>
         </div>
     </div>

@@ -9,6 +9,8 @@ import { UserProject } from 'src/model/userProject';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { SideBarService } from 'src/service/sideBarService';
+import { TourService } from 'src/service/tutorialService';
 
 @Component({
   selector: 'app-side-bar',
@@ -20,7 +22,10 @@ export class SideBarComponent implements OnInit {
 
 
   constructor(    private cookieService: CookiesService, private router: Router,  
-    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService, private backEndService :BackendEVOLVEService
+                   
+    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService,
+    private tutorialService:TourService, private sideBarService:SideBarService, private backEndService :BackendEVOLVEService
+
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
@@ -29,7 +34,6 @@ config = false
 projects:Project[]=[]
 
   async ngOnInit(): Promise<void> {
-    
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
     this.projects = await this.backEndService.getProjectsByUserId(this.loggedUser.id)
@@ -91,6 +95,9 @@ projects:Project[]=[]
 
   }
 
+  startTour(){
+    this.tutorialService.startTour();
+  }
 
   goTelaInicial(){
     this.router.navigateByUrl('/tela-inicial');

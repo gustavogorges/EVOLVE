@@ -23,6 +23,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   constructor(private service : BackendEVOLVEService, private route:Router, private activatedRoute : ActivatedRoute, private cookies_service : CookiesService) { }
 
   id!: number
+  name:string = "Oi luka sou undefined"
   projects !: Project[]
   resetProject: Boolean = false
   formData!:FormData
@@ -40,8 +41,11 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
   loggedUser : User = new User;
   async ngOnInit() {
+
     this.loggedUser = await this.cookies_service.getLoggedUser();
     await this.getProjects()
+    this.getProjects()
+    this.name = this.team.name
   }
 
   closeTask(event: boolean) {
