@@ -49,6 +49,7 @@ export class SelectPropriedadeComponent implements OnInit {
   elemento: Property = new Property();
   loggedUser: User = new User;
   checkboxProperty: boolean = false;
+  propertiesUpdatedList: Array<Property> = new Array;
 
   constructor(
     private service : BackendEVOLVEService,
@@ -145,6 +146,8 @@ export class SelectPropriedadeComponent implements OnInit {
         this.newPropertie.global = true;
        }
        this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+       let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       } else if(this.optionType == 'data') {
         this.newPropertie.propertyType = PropertyType.DataValue;
         this.tarefa.properties.push(this.newPropertie);
@@ -152,6 +155,8 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
         this.newPropertie.options = this.listOptions;
@@ -160,6 +165,8 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'seleção múltipla') {
         this.newPropertie.propertyType = PropertyType.MultiSelectValue;   
         this.newPropertie.options = this.listOptions;
@@ -168,6 +175,8 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'número double') {
         this.newPropertie.propertyType = PropertyType.DoubleValue;   
         this.tarefa.properties.push(this.newPropertie);
@@ -175,6 +184,8 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'texto') {
         this.newPropertie.propertyType = PropertyType.TextValue;
         this.tarefa.properties.push(this.newPropertie);
@@ -182,14 +193,18 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'associados') {
         this.tarefa.properties.push(this.newPropertie); 
         if(this.checkboxProperty){
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        this.propertiesUpdatedList = updatedTask.properties;
       }
       
-    this.newItemEvent.emit()  
+    this.newItemEvent.emit(this.propertiesUpdatedList)  
   }
 }

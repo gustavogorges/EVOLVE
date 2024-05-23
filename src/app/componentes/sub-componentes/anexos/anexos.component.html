@@ -18,7 +18,7 @@
             *ngFor="let file of task.files; let index = index"
             [ngClass]="task.files.length == index+1 && task.files.length > 4 ? 'border-0' : 'border-b-2'" 
             >
-            <a [download]="file.name"  [href]="file.url" [type]="file.type">
+            <a [download]="file.name" [href]="file.url" [type]="file.type">
             <i 
             class="pi pi-download file-icon2">
              </i>

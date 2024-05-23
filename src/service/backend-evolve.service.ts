@@ -28,6 +28,7 @@ import { UsuarioTarefa } from 'src/model/userTask';
 import { UserTeam } from 'src/model/userTeam';
 import { TeamNotification } from 'src/model/teamNotification';
 import { File } from 'src/model/file';
+import { NotificationsConfig } from 'src/model/notificationsConfig';
 
 
 @Injectable({
@@ -56,6 +57,12 @@ export class BackendEVOLVEService {
     let formData = new FormData();
     formData.append("taskId", taskId.toString());
     return (await axios.patch(this.URL+"task/setConcluded",formData, {withCredentials: true})).data
+  }
+
+  async setTaskNotes(taskId:number, notes:string) {
+    let formData = new FormData();
+    formData.append("notes", notes);
+    return (await axios.patch(this.URL+"task/"+taskId+"/notes",formData, {withCredentials: true})).data
   }
 
   async patchTeamImageColor(teamId:number, newImageColor:string):Promise<Team>{
@@ -335,6 +342,14 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
   }
+
+
+  async patchNotificationsConfig(userId: number, config: NotificationsConfig): Promise<User> {
+    return (
+      await axios.patch(this.URL + 'user/' + userId + '/notificationsConfig', config, {withCredentials: true})
+    ).data;
+  }
+
 
   async patchUserImageFromLink(userId: number, image: File): Promise<User> {
     // let formsData = new FormData();
@@ -724,27 +739,16 @@ export class BackendEVOLVEService {
   // }
 
   async putProjeto(project: Project) {
-    //falta fazer aqui
-    this.patchProjectName(project.id, project.name); 
+    
+    await this.patchProjectName(project.id, project.name); 
 
-    console.log("vou fazer patch da descricao hein");
-    this.patchProjectDescription(project.id, project.description);
+    await this.patchProjectDescription(project.id, project.description);
+  
+    await this.patchProjecyImageColor(project.id, project.imageColor); 
+  
+    await this.patchProjectTasks(project.id, project.tasks);
 
-    // this.patchProjectImage(project.id, project.image); 
-  
-    // this.patchProjectImageRemove(project.id);
-  
-    this.patchProjecyImageColor(project.id, project.imageColor); 
-  
-    // this.patchProjectFinalDate(project.id, project.finalDate);
-  
-    // this.patchProjectStatusList(project.id, project.statusList); 
-  
-    // this.patchProjectMembers(project.id, project.members); 
-  
-    this.patchProjectTasks(project.id, project.tasks);
-  
-    // this.patchDefaultRole(project.id, project.defaultRole)
+    if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
 
     return await this.getOne("project", project.id)
   }
@@ -827,6 +831,8 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectFinalDate(projecId: number, finalDate: string) {
+    console.log(finalDate);
+    
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (

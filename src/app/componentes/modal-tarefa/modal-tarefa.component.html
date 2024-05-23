@@ -130,7 +130,7 @@
       *ngIf="booleanAddPropriedade"
       [tarefa]="tarefa"
       [projectId]="projeto.id"
-      (newItemEvent)="updatePropertiesList()"
+      (newItemEvent)="updatePropertiesList($event)"
     ></app-select-propriedade>
     <div
       class="task-properties-box"
@@ -323,6 +323,7 @@
                 [events]="eventsSubject.asObservable()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
+                (deleteEmitter)="propertiesList = $event.properties"
               ></app-propriedade-tarefa>
             </div>
           </div>
@@ -341,6 +342,7 @@
                 [events]="eventsSubject.asObservable()"
                 (eventEmitterValue)="setPropertyValue($event)"
                 (eventEmitterValue2)="setPropertyValue2($event)"
+                (deleteEmitter)="propertiesList = $event.properties"
               ></app-propriedade-tarefa>
             </div>
           </div>
@@ -427,6 +429,15 @@
         >
           {{'anexos' | translate}}
         </p>
+        <p
+          [ngClass]="
+            page_task == 'notas' ? 'border-b-2 border-primary' : 'border-none'
+          "
+          class="page-name"
+          (click)="changePage('notas')"
+        >
+          {{'Notas' | translate}}
+        </p>
       </div>
       <div class="components">
         <app-sub-tarefa
@@ -452,14 +463,12 @@
           [task]="tarefa"
           [loggedUser]="loggedUser"
         ></app-anexos>
-        <app-automacao
+        <app-notas
           class="component"
-          *ngIf="page_task == 'automacao'"
-        ></app-automacao>
-        <app-integracao
-          class="component"
-          *ngIf="page_task == 'integracao'"
-        ></app-integracao>
+          *ngIf="page_task == 'notas'"
+          [task]="tarefa"
+          [loggedUser]="loggedUser">
+        </app-notas>
       </div>
     </div>
   </div>

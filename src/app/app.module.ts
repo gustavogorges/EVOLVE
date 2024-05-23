@@ -139,6 +139,8 @@ import { CardsCarroselComponent } from './componentes/sub-componentes/cards-carr
 import { CardListLandingPageComponentComponent } from './componentes/sub-componentes/card-list-landing-page-component/card-list-landing-page-component.component';
 import { CalendarLandingPageComponentComponent } from './componentes/sub-componentes/calendar-landing-page-component/calendar-landing-page-component.component';
 import { GreenDivLandingpageComponent } from './componentes/green-div-landingpage/green-div-landingpage.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NotasComponent } from './componentes/sub-componentes/notas/notas.component';
 
 
 
@@ -219,6 +221,7 @@ export function HttpLoaderFactory(http:HttpClient){
     DashboardPerfilComponent,
     SideBarComponent,
     ModalConfigComponent,
+    NotasComponent,
 
     SelectOpcaoComponent,
     TelaPerfilComponent,
@@ -265,6 +268,7 @@ export function HttpLoaderFactory(http:HttpClient){
     CalendarModule,
     AppRoutingModule,
     AccordionModule,
+    CKEditorModule,
     ButtonModule,
     CheckboxModule,
     FormsModule,

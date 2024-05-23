@@ -19,7 +19,7 @@
       *ngIf="!checkTypeValue() && !booleanValueOption"
       class="propertie-value"
     >
-      {{ propertyValue.value.value }}
+    {{ propertyValue.value.value }} 
     </div>
     <div *ngIf="booleanValueOption" class="flex flex-wrap gap-2 flex-1">
       <div
@@ -43,7 +43,7 @@
   </div>
   <div
     *ngIf="property.editable == true"
-    class="h-full flex items-center justify-start gap-3"
+    class="h-[80%] flex items-start justify-start gap-3"
   >
     <!-- ARRUMAR OS NGIF DOS INPUT COM NOVA LÓGICA TAMBÉM -->
     <input
@@ -61,6 +61,7 @@
     <input
       *ngIf="property.propertyType.toString() == 'TextValue'"
       class="inputPropertyValue"
+      maxlength="20"
       type="text"
       [(ngModel)]="newPropertyValue"
     />

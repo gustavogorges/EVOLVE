@@ -3,6 +3,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { File } from 'src/model/file';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-anexos',
@@ -11,9 +12,14 @@ import { File } from 'src/model/file';
 })
 export class AnexosComponent implements OnInit {
 
-  constructor(private service:BackendEVOLVEService) { }
+  constructor(private service:BackendEVOLVEService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    this.task.files.forEach(file => {
+      this.setUrl(file);
+      console.log(file);
+      
+    });
   }
 
 
@@ -23,18 +29,14 @@ export class AnexosComponent implements OnInit {
   @Input()
   loggedUser : User = new User;
 
-  urls : Array<any> = new Array();
-  url : string = "";
-
   async onFileSelected(event : any) {
 
     const file:File = event.target.files[0];
  
     if (file) {
       this.task = await this.service.patchTaskFile(this.task.id,this.loggedUser.id,file);
-      const taskFile : File = this.task.files[this.task.files.length - 1];
-      this.setUrl(taskFile);
     }
+
   }
 
   verifyApprovament() :boolean {
@@ -53,7 +55,9 @@ export class AnexosComponent implements OnInit {
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: 'application/pdf' });
 
-    taskFile.url = window.URL.createObjectURL(blob);
+    const url = window.URL.createObjectURL(blob);
+    taskFile.url = this.sanitizer.bypassSecurityTrustUrl(url);
+
 
   }
 
@@ -63,9 +67,5 @@ export class AnexosComponent implements OnInit {
     this.service.deleteTaskFile(this.task.id,file.id,this.loggedUser.id);
   }
 
-  downloadFile(index:number) {
-    this.urls[index] = this.url;
-    window.open(this.url);
-  }
 
 }

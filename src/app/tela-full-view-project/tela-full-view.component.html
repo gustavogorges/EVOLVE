@@ -216,16 +216,17 @@
                 ? 'h-[2vw]'
                 : 'h-0'
             " class="member-infos-view">
-            <div class="flex justify-between h-full items-center px-2">
-              <div class="flex justify-center gap-2 text-primary dark:text-dark-primary">
+            <div class="flex justify-between w-full h-full items-center px-2">
+              <div class="flex w-[75%] overflow-hidden gap-2 text-primary dark:text-dark-primary">
                 <div><i class="pi pi-envelope"></i></div>
 
                 <div>
                   <p class="truncate text-sm">{{ member.user?.email }}</p>
+
                 </div>
               </div>
               <button (click)="goToPerfilMember(member.user)"
-                class="px-2 p-1 bg-secondary text-secondaryWhite rounded-lg flex gap-2">
+                class="px-2 hover:scale-105 duration-100 p-1 min-w-fit bg-secondary text-secondaryWhite rounded-lg flex gap-2">
                 <i class="pi pi-user"></i>
                 <i class="pi pi-angle-double-right"></i>
               </button>

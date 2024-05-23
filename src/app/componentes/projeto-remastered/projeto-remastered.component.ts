@@ -69,7 +69,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   preImage:SafeUrl | undefined = '';
   projetoSave !: Project
   searchTerm : string = ''
-  listIdsFromRemove = new Array<Pick<User, "id">>;
+  listIdsFromRemove = new Array<UserProject>;
   
   @Input() resetProject : Boolean = false
   
@@ -93,7 +93,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   @Output() quest: EventEmitter<string> = new EventEmitter<string>()
 
-  @Output() listFromRemove: EventEmitter<Array<Pick<User, "id">>> = new EventEmitter<Array<Pick<User, "id">>>()
+  @Output() listFromRemove: EventEmitter<Array<UserProject>> = new EventEmitter<Array<UserProject>>()
 
   @Output() openTaskModal: EventEmitter<Task> = new EventEmitter<Task>()
 
@@ -113,7 +113,7 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
   async alterarTarefaFavoritado(){
     this.projeto.favorited = !this.projeto.favorited;
-    this.projeto = await this.service.patchProjectFavorited(this.projeto.id, this.projeto.favorited)
+    await this.service.patchProjectFavorited(this.projeto.id, this.projeto.favorited)
   }
 
   async salvarTarefa(){
@@ -214,8 +214,8 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
     })
   }
 
-  async removeMember(user:User) {
-    if(user?.id != this.getProjectCreator(this.projeto).id){
+  async removeMember(user:UserProject) {
+    if(user?.user.id != this.getProjectCreator(this.projeto).id){
       this.quest.emit("Realmente deseja remover um membro?");
   
       try {
@@ -223,10 +223,10 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
         this.confirmationAction = undefined;
 
         if (confirmation) {
-          this.projeto.members.splice(this.projeto.members.indexOf(this.projeto.members.find(member => member.userId == user.id)!), 1)
-          this.listIdsFromRemove.push({
-            "id" : user.id
-          })
+          this.projeto.members.splice(this.projeto.members.indexOf(this.projeto.members.find(member => member.userId == user.user.id)!), 1)
+          this.listIdsFromRemove.push(
+            user
+          )
         }
 
       } catch (ignore) {}
