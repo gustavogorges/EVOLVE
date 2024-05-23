@@ -23,5 +23,5 @@ export class Team {
     defaultRole:Role = new Role;
     notifications: Array<TeamNotification> = new Array;
     booleanView: boolean = false;
-    code : String = 'tf';
+    code : string = 'tf';
 }

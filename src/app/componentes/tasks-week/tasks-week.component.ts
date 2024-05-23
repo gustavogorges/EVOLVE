@@ -89,8 +89,6 @@ async openTask(tarefa: Task): Promise<void> {
     let projetoId : number = tarefa.project.id!; 
     this.tarefaSelecionada = await this.service.getOne("task", tarefa.id);
     this.projeto = await this.service.getOne("project",projetoId)
-    console.log(this.tarefaSelecionada.project);
-    console.log(this.tarefaSelecionada);
     this.booleanTask = true;
 
   }

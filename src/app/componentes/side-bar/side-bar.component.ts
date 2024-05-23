@@ -41,7 +41,6 @@ projects:Project[]=[]
 
   @ViewChild('sidebar') sidebarConfig !: ElementRef
   onDocumentClick = (event: MouseEvent) => {
-    console.log(this.elementRef.nativeElement.contains(this.sidebarConfig));
     
     if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
         this.sideBar.emit(false)

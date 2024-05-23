@@ -12,11 +12,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
-    console.log(state.url);
-    
     if (this.service.isLoggedIn()) {
-      console.log(state.url);
-      
       // Se estiver logado e tentar acessar a página de login ou de cadastro, redireciona para a página inicial
       if ((state.url == '/tela-cadastro') || state.url==('/login')) {
         this.router.navigate(['/tela-inicial']);

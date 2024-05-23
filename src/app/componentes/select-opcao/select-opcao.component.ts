@@ -39,8 +39,6 @@ export class SelectOpcaoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.optionsList = this.property.options;
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    console.log(this.task);
-    
   }
 
   async saveOptionUniSelect(option:Option) {

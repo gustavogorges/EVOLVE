@@ -19,7 +19,6 @@ import { ToastModule } from 'primeng/toast';
 import { EquipeRecenteComponent } from './componentes/equipe-recente-card/equipe-recente-card.component';
 import { DiaCalendarioComponent } from './componentes/dia-calendario/dia-calendario.component';
 import { TarefaDiaComponent } from './componentes/tarefa-dia/tarefa-dia.component';
-
 import { ModalTarefaComponent } from './componentes/modal-tarefa/modal-tarefa.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SubTarefaComponent } from './componentes/sub-componentes/sub-tarefa/sub-tarefa.component';
@@ -102,7 +101,6 @@ import { ProjectsInfoPerfilComponent } from './componentes/projects-info-perfil/
 import { DashboardPerfilComponent } from './componentes/dashboard-perfil/dashboard-perfil.component';
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 import { ModalConfigComponent } from './componentes/modal-config/modal-config.component';
-
 import { SelectAssociatesComponent } from './componentes/select-associates/select-associates.component';
 
 import { VlibrasComponent } from './componentes/vlibras/vlibras.component';

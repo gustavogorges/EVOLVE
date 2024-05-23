@@ -80,13 +80,11 @@ export class SubTarefaComponent implements OnInit {
   }
 
   confirmEdit(subtarefa : Subtask) {
-    console.log(this.listaSubtarefas)
     subtarefa.name = this.newNameEdit;
     subtarefa.editable = false;
     this.service.putTarefa(this.tarefa, this.loggedUser.id);
   }
   async completed(sub : Subtask){
-      console.log(sub);
       if(sub.concluded){
         sub.concluded=false;
       }else{

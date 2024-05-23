@@ -40,10 +40,8 @@ export class MessageBarComponent implements OnInit {
   
       this.newMessage.date = messageDate.toISOString()
       
-      console.log(this.newMessage);
   
       let sentMessage:Message = await this.service.postMessage(this.newMessage)
-      console.log(sentMessage)
       this.chat.messages.push(sentMessage)
   
       this.newMessage = new  MessageDTO

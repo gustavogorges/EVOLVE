@@ -19,7 +19,6 @@ export class EnterTeamModalComponent implements OnInit {
   code !: string;
   loggedUser !: User
   async ngOnInit(): Promise<void> {
-    console.log('to aqui em ');
     this.loggedUser = await this.cookie.getLoggedUser()
     
   }
@@ -27,7 +26,6 @@ team !: Team
 invalidCode = false
   async verifyCode(){
     
-    console.log(this.code);
   let teamResponse = await this.service.getTeamsByCode(this.code);
 
     // Verificando o status e os dados da resposta

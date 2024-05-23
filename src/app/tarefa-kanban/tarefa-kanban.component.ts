@@ -74,14 +74,12 @@ export class TarefaKanbanComponent  implements OnChanges{
   onDragStart(event: any) {
     this.currentDragEffectMsg = '';
     this.currentDraggableEvent = event;
-    console.log(event.toElement.id)
     this.start = event.toElement.id
 
   }
   onDragStartTask(event: any) {
     this.dropTarefa = true; 
     this.dropStatus = false 
-    console.log(this.dropTarefa)
     this.start = event.toElement.id
 
 
@@ -89,7 +87,6 @@ export class TarefaKanbanComponent  implements OnChanges{
   onDragStartStatus(event: any) {
     this.dropTarefa = false; 
     this.dropStatus = true 
-    console.log(event.toElement.id)
     this.start = event.toElement.id
 
 
@@ -99,13 +96,7 @@ export class TarefaKanbanComponent  implements OnChanges{
     this.dropTarefa = true; 
     this.dropStatus = false 
     this.taskMoved = item
-    console.log(this.dropTarefa)
   
-  //   if (effect === 'move') {
-  //     const index = list.indexOf(item);
-  //     list.splice(index, 1);
-    
-  // }
 }
 
 
@@ -117,12 +108,11 @@ export class TarefaKanbanComponent  implements OnChanges{
   }
 
    onDrop(event: DndDropEvent, list?: Status[]) {
-    console.log(event.index)
 
     if(event.data == this.taskMoved ){
-      console.log("sou pika");
       
     }
+
     if (list && (event.dropEffect === 'copy' || event.dropEffect === 'move')) {
 
       let index = event.index!;
@@ -141,20 +131,14 @@ export class TarefaKanbanComponent  implements OnChanges{
         status.columnIndex=list.indexOf(status)
         this.project.statusList.push(status)
         this.service.updateStatusList(this.project.id, this.loggedUser.id, this.project.statusList);
-        console.log("passei uma vez ein")
       })
       this.project.statusList = list
-
-
     }
     
   }
    async onDropTask(event: DndDropEvent, list: Task[], item?:any) {
 
     if((event.data as Task).currentStatus){
-      console.log("sou pika");
-      
-    
    
     if (list && (event.dropEffect === 'copy' || event.dropEffect === 'move')) {
       let index = event.index!;
@@ -177,14 +161,10 @@ export class TarefaKanbanComponent  implements OnChanges{
         task.project = {
           id: this.project.id
         }
-        console.log(task);
         await this.service.putTarefa(task,this.loggedUser.id);
          
       })
       this.taskList == list;
-    }else{
-      console.log("status ");
-      
     }
  
      

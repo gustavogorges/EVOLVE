@@ -42,11 +42,9 @@ export class TelaLoginComponent implements OnInit {
     window.addEventListener('userLoggedIn', async (event: Event) => {
       const customEvent = event as CustomEvent;
       const userData = customEvent.detail;  
-      console.log(userData);
       const result= await this.authService.loginGoogle(userData)
       if (result != null) {
         this.responseData = result;
-        console.log(this.responseData);
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
         setTimeout(() => {
@@ -109,13 +107,11 @@ export class TelaLoginComponent implements OnInit {
   responseData : any 
 
  async submit() {
-    // console.log(this.service.getOne("user", 1));
     try {
       const result = await this.authService.proceedLogin(this.userForm.value);
       
       if (result != null) {
         this.responseData = result;
-        console.log(this.responseData);
         
         this.cookie.setLoggedUserId(this.responseData.data.id);
         setTimeout(() => {
@@ -123,7 +119,6 @@ export class TelaLoginComponent implements OnInit {
           window.dispatchEvent(event);
         }, 100);
         this.login.emit()
-        
         
         this.router.navigate(['/tela-inicial']);
       } else {
@@ -149,15 +144,7 @@ export class TelaLoginComponent implements OnInit {
     }
   }
 
-  // async login(): Promise<void> {
-  //   this.usuario = await this.service.getUser(this.email);
-  //   if (this.usuario) {
-  //     this.router.navigate(['/tela-inicial'], { state: { user: this.usuario } });
-  //   }
-  // }
-
   cadastro(): void {
-    console.log('foi');
     this.router.navigate(['/tela-cadastro']);
   }
 
@@ -203,12 +190,9 @@ export class TelaLoginComponent implements OnInit {
   user!: User;
   validEmail = false 
   async verifyEmail() {
-    console.log(this.changeEmail);
     this.user = await this.service.getUserByEmail(this.changeEmail);
     if (this.user.id != null) {
       this.generateRandomNumbers();
-      console.log(this.randomNumbers);
-
       this.sendEmail();
       this.emailModal = false;
       this.codeModal = true;
@@ -243,18 +227,14 @@ export class TelaLoginComponent implements OnInit {
       this.n5 == this.randomNumbers[4] &&
       this.n6 == this.randomNumbers[5]
     ) {
-      console.log(true);
       this.codeModal = false;
       this.passwordModal = true;
     }
   }
 
   passwordReset() {
-    console.log(this.passwordForm);
-
     this.user.password = this.passwordForm?.get('password')?.value;
-    console.log(this.user);
-
+    
     this.service.patchUserPassword(this.user.id, this.user.password);
     this.closeModal();
     this.message = 'senha alterada com sucesso';

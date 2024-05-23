@@ -85,7 +85,6 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       this.teamId  = Number(getTeamId)
       this.team = this.loggedUser.teamRoles.find(team => team.team.id === this.teamId)?.team as Team;
       this.projects = await this.service.getProjectsByTeamId(this.teamId)
-      console.log(this.projects);
     });
   }
 

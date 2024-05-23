@@ -21,8 +21,6 @@ export class UserCardPerfilComponent implements OnInit {
     
     if(user.image!=null){
       styles['background'] ="data:image/jpeg;base64,"+ user.image?.data;
-      console.log(styles);
-
     }else{
       styles['background-color'] = user.imageColor;
 

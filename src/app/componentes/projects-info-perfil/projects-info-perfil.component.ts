@@ -11,7 +11,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
   templateUrl: './projects-info-perfil.component.html',
   styleUrls: ['./projects-info-perfil.component.scss']
 })
-export class ProjectsInfoPerfilComponent implements OnInit, OnChanges {
+export class ProjectsInfoPerfilComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService) { }
 
@@ -20,18 +20,7 @@ export class ProjectsInfoPerfilComponent implements OnInit, OnChanges {
   @Input()
   user !: User
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // Handle changes in input data
-    console.log('Input data changed:', changes);
-    if (changes['team'] || changes['user']) {
-      // console.log(this.team.projects);
-      
-    }
-  }
-
   ngOnInit(): void {
-    console.log('Team name:', this.team?.name);
-    // Initialize component properties
   }
 
  

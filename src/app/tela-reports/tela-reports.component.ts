@@ -33,7 +33,6 @@ export class TelaReportsComponent implements OnInit, OnChanges {
     private backendService: BackendEVOLVEService
   ) {}
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
-    console.log(this.team);
 
     const teamReportContent = [];
 
@@ -41,7 +40,6 @@ export class TelaReportsComponent implements OnInit, OnChanges {
     if (this.team?.projects) {
       for (let project of this.team.projects) {
         const projectTasksContent = [];
-        console.log(project);
         project = await this.backendService.getOne("project", project.id)
         
         // Itera sobre cada tarefa no projeto
@@ -83,11 +81,9 @@ export class TelaReportsComponent implements OnInit, OnChanges {
 
     let team = this.team;
     this.teamsWithReports = { team, report: teamReportContent };
-    console.log(this.teamsWithReports.report);
   }
 
   async ngOnInit(): Promise<void> {
-    console.log(this.team);
   }
 
   generatePdf(teamReport: any[]): void {

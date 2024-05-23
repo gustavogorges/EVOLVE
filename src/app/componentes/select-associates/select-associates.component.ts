@@ -35,7 +35,6 @@ export class SelectAssociatesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.project);
   }
 
   saveAssociate(associate:User) { 
@@ -45,7 +44,6 @@ export class SelectAssociatesComponent implements OnInit {
 
   eventEmitterFunc() : void {
     this.arrayForce = this.task.associates;
-    console.log(this.arrayForce);
     this.newItem.emit(this.arrayForce);
   }
 

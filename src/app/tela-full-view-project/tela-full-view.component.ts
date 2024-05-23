@@ -60,7 +60,7 @@ export class TelaFullViewComponent implements OnInit {
     loggedUser: User = new User;
     userProject !: UserProject;
     hasPermission : boolean = false;
-    openSmMoreViewBoolean = true
+    openSmMoreViewBoolean = this.resizeWindow()
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
     openSmMoreView(){
@@ -68,7 +68,6 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async ngOnInit() {
-        console.log("ENTROU NO ONINIT");
         
         this.loggedUser = await this.cookies_service.getLoggedUser();
         this.route.paramMap.subscribe(async params => {
@@ -215,8 +214,6 @@ export class TelaFullViewComponent implements OnInit {
         }, 50)
         setTimeout( async () => {
             if(this.nameEdited != this.projeto.name ){
-                console.log(this.nameEdit);
-                console.log(this.projeto.name);
                 
                 this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
             }
@@ -309,6 +306,16 @@ export class TelaFullViewComponent implements OnInit {
         }
     }
 
+    @HostListener('window:resize', ['$event'])
+    resizeWindow(){
+        if(window.innerWidth > 1024){
+            this.openSmMoreViewBoolean = true
+            return true
+        }
+        this.openSmMoreViewBoolean = false
+        return false
+    }
+
     editStatus(status: Status) {
         this.status = status
         this.boolEditStatus = true
@@ -359,7 +366,7 @@ export class TelaFullViewComponent implements OnInit {
 
                     setTimeout(() => {
                         if (matchingChart) {
-                            console.log(this.getValuesChart(chart));
+                            this.getValuesChart(chart);
 
                             let updatedMatchingChart = { ...matchingChart, id: chart.id, data: { labels: this.getLabelsChart(chart), datasets: [{ label: chart.label, data: this.getValuesChart(chart), }] } };
 

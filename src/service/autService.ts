@@ -19,10 +19,7 @@ export class AuthService {
 
   async proceedLogin(userlogin: any): Promise<AxiosResponse<User>> {
     try {
-      console.log(userlogin);
-      
       const response = await axios.post<User>('http://localhost:8087/auth/login', {email:userlogin.username, password:userlogin.password}, { withCredentials: true });
-        // console.log(response);
         
       const jwtCookie = response.headers['set-cookie'];
       if (jwtCookie) {
@@ -31,8 +28,6 @@ export class AuthService {
         const path = '/';
         this.cookies.set('EV', value, parseInt(maxAge), path);
       }
-      console.log(response);
-      
 
       return response;
     } catch (error) {
@@ -44,7 +39,6 @@ export class AuthService {
 
 
   isLoggedIn() {
-    console.log(this.cookies.get('EV'));
     return  this.cookies.get('EV')!="" && this.cookies.get('EV')!=null;
   }
  
