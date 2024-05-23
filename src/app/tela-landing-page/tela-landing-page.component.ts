@@ -19,7 +19,7 @@ export class TelaLandingPageComponent implements OnInit {
   devsArray : any[] = [
     {
       name : 'Gustavo Gorges Koch',
-      description : 'sla',
+      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
       image : 'assets/gorges.jpg',
       github : 'https://github.com/gustavogorges'
@@ -33,19 +33,21 @@ export class TelaLandingPageComponent implements OnInit {
     },
     {
       name : 'Thiago Alessandro',
-      description : 'sla',
+      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
-      image : 'assets/pessoaTeste.svg',
+      image : 'assets/Thiago.jpg',
+      github : "https://github.com/Thiago-Alessandro"
     },
     {
       name : 'Simon',
-      description : 'sla',
+      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
-      image : 'assets/pessoaTeste.svg',
+      image : 'assets/Saymon.jpg',
+      github : "https://github.com/Saymon-Silva"
     },
     {
       name : 'Deborah Mattge',
-      description : 'sla',
+      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
       image : 'assets/debora.jpg',
       github : 'https://github.com/deborah-mattge'
