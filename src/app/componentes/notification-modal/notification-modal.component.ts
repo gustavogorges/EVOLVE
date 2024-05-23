@@ -26,11 +26,7 @@ export class NotificationModalComponent implements OnInit {
     for(let teamRole of this.loggedUser.teamRoles){
       teamRole.team.notifications = await this.verifyNotificatedList(teamRole.team);
     }
-    console.log(this.loggedUser);
-    
     document.body.addEventListener('click', this.onDocumentClick);
-    console.log();
-    this.openNotification()
   }
 
   openNotification(){
@@ -44,19 +40,7 @@ export class NotificationModalComponent implements OnInit {
     }
   };
 
-  a(){
-    console.log(this.loggedUser.notificationsConfig);
-  }
-  @ViewChildren('taskOption') taskOptions!: any;
-  changeEnableTaskConfig(){
-    console.log(this.taskOptions);
-    console.log();
-    let elementsToChange:any[] = this.taskOptions._results
-    elementsToChange.forEach(elementRef => elementRef.nativeElement.disabled = !this.loggedUser.notificationsConfig.taskAll) 
-    console.log(this.taskOptions);
-    
-    
-  }
+
 
   async openNotifications(team : Team){
     console.log(await this.service.getAllNotifications(team.id));
@@ -106,9 +90,24 @@ export class NotificationModalComponent implements OnInit {
     this.lastConfig = this.loggedUser.notificationsConfig
   }
 
-  cancelEditingConfigs(){
+  a(){
+    console.log(this.loggedUser.notificationsConfig);
+  }
+  @ViewChildren('taskOption') taskOptions!: any;
+  changeEnableTaskConfig(){
+    let elementsToChange:any[] = this.taskOptions._results
+    elementsToChange.forEach(elementRef => elementRef.nativeElement.disabled = !this.loggedUser.notificationsConfig.taskAll) 
+  }
+
+  @ViewChildren('projectOption') projectOptions!: any;
+  changeEnableProjectConfig(){
+    let elementsToChange:any[] = this.projectOptions._results
+    elementsToChange.forEach(elementRef => elementRef.nativeElement.disabled = !this.loggedUser.notificationsConfig.projectAll) 
+  }
+
+  async cancelEditingConfigs(){
     this.editingConfigs = false
-    this.loggedUser.notificationsConfig = this.lastConfig!
+    this.loggedUser = await this.service.getOne("user", this.loggedUser.id)
     this.lastConfig = null
   }
 
@@ -116,6 +115,7 @@ export class NotificationModalComponent implements OnInit {
     this.editingConfigs = false
     this.lastConfig = null
     this.loggedUser = await this.service.patchNotificationsConfig(this.loggedUser.id, this.loggedUser.notificationsConfig)
+    console.log(this.loggedUser.notificationsConfig);
   }
 
 
