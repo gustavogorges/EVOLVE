@@ -50,7 +50,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     }
   }
 
-  async getFinalDateProjectFilter() {
+  async getFinalDateProjectFilter(event:any) {
     if(this.atualFilter != null){
       await this.getOriginal()
     }
@@ -62,7 +62,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
     this.atualFilter = {
       id: 0,
-      name : "Data final"
+      name : event.target.innerText
     }
   }
 
@@ -77,7 +77,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     });
   }
 
-  async getProgress() {
+  async getProgress(event:any) {
     if(this.atualFilter != null){
       await this.getOriginal()
     }
@@ -89,18 +89,19 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     });
   }
 
-  async sortProjectsByProgress(){
+  async sortProjectsByProgress(event:any){
     if(this.atualFilter != null){
       await this.getOriginal()
     }
     this.projects.sort((a, b) => b.progress - a.progress);
     this.atualFilter = {
       id: 4,
-      name : "Progresso"
+      name : event.target.innerText
+
     }
   }
 
-  async getFavorites(){
+  async getFavorites(event:any){
     if(this.atualFilter != null){
       await this.getOriginal()
     }
@@ -121,11 +122,12 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
     this.atualFilter = {
       id: 1,
-      name : "Favoritos"
+      name : event.target.innerText
+
     }
   }
 
-  async filterProjectsByLoggedUser(){
+  async filterProjectsByLoggedUser(event:any){
     if(this.atualFilter != null){
       await this.getOriginal()
     }
@@ -135,7 +137,8 @@ export class TelaProjetoRemasteredComponent implements OnInit {
 
     this.atualFilter = {
       id: 2,
-      name : "Associado"
+      name : event.target.innerText
+
     }
   }
 

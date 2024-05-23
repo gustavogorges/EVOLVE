@@ -15,39 +15,39 @@
 
        <div class="flex gap-5 items-center">
             <div class="w-fit">
-                <button (click)="changeFiltro()" (click)="ordenacaoBol()" class="select-button">
+                <button (click)="ordenacaoBol()" class="select-button">
                     <i class="pi pi-filter icon icon2" ></i>
                     <p class="text-select">
                     {{'Ordenação' | translate}}
                     </p>
                 </button>
                 <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200 translate-y-3 w-[8vw]" [ngClass]="ordenacaoBoolean ? 'h-fit':'h-0'">
-                    <div (click)="getFinalDateProjectFilter()" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="getFinalDateProjectFilter($event)" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-calendar text-primary font-semibold "></i>
-                        <p>Data final</p>
+                        <p>{{'Data Final' | translate}}</p>
                     </div>
-                    <div (click)="sortProjectsByProgress()" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="sortProjectsByProgress($event)" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-chart-line text-primary font-semibold "></i>
-                        <p >Progresso</p>   
+                        <p >{{'Progresso' | translate}}</p>   
                     </div>
                 </div>
             </div>
 
             <div class="w-fit">
-                <button (click)="changeFiltro()" (click)="filterBol()" class="select-button">
+                <button (click)="filterBol()" class="select-button">
                     <i class="pi pi-filter icon icon2" ></i>
                     <p class="text-select">
                     {{'Filtro' | translate}}
                     </p>
                 </button>
                 <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200 translate-y-3 w-[8vw]" [ngClass]="filterBoolean ? 'h-fit':'h-0'">
-                    <div (click)="getFavorites()" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="getFavorites($event)" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-star text-primary font-semibold "></i>
-                        <p >Favoritos</p>
+                        <p >{{'Favoritos' | translate}}</p>
                     </div>
-                    <div (click)="filterProjectsByLoggedUser()" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="filterProjectsByLoggedUser($event)" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-user text-primary font-semibold "></i>
-                        <p >Associado</p>
+                        <p >{{'Associado' | translate}}</p>
                     </div>
                 </div>
             </div>

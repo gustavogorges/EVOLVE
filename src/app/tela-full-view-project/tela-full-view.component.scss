@@ -185,6 +185,10 @@
     @apply w-full flex justify-center text-primaryWhite dark:text-primaryFontBlack items-center font-semibold h-10 gap-x-2 cursor-pointer mb-2 bg-secondary dark:bg-dark-secundary-green rounded-lg mt-5
 }
 
+.goToTarefa {
+    @apply w-full flex justify-center text-primaryWhite dark:text-primaryFontBlack items-center font-semibold h-10 gap-x-2 cursor-pointer mb-2 bg-primary dark:bg-dark-primary rounded-lg mt-5
+}
+
 .new-status {
     @apply w-full h-28 grid grid-rows-3 mt-4
 }

@@ -15,6 +15,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { UserProject } from 'src/model/userProject';
 import { Task } from 'src/model/task';
+import { Team } from 'src/model/team';
 @Component({
     selector: 'app-tela-full-view',
     templateUrl: './tela-full-view.component.html',
@@ -65,6 +66,10 @@ export class TelaFullViewComponent implements OnInit {
 
     openSmMoreView(){
         this.openSmMoreViewBoolean = !this.openSmMoreViewBoolean
+    }
+
+    goToTelaTarefa(){
+        this.router.navigateByUrl('/tela-tarefa/' + this.projeto.id);
     }
 
     async ngOnInit() {
