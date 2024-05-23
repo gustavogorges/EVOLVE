@@ -35,20 +35,15 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
 
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
     // Handle changes in input data
-    console.log('Input data changed:', changes);
     if (changes['project'] || changes['user']) {
      
       await this.calculateTotalTasks()
       this.dashboard()
 
-      console.log(this.listaTasks);
-      
     }
     
     if(changes['listaTasks']){
       this.dashboard()
-      console.log(this.listaTasks);
-
     }
   }
 
@@ -60,8 +55,6 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     this.calculateWorkedTimeOnProject();
   }
   setData(project: Project): any {
-    console.log(this.listaTasks);
-    
 
     const datasets = project.statusList.map((status: Status) => {
       let list = this.listaTasks.filter((t)=>{
@@ -69,12 +62,7 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
         return t.currentStatus.id ==status.id
         
       })
-      console.log(list.length);
-      
-     
-      
-      
-      
+
       return {
         type: 'bar',
         label: status.name,
@@ -82,16 +70,11 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
         data:[list.length] 
       };
     });
-    console.log(datasets);
-    
   
  this.stackedData = {
       labels: [''],
       datasets: datasets,
     };
-
-    console.log(this.stackedData);
-
     
   }
 
@@ -136,21 +119,15 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
   }
   async calculateTotalTasks():Promise<void> {
     this.totalTask = 0;
-   console.log("abu");
    
        this.project =await this.service.getOne("project", this.project.id)
-       console.log(this.project);
        
        this.project.tasks.map((t: Task)=>{
-        console.log(this.user);
-        console.log(t.associates);
-        
 
         if(t.associates?.find(user=> this.user.id ==user.id)){
           this.totalTask+=1   
           
           this.listaTasks.push(t)   
-          console.log(this.listaTasks);
                
         }
        })
@@ -158,7 +135,6 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
 
   async calculateWorkedTimeOnProject() {
     this.userAllWorkedTimeProject = await this.service.getAllWorkedTime(this.loggedUser.id, this.project.id); 
-    console.log(this.userAllWorkedTimeProject);
     this.userAllWorkedTimeProject.forEach((userTask) => {
       this.horasTotais = (parseInt(this.horasTotais) + userTask.workedHours).toString();
       this.minutosTotais = (parseInt(this.minutosTotais) + userTask.workedMinutes).toString();
@@ -169,9 +145,6 @@ export class DashboardPerfilComponent implements OnInit, OnChanges {
     if(parseInt(this.minutosTotais) < 10){
       this.minutosTotais = "0" + this.minutosTotais;
     }
-    console.log(this.horasTotais);
-    console.log(this.minutosTotais);
-
   }
 
 }

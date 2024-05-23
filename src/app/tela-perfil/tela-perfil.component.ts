@@ -44,7 +44,6 @@ export class TelaPerfilComponent implements OnInit {
       const projectId = params.get('userId');
       const id  = Number(projectId)
       this.user = await this.service.getOne('user', id);
-      console.log(this.user);
       this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
       if(this.loggedUser.id!=this.user.id){
         this.logged=false
@@ -60,8 +59,6 @@ export class TelaPerfilComponent implements OnInit {
 
   }
   async teste() {
-    // this.user.teamRoles = await this.service.getTeamsByUserId(this.user?.id);
-    console.log(this.user.teamRoles);
     
     let users: any = [];
     this.user.teamRoles.forEach((team) => {
@@ -91,7 +88,6 @@ export class TelaPerfilComponent implements OnInit {
   }
   getUserStyles(user: any): any {
     let styles: any = {};
-    console.log(user);
 
     if (user.image != null) {
       styles['background'] = user.image.data;
@@ -101,7 +97,6 @@ export class TelaPerfilComponent implements OnInit {
     return styles;
   }
   changeTeam(team: Team) {
-    console.log(team);
 
     this.teamShowing = team;
   }
@@ -125,7 +120,6 @@ export class TelaPerfilComponent implements OnInit {
       let chat: Chat = await this.service.postUserChat(userchat)
       this.cookieService.set("lastChatId", chat.id)
     }
-    console.log(foundChat);
     this.router.navigate(['/tela-chat']);
 
   }
@@ -199,9 +193,6 @@ async setImage(event:any){
 
       const imageUrl = URL.createObjectURL(blob);
       this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-      console.log(this.preImage);
-     
-
       
       await this.service.patchImageUser(this.user.id, this.formData)   
       this.user = await this.service.getOne("user",this.user.id)   

@@ -16,9 +16,6 @@ export class HistoricosComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.task = await this.service.getOne("task", this.task.id); 
-    console.log(this.task);
-   console.log
-   ( this.task.historic)
   }
 
 }

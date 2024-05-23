@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { UserTeam } from 'src/model/userTeam';
@@ -13,10 +13,12 @@ import { CookiesService } from 'src/service/cookies-service.service';
 export class EnterTeamModalComponent implements OnInit {
 
   constructor(private service : BackendEVOLVEService, private cookie : CookiesService) { }
+  @Output()
+  @Output() closeModalEnterTeam: EventEmitter<Boolean> = new EventEmitter<Boolean>()
+
   code !: string;
   loggedUser !: User
   async ngOnInit(): Promise<void> {
-    console.log('to aqui em ');
     this.loggedUser = await this.cookie.getLoggedUser()
     
   }
@@ -24,7 +26,6 @@ team !: Team
 invalidCode = false
   async verifyCode(){
     
-    console.log(this.code);
   let teamResponse = await this.service.getTeamsByCode(this.code);
 
     // Verificando o status e os dados da resposta
@@ -48,5 +49,8 @@ invalidCode = false
 
     await this.service.patchTeamParticipantByCode(this.team.id, userTeam.userId);
     window.location.href = "equipe/"+this.team.id
+  }
+  closeModal(){
+    this.closeModalEnterTeam.emit(false)
   }
 }

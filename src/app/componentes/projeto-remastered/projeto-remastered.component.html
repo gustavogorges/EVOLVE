@@ -103,7 +103,7 @@
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn && hasPermission" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
-            <button [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+            <button [disabled]="projeto.editOn" *ngIf=" hasPermission" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" class="botao-ir-para-projeto" (click)="irParaProjeto(this.projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
 
         </div>
     </div>
@@ -161,7 +161,7 @@
             <button *ngIf="projeto.editOn" class="botao-cancelar" (click)="cancelEdit()" >{{'Cancelar Edição' | translate}} <i class="pi pi-times"></i></button>
             <button *ngIf="!projeto.editOn" class="botao-editar-projeto" (click)="editOn(true)">{{'Editar Projeto' | translate}} <i class="pi pi-pencil"></i> </button>
             <button *ngIf="projeto.editOn" class="botao-salvar-projeto" (click)="salvaProjeto()">{{'Salvar Edição' | translate}} <i class="pi pi-save"></i> </button>
-            <button class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
+            <button  class="botao-ir-para-projeto" [disabled]="projeto.editOn" [ngClass]="projeto.editOn ? 'opacity-50 cursor-not-allowed':'hover:scale-105'" (click)="irParaProjeto(projeto.id)">{{'Ir para projeto' | translate}} <i class="pi pi-angle-double-right"></i></button>
 
         </div>
 

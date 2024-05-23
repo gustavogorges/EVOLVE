@@ -1,6 +1,6 @@
 <app-modal-config *ngIf="config" (close)="closeConfig()" class="w-screen"></app-modal-config>
   
-<div class="overflow-y-auto h-screen xl:w-80 w-64 lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-5 items-center gap-8 shadow-2xl">
+<div class="overflow-y-auto h-screen xl:w-80 w-64 lg:flex bg-[#eeeeee] dark:bg-dark-primary-black absolute z-50 flex flex-col p-7 items-center gap-6 shadow-2xl">
 
   <i class="pi pi-angle-double-left self-end text-fontGray dark:text-primaryGray" (click)="closeSideBar()"></i>
 
@@ -36,22 +36,22 @@
       </div>
       <div class="flex flex-col gap-5">
         <div *ngFor="let project of userTeam.team.projects">
-          <div class="px-5 flex flex-col gap-1">
+          <div class="px-2 flex flex-col gap-1">
             <div class="flex gap-2 select-none">
-              <p class="font-titulo text-lg truncate font-medium text-[#414651] dark:text-primaryWhite">
+              <p class="font-titulo text-base truncate font-medium text-[#414651] dark:text-primaryWhite">
                 {{ project.name }}
               </p>
             </div>
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col " *ngIf="hasPermissionProject(project)">
               <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goTelaTarefa(project)">
-                <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300">
-                  {{ config ? 'Visualizar tarefas' : 'Visualizar tarefas' | translate }}
+                <p class="font-hind-madurai text-base font-medium text-fontGray dark:text-gray-300">
+                  {{ 'Visualizar tarefas' | translate }}
                 </p>
                 <i class="pi pi-angle-right self-center text-fontGray dark:text-gray-300" style="width: 1.5rem"></i>
               </div>
               <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goTelaProject(project)">
-                <p class="font-titulo text-base font-medium text-fontGray dark:text-gray-300">
-                  {{ config ? 'Pagina do projeto' : 'Pagina do projeto' | translate }}
+                <p class="font-hind-madurai text-base font-medium  text-fontGray dark:text-gray-300">
+                  {{ 'Pagina do projeto'  | translate }}
                 </p>
                 <i class="pi pi-angle-right self-center text-fontGray dark:text-gray-300" style="width: 1.5rem"></i>
               </div>
@@ -102,6 +102,5 @@
   </div>
   
 
-  <!-- Modal de Configuração -->
-<app-enter-team-modal *ngIf="enterTeam"></app-enter-team-modal>
+<app-enter-team-modal *ngIf="enterTeam" (closeModalEnterTeam)="openEnterTeam()"></app-enter-team-modal>
 </div>

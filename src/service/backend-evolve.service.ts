@@ -84,6 +84,14 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL + "project/" + projectId + "/setRole", userProject, {withCredentials: true})).data;
   }
 
+  async leaveTeam(userId:number, teamId:number) {
+    let formData = new FormData
+    formData.append("userId", userId.toString())
+    return (await axios.put(this.URL + "team/"+  teamId + "/leaveTeam", formData, {withCredentials: true})).data;
+  }
+
+
+
   async updateDashboard(
     dashboard: Dashboard,
     idDashboard: number,
@@ -169,8 +177,6 @@ export class BackendEVOLVEService {
   }
 
   async putMessage(message: MessageDTO): Promise<Message> {
-    console.log('fazendo update na service');
-    console.log(message);
     return (await axios.put(this.URL + 'message', message, {withCredentials: true})).data;
   }
 
@@ -288,14 +294,17 @@ export class BackendEVOLVEService {
   }
 
   async getOne(caminho: string, id: number) {
-    //console.log((
-    //  await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
-    //).data);
     
     return (
       await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
     ).data;
   }
+  async getOneProject(caminho: string, id: number) {
+    return (
+      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
+    );
+  }
+
 
   async deleteById(caminho: string, id: number) {
     return (await axios.delete(this.URL + caminho + '/' + id, {withCredentials: true})).data;
@@ -564,7 +573,6 @@ export class BackendEVOLVEService {
   }
 
   async patchPriority(priority: number, taskId: number) {
-    console.log(priority);
 
     return (
       await axios.patch(
@@ -731,18 +739,24 @@ export class BackendEVOLVEService {
   // }
 
   async putProjeto(project: Project) {
-    
+    setTimeout( async () => {
     await this.patchProjectName(project.id, project.name); 
-
-    await this.patchProjectDescription(project.id, project.description);
-  
-    await this.patchProjecyImageColor(project.id, project.imageColor); 
-  
-    await this.patchProjectTasks(project.id, project.tasks);
-
-    if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
-
-    return await this.getOne("project", project.id)
+    }, 50)
+    setTimeout( async () => {
+      await this.patchProjectDescription(project.id, project.description);
+    }, 100)
+    setTimeout( async () => {
+      await this.patchProjecyImageColor(project.id, project.imageColor); 
+    }, 150)
+    setTimeout( async () => {
+      await this.patchProjectTasks(project.id, project.tasks);
+    }, 200)
+    setTimeout( async () => {
+      if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
+    }, 250)
+    setTimeout(async () => {
+      return await this.getOne("project", project.id)
+    }, 300)
   }
 
   
@@ -800,8 +814,6 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectImage(id: number, formData: FormData) {
-    // let formData = new FormData
-    // formData.append("image", image)
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData, {withCredentials: true}))
       .data;
   }
@@ -823,8 +835,6 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectFinalDate(projecId: number, finalDate: string) {
-    console.log(finalDate);
-    
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (
@@ -862,8 +872,6 @@ export class BackendEVOLVEService {
   }
 
   async patchDefaultRole(projecId: number, defaultRole: Role) {
-    console.log(defaultRole);
-    
     return (
       await axios.patch(this.URL + "project/" + projecId + "/defaultRole", defaultRole, {withCredentials: true})
     )
@@ -944,7 +952,6 @@ export class BackendEVOLVEService {
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
     console.log((await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data);
-    console.log("ME OLHEEEEE");
     
     return (await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data;
   }

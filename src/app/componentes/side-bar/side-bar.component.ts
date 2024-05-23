@@ -5,6 +5,8 @@ import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permis
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
+import { UserProject } from 'src/model/userProject';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { SideBarService } from 'src/service/sideBarService';
@@ -20,18 +22,21 @@ export class SideBarComponent implements OnInit {
 
 
   constructor(    private cookieService: CookiesService, private router: Router,  
+                   
     private colorService: ColorService, private elementRef: ElementRef, private a : CookieService,
-    private tutorialService:TourService, private sideBarService:SideBarService
+    private tutorialService:TourService, private sideBarService:SideBarService, private backEndService :BackendEVOLVEService
+
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
 loggedUser !: User
 config = false
+projects:Project[]=[]
 
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
-    
+    this.projects = await this.backEndService.getProjectsByUserId(this.loggedUser.id)
   }
 
   closeSideBar(){
@@ -40,7 +45,6 @@ config = false
 
   @ViewChild('sidebar') sidebarConfig !: ElementRef
   onDocumentClick = (event: MouseEvent) => {
-    console.log(this.elementRef.nativeElement.contains(this.sidebarConfig));
     
     if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
         this.sideBar.emit(false)
@@ -50,6 +54,11 @@ config = false
    return hasPermission(this.loggedUser.id, team, 'CREATE_PROJECT' );
   }
 
+  hasPermissionProject(project :any):boolean{
+    let result:boolean = this.projects.map(e => e.id).includes(project.id);
+    return result
+  }
+
   goTelaTarefa( project : Project){
       this.router.navigate(['/tela-tarefa/'+project.id]);
       this.closeSideBar()
@@ -57,7 +66,7 @@ config = false
   }
   enterTeam = false
    openEnterTeam(){
-    this.enterTeam = true;
+    this.enterTeam = !this.enterTeam;
    }
 
   openConfig(){
@@ -109,7 +118,9 @@ config = false
     document.documentElement.style.setProperty('--font-size-3xl', ''+(this.sliderValue+14)+'px');
 
     this.cookieService.deleteAll()
-    this.a.deleteAll()
+    setTimeout(async () =>{
+      this.a.deleteAll()
+     }, 50)
 
     this.router.navigate(['/login']);
 

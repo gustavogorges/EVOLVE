@@ -29,7 +29,6 @@ export class TelaCadastroComponent implements OnInit {
       
       const customEvent = event as CustomEvent;
       const userData = customEvent.detail;  
-      console.log(userData);
       await this.create(userData);
       
       });
@@ -92,7 +91,6 @@ export class TelaCadastroComponent implements OnInit {
   status !: any
 
   async submit(){
-    console.log("Eu entrei po, viaja não fi")
     this.usuario.name = this.formControls['name'].value;
     this.usuario.email = this.formControls['email'].value;
     this.usuario.password = this.formControls['password'].value;
@@ -100,7 +98,6 @@ export class TelaCadastroComponent implements OnInit {
     this.usuario.imageColor = this.randomizeColor()
     if(this.usuario.email !=null && this.usuario.name!=null && this.usuario.password!=null){
       this.status  = await this.service.postUsuario(this.usuario)
-      console.log(this.status);
       
       if(this.status.status >= 200 && this.status.status < 300){
         this.message = "sua conta foi cadastrada com sucesso"
@@ -121,19 +118,13 @@ export class TelaCadastroComponent implements OnInit {
 
     }
     async create(userData : any){
-      console.log("TESTEEEEE");
-      console.log(userData.picture);
-      
-      
       this.usuario.email = userData.email
       this.usuario.name = userData.name
       // this.usuario.image.data = userData.picture
       this.usuario.password = ''
       this.usuario.socialLogin = true
-      console.log(this.usuario);
       
       this.status  = await this.service.postUsuario(this.usuario)
-      console.log(this.status);
 
       let file:File = new File()
       file.data = userData.picture

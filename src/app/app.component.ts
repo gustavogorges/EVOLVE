@@ -33,24 +33,11 @@ export class AppComponent{
   title = 'Evolve';
   loggedUser !: User;
 
-  // boo = false
-
   reload(){
     window.location.reload()
   }
 
   islogged = false
-
-  // a(){
-  //   if(this.cookieService.getLoggedUserId() && this.cookieService.getLoggedUserId()!="0"){
-  //     this.islogged = true
-  //   } else {
-  //     console.log(this.cookieService.getLoggedUserId());
-      
-  //     this.islogged = false
-  //   }
-  //   this.a()
-  // }
 
   async ngOnInit(): Promise<void> {
 
@@ -116,8 +103,6 @@ export class AppComponent{
   }
 
   updateStatus(){
-    console.log("Entrei na funcao");
-    
     this.islogged = true
   }
 
@@ -125,10 +110,7 @@ export class AppComponent{
   onMouseUp(event: MouseEvent) {
     const selectedText = window.getSelection()!.toString().trim();
     if (selectedText) {
-      console.log("entrou aqui");
-      console.log(this.textToSpeechService.canSpeak);
       if (this.textToSpeechService.canSpeak) {
-        console.log("entrou aqui 2");
         this.textToSpeechService.speak(selectedText);
       }
     }

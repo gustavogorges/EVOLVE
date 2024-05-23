@@ -49,9 +49,6 @@ export class NavegacaoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.tutorialService.registerSideBarComponent(this);
     this.lang = localStorage.getItem('lang') || 'en'
-    console.log(this.cookieService.getLoggedUserId());
-    console.log(this.router.getCurrentNavigation());
-    console.log(this.router);
     
     if(this.cookieService.getLoggedUserId()==''){
       this.exist.emit()
@@ -150,8 +147,6 @@ export class NavegacaoComponent implements OnInit {
     }else{
       this.sideBar=true
     }
-    console.log(this.sideBar);
-    
   }
 
   closeSideBar(bar : boolean){
@@ -191,8 +186,6 @@ export class NavegacaoComponent implements OnInit {
 
   @ViewChild('sidebar') sidebarConfig !: ElementRef
   onDocumentClick = (event: MouseEvent) => {
-    console.log(this.elementRef.nativeElement.contains(this.sidebarConfig));
-    
     if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
         this.openLangBol = false
     }

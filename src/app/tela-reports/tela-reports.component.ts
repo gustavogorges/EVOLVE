@@ -26,21 +26,22 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces';
 export class TelaReportsComponent implements OnInit, OnChanges {
   loggedUser: User | null = null;
   teamsWithReports!: { team: Team; report: any[] };
-
+  @Input()
+  team!: Team;
   constructor(
     private cookieService: CookiesService,
     private backendService: BackendEVOLVEService
   ) {}
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
-    console.log(this.team);
 
     const teamReportContent = [];
 
     // Itera sobre cada projeto na equipe
     if (this.team?.projects) {
-      for (const project of this.team.projects) {
+      for (let project of this.team.projects) {
         const projectTasksContent = [];
-
+        project = await this.backendService.getOne("project", project.id)
+        
         // Itera sobre cada tarefa no projeto
         for (const taskId of project.tasks) {
           const task: Task = await this.backendService.getOne(
@@ -80,12 +81,9 @@ export class TelaReportsComponent implements OnInit, OnChanges {
 
     let team = this.team;
     this.teamsWithReports = { team, report: teamReportContent };
-    console.log(this.teamsWithReports.report);
   }
-  @Input()
-  team!: Team;
+
   async ngOnInit(): Promise<void> {
-    console.log(this.team);
   }
 
   generatePdf(teamReport: any[]): void {

@@ -61,8 +61,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       this.listaTarefas = this.projeto.tasks;
       this.listaNova = this.projeto.tasks;
       this.sortLists();
-      console.log(this.listaTarefas);
-
     }
   }
 
@@ -75,7 +73,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
       const projectId = params.get('projectId');
       const id  = Number(projectId)
       this.projeto = await this.service.getOne('project', id);
-      console.log(this.projeto);
       this.teste()
     });
   
@@ -137,8 +134,6 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
 }
  
   teste(){
-    console.log(this.projeto);
-    
     this.listaTarefas = this.projeto.tasks;
     this.listaNova = this.projeto.tasks;
     this.sortLists();
@@ -479,14 +474,11 @@ if (lang === 'pt') {
     }  }
 
   async optionC(option: any) {
-    console.log(option);
     
     if (option.name== 'Status' || option.name== 'Prioridade' || option.name== 'Associado' || option.name== '状态' 
     || option.name== 'Estado' || option.name== 'Prioridad' || option.name== 'Priority' || option.name== '优先级'
     || option.name== 'Associate' || option.name== '关联' || option.name== 'Asociado') {
       this.optionFilter = '';
-      console.log(3);
-      
     } 
     else {      
       this.optionFilter = option.name ?? option;
@@ -508,10 +500,8 @@ if (lang === 'pt') {
         }
       });
         this.projeto.members.map((s) => {
-          console.log(option);
           
           if (s.user.name == option.name) {
-            console.log(option.name);
 
             this.listaTarefas = this.listaNova.filter((task) => task.associates.find(associate => ((associate as User).name) == option.name));
           this.filtroVisible = false;
@@ -542,16 +532,12 @@ if (lang === 'pt') {
     priorityTeste.backgroundColor = "#cccccc" 
     this.tarefaNova.creator = this.loggedUser;
     this.tarefaNova.project = this.projeto;
-    console.log(this.tarefaNova.project.team);
     this.tarefaNova.currentStatus = this.projeto.statusList[0];
 
-    console.log(this.tarefaNova);
     this.tarefaNova = await this.service.postTarefa(this.tarefaNova,this.projeto.id);
-    console.log(this.tarefaNova);
 
     this.tarefaNova.priority = priorityTeste; 
     this.tarefaSelecionada = this.tarefaNova;
-    console.log(this.tarefaSelecionada);
     
     this.booleanTask = true;
   }

@@ -28,7 +28,7 @@
   
             <app-entrega-prox
               *ngIf="i <= 3"
-              class="card-deliveries"
+              class="card-deliveries  cursor-pointer"
               [tarefa]="tarefa"
               [favoritedAble]="true"
               (click)="openTask(tarefa)"
@@ -49,7 +49,7 @@
         <div></div>
         <div class="container " *ngIf="projectList.length!=0">
           <div *ngFor="let project of projectList; index as i">
-            <app-important-project [project]="project" (click)="goTasks(project.id)" ></app-important-project>
+            <app-important-project  class="cursor-pointer" [project]="project" (click)="goTasks(project.id)" ></app-important-project>
           </div>
           </div>
 
@@ -58,7 +58,7 @@
       *ngIf="projectList.length == 0"
       class="flex flex-col items-center justify-center text-center  text-fontGray text-lg font-hind-madurai"
     >
-      <h1>Parece que  você não possui nenhum projeto favoritado. Favorite um de seus projetos e os encontre aqui!</h1>
+      <h1>{{'Parece que  você não possui nenhum projeto favoritado. Favorite um de seus projetos e os encontre aqui!' | translate}}</h1>
     </div>
     </div>
   </div>
@@ -73,7 +73,7 @@
           <app-equipe-recente-card
             (click)="goProjetos()"
             [team]="getCurrentTeam(indiceAtual)"
-            class="w-full max-h-[200px]"
+            class="w-full max-h-[200px] cursor-pointer"
           ></app-equipe-recente-card>
           <button class="absolute top-1/2 -translate-y-1/2 -right-5 pi pi-chevron-right text-[#aaa]" (click)="mudarItem(indiceAtual + 1)"></button>
       

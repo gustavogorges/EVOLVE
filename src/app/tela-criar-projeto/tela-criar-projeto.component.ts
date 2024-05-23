@@ -37,7 +37,6 @@ export class TelaCriarProjetoComponent implements OnInit {
 
 
       this.team = this.loggedUser.teamRoles.find(team => team.team.id === teamid)?.team as Team;
-      console.log(this.team);
       
       this.usuarios = this.team.participants.map(userTeam => userTeam.user) || []
       
@@ -189,13 +188,11 @@ export class TelaCriarProjetoComponent implements OnInit {
           resolve();
         });
       });
-      console.log(postProject);
       
       postProject = await this.service.postProjeto(postProject, postProject.team.id);
 
       setTimeout(async () => {
         if(postProject.id != null){
-          console.log(postProject.id);
           
           let lista: Array<any> = [];
             setTimeout(() => {
@@ -223,7 +220,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         }
     
         setTimeout(() => {
-          this.route.navigate(['/tela-projeto', teamId]);
+          this.route.navigate(['/tela-tarefa', postProject.id]);
         });
       });
     }

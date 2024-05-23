@@ -19,8 +19,6 @@ export class TextToSpeechComponent implements OnInit {
   canSpeak: boolean = false;
 
   callService() {
-    console.log("entrou aqui");
-    
     this.canSpeak = !this.canSpeak;
     this.textToSpeechService.canSpeak = this.canSpeak;
   }

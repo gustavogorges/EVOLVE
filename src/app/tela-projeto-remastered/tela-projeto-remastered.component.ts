@@ -9,6 +9,7 @@ import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { hasPermission } from '../shared/check-permissions';
+import { PropertyWrite } from '@angular/compiler';
 
 @Component({
   selector: 'app-tela-projeto-remastered',
@@ -87,7 +88,6 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       this.teamId  = Number(getTeamId)
       this.team = this.loggedUser.teamRoles.find(team => team.team.id === this.teamId)?.team as Team;
       this.projects = await this.service.getProjectsByTeamId(this.teamId)
-      console.log(this.projects);
     });
   }
 
@@ -150,18 +150,19 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     },);
 
     setTimeout(async () => {
-
       if(this.formData!=null){
         await this.service.patchProjectImage(project.id, this.formData)
       }
     });
 
     setTimeout(async () => {
-      setTimeout(async () => {
+        // await this.service.patchProjectName(project.id, project.name); 
         await this.service.putProjeto(project);
+      }, 50);
+
+      setTimeout(async () => {
         window.location.reload()
-      })
-    });
+      }, 100);
   }
 
   async saveImage(event:any){

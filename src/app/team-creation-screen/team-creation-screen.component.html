@@ -23,13 +23,15 @@
             class="input-name text-primary dark:text-dark-primary"
           />
           <div class="flex md:gap-3 gap-1 flex-col md:flex-row md:items-center  px-2 w-full">
-            <p class="font-titulo lg:text-sm md:text-xl xl:text-xl text-sm text-gray-500 dark:text-primaryWhite">Código da equipe:</p>
+            <p class="font-titulo lg:text-sm md:text-xl xl:text-xl text-sm text-gray-500 dark:text-primaryWhite">{{'Código da equipe:' | translate}}</p>
             <div class="flex gap-1">
 
               <p class="font-titulo xl:text-xl md:text-lg text-xs text-secondary dark:text-dark-secundary-green font-medium">
                 {{ team?.code }}
               </p>
-              <i class="pi pi-clone icon text-gray-500"></i>
+              <i class="pi pi-clone icon text-gray-500 cursor-pointer"  *ngIf="!copied" (click)="copyInfo()"></i>
+              <i class="pi pi-check icon text-secondary dark:text-dark-secundary-green cursor-pointer"  *ngIf="copied" (click)="copyInfo()"></i>
+
             </div>
           </div>
         </div>
@@ -38,27 +40,26 @@
 
       <div class="flex flex-col gap-1">
         <p class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary dark:text-dark-primary">
-          Niveis de acesso:
+          {{'Níveis de acesso:' | translate}}
         </p>
 
         <div class="flex flex-wrap gap-6">
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Criador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">{{'Criador' | translate}}</p>
               <i
                 class="pi pi-verified text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
             <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
-              editar, controle dos participantes, criar projetos, e excluir a
-              equipe.
+              {{'editar, controle dos participantes, criar projetos, e excluir a equipe.' | translate}}
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
               <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">
-                Administrador
+                {{'Administrador' | translate}}
               </p>
               <i
                 class="pi pi-shield text-secondary dark:text-dark-secundary-green font-bold"
@@ -66,43 +67,57 @@
               ></i>
             </div>
             <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
-              editar, controle dos participantes, e criar projetos.
+              {{'editar, controle dos participantes, e criar projetos.' | translate}}
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Colaborador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">{{'Colaborador' | translate}}</p>
               <i
                 class="pi pi-wrench text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
             <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
-              visualizar e criar projetos.
+              {{'visualizar e criar projetos.' | translate}}
             </p>
           </div>
           <div class="flex flex-col w-[45%]">
             <div class="flex items-center justify-between">
-              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">Espectador</p>
+              <p class="font-hind-madurai lg:text-2xl text-lg font-medium dark:text-secondaryWhite">{{'Espectador' | translate}}</p>
               <i
                 class="pi pi-eye text-secondary dark:text-dark-secundary-green font-bold"
                 style="font-weight: 700"
               ></i>
             </div>
             <p class="font-hind-madurai md:text-base text-sm text-gray-500 dark:text-gray-300">
-              apenas visualizar.
+              {{'apenas visualizar.' | translate}}
             </p>
           </div>
+   
         </div>
+                   
+      
       </div>
+      <div class="flex gap-3 xl:mt-[54px] 2xl:mt-[50px]">
+        <button (click)="goProjects()" class="py-2 px-7 bg-primary dark:bg-dark-primary text-white font-bold font-titulo rounded-lg ">
+          {{"Iniciar Chat"|translate }}
+         </button>
+         <button (click)="goProjects()" class="py-2 px-7 bg-secondary dark:bg-dark-secundary-green text-white font-bold font-titulo rounded-lg ">
+          {{"Ir Para Projetos" | translate}}  
+         </button>
+      </div>
+   
+
     </div>
+    
     <div class="lg:w-[44%] w-full flex flex-col gap-6">
       <div class="flex justify-between">
         <p
           class="font-titulo xl:text-3xl md:text-xl lg:text-2xl font-bold text-primary dark:text-dark-primary"
           *ngIf="!isSearchUserModalOpen"
         >
-          Membros da equipe:
+          {{'Membros da equipe:' | translate}}
         </p>
         <div class="flex w-max justify-end relative">
           <button
@@ -139,8 +154,8 @@
       </div>
 
       <div class="flex justify-between lg:px-36 px-10 border-[1px] border-x-0">
-        <p class="font-titulo text-lg text-gray-500 dark:text-gray-300">Usuário</p>
-        <p class="font-titulo text-lg text-gray-500 dark:text-gray-300">Atribuição</p>
+        <p class="font-titulo text-lg text-gray-500 dark:text-gray-300">{{'Usuário' | translate}}</p>
+        <p class="font-titulo text-lg text-gray-500 dark:text-gray-300">{{'Atribuição' | translate}}</p>
       </div>
 
       <div class="member-list flex flex-col w-full overflow-scroll gap-8 lg:h-[350px] h-[200px] max-h-[350px] overflow-y-auto">
@@ -212,25 +227,27 @@
       
     <div *ngIf="!disabledInfo" class="flex xl:gap-10 gap-3 self-end">
       <button (click)="cancelar()" class="py-2 px-4 bg-primary dark:bg-dark-primary text-white font-bold font-titulo rounded-lg">
-        cancelar
+        {{'cancelar' | translate}}
        </button>
+
        <div joyrideStep="step3" title="Salvar Equipe" text="Clique aqui para salvar a equipe.">
          <button (click)="salvar()" class="py-2 px-6 bg-secondary dark:bg-dark-secundary-green   text-white font-bold font-titulo rounded-lg">
-   salvar      </button>
+   {{'salvar' | translate}}        </button>
        </div>
+
     </div>
     <div *ngIf="disabledInfo" class="flex xl:gap-10 gap-3 self-end">
       <button *ngIf="permission()" (click)="editar()" class="py-2 lg:px-7 px-3  bg-primary dark:bg-dark-primary text-white font-bold text-sm lg:text-base  font-titulo rounded-lg">
-        editar
+        {{'editar' | translate}}
        </button>
     
        <button (click)="leaveTeam()" *ngIf="findTeamAdm(team)?.id != loggedUser?.id" class="py-2 px-7 bg-red-500  text-white font-bold font-titulo rounded-lg">
-        sair da equipe
+        {{'sair da equipe' | translate}}
        </button>
       
        <button (click)="removeTeam()" *ngIf="findTeamAdm(team)?.id == loggedUser?.id " class="py-2 px-7 bg-red-500 text-white font-bold font-titulo rounded-lg">
 
-        excluir equipe
+        {{'excluir equipe' | translate}}
        </button>
      
        <app-tela-reports  [team]="team"> </app-tela-reports>

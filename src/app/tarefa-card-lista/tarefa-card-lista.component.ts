@@ -50,11 +50,7 @@ data : Date = new Date
      this.caminhoEstrela = "assets/estrelaNaoMarcada.svg"
    }
    this.valorBarra = 60 +"%"; 
-   console.log(this.tarefaAtual.id + " "+this.tarefaAtual.currentStatus)
    this.arrayForce =  this.tarefaAtual.associates as Array<User> 
-   console.log(this.arrayForce);
-   
- 
  }
 
  async favoritar(){
@@ -66,10 +62,7 @@ data : Date = new Date
      this.tarefaAtual.favorited=false;
 
    }
-   console.log(this.tarefaAtual)
-
-  console.log(this.caminhoEstrela)
-   console.log( await this.service.putTarefa(this.tarefaAtual, this.loggedUser.id))
+   await this.service.putTarefa(this.tarefaAtual, this.loggedUser.id)
    this.newItem.emit(true);
 
 

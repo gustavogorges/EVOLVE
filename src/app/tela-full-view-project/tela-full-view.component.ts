@@ -60,7 +60,7 @@ export class TelaFullViewComponent implements OnInit {
     loggedUser: User = new User;
     userProject !: UserProject;
     hasPermission : boolean = false;
-    openSmMoreViewBoolean = true
+    openSmMoreViewBoolean = this.resizeWindow()
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
     openSmMoreView(){
@@ -68,7 +68,6 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async ngOnInit() {
-        console.log("ENTROU NO ONINIT");
         
         this.loggedUser = await this.cookies_service.getLoggedUser();
         this.route.paramMap.subscribe(async params => {
@@ -126,9 +125,9 @@ export class TelaFullViewComponent implements OnInit {
           || event.target.files[0].type === "image/webp" 
           || event.target.files[0].type === "image/png"){
             this.imagemBlob = event.target.files[0]
-            // const formData = new FormData();
-            // formData.append('image', event.target.files[0]);
-            this.formData = event.target.files[0]
+            const formData = new FormData();
+            formData.append('image', event.target.files[0]);
+            this.formData = formData;
             const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
     
             const imageUrl = URL.createObjectURL(blob);
@@ -207,22 +206,27 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async saveProject(){
-        if(this.descEdited != this.projeto.description){
-            this.projeto = 
-            await this.service.patchProjectDescription(this.projeto.id, this.projeto.description)
-        }
-
-        
-        if(this.nameEdited != this.projeto.name ){
-            this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
-        }
-
-        if(this.formData){         
-            await this.service.patchProjectImage(this.projeto.id, this.formData)
-            // this.formData = null
-        }
-
-        this.nameEdit = false
+        setTimeout( async () => {
+            if(this.descEdited != this.projeto.description){              
+                this.projeto = 
+                await this.service.patchProjectDescription(this.projeto.id, this.descEdited)
+            }
+        }, 50)
+        setTimeout( async () => {
+            if(this.nameEdited != this.projeto.name ){
+                
+                this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
+            }
+        }, 100)
+        setTimeout( async () => {
+            if(this.formData){                       
+                await this.service.patchProjectImage(this.projeto.id, this.formData)
+                // this.formData = null
+            }
+        }, 150)
+        setTimeout( async () => {
+            this.nameEdit = false
+        }, 200)
     }
 
     filteredNames() {
@@ -302,6 +306,16 @@ export class TelaFullViewComponent implements OnInit {
         }
     }
 
+    @HostListener('window:resize', ['$event'])
+    resizeWindow(){
+        if(window.innerWidth > 1024){
+            this.openSmMoreViewBoolean = true
+            return true
+        }
+        this.openSmMoreViewBoolean = false
+        return false
+    }
+
     editStatus(status: Status) {
         this.status = status
         this.boolEditStatus = true
@@ -310,7 +324,7 @@ export class TelaFullViewComponent implements OnInit {
 
     async enableStatus(status: Status) {
         status.enabled = !status.enabled
-        await this.postStatus(status)
+        this.projeto = await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
     organizeStatus() {
@@ -352,7 +366,7 @@ export class TelaFullViewComponent implements OnInit {
 
                     setTimeout(() => {
                         if (matchingChart) {
-                            console.log(this.getValuesChart(chart));
+                            this.getValuesChart(chart);
 
                             let updatedMatchingChart = { ...matchingChart, id: chart.id, data: { labels: this.getLabelsChart(chart), datasets: [{ label: chart.label, data: this.getValuesChart(chart), }] } };
 
@@ -429,10 +443,8 @@ export class TelaFullViewComponent implements OnInit {
     async editStatusPut() {
         this.boolEditStatus = false
         this.booleanAddStatus = false
-        let oldStatus = this.projeto.statusList.find(status => status.id == this.status.id)
-        oldStatus = this.status
         this.status = new Status
-        return await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
+        await this.service.updateStatusList(this.projeto.id, this.loggedUser.id, this.projeto.statusList)
     }
 
 
