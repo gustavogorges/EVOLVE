@@ -2,12 +2,17 @@
 class="fixed w-screen h-screen z-[99] modal top-1/2 left-1/2 flex items-center justify-center -translate-x-1/2 -translate-y-1/2"
 >
 <div
-  class="w-[500px] h-max bg-white p-7 rounded-xl shadow-lg flex flex-col gap-4 relative"
+  class="w-[500px] h-max bg-white dark:bg-dark-primary-gray p-7 rounded-xl shadow-lg flex flex-col gap-4 relative"
 >
-<h2 class="font-titulo text-lg font-bold">
+<i
+class="absolute top-7 right-7 pi pi-times text-sm text-primaryFontBlack dark:text-primaryWhite"
+style="font-size: 1rem"
+(click)="closeModal()"
+></i>
+<h2 class="font-titulo text-lg font-bold dark:text-white">
     {{ "Entre em uma equipe" | translate }}
   </h2>
-  <p class="text-fontGray font-hind-madurai">
+  <p class="text-fontGray dark:text-gray-300 font-hind-madurai">
     {{
       "Informe o código fornecido por um membro da equipe:"
         | translate
@@ -16,16 +21,16 @@ class="fixed w-screen h-screen z-[99] modal top-1/2 left-1/2 flex items-center j
       [(ngModel)]="code"
       type="text"
       placeholder="{{ 'Digite o código' | translate }} "
-      class="w-full placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary"
+      class="w-full placeholder:font-hind-madurai placeholder:text-sm outline-none p-2 bg-primaryWhite rounded-md focus:outline-1 focus:outline-primary focus:dark:outline-dark-primary"
     />
     <button
     (click)="verifyCode()"
-    class="px-5 py-2 w-3/12 rounded-lg bg-primary text-base self-end text-white font-titulo font-semibold"
+    class="px-5 py-2 w-3/12 rounded-lg bg-primary dark:bg-dark-primary text-base self-end text-white font-titulo font-semibold"
   >
     {{ "enviar" | translate }}
   </button>
     
-  <p class="text-fontGray text-xs font-hind-madurai">
+  <p class="text-fontGray dark:text-gray-300 text-xs font-hind-madurai">
     {{
       "Não sabe o código? toda equipe possui um, peça para um membro o código da equipe que deseja participar, ou para que seja adicionado na equipe."
         | translate

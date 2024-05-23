@@ -12,6 +12,8 @@ import { CookiesService } from 'src/service/cookies-service.service';
 import { v4 as uuidv4 } from 'uuid';
 import { hasPermission } from '../shared/check-permissions';
 import { Permission } from 'src/model/permission.';
+import { Task } from 'src/model/task';
+import { trimEnd } from 'lodash';
 @Component({
   selector: 'app-team-creation-screen',
   templateUrl: './team-creation-screen.component.html',
@@ -112,6 +114,19 @@ export class TeamCreationScreenComponent implements OnInit {
         
 
    
+  }
+  copied = false
+  // Método para copiar a informação
+  copyInfo() {
+    const textToCopy = this.team.code.toString();
+    
+    // Usando a API Clipboard
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      console.log('Texto copiado para a área de transferência');
+    }).catch(err => {
+      console.error('Erro ao copiar o texto: ', err);
+    });
+    this.copied = true
   }
 
   userId = 0
@@ -248,7 +263,7 @@ export class TeamCreationScreenComponent implements OnInit {
       console.log(this.title == 'sair da equipe');
 
 
-      if (this.title == 'excluir a equipe') {
+      if (this.title == 'excluir a equipe') { //essa logica aqui se tiver traduzindo vai precisar ver com a tradução hein (ali em baixo tbm)
         console.log(10);
 
         this.service.deleteById("team", this.team.id);
@@ -258,11 +273,12 @@ export class TeamCreationScreenComponent implements OnInit {
         console.log(11);
 
         this.loggedUser = await this.cookiesService.getLoggedUser();
-        const indexToRemove = this.team.participants.findIndex(userTeam => userTeam.userId === this.loggedUser.id);
-        if (indexToRemove !== -1) {
-          this.team.participants.splice(indexToRemove, 1);
-        }
-        this.service.patchTeamParticipants(this.team.id, this.team.participants);
+        // const indexToRemove = this.team.participants.findIndex(userTeam => userTeam.userId === this.loggedUser.id);
+        // if (indexToRemove !== -1) {
+        //   this.team.participants.splice(indexToRemove, 1);
+        // }
+        // this.service.patchTeamParticipants(this.team.id, this.team.participants);
+        this.service.leaveTeam(this.loggedUser.id, this.team.id)
         this.router.navigateByUrl('/tela-inicial');
 
       }

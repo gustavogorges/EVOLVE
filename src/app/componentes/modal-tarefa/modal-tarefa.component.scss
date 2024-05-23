@@ -1,5 +1,5 @@
 .main {
-    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] max-h-[100%] h-[95%]  fixed top-[4.5rem] right-0 bg-white dark:bg-dark-primary-black rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
+    @apply lg:w-[65%] md:w-[80%] w-[100%] 2xl:w-[45%] xl:w-[60%] max-h-[100%] md:h-[95%] h-screen fixed  top-7 md:top-[4.5rem] right-0 bg-white dark:bg-dark-primary-black rounded-tl-sm overflow-y-auto rounded-bl-sm shadow-2xl  flex flex-col items-center justify-start
 }
 
 .name-progress {
@@ -133,7 +133,7 @@
 }
 
 .add-propertie-text  {
-    @apply text-base pl-3 font-titulo
+    @apply md:text-base text-sm pl-3 font-titulo
 }
 
 .icon-propertie {
