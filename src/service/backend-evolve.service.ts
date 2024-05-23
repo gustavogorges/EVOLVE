@@ -304,6 +304,12 @@ export class BackendEVOLVEService {
       await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
     ).data;
   }
+  async getOneProject(caminho: string, id: number) {
+    return (
+      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
+    );
+  }
+
 
   async deleteById(caminho: string, id: number) {
     return (await axios.delete(this.URL + caminho + '/' + id, {withCredentials: true})).data;
