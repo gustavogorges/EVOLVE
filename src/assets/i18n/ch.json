@@ -255,6 +255,27 @@
   "Listas": "列表",
   "Calendario": "日历",
   "Em Aprovação":"批准中",
-  "editar perfil":"编辑个人资料"
+  "editar perfil":"编辑个人资料",
+  "Níveis de acesso:": "访问级别：",
+  "editar, controle dos participantes, criar projetos, e excluir a equipe.": "编辑、参与者控制、创建项目和删除团队。",
+  "Administrador": "管理员",
+  "editar, controle dos participantes, e criar projetos.": "编辑、参与者控制和创建项目。",
+  "Colaborador": "合作者",
+  "visualizar e criar projetos.": "查看和创建项目。",
+  "Espectador": "观众",
+  "apenas visualizar.": "仅查看。",
+  "Membros da equipe:": "团队成员：",
+  "Usuário": "用户",
+  "salvar": "保存",
+  "sair da equipe": "离开团队",
+  "excluir equipe": "删除团队",
+  "usuarios selecionados": "已选择用户",
+  "Adicionar usuario(s)": "添加用户",
+  "Gerar PDF": "生成PDF",
+  "Deseja": "要",
+  "Entrar em uma equipe": "加入团队",
+  "Código da equipe:": "团队代码：",
+  "Parece que você não possui nenhum projeto favoritado. Favorite um de seus projetos e os encontre aqui!": "看起来您没有任何收藏的项目。收藏您的一个项目并在这里找到它们！",
+        "Parece que não há tarefas atribuidas a você!": "看起来没有分配给您的任务！"
 }
   

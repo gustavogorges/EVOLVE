@@ -12,6 +12,8 @@ import { CookiesService } from 'src/service/cookies-service.service';
 import { v4 as uuidv4 } from 'uuid';
 import { hasPermission } from '../shared/check-permissions';
 import { Permission } from 'src/model/permission.';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 @Component({
   selector: 'app-team-creation-screen',
   templateUrl: './team-creation-screen.component.html',

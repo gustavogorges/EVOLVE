@@ -60,7 +60,7 @@ export class TelaFullViewComponent implements OnInit {
     loggedUser: User = new User;
     userProject !: UserProject;
     hasPermission : boolean = false;
-    openSmMoreViewBoolean = true
+    openSmMoreViewBoolean = this.resizeWindow()
     constructor(private service: BackendEVOLVEService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private cookies_service: CookiesService) { }
 
     openSmMoreView(){
@@ -300,6 +300,16 @@ export class TelaFullViewComponent implements OnInit {
         }else{
             return false
         }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    resizeWindow(){
+        if(window.innerWidth > 1024){
+            this.openSmMoreViewBoolean = true
+            return true
+        }
+        this.openSmMoreViewBoolean = false
+        return false
     }
 
     editStatus(status: Status) {

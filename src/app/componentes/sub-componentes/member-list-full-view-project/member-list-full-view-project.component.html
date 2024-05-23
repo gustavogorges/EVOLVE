@@ -40,7 +40,7 @@
     (click)="selectPermissions = !selectPermissions"
   >
     <button
-      class="h-[2rem] w-[80%] text-sm bg-primary dark:bg-dark-primary text-secondaryWhite dark:text-primaryFontBlack rounded-full duration-200 hover:scale-105"
+      class="h-[2rem] w-[80%] text-[9px] xl:text-sm bg-primary dark:bg-dark-primary text-secondaryWhite dark:text-primaryFontBlack rounded-full duration-200 hover:scale-105"
     >
       {{ "Alterar permições" | translate }}
     </button>
@@ -60,7 +60,7 @@
     *ngIf="user.id != getProjectCreator(project).id && hasPermission"
   >
     <button
-      class="h-[2rem] w-[80%]  text-sm bg-red-600 rounded-full text-secondaryWhite duration-200 hover:scale-105"
+      class="h-[2rem] w-[80%] text-[9px] xl:text-sm bg-red-600 rounded-full text-secondaryWhite duration-200 hover:scale-105"
       (click)="removeMember()"
     >
       {{ "Remover membro" | translate }}

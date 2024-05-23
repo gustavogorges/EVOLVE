@@ -255,6 +255,29 @@
     "Listas": "Lists",
     "Calendario": "Calendar",
     "Em Aprovação":"In approval",
-    "editar perfil":"Edit Profile"
-  
+    "editar perfil":"Edit Profile",
+
+
+
+    "Níveis de acesso:": "Access levels:",
+    "editar, controle dos participantes, criar projetos, e excluir a equipe.": "edit, participant control, create projects, and delete the team.",
+    "Administrador": "Administrator",
+    "editar, controle dos participantes, e criar projetos.": "edit, participant control, and create projects.",
+    "Colaborador": "Collaborator",
+    "visualizar e criar projetos.": "view and create projects.",
+    "Espectador": "Viewer",
+    "apenas visualizar.": "view only.",
+    "Membros da equipe:": "Team members:",
+    "Usuário": "User",
+    "salvar": "save",
+    "sair da equipe": "leave team",
+    "excluir equipe": "delete team",
+    "usuarios selecionados": "users selected",
+    "Adicionar usuario(s)": "Add user(s)",
+    "Gerar PDF": "Generate PDF",
+    "Deseja" : "Want",
+    "Entrar em uma equipe" : "Join a team",
+    "Código da equipe:" : "Team code:",
+    "Parece que você não possui nenhum projeto favoritado. Favorite um de seus projetos e os encontre aqui!" : "It looks like you don't have any favorite projects. Favorite one of your projects and find them here!",
+    "Parece que não há tarefas atribuidas a você!" : "It looks like there are no tasks assigned to you!"
 }
