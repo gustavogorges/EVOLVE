@@ -17,8 +17,6 @@ export class AnexosComponent implements OnInit {
   ngOnInit(): void {
     this.task.files.forEach(file => {
       this.setUrl(file);
-      console.log(file);
-      
     });
   }
 
@@ -63,7 +61,6 @@ export class AnexosComponent implements OnInit {
 
   removeTaskFile(file:File): void {
     this.task.files = this.task.files.filter(f => f.id !== file.id);
-    console.log(file);
     this.service.deleteTaskFile(this.task.id,file.id,this.loggedUser.id);
   }
 

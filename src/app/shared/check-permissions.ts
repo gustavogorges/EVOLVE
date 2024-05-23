@@ -25,11 +25,15 @@ export function hasPermission(userId : number, team : Team, permission : any): b
 export function hasPermissionProject(userId : number, project : Project, permission : any): boolean{
     let boolean = false
     
+    console.log(project);
     
-    project?.members.map((userProject)=>{
+    project?.members?.map((userProject)=>{
+        console.log(project);
         
         
         if(userProject.userId == userId){
+            console.log(userProject);
+            
             
             userProject.role.permissions.forEach(u=> {
                 if(u==permission){

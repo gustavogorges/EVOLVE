@@ -74,8 +74,6 @@ export class CommentsProjectComponent implements OnInit {
 
   async addCommentValue() : Promise<void> {
     // Function to get hours and functions
-    console.log(this.comment.value);
-    
     if(this.comment.value != ''){
       const date = new Date();
       const hours = date.getHours();
@@ -94,7 +92,6 @@ export class CommentsProjectComponent implements OnInit {
 
       let postComment:any = newComment
       postComment.user = {"id":this.loggedUser.id}
-      console.log(postComment);
       
       await this.service.patchNewCommentProject(this.project.id, postComment, this.loggedUser.id)
       let listComments = await this.service.getAllCommentsOfProject(this.project.id)

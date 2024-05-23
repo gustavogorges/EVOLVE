@@ -85,7 +85,6 @@ export class MemberListFullViewProjectComponent implements OnInit {
       userProjectReceived.role.name = "PROJECT_VIEWER"
       this.user.currentRole = "Espectador"
     }
-    console.log(userProjectReceived);
     this.service.setUserProjectRole(this.project.id,userProjectReceived);
   }
 
@@ -109,7 +108,6 @@ export class MemberListFullViewProjectComponent implements OnInit {
           })
 
           this.project.members.filter( (userProject) => !listIdsFromRemove.find(e=> e.id = userProject.userId))
-          console.log(this.project.members);
           await this.service.patchProjectRemoveMember(this.project.id, this.user.id)
         }
 
@@ -119,7 +117,6 @@ export class MemberListFullViewProjectComponent implements OnInit {
 
   waitForConfirmation(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      console.log("waitForConfirmation() called");
 
       let timer: ReturnType<typeof setTimeout>;
       let intervalId: ReturnType<typeof setInterval>;

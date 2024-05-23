@@ -118,8 +118,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   updatePropertiesList(updatedPropertiesList : Array<Property>) : void {
       this.propertiesList = updatedPropertiesList;
-      console.log(this.propertiesList);
-
       this.booleanAddPropriedade = false;
   }
 
@@ -132,9 +130,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       userTask.userId = this.loggedUser.id;
       userTask.taskId = this.tarefa.id;
     }
-
-    //console.log(await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id));
-
 
     if(userTask.workedSeconds + this.seconds >= 60) {
       userTask.workedMinutes += 1;
@@ -150,9 +145,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
     userTask.workedHours += this.hours;
 
-    console.log(userTask);
-    
-    
     this.service.updateUserWorkedTime(userTask, this.tarefa.id);
     this.finishFocus();
   }
@@ -183,9 +175,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
-    console.log(this.tarefa);
-    console.log(this.projeto);
-    
     
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
     
@@ -470,16 +459,12 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   saveProperty() : void {
-    console.log(this.tarefa.finalDate);
-    
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
    
     this.booleanCalendarioFinalDate = false;
   }
 
   saveProperty2() : void {
-    console.log(this.tarefa.scheduledDate);
-    
     this.service.updateTaskScheludeDate(this.tarefa.id,this.loggedUser.id,this.tarefa.scheduledDate)
     this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
   }

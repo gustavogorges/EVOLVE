@@ -53,10 +53,7 @@ export class SelectCustomComponent implements OnInit {
 
     if (option.name == "Prioridade" || option.name == "Priority" || option.name == "优先级" || option.name == "Prioridad") {
       this.ordemPrioridades.map((s) => {
-        console.log(s)
         this.listOptions.push(s)
-        console.log(this.listOptions);
-
       })
 
 

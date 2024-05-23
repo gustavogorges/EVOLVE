@@ -71,7 +71,6 @@ export class TeamCreationScreenComponent implements OnInit {
       this.team.participants.map((u) => this.teamParticipants.push(u))
 
     }
-    console.log(this.team);
   }
 
   getUsersFromTeam(userTeams: UserTeam[]): User[] {
@@ -98,12 +97,6 @@ export class TeamCreationScreenComponent implements OnInit {
 
         const imageUrl = URL.createObjectURL(blob);
         this.preImage = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-        console.log(this.preImage);
-
-
-
-        // await this.service.patch(this.user.id, this.formData)   
-        //  this.user = await this.service.getOne("user",this.user.id)   
       }
     }
   }
@@ -122,10 +115,7 @@ export class TeamCreationScreenComponent implements OnInit {
     
     // Usando a API Clipboard
     navigator.clipboard.writeText(textToCopy).then(() => {
-      console.log('Texto copiado para a área de transferência');
-    }).catch(err => {
-      console.error('Erro ao copiar o texto: ', err);
-    });
+    })
     this.copied = true
     setTimeout(() => {
       this.copied = false
@@ -138,13 +128,8 @@ export class TeamCreationScreenComponent implements OnInit {
     this.select = !this.select
   }
   choosenRole(option : string   , userTeam :UserTeam){  
-    console.log(option);
     let index  = this.options2.indexOf(option)
     userTeam.role.id = index+1;
-    console.log(index+1);
-    
-    console.log(userTeam);
-    
   }
 
   randomColor() {
@@ -173,7 +158,6 @@ export class TeamCreationScreenComponent implements OnInit {
     }
 
     )
-    console.log(this.teamParticipants);
 
     this.isSearchUserModalOpen = false
   }
@@ -192,7 +176,6 @@ export class TeamCreationScreenComponent implements OnInit {
     this.team.participants = this.teamParticipants
 
     this.team.imageColor = this.backGroundColorProject
-    console.log(this.team);
 
     if (this.id == 0) {
       let userTeamCreator: any = new UserTeam
@@ -212,9 +195,6 @@ export class TeamCreationScreenComponent implements OnInit {
         a.user = {"id": a.user.id}
       }
 
-      console.log(postingTeam);
-      console.log("postingTeam");
-      
       this.team = await this.service.postEquipe(postingTeam);
       window.location.href = "/tela-projeto/"+this.team.id
 
@@ -230,17 +210,13 @@ export class TeamCreationScreenComponent implements OnInit {
      await this.service.patchTeamImageColor(this.team.id, (this.team.imageColor as string))
       this.team = await this.service.patchTeamParticipants(this.team.id, participantsPatch)
 
-      console.log(this.team.participants);
       
       this.teamParticipants = this.team.participants
       //this.service.putEquipe(this.team); 
     }
     this.disabledInfo = true;
     let id = this.team.id
-    console.log(id);
-
     this.router.navigate(["/equipe/" + id])
-
   }
   editar() {
     this.disabledInfo = false;
@@ -267,25 +243,16 @@ export class TeamCreationScreenComponent implements OnInit {
     if (boolean == false) {
       this.openModal = false;
     } else {
-      console.log(this.title);
-      console.log(this.title == 'sair da equipe');
-
 
       if (this.title == 'excluir a equipe') { //essa logica aqui se tiver traduzindo vai precisar ver com a tradução hein (ali em baixo tbm)
-        console.log(10);
 
         this.service.deleteById("team", this.team.id);
         this.router.navigateByUrl('/tela-inicial');
 
       } else if (this.title == 'sair da equipe') {
-        console.log(11);
 
         this.loggedUser = await this.cookiesService.getLoggedUser();
-        // const indexToRemove = this.team.participants.findIndex(userTeam => userTeam.userId === this.loggedUser.id);
-        // if (indexToRemove !== -1) {
-        //   this.team.participants.splice(indexToRemove, 1);
-        // }
-        // this.service.patchTeamParticipants(this.team.id, this.team.participants);
+
         this.service.leaveTeam(this.loggedUser.id, this.team.id)
         this.router.navigateByUrl('/tela-inicial');
 
@@ -293,8 +260,6 @@ export class TeamCreationScreenComponent implements OnInit {
     }
   }
   cancelar() {
-    console.log(this.disabledInfo);
-
     this.disabledInfo = true;
 
     if (this.id == 0) {

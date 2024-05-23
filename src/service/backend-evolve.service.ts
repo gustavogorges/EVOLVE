@@ -177,8 +177,6 @@ export class BackendEVOLVEService {
   }
 
   async putMessage(message: MessageDTO): Promise<Message> {
-    console.log('fazendo update na service');
-    console.log(message);
     return (await axios.put(this.URL + 'message', message, {withCredentials: true})).data;
   }
 
@@ -296,14 +294,17 @@ export class BackendEVOLVEService {
   }
 
   async getOne(caminho: string, id: number) {
-    //console.log((
-    //  await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
-    //).data);
     
     return (
       await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
     ).data;
   }
+  async getOneProject(caminho: string, id: number) {
+    return (
+      await axios.get(this.URL + caminho + '/' + id, { withCredentials: true })
+    );
+  }
+
 
   async deleteById(caminho: string, id: number) {
     return (await axios.delete(this.URL + caminho + '/' + id, {withCredentials: true})).data;
@@ -572,7 +573,6 @@ export class BackendEVOLVEService {
   }
 
   async patchPriority(priority: number, taskId: number) {
-    console.log(priority);
 
     return (
       await axios.patch(
@@ -814,10 +814,6 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectImage(id: number, formData: FormData) {
-    // let formData = new FormData
-    // formData.append("image", image)
-    console.log(formData);
-    
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData, {withCredentials: true}))
       .data;
   }
@@ -839,8 +835,6 @@ export class BackendEVOLVEService {
   }
 
   async patchProjectFinalDate(projecId: number, finalDate: string) {
-    console.log(finalDate);
-    
     let formData: FormData = new FormData;
     formData.append("finalDate", finalDate);
     return (
@@ -878,8 +872,6 @@ export class BackendEVOLVEService {
   }
 
   async patchDefaultRole(projecId: number, defaultRole: Role) {
-    console.log(defaultRole);
-    
     return (
       await axios.patch(this.URL + "project/" + projecId + "/defaultRole", defaultRole, {withCredentials: true})
     )
@@ -960,7 +952,6 @@ export class BackendEVOLVEService {
 
   async getProjectChatsByUserId(id: number): Promise<Array<ProjectChat>> {
     console.log((await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data);
-    console.log("ME OLHEEEEE");
     
     return (await axios.get(this.URL + "projectChat/user/" + id, {withCredentials: true})).data;
   }

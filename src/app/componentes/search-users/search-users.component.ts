@@ -27,16 +27,10 @@ export class SearchUsersComponent implements OnInit, OnChanges{
 
 bah !:Array<User>
   async ngOnInit(): Promise<void> {
-    console.log(this.addedUsers);
     let logged = await this.cokkie.getLoggedUser()
     this.users = await this.service.getAllSomething("user")
-    console.log("BAHHHH FURIZADINHANN")
    this.bah = this.users.filter( user => !this.addedUsers.find(u => u.id == user.id) && logged.id !=user.id )
-   console.log("BAHHHH rPAZIADINHAANNN")
-
  
-     console.log(this.bah);
-     
      this.users = this.getUsers();
     
   }
@@ -49,16 +43,12 @@ bah !:Array<User>
 
 
   getUsers():Array<User>{
-    console.log(this.bah  );
-    console.log(this.search);
     
     this.users = this.bah?.filter((user) => this.matchSearch(user) && !this.isUserSelected(user));
-    console.log(this.users);
    
     return this.users;
 }
   getSelectedUsers():Array<User>{
-    console.log(this.selectedUsers);
     
     return this.selectedUsers.sort(this.sortByUserName)
   }
@@ -85,8 +75,6 @@ bah !:Array<User>
   }
 
   matchSearch(user:User):boolean{
-    console.log(this.searchMatchUserEmail(user));
-    
     return this.searchMatchUserEmail(user) || this.searchMatchUserName(user)
   }
 

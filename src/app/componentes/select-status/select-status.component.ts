@@ -112,10 +112,6 @@ export class SelectStatusComponent implements OnInit{
     const backgroundColorIntensity = intensity(backgroundColor);
     const contrast = Math.abs(textColorIntensity - backgroundColorIntensity);
 
-    console.log("Intensidade do texto:", textColorIntensity);
-    console.log("Intensidade do fundo:", backgroundColorIntensity);
-    console.log("Contraste:", contrast);
-
     return contrast >= threshold;
   }
 

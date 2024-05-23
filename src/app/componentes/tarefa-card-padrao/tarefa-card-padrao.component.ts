@@ -46,9 +46,6 @@ import { CookiesService } from 'src/service/cookies-service.service';
       this.valorBarra = 60 +"%"; 
   
     this.arrayForce =  this.tarefaAtual.associates as Array<User> 
-      console.log(this.arrayForce);
-      
-
     }
 
     async favoritar(event: MouseEvent){
@@ -84,13 +81,11 @@ import { CookiesService } from 'src/service/cookies-service.service';
       }
     }
     async completed(sub : Subtask){
-      console.log(sub);
       if(sub.concluded){
         sub.concluded=false;
       }else{
         sub.concluded=true;
       }
-      console.log(sub);
       this.tarefaAtual.subtasks.map((s)=>{
         if(s.id ==sub.id){
           s.concluded=sub.concluded

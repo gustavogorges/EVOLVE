@@ -10,8 +10,6 @@ export class appClickedOutside {
 
     @HostListener('document:click', ['$event.target'])
     public onClick(target:any){
-        console.log('wadawdawdawdadawdad');
-        
         const clickedInside = this.el.nativeElement.contains(target)
         if(!clickedInside){
             this.clickedOutside.emit(clickedInside)

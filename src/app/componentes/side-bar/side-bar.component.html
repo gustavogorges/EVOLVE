@@ -42,7 +42,7 @@
                 {{ project.name }}
               </p>
             </div>
-            <div class="flex flex-col ">
+            <div class="flex flex-col " *ngIf="hasPermissionProject(project)">
               <div class="flex cursor-pointer duration-150 hover:scale-105 hover:pl-2" (click)="goTelaTarefa(project)">
                 <p class="font-hind-madurai text-base font-medium text-fontGray dark:text-gray-300">
                   {{ 'Visualizar tarefas' | translate }}
