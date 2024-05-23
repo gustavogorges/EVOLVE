@@ -213,6 +213,8 @@ export class TeamCreationScreenComponent implements OnInit {
       console.log("postingTeam");
       
       this.team = await this.service.postEquipe(postingTeam);
+      window.location.href = "/tela-projeto/"+this.team.id
+
     }
 
     else {
@@ -255,6 +257,9 @@ export class TeamCreationScreenComponent implements OnInit {
     this.openModal = true
 
   }
+  goProjects(){{
+    window.location.href = "/tela-projeto/"+this.team.id
+  }}
   async modal(boolean: boolean) {
     if (boolean == false) {
       this.openModal = false;

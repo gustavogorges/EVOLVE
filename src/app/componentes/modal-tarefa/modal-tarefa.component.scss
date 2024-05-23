@@ -67,7 +67,7 @@
 }
 
 .name-empty {
-    @apply text-2xl text-primary dark:text-dark-primary opacity-70 bg-slate-100 px-10 rounded-xl font-titulo
+    @apply text-2xl text-primary dark:text-dark-primary opacity-70 bg-slate-100 dark:bg-dark-secundary-gray  px-10 rounded-xl font-titulo
 }
 
 .progress-bar-box {

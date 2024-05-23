@@ -24,6 +24,7 @@
     <i class="pi pi-angle-double-right icon-close"></i>
   </div>
   <div class="the-box">
+
     <div class="foco-on" *ngIf="booleanFoco">
       <div class="foco-timer">
         <div>{{ timerString }}</div>
@@ -55,6 +56,8 @@
       </div>
     </div>
     <div class="name-progress">
+      <div class="h-52 "></div>
+
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
           <p class="name truncate " *ngIf="!booleanEditName && tarefa.name != ''">{{ tarefa.name }}</p>
@@ -71,8 +74,8 @@
             *ngIf="booleanEditName"
           >
             <input
-              class="input-box truncate "
-              style="font-size: 30px; color: #185e77; font-weight: semibold"
+              class="input-box truncate text-primary dark:text-dark-primary bg-slate-100 dark:bg-dark-secundary-gray p-2 rounded-lg"
+              style="font-size: 30px;  font-weight: semibold"
               type="text"
               maxlength="25"
               pInputText
