@@ -84,6 +84,14 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL + "project/" + projectId + "/setRole", userProject, {withCredentials: true})).data;
   }
 
+  async leaveTeam(userId:number, teamId:number) {
+    let formData = new FormData
+    formData.append("userId", userId.toString())
+    return (await axios.put(this.URL + "team/"+  teamId + "/leaveTeam", formData, {withCredentials: true})).data;
+  }
+
+
+
   async updateDashboard(
     dashboard: Dashboard,
     idDashboard: number,
@@ -731,18 +739,24 @@ export class BackendEVOLVEService {
   // }
 
   async putProjeto(project: Project) {
-    
+    setTimeout( async () => {
     await this.patchProjectName(project.id, project.name); 
-
-    await this.patchProjectDescription(project.id, project.description);
-  
-    await this.patchProjecyImageColor(project.id, project.imageColor); 
-  
-    await this.patchProjectTasks(project.id, project.tasks);
-
-    if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
-
-    return await this.getOne("project", project.id)
+    }, 50)
+    setTimeout( async () => {
+      await this.patchProjectDescription(project.id, project.description);
+    }, 100)
+    setTimeout( async () => {
+      await this.patchProjecyImageColor(project.id, project.imageColor); 
+    }, 150)
+    setTimeout( async () => {
+      await this.patchProjectTasks(project.id, project.tasks);
+    }, 200)
+    setTimeout( async () => {
+      if(project.finalDate) await this.patchProjectFinalDate(project.id, project.finalDate)
+    }, 250)
+    setTimeout(async () => {
+      return await this.getOne("project", project.id)
+    }, 300)
   }
 
   
@@ -802,6 +816,8 @@ export class BackendEVOLVEService {
   async patchProjectImage(id: number, formData: FormData) {
     // let formData = new FormData
     // formData.append("image", image)
+    console.log(formData);
+    
     return (await axios.patch(this.URL + 'project/' + id + '/image', formData, {withCredentials: true}))
       .data;
   }

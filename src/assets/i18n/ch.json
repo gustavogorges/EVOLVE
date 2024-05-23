@@ -276,6 +276,13 @@
   "Entrar em uma equipe": "加入团队",
   "Código da equipe:": "团队代码：",
   "Parece que você não possui nenhum projeto favoritado. Favorite um de seus projetos e os encontre aqui!": "看起来您没有任何收藏的项目。收藏您的一个项目并在这里找到它们！",
-        "Parece que não há tarefas atribuidas a você!": "看起来没有分配给您的任务！"
+  "Parece que não há tarefas atribuidas a você!": "看起来没有分配给您的任务！",
+  "Defina suas preferências de notificação dentro de seus projetos, escolha o que deseja receber e o que não deseja": "在项目中设定通知偏好，选择你想接收和不想接收的内容",
+  "Data Final": "结束日期",
+  "Anexos": "附件",
+  "Associados": "关联人员",
+  "Prioridade": "优先级",
+  "Propriedade": "所有权",
+  "Informações Básicas": "基本信息"
 }
   
