@@ -119,7 +119,7 @@
       <div class="container" *ngFor="let dashboard of dashboards; index as index">
         <div>
           <app-modal-option-full-view (dashboardToedit)="setdashboardEdit($event)" [viewOptionsBol]="viewOptionsBol"
-            [charts]="charts" (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard"
+            [charts]="charts" [confirmationAction]="getResponse()" (quest)="setQuest($event)" (deleteChart)="chartToTrash(dashboard, $event)" [dashboard]="dashboard"
             [projeto]="projeto" [dashboards]="dashboards" class="w-fit h-fit">
           </app-modal-option-full-view>
           <div class="dashboard flex" cdkDropList cdkDropListOrientation="horizontal"
@@ -278,7 +278,7 @@
           <div *ngIf="booleanAddStatus || boolEditStatus" class="new-status">
             <div class="nome-status-box">
               <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%">
-                <input class="input-add-status" type="text" placeholder="escreva o nome" [(ngModel)]="status.name" />
+                <input class="input-add-status" type="text" placeholder="{{'escreva o nome' | translate}}" [(ngModel)]="status.name" />
                 <div class="w-full flex justify-center items-center">
                   <i class="pi pi-pencil text-primary dark:text-dark-primary font-bold"></i>
                 </div>
@@ -287,7 +287,7 @@
             <div class="cor-status-box">
               <div class="grid grid-cols-2 w-full" style="grid-template-columns: 80% 20%">
                 <input class="input-add-status" type="text" value="{{ status.backgroundColor.toUpperCase() }}"
-                  placeholder="selecione uma cor" />
+                  placeholder="{{'selecione uma cor' | translate}}" />
                 <div class="w-full flex justify-center items-center">
                   <input type="color" class="w-7" [(ngModel)]="status.backgroundColor" />
                 </div>
