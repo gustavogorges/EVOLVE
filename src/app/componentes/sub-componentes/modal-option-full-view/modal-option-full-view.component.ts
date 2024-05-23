@@ -26,6 +26,9 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
   @Output() viewEditBolEmit : EventEmitter<any> = new EventEmitter
   @Output() dashboardToedit : EventEmitter<any> = new EventEmitter
   @Output() newChartElement : EventEmitter<any> = new EventEmitter
+  @Input() confirmationAction !: Boolean | any
+  @Output() quest: EventEmitter<string> = new EventEmitter<string>()
+
   nameDashEdited = ''
   @ViewChild('inputElement') inputElement !: ElementRef
   loggedUser : User = new User;
@@ -67,8 +70,18 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
   };
 
   async deleteDashboard(){
-    await this.service.deleteDashboard(this.projeto.id, this.dashboard.id, this.loggedUser.id)
-    this.dashboards.splice(this.dashboards.indexOf(this.dashboard), 1)
+      this.quest.emit("Realmente deseja deletar a Dashboard?");
+
+      try {
+        const confirmation = await this.waitForConfirmation();
+        this.confirmationAction = undefined;
+
+        if (confirmation) {
+          await this.service.deleteDashboard(this.projeto.id, this.dashboard.id, this.loggedUser.id)
+          this.dashboards.splice(this.dashboards.indexOf(this.dashboard), 1)
+        }
+
+      } catch (ignore) { }
   }
 
   viewEdit(){
@@ -95,4 +108,25 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
   outsideClick(event: any) {
     this.newChartElement.emit(this.chartElement.nativeElement)
   }
+
+  waitForConfirmation(): Promise<boolean> {
+    return new Promise<boolean>((resolve) => {
+      console.log("waitForConfirmation() called");
+
+      let timer: ReturnType<typeof setTimeout>;
+      let intervalId: ReturnType<typeof setInterval>;
+
+      timer = setTimeout(() => {
+        clearInterval(intervalId);
+      }, 30000);
+
+      intervalId = setInterval(() => {
+        if (typeof this.confirmationAction !== "undefined") {
+          clearTimeout(timer);
+          clearInterval(intervalId);
+          resolve(this.confirmationAction as boolean);
+        }
+      }, 100);
+    });
+  };
 }
