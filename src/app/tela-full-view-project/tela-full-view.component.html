@@ -270,7 +270,7 @@
           <div
             *ngIf="!booleanAddStatus && !boolEditStatus && hasPermission"
             (click)="addStatus()"
-            class="add-box"
+            class="add-box hover:scale-105 duration-200"
           >
             <i class="pi pi-plus"></i>
             <p>{{ "Adicionar status" | translate }}</p>
@@ -299,6 +299,14 @@
             <div *ngIf="boolEditStatus" class="edit-status-box cursor-pointer" (click)="editStatusPut()">
               <p class="font-semibold">{{ "Editar Status" | translate }}</p>
             </div>
+          </div>
+          <div
+            *ngIf="!booleanAddStatus && !boolEditStatus && hasPermission"
+            (click)="goToTelaTarefa()"
+            class="goToTarefa hover:scale-105 duration-200"
+          >
+          <p>{{ "Ir para Tarefas" | translate }}</p>
+          <i class="pi pi-angle-double-right"></i>
           </div>
         </div>
       </div>
