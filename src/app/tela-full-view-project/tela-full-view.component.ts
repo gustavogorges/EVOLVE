@@ -126,9 +126,9 @@ export class TelaFullViewComponent implements OnInit {
           || event.target.files[0].type === "image/webp" 
           || event.target.files[0].type === "image/png"){
             this.imagemBlob = event.target.files[0]
-            // const formData = new FormData();
-            // formData.append('image', event.target.files[0]);
-            this.formData = event.target.files[0]
+            const formData = new FormData();
+            formData.append('image', event.target.files[0]);
+            this.formData = formData;
             const blob = new Blob([event.target.files[0]], { type: event.target.files[0].type });
     
             const imageUrl = URL.createObjectURL(blob);
@@ -207,22 +207,29 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async saveProject(){
-        if(this.descEdited != this.projeto.description){
-            this.projeto = 
-            await this.service.patchProjectDescription(this.projeto.id, this.projeto.description)
-        }
-
-        
-        if(this.nameEdited != this.projeto.name ){
-            this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
-        }
-
-        if(this.formData){         
-            await this.service.patchProjectImage(this.projeto.id, this.formData)
-            // this.formData = null
-        }
-
-        this.nameEdit = false
+        setTimeout( async () => {
+            if(this.descEdited != this.projeto.description){              
+                this.projeto = 
+                await this.service.patchProjectDescription(this.projeto.id, this.descEdited)
+            }
+        }, 50)
+        setTimeout( async () => {
+            if(this.nameEdited != this.projeto.name ){
+                console.log(this.nameEdit);
+                console.log(this.projeto.name);
+                
+                this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
+            }
+        }, 100)
+        setTimeout( async () => {
+            if(this.formData){                       
+                await this.service.patchProjectImage(this.projeto.id, this.formData)
+                // this.formData = null
+            }
+        }, 150)
+        setTimeout( async () => {
+            this.nameEdit = false
+        }, 200)
     }
 
     filteredNames() {

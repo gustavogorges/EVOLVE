@@ -6,7 +6,7 @@
   (closeModalTask)="closeTask($event)"></app-modal-tarefa>
 
 <div *ngIf="!openSmMoreViewBoolean" class="w-[2rem] flex justify-center items-center h-[2rem]  xl:hidden right-2 rounded-full bg-primary fixed z-50" (click)="openSmMoreView()">
-  <p class="text-primaryWhite"><</p>
+  <p class="text-primaryWhite"></p>
 </div>
 
 <div class="div-pai" [ngClass]="confirmationActionModalBol ? 'blur-sm opacity-50' : 'blur-0'">
