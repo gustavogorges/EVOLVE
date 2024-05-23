@@ -25,6 +25,8 @@ export class SearchComponentComponent implements OnInit {
   open: boolean = false
   @Output() openTaskMdal : EventEmitter<Task> = new EventEmitter
 
+  placeholder:string = "Pesquise itens, coleções, contas, etc..."
+
   async ngOnInit(){
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user}) 
     document.body.addEventListener('click', this.onDocumentClick);

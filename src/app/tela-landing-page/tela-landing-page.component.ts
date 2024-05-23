@@ -32,7 +32,7 @@ export class TelaLandingPageComponent implements OnInit {
       github : 'https://github.com/Felipe-T-Maciel'
     },
     {
-      name : 'Thiago Alessandro',
+      name : 'Thiago Alessandro Batista',
       description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
       image : 'assets/Thiago.jpg',
