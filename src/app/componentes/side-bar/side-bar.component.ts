@@ -55,7 +55,7 @@ config = false
   }
   enterTeam = false
    openEnterTeam(){
-    this.enterTeam = true;
+    this.enterTeam = !this.enterTeam;
    }
 
   openConfig(){

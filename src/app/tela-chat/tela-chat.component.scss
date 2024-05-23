@@ -3,7 +3,7 @@
 }
 
 .main{
-  @apply flex items-center w-[80%]  h-[80%] rounded-[1rem] overflow-clip dark:bg-dark-primary-black ; 
+  @apply flex items-center w-[80%]  h-[80%] rounded-[1rem] overflow-clip dark:bg-dark-primary-gray ; 
 }
 
 .contacts-container{
@@ -22,11 +22,11 @@
 }
 
 .contacts-list-container{
-  @apply  w-full h-full bg-[#f5f5f5] dark:bg-dark-theme-back  overflow-y-scroll ;
+  @apply  w-full h-full bg-[#f5f5f5] dark:bg-dark-primary-gray overflow-y-scroll ;
 }
 
 .search-bar-container{
-  @apply z-20 flex justify-center items-center relative w-full h-[10%] bg-[#f5f5f5] dark:bg-dark-theme-back border-b-2 dark:border-gray-500  top-0;
+  @apply z-20 flex justify-center items-center relative w-full h-[10%] bg-[#f5f5f5] dark:bg-dark-primary-gray border-b-2 dark:border-gray-500  top-0;
 }
 
 .search-bar{

@@ -27,6 +27,8 @@ export class NotificationModalComponent implements OnInit {
       teamRole.team.notifications = await this.verifyNotificatedList(teamRole.team);
     }
     document.body.addEventListener('click', this.onDocumentClick);
+    this.changeEnableProjectConfig()
+    this.changeEnableTaskConfig()
   }
 
   openNotification(){

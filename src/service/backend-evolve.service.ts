@@ -84,6 +84,14 @@ export class BackendEVOLVEService {
     return (await axios.patch(this.URL + "project/" + projectId + "/setRole", userProject, {withCredentials: true})).data;
   }
 
+  async leaveTeam(userId:number, teamId:number) {
+    let formData = new FormData
+    formData.append("userId", userId.toString())
+    return (await axios.put(this.URL + "team/"+  teamId + "/leaveTeam", formData, {withCredentials: true})).data;
+  }
+
+
+
   async updateDashboard(
     dashboard: Dashboard,
     idDashboard: number,

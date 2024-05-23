@@ -29,7 +29,9 @@
               <p class="font-titulo xl:text-xl md:text-lg text-xs text-secondary dark:text-dark-secundary-green font-medium">
                 {{ team?.code }}
               </p>
-              <i class="pi pi-clone icon text-gray-500"></i>
+              <i class="pi pi-clone icon text-gray-500 cursor-pointer"  *ngIf="!copied" (click)="copyInfo()"></i>
+              <i class="pi pi-check icon text-secondary dark:text-dark-secundary-green cursor-pointer"  *ngIf="copied" (click)="copyInfo()"></i>
+
             </div>
           </div>
         </div>
@@ -93,9 +95,25 @@
               apenas visualizar.
             </p>
           </div>
+   
         </div>
+                   
+      
       </div>
+      <div class="flex gap-3 xl:mt-[54px] 2xl:mt-[50px]">
+        <button (click)="goProjects()" class="py-2 px-7 bg-primary dark:bg-dark-primary text-white font-bold font-titulo rounded-lg ">
+
+          Iniciar chat 
+         </button>
+         <button (click)="goProjects()" class="py-2 px-7 bg-secondary dark:bg-dark-secundary-green text-white font-bold font-titulo rounded-lg ">
+  
+          ir para projetos  
+         </button>
+      </div>
+   
+
     </div>
+    
     <div class="lg:w-[44%] w-full flex flex-col gap-6">
       <div class="flex justify-between">
         <p
