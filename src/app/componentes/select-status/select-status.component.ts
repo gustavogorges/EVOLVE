@@ -90,7 +90,7 @@ export class SelectStatusComponent implements OnInit{
               }
           });
       }
-  }
+    }
 
   salvarStatus(status:Status) {
     this.tarefa.currentStatus = status;

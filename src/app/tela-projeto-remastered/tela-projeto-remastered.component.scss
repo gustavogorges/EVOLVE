@@ -31,3 +31,14 @@
 
     }
 }
+
+.select-button{
+    @apply text-xs dark:text-gray-300 font-titulo flex gap-1
+    md:text-base
+    lg:text-xl
+    2xl:text-xl;
+
+    i{
+        @apply text-primary dark:text-dark-primary
+    }
+}

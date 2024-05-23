@@ -34,11 +34,14 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   team !: Team
   task !: Task
   project !: Project;
+  filterBoolean = false
+  ordenacaoBoolean = false
+  atualFilter : any = null
 
   loggedUser : User = new User;
   async ngOnInit() {
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    this.getProjects()
+    await this.getProjects()
   }
 
   closeTask(event: boolean) {
@@ -47,13 +50,118 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     }
   }
 
+  async getFinalDateProjectFilter() {
+    if(this.atualFilter != null){
+      await this.getOriginal()
+    }
+    this.projects.sort((a, b) => {
+        const dateA = new Date(a.finalDate);
+        const dateB = new Date(b.finalDate);
+        return dateA.getTime() - dateB.getTime();
+    });
+
+    this.atualFilter = {
+      id: 0,
+      name : "Data final"
+    }
+  }
+
+  async getOriginal() {
+    this.projects = await this.service.getProjectsByTeamId(this.teamId)
+
+    this.projects.sort((a, b) => {
+        const dateA = new Date(a.lastTimeEdited || a.creationDate);
+        const dateB = new Date(b.lastTimeEdited || b.creationDate);
+
+        return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  async getProgress() {
+    if(this.atualFilter != null){
+      await this.getOriginal()
+    }
+    this.projects.sort((a, b) => {
+        const dateA = new Date(a.progress);
+        const dateB = new Date(b.progress);
+
+        return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  async sortProjectsByProgress(){
+    if(this.atualFilter != null){
+      await this.getOriginal()
+    }
+    this.projects.sort((a, b) => b.progress - a.progress);
+    this.atualFilter = {
+      id: 4,
+      name : "Progresso"
+    }
+  }
+
+  async getFavorites(){
+    if(this.atualFilter != null){
+      await this.getOriginal()
+    }
+
+    const favoriteProjects = this.projects.filter(project => project.favorited);
+
+    if (favoriteProjects.length > 0) {
+        favoriteProjects.sort((a, b) => {
+            const dateA = new Date(a.lastTimeEdited || a.creationDate);
+            const dateB = new Date(b.lastTimeEdited || b.creationDate);
+            return dateB.getTime() - dateA.getTime();
+        });
+
+        this.projects = favoriteProjects;
+    } else {
+        this.projects = [];
+    }
+
+    this.atualFilter = {
+      id: 1,
+      name : "Favoritos"
+    }
+  }
+
+  async filterProjectsByLoggedUser(){
+    if(this.atualFilter != null){
+      await this.getOriginal()
+    }
+    this.projects.filter(project => 
+      project.members.some(member => member.userId === this.loggedUser.id)
+    );
+
+    this.atualFilter = {
+      id: 2,
+      name : "Associado"
+    }
+  }
+
+  removeFilter(){
+    this.atualFilter = null
+      this.getOriginal()
+  }
+
   hasPermission(team : Team){
    return  hasPermission(this.loggedUser.id, team, "CREATE_PROJECT")
   }
+
   openTaskModal(task:any){
     this.task = task
     this.project = task.project as Project
     this.booleanTask = true
+  }
+
+  filterBol(){
+    this.filterBoolean = !this.filterBoolean
+    this.ordenacaoBoolean = false
+  }
+
+  ordenacaoBol(){
+    this.ordenacaoBoolean = !this.ordenacaoBoolean
+    this.filterBoolean = false
   }
 
   getResponse(){
@@ -84,9 +192,12 @@ export class TelaProjetoRemasteredComponent implements OnInit {
       const getTeamId = params.get('teamId');
       this.teamId  = Number(getTeamId)
       this.team = this.loggedUser.teamRoles.find(team => team.team.id === this.teamId)?.team as Team;
-      this.projects = await this.service.getProjectsByTeamId(this.teamId)
-      console.log(this.projects);
+      this.getOriginal()
     });
+  }
+
+  changeFiltro(){
+
   }
 
   openProject(p:any){

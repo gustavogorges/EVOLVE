@@ -127,6 +127,9 @@ export class TeamCreationScreenComponent implements OnInit {
       console.error('Erro ao copiar o texto: ', err);
     });
     this.copied = true
+    setTimeout(() => {
+      this.copied = false
+    }, 1000);
   }
 
   userId = 0
