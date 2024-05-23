@@ -62,7 +62,7 @@
             <div class="check">
               
                 <input class="w-4" type="checkbox" id="1" [(ngModel)]="loggedUser.notificationsConfig.taskAll"
-                    (change)="changeEnableTaskConfig()" />
+                     />
                     <label class="text-primary font-bold font-titulo text-xl dark:text-dark-primary  " for="1">
                         {{ "Tarefas" | translate }}
                     </label>
@@ -77,36 +77,36 @@
             <div class="w-[130px]">
                 <div class="flex gap-4 justify-between check">
                    
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAssociates"
-                        (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAssociates"
+                        />
                         <label class="text-primaryFontBlack font-hind-madurai text-base dark:text-white">
                             {{ "Associados" | translate }}
                         </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAttachments"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAttachments"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Anexos" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskComments"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskComments"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Comentários" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskDescription"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskDescription"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Descrição" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskFinalDate"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskFinalDate"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Data Final" | translate }}
                     </label>
@@ -114,36 +114,36 @@
             </div>
             <div class="w-[130px]">
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskName"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskName"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Nome" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskPriority"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskPriority"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Prioridade" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskProperties"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskProperties"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Propriedade" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskStatus"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskStatus"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Status" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskSubtasks"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.taskAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskSubtasks"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Subtasks" | translate }}
                     </label>
@@ -155,7 +155,7 @@
         <div>
             <div class="flex gap-4 check">
                 <input class="w-4" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectAll"
-                (change)="changeEnableProjectConfig()" />
+                />
                 
                         <label class="text-primary font-bold font-titulo text-xl dark:text-dark-primary">
                             {{ "Projetos" | translate }}
@@ -170,15 +170,15 @@
         <div class="flex gap-5 w-full">
             <div class="w-[140px]">
                 <div class="flex gap-4 justify-between check">
-                    <input #projectOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectComments"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.projectAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectComments"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Comentários" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #projectOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectDashboards"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.projectAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectDashboards"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Dashboards" | translate }}
                     </label>
@@ -188,22 +188,22 @@
          
             <div class="w-[170px]">
                 <div class="flex gap-3 justify-between check">
-                    <input #projectOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectInfos"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.projectAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectInfos"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Informações Básicas" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #projectOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectParticipants"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.projectAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectParticipants"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Membros" | translate }}
                     </label>
                 </div>
                 <div class="flex gap-4 justify-between check">
-                    <input #projectOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectStatus"
-                    (change)="a()" />
+                    <input [disabled]="!loggedUser.notificationsConfig.projectAll" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectStatus"
+                    />
                     <label class="text-primaryFontBlack dark:text-white font-hind-madurai text-base">
                         {{ "Status" | translate }}
                     </label>
