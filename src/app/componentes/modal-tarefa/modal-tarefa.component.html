@@ -24,6 +24,7 @@
     <i class="pi pi-angle-double-right icon-close"></i>
   </div>
   <div class="the-box">
+
     <div class="foco-on" *ngIf="booleanFoco">
       <div class="foco-timer">
         <div>{{ timerString }}</div>
@@ -55,9 +56,11 @@
       </div>
     </div>
     <div class="name-progress">
+      <div class="h-52 "></div>
+
       <div class="foco-name-box">
         <div class="name-box items-center justify-between">
-          <p class="name" *ngIf="!booleanEditName && tarefa.name != ''">{{ tarefa.name }}</p>
+          <p class="name truncate " *ngIf="!booleanEditName && tarefa.name != ''">{{ tarefa.name }}</p>
           <p (click)="booleanEditName=true" class="name-empty" *ngIf="!booleanEditName && tarefa.name == ''">Digite o nome da tarefa aqui</p>
           <i
             *ngIf="!booleanEditName"
@@ -71,9 +74,10 @@
             *ngIf="booleanEditName"
           >
             <input
-              class="input-box"
-              style="font-size: 30px; color: #185e77; font-weight: semibold"
+              class="input-box truncate text-primary dark:text-dark-primary bg-slate-100 dark:bg-dark-secundary-gray p-2 rounded-lg"
+              style="font-size: 30px;  font-weight: semibold"
               type="text"
+              maxlength="25"
               pInputText
               placeholder="Digite o nome da tarefa"
               [(ngModel)]="tarefa.name"
@@ -90,7 +94,7 @@
         <div class="foco-box">
           <div class="foco " (click)="startFocus()" *ngIf="!booleanFoco">
             <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-            <p class="font-bold text-sm">{{'iniciar foco' | translate}}</p>
+            <p class="font-bold text-sm hidden md:flex font-titulo">{{'iniciar foco' | translate}}</p>
           </div>
         </div>
       </div>
@@ -468,4 +472,5 @@
       </div>
     </div>
   </div>
+  <div class="h-[50px]"></div>
 </div>

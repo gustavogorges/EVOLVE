@@ -97,20 +97,20 @@
             <app-user-card-perfil
               [user]="userTeam.user"
               (click)="goToUser(userTeam.user)"
-             
+             class="cursor-pointer"
             ></app-user-card-perfil>
           </div>
       </div>
     
     </div>
-    <div class="flex flex-col gap-2 lg:w-[80%] self-center ">
+    <div class="flex flex-col gap-2 lg:w-[80%] max-w-[80%] overflow-x-auto self-center ">
       <div class="flex w-full md:gap-10 gap-5 overflow-x-auto border-b-2 dark:border-gray-500 ">
         <div *ngFor="let team of user?.teamRoles">
           <p
             class="font-hind-madurai md:text-xl w-max sm:text-lg text-base text-fontGray dark:text-gray-300 cursor-pointer"
             (click)="changeTeam(team.team)"
           >
-            {{ team.team.name }}
+            {{ team?.team?.name }}
           </p>
         </div>
       </div>

@@ -219,8 +219,10 @@
             <div class="flex justify-between w-full h-full items-center px-2">
               <div class="flex w-[75%] overflow-hidden gap-2 text-primary dark:text-dark-primary">
                 <div><i class="pi pi-envelope"></i></div>
+
                 <div>
-                  <p class="truncate text-sm">{{ member.user.email }}</p>
+                  <p class="truncate text-sm">{{ member.user?.email }}</p>
+
                 </div>
               </div>
               <button (click)="goToPerfilMember(member.user)"
@@ -264,6 +266,7 @@
           </div>
         </div>
         <div>
+
           <div
             *ngIf="!booleanAddStatus && !boolEditStatus && hasPermission"
             (click)="addStatus()"

@@ -26,14 +26,12 @@ export class WeekCalendarComponent implements OnInit {
     this.taskList = await this.service.getTasksByUserId(this.looggedUser.id);
     this.taskList.forEach((task) => {
     
-        console.log('Before conversion:', task.finalDate);
         const convertedFinalDate = this.convertToDate(task.finalDate);
         if (convertedFinalDate) task.finalDate = convertedFinalDate;
 
         const convertedScheduledDate = this.convertToDate(task.scheduledDate);
         if (convertedScheduledDate) task.scheduledDate = convertedScheduledDate;
 
-        console.log('After conversion:', task.finalDate);
      
     });
     this.atualizarSemana();

@@ -50,18 +50,35 @@ export class TelaInicialComponent implements OnInit {
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     console.log(this.loggedUser);
     
+  
     this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
-    this.listaTarefas.sort((a,b)=>{
-      if (a.finalDate < b.finalDate) {
+    console.log(this.listaTarefas);
+
+    this.listaTarefas = this.listaTarefas.filter(task => task.finalDate !== null && task.finalDate !== undefined);
+    console.log(this.listaTarefas);
+    
+    this.listaTarefas.sort((a, b) => {
+      const dateA = new Date(a.finalDate);
+      const dateB = new Date(b.finalDate);
+  
+      if (dateA < dateB) {
         return -1; // 'a' vem antes de 'b'
-      } else if (a.finalDate > b.finalDate) {
+      } else if (dateA > dateB) {
         return 1; // 'b' vem antes de 'a'
       } else {
-        return 0; // datas são iguais
+        // Datas são iguais, ordenar por id
+        if (a.id < b.id) {
+          return -1; // 'a' vem antes de 'b'
+        } else if (a.id > b.id) {
+          return 1; // 'b' vem antes de 'a'
+        } else {
+          return 0; // ids são iguais
+        }
       }
-    })
+    });
     let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
-   
+    console.log(this.listaTarefas);
+    
     // this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
     // console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
     
@@ -178,7 +195,28 @@ async openTask(tarefa: Task): Promise<void> {
       this.booleanTask = false;
     }
       this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
+  
+      this.listaTarefas = this.listaTarefas.filter(task => task.finalDate !== null && task.finalDate !== undefined);
       
+      this.listaTarefas.sort((a, b) => {
+        const dateA = new Date(a.finalDate);
+        const dateB = new Date(b.finalDate);
+    
+        if (dateA < dateB) {
+          return -1; // 'a' vem antes de 'b'
+        } else if (dateA > dateB) {
+          return 1; // 'b' vem antes de 'a'
+        } else {
+          // Datas são iguais, ordenar por id
+          if (a.id < b.id) {
+            return -1; // 'a' vem antes de 'b'
+          } else if (a.id > b.id) {
+            return 1; // 'b' vem antes de 'a'
+          } else {
+            return 0; // ids são iguais
+          }
+        }
+      });
     
   }
 }
