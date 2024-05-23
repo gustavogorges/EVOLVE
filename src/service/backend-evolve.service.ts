@@ -28,6 +28,7 @@ import { UsuarioTarefa } from 'src/model/userTask';
 import { UserTeam } from 'src/model/userTeam';
 import { TeamNotification } from 'src/model/teamNotification';
 import { File } from 'src/model/file';
+import { NotificationsConfig } from 'src/model/notificationsConfig';
 
 
 @Injectable({
@@ -327,6 +328,14 @@ export class BackendEVOLVEService {
       await axios.patch(this.URL + 'user/' + userId + '/theme' , formsData, {withCredentials: true})
     ).data;
   }
+
+
+  async patchNotificationsConfig(userId: number, config: NotificationsConfig): Promise<User> {
+    return (
+      await axios.patch(this.URL + 'user/' + userId + '/notificationsConfig', config, {withCredentials: true})
+    ).data;
+  }
+
 
   async patchUserImageFromLink(userId: number, image: File): Promise<User> {
     // let formsData = new FormData();

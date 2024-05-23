@@ -1,7 +1,7 @@
 <i class="icon pi pi-bell icon2 pt-1" (click)="openNotification()"></i>
 
-<div class=" bg-white dark:bg-dark-primary-gray fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col duration-300 justify-between  overflow-hidden " [ngClass]="notification ? 'w-[400px] h-[480px] opacity-100':'w-0 h-0 opacity-0'">
-    <div class="main-box min-w-fit">
+<div  class=" bg-white dark:bg-dark-primary-gray fixed right-[230px] top-12 shadow-lg rounded-lg flex flex-col duration-300 justify-between  overflow-hidden " [ngClass]="notification ? 'w-[400px] h-[480px] opacity-100':'w-0 h-0 opacity-0'">
+    <div class="main-box min-w-fit" *ngIf="!editingConfigs">
         <div class="teams-box" *ngFor="let userTeam of loggedUser.teamRoles">
 
             <div class="h-16 w-full flex justify-between items-center px-4">
@@ -59,9 +59,97 @@
             </div>
         </div>
     </div>
-    <div class="clean-box">
-        <div class="clean-button" (click)="cleanAllNotifications()">
-            <p class="text-base text-primaryWhite font-titulo font-semibold">limpar</p>
+
+    <div *ngIf="editingConfigs" class="max-h-full w-full py-2 overflow-y-auto min-w-fit text-xl px-8">
+        <div class="flex gap-4 py-4">
+            <div class="text-primaryFontBlack text-2xl dark:text-white">{{"Tarefas" | translate}}</div>
+            <input class="w-5" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAll" (change)="changeEnableTaskConfig()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Associados" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAssociates" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Anexos" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskAttachments" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Comentários" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskComments" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Descrição" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskDescription" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Data Final" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskFinalDate" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Nome" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskName" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Prioridade" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskPriority" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Propriedade" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskProperties" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Status" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskStatus" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Subtasks" | translate}}</div>
+            <input #taskOption type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.taskSubtasks" (change)="a()"> 
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="flex gap-4 pb-4">
+            <div class="text-2xl text-primaryFontBlack dark:text-white">{{"Projetos" | translate}}</div>
+            <input class="w-5" type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectAll" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Comentários" | translate}}</div>
+            <input type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectComments" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Dashboards" | translate}}</div>
+            <input type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectDashboards" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Informações Básicas" | translate}}</div>
+            <input type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectInfos" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Membros" | translate}}</div>
+            <input type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectParticipants" (change)="a()"> 
+        </div>
+        <div class="flex gap-4">
+            <div class="text-primaryFontBlack dark:text-white">{{"Status" | translate}}</div>
+            <input type="checkbox" [(ngModel)]="loggedUser.notificationsConfig.projectStatus" (change)="a()"> 
+        </div>
+    </div>
+
+    <div *ngIf="!editingConfigs" class="no-close clean-box h-[15%] w-full flex justify-between items-end px-4 pb-3 ">
+        <div class="no-close clean-button" (click)="editNotificationsConfig()">
+            <i class="pi pi-cog text-primaryWhite"></i>
+        </div>
+        <div class="no-close clean-button" (click)="cleanAllNotifications()">
+            <p class="no-close text-base text-primaryWhite font-titulo font-semibold">{{"Limpar" | translate}}</p>
+        </div>
+    </div>
+    <div *ngIf="editingConfigs" class="no-close clean-box h-[15%] w-full flex justify-between items-end px-4 pb-3 ">
+        <div class="no-close h-8 w-24 rounded-lg flex items-center justify-center cursor-pointer bg-red-500" (click)="cancelEditingConfigs()">
+            <p class="no-close text-base text-primaryWhite font-titulo font-semibold">{{"Cancelar" | translate}}</p>
+        </div>
+        <div class="no-close  h-8 w-24 rounded-lg flex items-center justify-center cursor-pointer bg-secondary" (click)="saveConfigs()">
+            <p class="no-close text-base text-primaryWhite font-titulo font-semibold">{{"Salvar" | translate}}</p>
         </div>
     </div>
 </div>

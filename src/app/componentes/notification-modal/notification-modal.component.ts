@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { LogarithmicScale } from 'chart.js';
+import { NotificationsConfig } from 'src/model/notificationsConfig';
 import { Team } from 'src/model/team';
 import { TeamNotification } from 'src/model/teamNotification';
 import { User } from 'src/model/user';
@@ -29,7 +30,7 @@ export class NotificationModalComponent implements OnInit {
     
     document.body.addEventListener('click', this.onDocumentClick);
     console.log();
-    
+    this.openNotification()
   }
 
   openNotification(){
@@ -37,10 +38,25 @@ export class NotificationModalComponent implements OnInit {
   }
 
   onDocumentClick = (event: any) => {
-    if (!this.elementRef.nativeElement.contains(event.target) && event.target.tagName != "I") {
+    if (!this.elementRef.nativeElement.contains(event.target) && event.target.tagName != "I" && !(event.target.classList.value as string).includes("no-close")) {
+      console.log(event.target.classList.value);
       this.notification = false
     }
   };
+
+  a(){
+    console.log(this.loggedUser.notificationsConfig);
+  }
+  @ViewChildren('taskOption') taskOptions!: any;
+  changeEnableTaskConfig(){
+    console.log(this.taskOptions);
+    console.log();
+    let elementsToChange:any[] = this.taskOptions._results
+    elementsToChange.forEach(elementRef => elementRef.nativeElement.disabled = !this.loggedUser.notificationsConfig.taskAll) 
+    console.log(this.taskOptions);
+    
+    
+  }
 
   async openNotifications(team : Team){
     console.log(await this.service.getAllNotifications(team.id));
@@ -81,5 +97,27 @@ export class NotificationModalComponent implements OnInit {
   verifyIdOnNotificationList(notification : TeamNotification) : boolean {
     return notification.notificatedUsers.some(user => user.id === this.loggedUser.id);
   }
+
+
+  editingConfigs:boolean=false
+  lastConfig:NotificationsConfig|null = null
+  editNotificationsConfig(){
+    this.editingConfigs = true
+    this.lastConfig = this.loggedUser.notificationsConfig
+  }
+
+  cancelEditingConfigs(){
+    this.editingConfigs = false
+    this.loggedUser.notificationsConfig = this.lastConfig!
+    this.lastConfig = null
+  }
+
+  async saveConfigs(){
+    this.editingConfigs = false
+    this.lastConfig = null
+    this.loggedUser = await this.service.patchNotificationsConfig(this.loggedUser.id, this.loggedUser.notificationsConfig)
+  }
+
+
 
 }
