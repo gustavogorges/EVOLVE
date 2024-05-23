@@ -32,7 +32,6 @@ export class NotificationModalComponent implements OnInit {
 
   onDocumentClick = (event: any) => {
     if (!this.elementRef.nativeElement.contains(event.target) && event.target.tagName != "I" && !(event.target.classList.value as string).includes("no-close")) {
-      console.log(event.target.classList.value);
       this.notification = false
     }
   };
@@ -40,7 +39,6 @@ export class NotificationModalComponent implements OnInit {
 
 
   async openNotifications(team : Team){
-    console.log(await this.service.getAllNotifications(team.id));
     team.booleanView = true;
   }
 
@@ -50,8 +48,6 @@ export class NotificationModalComponent implements OnInit {
       notification.readed = true;
       this.service.patchReadedNotification(team.id,notification.id);
     });
-    console.log(team.notifications);
-    
   }
 
 

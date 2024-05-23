@@ -48,14 +48,10 @@ export class TelaInicialComponent implements OnInit {
  
     
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
-    console.log(this.loggedUser);
-    
   
     this.listaTarefas = await this.service.getTasksByUserId(this.loggedUser.id)
-    console.log(this.listaTarefas);
 
     this.listaTarefas = this.listaTarefas.filter(task => task.finalDate !== null && task.finalDate !== undefined);
-    console.log(this.listaTarefas);
     
     this.listaTarefas.sort((a, b) => {
       const dateA = new Date(a.finalDate);
@@ -77,14 +73,8 @@ export class TelaInicialComponent implements OnInit {
       }
     });
     let projects = await this.service.getProjectsByUserId(this.loggedUser.id)
-    console.log(this.listaTarefas);
-    
-    // this.loggedUser.teamRoles = await this.service.getTeamsByUserId(this.loggedUser.id)
-    // console.log( await this.service.getTeamsByUserId(this.loggedUser.id));
-    
     
     this.userColors()
-
 
     projects.map((project: Project)=>{
       if(project.favorited){

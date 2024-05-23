@@ -26,7 +26,6 @@ export class AddMemberToProjectModalComponent implements OnInit {
   async ngOnInit() {
     this.team = await this.service.getOne("team", this.project.team.id);
     this.loggedUser = await this.cookies_service.getLoggedUser();
-    console.log(this.team);
   }
 
 
@@ -50,7 +49,6 @@ export class AddMemberToProjectModalComponent implements OnInit {
     userProject.projectId = this.project.id
 
     this.project.members.push(userProject)
-    console.log(this.project.members);
     
     let project:Project = await this.service.patchProjectMembers(this.project.id, this.project.members)
     this.project.members = project.members

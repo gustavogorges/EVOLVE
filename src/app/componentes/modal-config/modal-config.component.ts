@@ -36,8 +36,6 @@ export class ModalConfigComponent implements OnInit {
     this.theme=this.loggedUser.theme
     this.checkDefaultColors();
     this.sliderValue = this.loggedUser.fontSize
-    console.log(23);
-    
  
   }
   
@@ -110,8 +108,6 @@ changeColor(novaCor: string){
     this.secondaryColor = ''
   }
   this.divSelecionada = !this.divSelecionada;
-  console.log(3);
-  console.log(this.primaryColor);
   if(this.primaryColor == "#185E77"  ){
     this.primaryColor="";
    
@@ -121,7 +117,6 @@ changeColor(novaCor: string){
   }
   
   if(!this.primaryColor){
-    console.log(4);
 
     this.loggedUser.primaryColor=novaCor
     this.primaryColor=this.loggedUser.primaryColor
@@ -129,7 +124,6 @@ changeColor(novaCor: string){
     
     this.colorService.setPrimaryColor(novaCor);
   }else if(!this.secondaryColor && this.primaryColor){
-    console.log(5);
 
     this.loggedUser.secondaryColor=novaCor
     this.service.patchUserSecondaryColor(this.loggedUser.id, this.loggedUser.secondaryColor)
@@ -141,11 +135,9 @@ changeColor(novaCor: string){
   }
   
   else if(this.primaryColor==novaCor){
-    console.log(46);
 
     this.primaryColor="";
   }else if(this.secondaryColor==novaCor){
-    console.log(47);
 
     this.secondaryColor=""
   }
@@ -162,7 +154,6 @@ changeDarkColor(novaCor: string){
     this.primaryDarkColor = ''
     this.secondaryDarkColor = ''
   }
-  console.log(this.primaryColor);
   if(this.primaryDarkColor =="#67BFE0"  ){
     this.primaryDarkColor="";
    
@@ -189,7 +180,6 @@ changeDarkColor(novaCor: string){
 
     this.primaryDarkColor="";
   }else if(this.secondaryDarkColor==novaCor){
-    console.log(47);
 
     this.secondaryDarkColor=""
   }
@@ -199,23 +189,17 @@ changeDarkColor(novaCor: string){
 
 }
 checkDefaultColors(){
-  console.log(this.loggedUser);
-  console.log(this.defaultColors);
   
   
   if((this.loggedUser.primaryColor=='#185E77'||this.loggedUser.secondaryColor=='#4C956C')&&(this.loggedUser.primaryDarkColor=='#67BFE0'||this.loggedUser.secondaryDarkColor=='#86C19F' )){
-    console.log(1
-    );
     
     this.defaultColors=true
     return true; 
   }else{
-    console.log(2);
     
     this.defaultColors=false
     return false 
   }
-  console.log(this.defaultColors);
   
 }
 async changeToDefault(){
@@ -253,49 +237,5 @@ changeFont(){
 
  this.service.patchUserFontSize(this.loggedUser.id, this.sliderValue)
 }
-// base = 16
-// sm = 14
-// lg=18
-// xl=20
-// xl2=24
-// xl3 =30
-//  increaseFontSize() {
-//   this.base+=2
-//   this.sm+=2
-//   this.lg+=2
-//   this.xl+=2
-//   console.log(this.xl2);
-  
-//   this.xl2+=2
-//   this.xl3+=2
-//   console.log(this.xl2);
-  
 
-//   document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
-//   document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
-//   document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
-//   document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
-//   document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
-//   document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
-
-
-
-
-// }
-
-// // Diminuir o tamanho da fonte
-//  decreaseFontSize() {
-//   this.base-=2
-//   this.sm-=2
-//   this.lg-=2
-//   this.xl-=2
-//   this.xl2-=2
-//   this.xl3-=2
-//   document.documentElement.style.setProperty('--font-size-base', ''+this.base+'px');
-//   document.documentElement.style.setProperty('--font-size-sm', ''+this.sm+'px');
-//   document.documentElement.style.setProperty('--font-size-lg', ''+this.lg+'px');
-//   document.documentElement.style.setProperty('--font-size-xl', ''+this.xl+'px');
-//   document.documentElement.style.setProperty('--font-size-2xl', ''+this.xl2+'px');
-//   document.documentElement.style.setProperty('--font-size-3xl', ''+this.xl3+'px');
-// } 
 }

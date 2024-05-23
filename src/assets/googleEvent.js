@@ -23,8 +23,6 @@ function gisLoaded() {
     callback: "", // defined later
   });
   gisInited = true;
-  console.log("token");
-  console.log(tokenClient);
 }
 function createGoogleEvent(eventDetails) {
   tokenClient.callback = async (resp) => {

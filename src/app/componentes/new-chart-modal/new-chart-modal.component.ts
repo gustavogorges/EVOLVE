@@ -37,7 +37,6 @@ export class NewChartModalComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    
     this.project.charts.forEach(element => {
     
       this.labels.push({
@@ -46,14 +45,10 @@ export class NewChartModalComponent implements OnChanges, OnInit {
         value : element.label
       })
     });
-
-    console.log(this.labels);
-    
   }
 
   async createNewChart(){
     let labelChoosed = this.getLabelById().value
-    console.log(labelChoosed);
     
     this.charts.forEach(element => {
       if(element.id === this.chartChoosed){
@@ -90,8 +85,6 @@ export class NewChartModalComponent implements OnChanges, OnInit {
 }
 
 getValuesChart(chart : DashBoardCharts){
-    console.log(chart);
-    
     let valueLabels: number[][] = []
 
     if(chart.labels != null){

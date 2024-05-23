@@ -68,7 +68,6 @@ export class TelaFullViewComponent implements OnInit {
     }
 
     async ngOnInit() {
-        console.log("ENTROU NO ONINIT");
         
         this.loggedUser = await this.cookies_service.getLoggedUser();
         this.route.paramMap.subscribe(async params => {
@@ -215,8 +214,6 @@ export class TelaFullViewComponent implements OnInit {
         }, 50)
         setTimeout( async () => {
             if(this.nameEdited != this.projeto.name ){
-                console.log(this.nameEdit);
-                console.log(this.projeto.name);
                 
                 this.projeto = await this.service.patchProjectName(this.projeto.id, this.nameEdited)
             }
@@ -369,7 +366,7 @@ export class TelaFullViewComponent implements OnInit {
 
                     setTimeout(() => {
                         if (matchingChart) {
-                            console.log(this.getValuesChart(chart));
+                            this.getValuesChart(chart);
 
                             let updatedMatchingChart = { ...matchingChart, id: chart.id, data: { labels: this.getLabelsChart(chart), datasets: [{ label: chart.label, data: this.getValuesChart(chart), }] } };
 

@@ -34,8 +34,6 @@ export class ComentariosComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user});
     this.comments = this.task.comments;
-    console.log(this.comments);
-    
   }
 
   verifyCommentOwner(comment : Comment) : boolean {
@@ -49,8 +47,6 @@ export class ComentariosComponent implements OnInit {
   async deleteComment(comment : Comment) {
     this.comments = await this.service.deleteComment(this.task.id,comment.id,this.loggedUser.id);
     this.comments = this.comments.filter(c => c.id !== comment.id);
-    console.log(this.comments);
-    
    }
 
    verifyApprovament() :boolean {
@@ -76,8 +72,6 @@ export class ComentariosComponent implements OnInit {
     const month = date.getMonth() + 1;
      let formattedDate = datePipe.transform(date, 'dd/MM');
      let da = ""+formattedDate
-     console.log(da);
-     
 
     let newComment : Comment = new Comment;
     newComment.value = this.comment.value;

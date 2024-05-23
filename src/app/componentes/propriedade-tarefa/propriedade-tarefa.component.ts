@@ -34,9 +34,6 @@ export class PropriedadeTarefaComponent implements OnInit {
   propertyValue : any;
 
   ngOnInit(): void {
-    console.log(this.task);
-    
-
     this.propertyValue = this.property.propertyValues[0]
 
     if(this.property.currentOptions.length > 0) {

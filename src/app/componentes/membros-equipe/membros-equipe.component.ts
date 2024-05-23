@@ -64,9 +64,7 @@ export class MembrosEquipeComponent implements OnInit {
       userProject.role = this.projeto.defaultRole
       this.projeto.members.push(userProject)
     });
-    console.log(this.projeto);
   }
-
 
   removeUser(){
     this.projeto.members.map(member => member.user).forEach(element => {

@@ -200,7 +200,6 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   cancelEdit(){
     setTimeout(() => {
       if(this.projetoSave != null){
-        console.log(this.projetoSave);
         this.projeto.name = this.projetoSave.name
         this.projeto.description = this.projetoSave.description
         this.projeto.finalDate = this.projetoSave.finalDate
@@ -235,14 +234,11 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
 
 
   getProjectCreator(project:Project):User{
-    // console.log(project);
     return project.members.find(userProject => userProject.manager)!.user
   }
   
 
   verifyIsCreator(p:User){
-    // console.log(p.id, this.getProjectCreator(this.projeto).id);
-    
     if(p.id != this.getProjectCreator(this.projeto).id){
       return true
     }
@@ -251,8 +247,6 @@ export class ProjetoRemasteredComponent implements OnInit, OnChanges {
   
   waitForConfirmation(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      console.log("waitForConfirmation() called");
-  
       let timer: ReturnType<typeof setTimeout>;
       let intervalId: ReturnType<typeof setInterval>;
   

@@ -111,7 +111,6 @@ export class ModalOptionFullViewComponent implements OnInit, AfterViewInit {
 
   waitForConfirmation(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      console.log("waitForConfirmation() called");
 
       let timer: ReturnType<typeof setTimeout>;
       let intervalId: ReturnType<typeof setInterval>;
