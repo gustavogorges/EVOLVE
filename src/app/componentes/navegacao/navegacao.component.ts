@@ -9,6 +9,7 @@ import { Task } from 'src/model/task';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { TourService } from 'src/service/tutorialService';
 
 @Component({
   selector: 'app-navegacao',
@@ -18,7 +19,8 @@ import { CookiesService } from 'src/service/cookies-service.service';
 export class NavegacaoComponent implements OnInit {
 
   constructor(private router: Router, private cookieService: CookiesService,  private service: BackendEVOLVEService,
-    private translateService:TranslateService, private elementRef: ElementRef, private zone: NgZone) {}
+    private translateService:TranslateService, private elementRef: ElementRef, private zone: NgZone,
+  private tutorialService : TourService) {}
 
   sideBar = false
   loggedUser !: User; 
@@ -45,6 +47,7 @@ export class NavegacaoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.tutorialService.registerSideBarComponent(this);
     this.lang = localStorage.getItem('lang') || 'en'
     console.log(this.cookieService.getLoggedUserId());
     console.log(this.router.getCurrentNavigation());

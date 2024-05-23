@@ -141,6 +141,8 @@ import { CalendarLandingPageComponentComponent } from './componentes/sub-compone
 import { GreenDivLandingpageComponent } from './componentes/green-div-landingpage/green-div-landingpage.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NotasComponent } from './componentes/sub-componentes/notas/notas.component';
+import { JoyrideModule } from 'ngx-joyride';
+import { SideBarService } from 'src/service/sideBarService';
 
 
 
@@ -268,6 +270,7 @@ export function HttpLoaderFactory(http:HttpClient){
     CalendarModule,
     AppRoutingModule,
     AccordionModule,
+    JoyrideModule.forRoot(),
     CKEditorModule,
     ButtonModule,
     CheckboxModule,

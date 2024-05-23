@@ -7,6 +7,8 @@ import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
+import { SideBarService } from 'src/service/sideBarService';
+import { TourService } from 'src/service/tutorialService';
 
 @Component({
   selector: 'app-side-bar',
@@ -18,7 +20,8 @@ export class SideBarComponent implements OnInit {
 
 
   constructor(    private cookieService: CookiesService, private router: Router,  
-    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService
+    private colorService: ColorService, private elementRef: ElementRef, private a : CookieService,
+    private tutorialService:TourService, private sideBarService:SideBarService
     ) { }
   
 @Output() sideBar = new EventEmitter<boolean>();
@@ -26,7 +29,6 @@ loggedUser !: User
 config = false
 
   async ngOnInit(): Promise<void> {
-    
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
     
@@ -84,6 +86,9 @@ config = false
 
   }
 
+  startTour(){
+    this.tutorialService.startTour();
+  }
 
   goTelaInicial(){
     this.router.navigateByUrl('/tela-inicial');

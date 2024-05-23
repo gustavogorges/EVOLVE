@@ -39,6 +39,7 @@
     "ng-drag-drop": "^5.0.0",
     "ngx-cookie-service": "^14.0.1",
     "ngx-drag-drop": "14.0",
+    "ngx-joyride": "^2.5.0",
     "primeicons": "^6.0.1",
     "primeng": "^14.2.3",
     "rxjs": "~7.5.0",
