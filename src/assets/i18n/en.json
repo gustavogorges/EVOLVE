@@ -255,6 +255,14 @@
     "Listas": "Lists",
     "Calendario": "Calendar",
     "Em Aprovação":"In approval",
-    "editar perfil":"Edit Profile"
+    "editar perfil":"Edit Profile",
+    "Defina suas preferências de notificação dentro de suas tarefas, escolha o que deseja receber e o que não deseja": "Set your notification preferences within your tasks, choose what you want to receive and what you don't want",
+    "Defina suas preferências de notificação dentro de seus projetos, escolha o que deseja receber e o que não deseja": "Set your notification preferences within your projects, choose what you want to receive and what you don't want",
+        "Data Final": "End Date",
+    "Anexos": "Attachments",
+    "Associados": "Associates",
+    "Prioridade": "Priority",
+    "Propriedade": "Ownership",
+    "Informações Básicas": "Basic Information"
   
-}
+} 

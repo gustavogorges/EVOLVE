@@ -10,6 +10,7 @@
     <div class="tittle">
         <p>{{team?.name}}</p>
         <button class="disabled:opacity-70" *ngIf="hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
+    
     </div>
     
     <div class="projects">
