@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Task } from 'src/model/task';
 import { Team } from 'src/model/team';
 import { TeamNotification } from 'src/model/teamNotification';
 import { User } from 'src/model/user';
@@ -24,6 +25,7 @@ export class NotificationModalComponent implements OnInit {
       teamRole.team.notifications = await this.verifyNotificatedList(teamRole.team);
     }
     document.body.addEventListener('click', this.onDocumentClick);
+    
   }
 
   openNotification(){
