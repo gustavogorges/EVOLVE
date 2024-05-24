@@ -28,9 +28,14 @@ export class AuthService {
         const path = '/';
         this.cookies.set('EV', value, parseInt(maxAge), path);
       }
+      
 
       return response;
     } catch (error) {
+      setTimeout(() => {
+        const event = new CustomEvent('erroModal', { detail: "Usuário não encontrado!" });
+        window.dispatchEvent(event);
+      }, 100);
       console.error('Erro ao fazer login:', error);
       throw error;
 

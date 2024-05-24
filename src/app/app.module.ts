@@ -141,6 +141,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NotasComponent } from './componentes/sub-componentes/notas/notas.component';
 import { JoyrideModule } from 'ngx-joyride';
 import { SideBarService } from 'src/service/sideBarService';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -274,11 +275,11 @@ export function HttpLoaderFactory(http:HttpClient){
     CheckboxModule,
     FormsModule,
     InputTextareaModule,
-    ToastModule,
     CalendarModule,
     ColorPickerModule,
     BrowserAnimationsModule,
     CdTimerModule,
+    ToastModule,
     BrowserModule,
     DragDropModule,
 
@@ -290,7 +291,7 @@ export function HttpLoaderFactory(http:HttpClient){
     HttpClientModule
   ],
   
-  providers: [HttpClient, DatePipe,  { provide: LOCALE_ID, useValue: 'pt-BR' },],
+  providers: [HttpClient, DatePipe,  { provide: LOCALE_ID, useValue: 'pt-BR' }, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

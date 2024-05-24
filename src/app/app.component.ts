@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { sortedUniq } from 'lodash';
+import { MessageService } from 'primeng/api';
 import { User } from 'src/model/user';
 import { AuthService } from 'src/service/autService';
 import { ColorService } from 'src/service/colorService';
@@ -20,7 +21,8 @@ export class AppComponent{
     private colorService : ColorService, 
     private translateService : TranslateService,
     private textToSpeechService: TextToSpeechService,
-    private authService : AuthService
+    private authService : AuthService,
+    private messageService : MessageService
 
     ){
       if(localStorage.getItem('lang') === null){
@@ -40,6 +42,12 @@ export class AppComponent{
   islogged = false
 
   async ngOnInit(): Promise<void> {
+
+    window.addEventListener('erroModal', async (event: Event) => {
+      const customEvent = event as CustomEvent;
+      console.log(customEvent.detail);
+      this.addSingle(customEvent.detail);
+     })
 
     window.addEventListener('login', async (event: Event) => { 
       this.islogged = true
@@ -101,6 +109,10 @@ export class AppComponent{
   getRotaAtual(){
     return this.router.url;
   }
+
+  addSingle(detail : string) {
+    this.messageService.add({severity:'error', summary:detail, detail:'Via BackendEVOLVE'});
+}
 
   updateStatus(){
     this.islogged = true
