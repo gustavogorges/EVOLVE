@@ -2,7 +2,7 @@
 <div class="main-box">
     <div class="main">
 
-        <div class="contacts-container">
+        <div class="contacts-container" *ngIf="!chatOpen">
 
             <nav class="contacts-nav">
                 <div class="contacts-nav-text-container">
@@ -36,16 +36,16 @@
                 <div class="contacts-list"  *ngFor="let chat of chatList">
                     <app-contact [contact]="getContact(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
                 </div>
-
                 
             </div>
 
         </div>
 
-        <div class="chat ">
-
+        <div class="chat relative xl:flex" [ngClass]="chatOpen ? 'flex':'hidden'">
             <div class="chat-header " *ngIf="true">
-
+                <div class="xl:hidden text-primaryWhite rounded-full" (click)="closeChat()">
+                    <i class="pi pi-arrow-left"></i>
+                </div>
                 <div class="chat-header-img-container" [ngStyle]="{'background-color': contact.imageColor}">
                     <img *ngIf="contact.image?.data" src="{{contact.image.data}}"
                         alt="" class="chat-header-img">
@@ -62,7 +62,7 @@
 
                 <div class="message-box" *ngFor="let message of selectedChat?.messages; index as index ">
                     <div *ngIf ="showDateMesssage(message)" class="w-full h-16  flex justify-center items-center">
-                        <div class="w-28 h-8 flex justify-center items-center  rounded-[10px]">
+                        <div class="w-28 h-8 flex justify-center dark:text-primaryWhite items-center  rounded-[10px]">
                             {{message.date | date: "MMM d, y"}}
                         </div>
                     </div>

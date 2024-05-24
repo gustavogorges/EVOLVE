@@ -7,7 +7,7 @@
 }
 
 .contacts-container{
-  @apply flex flex-col bg-[#f5f5f5] dark:bg-dark-primary-gray w-[30%] h-full;
+  @apply flex flex-col bg-[#f5f5f5] dark:bg-dark-primary-gray w-full xl:w-[30%] h-full;
 }
 
 .contacts-nav{
@@ -47,11 +47,11 @@
 
 
 .chat{
-  @apply justify-between flex-col flex bg-white flex-1 w-full relative h-full ;
+  @apply justify-between flex-col bg-white flex-1 w-full relative h-full ;
 }
 
 .chat-header{
-  @apply w-full min-h-[4rem] h-16 bg-primary dark:bg-dark-primary  flex items-center gap-4 px-8 ;
+  @apply w-full min-h-[4rem] h-16 bg-primary dark:bg-dark-primary  flex items-center gap-4 px-2 ;
 }
 
 .chat-header-img-container{
@@ -71,7 +71,7 @@
 }
 
 .messages-container{
-  @apply w-full h-full pt-4 overflow-scroll px-16 flex flex-col gap-4 dark:bg-dark-primary-black  ;
+  @apply w-full h-full pt-4 overflow-scroll px-3 xl:px-16 flex flex-col gap-4 dark:bg-dark-primary-black  ;
 }
 
 .message-box{
