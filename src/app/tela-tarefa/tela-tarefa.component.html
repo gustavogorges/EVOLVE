@@ -92,7 +92,7 @@
     </div>
 
     <div *ngIf="option == 'Cards'">
-      <div class="tasks-grid-padrao">
+      <div class="tasks-grid-padrao" *ngIf="listaTarefas.length !=0">
         <div
           *ngFor="
             let tarefa of listaTarefas;
@@ -110,6 +110,12 @@
           ></app-tarefa-card-padrao>
         </div>
       </div>
+      <div *ngIf="listaTarefas.length ==0" class="flex justify-center h-[450px] items-center">
+        <p class="text-gray-400 text-2xl font-titulo ">
+          Parece que você não possui nenhuma tarefa criada, adicione uma no botão acima!
+        </p>
+      </div>
+      
     </div>
     <div *ngIf="option == 'Lista'">
       <div class="box-list">

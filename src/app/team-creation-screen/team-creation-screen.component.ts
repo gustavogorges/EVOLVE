@@ -118,6 +118,9 @@ export class TeamCreationScreenComponent implements OnInit {
     navigator.clipboard.writeText(textToCopy).then(() => {
     })
     this.copied = true
+    setTimeout(() => {
+      this.copied = false
+    }, 1000);
   }
 
   userId = 0

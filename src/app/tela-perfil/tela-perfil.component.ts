@@ -28,7 +28,7 @@ export class TelaPerfilComponent implements OnInit {
   @Input()
   user!: User;
   loggedUser!: User;
-  teamUsers!: Array<any>;
+  teamUsers: Array<any> = new Array;
   teamShowing!: Team;
 
   data: any;
@@ -61,13 +61,32 @@ export class TelaPerfilComponent implements OnInit {
   async teste() {
     
     let users: any = [];
+    console.log(this.user.teamRoles);
+  
     this.user.teamRoles.forEach((team) => {
-      users = team.team?.participants?.filter(
-        (participant) =>
-          participant.userId != this.user.id && !users.includes(participant)
+      team.team?.participants?.forEach(async participant => 
+        {
+          console.log("entroy aqui");
+          
+          if(participant.userId != this.user.id ) {
+            console.log("teste111");
+          if(participant.user.socialLogin == true){
+            console.log(participant.user);
+
+            participant.user = await this.service.getOne("user", participant.user.id)
+            console.log(participant.user);
+            
+          }
+            this.teamUsers.push(participant);
+          }
+        }
+        
+      
+          // participant.userId != this.user.id && !users.includes(participant)
       );
     });
-    this.teamUsers = users;
+    console.log(this.teamUsers);
+
   }
   config = false
   openConfig(){

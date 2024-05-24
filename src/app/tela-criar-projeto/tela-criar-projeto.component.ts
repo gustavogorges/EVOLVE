@@ -220,7 +220,7 @@ export class TelaCriarProjetoComponent implements OnInit {
         }
     
         setTimeout(() => {
-          this.route.navigate(['/tela-projeto', teamId]);
+          this.route.navigate(['/tela-tarefa', postProject.id]);
         });
       });
     }

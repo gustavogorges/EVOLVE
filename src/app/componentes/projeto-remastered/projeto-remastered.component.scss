@@ -66,9 +66,6 @@
         .project-progress{
             @apply row-start-6 row-end-7 col-span-full w-full h-full bg-gray-200;
 
-            div{
-                @apply w-[40%] bg-secondary h-full rounded-r-lg
-            }
         }
 
         .project-final-date{
