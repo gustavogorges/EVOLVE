@@ -28,7 +28,9 @@
                 <img *ngIf="!verifyImg(getProjectCreator(projeto))" src="{{getProjectCreator(projeto).image.data}}" alt="">
             </div>
         </div>
-        <div class="project-progress"><div></div></div>
+        <div class="project-progress">
+            <div class="bg-secondary h-full rounded-r-lg" [style.width.%]="projeto?.progress"></div>
+        </div>
         <div class="project-final-date"><p>{{'data final:' | translate}} 
             <input #data [disabled]="!projeto.editOn" type="date" [(ngModel)]="projeto.finalDate" class="bg-transparent">
         </p></div>

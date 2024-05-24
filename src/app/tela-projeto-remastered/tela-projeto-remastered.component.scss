@@ -1,5 +1,5 @@
 .screen{
-    @apply w-screen h-screen p-4 px-[10%] flex flex-col  pt-[20%] xl:pt-10;
+    @apply w-screen h-screen p-4 px-[10%] flex flex-col  pt-[5%] xl:pt-10;
 
     .tittle{
         @apply mb-[4%]  h-max w-max ;
@@ -18,7 +18,7 @@
 
 
         button{
-            @apply w-[20vw] bg-secondary  dark:bg-dark-secondary rounded-lg text-sm px-6  py-2 text-white font-bold 
+            @apply w-[40vw] xl:w-[20vw] bg-secondary  dark:bg-dark-secondary rounded-lg text-sm px-6  py-2 text-white font-bold 
             2xl:text-xl 2xl:px-20
             lg:text-lg lg:px-16
             md:text-lg md:px-14
@@ -35,5 +35,16 @@
     .projects{
         @apply flex flex-wrap gap-10 justify-center;
 
+    }
+}
+
+.select-button{
+    @apply text-xs dark:text-gray-300 font-titulo flex gap-1
+    md:text-base
+    lg:text-xl
+    2xl:text-xl;
+
+    i{
+        @apply text-primary dark:text-dark-primary
     }
 }

@@ -21,6 +21,7 @@ export class Project {
     finalDate: string = "";
     creationDate: string = "";
     lastTimeEdited: string = "";
+    progress : number = 0;
     comments: Array<Comment> = new Array;
     properties: Array<Property> = new Array;
     statusList: Array<Status> = new Array;
