@@ -45,6 +45,7 @@ export class MessageBarComponent implements OnInit {
       this.chat.messages.push(sentMessage)
   
       this.newMessage = new  MessageDTO
+      window.location.reload()
     }
 
   }
