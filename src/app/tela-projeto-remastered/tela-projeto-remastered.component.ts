@@ -85,6 +85,7 @@ export class TelaProjetoRemasteredComponent implements OnInit {
     if(this.atualFilter != null){
       await this.getOriginal()
     }
+
     this.projects.sort((a, b) => {
         const dateA = new Date(a.progress);
         const dateB = new Date(b.progress);

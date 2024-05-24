@@ -21,7 +21,7 @@
       text="Clique para criar um projeto."
       class="w-max h-max"
     >
-            <button class="disabled:opacity-70 " *ngIf="hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
+            <button class="disabled:opacity-70 " [disabled]="!hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
         </div>
         </div>
 
