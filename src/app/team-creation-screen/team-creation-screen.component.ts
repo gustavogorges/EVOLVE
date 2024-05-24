@@ -14,6 +14,7 @@ import { hasPermission } from '../shared/check-permissions';
 import { Permission } from 'src/model/permission.';
 import { Task } from 'src/model/task';
 import { trimEnd } from 'lodash';
+import { TeamChat } from 'src/model/teamChat';
 @Component({
   selector: 'app-team-creation-screen',
   templateUrl: './team-creation-screen.component.html',
@@ -233,9 +234,27 @@ export class TeamCreationScreenComponent implements OnInit {
     this.openModal = true
 
   }
+  async goChat(){
+    let teamChats: TeamChat[] = await this.service.getTeamChatsByUserId(this.loggedUser.id)
+    // this.loggedUser.chats.find(chat => chat.users.find(user => user.id == this.user.id))!
+    let foundChat:TeamChat =  teamChats.find(chat => chat.team.id == this.team.id)!
+    this.cookiesService.set(this.cookiesService.chatListTypeField, "teams")
+    if(foundChat  != (null||undefined)){
+      this.cookiesService.set("lastChatId", foundChat.id)
+      this.router.navigate(['/tela-chat']);
+    } else {
+      alert(`A equipe ${this.team.name} não possui um chat!`)
+      //criaria um chat mas por padrao é criado automaticamente ent n precisa
+      // let teamChat: any = new TeamChat
+      // userchat.users = [{"id": this.loggedUser.id},{"id":this.user.id}]
+      // let chat: Chat = await this.service.postUserChat(userchat)
+      // this.cookiesService.set("lastChatId", chat.id)
+    }
+  }
   goProjects(){{
     window.location.href = "/tela-projeto/"+this.team.id
   }}
+  
   async modal(boolean: boolean) {
     if (boolean == false) {
       this.openModal = false;

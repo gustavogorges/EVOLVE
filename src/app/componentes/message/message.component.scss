@@ -32,7 +32,7 @@
     border-style: solid;
     border-width: 0 20.5px 35.5px 20.5px;
     border-color: transparent transparent #f5f5f5 transparent;
-    @apply border-b-dark-secundary-gray;
+    @apply dark:border-b-dark-secundary-gray;
 
  }
 
