@@ -435,7 +435,7 @@ export class BackendEVOLVEService {
   ) {
     return (
         await axios.patch(
-          this.URL + 'task/' + 1 + '/dependencies/' + 3,
+          this.URL + 'task/' + taskId + '/dependencies/' + userId,
           dependencies, {withCredentials: true}
         )
       ).data;

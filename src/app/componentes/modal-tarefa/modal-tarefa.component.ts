@@ -214,6 +214,16 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
       this.modalFelipeGorges = true;
     }
+
+    let task1 = await this.service.getOne("task", 1)
+    let task2 = await this.service.getOne("task", 2)
+    let task3 = await this.service.getOne("task", 3)
+    let dep1 = []
+    dep1.push(task2)
+    dep1.push(task3)
+    console.log(await this.service.patchTaskDependencies(1, dep1, 3));
+    
+
   }
 
   translateStatus() {
@@ -471,6 +481,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   async saveName() : Promise<void> {
     this.tarefa = await this.service.updateTaskName(this.tarefa.id,this.loggedUser.id,this.tarefa.name);
+    let task4 = await this.service.getOne("task", 4)
+    let tasks:Task[] = []
+    tasks.push(task4)
+    await this.service.patchTaskDependencies(1, tasks ,this.loggedUser.id )
     this.booleanEditName = false;
   }
 
