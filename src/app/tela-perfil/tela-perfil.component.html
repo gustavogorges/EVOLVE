@@ -93,7 +93,7 @@
     <div class=" flex flex-col h-full gap-5 xl:w-[30%] 2xl:w-1/3 order-1 xl:-order-1 " >
       <p class="title dark:text-dark-primary">{{'Membros de suas Equipes:' | translate}}</p>
       <div class="flex flex-col sm:flex-row sm:flex-wrap xl:flex-col xl:gap-5 gap-2 justify-between w-full">
-        <div *ngFor="let userTeam of teamUsers" class="sm:w-[47%] w-full xl:w-full ">
+        <div *ngFor="let userTeam of teamUsers" class="sm:w-[47%] w-full xl:w-full ">          
             <app-user-card-perfil
               [user]="userTeam.user"
               (click)="goToUser(userTeam.user)"
@@ -103,7 +103,7 @@
       </div>
     
     </div>
-    <div class="flex flex-col gap-2 lg:w-[80%] max-w-[80%] overflow-x-auto self-center ">
+    <div class="flex flex-col gap-2 lg:w-[80%] max-w-[80%] overflow-x-auto  ">
       <div class="flex w-full md:gap-10 gap-5 overflow-x-auto border-b-2 dark:border-gray-500 ">
         <div *ngFor="let team of user?.teamRoles">
           <p
