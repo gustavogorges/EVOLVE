@@ -428,6 +428,25 @@ export class BackendEVOLVEService {
     ).data;
   }
 
+  async patchTaskDependencies(
+    taskId: number,
+    dependencies: Task[],
+    userId: number
+  ) {
+    return (
+        await axios.patch(
+          this.URL + 'task/' + 1 + '/dependencies/' + 3,
+          dependencies, {withCredentials: true}
+        )
+      ).data;
+    // return (
+    //   await axios.patch(
+    //     this.URL + 'task/' + taskId + '/dependencies/' + userId,
+    //     dependencies, {withCredentials: true}
+    //   )
+    // ).data;
+  }
+
   async patchAssociate(
     taskId: number,
     associates: Array<Pick<User, 'id'>>,

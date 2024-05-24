@@ -29,12 +29,16 @@
                     <div
                         class="search-bar">
                         <input class="search-input" type="text" [(ngModel)]="search" placeholder="Pesquise aqui...">
+                        <!-- me olhe aqui head -->
                         <i class="search-icon pi pi-search"></i>
                     </div>
                 </div>
 
                 <div class="contacts-list"  *ngFor="let chat of chatList">
                     <app-contact [contact]="getContact(chat,loggedUser)" [chat]="chat" (click)="selectChat(chat)" *ngIf="checkSearch(chat)"></app-contact>
+                </div>
+                <div *ngIf="!(chatList.length>0)" class=" flex justify-center items-center h-full font-hind-madurai text-fontGray ">
+                    {{"Nada Encontrado" | translate}}
                 </div>
                 
             </div>
@@ -67,6 +71,9 @@
                         </div>
                     </div>
                     <app-message [loggedUser]="loggedUser" [chat]="selectedChat" [message]="message"></app-message>
+                </div>
+                <div *ngIf="!(selectedChat.messages.length>0)" class=" text-fontGray font-hindi-madurai flex justify-center items-center  ">
+                    {{"Não há mensagens"|translate}}
                 </div>
 
             </div>

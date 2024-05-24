@@ -1,11 +1,14 @@
 <div class="w-full h-full p-2">
   <div class="flex flex-col gap-6">
-    <div *ngFor="let project of team?.projects" class="flex flex-col gap-4 border-b-2 dark:border-gray-500 p-2" >
+    <div *ngFor="let project of team?.projects; index as index" class="flex flex-col gap-4 border-b-2 dark:border-gray-500 p-2" >
       <p class="font-titulo font-bold sm:text-2xl text-lg dark:text-primaryWhite">
         {{ project?.name }}
        
       </p>
-      <app-dashboard-perfil [project]="project" [user]="user"></app-dashboard-perfil>
+      <app-dashboard-perfil *ngIf="projetsToShow[index]" [project]="project" [user]="user2"></app-dashboard-perfil>
+      <div *ngIf="!projetsToShow[index]" class=" text-fontGray font-hindi-madurai" >
+        {{"Você não tem permissão para visualizar esse projeto" | translate}}
+      </div>
       
     </div>
     <div *ngIf="!team?.projects || team?.projects?.length==0 ">

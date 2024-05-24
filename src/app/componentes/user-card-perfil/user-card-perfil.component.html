@@ -1,11 +1,11 @@
 
-<div class="flex md:p-6 p-4 w-full sm:h-28 h-20 rounded-2xl border-2 dark:border-gray-500 gap-7 items-center">
+<div class="flex md:p-6 p-4 w-full sm:h-28 h-20 rounded-2xl border-2 dark:border-gray-500 gap-3 items-center">
 
   <div
     [ngStyle]="{
       'background-image':
         user.image != null
-          ? 'url(data:image/jpeg;base64,' + user.image.data + ')'
+          ? 'url(' + user.image.data + ')'
           : user.imageColor,
       'background-size': 'cover',
       'background-color': user.imageColor
@@ -14,7 +14,7 @@
   >
     
   </div>
-  <div class="w-full">
+  <div class="w-[80%]">
     <p class="name truncate">{{ user.name }}</p>
     <p class="font-hind-madurai truncate sm:text-xl text-base font-normal text-slate-600 dark:text-slate-300">
       {{ user.email }}
