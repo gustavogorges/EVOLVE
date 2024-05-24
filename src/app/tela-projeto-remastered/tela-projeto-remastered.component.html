@@ -21,7 +21,7 @@
       text="Clique para criar um projeto."
       class="w-max h-max"
     >
-            <button class="disabled:opacity-70" *ngIf="hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
+            <button class="disabled:opacity-70 " *ngIf="hasPermission(team)" (click)="goToCreateProject(this.teamId)"><i class="pi pi-plus"></i> {{'Adicionar Projeto' | translate}}</button>
         </div>
         </div>
 
@@ -33,14 +33,14 @@
                     {{'Ordenação' | translate}}
                     </p>
                 </button>
-                <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200 translate-y-3 w-[8vw]" [ngClass]="ordenacaoBoolean ? 'h-fit':'h-0'">
-                    <div (click)="getFinalDateProjectFilter($event)" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200 translate-y-3 w-[25vw] xl:w-[8vw]" [ngClass]="ordenacaoBoolean ? 'h-fit':'h-0'">
+                    <div (click)="getFinalDateProjectFilter($event)" [ngClass]="ordenacaoBoolean ? 'h-[6vw] xl:h-[2vw]':'h-0'" class="z-[9999999] w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-calendar text-primary font-semibold "></i>
-                        <p>{{'Data Final' | translate}}</p>
+                        <p class="text-[10px] xl:text-lg">{{'Data Final' | translate}}</p>
                     </div>
-                    <div (click)="sortProjectsByProgress($event)" [ngClass]="ordenacaoBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="sortProjectsByProgress($event)" [ngClass]="ordenacaoBoolean ? 'h-[6vw] xl:h-[2vw]':'h-0'" class="z-[9999999] w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-chart-line text-primary font-semibold "></i>
-                        <p >{{'Progresso' | translate}}</p>   
+                        <p class="text-[10px] xl:text-lg">{{'Progresso' | translate}}</p>   
                     </div>
                 </div>
             </div>
@@ -52,14 +52,14 @@
                     {{'Filtro' | translate}}
                     </p>
                 </button>
-                <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200 translate-y-3 w-[8vw]" [ngClass]="filterBoolean ? 'h-fit':'h-0'">
-                    <div (click)="getFavorites($event)" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                <div class="bg-primaryWhite shadow-xl overflow-hidden rounded-lg absolute duration-200  translate-y-3 w-[25vw] xl:w-[8vw]" [ngClass]="filterBoolean ? 'h-fit':'h-0'">
+                    <div (click)="getFavorites($event)" [ngClass]="filterBoolean ? 'h-[6vw] xl:h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-star text-primary font-semibold "></i>
-                        <p >{{'Favoritos' | translate}}</p>
+                        <p class="text-[10px] xl:text-lg">{{'Favoritos' | translate}}</p>
                     </div>
-                    <div (click)="filterProjectsByLoggedUser($event)" [ngClass]="filterBoolean ? 'h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
+                    <div (click)="filterProjectsByLoggedUser($event)" [ngClass]="filterBoolean ? 'h-[6vw] xl:h-[2vw]':'h-0'" class=" w-full overflow-hidden hover:px-4 duration-200 border-b-2 text-lg cursor-pointer flex gap-2 px-3 items-center ">
                         <i class="pi pi-user text-primary font-semibold "></i>
-                        <p >{{'Associado' | translate}}</p>
+                        <p class="text-[10px] xl:text-lg">{{'Associado' | translate}}</p>
                     </div>
                 </div>
             </div>
