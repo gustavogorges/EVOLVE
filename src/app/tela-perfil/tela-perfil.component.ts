@@ -59,35 +59,19 @@ export class TelaPerfilComponent implements OnInit {
 
   }
   async teste() {
+    // this.user.teamRoles = await this.service.getTeamsByUserId(this.user?.id);
+    console.log(this.user.teamRoles);
     
     let users: any = [];
-    console.log(this.user.teamRoles);
-  
     this.user.teamRoles.forEach((team) => {
-      team.team?.participants?.forEach(async participant => 
-        {
-          console.log("entroy aqui");
-          
-          if(participant.userId != this.user.id ) {
-            console.log("teste111");
-          if(participant.user.socialLogin == true){
-            console.log(participant.user);
-
-            participant.user = await this.service.getOne("user", participant.user.id)
-            console.log(participant.user);
-            
-          }
-            this.teamUsers.push(participant);
-          }
-        }
-        
-      
-          // participant.userId != this.user.id && !users.includes(participant)
+      users = team.team?.participants?.filter(
+        (participant) =>
+          participant.userId != this.user.id && !users.includes(participant) && participant.userId !=this.loggedUser.id
       );
     });
-    console.log(this.teamUsers);
-
+    this.teamUsers = users;
   }
+
   config = false
   openConfig(){
       if(this.disabledInfo==false){
