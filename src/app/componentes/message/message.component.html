@@ -8,12 +8,12 @@
 
     <div class="message" [ngStyle]="{ 'justify-content': messageAlignment }">
         <div class="message-body e ">
-            <div class="sender-image-pointer  {{messagePointerLoggedUser ? 'rotate-[46deg]' : 'rotate-[-46deg]'}} {{messageAlignment=='start' ? 'start-[-15px]' : 'end-[-15px]'}}"  *ngIf="showSenderImagePointer"></div>
+            <div class="sender-image-pointer dark:sender-image-pointer-dark {{messagePointerLoggedUser ? 'rotate-[46deg]' : 'rotate-[-46deg]'}} {{messageAlignment=='start' ? 'start-[-15px]' : 'end-[-15px]'}}"  *ngIf="showSenderImagePointer"></div>
                 <p class="message-content dark:text-white font-hind-madurai">
                     {{message.content}}
                 </p>
             <hr class="py-1">
-            <div class="flex items-center w-full h-full gap-4 text-[12px]" [ngStyle]="{'justify-content': messageInfoAlignment}">
+            <div class="flex items-center w-full h-full gap-4 text-[8px] xl:text-[12px]" [ngStyle]="{'justify-content': messageInfoAlignment}">
                 <p *ngIf="showName()" class="max-w-[4rem] truncate dark:text-white font-titulo">{{message.sender.name}}</p>
                 <p class="dark:text-white font-hind-madurai">{{message.date | date: "HH:mm"}}  </p>
             </div>
