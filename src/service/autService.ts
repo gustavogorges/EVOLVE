@@ -33,7 +33,7 @@ export class AuthService {
       return response;
     } catch (error) {
       setTimeout(() => {
-        const event = new CustomEvent('erroModal', { detail: "Usuário não encontrado!" });
+        const event = new CustomEvent('erroModal', { detail: "Usuário não encontrado ou senha incorreta!" });
         window.dispatchEvent(event);
       }, 100);
       console.error('Erro ao fazer login:', error);
