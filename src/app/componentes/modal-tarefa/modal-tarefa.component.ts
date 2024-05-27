@@ -215,9 +215,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.modalFelipeGorges = true;
     }
 
- 
-    
-
+    if(!this.verifyAssociate()) {
+      this.modalFelipeGorges = true;
+    }
   }
 
   translateStatus() {
@@ -527,6 +527,19 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
  
       this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
     
+  }
+
+  verifyAssociate() : boolean {
+    console.log("chegou no verify associate");
+    
+    this.tarefa.associates.forEach(associate => {
+      if(associate.id == this.loggedUser.id) {
+        console.log("retornou true");
+        return true;
+      }
+      return false;
+    })
+    return false;
   }
 
   editDataFinalDate() {
