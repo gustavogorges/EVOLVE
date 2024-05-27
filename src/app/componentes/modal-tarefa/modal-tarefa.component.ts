@@ -215,13 +215,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.modalFelipeGorges = true;
     }
 
-    let task1 = await this.service.getOne("task", 1)
-    let task2 = await this.service.getOne("task", 2)
-    let task3 = await this.service.getOne("task", 3)
-    let dep1 = []
-    dep1.push(task2)
-    dep1.push(task3)
-    console.log(await this.service.patchTaskDependencies(1, dep1, 3));
+ 
     
 
   }
@@ -484,7 +478,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     let task4 = await this.service.getOne("task", 4)
     let tasks:Task[] = []
     tasks.push(task4)
-    await this.service.patchTaskDependencies(1, tasks ,this.loggedUser.id )
     this.booleanEditName = false;
   }
 
@@ -513,6 +506,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.page_task = 'anexos';
     } else if (name_page == 'notas') {
       this.page_task = 'notas';
+    }
+    else if (name_page == 'dependencias') {
+      this.page_task = 'dependencias';
     }
   }
 
