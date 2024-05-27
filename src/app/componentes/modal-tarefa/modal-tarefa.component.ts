@@ -202,7 +202,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
-      this.tarefa.currentStatus.name = "sem status";
+
       this.tarefa.priority.name = "NENHUMA"
       this.tarefa.priority.backgroundColor = "#cccccc"
     } else if (this.tarefa.id != 0) {
@@ -475,9 +475,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   async saveName() : Promise<void> {
     this.tarefa = await this.service.updateTaskName(this.tarefa.id,this.loggedUser.id,this.tarefa.name);
-    let task4 = await this.service.getOne("task", 4)
-    let tasks:Task[] = []
-    tasks.push(task4)
     this.booleanEditName = false;
   }
 
@@ -530,16 +527,13 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   verifyAssociate() : boolean {
-    console.log("chegou no verify associate");
-    
+    let result = false;
     this.tarefa.associates.forEach(associate => {
       if(associate.id == this.loggedUser.id) {
-        console.log("retornou true");
-        return true;
+        result =  true;
       }
-      return false;
     })
-    return false;
+     return result;
   }
 
   editDataFinalDate() {
