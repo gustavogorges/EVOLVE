@@ -214,6 +214,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
       this.modalFelipeGorges = true;
     }
+    if(!this.verifyAssociate()) {
+      this.modalFelipeGorges = true;
+    }
   }
 
   translateStatus() {
@@ -517,6 +520,19 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
  
       this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
     
+  }
+
+  verifyAssociate() : boolean {
+    console.log("chegou no verify associate");
+    
+    this.tarefa.associates.forEach(associate => {
+      if(associate.id == this.loggedUser.id) {
+        console.log("retornou true");
+        return true;
+      }
+      return false;
+    })
+    return false;
   }
 
   editDataFinalDate() {
