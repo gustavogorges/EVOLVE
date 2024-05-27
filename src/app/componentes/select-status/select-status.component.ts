@@ -37,6 +37,16 @@ export class SelectStatusComponent implements OnInit{
 
    ngOnInit(): void {
     this.translateStatus()
+    this.filteredList = this.projeto.statusList.filter(s => this.showConcluded(s))  
+  }
+
+
+    filteredList:Status[]=[]
+    showConcluded(status: Status){
+      if(status.name == 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成'){
+        return this.tarefa.dependencies.find(d => !(d.currentStatus.name === 'concluido' || d.currentStatus.name === 'completado' || d.currentStatus.name === 'completed' || d.currentStatus.name === '已完成')) == null 
+      }
+      return true
     }
 
     translateStatus() {
@@ -187,5 +197,6 @@ export class SelectStatusComponent implements OnInit{
       this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
     }
   }
+
 
 }

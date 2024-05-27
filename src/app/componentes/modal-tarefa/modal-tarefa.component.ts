@@ -214,6 +214,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
       this.modalFelipeGorges = true;
     }
+
     if(!this.verifyAssociate()) {
       this.modalFelipeGorges = true;
     }
@@ -474,6 +475,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   async saveName() : Promise<void> {
     this.tarefa = await this.service.updateTaskName(this.tarefa.id,this.loggedUser.id,this.tarefa.name);
+    let task4 = await this.service.getOne("task", 4)
+    let tasks:Task[] = []
+    tasks.push(task4)
     this.booleanEditName = false;
   }
 
@@ -502,6 +506,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
       this.page_task = 'anexos';
     } else if (name_page == 'notas') {
       this.page_task = 'notas';
+    }
+    else if (name_page == 'dependencias') {
+      this.page_task = 'dependencias';
     }
   }
 

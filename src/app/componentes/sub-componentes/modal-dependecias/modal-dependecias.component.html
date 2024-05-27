@@ -1,0 +1,19 @@
+<div class="absolute w-[600px] h-max max-h-[60%] overflow-y-auto  shadow-2xl bg-white top-1/2 left-1/2 flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2">
+    <div
+    class=" relative"
+  >
+    <i
+      class="absolute top-7 right-0 pi pi-times text-sm text-fontGray dark:text-primaryWhite " (click)="close()"
+      style="font-size: 1rem"
+    ></i>
+    <div class="flex flex-col gap-3 w-full py-6">
+    <div>
+        <p class="font-titulo text-lg font-bold">Tarefas para dependencias:</p>
+        <p class="font-hind-madurai w-[95%] text-base text-fontGray">as tarefas abaixo podem ser adicionadas como dependencias nessa tarefa</p>
+    </div>
+    <div *ngFor="let taskProject of taskList" class="w-full">
+        <app-entrega-prox [tarefa]="taskProject" [favoritedAble]="false" (click)="sendTask(taskProject)"></app-entrega-prox>
+    </div>
+</div>
+  
+</div>

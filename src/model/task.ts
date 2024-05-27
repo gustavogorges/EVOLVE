@@ -39,6 +39,7 @@ export class Task{
     conclusionPercentage:number=0;
     isVisible: boolean = false;
 
-    schedulingData:string = "" //p que serve isso?
+    schedulingData:string = "" //p que serve isso?;
+    dependencies : Array<Task> = new Array; 
 
 }

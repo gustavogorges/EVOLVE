@@ -447,6 +447,15 @@
         >
           {{'Notas' | translate}}
         </p>
+        <p
+        [ngClass]="
+          page_task == 'dependencias' ? 'border-b-2 border-primary' : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('dependencias')"
+      >
+        {{'Depêndencias' | translate}}
+      </p>
       </div>
       <div class="components">
         <app-sub-tarefa
@@ -478,6 +487,14 @@
           [task]="tarefa"
           [loggedUser]="loggedUser">
         </app-notas>
+        <app-dependencias
+        class="component"
+        [task]="tarefa"
+        [project]="projeto"
+        *ngIf="page_task == 'dependencias'">
+
+
+        </app-dependencias>
       </div>
     </div>
   </div>
