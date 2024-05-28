@@ -622,7 +622,7 @@ export class BackendEVOLVEService {
   }
 
   async getAllPriorities(projectId: number) {
-    return (await axios.get(this.URL + 'task/' + projectId + '/priorities', {withCredentials: true})).data;
+    return (await axios.get(this.URL + 'task/priorities', {withCredentials: true})).data;
   }
 
   async postTarefa(tarefa: Task, projectId: number) {
