@@ -256,30 +256,17 @@ export class TelaProjetoRemasteredComponent implements OnInit {
   
 
    async editFun(project:Project){
-    let postProject:any = project
-    let imageSave:any
-    setTimeout(() => {
-      postProject.members = project.members
-      if(this.formData === null && project.image != null){
-        imageSave = project.image
-      }
-      postProject.image = null
-    },);
-
     setTimeout(async () => {
       if(this.formData!=null){
         await this.service.patchProjectImage(project.id, this.formData)
       }
-    });
+    }, 50);
 
     setTimeout(async () => {
-        // await this.service.patchProjectName(project.id, project.name); 
-        await this.service.putProjeto(project);
+        await this.service.patchProjectDescription(project.id, project.description)
+        await this.service.patchProjectName(project.id, project.name)
+        await this.service.patchProjectFinalDate(project.id, project.finalDate)
       }, 50);
-
-      setTimeout(async () => {
-        window.location.reload()
-      }, 100);
   }
 
   async saveImage(event:any){

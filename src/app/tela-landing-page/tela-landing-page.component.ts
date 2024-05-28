@@ -25,6 +25,13 @@ export class TelaLandingPageComponent implements OnInit {
       github : 'https://github.com/gustavogorges'
     },
     {
+      name : 'Thiago Batista',
+      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
+      area : 'FullStack',
+      image : 'assets/Thiago.jpg',
+      github : "https://github.com/Thiago-Alessandro"
+    },
+    {
       name : 'Felipe Tomio',
       description : '18 anos com diploma técnico de desenvolvimento de sistemas pelo Senai e atualmente atua pela Weg no centroWeg como fullStack. Github: felipe-t-maciel | Instagram: @_fenipee',
       area : 'FullStack',
@@ -32,14 +39,7 @@ export class TelaLandingPageComponent implements OnInit {
       github : 'https://github.com/Felipe-T-Maciel'
     },
     {
-      name : 'Thiago Alessandro Batista',
-      description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
-      area : 'FullStack',
-      image : 'assets/Thiago.jpg',
-      github : "https://github.com/Thiago-Alessandro"
-    },
-    {
-      name : 'Simon',
+      name : 'Saymon Patrick da Silva',
       description : '18 anos, atuando atualmente pela Weg no centroWeg como fullStack',
       area : 'FullStack',
       image : 'assets/Saymon.jpg',
@@ -81,7 +81,7 @@ export class TelaLandingPageComponent implements OnInit {
 
   setThisMember(dev:any){
     if(this.activeIndex === this.devsArray.indexOf(dev)){
-      window.location.replace(dev.github)
+      document.location.href = dev.github
     }else{
       this.activeIndex = this.devsArray.indexOf(dev)
     }
