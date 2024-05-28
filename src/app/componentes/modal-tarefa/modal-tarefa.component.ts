@@ -198,8 +198,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     },10);
     this.propertiesList = this.tarefa.properties;
 
-    
-
     // this.verificaTamanhoString();
     if (this.tarefa.name == '') {      
 
