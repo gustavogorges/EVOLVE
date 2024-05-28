@@ -48,7 +48,11 @@ export class ModalConfigComponent implements OnInit {
 
   }
   editEmail(){
+    console.log("chego aqui");
+    
     this.disabledEmail = false 
+    console.log(this.disabledEmail);
+    
    
     
   }
