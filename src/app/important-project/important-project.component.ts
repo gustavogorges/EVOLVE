@@ -7,7 +7,7 @@ import { Project } from 'src/model/project';
   templateUrl: './important-project.component.html',
   styleUrls: ['./important-project.component.scss']
 })
-export class ImportantProjectComponent implements OnInit {
+export class  ImportantProjectComponent implements OnInit {
   caminho = "assets/naoVector.svg"
     caminhoEstrela="assets/estrelaNaoMarcada.svg"
 

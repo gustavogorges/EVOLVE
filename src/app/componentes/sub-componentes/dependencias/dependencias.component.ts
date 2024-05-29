@@ -28,8 +28,8 @@ export class DependenciasComponent implements OnInit {
   loggedUser !: User
   async ngOnInit(): Promise<void> {
     console.log(this.task);
-    this.taskList = this.task.dependencies.filter((t)=> t.currentStatus.name != "concluido")
-    this.taskConclued = this.task.dependencies.filter((t)=> t.currentStatus.name == "concluido")
+    this.taskList = this.task.dependencies.filter((t)=> {t.currentStatus.name != "concluido" })
+    this.taskConclued = this.task.dependencies.filter((t)=> t.currentStatus.name == "concluido" && t.concluded)
     this.loggedUser = await this.cookies_service.getLoggedUser();
   }
   verifyApprovament() :boolean {
