@@ -13,6 +13,9 @@ import { CookiesService } from 'src/service/cookies-service.service';
 })
 export class TaskCalendarComponent implements OnInit, OnChanges{
 
+  oldFinalDate : any;
+
+
   constructor(private service : BackendEVOLVEService,
     private cookies_service : CookiesService) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,7 +39,7 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
     this.dayOpen.setHours(0, 0, 0, 0)
 
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    
+
   }
 
   construirCalendario() {
@@ -76,20 +79,22 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
   teste(){
     for(let task of this.taskList){
       if(task.finalDate!=null){
-     
+        console.log(task.finalDate);
+        this.oldFinalDate = task.finalDate;
+        console.log(this.oldFinalDate); 
         task.finalDate=new Date(task.finalDate+"T00:00:00-03:00")
         task.project = {
           id:this.project.id
         }
         this.service.putTarefa(task, this.loggedUser.id);
-      
+
         this.diasCalendario.map(dia =>{
-        
-        
-        
+
+
+
           if(dia.getTime()==task.finalDate.getTime()){
           }
-           
+
         })
       }
     }
@@ -101,10 +106,10 @@ export class TaskCalendarComponent implements OnInit, OnChanges{
   isToday(dia : Date){
     const today = new Date()
     today.setHours(0, 0, 0, 0)
-   
-   
-   
-    
+
+
+
+
     return dia.getTime()==today.getTime()
   }
   booleanTask: boolean = false;
@@ -125,7 +130,7 @@ async openTask(tarefa: Task): Promise<void> {
         this.tarefaNova = new Task();
         this.booleanTask = false;
       }
-    }  
+    }
 
-  
+
 }
