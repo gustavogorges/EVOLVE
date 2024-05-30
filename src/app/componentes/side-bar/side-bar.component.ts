@@ -124,6 +124,10 @@ projects:Project[]=[]
       this.a.deleteAll()
      }, 50)
 
+     setTimeout( () => {
+      this.a.delete("EV")
+     },100)
+
     this.router.navigate(['/login']);
 
   }
