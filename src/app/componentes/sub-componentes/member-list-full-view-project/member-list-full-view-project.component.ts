@@ -35,7 +35,7 @@ export class MemberListFullViewProjectComponent implements OnInit {
       this.hasPermission = true;
     }
     if(this.userProject?.role?.name == "PROJECT_COLABORATOR"){
-      this.user.currentRole = "Colabarador"
+      this.user.currentRole = "Colaborador"
     }
     if(this.userProject?.role?.name == "PROJECT_CREATOR"){
       this.user.currentRole = "Criador"
