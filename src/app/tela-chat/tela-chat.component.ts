@@ -112,7 +112,8 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
     // this.updateMessageStatus()
     this.cookiesService.set("lastChatId", this.selectedChat.id)
     this.cookiesService.set(this.cookiesService.chatListTypeField, this.chatType)
-    this.chatOpen = true
+    this.chatOpen = this.resizeWindow()
+    
   }
 
   getContact(chat:Chat, user: User):User|Team|Project {

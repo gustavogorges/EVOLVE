@@ -72,7 +72,7 @@
                     </div>
                     <app-message [loggedUser]="loggedUser" [chat]="selectedChat" [message]="message"></app-message>
                 </div>
-                <div *ngIf="!(selectedChat.messages.length>0)" class=" text-fontGray font-hindi-madurai flex justify-center items-center  ">
+                <div *ngIf="selectedChat?.messages ? !(selectedChat.messages.length>0) : false" class=" text-fontGray font-hindi-madurai flex justify-center items-center  ">
                     {{"Não há mensagens"|translate}}
                 </div>
 
