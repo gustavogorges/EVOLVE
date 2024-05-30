@@ -27,7 +27,7 @@
 }
 
 .inputPropertyValue {
-    @apply w-[50%] h-full outline-none 
+    @apply min-w-[50%] h-full outline-none 
 }
 
 .status-icon {

@@ -37,6 +37,16 @@ export class SelectStatusComponent implements OnInit{
 
    ngOnInit(): void {
     this.translateStatus()
+    this.filteredList = this.projeto.statusList.filter(s => this.showConcluded(s))  
+  }
+
+
+    filteredList:Status[]=[]
+    showConcluded(status: Status){
+      if(status.name == 'concluido' || status.name === 'completado' || status.name === 'completed' || status.name === '已完成'){
+        return this.tarefa.dependencies.find(d => !(d.currentStatus.name === 'concluido' || d.currentStatus.name === 'completado' || d.currentStatus.name === 'completed' || d.currentStatus.name === '已完成') || !d.concluded) == null 
+      }
+      return true
     }
 
     translateStatus() {
@@ -116,11 +126,11 @@ export class SelectStatusComponent implements OnInit{
   }
 
   addStatus() {
+    this.status = new Status
     this.booleanAddStatus = !this.booleanAddStatus;
   }
 
   async novoStatus(): Promise<void> {
-
     if(this.status.name != ''){
       if(this.status.backgroundColor === ''){
         this.status.backgroundColor = "#ff0000"
@@ -132,13 +142,17 @@ export class SelectStatusComponent implements OnInit{
       } else {
         this.status.textColor = "#000000";
       }
-      this.projeto.statusList.push(this.status);
+
+      setTimeout(() => {
+        this.projeto.statusList.push(this.status);
+      });
+
       if(this.projeto.id != 0 && this.projeto.id != null){ 
         this.projeto = await this.service.updateStatusList(this.projeto.id,this.loggedUser.id,this.projeto.statusList);
       }
-      this.addStatus();
+      this.filteredList.push(this.status)
+      this.booleanAddStatus = !this.booleanAddStatus;
     }
-    this.status = new Status();
   }
 
 
@@ -187,5 +201,6 @@ export class SelectStatusComponent implements OnInit{
       this.projeto.statusList.splice(this.projeto.statusList.indexOf(status), 1)
     }
   }
+
 
 }

@@ -1,6 +1,17 @@
 <div class="2xl:w-full xl:w-full lg:w-full  md:w-full lg:h-[124px] h-max w-full bg-white dark:bg-dark-primary-black p-4  rounded-lg flex flex-col gap-2">
   <div class="flex gap-4 items-center">
-    <div class="md:w-14 md:h-14 h-12 w-12 overflow-clip rounded-full" [ngStyle]="{'background-color': project.imageColor}"></div>
+    <div
+    [ngStyle]="{
+      'background-image':
+        project.image != null
+          ? 'url(' + project.image.data + ')'
+          : project.imageColor,
+      'background-size': 'cover',
+      'background-color': project.imageColor
+    }"
+    class="md:w-14 md:h-14 h-12 w-12 overflow-clip rounded-full"
+  >
+    </div>
     <div class="text truncate 2xl:w-[200px] xl:w-[100px] lg:w-[200px] md:w-[150px]">
       {{ project.name }}
     </div>

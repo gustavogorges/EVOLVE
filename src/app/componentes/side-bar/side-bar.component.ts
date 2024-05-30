@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Button } from 'primeng/button';
 import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permissions';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
@@ -45,8 +46,9 @@ projects:Project[]=[]
 
   @ViewChild('sidebar') sidebarConfig !: ElementRef
   onDocumentClick = (event: MouseEvent) => {
-    
-    if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig)) {
+    console.log(event);
+    let target :any= event.target
+    if (!this.elementRef.nativeElement.contains(event.target) && !this.elementRef.nativeElement.contains(this.sidebarConfig) && !target?.classList.contains("noClose")) {
         this.sideBar.emit(false)
     }
   }

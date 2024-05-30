@@ -141,7 +141,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NotasComponent } from './componentes/sub-componentes/notas/notas.component';
 import { JoyrideModule } from 'ngx-joyride';
 import { SideBarService } from 'src/service/sideBarService';
+
 import { MessageService } from 'primeng/api';
+
+import { DependenciasComponent } from './componentes/sub-componentes/dependencias/dependencias.component';
+import { ModalDependeciasComponent } from './componentes/sub-componentes/modal-dependecias/modal-dependecias.component';
 
 
 
@@ -247,7 +251,9 @@ export function HttpLoaderFactory(http:HttpClient){
     CardsCarroselComponent,
     CardListLandingPageComponentComponent,
     CalendarLandingPageComponentComponent,
-    GreenDivLandingpageComponent
+    GreenDivLandingpageComponent,
+    DependenciasComponent,
+    ModalDependeciasComponent
 
   ],
   

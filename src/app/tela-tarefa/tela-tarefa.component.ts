@@ -65,6 +65,11 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
   }
 
   async ngOnInit(): Promise<void> {
+    window.addEventListener("addTask", (e:Event) => {
+      console.log((e as CustomEvent).detail);
+      this.listaTarefas.push((e as CustomEvent).detail)
+      console.log(this.listaTarefas);
+    })
     if (localStorage.getItem('taskViewPreference') != null) {
       this.option = localStorage.getItem('taskViewPreference');
     }
@@ -82,7 +87,7 @@ ordemPrioridades = ['URGENTE', 'ALTA', 'MEDIA', 'BAIXA', 'MUITO_BAIXA', 'NENHUMA
     if(this.userProject?.role.name != "PROJECT_VIEWER") {
       this.hasPermission = true;
     }
-    }, 100);
+    });
     this.listaTarefas.forEach(element => {
       this.translateStatus(element)
     });
@@ -537,9 +542,17 @@ if (lang === 'pt') {
     this.tarefaNova = await this.service.postTarefa(this.tarefaNova,this.projeto.id);
 
     this.tarefaNova.priority = priorityTeste; 
+
+    this.projeto = await this.service.getOne('project', this.projeto.id);
+    this.listaTarefas = this.projeto.tasks;
+    this.listaNova = this.projeto.tasks;
+    console.log(this.projeto);
+    
+    
     this.tarefaSelecionada = this.tarefaNova;
     
     this.booleanTask = true;
+    // this.sortLists();
   }
 
   adicionarTarefa() {

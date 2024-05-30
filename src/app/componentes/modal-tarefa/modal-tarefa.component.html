@@ -17,7 +17,16 @@
       </p>  </div>
     <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
   </div>
-  <div *ngIf="modalFelipeGorges || tarefa.concluded || verifyAprovament()" class="w-full z-40 absolute " [ngClass]="modalFelipeGorges ? 'h-full':'h-[45%]'">
+
+  <div [ngClass]="modalFelipeGorges ? 'shadow-2xl':''" *ngIf="modalFelipeGorges && !verifyAssociate()" class="w-[20vw] left-[35%] z-[9999] p-5 gap-4  rounded-lg flex flex-col justify-around items-center top-[30%] h-max bg-secondaryWhite absolute">
+    <div class="w-full flex justify-center items-center flex-col gap-2">
+      <h2 class="font-titulo text-lg font-bold">Você não está associado  </h2>
+      <p class="text-fontGray font-hind-madurai">
+      Você não está associado por isso não pode edtiar está tarefa.
+      </p>  </div>
+    <button (click)="alternateModalAviso()" class="py-2 px-4 bg-secondary rounded-lg text-secondaryWhite font-titulo font-bold">Entendido!</button>
+  </div>
+  <div *ngIf="modalFelipeGorges || tarefa.concluded || verifyAprovament() || !verifyAssociate()" class="w-full z-40 absolute " [ngClass]="modalFelipeGorges ? 'h-full':'h-[55%]'">
 
   </div>
   <div class="close-btn z-50" (click)="sendEventEmitter()">
@@ -438,6 +447,15 @@
         >
           {{'Notas' | translate}}
         </p>
+        <p
+        [ngClass]="
+          page_task == 'dependencias' ? 'border-b-2 border-primary' : 'border-none'
+        "
+        class="page-name"
+        (click)="changePage('dependencias')"
+      >
+        {{'Depêndencias' | translate}}
+      </p>
       </div>
       <div class="components">
         <app-sub-tarefa
@@ -469,6 +487,14 @@
           [task]="tarefa"
           [loggedUser]="loggedUser">
         </app-notas>
+        <app-dependencias
+        class="component"
+        [task]="tarefa"
+        [project]="projeto"
+        *ngIf="page_task == 'dependencias'">
+
+
+        </app-dependencias>
       </div>
     </div>
   </div>

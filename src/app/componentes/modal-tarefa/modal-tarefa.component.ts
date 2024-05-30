@@ -41,7 +41,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   statusAntigo: Status = new Status();
   descricaoAntiga: string = '';
   nomeAntigo: string = '';
-  booleanPlayPause : boolean = false; 
+  booleanPlayPause : boolean = false;
 
   propertyStack : Property = new Property;
   propertiesStack : Array<Property> = new Array;
@@ -79,7 +79,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
           this.seconds++;
           this.secondsString = this.seconds.toString();
         }
-      } 
+      }
       if(this.seconds > 59) {
         this.seconds = 0;
         this.secondsString = '0' + this.seconds.toString();
@@ -123,7 +123,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   async sendTimeFocus() : Promise<void> {
     let userTask : UsuarioTarefa = new UsuarioTarefa();
-    
+
     try{
       userTask = (await this.service.getUserWorkedTime(this.loggedUser.id,this.tarefa.id)).data
     } catch{
@@ -159,6 +159,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   @Input() tarefa: Task = new Task();
+  @Input() oldFinalDate : any;
   @Input() projeto: Project = new Project();
   @Output() closeModalTask = new EventEmitter<boolean>();
 
@@ -175,9 +176,16 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   taskUnchanged : Task = new Task;
 
   async ngOnInit(): Promise<void> {
-    
+    console.log(this.oldFinalDate);
+
+    if(this.oldFinalDate != null) {
+      console.log("entrou no if");
+
+      this.tarefa.finalDate = this.oldFinalDate;
+    }
+
     this.loggedUser = await this.cookies_service.getLoggedUser().then((user)=>{return user})
-    
+
     this.listAssociates = this.tarefa.associates;
 
     this.listPriorities = await this.service.getAllPriorities(this.projeto.id)
@@ -198,11 +206,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     },10);
     this.propertiesList = this.tarefa.properties;
 
-    
-
     // this.verificaTamanhoString();
-    if (this.tarefa.name == '') {      
-      this.tarefa.currentStatus.name = "sem status";
+    if (this.tarefa.name == '') {
+
       this.tarefa.priority.name = "NENHUMA"
       this.tarefa.priority.backgroundColor = "#cccccc"
     } else if (this.tarefa.id != 0) {
@@ -212,6 +218,10 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
 
     if(this.tarefa.currentStatus.name == "concluido" || this.tarefa.currentStatus.name === '已完成' || this.tarefa.currentStatus.name === 'completado' || this.tarefa.currentStatus.name === 'completed') {
+      this.modalFelipeGorges = true;
+    }
+
+    if(!this.verifyAssociate()) {
       this.modalFelipeGorges = true;
     }
   }
@@ -427,7 +437,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     }
   }
 
-  
+
 
   listAssociatesVerify() : boolean {
     if(this.tarefa.associates == null || this.tarefa.associates.length == 0) {
@@ -447,12 +457,12 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
         endTime: endTime,
         taskName : this.tarefa.name,
         description: "projeto:"+this.projeto.name+" status da tarefa:"+this.tarefa.currentStatus.name
-  
+
       };
       createGoogleEvent(eventDetails)
 
     }
- 
+
   }
   async saveDescription():Promise<void>{
     this.tarefa = await this.service.patchTaskDescription(this.tarefa.id, this.loggedUser.id, this.tarefa.description)
@@ -460,7 +470,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
   saveProperty() : void {
     this.service.updateTaskFinalDate(this.tarefa.id,this.loggedUser.id,this.tarefa.finalDate)
-   
+
     this.booleanCalendarioFinalDate = false;
   }
 
@@ -500,6 +510,9 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     } else if (name_page == 'notas') {
       this.page_task = 'notas';
     }
+    else if (name_page == 'dependencias') {
+      this.page_task = 'dependencias';
+    }
   }
 
   verificaTamanhoString() {
@@ -514,19 +527,29 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   editPriority() {
- 
+
       this.booleanSelectPrioridade = !this.booleanSelectPrioridade;
-    
+
+  }
+
+  verifyAssociate() : boolean {
+    let result = false;
+    this.tarefa.associates.forEach(associate => {
+      if(associate.id == this.loggedUser.id) {
+        result =  true;
+      }
+    })
+     return result;
   }
 
   editDataFinalDate() {
     this.booleanCalendarioFinalDate = !this.booleanCalendarioFinalDate;
-   
+
   }
 
   editDataScheduling() {
     this.booleanCalendariosScheduling = !this.booleanCalendariosScheduling;
-    
+
   }
 
 
@@ -544,7 +567,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
               this.service.putPropertyValue(propertieStackFor.id,propertiesValueStackFor,this.loggedUser.id,this.tarefa.id)
             }
           })
-          
+
         }
       })
 
@@ -565,16 +588,16 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
 
     } else if (this.tarefa.id == 0) {
       this.tarefa.project.id = 1;
-      this.tarefa.creator.id = this.loggedUser.id; 
+      this.tarefa.creator.id = this.loggedUser.id;
       this.service.postTarefa(this.tarefa, this.projeto.id);
 
-  
+
     }
 
     this.verifyBooleans();
   }
 
-  
+
   finishEditPriority(priority:PriorityRecord) {
     this.tarefa.priority = priority;
     this.booleanSelectPrioridade = false;
@@ -629,6 +652,6 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
     this.closeModalTask.emit(true);
   }
   async updateTask(){
-    this.tarefa = await this.service.getOne("task", this.tarefa.id) 
+    this.tarefa = await this.service.getOne("task", this.tarefa.id)
   }
 }

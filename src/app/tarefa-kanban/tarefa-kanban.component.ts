@@ -124,15 +124,21 @@ export class TarefaKanbanComponent  implements OnChanges{
       } else {
         list.splice(index-1, 0, event.data);
       }
-
-    
+      console.log(list);
+      console.log(this.project.statusList);
+      
+      
+      this.project.statusList = []
      
       list.map((status : Status)=>{
-        status.columnIndex=list.indexOf(status)
-        this.project.statusList.push(status)
-        this.service.updateStatusList(this.project.id, this.loggedUser.id, this.project.statusList);
+        setTimeout( async () => {
+          status.columnIndex=list.indexOf(status)
+          this.project.statusList.push(status)
+        },50)
       })
-      this.project.statusList = list
+      setTimeout( async () => {
+        await this.service.updateStatusList(this.project.id, this.loggedUser.id, this.project.statusList);
+      },100)
     }
     
   }

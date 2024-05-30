@@ -72,7 +72,7 @@ export class SelectPropriedadeComponent implements OnInit {
       showing: true
     },
     {
-      text: 'número double',
+      text: 'número decimal',
       icon: 'pi pi-dollar',
       showing: true
     },
@@ -91,11 +91,7 @@ export class SelectPropriedadeComponent implements OnInit {
       icon: 'pi pi-book',
       showing: true
     },
-    {
-      text: 'associados',
-      icon: 'pi pi-users',
-      showing: true
-    }
+  
   ];
 
   clickDate(option: any) {
@@ -177,7 +173,7 @@ export class SelectPropriedadeComponent implements OnInit {
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
         this.propertiesUpdatedList = updatedTask.properties;
-      }  else if(this.optionType == 'número double') {
+      }  else if(this.optionType == 'número decimal') {
         this.newPropertie.propertyType = PropertyType.DoubleValue;   
         this.tarefa.properties.push(this.newPropertie);
         if(this.checkboxProperty){

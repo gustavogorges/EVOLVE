@@ -59,6 +59,12 @@
       [(ngModel)]="newPropertyValue"
     />
     <input
+    *ngIf="property.propertyType.toString() == 'DataValue'"
+    class="inputPropertyValue"
+    type="date"
+    [(ngModel)]="newPropertyValue"
+  />
+    <input
       *ngIf="property.propertyType.toString() == 'TextValue'"
       class="inputPropertyValue"
       maxlength="20"

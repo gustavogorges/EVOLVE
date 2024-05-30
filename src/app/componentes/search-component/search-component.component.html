@@ -77,7 +77,7 @@
             <i class="foto pi pi-check-square text-secondary dark:text-dark-secondary"></i>
             <div class="col-start-2 col-end-3 w-full pr-4 flex items-center justify-between">
                 <div *ngIf="task" class="w-full text-lg dark:text-white px-1 pr-4"><p>{{task.name}}</p></div>
-                <div class="w-[1rem] h-[1rem] rounded-full" [ngStyle]="{'background': task.currentStatus.backgroundColor}"></div>
+                <div *ngIf="task?.currentStatus?.backgroundColor" class="w-[1rem] h-[1rem] rounded-full" [ngStyle]="{'background': task?.currentStatus?.backgroundColor}"></div>
             </div>
         </div>
     </div>

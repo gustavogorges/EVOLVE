@@ -1,16 +1,19 @@
 <div class="main" style="background-color: #ffff;">
     <div class="status-box" >
-        <div class="status-adjust" *ngFor="let status of projeto.statusList">
-            <div
-             class="status cursor-pointer"
-             [ngStyle]="{'background-color': status.backgroundColor, 'color': status.textColor}"
-             (click)="salvarStatus(status)"
-             >
-                <p class="truncate px-4">{{status.name}}</p>
-            </div>
-            <i *ngIf="verifyStatusDefault(status)" class="pi " [ngClass]="!status.enabled ? 'pi-plus-circle':'pi-minus-circle'" (click)="enableStatus(status)"></i>
-            <i *ngIf="!verifyStatusDefault(status)" class="pi pi-pencil" (click)="editStatus(status)"></i>
-            <i *ngIf="!verifyStatusDefault(status)" class="pi pi-trash" (click)="deleteStatus(status)"></i>
+        <div class="status-adjust" *ngFor="let status of filteredList">
+            
+
+                <div
+                class="status cursor-pointer"
+                [ngStyle]="{'background-color': status.backgroundColor, 'color': status.textColor}"
+                (click)="salvarStatus(status)"
+                >
+                   <p class="truncate px-4">{{status.name}}</p>
+               </div>
+               <i *ngIf="verifyStatusDefault(status)" class="pi " [ngClass]="!status.enabled ? 'pi-plus-circle':'pi-minus-circle'" (click)="enableStatus(status)"></i>
+               <i *ngIf="!verifyStatusDefault(status)" class="pi pi-pencil" (click)="editStatus(status)"></i>
+               <i *ngIf="!verifyStatusDefault(status)" class="pi pi-trash" (click)="deleteStatus(status)"></i>
+         
         </div>
     </div>
     <div *ngIf="!booleanAddStatus && !boolEditStatus" (click)="addStatus()" class="add-box">

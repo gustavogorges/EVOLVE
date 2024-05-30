@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Chat } from 'src/model/chat';
 import { TeamChat } from 'src/model/teamChat';
 import { UserChat } from 'src/model/userChat';
@@ -21,7 +21,7 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
   chatTypeUsers:string = "users"
   chatTypeTeams:string = "teams"
   chatTypeProjects:string = "projects"
-
+  chatOpen : boolean = false
   loggedUser: User = new User
   search:string = ""
   selectedChat!:Chat
@@ -42,6 +42,7 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
     this.setChatListType(await this.cookiesService.get(this.cookiesService.chatListTypeField))
     this.selectChat(await this.getLastChat(this.chatType))
     this.sortChatList()
+    this.resizeWindow()
   }
 
   // Esta função será chamada sempre que houver mudanças na view
@@ -111,6 +112,7 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
     // this.updateMessageStatus()
     this.cookiesService.set("lastChatId", this.selectedChat.id)
     this.cookiesService.set(this.cookiesService.chatListTypeField, this.chatType)
+    this.chatOpen = true
   }
 
   getContact(chat:Chat, user: User):User|Team|Project {
@@ -120,6 +122,20 @@ export class TelaChatComponent implements OnInit, AfterViewChecked {
       default : return this.getContactFromUserChat(chat, user)
     }
   }
+
+  closeChat(){
+    this.chatOpen = false
+  }
+
+  @HostListener('window:resize', ['$event'])
+    resizeWindow(){
+        if(window.innerWidth > 1024){
+            this.chatOpen = false
+            return false
+        }
+        this.chatOpen = true
+        return true
+    }
 
   getContactFromUserChat(chat: UserChat, user: User){
     if (chat.users[0]?.id != user.id) {

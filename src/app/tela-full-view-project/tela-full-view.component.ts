@@ -226,7 +226,6 @@ export class TelaFullViewComponent implements OnInit {
         setTimeout( async () => {
             if(this.formData){                       
                 await this.service.patchProjectImage(this.projeto.id, this.formData)
-                // this.formData = null
             }
         }, 150)
         setTimeout( async () => {

@@ -22,7 +22,7 @@
           <input
             type="email"
             name=""
-            id=""
+            id="1"
             [placeholder]="loggedUser?.email"
             [disabled]="disabledEmail"
             [(ngModel)]="email"
@@ -31,7 +31,7 @@
         </div>
         <button
           *ngIf="disabledEmail"
-          class="md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+          class="noClose md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
           (click)="editEmail()"
         >
           {{'editar' | translate}}
@@ -39,14 +39,14 @@
         <div class="flex flex-col md:flex-row gap-2" *ngIf="!disabledEmail">
           <button
          
-          class="md:px-7 px-4 font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
+          class="noClose md:px-7 px-4 font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
           (click)="putEmail()"
         >
           {{'confirmar' | translate}}
         </button>
         <button
           (click)="cancelEmail()"
-          class="md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
+          class="noClose md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
         >
           {{'cancelar' | translate}}
         </button>
@@ -62,7 +62,7 @@
           <input
             type="password"
             name=""
-            id=""
+            id="2"
             placeholder="********"
             [(ngModel)]="password"
             [disabled]="disabledPassword"
@@ -72,20 +72,20 @@
         <button
           (click)="editPassword()"
           *ngIf="disabledPassword"
-          class="md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
+          class="noClose md:px-7 px-4  font-hind-madurai h-min bg-primary dark:bg-dark-primary text-white rounded-md"
         >
           {{'editar' | translate}}
         </button>
         <div class="flex gap-2" *ngIf="!disabledPassword">
           <button
             (click)="putPassword()"
-            class="md:px-7 px-4  font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
+            class="noClose md:px-7 px-4  font-hind-madurai h-min bg-secondary dark:bg-dark-secondary text-white rounded-md"
           >
             {{'confirmar' | translate}}
           </button>
           <button
             (click)="cancelPassword()"
-            class="md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
+            class="noClose md:px-7 px-4  font-hind-madurai h-min bg-red-700 text-white rounded-md"
           >
             {{'cancelar' | translate}}
           </button>
@@ -439,8 +439,8 @@
        
       </div>
     </div>
-    <div class="flex justify-between items-center">
-      <div class="flex flex-col gap-2 w-1/2">
+    <div class="flex justify-between items-center w-full gap-4">
+      <div class="flex flex-col gap-2 w-[45%]">
         <p class="font-titulo font-medium text-lg dark:text-white">
           {{'Altere o tamanho da fonte:' | translate}}
         </p>
@@ -450,7 +450,15 @@
         {{'Personalize o tamanho da fonte para uma experiência de leitura ideal. Ajuste o tamanho da fonte para tornar o texto mais confortável e legível conforme suas preferências.' | translate}}
         </p>
       </div>
-      <input type="range" min="12" max="24" step="2"  [(ngModel)]="sliderValue" (ngModelChange)="changeFont() " value="12" class="range-slider" id="font-size-slider"> 
+      <div class="flex flex-col w-[45%]">
+        <div class="w-full flex justify-between items-end">
+          <p class="font-titulo font-semibold dark:text-gray-300">aa</p>
+          <p class="font-titulo text-primary font-bold dark:text-dark-primary ">{{sliderValue}}px</p>
+          <p class="font-titulo font-semibold dark:text-gray-300">AA</p>
+        
+        </div>
+        <input type="range" min="12" max="24" step="2"  [(ngModel)]="sliderValue" (ngModelChange)="changeFont() " value="12" class="range-slider" id="font-size-slider"> 
+      </div>
     </div>
   </div>
 </div>
