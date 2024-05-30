@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { User } from 'src/model/user';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
+import { MessageService } from 'primeng/api';
 import emailjs, { send } from '@emailjs/browser';
 import { getRtlScrollAxisType } from '@angular/cdk/platform';
 import { AuthService } from 'src/service/autService';
@@ -30,7 +31,7 @@ export class TelaLoginComponent implements OnInit {
   @Output() login : EventEmitter<any> = new EventEmitter
 
   constructor(private router: Router,private coockiesService:CookiesService, private service: BackendEVOLVEService, private authService :AuthService,
-    private cookie : CookiesService) {}
+    private cookie : CookiesService, private messageService : MessageService) {}
 
 
   ngOnInit(): void {
