@@ -16,8 +16,8 @@ export class TelaCadastroComponent implements OnInit {
   usuario : User = new User();
   userForm !: FormGroup
 
-  constructor(private service : BackendEVOLVEService, private router: Router) { 
-    
+  constructor(private service : BackendEVOLVEService, private router: Router) {
+
   }
 
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class TelaCadastroComponent implements OnInit {
       window.dispatchEvent(event);
     }, 100);
     window.addEventListener('registration', async (event: Event) => {
-      
+
       const customEvent = event as CustomEvent;
-      const userData = customEvent.detail;  
+      const userData = customEvent.detail;
       await this.create(userData);
-      
+
       });
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -87,34 +87,44 @@ export class TelaCadastroComponent implements OnInit {
     return this.userForm.controls;
   }
   showConfirmationMessage = false;
-  message  = "cadastro foiii" 
+  message  = "cadastro foiii"
   status !: any
 
   async submit(){
     this.usuario.name = this.formControls['name'].value;
     this.usuario.email = this.formControls['email'].value;
     this.usuario.password = this.formControls['password'].value;
-    
+
     this.usuario.imageColor = this.randomizeColor()
     if(this.usuario.email !=null && this.usuario.name!=null && this.usuario.password!=null){
-      this.status  = await this.service.postUsuario(this.usuario)
-      
+      try {
+        this.status  = await this.service.postUsuario(this.usuario)
+      } catch(error) {
+        setTimeout(() => {
+          const event = new CustomEvent('erroModal', { detail: "Email já existe na base de dados!" });
+          window.dispatchEvent(event);
+        }, 100);
+        console.error('Erro ao fazer login:', error);
+        throw error;
+
+      }
+
       if(this.status.status >= 200 && this.status.status < 300){
         this.message = "sua conta foi cadastrada com sucesso"
         this.showConfirmationMessage = true;
-  
+
         setTimeout(() => {
           window.location.href = "/login"
-          
+
         }, 1000);
       }else{
         this.message = "não foi possivel cadastrar sua conta"
         this.showConfirmationMessage = true;
-  
+
       }
 
     }
-  
+
 
     }
     async create(userData : any){
@@ -123,28 +133,28 @@ export class TelaCadastroComponent implements OnInit {
       // this.usuario.image.data = userData.picture
       this.usuario.password = ''
       this.usuario.socialLogin = true
-      
+
       this.status  = await this.service.postUsuario(this.usuario)
 
       let file:File = new File()
       file.data = userData.picture
       await this.service.patchUserImageFromLink(this.status.data.id, file)
-      
+
       if(this.status.status >= 200 && this.status.status < 300){
         this.message = "sua conta foi cadastrada com sucesso"
         this.showConfirmationMessage = true;
-  
+
         setTimeout(() => {
           window.location.href = "/login"
         }, 1000);
       }else{
         this.message = "não foi possivel cadastrar sua conta"
         this.showConfirmationMessage = true;
-  
+
       }
     }
     closeModal(){
-    this.showConfirmationMessage = false 
+    this.showConfirmationMessage = false
     }
   }
 
