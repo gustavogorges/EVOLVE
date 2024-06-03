@@ -73,7 +73,7 @@ export class SubTarefaComponent implements OnInit {
   }
 
   verifyApprovament() :boolean {
-    if(this.tarefa.concluded == true || this.tarefa.currentStatus.name == "Concluído"){
+    if(this.tarefa.concluded == true || this.tarefa.currentStatus.name == "concluido"){
       return true
     }
    return false;

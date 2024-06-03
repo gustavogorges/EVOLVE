@@ -50,7 +50,7 @@ export class ComentariosComponent implements OnInit {
    }
 
    verifyApprovament() :boolean {
-    if(this.task.concluded == true || this.task.currentStatus.name == "Concluído"){
+    if(this.task.concluded == true || this.task.currentStatus.name == "concluido"){
       return true
     }
    return false;

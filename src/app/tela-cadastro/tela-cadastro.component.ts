@@ -26,7 +26,7 @@ export class TelaCadastroComponent implements OnInit {
       window.dispatchEvent(event);
     }, 100);
     window.addEventListener('registration', async (event: Event) => {
-
+      
       const customEvent = event as CustomEvent;
       const userData = customEvent.detail;
       await this.create(userData);
@@ -99,7 +99,9 @@ export class TelaCadastroComponent implements OnInit {
     if(this.usuario.email !=null && this.usuario.name!=null && this.usuario.password!=null){
       try {
         this.status  = await this.service.postUsuario(this.usuario)
+        console.log("log do erro retornado 1", this.status.status);
       } catch(error) {
+        console.log("log do status retornado 2", this.status.status)
         setTimeout(() => {
           const event = new CustomEvent('erroModal', { detail: "Email já existe na base de dados!" });
           window.dispatchEvent(event);
