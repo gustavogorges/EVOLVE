@@ -141,8 +141,10 @@ export class SelectPropriedadeComponent implements OnInit {
        if(this.checkboxProperty){
         this.newPropertie.global = true;
        }
-       this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-       let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+       let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
+      //  let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+       console.log(updatedTask.properties);
+       
         this.propertiesUpdatedList = updatedTask.properties;
       } else if(this.optionType == 'data') {
         this.newPropertie.propertyType = PropertyType.DataValue;
@@ -151,7 +153,7 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'seleção única') {
         this.newPropertie.propertyType = PropertyType.UniSelectValue;
@@ -161,7 +163,7 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'seleção múltipla') {
         this.newPropertie.propertyType = PropertyType.MultiSelectValue;   
@@ -171,7 +173,7 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'número decimal') {
         this.newPropertie.propertyType = PropertyType.DoubleValue;   
@@ -180,7 +182,7 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'texto') {
         this.newPropertie.propertyType = PropertyType.TextValue;
@@ -189,7 +191,7 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }  else if(this.optionType == 'associados') {
         this.tarefa.properties.push(this.newPropertie); 
@@ -197,10 +199,11 @@ export class SelectPropriedadeComponent implements OnInit {
           this.newPropertie.global = true;
          }
         this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
-        let updatedTask : Task = await this.service.getOne("task",this.tarefa.id)
+        let updatedTask : Task = await this.service.patchProperty(this.newPropertie,this.tarefa.id, this.loggedUser.id);
         this.propertiesUpdatedList = updatedTask.properties;
       }
-      
+    console.log(this.propertiesUpdatedList);
+    
     this.newItemEvent.emit(this.propertiesUpdatedList)  
   }
 }

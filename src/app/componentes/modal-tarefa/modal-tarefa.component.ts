@@ -117,6 +117,7 @@ export class ModalTarefaComponent implements OnInit, OnChanges {
   }
 
   updatePropertiesList(updatedPropertiesList : Array<Property>) : void {
+      console.log(updatedPropertiesList)
       this.propertiesList = updatedPropertiesList;
       this.booleanAddPropriedade = false;
   }
