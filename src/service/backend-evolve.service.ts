@@ -39,6 +39,11 @@ export class BackendEVOLVEService {
 
   constructor() { }
 
+  async getLastErrorLog() {
+    return (await axios.get(this.URL + 'error/logs', {withCredentials: true})).data;
+  }
+
+
   // async putUsuario (usuario:User|Pick<User, "id">){
   //   return (await axios.put(this.URL+"user", usuario)).data
   // }

@@ -6,6 +6,7 @@ import { sortedUniq } from 'lodash';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/model/user';
 import { AuthService } from 'src/service/autService';
+import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { TextToSpeechService } from 'src/service/text-to-speech.service';
@@ -22,7 +23,8 @@ export class AppComponent{
     private translateService : TranslateService,
     private textToSpeechService: TextToSpeechService,
     private authService : AuthService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private backendService : BackendEVOLVEService
 
     ){
       if(localStorage.getItem('lang') === null){
@@ -33,7 +35,7 @@ export class AppComponent{
     }
 
   title = 'Evolve';
-  loggedUser !: User;
+  loggedUser : User = new User();
 
   reload(){
     window.location.reload()
@@ -41,7 +43,44 @@ export class AppComponent{
 
   islogged = false
 
+  callErrorLogModal(message:string){
+    console.log("EU CHEGUei AQUI");
+    
+    setTimeout(() => {
+      const event = new CustomEvent('erroModal', { detail: message});
+      window.dispatchEvent(event);
+    }, 100);
+  }
+
+  async verifyLogs(){
+    setTimeout( async () => {
+      console.log("etou fando a request");
+      let errorLog:string[] = [];
+      try {
+        errorLog = await this.backendService.getLastErrorLog()
+      } catch(e){
+        errorLog = errorLog
+      }
+      console.log(this.loggedUser);
+      
+      console.log(errorLog);
+      
+      let lastLog:string = errorLog.at(2) ?? ""
+      console.log(lastLog);
+      console.log(JSON.parse(lastLog));
+      if(lastLog != this.lastErrorLog){
+        this.callErrorLogModal(JSON.parse(lastLog))
+      }
+      this.lastErrorLog = lastLog ?? this.lastErrorLog
+      this.verifyLogs()
+    },5000)
+  }
+
+  lastErrorLog:string = ""
+
   async ngOnInit(): Promise<void> {
+
+    this.verifyLogs()
 
     window.addEventListener('erroModal', async (event: Event) => {
       const customEvent = event as CustomEvent;
@@ -127,4 +166,7 @@ export class AppComponent{
       }
     }
   }
+
+
+
 }
