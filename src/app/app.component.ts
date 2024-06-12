@@ -10,6 +10,7 @@ import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { TextToSpeechService } from 'src/service/text-to-speech.service';
+import { stringify } from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -42,10 +43,9 @@ export class AppComponent{
   }
 
   islogged = false
+    lastErrorLog:string = ""
 
-  callErrorLogModal(message:string){
-    console.log("EU CHEGUei AQUI");
-    
+  callErrorLogModal(message:string){    
     setTimeout(() => {
       const event = new CustomEvent('erroModal', { detail: message});
       window.dispatchEvent(event);
@@ -54,29 +54,45 @@ export class AppComponent{
 
   async verifyLogs(){
     setTimeout( async () => {
-      console.log("etou fando a request");
-      let errorLog:string[] = [];
+      let errorLogs:string[] = [];
+      let lastLog:string = this.lastErrorLog
       try {
-        errorLog = await this.backendService.getLastErrorLog()
+        errorLogs = await this.backendService.getLastErrorLog()
       } catch(e){
-        errorLog = errorLog
+        errorLogs = errorLogs
       }
-      console.log(this.loggedUser);
       
-      console.log(errorLog);
-      
-      let lastLog:string = errorLog.at(2) ?? ""
-      console.log(lastLog);
-      console.log(JSON.parse(lastLog));
+      lastLog = errorLogs.at(errorLogs.length-1) ?? ""
+
+      // Função para extrair valor de uma chave específica
+      function extractValue(str: string, key: string): string {
+        const regex = new RegExp(`${key}:\\s*([^,]+)`);
+        const match = str.match(regex);
+        return match ? match[1].trim() : '';
+      }
+
+      // const id = extractValue(lastLog, 'id');
+      const title = extractValue(lastLog, 'title');
+      // const error = extractValue(lastLog, 'error');
+      // const dateTime = extractValue(lastLog, 'dateTime');
+      // const requestSenderId = extractValue(lastLog, 'requestSenderId');
+
+      // console.log(id);
+      // console.log(title);
+      // console.log(error);
+      // console.log(dateTime);
+      // console.log(requestSenderId);
+
       if(lastLog != this.lastErrorLog){
-        this.callErrorLogModal(JSON.parse(lastLog))
+        this.callErrorLogModal(title)
       }
       this.lastErrorLog = lastLog ?? this.lastErrorLog
       this.verifyLogs()
     },5000)
   }
 
-  lastErrorLog:string = ""
+
+
 
   async ngOnInit(): Promise<void> {
 

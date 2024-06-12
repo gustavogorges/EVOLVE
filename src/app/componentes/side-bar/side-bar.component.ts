@@ -1,26 +1,31 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild  } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Button } from 'primeng/button';
 import { hasPermission, hasPermissionProject } from 'src/app/shared/check-permissions';
 import { Project } from 'src/model/project';
 import { Team } from 'src/model/team';
 import { User } from 'src/model/user';
-import { UserProject } from 'src/model/userProject';
 import { BackendEVOLVEService } from 'src/service/backend-evolve.service';
 import { ColorService } from 'src/service/colorService';
 import { CookiesService } from 'src/service/cookies-service.service';
 import { SideBarService } from 'src/service/sideBarService';
 import { TourService } from 'src/service/tutorialService';
 
+interface ErrorLog{
+  id:string,
+  title:string,
+  error:string,
+  dateTime:Date,
+  requestSenderId:string
+}
+
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
+
 export class SideBarComponent implements OnInit {
-
-
 
   constructor(    private cookieService: CookiesService, private router: Router,  
                    
@@ -38,6 +43,39 @@ projects:Project[]=[]
     this.loggedUser = await this.cookieService.getLoggedUser().then((user)=>{return user})
     document.body.addEventListener('click', this.onDocumentClick);
     this.projects = await this.backEndService.getProjectsByUserId(this.loggedUser.id)
+  }
+
+
+  async verifyLogs(){
+      let errorLogs:string[] = [];
+      try {
+        errorLogs = await this.backEndService.getLastErrorLog()
+      } catch(e){
+        errorLogs = errorLogs
+      }
+
+      let logList:ErrorLog[]=[]
+      for(let log of errorLogs){
+        let logParsed:ErrorLog = {"id":"", "title":"", "error":"", "dateTime":new Date,"requestSenderId":""}
+        logParsed.id = extractValue(log, 'id');
+        logParsed.title = extractValue(log, 'title');
+        logParsed.error = extractValue(log, 'error');
+        logParsed.requestSenderId = extractValue(log, 'requestSenderId');
+        logParsed.dateTime = new Date(extractValue(log, 'dateTime'));
+        logList.push(logParsed)
+      }
+      console.log(logList);
+      
+
+      // Função para extrair valor de uma chave específica
+      function extractValue(str: string, key: string): string {
+        const regex = new RegExp(`${key}:\\s*([^,]+)`);
+        const match = str.match(regex);
+        return match ? match[1].trim() : '';
+      }
+  }
+  async openErrorLogsModal(){
+      this.verifyLogs()
   }
 
   closeSideBar(){
