@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --o",
-    "build": "ng build",
+    "build": "npx ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -53,6 +53,12 @@
     "@angular-devkit/build-angular": "^14.2.1",
     "@angular/cli": "~14.2.1",
     "@angular/compiler-cli": "^14.0.0",
+    "@opentelemetry/auto-instrumentations-web": "^0.40.0",
+    "@opentelemetry/context-zone-peer-dep": "^1.25.1",
+    "@opentelemetry/exporter-logs-otlp-http": "^0.52.1",
+    "@opentelemetry/exporter-metrics-otlp-http": "^0.52.1",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.52.1",
+    "@opentelemetry/instrumentation": "^0.52.1",
     "@types/jasmine": "~4.0.0",
     "@types/lodash": "^4.17.0",
     "@types/pdfmake": "^0.2.9",

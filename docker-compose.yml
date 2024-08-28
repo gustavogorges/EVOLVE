@@ -1,0 +1,13 @@
+networks:
+  default:
+    name: evolve
+    driver: bridge
+
+services:
+  evolve:
+    container_name: evolve
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"

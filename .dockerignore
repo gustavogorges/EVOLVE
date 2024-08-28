@@ -1,0 +1,6 @@
+.git
+.results
+tmp
+scripts
+node_modules
+.env*
