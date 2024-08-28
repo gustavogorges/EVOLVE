@@ -16,7 +16,6 @@ FROM registry-docker.weg.net/nginx:alpine
 
 # Copia os arquivos compilados para a pasta padrão do nginx
 COPY --from=build /app/dist/evolve /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Exponha a porta que o NGINX usará
 EXPOSE 80
