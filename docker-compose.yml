@@ -1,6 +1,7 @@
 networks:
   default:
     name: evolve
+    external: true
     driver: bridge
 
 services:

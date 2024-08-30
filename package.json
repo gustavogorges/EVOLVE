@@ -22,6 +22,7 @@
     "@angular/router": "^14.3.0",
     "@ckeditor/ckeditor5-angular": "^7.0.1",
     "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+    "@elastic/apm-rum-angular": "^3.0.4",
     "@emailjs/browser": "^4.3.3",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",

@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AccordionModule} from 'primeng/accordion';     
@@ -147,14 +147,14 @@ import { MessageService } from 'primeng/api';
 import { DependenciasComponent } from './componentes/sub-componentes/dependencias/dependencias.component';
 import { ModalDependeciasComponent } from './componentes/sub-componentes/modal-dependecias/modal-dependecias.component';
 
-
+import { initializeApp } from '../main'; // Certifique-se de ajustar o caminho conforme necessário
+import { ApmModule, ApmService, ApmErrorHandler } from '@elastic/apm-rum-angular';
 
 
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
 }
-
 
 
 @NgModule({
@@ -258,6 +258,7 @@ export function HttpLoaderFactory(http:HttpClient){
   ],
   
   imports: [
+    ApmModule,
     HttpClientModule,
     TranslateModule.forRoot(
       {
@@ -296,8 +297,35 @@ export function HttpLoaderFactory(http:HttpClient){
     ReactiveFormsModule,
     HttpClientModule
   ],
-  
-  providers: [HttpClient, DatePipe,  { provide: LOCALE_ID, useValue: 'pt-BR' }, MessageService],
+
+  providers: [
+    HttpClient,
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    MessageService,
+    ApmService,
+    {
+      provide: ErrorHandler,
+      useClass: ApmErrorHandler
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+  constructor(service: ApmService) {
+    // Agent API is exposed through this apm instance
+    const apm = service.init({
+      serviceName: 'evolve-apm',  // Nome do serviço que você quer definir
+      serverUrl: 'http://localhost:8200',
+      serviceVersion: '1.0.0',  // Versão do seu serviço
+      environment: 'production',  // Ambiente (ex: production, development)
+    })
+
+    apm.setUserContext({
+      'username': 'nome-do-usuario',
+      'id': 'id-do-usuario'
+    })
+  }
+}
